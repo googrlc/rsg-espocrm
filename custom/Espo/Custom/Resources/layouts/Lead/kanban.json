@@ -1,0 +1,12 @@
+{
+    "rows": [
+        [
+            {"name": "insuranceInterest"},
+            {"name": "priority"}
+        ],
+        [
+            {"name": "estimatedPremium"},
+            {"name": "assignedUser"}
+        ]
+    ]
+}
