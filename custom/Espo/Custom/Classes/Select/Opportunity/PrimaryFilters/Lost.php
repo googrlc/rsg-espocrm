@@ -8,6 +8,6 @@ class Lost implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["stage" => "Lost"]);
+        $queryBuilder->where(["stage" => ["Closed Lost", "Non-Renewal / Lost"]]);
     }
 }

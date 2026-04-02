@@ -2,6 +2,7 @@
     "primaryFilterClassNameMap": {
         "actual": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Actual",
         "converted": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Converted",
-        "dead": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Dead"
+        "dnc": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Dnc",
+        "nurture": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Nurture"
     }
 }

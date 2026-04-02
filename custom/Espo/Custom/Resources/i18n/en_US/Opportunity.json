@@ -63,14 +63,18 @@
     "options": {
         "stage": {
             "": "",
-            "Qualify": "Qualify",
-            "Gathering Exposures": "Gathering Exposures",
+            "Discovery": "Discovery",
             "Quoting": "Quoting",
-            "Proposal Sent": "Proposal Sent",
-            "Negotiating": "Negotiating",
-            "Stalled": "Stalled",
-            "Won - Bound": "Won - Bound",
-            "Lost": "Lost"
+            "Proposal Presented": "Proposal Presented",
+            "Negotiation": "Negotiation",
+            "Closed Won": "Closed Won",
+            "Closed Lost": "Closed Lost",
+            "Renewal Notice Sent": "Renewal Notice Sent",
+            "Markets Out / Shopping": "Markets Out / Shopping",
+            "Quoted": "Quoted",
+            "Presented to Client": "Presented to Client",
+            "Bound / Renewed": "Bound / Renewed",
+            "Non-Renewal / Lost": "Non-Renewal / Lost"
         }
     },
     "tooltips": {
@@ -85,8 +89,8 @@
     },
     "presetFilters": {
         "open": "Open Pipeline",
-        "won": "Won - Bound",
-        "lost": "Lost"
+        "won": "Closed Won",
+        "lost": "Closed Lost"
     },
     "boolFilters": {
         "onlyMy": "Only My",

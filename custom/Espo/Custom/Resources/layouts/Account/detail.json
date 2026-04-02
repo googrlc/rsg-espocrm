@@ -58,44 +58,28 @@
         "label": "Key Metrics"
     },
     {
-        "rows": [
-            [
-                {
-                    "name": "intelPackRun"
-                },
-                {
-                    "name": "intelPackLastRun"
-                }
-            ],
-            [
-                {
-                    "name": "aiAssessment"
-                }
-            ]
-        ],
+        "rows": [],
         "style": "default",
-        "name": "aiIntelPack",
-        "label": "AI Intel Pack"
+        "tabBreak": true,
+        "tabLabel": "Contacts",
+        "name": "contactsAnchor",
+        "label": "Contacts"
     },
     {
-        "rows": [
-            [
-                {
-                    "name": "momentumClientId"
-                },
-                {
-                    "name": "momentumLastSynced"
-                }
-            ],
-            [
-                {
-                    "name": "googleDriveFolderUrl"
-                }
-            ]
-        ],
+        "rows": [],
         "style": "default",
-        "name": "detailsInternal",
-        "label": "Internal"
+        "tabBreak": true,
+        "tabLabel": "Policies",
+        "name": "policiesAnchor",
+        "label": "Policies"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Activity",
+        "name": "activityAnchor",
+        "label": "Activity"
     },
     {
         "rows": [
@@ -153,9 +137,8 @@
         },
         "style": "default",
         "tabBreak": true,
-        "tabLabel": null,
+        "tabLabel": "Business Profile",
         "hidden": false,
-        "noteText": null,
         "name": "opportunitiesTab",
         "customLabel": "Business Details"
     },
@@ -208,10 +191,8 @@
             ]
         },
         "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Business Profile",
+        "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "aiAssessment",
         "customLabel": "AI Account Assessment"
     },
@@ -286,10 +267,8 @@
             ]
         },
         "style": "default",
-        "tabBreak": true,
-        "tabLabel": null,
+        "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "businessIdentity",
         "customLabel": "Business Identity"
     },
@@ -352,7 +331,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "bbbReputation",
         "customLabel": "BBB & Reputation"
     },
@@ -415,7 +393,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "fleetOperations",
         "customLabel": "Fleet & Operations"
     },
@@ -520,7 +497,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "coverageGapsCl",
         "customLabel": "Coverage Gaps & Cross-Sell"
     },
@@ -563,7 +539,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "dependentsHousehold",
         "customLabel": "Dependents & Household"
     },
@@ -699,7 +674,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "gbMedical",
         "customLabel": "Medical"
     },
@@ -742,7 +716,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "gbAncillary",
         "customLabel": "Dental, Vision & Life"
     },
@@ -774,7 +747,6 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "noteText": null,
         "name": "gbDisabilityVoluntary",
         "customLabel": "Disability & Voluntary"
     },
@@ -798,5 +770,47 @@
         "style": "default",
         "name": "gbNotesPanel",
         "customLabel": "Group Benefits Notes"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "intelPackRun"
+                },
+                {
+                    "name": "intelPackLastRun"
+                }
+            ],
+            [
+                {
+                    "name": "aiAssessment"
+                }
+            ]
+        ],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Internal",
+        "name": "aiIntelPack",
+        "label": "AI Intel Pack"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "momentumClientId"
+                },
+                {
+                    "name": "momentumLastSynced"
+                }
+            ],
+            [
+                {
+                    "name": "googleDriveFolderUrl"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "detailsInternal",
+        "label": "Internal"
     }
 ]

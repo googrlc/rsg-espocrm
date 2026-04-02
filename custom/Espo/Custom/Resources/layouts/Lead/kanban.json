@@ -1,0 +1,12 @@
+{
+    "rows": [
+        [
+            {"name": "name"},
+            {"name": "insuranceInterest"}
+        ],
+        [
+            {"name": "xDate"},
+            {"name": "assignedUser"}
+        ]
+    ]
+}

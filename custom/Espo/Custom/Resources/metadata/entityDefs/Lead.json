@@ -90,13 +90,43 @@
             "readOnly": true
         },
         "status": {
+            "type": "enum",
+            "options": [
+                "New / Uncontacted",
+                "Attempting Contact",
+                "Connected",
+                "Gathering Info",
+                "Qualified",
+                "Nurture",
+                "DNC",
+                "Converted"
+            ],
+            "default": "New / Uncontacted",
+            "displayAsLabel": true,
+            "labelType": "state",
+            "style": {
+                "New / Uncontacted": "primary",
+                "Attempting Contact": "primary",
+                "Connected": "warning",
+                "Gathering Info": "warning",
+                "Qualified": "success",
+                "Nurture": "info",
+                "DNC": "danger",
+                "Converted": "success"
+            },
             "kanbanOrder": [
-                "New",
-                "Assigned",
-                "In Process",
-                "Converted",
-                "Dead"
+                "New / Uncontacted",
+                "Attempting Contact",
+                "Connected",
+                "Gathering Info",
+                "Qualified",
+                "Nurture"
             ]
+        },
+        "xDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Expiration date of current policy — used for nurture loop automation"
         }
     },
     "collection": {
@@ -113,11 +143,12 @@
             "createdAt",
             "modifiedAt",
             "status",
-            "source"
+            "source",
+            "xDate"
         ]
     },
     "kanbanStatusIgnoreList": [
-        "Converted",
-        "Dead"
+        "DNC",
+        "Converted"
     ]
 }

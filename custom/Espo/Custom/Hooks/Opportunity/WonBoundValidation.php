@@ -12,7 +12,7 @@ class WonBoundValidation implements BeforeSave
     {
         $stage = $entity->get("stage");
 
-        if ($stage !== "Won - Bound") {
+        if ($stage !== "Closed Won") {
             return;
         }
 
@@ -32,7 +32,7 @@ class WonBoundValidation implements BeforeSave
 
         if (!empty($missing)) {
             throw new BadRequest(
-                "The following fields are required when Stage is \"Won - Bound\": " .
+                "The following fields are required when Stage is \"Closed Won\": " .
                 implode(", ", $missing) . "."
             );
         }
