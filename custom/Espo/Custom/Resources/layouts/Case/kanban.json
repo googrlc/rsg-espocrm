@@ -1,0 +1,12 @@
+{
+    "rows": [
+        [
+            {"name": "name"},
+            {"name": "account"}
+        ],
+        [
+            {"name": "priority"},
+            {"name": "assignedUser"}
+        ]
+    ]
+}
