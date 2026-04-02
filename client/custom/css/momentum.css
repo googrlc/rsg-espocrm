@@ -23,10 +23,14 @@ html {
     max-width: 100%;
 }
 
-/* All panels constrained */
+/* All panels constrained (except those containing kanban boards) */
 .panel {
     overflow: hidden;
     max-width: 100%;
+}
+
+.panel:has(.kanban-board) {
+    overflow: visible;
 }
 
 .panel-body {
@@ -55,23 +59,23 @@ table.table {
     max-width: 100%;
 }
 
-/* Cell text overflow — truncate with ellipsis */
-.list-container table td,
-.list-container table th,
-table.table td,
-table.table th {
+/* Cell text overflow — truncate with ellipsis (list tables only, not kanban) */
+.list-container > table td,
+.list-container > table th,
+.list-container > .table td,
+.list-container > .table th {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: 0;
 }
 
-/* Let name/link columns wrap when needed */
-.list-container table td:first-child,
-.list-container table th:first-child,
-table.table td[data-name="name"],
-table.table td[data-name="account"],
-table.table td[data-name="contact"] {
+/* Let name/link columns wrap when needed (list tables only) */
+.list-container > table td:first-child,
+.list-container > table th:first-child,
+.list-container > table td[data-name="name"],
+.list-container > table td[data-name="account"],
+.list-container > table td[data-name="contact"] {
     white-space: normal;
     word-break: break-word;
 }
@@ -231,17 +235,37 @@ table.table td[data-name="contact"] {
 
 .kanban-board {
     overflow-x: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     max-width: 100%;
 }
 
 .kanban-columns-container {
+    display: flex;
     min-width: min-content;
+}
+
+.kanban-column {
+    min-width: 200px;
+    flex: 1;
 }
 
 .kanban-column .kanban-card {
     overflow: hidden;
     word-break: break-word;
+}
+
+/* Reset aggressive table rules inside kanban cards */
+.kanban-board table {
+    table-layout: auto;
+}
+
+.kanban-board table td,
+.kanban-board table th {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    max-width: none;
 }
 
 /* ==========================================================================
