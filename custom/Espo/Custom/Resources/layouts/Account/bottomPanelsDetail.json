@@ -17,36 +17,36 @@
         "tab": 0
     },
     "activityLogs": {
-        "index": 4,
+        "index": 0,
         "tab": 1
     },
     "emails": {
-        "index": 5,
+        "index": 1,
         "tab": 1
     },
     "meetings": {
-        "index": 6,
+        "index": 2,
         "tab": 1
     },
     "calls": {
-        "index": 7,
+        "index": 3,
         "tab": 1
     },
     "tasks": {
-        "index": 8,
+        "index": 4,
         "tab": 1
     },
     "opportunities": {
-        "index": 9,
+        "index": 0,
         "tab": 2
     },
     "cases": {
-        "index": 10,
-        "tab": 5
+        "index": 0,
+        "tab": 4
     },
     "commissions": {
-        "index": 11,
-        "tab": 6
+        "index": 1,
+        "tab": 4
     },
     "activities": {
         "disabled": true
