@@ -1,0 +1,257 @@
+{
+    "kanbanViewMode": true,
+    "statusField": "accountType",
+    "dynamicLogic": {
+        "fields": {
+            "intelFleetSize": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "arrayAnyOf",
+                                    "attribute": "lob",
+                                    "value": ["Commercial Auto"]
+                                },
+                                {
+                                    "type": "arrayAnyOf",
+                                    "attribute": "lob",
+                                    "value": ["Cargo"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "intelOperatingRadius": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "arrayAnyOf",
+                                    "attribute": "lob",
+                                    "value": ["Commercial Auto"]
+                                },
+                                {
+                                    "type": "arrayAnyOf",
+                                    "attribute": "lob",
+                                    "value": ["Cargo"]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "intelCargoType": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "arrayAnyOf",
+                            "attribute": "lob",
+                            "value": ["Cargo"]
+                        }
+                    ]
+                }
+            },
+            "intelOwnerOperators": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "arrayAnyOf",
+                            "attribute": "lob",
+                            "value": ["Commercial Auto"]
+                        }
+                    ]
+                }
+            },
+            "intelDotIncidents": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "arrayAnyOf",
+                            "attribute": "lob",
+                            "value": ["Commercial Auto"]
+                        }
+                    ]
+                }
+            }
+        },
+        "panels": {
+            "commercialDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "accountType",
+                                    "value": "Commercial Lines"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "accountType",
+                                    "value": "Group Benefits"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "filterList": [
+        {"name": "recentlyCreated"},
+        {"name": "prospects"},
+        {"name": "commercialLines"},
+        {"name": "personalLines"},
+        {"name": "medicare"},
+        {"name": "lifeInsurance"}
+    ],
+    "boolFilterList": ["onlyMy"],
+    "views": {
+        "detail": "custom:views/account/record/detail-view"
+    },
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "accountScore",
+                "label": "Account Score",
+                "view": "custom:views/account/record/panels/account-score",
+                "order": 1,
+                "sticked": true
+            },
+            {
+                "name": "googleDrive",
+                "label": "Google Drive",
+                "view": "custom:views/widgets/google-drive",
+                "order": 2
+            },
+            {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/account/record/panels/record-info",
+                "order": 3
+            },
+            {
+                "name": "intelPack",
+                "label": "Intel Pack",
+                "view": "custom:views/account/record/panels/intel-pack",
+                "order": 4
+            },
+            {
+                "name": "activities",
+                "label": "Activities",
+                "view": "crm:views/record/panels/activities",
+                "aclScope": "Activities",
+                "orderBy": "dateStart",
+                "orderDirection": "desc",
+                "order": 5
+            },
+            {
+                "name": "history",
+                "label": "Activity History",
+                "view": "crm:views/record/panels/history",
+                "aclScope": "Activities",
+                "orderBy": "dateStart",
+                "orderDirection": "desc",
+                "order": 6
+            }
+        ]
+    },
+    "bottomPanels": {
+        "detail": []
+    },
+    "relationshipPanels": {
+        "contacts": {
+            "layout": "listForAccount",
+            "orderBy": "name",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "unlinkButton": true,
+            "order": 1,
+            "view": "custom:views/account/record/panels/contacts-subpanel"
+        },
+        "policies": {
+            "orderBy": "expirationDate",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 2,
+            "label": "Policies",
+            "view": "custom:views/account/record/panels/commercial-policies",
+            "selectPrimaryFilterName": "commercialOnly"
+        },
+        "tasks": {
+            "orderBy": "dateEnd",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 3,
+            "label": "Tasks — All Related",
+            "view": "custom:views/account/record/panels/tasks-rollup"
+        },
+        "activityLogs": {
+            "orderBy": "dateTime",
+            "orderDirection": "desc",
+            "createButton": true,
+            "order": 4,
+            "label": "Activity Log"
+        },
+        "opportunities": {
+            "layout": "listForAccount",
+            "orderBy": "createdAt",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 10
+        },
+        "renewals": {
+            "orderBy": "expirationDate",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 11
+        },
+        "commissions": {
+            "orderBy": "createdAt",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 12
+        },
+        "emails": {
+            "orderBy": "dateSent",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 20
+        },
+        "meetings": {
+            "orderBy": "dateStart",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 21
+        },
+        "calls": {
+            "orderBy": "dateStart",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 22
+        },
+        "cases": {
+            "layout": "listForAccount",
+            "orderBy": "createdAt",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 23
+        }
+    }
+}

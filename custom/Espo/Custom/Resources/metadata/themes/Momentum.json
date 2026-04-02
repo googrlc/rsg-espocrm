@@ -1,0 +1,17 @@
+{
+    "stylesheet": "client/custom/css/momentum.css",
+    "navbarHeight": 48,
+    "params": {
+        "bodyBackground": "#f5f7fb",
+        "primaryColor": "#2262e8",
+        "successColor": "#1f8f4e",
+        "warningColor": "#ad7a12",
+        "dangerColor": "#c0392b",
+        "navbarBackground": "#f4f6fb",
+        "navbarBorder": "#d7deee",
+        "navbarActiveBackground": "#dbe8ff",
+        "navbarActiveColor": "#143a93",
+        "panelBorderRadius": "16px",
+        "fontFamily": "Plus Jakarta Sans, Avenir Next, -apple-system, sans-serif"
+    }
+}

@@ -1,0 +1,10 @@
+[
+    {"name": "name", "link": true, "width": 25},
+    {"name": "status", "width": 10},
+    {"name": "dateEnd", "width": 10},
+    {"name": "assignedUser", "width": 10},
+    {"name": "taskSource", "width": 8},
+    {"name": "linkedAccount", "link": true, "width": 12},
+    {"name": "priority", "width": 8},
+    {"name": "taskType", "width": 10}
+]

@@ -1,0 +1,176 @@
+[
+    {
+        "rows": [
+            [
+                {"name": "name"},
+                {"name": "type"}
+            ],
+            [
+                {"name": "accountStatus"},
+                false
+            ],
+            [
+                {"name": "phoneNumber"},
+                {"name": "emailAddress"}
+            ],
+            [
+                {"name": "billingAddress"}
+            ]
+        ],
+        "style": "default",
+        "name": "accountInfo",
+        "label": "Account Information"
+    },
+    {
+        "rows": [
+            [
+                {"name": "totalActivePremium"},
+                {"name": "activePolicyCount"}
+            ],
+            [
+                {"name": "nextXDate"},
+                {"name": "nextXDateLob"}
+            ]
+        ],
+        "style": "default",
+        "name": "keyMetrics",
+        "label": "Key Metrics"
+    },
+    {
+        "rows": [
+            [
+                {"name": "fein"},
+                {"name": "industry"}
+            ],
+            [
+                {"name": "yearsInBusiness"},
+                {"name": "numberOfEmployees"}
+            ],
+            [
+                {"name": "dateOfBirth"},
+                {"name": "gender"}
+            ],
+            [
+                {"name": "maritalStatus"},
+                false
+            ],
+            [
+                {"name": "description"}
+            ]
+        ],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Details",
+        "name": "accountDetails",
+        "label": "Account Details"
+    },
+    {
+        "rows": [
+            [
+                {"name": "momentumClientId"},
+                {"name": "momentumLastSynced"}
+            ],
+            [
+                {"name": "googleDriveFolderUrl"}
+            ]
+        ],
+        "style": "default",
+        "name": "detailsInternal",
+        "label": "Internal"
+    },
+    {
+        "rows": [
+            [
+                {"name": "intelPackRun"},
+                {"name": "intelPackLastRun"}
+            ],
+            [
+                {"name": "aiAssessment"}
+            ]
+        ],
+        "style": "default",
+        "name": "aiIntelPack",
+        "label": "AI Intel Pack"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Policies",
+        "name": "policiesTabPlaceholder",
+        "label": "Policies"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Activity",
+        "name": "activityTabPlaceholder",
+        "label": "Activity"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Tasks",
+        "name": "tasksTabPlaceholder",
+        "label": "Tasks"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Commissions",
+        "name": "commissionsTabPlaceholder",
+        "label": "Commissions"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Opportunities",
+        "name": "opportunitiesTabPlaceholder",
+        "label": "Opportunities"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Documents",
+        "name": "documentsTabPlaceholder",
+        "label": "Documents"
+    },
+    {
+        "rows": [
+            [
+                {"name": "intelYearsInBusiness"},
+                {"name": "website"}
+            ],
+            [
+                {"name": "businessEntity"},
+                {"name": "sicCode"}
+            ],
+            [
+                {"name": "intelNaics"},
+                {"name": "annualRevenue"}
+            ]
+        ],
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "or",
+                    "value": [
+                        {"type": "equals", "attribute": "accountType", "value": "Commercial Lines"},
+                        {"type": "equals", "attribute": "accountType", "value": "Group Benefits"}
+                    ]
+                }
+            ]
+        },
+        "style": "default",
+        "tabBreak": false,
+        "hidden": false,
+        "noteText": null,
+        "noteStyle": "info",
+        "customLabel": "Business Details"
+    }
+]

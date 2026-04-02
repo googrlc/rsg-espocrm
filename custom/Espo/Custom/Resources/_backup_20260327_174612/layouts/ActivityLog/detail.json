@@ -1,0 +1,32 @@
+[
+  {
+    "label": "Activity",
+    "rows": [
+      [{"name": "name"}, {"name": "activityType"}],
+      [{"name": "classification"}, {"name": "dateTime"}],
+      [{"name": "account"}, {"name": "contact"}],
+      [{"name": "policy"}, {"name": "loggedBy"}]
+    ]
+  },
+  {
+    "label": "Call Details",
+    "name": "callDetails",
+    "rows": [
+      [{"name": "direction"}, {"name": "duration"}],
+      [{"name": "outcome"}, false]
+    ]
+  },
+  {
+    "label": "Notes",
+    "rows": [
+      [{"name": "notes", "fullWidth": true}],
+      [{"name": "followUpTask"}, false]
+    ]
+  },
+  {
+    "label": "",
+    "rows": [
+      [{"name": "assignedUser"}, {"name": "teams"}]
+    ]
+  }
+]

@@ -1,0 +1,57 @@
+{
+    "controller": "controllers/record",
+    "color": "#2d7d46",
+    "iconClass": "fas fa-dollar-sign",
+    "kanbanViewMode": true,
+    "statusField": "status",
+    "filterList": [
+        {"name": "all"},
+        {"name": "newBusiness"},
+        {"name": "renewal", "style": "success"},
+        {"name": "posted", "style": "success"},
+        {"name": "estimated", "style": "info"},
+        {"name": "overdue", "style": "danger"}
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "markAsPosted",
+                "label": "Mark as Posted",
+                "view": "custom:views/commission/record/panels/mark-as-posted",
+                "order": 1,
+                "sticked": true
+            }
+        ]
+    },
+    "dynamicLogic": {
+        "fields": {
+            "postedAmount": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {"type": "equals", "attribute": "status", "value": "Posted"},
+                                {"type": "equals", "attribute": "status", "value": "Overdue"}
+                            ]
+                        }
+                    ]
+                }
+            },
+            "paymentReceivedDate": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "status",
+                            "value": "Posted"
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

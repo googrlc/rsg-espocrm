@@ -1,0 +1,9 @@
+{
+    "presetFilters": {
+        "open": "Open Cases",
+        "closed": "Closed Cases"
+    },
+    "boolFilters": {
+        "onlyMy": "Only My"
+    }
+}

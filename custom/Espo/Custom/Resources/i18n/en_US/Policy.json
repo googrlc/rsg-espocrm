@@ -1,0 +1,19 @@
+{
+    "presetFilters": {
+        "active": "Active",
+        "expiringSoon": "Expiring Soon",
+        "expired": "Expired",
+        "commAuto": "Comm Auto",
+        "genLiability": "Gen Liability",
+        "medicare": "Medicare",
+        "lifeInsurance": "Life",
+        "personalLines": "Personal Lines",
+        "workersComp": "Workers Comp",
+        "renewalsDue": "Renewals Due",
+        "commercialOnly": "Commercial Only"
+    },
+    "labels": {
+        "Commercial Policies": "Commercial Policies",
+        "Personal Policies": "Personal Policies"
+    }
+}

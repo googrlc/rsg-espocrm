@@ -1,0 +1,643 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "contacts"
+                },
+                {
+                    "name": "lineOfBusiness"
+                }
+            ],
+            [
+                {
+                    "name": "leadSource"
+                },
+                {
+                    "name": "assignedUser"
+                }
+            ],
+            [
+                {
+                    "name": "priority"
+                },
+                {
+                    "name": "businessType"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "overview",
+        "label": "Overview"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "currentCarrier"
+                },
+                {
+                    "name": "targetCarrier"
+                }
+            ],
+            [
+                {
+                    "name": "caBusType"
+                },
+                {
+                    "name": "caRadius"
+                }
+            ],
+            [
+                {
+                    "name": "caVehicleCount"
+                },
+                {
+                    "name": "caDriverCount"
+                }
+            ],
+            [
+                {
+                    "name": "caDotNumber"
+                },
+                {
+                    "name": "caMcNumber"
+                }
+            ],
+            [
+                {
+                    "name": "caCommodity"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "caCurrentPolicyNum"
+                },
+                {
+                    "name": "caCurrentExpiration"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "commAutoDetails",
+        "label": "Commercial Auto"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "currentCarrier"
+                },
+                {
+                    "name": "targetCarrier"
+                }
+            ],
+            [
+                {
+                    "name": "glClassCode"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "glOperationsDesc"
+                }
+            ],
+            [
+                {
+                    "name": "glAnnualPayroll"
+                },
+                {
+                    "name": "glAnnualRevenue"
+                }
+            ],
+            [
+                {
+                    "name": "glSubcontractorsUsed"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "glDetails",
+        "label": "General Liability"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "currentCarrier"
+                },
+                {
+                    "name": "targetCarrier"
+                }
+            ],
+            [
+                {
+                    "name": "wcClassCode"
+                },
+                {
+                    "name": "wcExperienceMod"
+                }
+            ],
+            [
+                {
+                    "name": "wcAnnualPayroll"
+                },
+                {
+                    "name": "wcEmployeeCount"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "wcDetails",
+        "label": "Workers Compensation"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "currentCarrier"
+                },
+                {
+                    "name": "targetCarrier"
+                }
+            ],
+            [
+                {
+                    "name": "umbrellaLimit"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "umbrellaDetails",
+        "label": "Umbrella"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "autoVehicleCount"
+                },
+                {
+                    "name": "autoDriverCount"
+                }
+            ],
+            [
+                {
+                    "name": "currentCarrier"
+                },
+                {
+                    "name": "paCurrentPremium"
+                }
+            ],
+            [
+                {
+                    "name": "paCurrentExpiration"
+                },
+                {
+                    "name": "paPriorClaims"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "personalAutoDetails",
+        "label": "Personal Auto"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propSquareFootage"
+                }
+            ],
+            [
+                {
+                    "name": "propConstructionType"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "currentCarrier"
+                },
+                {
+                    "name": "propCurrentPremium"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "homeownersDetails",
+        "label": "Homeowners \/ Renters \/ Condo"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "medPlanType"
+                },
+                {
+                    "name": "medCurrentCarrier"
+                }
+            ],
+            [
+                {
+                    "name": "medCurrentPlan"
+                },
+                {
+                    "name": "medAepSepDate"
+                }
+            ],
+            [
+                {
+                    "name": "medIrmaaApplies"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "medicareDetails",
+        "label": "Medicare"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "lifeCoverageType"
+                },
+                {
+                    "name": "lifeFaceAmountRequested"
+                }
+            ],
+            [
+                {
+                    "name": "lifeTermLength"
+                },
+                {
+                    "name": "lifeHealthClassTarget"
+                }
+            ],
+            [
+                {
+                    "name": "lifeTobaccoUser"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "lifeDetails",
+        "label": "Life Insurance"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propSquareFootage"
+                }
+            ],
+            [
+                {
+                    "name": "propConstructionType"
+                },
+                {
+                    "name": "propRoofType"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofAge"
+                },
+                {
+                    "name": "propReplacementCost"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                {
+                    "name": "propOccupancy"
+                }
+            ],
+            [
+                {
+                    "name": "propProtectionClass"
+                },
+                {
+                    "name": "propFloodZone"
+                }
+            ],
+            [
+                {
+                    "name": "propAssessmentDate"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "propAssessmentNotes"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "propertyAssessment",
+        "label": "Property Assessment"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "autoVehicleCount"
+                },
+                {
+                    "name": "autoDriverCount"
+                }
+            ],
+            [
+                {
+                    "name": "autoYoungestDriverAge"
+                },
+                {
+                    "name": "autoUseType"
+                }
+            ],
+            [
+                {
+                    "name": "autoPriorAccidents"
+                },
+                {
+                    "name": "autoPriorViolations"
+                }
+            ],
+            [
+                {
+                    "name": "autoCurrentCarrierYears"
+                },
+                {
+                    "name": "autoGarageState"
+                }
+            ],
+            [
+                {
+                    "name": "autoSR22Required"
+                },
+                {
+                    "name": "autoTotalVehicleValue"
+                }
+            ],
+            [
+                {
+                    "name": "autoAssessmentDate"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "autoAssessmentNotes"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "driverVehicleAssessment",
+        "label": "Driver \/ Vehicle Assessment"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "healthDateOfBirth"
+                },
+                {
+                    "name": "healthGender"
+                }
+            ],
+            [
+                {
+                    "name": "healthTobaccoUse"
+                },
+                {
+                    "name": "healthRiskClass"
+                }
+            ],
+            [
+                {
+                    "name": "healthHeightInches"
+                },
+                {
+                    "name": "healthWeightLbs"
+                }
+            ],
+            [
+                {
+                    "name": "healthPreExistingConditions"
+                }
+            ],
+            [
+                {
+                    "name": "healthMedications"
+                }
+            ],
+            [
+                {
+                    "name": "healthFaceAmount"
+                },
+                {
+                    "name": "healthCoverageType"
+                }
+            ],
+            [
+                {
+                    "name": "healthBeneficiaryName"
+                },
+                {
+                    "name": "healthAssessmentDate"
+                }
+            ],
+            [
+                {
+                    "name": "healthAssessmentNotes"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "healthRiskAssessment",
+        "label": "Health Risk Assessment"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "chkScopeOfAppt"
+                },
+                {
+                    "name": "lossRunsRequested"
+                }
+            ],
+            [
+                {
+                    "name": "chkUnderlyingLinked"
+                },
+                {
+                    "name": "chkUnderlyingConfirmed"
+                }
+            ],
+            [
+                {
+                    "name": "chkMvrsPulled"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "checklistIntake",
+        "label": "Checklist — Intake"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "chkQuoteSubmitted"
+                },
+                {
+                    "name": "chkProposalSent"
+                }
+            ],
+            [
+                {
+                    "name": "chkPlanPresented"
+                },
+                {
+                    "name": "chkSignedAppReceived"
+                }
+            ],
+            [
+                {
+                    "name": "chkAppSubmitted"
+                },
+                {
+                    "name": "chkCmsConfirmation"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "checklistMarketing",
+        "label": "Checklist — Marketing"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "chkBound"
+                },
+                {
+                    "name": "commissionLogged"
+                }
+            ],
+            [
+                {
+                    "name": "emailSequenceStarted"
+                },
+                {
+                    "name": "onboardingSent"
+                }
+            ],
+            [
+                {
+                    "name": "chkDecPageDelivered"
+                },
+                {
+                    "name": "chkWelcomeLetter"
+                }
+            ],
+            [
+                {
+                    "name": "skipEmailSequence"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "checklistOnboarding",
+        "label": "Checklist — Onboarding"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "lastContactMethod"
+                },
+                {
+                    "name": "lostReason"
+                }
+            ],
+            [
+                {
+                    "name": "aiSummary"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "sales",
+        "label": "Sales"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "estimatedPremium"
+                },
+                {
+                    "name": "writtenPremium"
+                }
+            ],
+            [
+                {
+                    "name": "commissionRate"
+                },
+                {
+                    "name": "estimatedCommission"
+                }
+            ],
+            [
+                {
+                    "name": "bindDate"
+                },
+                {
+                    "name": "effectiveDate"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "financial",
+        "label": "Financial"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

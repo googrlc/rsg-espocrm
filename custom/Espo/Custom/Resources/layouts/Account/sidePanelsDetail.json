@@ -1,0 +1,24 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "accountScore": {
+        "sticked": true,
+        "index": 0
+    },
+    "googleDrive": {
+        "index": 1
+    },
+    "default": {
+        "dynamicLogicVisible": null,
+        "style": "default",
+        "sticked": false,
+        "index": 2
+    },
+    "recordInfo": {
+        "index": 3
+    },
+    "internalIds": {
+        "index": 4
+    }
+}

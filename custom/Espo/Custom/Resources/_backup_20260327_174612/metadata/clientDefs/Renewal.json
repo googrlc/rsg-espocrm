@@ -1,0 +1,72 @@
+{
+    "controller": "controllers/record",
+    "colors": {},
+    "iconClass": "fas fa-sync-alt",
+    "kanbanViewMode": true,
+    "statusField": "stage",
+    "kanbanStatusIgnoreList": ["Lost"],
+    "filterList": [
+        {"name": "active", "style": "primary"},
+        {"name": "critical", "style": "danger"},
+        {"name": "commAuto"},
+        {"name": "genLiability"},
+        {"name": "personalLines"},
+        {"name": "medicare"},
+        {"name": "renewed", "style": "success"},
+        {"name": "lost", "style": "danger"}
+    ],
+    "boolFilterList": [
+        "onlyMy",
+        "assignedToGretchen"
+    ],
+    "dynamicLogic": {
+        "fields": {
+            "lostReason": {
+                "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "stage",
+                            "value": "Lost"
+                        }
+                    ]
+                },
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "stage",
+                            "value": "Lost"
+                        }
+                    ]
+                }
+            },
+            "newPolicy": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "stage",
+                            "value": "Renewed - Won"
+                        }
+                    ]
+                }
+            },
+            "renewalPremium": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {"type": "equals", "attribute": "stage", "value": "Quote Requested"},
+                                {"type": "equals", "attribute": "stage", "value": "Proposal Sent"},
+                                {"type": "equals", "attribute": "stage", "value": "Negotiating"},
+                                {"type": "equals", "attribute": "stage", "value": "Renewed - Won"}
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

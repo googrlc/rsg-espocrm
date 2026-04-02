@@ -1,0 +1,8 @@
+{
+  "cssList": [
+    "client/custom/css/momentum.css"
+  ],
+  "scriptList": [
+    "client/custom/src/selectize-fix.js"
+  ]
+}

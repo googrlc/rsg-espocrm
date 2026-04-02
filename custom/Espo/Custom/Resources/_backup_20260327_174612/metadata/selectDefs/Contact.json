@@ -1,0 +1,5 @@
+{
+    "primaryFilterClassNameMap": {
+        "recentlyCreated": "Espo\\Custom\\Classes\\Select\\Contact\\PrimaryFilters\\RecentlyCreated"
+    }
+}

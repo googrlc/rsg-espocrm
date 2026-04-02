@@ -1,0 +1,23 @@
+{
+  "entity": true,
+  "layouts": true,
+  "tab": true,
+  "acl": true,
+  "aclPortal": true,
+  "customizable": true,
+  "importable": true,
+  "notifications": true,
+  "calendar": false,
+  "activity": false,
+  "type": "BasePlus",
+  "module": "Custom",
+  "isCustom": true,
+  "stream": true,
+  "color": "#2d7d46",
+  "iconClass": "fas fa-dollar-sign",
+  "kanbanStatusIgnoreList": [
+    "Written Off"
+  ],
+  "disabled": false,
+  "object": true
+}

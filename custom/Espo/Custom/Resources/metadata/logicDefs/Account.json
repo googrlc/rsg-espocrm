@@ -1,0 +1,25 @@
+{
+    "fields": {
+        "activePolicyCount": {
+            "readOnly": {
+                "conditionGroup": [
+                    {
+                        "type": "isNotEmpty",
+                        "attribute": "id"
+                    }
+                ]
+            }
+        },
+        "yearsInBusiness": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "type",
+                        "value": "Commercial Lines"
+                    }
+                ]
+            }
+        }
+    }
+}

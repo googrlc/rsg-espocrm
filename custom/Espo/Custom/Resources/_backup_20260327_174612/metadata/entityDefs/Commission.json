@@ -1,0 +1,248 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": true,
+            "tooltipText": "Auto-generated: {ClientName} — {LOB} — {EffectiveDate}"
+        },
+        "commissionType": {
+            "type": "enum",
+            "options": [
+                "",
+                "New Business",
+                "Renewal"
+            ],
+            "required": true,
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "New Business": "primary",
+                "Renewal": "success"
+            },
+            "tooltipText": "Auto-set from source trigger"
+        },
+        "status": {
+            "type": "enum",
+            "options": [
+                "",
+                "Estimated",
+                "Posted",
+                "Overdue"
+            ],
+            "default": "Estimated",
+            "required": true,
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Estimated": "info",
+                "Posted": "success",
+                "Overdue": "danger"
+            }
+        },
+        "producer": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "Auto-populated from source record Assigned User — Lamar / Gretchen"
+        },
+        "lineOfBusiness": {
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial Auto",
+                "General Liability",
+                "Workers Comp",
+                "Commercial Property",
+                "BOP",
+                "Professional Liability",
+                "Umbrella",
+                "Personal Auto",
+                "Homeowners",
+                "Renters",
+                "Condo",
+                "Life",
+                "Health",
+                "Medicare",
+                "Group Benefits",
+                "Other"
+            ],
+            "isCustom": true,
+            "tooltipText": "Auto-populated from Policy LOB"
+        },
+        "carrier": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "Auto-populated from Policy carrier"
+        },
+        "writtenPremium": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Auto-populated from Policy premiumAmount or Renewal renewalPremium"
+        },
+        "commissionRate": {
+            "type": "float",
+            "isCustom": true,
+            "tooltipText": "Auto-populated from Policy commissionRate — flagged if missing"
+        },
+        "estimatedCommission": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-calculated: writtenPremium x commissionRate — $0 and flagged if rate missing"
+        },
+        "postedAmount": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Manually entered when carrier payment received"
+        },
+        "varianceAmount": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-calculated: postedAmount - estimatedCommission"
+        },
+        "variancePercent": {
+            "type": "float",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-calculated: variance / estimatedCommission — flags large discrepancies"
+        },
+        "expectedPaymentDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Manually entered or defaulted to 30 days after effective date"
+        },
+        "paymentReceivedDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Entered when marking as Posted"
+        },
+        "overdueFlag": {
+            "type": "bool",
+            "default": false,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-set when status = Estimated AND expected payment date > 30 days past"
+        },
+        "commissionNotes": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Carrier adjustments, disputes, explanations"
+        },
+        "effectiveDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "policy": {
+            "type": "link",
+            "required": true
+        },
+        "opportunity": {
+            "type": "link",
+            "tooltipText": "Auto-populated when source = Opportunity Won"
+        },
+        "renewal": {
+            "type": "link",
+            "tooltipText": "Auto-populated when source = Renewal Won"
+        },
+        "contact": {
+            "type": "link"
+        },
+        "account": {
+            "type": "link",
+            "required": true
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        }
+    },
+    "links": {
+        "policy": {
+            "type": "belongsTo",
+            "entity": "Policy",
+            "foreign": "commissions",
+            "isCustom": true
+        },
+        "opportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "foreign": "commissions",
+            "isCustom": true
+        },
+        "renewal": {
+            "type": "belongsTo",
+            "entity": "Renewal",
+            "foreign": "commissions",
+            "isCustom": true
+        },
+        "contact": {
+            "type": "belongsTo",
+            "entity": "Contact",
+            "foreign": "commissions",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "commissions",
+            "isCustom": true
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "carrier",
+            "producer"
+        ],
+        "sortByList": [
+            "name",
+            "createdAt",
+            "modifiedAt",
+            "carrier",
+            "writtenPremium",
+            "status",
+            "expectedPaymentDate"
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "contacts": {
+        "index": 0
+    },
+    "stream": {
+        "sticked": false,
+        "index": 1
+    },
+    "cases": {
+        "index": 2
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "primaryFilterClassNameMap": {
+        "active": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\Active",
+        "expiringSoon": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\ExpiringSoon",
+        "expired": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\Expired",
+        "commAuto": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\CommAuto",
+        "genLiability": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\GenLiability",
+        "medicare": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\Medicare",
+        "lifeInsurance": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\LifeInsurance",
+        "personalLines": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\PersonalLines",
+        "workersComp": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\WorkersComp",
+        "renewalsDue": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\RenewalsDue",
+        "commercialOnly": "Espo\\Custom\\Classes\\Select\\Policy\\PrimaryFilters\\CommercialOnly"
+    }
+}

@@ -1,0 +1,499 @@
+/* ==========================================================================
+   RSG EspoCRM Redesign v2 — Custom Styling
+   ========================================================================== */
+
+/* --- General Panel Styling --- */
+.detail[data-scope="Account"] .panel,
+.detail[data-scope="Contact"] .panel {
+    border-radius: 6px;
+    margin-bottom: 16px;
+}
+.detail[data-scope="Account"] .panel .panel-heading,
+.detail[data-scope="Contact"] .panel .panel-heading {
+    border-radius: 6px 6px 0 0;
+}
+
+/* --- Account Information Panel --- */
+.detail[data-scope="Account"] .panel[data-name="accountInfo"] {
+    background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.detail[data-scope="Account"] .panel[data-name="accountInfo"] .field[data-name="name"] .field-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a2e;
+    line-height: 1.3;
+}
+.detail[data-scope="Account"] .panel[data-name="accountInfo"] .field[data-name="accountType"] .enum-value-container .label {
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* --- Client Intelligence subsection divider --- */
+.detail[data-scope="Account"] .panel[data-name="clientIntelligence"] .panel-heading .panel-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+.detail[data-scope="Account"] .panel[data-name="clientIntelligence"] .field a {
+    color: #2980b9;
+    font-weight: 500;
+}
+
+/* --- Risk Profile metric styling --- */
+.detail[data-scope="Account"] .panel[data-name="riskProfile"] .field[data-name="riskScore"] .field-value,
+.detail[data-scope="Account"] .panel[data-name="riskProfile"] .field[data-name="estimatedRevenue"] .field-value,
+.detail[data-scope="Account"] .panel[data-name="riskProfile"] .field[data-name="employeeCount"] .field-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    background: #f4f6f9;
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+.detail[data-scope="Account"] .panel[data-name="riskProfile"] .field-label {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    color: #7f8c8d;
+    font-weight: 600;
+}
+
+/* --- Internal panel — muted --- */
+.detail[data-scope="Account"] .panel[data-name="internal"] {
+    opacity: 0.75;
+}
+.detail[data-scope="Account"] .panel[data-name="internal"] .panel-heading .panel-title {
+    font-size: 12px;
+    color: #95a5a6;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Empty field styling --- */
+.detail[data-scope="Account"] .field .none-value,
+.detail[data-scope="Contact"] .field .none-value {
+    font-style: italic;
+    color: #adb5bd;
+    font-size: 13px;
+}
+
+/* --- Contact Header Card --- */
+.detail[data-scope="Contact"] .panel[data-name="contactHeader"] {
+    background: linear-gradient(135deg, #f0f4ff 0%, #fff 100%);
+    border: 1px solid #d0d8e8;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.detail[data-scope="Contact"] .panel[data-name="contactHeader"] .panel-heading {
+    display: none;
+}
+.detail[data-scope="Contact"] .panel[data-name="contactHeader"] .field[data-name="name"] .field-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+/* Account pill in contact header */
+.detail[data-scope="Contact"] .panel[data-name="contactHeader"] .field[data-name="account"] a {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 3px 10px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+}
+.detail[data-scope="Contact"] .panel[data-name="contactHeader"] .field[data-name="account"] a:hover {
+    background: #bbdefb;
+}
+
+/* --- Medicare & Life Panel --- */
+.detail[data-scope="Contact"] .panel[data-name="medicareLife"] {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+}
+.detail[data-scope="Contact"] .panel[data-name="medicareLife"] .panel-heading {
+    background: #f5f5f5;
+}
+
+/* AEP date amber highlight when within 90 days */
+.detail[data-scope="Contact"] .field[data-name="aepSepDate"] .field-value {
+    font-weight: 600;
+}
+
+/* --- LOB Tag Colors --- */
+.lob-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+.lob-tag-comm-auto, .lob-tag-commercial-auto {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+.lob-tag-gen-liability, .lob-tag-general-liability {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+.lob-tag-workers-comp {
+    background: #fff3e0;
+    color: #e65100;
+}
+.lob-tag-medicare, .lob-tag-medicare-advantage, .lob-tag-medicare-supplement {
+    background: #f3e5f5;
+    color: #6a1b9a;
+}
+.lob-tag-life, .lob-tag-life-insurance {
+    background: #fce4ec;
+    color: #c62828;
+}
+.lob-tag-personal, .lob-tag-personal-lines, .lob-tag-homeowners, .lob-tag-personal-auto, .lob-tag-renters, .lob-tag-condo {
+    background: #e0f2f1;
+    color: #00695c;
+}
+.lob-tag-umbrella {
+    background: #e8eaf6;
+    color: #283593;
+}
+.lob-tag-bop, .lob-tag-commercial-property, .lob-tag-commercial-package {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+/* --- Status Badges --- */
+.status-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.status-badge-active { background: #e8f5e9; color: #2e7d32; }
+.status-badge-renewal, .status-badge-renewing, .status-badge-up-for-renewal { background: #fff3e0; color: #e65100; }
+.status-badge-lapsed, .status-badge-expired { background: #ffebee; color: #c62828; }
+.status-badge-cancelled { background: #f5f5f5; color: #757575; }
+
+/* --- Amber Task Button --- */
+.btn-warning.action[data-action="createTask"],
+.btn-task-amber {
+    background: #FF9800 !important;
+    border-color: #FF9800 !important;
+    color: #fff !important;
+    font-weight: 500;
+}
+.btn-warning.action[data-action="createTask"]:hover,
+.btn-task-amber:hover {
+    background: #F57C00 !important;
+    border-color: #F57C00 !important;
+}
+
+/* --- Task Source Badges --- */
+.label-md[data-name="taskSource"] .label-primary,
+.enum-style-warning[data-name="taskSource"] { background: #FF9800; }
+.enum-style-success[data-name="taskSource"] { background: #4CAF50; }
+.enum-style-info[data-name="taskSource"] { background: #2196F3; }
+
+/* --- Scope Note styling --- */
+.scope-note {
+    font-style: italic;
+    font-size: 12px;
+    color: #999;
+    padding: 4px 16px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+}
+.scope-note a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+.scope-note a:hover {
+    text-decoration: underline;
+}
+
+/* --- Expiration Warning (within 60 days) --- */
+.expiration-warning {
+    color: #e65100 !important;
+    font-weight: 700 !important;
+}
+
+/* --- Task completion styling --- */
+.task-completed .cell[data-name="name"] {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* --- Side panel hover --- */
+.detail .panel-body .list-group-item {
+    border-left: 3px solid transparent;
+    transition: border-color 0.15s;
+}
+.detail .panel-body .list-group-item:hover {
+    border-left-color: #3498db;
+    background: #f8f9fa;
+}
+
+/* --- Task Create Modal Banner --- */
+.task-context-banner {
+    background: #fff3e0;
+    border: 1px solid #ffcc80;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #e65100;
+}
+
+/* --- Google Drive link styling --- */
+.field[data-name="googleDriveFolderUrl"] a {
+    color: #1a73e8;
+    text-decoration: none;
+    font-weight: 500;
+}
+.field[data-name="googleDriveFolderUrl"] a:hover {
+    text-decoration: underline;
+}
+
+/* --- Side panel widgets --- */
+.side .panel {
+    margin-bottom: 12px;
+}
+.side .panel .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 12px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.side .panel .info-label {
+    color: #999;
+    font-size: 11px;
+}
+.side .panel .info-value {
+    font-weight: 500;
+    color: #333;
+}
+
+/* --- Financials widget --- */
+.financials-widget .fin-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 12px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.financials-widget .fin-label {
+    color: #999;
+    font-size: 11px;
+}
+.financials-widget .fin-value {
+    font-weight: 600;
+    color: #333;
+}
+.financials-widget .fin-premium {
+    font-size: 16px;
+    color: #1565c0;
+}
+
+/* --- Overdue task in list --- */
+.list-row.overdue-task .cell[data-name="dateEnd"] {
+    color: #c62828;
+    font-weight: 700;
+}
+
+/* --- Filter bar active state --- */
+.list-buttons-container .btn.active {
+    background: #1a73e8;
+    color: #fff;
+    border-color: #1a73e8;
+}
+
+/* --- Policy filter - Renewals Due amber highlight --- */
+.list-buttons-container .btn[data-name="renewalsDue"] {
+    border-color: #FF9800;
+    color: #e65100;
+}
+.list-buttons-container .btn[data-name="renewalsDue"].active {
+    background: #FF9800;
+    color: #fff;
+    border-color: #FF9800;
+}
+
+/* ==========================================================================
+   STAGE BAR — Opportunity Pipeline Visualization
+   ========================================================================== */
+
+.stage-bar-container {
+    padding: 4px 0;
+}
+
+.stage-bar {
+    display: flex;
+    gap: 2px;
+    align-items: stretch;
+}
+
+.stage-step {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    font-size: 11px;
+    line-height: 1.3;
+}
+
+.stage-step .stage-label {
+    display: block;
+    font-weight: 500;
+}
+
+.stage-step .stage-probability {
+    display: block;
+    font-size: 10px;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+.stage-step.stage-completed {
+    background: #e0e0e0;
+    color: #757575;
+}
+
+.stage-step.stage-current {
+    background: #1565c0;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(21, 101, 192, 0.3);
+}
+
+.stage-step.stage-pending {
+    background: #f5f5f5;
+    color: #bdbdbd;
+}
+
+.stage-step.stage-terminal {
+    background: #f5f5f5;
+    color: #bdbdbd;
+    flex: 0.6;
+}
+
+.stage-step.stage-won {
+    background: #2e7d32;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.3);
+}
+
+.stage-step.stage-lost {
+    background: #c62828;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(198, 40, 40, 0.3);
+}
+
+.stage-step:hover:not(.stage-current):not(.stage-won):not(.stage-lost) {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+/* ==========================================================================
+   ACTIVITY LOG Styling
+   ========================================================================== */
+
+/* Activity type badges */
+.detail[data-scope="ActivityLog"] .field[data-name="activityType"] .label-primary {
+    background: #1565c0;
+}
+.detail[data-scope="ActivityLog"] .field[data-name="activityType"] .label-success {
+    background: #2e7d32;
+}
+.detail[data-scope="ActivityLog"] .field[data-name="activityType"] .label-warning {
+    background: #e65100;
+}
+.detail[data-scope="ActivityLog"] .field[data-name="activityType"] .label-info {
+    background: #6a1b9a;
+}
+
+/* Classification badge - clickable inline */
+.classification-badge {
+    cursor: pointer;
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 500;
+    background: #f0f0f0;
+    color: #555;
+    border: 1px solid #ddd;
+}
+.classification-badge:hover {
+    background: #e0e0e0;
+    border-color: #bbb;
+}
+
+/* Contact chip (blue) */
+.activity-contact-chip {
+    display: inline-block;
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Policy chip (amber) */
+.activity-policy-chip {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* Policy stub banner */
+.policy-stub-banner {
+    font-size: 13px;
+}
+.policy-stub-banner a {
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   Record Info widget styling
+   ========================================================================== */
+
+.opp-record-info .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 12px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.opp-record-info .info-label {
+    color: #999;
+    font-size: 11px;
+}
+.opp-record-info .info-value {
+    font-weight: 500;
+    color: #333;
+}

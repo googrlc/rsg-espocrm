@@ -1,0 +1,7 @@
+{
+    "primaryFilterClassNameMap": {
+        "recentlyCreated": "Espo\\Custom\\Classes\\Select\\Contact\\PrimaryFilters\\RecentlyCreated",
+        "personal": "Espo\\Custom\\Classes\\Select\\Contact\\PrimaryFilters\\Personal",
+        "commercial": "Espo\\Custom\\Classes\\Select\\Contact\\PrimaryFilters\\Commercial"
+    }
+}

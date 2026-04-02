@@ -1,0 +1,60 @@
+{
+    "contacts": {
+        "index": 0,
+        "tab": 0
+    },
+    "stream": {
+        "sticked": false,
+        "index": 1,
+        "tab": 0
+    },
+    "policies": {
+        "index": 2,
+        "tab": 2
+    },
+    "renewals": {
+        "index": 3,
+        "tab": 2
+    },
+    "activityLogs": {
+        "index": 4,
+        "tab": 2
+    },
+    "emails": {
+        "index": 5,
+        "tab": 3
+    },
+    "meetings": {
+        "index": 6,
+        "tab": 3
+    },
+    "calls": {
+        "index": 7,
+        "tab": 3
+    },
+    "tasks": {
+        "index": 8,
+        "tab": 3
+    },
+    "cases": {
+        "index": 9,
+        "tab": 4
+    },
+    "commissions": {
+        "index": 10,
+        "tab": 5
+    },
+    "opportunities": {
+        "index": 11,
+        "tab": 6
+    },
+    "activities": {
+        "disabled": true
+    },
+    "history": {
+        "disabled": true
+    },
+    "_delimiter_": {
+        "disabled": true
+    }
+}

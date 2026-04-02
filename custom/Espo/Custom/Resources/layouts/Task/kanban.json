@@ -1,0 +1,12 @@
+{
+    "rows": [
+        [
+            {"name": "assignedUser"},
+            {"name": "taskType"}
+        ],
+        [
+            {"name": "dateEnd"},
+            {"name": "priority"}
+        ]
+    ]
+}

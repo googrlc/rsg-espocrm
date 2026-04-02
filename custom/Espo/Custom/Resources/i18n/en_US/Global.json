@@ -1,0 +1,14 @@
+{
+    "scopeNames": {
+        "Policy": "Policy",
+        "Commission": "Commission",
+        "CRenewal": "Renewal",
+        "Renewal": "Renewal"
+    },
+    "scopeNamesPlural": {
+        "Policy": "Policies",
+        "Commission": "Commissions",
+        "CRenewal": "Renewals",
+        "Renewal": "Renewals"
+    }
+}

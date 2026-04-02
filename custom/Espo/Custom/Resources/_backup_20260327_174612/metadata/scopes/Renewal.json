@@ -1,0 +1,26 @@
+{
+    "entity": true,
+    "layouts": true,
+    "tab": true,
+    "acl": true,
+    "aclPortal": true,
+    "customizable": true,
+    "importable": true,
+    "notifications": true,
+    "calendar": false,
+    "activity": false,
+    "type": "BasePlus",
+    "module": "Custom",
+    "isCustom": true,
+    "stream": true,
+    "color": "#e67e22",
+    "iconClass": "fas fa-sync-alt",
+    "statusField": "stage",
+    "kanbanStatusIgnoreList": [
+        "Renewed - Won",
+        "Lost"
+    ],
+    "kanbanOrderDisabled": false,
+    "disabled": false,
+    "object": true
+}

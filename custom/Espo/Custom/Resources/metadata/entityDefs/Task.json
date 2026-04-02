@@ -1,0 +1,145 @@
+{
+    "fields": {
+        "status": {
+            "type": "enum",
+            "options": [
+                "Inbox",
+                "In Progress",
+                "Waiting on Client",
+                "Waiting on Carrier",
+                "Completed",
+                "Cancelled"
+            ],
+            "style": {
+                "Inbox": "info",
+                "In Progress": "primary",
+                "Waiting on Client": "warning",
+                "Waiting on Carrier": "warning",
+                "Completed": "success",
+                "Cancelled": "default"
+            },
+            "default": "Inbox",
+            "displayAsLabel": true,
+            "labelType": "state",
+            "audited": true,
+            "notActualOptions": [
+                "Completed",
+                "Cancelled"
+            ],
+            "customizationOptionsReferenceDisabled": true
+        },
+        "taskType": {
+            "type": "enum",
+            "options": [
+                "Client Service",
+                "Policy Change",
+                "Renewal",
+                "New Business",
+                "Follow Up",
+                "Onboarding",
+                "Claims",
+                "Commission",
+                "Admin",
+                "Other"
+            ],
+            "displayAsLabel": true,
+            "audited": true
+        },
+        "syncSource": {
+            "type": "enum",
+            "options": [
+                "Manual",
+                "Gmail",
+                "Slack",
+                "Momentum",
+                "n8n",
+                "Viktor"
+            ],
+            "displayAsLabel": true
+        },
+        "urgency": {
+            "type": "enum",
+            "options": [
+                "Urgent",
+                "High",
+                "Normal",
+                "Low"
+            ],
+            "default": "Normal",
+            "displayAsLabel": true,
+            "style": {
+                "Urgent": "danger",
+                "High": "warning",
+                "Normal": "default",
+                "Low": "info"
+            }
+        },
+        "triageSummary": {
+            "type": "text",
+            "rowsMin": 2,
+            "cutHeight": 80
+        },
+        "triageReason": {
+            "type": "text",
+            "rowsMin": 2,
+            "cutHeight": 80
+        },
+        "taskSource": {
+            "type": "enum",
+            "options": [
+                "",
+                "Account",
+                "Contact",
+                "Policy"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Account": "warning",
+                "Contact": "success",
+                "Policy": "info"
+            },
+            "tooltipText": "Where this task was created from \u2014 enables Account rollup"
+        },
+        "linkedAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Parent account \u2014 all tasks roll up to this account"
+        },
+        "parent": {
+            "entityList": [
+                "Account",
+                "Contact",
+                "Lead",
+                "Opportunity",
+                "Case",
+                "Policy",
+                "Renewal"
+            ]
+        }
+    },
+    "links": {
+        "linkedAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "dateEnd",
+        "order": "asc",
+        "textFilterFields": [
+            "name",
+            "description"
+        ],
+        "sortByList": [
+            "name",
+            "dateEnd",
+            "createdAt",
+            "modifiedAt",
+            "status",
+            "priority",
+            "assignedUserName"
+        ]
+    }
+}

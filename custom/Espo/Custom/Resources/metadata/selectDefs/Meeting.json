@@ -1,0 +1,6 @@
+{
+    "primaryFilterClassNameMap": {
+        "planned": "Espo\\Custom\\Classes\\Select\\Meeting\\PrimaryFilters\\Planned",
+        "held": "Espo\\Custom\\Classes\\Select\\Meeting\\PrimaryFilters\\Held"
+    }
+}

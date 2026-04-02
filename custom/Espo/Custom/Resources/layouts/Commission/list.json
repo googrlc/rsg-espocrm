@@ -1,0 +1,13 @@
+[
+    {"name": "account", "width": 14, "link": true},
+    {"name": "lineOfBusiness", "width": 10},
+    {"name": "commissionType", "width": 10},
+    {"name": "policy", "width": 10, "link": true},
+    {"name": "writtenPremium", "width": 9},
+    {"name": "commissionRate", "width": 6},
+    {"name": "estimatedCommission", "width": 9},
+    {"name": "postedAmount", "width": 9},
+    {"name": "status", "width": 8},
+    {"name": "expectedPaymentDate", "width": 8},
+    {"name": "producer", "width": 7}
+]

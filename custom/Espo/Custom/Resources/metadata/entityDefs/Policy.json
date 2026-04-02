@@ -1,0 +1,346 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 100,
+            "required": true,
+            "tooltipText": "Policy number — used as record name/title"
+        },
+        "momentumPolicyId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "NowCerts/Momentum AMS policy databaseId — primary dedup key for sync. NEVER change this value once set."
+        },
+        "carrier": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true
+        },
+        "lineOfBusiness": {
+            "type": "varchar",
+            "maxLength": 500,
+            "isCustom": true,
+            "tooltipText": "Raw string from Momentum — may contain multiple LOBs comma-separated"
+        },
+        "status": {
+            "type": "enum",
+            "options": [
+                "",
+                "Active",
+                "Up for Renewal",
+                "Renewing",
+                "Renewed",
+                "Expired",
+                "Cancelled",
+                "Flat Cancel",
+                "Pending Cancel",
+                "Non-Renewed",
+                "Lapsed"
+            ],
+            "default": "Active",
+            "isCustom": true,
+            "style": {
+                "Active": "success",
+                "Up for Renewal": "warning",
+                "Renewing": "warning",
+                "Renewed": "success",
+                "Expired": "default",
+                "Cancelled": "danger",
+                "Flat Cancel": "danger",
+                "Pending Cancel": "warning",
+                "Non-Renewed": "danger",
+                "Lapsed": "danger"
+            },
+            "kanbanOrder": [
+                "Active",
+                "Up for Renewal",
+                "Renewing",
+                "Renewed",
+                "Expired",
+                "Cancelled",
+                "Pending Cancel"
+            ]
+        },
+        "effectiveDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "expirationDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Renewal trigger date — used by renewal pipeline automation"
+        },
+        "premiumAmount": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "commissionRate": {
+            "type": "float",
+            "isCustom": true
+        },
+        "commissionAmount": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "coverageAmount": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "deductible": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "agencyFee": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "businessType": {
+            "type": "enum",
+            "options": [
+                "",
+                "New Business",
+                "Renewal",
+                "Rewrite"
+            ],
+            "isCustom": true
+        },
+        "policyNotes": {
+            "type": "text",
+            "isCustom": true
+        },
+        "momentumLastSynced": {
+            "type": "datetime",
+            "isCustom": true
+        },
+        "syncStatus": {
+            "type": "enum",
+            "options": [
+                "",
+                "Synced",
+                "Pending",
+                "Error",
+                "Skipped"
+            ],
+            "default": "Pending",
+            "isCustom": true,
+            "style": {
+                "Synced": "success",
+                "Pending": "warning",
+                "Error": "danger",
+                "Skipped": "default"
+            }
+        },
+        "insuredMomentumId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync"
+        },
+        "account": {
+            "type": "link"
+        },
+        "contact": {
+            "type": "link"
+        },
+        "opportunities": {
+            "type": "linkMultiple"
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "premiumAtRisk": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Annual premium value at risk if policy lapses — used by renewal outreach automation"
+        },
+        "urgency": {
+            "type": "enum",
+            "options": [
+                "",
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+            ],
+            "isCustom": true,
+            "tooltipText": "Auto-calculated by n8n renewal workflow based on days to expiration",
+            "displayAsLabel": true,
+            "style": {
+                "Critical": "danger",
+                "High": "warning",
+                "Medium": "info",
+                "Low": "success"
+            }
+        },
+        "lastContactMethod": {
+            "type": "enum",
+            "options": [
+                "",
+                "Phone",
+                "Email",
+                "Text",
+                "No Response"
+            ],
+            "isCustom": true,
+            "tooltipText": "Set by renewal outreach automation after each email send"
+        },
+        "lastContactDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Set by renewal outreach automation after each contact attempt"
+        },
+        "commissions": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true
+        },
+        "emailSequenceStarted": {
+            "type": "bool",
+            "default": false,
+            "isCustom": true,
+            "tooltipText": "Set to true by renewal outreach automation after first email sent"
+        },
+        "renewals": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true,
+            "tooltipText": "Renewal pipeline records for this expiring policy"
+        },
+        "renewedFrom": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true,
+            "tooltipText": "Renewal records where this is the new/renewed policy"
+        },
+        "activityLogs": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true
+        }
+    },
+    "links": {
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "policies",
+            "isCustom": true
+        },
+        "contact": {
+            "type": "belongsTo",
+            "entity": "Contact",
+            "foreign": "policies",
+            "isCustom": true
+        },
+        "opportunities": {
+            "type": "hasMany",
+            "entity": "Opportunity",
+            "relationName": "policyOpportunity",
+            "foreign": "policies",
+            "isCustom": true
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "commissions": {
+            "type": "hasMany",
+            "entity": "Commission",
+            "foreign": "policy",
+            "isCustom": true
+        },
+        "renewals": {
+            "type": "hasMany",
+            "entity": "Renewal",
+            "foreign": "policy",
+            "isCustom": true
+        },
+        "renewedFrom": {
+            "type": "hasMany",
+            "entity": "Renewal",
+            "foreign": "newPolicy",
+            "isCustom": true
+        },
+        "activityLogs": {
+            "type": "hasMany",
+            "entity": "ActivityLog",
+            "foreign": "policy",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "name",
+        "order": "asc",
+        "textFilterFields": [
+            "name",
+            "carrier",
+            "momentumPolicyId"
+        ],
+        "sortByList": [
+            "name",
+            "createdAt",
+            "modifiedAt",
+            "effectiveDate",
+            "expirationDate",
+            "carrier",
+            "status",
+            "lineOfBusiness"
+        ]
+    },
+    "indexes": {
+        "momentumPolicyId": {
+            "columns": [
+                "momentumPolicyId"
+            ]
+        },
+        "insuredMomentumId": {
+            "columns": [
+                "insuredMomentumId"
+            ]
+        }
+    },
+    "kanbanStatusIgnoreList": [
+        "Expired",
+        "Cancelled",
+        "Flat Cancel",
+        "Non-Renewed",
+        "Lapsed"
+    ]
+}

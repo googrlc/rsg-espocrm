@@ -1,0 +1,20 @@
+{
+    "activityStatusList": [
+        "Inbox",
+        "In Progress",
+        "Waiting on Client",
+        "Waiting on Carrier"
+    ],
+    "historyStatusList": [
+        "Completed"
+    ],
+    "completedStatusList": [
+        "Completed"
+    ],
+    "canceledStatusList": [
+        "Cancelled"
+    ],
+    "kanbanStatusIgnoreList": [
+        "Cancelled"
+    ]
+}

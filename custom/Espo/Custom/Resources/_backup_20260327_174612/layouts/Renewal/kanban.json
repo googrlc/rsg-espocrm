@@ -1,0 +1,16 @@
+{
+    "rows": [
+        [
+            {"name": "account"},
+            {"name": "lineOfBusiness"}
+        ],
+        [
+            {"name": "currentPremium"},
+            {"name": "expirationDate"}
+        ],
+        [
+            {"name": "assignedUser"},
+            {"name": "urgency"}
+        ]
+    ]
+}

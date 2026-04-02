@@ -1,0 +1,19 @@
+{
+    "fields": {
+        "parent": {
+            "entityList": [
+                "Account",
+                "Lead",
+                "Contact",
+                "Opportunity",
+                "Case",
+                "Policy",
+                "Renewal"
+            ]
+        },
+        "account": {
+            "type": "link",
+            "readOnly": false
+        }
+    }
+}

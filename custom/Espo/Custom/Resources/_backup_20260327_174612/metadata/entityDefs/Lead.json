@@ -1,0 +1,110 @@
+{
+    "fields": {
+        "insuranceInterest": {
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial Auto",
+                "General Liability",
+                "Workers Comp",
+                "Commercial Property",
+                "BOP",
+                "Personal Auto",
+                "Homeowners",
+                "Life",
+                "Health",
+                "Medicare",
+                "Group Benefits",
+                "Inland Marine",
+                "Multiple",
+                "Other"
+            ],
+            "isCustom": true
+        },
+        "currentlyInsured": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
+        },
+        "currentCarrier": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true
+        },
+        "estimatedPremium": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "priority": {
+            "type": "enum",
+            "options": [
+                "",
+                "Hot",
+                "Warm",
+                "Cold"
+            ],
+            "isCustom": true,
+            "style": {
+                "Hot": "danger",
+                "Warm": "warning",
+                "Cold": "info"
+            }
+        },
+        "aiSummary": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Pre-call intel from Manus prospect intelligence pack"
+        },
+        "intelPackRun": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Checked when Manus prospect-intelligence-pack has run for this lead"
+        },
+        "dateOfBirth": {
+            "type": "date",
+            "isCustom": true
+        },
+        "medicareEligible": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
+        },
+        "medicarePartADate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "medicarePartBDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "currentMedicarePlan": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true
+        },
+        "t65AlertSent": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "readOnly": true
+        }
+    },
+    "collection": {
+        "orderBy": "name",
+        "order": "asc",
+        "textFilterFields": [
+            "name",
+            "emailAddress",
+            "accountName",
+            "phoneNumber"
+        ],
+        "sortByList": [
+            "name",
+            "createdAt",
+            "modifiedAt",
+            "status",
+            "source"
+        ]
+    }
+}

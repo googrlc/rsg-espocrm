@@ -1,0 +1,15 @@
+{
+    "filterList": [
+        {
+            "name": "planned",
+            "style": "primary"
+        },
+        {
+            "name": "held",
+            "style": "success"
+        }
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ]
+}

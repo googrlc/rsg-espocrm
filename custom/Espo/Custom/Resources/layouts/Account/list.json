@@ -1,0 +1,35 @@
+[
+    {
+        "name": "name",
+        "width": 22,
+        "link": true
+    },
+    {
+        "name": "accountType",
+        "width": 10
+    },
+    {
+        "name": "accountStatus",
+        "width": 8
+    },
+    {
+        "name": "totalAnnualPremium",
+        "width": 10
+    },
+    {
+        "name": "type",
+        "width": 16
+    },
+    {
+        "name": "scoreTotal",
+        "width": 7
+    },
+    {
+        "name": "gapCount",
+        "width": 7
+    },
+    {
+        "name": "assignedUser",
+        "width": 8
+    }
+]

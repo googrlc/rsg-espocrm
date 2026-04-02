@@ -1,0 +1,17 @@
+{
+    "presetFilters": {
+        "actual": "All Open",
+        "completed": "Completed",
+        "todays": "Today's",
+        "overdue": "Overdue",
+        "assignedToMe": "My Tasks",
+        "assignedToGretchen": "Gretchen's Tasks"
+    },
+    "fields": {
+        "taskSource": "Source",
+        "linkedAccount": "Linked Account"
+    },
+    "links": {
+        "linkedAccount": "Linked Account"
+    }
+}

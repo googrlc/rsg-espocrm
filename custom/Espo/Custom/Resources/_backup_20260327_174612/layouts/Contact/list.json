@@ -1,0 +1,10 @@
+[
+    {"name": "name", "link": true, "width": 20},
+    {"name": "accountName", "link": true, "width": 15},
+    {"name": "householdRole", "width": 10},
+    {"name": "clientType", "width": 10},
+    {"name": "emailAddress", "width": 18},
+    {"name": "phoneNumber", "width": 12},
+    {"name": "dateOfBirth", "width": 10},
+    {"name": "createdAt", "width": 10}
+]

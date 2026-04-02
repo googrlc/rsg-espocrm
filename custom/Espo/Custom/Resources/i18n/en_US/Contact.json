@@ -1,0 +1,21 @@
+{
+    "fields": {
+        "contactDriveFolderUrl": "Drive Folder URL",
+        "medicareEligible": "Medicare Eligible",
+        "medicarePartB": "Medicare Part B",
+        "medicarePlanType": "Plan Type",
+        "medicareCarrier": "Medicare Carrier",
+        "irmaApplies": "IRMAA Applies",
+        "aepSepDate": "AEP/SEP Date",
+        "lifeCoverageInForce": "Coverage In Force",
+        "lifeFaceAmount": "Face Amount",
+        "lifePolicyType": "Policy Type",
+        "lifeHealthClass": "Health Class",
+        "lifeAnnualPremium": "Annual Premium",
+        "lifeBeneficiaryOnFile": "Beneficiary On File",
+        "lifeReviewDate": "Life Review Date"
+    },
+    "labels": {
+        "Personal Policies": "Personal Policies"
+    }
+}

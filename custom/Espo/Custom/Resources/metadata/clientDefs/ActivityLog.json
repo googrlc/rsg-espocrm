@@ -1,0 +1,68 @@
+{
+    "controller": "controllers/record",
+    "color": "#607d8b",
+    "iconClass": "fas fa-clipboard-list",
+    "kanbanViewMode": true,
+    "statusField": "activityType",
+    "filterList": [
+        {"name": "all"},
+        {"name": "emails"},
+        {"name": "calls", "style": "warning"},
+        {"name": "automated", "style": "info"},
+        {"name": "notes"}
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "dynamicLogic": {
+        "fields": {
+            "direction": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "activityType",
+                            "value": "Call"
+                        }
+                    ]
+                }
+            },
+            "duration": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "activityType",
+                            "value": "Call"
+                        }
+                    ]
+                }
+            },
+            "outcome": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "activityType",
+                            "value": "Call"
+                        }
+                    ]
+                }
+            },
+            "classification": {
+                "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {"type": "equals", "attribute": "activityType", "value": "Email Out"},
+                                {"type": "equals", "attribute": "activityType", "value": "Email In"},
+                                {"type": "equals", "attribute": "activityType", "value": "Call"}
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

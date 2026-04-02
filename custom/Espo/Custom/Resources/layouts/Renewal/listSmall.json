@@ -1,0 +1,6 @@
+[
+  {"name": "name", "link": true, "width": 30},
+  {"name": "stage", "width": 20},
+  {"name": "expirationDate", "width": 15},
+  {"name": "urgency", "width": 15}
+]

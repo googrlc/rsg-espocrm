@@ -1,0 +1,22 @@
+{
+    "views": {
+        "list": "custom:views/account/list"
+    },
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "accountScore",
+                "label": "Account Score",
+                "view": "custom:views/account/record/panels/account-score",
+                "sticked": true,
+                "order": 1
+            },
+            {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/account/record/panels/record-info",
+                "order": 3
+            }
+        ]
+    }
+}

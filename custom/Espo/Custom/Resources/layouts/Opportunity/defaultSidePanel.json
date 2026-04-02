@@ -1,0 +1,14 @@
+[
+    {
+        "name": ":assignedUser"
+    },
+    {
+        "name": "probability"
+    },
+    {
+        "name": "businessType"
+    },
+    {
+        "name": "healthCoverageType"
+    }
+]

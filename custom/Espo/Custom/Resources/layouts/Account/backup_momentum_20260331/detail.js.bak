@@ -1,0 +1,86 @@
+/************************************************************************
+ * RSG Custom Account Record Detail View
+ * Synchronizes middle-panel tabs with bottom-panel (relationship) visibility.
+ *
+ * Tab map (0-indexed):
+ *   0 = Overview   (contacts, stream)
+ *   1 = Details    (no bottom panels)
+ *   2 = Policies   (policies, renewals)
+ *   3 = Activity & Tasks  (activityLogs, emails, meetings, calls, tasks)
+ *   4 = Cases      (cases)
+ *   5 = Commissions
+ *   6 = Opportunities
+ ************************************************************************/
+
+define("custom:views/account/record/detail", ["views/record/detail"], function (Dep) {
+
+    return Dep.extend({
+
+        // Map bottom panel names → middle tab numbers
+        bottomPanelTabMap: {
+            "contacts":      0,  // Overview
+            "stream":        0,  // Overview
+            "policies":      2,  // Policies
+            "renewals":      2,  // Policies
+            "activityLogs":  3,  // Activity & Tasks
+            "emails":        3,  // Activity & Tasks
+            "meetings":      3,  // Activity & Tasks
+            "calls":         3,  // Activity & Tasks
+            "tasks":         3,  // Activity & Tasks
+            "cases":         4,  // Cases
+            "commissions":   5,  // Commissions
+            "opportunities": 6,  // Opportunities
+        },
+
+        afterRender: function () {
+            Dep.prototype.afterRender.call(this);
+
+            var self = this;
+            var tab = this.currentTab || 0;
+
+            // Wait for bottom view to be ready, then sync
+            var bottomView = this.getView("bottom");
+            if (bottomView) {
+                if (bottomView.isRendered()) {
+                    self.syncBottomPanelsToTab(tab);
+                } else {
+                    this.listenToOnce(bottomView, "after:render", function () {
+                        self.syncBottomPanelsToTab(tab);
+                    });
+                }
+            }
+        },
+
+        selectTab: function (tab) {
+            Dep.prototype.selectTab.call(this, tab);
+            this.syncBottomPanelsToTab(tab);
+        },
+
+        syncBottomPanelsToTab: function (tab) {
+            var bottomView = this.getView("bottom");
+            if (!bottomView || !bottomView.$el) return;
+
+            var map = this.bottomPanelTabMap;
+
+            (bottomView.panelList || []).forEach(function (panel) {
+                if (!panel.name || panel.name === "_delimiter_") return;
+
+                var assignedTab = (panel.name in map) ? map[panel.name] : -1;
+
+                // -1 means show on all tabs
+                if (assignedTab === -1) return;
+
+                var $panel = bottomView.$el.find(".panel[data-name=\"" + panel.name + "\"]");
+
+                if (assignedTab === tab) {
+                    $panel.removeClass("hidden");
+                    panel.hidden = false;
+                    panel.tabHidden = false;
+                } else {
+                    $panel.addClass("hidden");
+                    panel.tabHidden = true;
+                }
+            });
+        },
+    });
+});

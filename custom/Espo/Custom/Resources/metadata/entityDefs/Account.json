@@ -1,0 +1,2464 @@
+{
+  "fields": {
+    "momentumClientId": {
+      "type": "varchar",
+      "maxLength": 255,
+      "isCustom": true,
+      "tooltipText": "NowCerts/Momentum AMS insured database_id \u2014 dedup key"
+    },
+    "fein": {
+      "type": "varchar",
+      "maxLength": 20,
+      "isCustom": true,
+      "tooltipText": "Federal Employer Identification Number \u2014 commercial accounts only",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Commercial Lines"
+          }
+        ]
+      }
+    },
+    "csrName": {
+      "type": "varchar",
+      "maxLength": 255,
+      "isCustom": true
+    },
+    "momentumLastSynced": {
+      "type": "datetime",
+      "isCustom": true
+    },
+    "policies": {
+      "type": "linkMultiple",
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "noLoad": true
+    },
+    "commissions": {
+      "type": "linkMultiple",
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "noLoad": true
+    },
+    "renewals": {
+      "type": "linkMultiple",
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "noLoad": true
+    },
+    "accountType": {
+      "type": "enum",
+      "options": [
+        "",
+        "Prospect",
+        "Commercial Lines",
+        "Personal Lines",
+        "Group Benefits",
+        "Medicare",
+        "Life Insurance"
+      ],
+      "isCustom": true,
+      "audited": true,
+      "style": {
+        "": null,
+        "Prospect": "info",
+        "Commercial Lines": "primary",
+        "Personal Lines": "success",
+        "Group Benefits": "info",
+        "Medicare": "warning",
+        "Life Insurance": "default"
+      }
+    },
+    "lob": {
+      "type": "multiEnum",
+      "options": [
+        "Commercial Auto",
+        "GL",
+        "Workers Comp",
+        "Cargo",
+        "Home",
+        "Auto",
+        "Life",
+        "Medicare",
+        "BOP",
+        "Umbrella",
+        "Professional Liability",
+        "Builders Risk",
+        "Transportation"
+      ],
+      "isCustom": true
+    },
+    "xDate": {
+      "type": "date",
+      "isCustom": true
+    },
+    "estimatedPremium": {
+      "type": "currency",
+      "isCustom": true
+    },
+    "annualPremium": {
+      "type": "currency",
+      "isCustom": true
+    },
+    "renewalDate": {
+      "type": "date",
+      "isCustom": true
+    },
+    "carrier": {
+      "type": "varchar",
+      "maxLength": 100,
+      "isCustom": true
+    },
+    "accountStatus": {
+      "type": "enum",
+      "options": [
+        "",
+        "Active",
+        "Urgent",
+        "Renewing",
+        "At Risk",
+        "Inactive"
+      ],
+      "default": "Active",
+      "isCustom": true,
+      "displayAsLabel": true,
+      "style": {
+        "Active": "success",
+        "Renewing": "warning",
+        "Urgent": "danger",
+        "At Risk": "danger",
+        "Inactive": "default"
+      }
+    },
+    "stage": {
+      "type": "enum",
+      "options": [
+        "",
+        "New",
+        "Qualified",
+        "Proposal",
+        "Negotiation",
+        "Closed Won",
+        "Closed Lost"
+      ],
+      "isCustom": true,
+      "displayAsLabel": true,
+      "style": {
+        "New": "default",
+        "Qualified": "info",
+        "Proposal": "primary",
+        "Negotiation": "warning",
+        "Closed Won": "success",
+        "Closed Lost": "danger"
+      }
+    },
+    "intelRun": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true,
+      "tooltipText": "Whether an intel pack has been run on this account"
+    },
+    "intelRunDate": {
+      "type": "datetime",
+      "isCustom": true
+    },
+    "intelRunBy": {
+      "type": "varchar",
+      "maxLength": 100,
+      "isCustom": true
+    },
+    "intelSourcesHit": {
+      "type": "int",
+      "isCustom": true
+    },
+    "intelConfidence": {
+      "type": "enum",
+      "options": [
+        "",
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "isCustom": true,
+      "displayAsLabel": true,
+      "style": {
+        "High": "success",
+        "Medium": "warning",
+        "Low": "danger"
+      }
+    },
+    "intelAiSummary": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelPainPoints": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelCrossSell": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelGrowthIndicator": {
+      "type": "text",
+      "isCustom": true
+    },
+    "insightSignal": {
+      "type": "text",
+      "isCustom": true
+    },
+    "insightObjection": {
+      "type": "text",
+      "isCustom": true
+    },
+    "insightOpener": {
+      "type": "text",
+      "isCustom": true
+    },
+    "insightRelationship": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelLegalName": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelDba": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelNaics": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelSic": {
+      "type": "varchar",
+      "maxLength": 20,
+      "isCustom": true
+    },
+    "intelEntityType": {
+      "type": "enum",
+      "options": [
+        "",
+        "LLC",
+        "Corp",
+        "Sole Prop",
+        "Partnership",
+        "Other"
+      ],
+      "isCustom": true
+    },
+    "intelYearsInBusiness": {
+      "type": "int",
+      "isCustom": true
+    },
+    "intelEmployeeCount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "intelAnnualRevenueEst": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelWebsite": {
+      "type": "url",
+      "isCustom": true
+    },
+    "intelLinkedinUrl": {
+      "type": "url",
+      "isCustom": true
+    },
+    "intelBbbRating": {
+      "type": "varchar",
+      "maxLength": 10,
+      "isCustom": true
+    },
+    "intelBbbAccredited": {
+      "type": "bool",
+      "isCustom": true
+    },
+    "intelBbbComplaints": {
+      "type": "int",
+      "isCustom": true
+    },
+    "intelFleetSize": {
+      "type": "int",
+      "isCustom": true
+    },
+    "intelOperatingRadius": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelCargoType": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelOwnerOperators": {
+      "type": "bool",
+      "isCustom": true
+    },
+    "intelDotIncidents": {
+      "type": "int",
+      "isCustom": true
+    },
+    "intelOshaViolations": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelUnderwritingFlag": {
+      "type": "text",
+      "isCustom": true,
+      "tooltipText": "Underwriting risk flags \u2014 may trigger declination or surplus lines"
+    },
+    "intelWebsiteNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelNewsNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelLinkedinNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelBbbNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelSignalNews": {
+      "type": "text",
+      "isCustom": true
+    },
+    "intelSignalLinkedin": {
+      "type": "text",
+      "isCustom": true
+    },
+    "sicCode": {
+      "type": "varchar",
+      "maxLength": 20,
+      "isCustom": true
+    },
+    "businessEntity": {
+      "type": "enum",
+      "options": [
+        "",
+        "Sole Proprietor",
+        "LLC",
+        "Corporation",
+        "S-Corp",
+        "Partnership",
+        "Non-Profit",
+        "Other"
+      ],
+      "isCustom": true,
+      "style": {
+        "": null,
+        "Sole Proprietor": null,
+        "LLC": null,
+        "Corporation": null,
+        "S-Corp": null,
+        "Partnership": null,
+        "Non-Profit": null,
+        "Other": null
+      }
+    },
+    "annualRevenue": {
+      "type": "currency",
+      "isCustom": true
+    },
+    "numberOfEmployees": {
+      "type": "int",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "or",
+            "value": [
+              {
+                "type": "equals",
+                "attribute": "accountType",
+                "value": "Commercial Lines"
+              },
+              {
+                "type": "equals",
+                "attribute": "accountType",
+                "value": "Group Benefits"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "assessmentDate": {
+      "notNull": false,
+      "type": "datetime",
+      "isCustom": true,
+      "tooltipText": "When Viktor last ran a full intelligence assessment on this account",
+      "minuteStep": 30,
+      "tooltip": true
+    },
+    "intelPackRun": {
+      "type": "bool",
+      "label": "Intel Pack Run",
+      "default": false,
+      "isCustom": true
+    },
+    "estimatedRevenue": {
+      "type": "currency",
+      "isCustom": true
+    },
+    "employeeCount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "yearsInBusiness": {
+      "type": "int",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Commercial Lines"
+          }
+        ]
+      }
+    },
+    "riskScore": {
+      "type": "int",
+      "isCustom": true,
+      "tooltipText": "AI-generated risk score from Viktor assessment"
+    },
+    "coverageGaps": {
+      "type": "text",
+      "isCustom": true,
+      "tooltipText": "AI-identified coverage gaps from Viktor assessment",
+      "tooltip": true
+    },
+    "keyFindings": {
+      "type": "text",
+      "isCustom": true,
+      "tooltipText": "Full narrative intel written by Viktor"
+    },
+    "linkedinUrl": {
+      "type": "url",
+      "isCustom": true
+    },
+    "websiteUrl": {
+      "type": "url",
+      "isCustom": true
+    },
+    "bbbRating": {
+      "type": "varchar",
+      "maxLength": 10,
+      "isCustom": true,
+      "options": []
+    },
+    "intelSources": {
+      "type": "text",
+      "isCustom": true,
+      "tooltipText": "Comma-separated list of sources checked: LinkedIn, BBB, News, Website"
+    },
+    "accountScore": {
+      "type": "int",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "readOnly": true,
+      "isCustom": true,
+      "layoutListDisabled": false,
+      "tooltipText": "Auto-calculated from policy count, premium, LOB diversity, tenure, and active ratio",
+      "tooltip": true
+    },
+    "scoreBreakdown": {
+      "type": "text",
+      "readOnly": true,
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "layoutListDisabled": true,
+      "tooltipText": "JSON breakdown of score components"
+    },
+    "googleDriveFolderUrl": {
+      "type": "url",
+      "isCustom": true
+    },
+    "retentionRisk": {
+      "type": "enum",
+      "options": [
+        "",
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "isCustom": true,
+      "style": {
+        "Low": "success",
+        "Medium": "warning",
+        "High": "danger"
+      }
+    },
+    "linkedTasks": {
+      "type": "linkMultiple",
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "layoutListDisabled": true,
+      "noLoad": true
+    },
+    "clientSince": {
+      "notNull": false,
+      "type": "date",
+      "isCustom": true
+    },
+    "referralSource": {
+      "type": "enum",
+      "options": [
+        "",
+        "Referral",
+        "Google",
+        "Social Media",
+        "Cold Outreach",
+        "Walk-in",
+        "NowCerts Import",
+        "Other"
+      ],
+      "isCustom": true
+    },
+    "referralName": {
+      "type": "text",
+      "isCustom": true
+    },
+    "preferredContact": {
+      "type": "enum",
+      "options": [
+        "",
+        "Phone",
+        "Email",
+        "Text"
+      ],
+      "isCustom": true
+    },
+    "bestTimeToCall": {
+      "type": "text",
+      "isCustom": true
+    },
+    "doNotContact": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "communicationNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "primaryFirstName": {
+      "type": "varchar",
+      "maxLength": 100,
+      "required": true,
+      "isCustom": true
+    },
+    "primaryLastName": {
+      "type": "varchar",
+      "maxLength": 100,
+      "required": false,
+      "isCustom": true,
+      "dynamicLogicRequired": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Personal Lines"
+          }
+        ]
+      }
+    },
+    "primaryDob": {
+      "type": "date",
+      "isCustom": true
+    },
+    "primaryGender": {
+      "type": "enum",
+      "options": [
+        "",
+        "Male",
+        "Female",
+        "Other",
+        "Prefer not to say"
+      ],
+      "isCustom": true
+    },
+    "primaryOccupation": {
+      "type": "text",
+      "isCustom": true
+    },
+    "primaryPhone": {
+      "type": "phone",
+      "isCustom": true
+    },
+    "primaryEmail": {
+      "type": "email",
+      "isCustom": true
+    },
+    "spouseFirstName": {
+      "type": "varchar",
+      "maxLength": 100,
+      "isCustom": true
+    },
+    "spouseLastName": {
+      "type": "varchar",
+      "maxLength": 100,
+      "isCustom": true
+    },
+    "spouseDob": {
+      "type": "date",
+      "isCustom": true
+    },
+    "spouseOccupation": {
+      "type": "text",
+      "isCustom": true
+    },
+    "dependentsCount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "dependentAges": {
+      "type": "text",
+      "isCustom": true
+    },
+    "propertyAddress": {
+      "type": "text",
+      "isCustom": true
+    },
+    "propertyCity": {
+      "type": "varchar",
+      "maxLength": 50,
+      "isCustom": true
+    },
+    "propertyState": {
+      "type": "varchar",
+      "maxLength": 5,
+      "default": "GA",
+      "isCustom": true
+    },
+    "propertyZip": {
+      "type": "varchar",
+      "maxLength": 10,
+      "isCustom": true
+    },
+    "mailingAddressSame": {
+      "type": "bool",
+      "default": true,
+      "isCustom": true
+    },
+    "mailingAddress": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isFalse",
+            "attribute": "mailingAddressSame"
+          }
+        ]
+      }
+    },
+    "residenceType": {
+      "type": "enum",
+      "options": [
+        "",
+        "Owned",
+        "Rented",
+        "Condo",
+        "Mobile Home",
+        "Other"
+      ],
+      "isCustom": true
+    },
+    "yearsAtAddress": {
+      "type": "int",
+      "isCustom": true
+    },
+    "vehicleCount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "vehicle1Year": {
+      "type": "int",
+      "isCustom": true
+    },
+    "vehicle1Make": {
+      "type": "varchar",
+      "maxLength": 30,
+      "isCustom": true
+    },
+    "vehicle1Model": {
+      "type": "varchar",
+      "maxLength": 30,
+      "isCustom": true
+    },
+    "vehicle1Vin": {
+      "type": "text",
+      "isCustom": true
+    },
+    "vehicle1Use": {
+      "type": "enum",
+      "options": [
+        "",
+        "Commute",
+        "Pleasure",
+        "Business",
+        "Rideshare"
+      ],
+      "isCustom": true
+    },
+    "vehicle1AnnualMiles": {
+      "type": "int",
+      "isCustom": true
+    },
+    "vehicle1Ownership": {
+      "type": "enum",
+      "options": [
+        "",
+        "Owned",
+        "Financed",
+        "Leased"
+      ],
+      "isCustom": true
+    },
+    "vehicle2Year": {
+      "type": "int",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicle2Make": {
+      "type": "varchar",
+      "maxLength": 30,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicle2Model": {
+      "type": "varchar",
+      "maxLength": 30,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicle2Vin": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicle2Use": {
+      "type": "enum",
+      "options": [
+        "",
+        "Commute",
+        "Pleasure",
+        "Business",
+        "Rideshare"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicle2AnnualMiles": {
+      "type": "int",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicle2Ownership": {
+      "type": "enum",
+      "options": [
+        "",
+        "Owned",
+        "Financed",
+        "Leased"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "greaterThanOrEquals",
+            "attribute": "vehicleCount",
+            "value": 2
+          }
+        ]
+      }
+    },
+    "vehicleAdditionalNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "youthfulDriverFlag": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n \u2014 true if any dependent age 16-25"
+    },
+    "rideshareDriverFlag": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "driverCount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "driver1Name": {
+      "type": "text",
+      "isCustom": true
+    },
+    "driver1Dob": {
+      "type": "date",
+      "isCustom": true
+    },
+    "driver1LicenseState": {
+      "type": "varchar",
+      "maxLength": 5,
+      "isCustom": true
+    },
+    "driver1Violations": {
+      "type": "int",
+      "isCustom": true
+    },
+    "driver1Accidents": {
+      "type": "int",
+      "isCustom": true
+    },
+    "driver2Name": {
+      "type": "text",
+      "isCustom": true
+    },
+    "driver2Dob": {
+      "type": "date",
+      "isCustom": true
+    },
+    "driver2LicenseState": {
+      "type": "varchar",
+      "maxLength": 5,
+      "isCustom": true
+    },
+    "driver2Violations": {
+      "type": "int",
+      "isCustom": true
+    },
+    "driver2Accidents": {
+      "type": "int",
+      "isCustom": true
+    },
+    "driverAdditionalNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "mvrFlag": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "propertyCount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "homeYearBuilt": {
+      "type": "int",
+      "isCustom": true
+    },
+    "homeConstruction": {
+      "type": "enum",
+      "options": [
+        "",
+        "Frame",
+        "Masonry",
+        "Mixed",
+        "Log",
+        "Other"
+      ],
+      "isCustom": true
+    },
+    "homeSquareFootage": {
+      "type": "int",
+      "isCustom": true
+    },
+    "homeDwellingValue": {
+      "type": "currency",
+      "isCustom": true
+    },
+    "homePurchaseYear": {
+      "type": "int",
+      "isCustom": true
+    },
+    "homeRoofYear": {
+      "type": "int",
+      "isCustom": true
+    },
+    "homeRoofMaterial": {
+      "type": "enum",
+      "options": [
+        "",
+        "Asphalt Shingle",
+        "Metal",
+        "Tile",
+        "Wood Shake",
+        "Other"
+      ],
+      "isCustom": true
+    },
+    "homeSecuritySystem": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "homeAlarmMonitored": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "homeTrampoline": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "homePool": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "homeDog": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "homeDogBreed": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "homeDog"
+          }
+        ]
+      }
+    },
+    "rentalPropertyFlag": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "rentalPropertyCount": {
+      "type": "int",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "rentalPropertyFlag"
+          }
+        ]
+      }
+    },
+    "rentalPropertyNotes": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "rentalPropertyFlag"
+          }
+        ]
+      }
+    },
+    "policyAutoActive": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "policyAutoCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoNumber": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoEffective": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoExpiration": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoBiLimits": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoCompCollision": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoDeductible": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyAutoUmUim": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyAutoActive"
+          }
+        ]
+      }
+    },
+    "policyHomeActive": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "policyHomeCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomeNumber": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomePremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomeEffective": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomeExpiration": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomeDwellingLimit": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomeDeductible": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyHomeWindHailDed": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyHomeActive"
+          }
+        ]
+      }
+    },
+    "policyRenterActive": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "policyRenterCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyRenterActive"
+          }
+        ]
+      }
+    },
+    "policyRenterPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyRenterActive"
+          }
+        ]
+      }
+    },
+    "policyRenterExpiration": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyRenterActive"
+          }
+        ]
+      }
+    },
+    "policyUmbrellaActive": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "policyUmbrellaCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyUmbrellaActive"
+          }
+        ]
+      }
+    },
+    "policyUmbrellaLimit": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyUmbrellaActive"
+          }
+        ]
+      }
+    },
+    "policyUmbrellaPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyUmbrellaActive"
+          }
+        ]
+      }
+    },
+    "policyUmbrellaExpiration": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyUmbrellaActive"
+          }
+        ]
+      }
+    },
+    "policyLifeActive": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "policyLifeCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyLifeActive"
+          }
+        ]
+      }
+    },
+    "policyLifeType": {
+      "type": "enum",
+      "options": [
+        "",
+        "Term",
+        "Whole",
+        "Universal",
+        "Final Expense"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyLifeActive"
+          }
+        ]
+      }
+    },
+    "policyLifeFaceValue": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyLifeActive"
+          }
+        ]
+      }
+    },
+    "policyLifePremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyLifeActive"
+          }
+        ]
+      }
+    },
+    "policyLifeExpiration": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyLifeActive"
+          }
+        ]
+      }
+    },
+    "policyMedicareActive": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "policyMedicareCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyMedicareActive"
+          }
+        ]
+      }
+    },
+    "policyMedicarePlanType": {
+      "type": "enum",
+      "options": [
+        "",
+        "Medicare Advantage",
+        "Medicare Supplement",
+        "PDP"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyMedicareActive"
+          }
+        ]
+      }
+    },
+    "policyMedicarePlanName": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyMedicareActive"
+          }
+        ]
+      }
+    },
+    "policyMedicarePremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyMedicareActive"
+          }
+        ]
+      }
+    },
+    "policyMedicareEffective": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "policyMedicareActive"
+          }
+        ]
+      }
+    },
+    "policyMedicareAepFlag": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "totalAnnualPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "readOnly": true,
+      "tooltipText": "Calculated by n8n \u2014 sum of all active policy premiums",
+      "tooltip": true
+    },
+    "policyCountActive": {
+      "type": "int",
+      "isCustom": true,
+      "readOnly": true,
+      "tooltipText": "Calculated by n8n \u2014 count of active policies"
+    },
+    "gapUmbrella": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapUmbrellaReason": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "gapUmbrella"
+          }
+        ]
+      }
+    },
+    "gapLife": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapLifeReason": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "gapLife"
+          }
+        ]
+      }
+    },
+    "gapLifeNeedEst": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "gapLife"
+          }
+        ]
+      }
+    },
+    "gapRenters": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapAutoUm": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapMedicare": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapMedicareEligible": {
+      "type": "date",
+      "isCustom": true,
+      "tooltipText": "Calculated from primary DOB \u2014 65th birthday"
+    },
+    "gapLandlord": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapRideshare": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapFinalExpense": {
+      "type": "bool",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n"
+    },
+    "gapCount": {
+      "type": "int",
+      "isCustom": true,
+      "readOnly": true,
+      "tooltipText": "Calculated by n8n \u2014 total true gap flags"
+    },
+    "scoreTotal": {
+      "type": "int",
+      "min": 0,
+      "max": 100,
+      "readOnly": true,
+      "isCustom": true,
+      "tooltipText": "0-100 score calculated by n8n"
+    },
+    "scoreTier": {
+      "type": "enum",
+      "options": [
+        "",
+        "Strong",
+        "Good",
+        "At Risk",
+        "Critical"
+      ],
+      "readOnly": true,
+      "isCustom": true,
+      "displayAsLabel": true,
+      "style": {
+        "Strong": "success",
+        "Good": "primary",
+        "At Risk": "warning",
+        "Critical": "danger"
+      }
+    },
+    "scoreBundleDepth": {
+      "type": "int",
+      "min": 0,
+      "max": 20,
+      "isCustom": true
+    },
+    "scorePaymentHistory": {
+      "type": "int",
+      "min": 0,
+      "max": 20,
+      "isCustom": true
+    },
+    "scoreYearsRetained": {
+      "type": "int",
+      "min": 0,
+      "max": 20,
+      "isCustom": true
+    },
+    "scoreClaimsActivity": {
+      "type": "int",
+      "min": 0,
+      "max": 20,
+      "isCustom": true
+    },
+    "scoreLastContact": {
+      "type": "int",
+      "min": 0,
+      "max": 20,
+      "isCustom": true
+    },
+    "scoreLastCalculated": {
+      "type": "datetime",
+      "isCustom": true
+    },
+    "scoreChangeDirection": {
+      "type": "enum",
+      "options": [
+        "",
+        "Up",
+        "Down",
+        "Flat"
+      ],
+      "isCustom": true
+    },
+    "scoreChangeAmount": {
+      "type": "int",
+      "isCustom": true
+    },
+    "scoreAlertSent": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "nextRenewalDate": {
+      "type": "date",
+      "isCustom": true,
+      "tooltipText": "Calculated by n8n \u2014 earliest policy expiration"
+    },
+    "nextRenewalLob": {
+      "type": "text",
+      "isCustom": true
+    },
+    "nextRenewalCarrier": {
+      "type": "text",
+      "isCustom": true
+    },
+    "daysToRenewal": {
+      "type": "int",
+      "isCustom": true,
+      "readOnly": true,
+      "tooltipText": "Calculated daily by n8n",
+      "tooltip": true
+    },
+    "renewalOutreachStage": {
+      "type": "enum",
+      "options": [
+        "",
+        "Not Started",
+        "Day 60 Sent",
+        "Day 30 Sent",
+        "Day 14 Sent",
+        "Confirmed",
+        "Shopped",
+        "Lost"
+      ],
+      "isCustom": true,
+      "displayAsLabel": true,
+      "style": {
+        "": null,
+        "Not Started": "default",
+        "Day 60 Sent": "primary",
+        "Day 30 Sent": "primary",
+        "Day 14 Sent": "warning",
+        "Confirmed": "success",
+        "Shopped": "primary",
+        "Lost": "danger"
+      }
+    },
+    "renewalQuoteReceived": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true
+    },
+    "renewalQuoteAmount": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "renewalQuoteReceived"
+          }
+        ]
+      }
+    },
+    "renewalQuoteCarrier": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "renewalQuoteReceived"
+          }
+        ]
+      }
+    },
+    "renewalQuoteDate": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isTrue",
+            "attribute": "renewalQuoteReceived"
+          }
+        ]
+      }
+    },
+    "renewalDecision": {
+      "type": "enum",
+      "options": [
+        "",
+        "Renewing",
+        "Re-marketed",
+        "Lost \u2014 Price",
+        "Lost \u2014 Service",
+        "Lost \u2014 Carrier",
+        "Non-renewed by Carrier"
+      ],
+      "isCustom": true
+    },
+    "renewalDecisionNotes": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isNotEmpty",
+            "attribute": "renewalDecision"
+          }
+        ]
+      }
+    },
+    "premiumChangeAmount": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isNotEmpty",
+            "attribute": "renewalDecision"
+          }
+        ]
+      }
+    },
+    "premiumChangePct": {
+      "type": "float",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "isNotEmpty",
+            "attribute": "renewalDecision"
+          }
+        ]
+      }
+    },
+    "rateIncreaseFlag": {
+      "type": "bool",
+      "default": false,
+      "isCustom": true,
+      "tooltipText": "Auto-set by n8n when premiumChangePct > 15%"
+    },
+    "claimsCountLifetime": {
+      "type": "int",
+      "isCustom": true
+    },
+    "claimsCount3yr": {
+      "type": "int",
+      "isCustom": true
+    },
+    "claimsOpen": {
+      "type": "int",
+      "isCustom": true
+    },
+    "lastClaimDate": {
+      "type": "date",
+      "isCustom": true
+    },
+    "lastClaimLob": {
+      "type": "enum",
+      "options": [
+        "",
+        "Auto",
+        "Home",
+        "Umbrella",
+        "Life",
+        "Medicare",
+        "Renters",
+        "Other"
+      ],
+      "isCustom": true
+    },
+    "lastClaimType": {
+      "type": "text",
+      "isCustom": true
+    },
+    "lastClaimStatus": {
+      "type": "enum",
+      "options": [
+        "",
+        "Open",
+        "Closed",
+        "Subrogation"
+      ],
+      "isCustom": true,
+      "displayAsLabel": true,
+      "style": {
+        "Open": "danger",
+        "Closed": "success",
+        "Subrogation": "warning"
+      }
+    },
+    "claimsNotes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "lastContactDate": {
+      "type": "date",
+      "isCustom": true,
+      "tooltipText": "Auto-updated when RsgActivity logged"
+    },
+    "lastContactType": {
+      "type": "enum",
+      "options": [
+        "",
+        "Call",
+        "Email",
+        "Text",
+        "In Person"
+      ],
+      "isCustom": true
+    },
+    "lastContactBy": {
+      "type": "link",
+      "isCustom": true
+    },
+    "lastContactOutcome": {
+      "type": "enum",
+      "options": [
+        "",
+        "Reached",
+        "Voicemail",
+        "No Answer",
+        "Email Opened",
+        "Unresponsive"
+      ],
+      "isCustom": true
+    },
+    "outreachAttemptsCurrent": {
+      "type": "int",
+      "isCustom": true,
+      "tooltipText": "Reset each renewal cycle by n8n"
+    },
+    "npsScore": {
+      "type": "int",
+      "isCustom": true
+    },
+    "npsDate": {
+      "type": "date",
+      "isCustom": true
+    },
+    "referralsGiven": {
+      "type": "int",
+      "default": 0,
+      "isCustom": true
+    },
+    "type": {
+      "type": "enum",
+      "options": [
+        "",
+        "Commercial Lines",
+        "Personal Lines",
+        "Group Benefits",
+        "Prospect"
+      ],
+      "customizationOptionsReferenceDisabled": true,
+      "audited": false,
+      "layoutListDisabled": true,
+      "layoutDetailDisabled": true,
+      "layoutMassUpdateDisabled": true,
+      "layoutFiltersDisabled": true,
+      "readOnly": true,
+      "style": {
+        "": null,
+        "Commercial Lines": "primary",
+        "Personal Lines": "success",
+        "Group Benefits": "info",
+        "Prospect": "warning"
+      }
+    },
+    "totalActivePremium": {
+      "type": "currency",
+      "label": "Total Active Premium",
+      "isCustom": true
+    },
+    "activePolicyCount": {
+      "type": "int",
+      "label": "Active Policy Count",
+      "min": 0,
+      "isCustom": true
+    },
+    "nextXDate": {
+      "type": "date",
+      "label": "Next X-Date",
+      "isCustom": true
+    },
+    "nextXDateLob": {
+      "type": "varchar",
+      "label": "Next X-Date LOB",
+      "maxLength": 255,
+      "isCustom": true
+    },
+    "intelPackLastRun": {
+      "type": "datetime",
+      "label": "Intel Pack Last Run",
+      "readOnly": true,
+      "isCustom": true
+    },
+    "aiAssessment": {
+      "type": "text",
+      "label": "AI Assessment",
+      "rowsMin": 4,
+      "isCustom": true
+    },
+    "cYearBusinessEst": {
+      "type": "text",
+      "rowsMin": 2,
+      "cutHeight": 200,
+      "isCustom": true
+    },
+    "dateOfBirth": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Personal Lines"
+          }
+        ]
+      }
+    },
+    "gender": {
+      "type": "enum",
+      "options": [
+        "",
+        "Male",
+        "Female",
+        "Other",
+        "Prefer not to say"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Personal Lines"
+          }
+        ]
+      }
+    },
+    "maritalStatus": {
+      "type": "enum",
+      "options": [
+        "",
+        "Single",
+        "Married",
+        "Divorced",
+        "Widowed",
+        "Separated"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Personal Lines"
+          }
+        ]
+      }
+    },
+    "industry": {
+      "type": "enum",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "or",
+            "value": [
+              {
+                "type": "equals",
+                "attribute": "accountType",
+                "value": "Commercial Lines"
+              },
+              {
+                "type": "equals",
+                "attribute": "accountType",
+                "value": "Group Benefits"
+              }
+            ]
+          }
+        ]
+      },
+      "options": [
+        "",
+        "Advertising",
+        "Aerospace",
+        "Agriculture",
+        "Apparel & Accessories",
+        "Architecture",
+        "Automotive",
+        "Banking",
+        "Biotechnology",
+        "Building Materials & Equipment",
+        "Chemical",
+        "Computer",
+        "Construction",
+        "Consulting",
+        "Creative",
+        "Culture",
+        "Defense",
+        "Education",
+        "Electric Power",
+        "Electronics",
+        "Energy",
+        "Entertainment & Leisure",
+        "Finance",
+        "Food & Beverage",
+        "Grocery",
+        "Healthcare",
+        "Hospitality",
+        "Insurance",
+        "Landscaping Services / Tree Care",
+        "Legal",
+        "Manufacturing",
+        "Marketing",
+        "Mass Media",
+        "Mining",
+        "Music",
+        "Petroleum",
+        "Publishing",
+        "Real Estate",
+        "Retail",
+        "Service",
+        "Shipping",
+        "Software",
+        "Sports",
+        "Support",
+        "Technology",
+        "Telecommunications",
+        "Television",
+        "Testing, Inspection & Certification",
+        "Transportation",
+        "Travel",
+        "Venture Capital",
+        "Water",
+        "Wholesale"
+      ]
+    },
+    "gbEligibleEmployees": {
+      "type": "int",
+      "isCustom": true,
+      "tooltipText": "Total number of eligible employees in the group",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbParticipatingEmployees": {
+      "type": "int",
+      "isCustom": true,
+      "tooltipText": "Number of employees currently participating",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbCensusReceived": {
+      "type": "bool",
+      "isCustom": true,
+      "default": false,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbCensusDate": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbMedicalCarrier": {
+      "type": "varchar",
+      "maxLength": 150,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbMedicalPlanType": {
+      "type": "enum",
+      "options": [
+        "",
+        "HMO",
+        "PPO",
+        "EPO",
+        "HDHP",
+        "POS",
+        "HRA",
+        "Indemnity"
+      ],
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbMedicalRenewalDate": {
+      "type": "date",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbMedicalMonthlyPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbEmployerContribution": {
+      "type": "varchar",
+      "maxLength": 50,
+      "isCustom": true,
+      "tooltipText": "e.g. 75% EE / 50% Dep",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbDentalCarrier": {
+      "type": "varchar",
+      "maxLength": 150,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbDentalMonthlyPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbVisionCarrier": {
+      "type": "varchar",
+      "maxLength": 150,
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbVisionMonthlyPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbLifeAdCarrier": {
+      "type": "varchar",
+      "maxLength": 150,
+      "isCustom": true,
+      "tooltipText": "Group Life & AD&D carrier",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbLifeBenefitAmount": {
+      "type": "currency",
+      "isCustom": true,
+      "tooltipText": "Basic life benefit amount per employee",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbStdCarrier": {
+      "type": "varchar",
+      "maxLength": 150,
+      "isCustom": true,
+      "tooltipText": "Short-Term Disability carrier",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbLtdCarrier": {
+      "type": "varchar",
+      "maxLength": 150,
+      "isCustom": true,
+      "tooltipText": "Long-Term Disability carrier",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbVoluntaryBenefits": {
+      "type": "text",
+      "isCustom": true,
+      "tooltipText": "Aflac, voluntary life, accident, critical illness, etc.",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "gbNotes": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "type",
+            "value": "Group Benefits"
+          }
+        ]
+      }
+    },
+    "billingAddressCountry": {
+      "type": "varchar",
+      "disabled": true
+    },
+    "teams": {
+      "type": "linkMultiple",
+      "disabled": true
+    }
+  },
+  "links": {
+    "policies": {
+      "type": "hasMany",
+      "entity": "Policy",
+      "foreign": "account",
+      "isCustom": true
+    },
+    "commissions": {
+      "type": "hasMany",
+      "entity": "Commission",
+      "foreign": "account",
+      "isCustom": true
+    },
+    "renewals": {
+      "type": "hasMany",
+      "entity": "Renewal",
+      "foreign": "account",
+      "isCustom": true
+    },
+    "emails": {
+      "type": "hasChildren",
+      "entity": "Email",
+      "foreign": "parent",
+      "layoutRelationshipsDisabled": false
+    },
+    "meetings": {
+      "type": "hasChildren",
+      "entity": "Meeting",
+      "foreign": "parent",
+      "audited": true,
+      "layoutRelationshipsDisabled": false
+    },
+    "calls": {
+      "type": "hasChildren",
+      "entity": "Call",
+      "foreign": "parent",
+      "audited": true,
+      "layoutRelationshipsDisabled": false
+    },
+    "tasks": {
+      "type": "hasChildren",
+      "entity": "Task",
+      "foreign": "parent",
+      "layoutRelationshipsDisabled": false
+    },
+    "linkedTasks": {
+      "type": "hasMany",
+      "entity": "Task",
+      "foreign": "linkedAccount",
+      "isCustom": true
+    },
+    "activityLogs": {
+      "type": "hasMany",
+      "entity": "ActivityLog",
+      "foreign": "account",
+      "isCustom": true
+    },
+    "lastContactBy": {
+      "type": "belongsTo",
+      "entity": "User",
+      "isCustom": true
+    }
+  },
+  "collection": {
+    "orderBy": "name",
+    "order": "asc",
+    "textFilterFields": [
+      "name",
+      "emailAddress",
+      "phoneNumber",
+      "primaryFirstName",
+      "primaryLastName"
+    ],
+    "sortByList": [
+      "name",
+      "createdAt",
+      "modifiedAt",
+      "accountType",
+      "accountStatus",
+      "stage",
+      "nextRenewalDate",
+      "scoreTotal"
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "contacts": {
+        "index": 0,
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "equals",
+                    "attribute": "type",
+                    "value": "Commercial Lines"
+                }
+            ]
+        }
+    },
+    "policies": {
+        "index": 1
+    },
+    "renewals": {
+        "index": 2
+    },
+    "stream": {
+        "sticked": false,
+        "index": 3
+    },
+    "activityLogs": {
+        "index": 4
+    },
+    "emails": {
+        "index": 5
+    },
+    "meetings": {
+        "index": 6
+    },
+    "calls": {
+        "index": 7
+    },
+    "tasks": {
+        "index": 8
+    },
+    "cases": {
+        "index": 9
+    },
+    "commissions": {
+        "index": 10
+    },
+    "opportunities": {
+        "index": 11
+    },
+    "documents": {
+        "index": 12
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "fields": {
+        "parent": {
+            "entityList": [
+                "Account",
+                "Lead",
+                "Contact",
+                "Opportunity",
+                "Case",
+                "CRenewal"
+            ]
+        }
+    },
+    "collection": {
+        "orderBy": "dateStart",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "description"
+        ],
+        "sortByList": [
+            "name",
+            "dateStart",
+            "createdAt",
+            "status",
+            "direction"
+        ]
+    }
+}

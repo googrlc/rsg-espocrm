@@ -1,0 +1,17 @@
+{
+    "primaryFilterClassNameMap": {
+        "active": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\Active",
+        "criticalUrgent": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\CriticalUrgent",
+        "renewed": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\Renewed",
+        "lost": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\Lost",
+        "commAuto": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\CommAuto",
+        "genLiability": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\GenLiability",
+        "personalLines": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\PersonalLines",
+        "medicare": "Espo\\Custom\\Classes\\Select\\Renewal\\PrimaryFilters\\Medicare"
+    },
+    "boolFilterClassNameMap": {
+        "onlyMy": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\OnlyMy",
+        "commercialLines": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\CommercialLines",
+        "personalLines": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\PersonalLines"
+    }
+}

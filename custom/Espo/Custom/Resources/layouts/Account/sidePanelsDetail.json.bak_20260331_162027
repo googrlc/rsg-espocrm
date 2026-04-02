@@ -1,0 +1,15 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "recordInfo": {
+        "index": 0
+    },
+    "accountScore": {
+        "sticked": true,
+        "index": 1
+    },
+    "default": {
+        "index": 2
+    }
+}

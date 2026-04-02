@@ -1,0 +1,27 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "recordInfo": {
+        "index": 0
+    },
+    "accountScore": {
+        "sticked": true,
+        "index": 1
+    },
+    "default": {
+        "index": 2
+    },
+    "googleDrive": {
+        "index": 3
+    },
+    "intelPack": {
+        "index": 4
+    },
+    "activities": {
+        "index": 5
+    },
+    "history": {
+        "index": 6
+    }
+}

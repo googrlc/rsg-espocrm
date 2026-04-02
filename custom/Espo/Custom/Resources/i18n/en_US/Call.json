@@ -1,0 +1,9 @@
+{
+    "presetFilters": {
+        "planned": "Planned",
+        "held": "Held / Completed"
+    },
+    "boolFilters": {
+        "onlyMy": "Only My"
+    }
+}

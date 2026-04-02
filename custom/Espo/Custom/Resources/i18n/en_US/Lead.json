@@ -1,0 +1,23 @@
+{
+    "fields": {
+        "insuranceInterest": "Insurance Interest",
+        "currentlyInsured": "Currently Insured?",
+        "currentCarrier": "Current Carrier",
+        "estimatedPremium": "Est. Premium",
+        "priority": "Priority",
+        "aiSummary": "AI Summary",
+        "intelPackRun": "Intel Pack Run"
+    },
+    "tooltips": {
+        "aiSummary": "Pre-call intel from Manus prospect intelligence pack",
+        "intelPackRun": "Checked when Manus prospect-intelligence-pack has run for this lead"
+    },
+    "presetFilters": {
+        "actual": "Active Leads",
+        "converted": "Converted",
+        "dead": "Dead / Lost"
+    },
+    "boolFilters": {
+        "onlyMy": "Only My"
+    }
+}

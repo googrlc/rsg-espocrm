@@ -1,0 +1,22 @@
+{
+    "presetFilters": {
+        "unreconciled": "Unreconciled",
+        "reconciled": "Reconciled"
+    },
+    "boolFilters": {
+        "onlyMy": "Only My",
+        "newBusiness": "New Business",
+        "renewal": "Renewal"
+    },
+    "fields": {
+        "sourceType": "Source Type"
+    },
+    "options": {
+        "sourceType": {
+            "": "",
+            "New Business": "New Business",
+            "Renewal": "Renewal",
+            "Other": "Other"
+        }
+    }
+}

@@ -1,0 +1,40 @@
+{
+    "fields": {
+        "status": {
+            "options": [
+                "New",
+                "Assigned",
+                "Pending",
+                "Day 0 Sent",
+                "Day 1 Sent",
+                "Day 7 Sent",
+                "Day 14 Sent",
+                "Day 30 Sent",
+                "Day 60 Sent",
+                "Sequence Complete",
+                "Opted Out",
+                "Closed",
+                "Rejected",
+                "Duplicate"
+            ]
+        }
+    },
+    "collection": {
+        "orderBy": "number",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "number",
+            "description"
+        ],
+        "fullTextSearch": true,
+        "sortByList": [
+            "name",
+            "number",
+            "createdAt",
+            "modifiedAt",
+            "status",
+            "priority"
+        ]
+    }
+}

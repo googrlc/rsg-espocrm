@@ -1,0 +1,17 @@
+{
+    "filterList": [
+        {
+            "name": "open",
+            "style": "primary"
+        },
+        {
+            "name": "closed",
+            "style": "success"
+        }
+    ],
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "kanbanViewMode": true,
+    "statusField": "status"
+}
