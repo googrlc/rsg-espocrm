@@ -19,7 +19,7 @@ html {
 .main-body-container,
 .container-fluid,
 .record {
-    overflow-x: hidden;
+    overflow-x: auto;
     max-width: 100%;
 }
 
