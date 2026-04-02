@@ -8,6 +8,6 @@ class Actual implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["status!=" => ["Converted", "Dead", "Recycled"]]);
+        $queryBuilder->where(["status!=" => ["Converted", "DNC", "Nurture"]]);
     }
 }

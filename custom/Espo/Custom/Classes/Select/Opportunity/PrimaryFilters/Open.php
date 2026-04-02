@@ -9,7 +9,7 @@ class Open implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            "stage!=" => ["Won - Bound", "Lost", ""]
+            "stage!=" => ["Closed Won", "Closed Lost", ""]
         ]);
     }
 }

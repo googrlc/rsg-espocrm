@@ -8,6 +8,6 @@ class Dead implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["status" => "Dead"]);
+        $queryBuilder->where(["status" => "DNC"]);
     }
 }

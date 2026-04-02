@@ -3,12 +3,14 @@
         "lineOfBusiness": "Line of Business",
         "carrier": "Carrier",
         "currentCarrier": "Current Carrier",
+        "targetCarrier": "Target Carrier",
         "businessType": "Business Type",
         "writtenPremium": "Written Premium",
         "estimatedPremium": "Est. Premium",
         "commissionRate": "Commission Rate %",
         "estimatedCommission": "Est. Commission",
         "bindDate": "Bind Date",
+        "effectiveDate": "Effective Date",
         "policyNumber": "Policy Number",
         "priority": "Priority",
         "fein": "FEIN",
@@ -63,14 +65,12 @@
     "options": {
         "stage": {
             "": "",
-            "Qualify": "Qualify",
-            "Gathering Exposures": "Gathering Exposures",
+            "Discovery": "Discovery",
             "Quoting": "Quoting",
-            "Proposal Sent": "Proposal Sent",
-            "Negotiating": "Negotiating",
-            "Stalled": "Stalled",
-            "Won - Bound": "Won - Bound",
-            "Lost": "Lost"
+            "Proposal Presented": "Proposal Presented",
+            "Negotiation": "Negotiation",
+            "Closed Won": "Closed Won",
+            "Closed Lost": "Closed Lost"
         }
     },
     "tooltips": {
@@ -78,15 +78,14 @@
         "fein": "Enter if Account not yet created",
         "commissionLogged": "Auto-set by n8n when commission ledger entry created",
         "aiSummary": "2-3 sentence brief from Manus intel — pre-call context",
-        "aggregatePageId": "Legacy Notion sync field — can be deprecated after full EspoCRM migration",
         "propAssessmentNotes": "AI-generated property assessment notes from Viktor or Manus",
         "autoAssessmentNotes": "AI-generated driver and vehicle risk assessment",
         "healthAssessmentNotes": "AI-generated health risk assessment notes"
     },
     "presetFilters": {
         "open": "Open Pipeline",
-        "won": "Won - Bound",
-        "lost": "Lost"
+        "won": "Closed Won",
+        "lost": "Closed Lost"
     },
     "boolFilters": {
         "onlyMy": "Only My",

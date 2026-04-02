@@ -89,19 +89,49 @@
             "default": false,
             "readOnly": true
         },
+        "xDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Current policy expiration date — drives the X-Date nurture loop"
+        },
         "status": {
+            "type": "enum",
+            "options": [
+                "New / Uncontacted",
+                "Attempting Contact",
+                "Connected",
+                "Gathering Info",
+                "Qualified",
+                "Nurture",
+                "DNC",
+                "Converted"
+            ],
+            "default": "New / Uncontacted",
+            "displayAsLabel": true,
+            "labelType": "state",
+            "style": {
+                "New / Uncontacted": "primary",
+                "Attempting Contact": "primary",
+                "Connected": "info",
+                "Gathering Info": "warning",
+                "Qualified": "success",
+                "Nurture": "info",
+                "DNC": "default",
+                "Converted": "success"
+            },
             "kanbanOrder": [
-                "New",
-                "Assigned",
-                "In Process",
-                "Converted",
-                "Dead"
+                "New / Uncontacted",
+                "Attempting Contact",
+                "Connected",
+                "Gathering Info",
+                "Qualified",
+                "Nurture"
             ]
         }
     },
     "collection": {
-        "orderBy": "name",
-        "order": "asc",
+        "orderBy": "createdAt",
+        "order": "desc",
         "textFilterFields": [
             "name",
             "emailAddress",
@@ -113,11 +143,13 @@
             "createdAt",
             "modifiedAt",
             "status",
-            "source"
+            "source",
+            "priority",
+            "xDate"
         ]
     },
     "kanbanStatusIgnoreList": [
-        "Converted",
-        "Dead"
+        "DNC",
+        "Converted"
     ]
 }

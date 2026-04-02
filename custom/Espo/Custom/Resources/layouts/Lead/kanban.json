@@ -6,7 +6,7 @@
         ],
         [
             {"name": "estimatedPremium"},
-            {"name": "assignedUser"}
+            {"name": "xDate"}
         ]
     ]
 }

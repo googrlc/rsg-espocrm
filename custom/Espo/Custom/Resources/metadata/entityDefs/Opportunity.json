@@ -4,51 +4,33 @@
             "type": "enum",
             "options": [
                 "",
-                "Prospect",
-                "Qualify",
-                "Quote",
-                "Proposal",
-                "Negotiate",
-                "Won - Bound",
-                "Lost",
-                "Renewal Notice Sent",
-                "Markets Out / Shopping",
-                "Quoted",
-                "Presented to Client",
-                "Bound / Renewed",
-                "Non-Renewal / Lost"
+                "Discovery",
+                "Quoting",
+                "Proposal Presented",
+                "Negotiation",
+                "Closed Won",
+                "Closed Lost"
             ],
-            "default": "Prospect",
+            "default": "Discovery",
             "audited": true,
             "view": "custom:views/opportunity/fields/stage-bar",
             "displayAsLabel": true,
             "labelType": "state",
             "probabilityMap": {
-                "Prospect": 10,
-                "Qualify": 20,
-                "Quote": 40,
-                "Proposal": 60,
-                "Negotiate": 75,
-                "Won - Bound": 100,
-                "Lost": 0,
-                "Renewal Notice Sent": 10,
-                "Markets Out / Shopping": 25,
-                "Quoted": 50,
-                "Presented to Client": 70,
-                "Bound / Renewed": 100,
-                "Non-Renewal / Lost": 0
+                "Discovery": 10,
+                "Quoting": 30,
+                "Proposal Presented": 60,
+                "Negotiation": 80,
+                "Closed Won": 100,
+                "Closed Lost": 0
             },
             "style": {
-                "Proposal": "warning",
+                "Discovery": "primary",
+                "Quoting": "primary",
+                "Proposal Presented": "warning",
                 "Negotiation": "warning",
                 "Closed Won": "success",
-                "Closed Lost": "info",
-                "Prospect": "default",
-                "Qualify": "primary",
-                "Quote": "primary",
-                "Negotiate": "warning",
-                "Won - Bound": "success",
-                "Lost": "danger"
+                "Closed Lost": "danger"
             },
             "fieldManagerAdditionalParamList": [
                 {
@@ -58,13 +40,12 @@
             ],
             "customizationOptionsReferenceDisabled": true,
             "kanbanOrder": [
-                "Prospect",
-                "Qualify",
-                "Quote",
-                "Proposal",
-                "Negotiate",
-                "Won - Bound",
-                "Lost"
+                "Discovery",
+                "Quoting",
+                "Proposal Presented",
+                "Negotiation",
+                "Closed Won",
+                "Closed Lost"
             ]
         },
         "lineOfBusiness": {
@@ -857,7 +838,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }
@@ -868,7 +849,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }
@@ -879,7 +860,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }
@@ -890,7 +871,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }
@@ -898,10 +879,10 @@
         }
     },
     "formula": {
-        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Prospect',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Qualify',\n    entity\\setAttribute('probability', 20)\n);\nifThen(\n    $stage == 'Quote',\n    entity\\setAttribute('probability', 40)\n);\nifThen(\n    $stage == 'Proposal',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiate',\n    entity\\setAttribute('probability', 75)\n);\nifThen(\n    $stage == 'Won - Bound',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
+        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
     },
     "kanbanStatusIgnoreList": [
-        "Won - Bound",
-        "Lost"
+        "Closed Won",
+        "Closed Lost"
     ]
 }

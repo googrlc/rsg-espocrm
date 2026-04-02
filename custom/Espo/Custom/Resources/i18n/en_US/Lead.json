@@ -6,16 +6,30 @@
         "estimatedPremium": "Est. Premium",
         "priority": "Priority",
         "aiSummary": "AI Summary",
-        "intelPackRun": "Intel Pack Run"
+        "intelPackRun": "Intel Pack Run",
+        "xDate": "X-Date"
     },
     "tooltips": {
         "aiSummary": "Pre-call intel from Manus prospect intelligence pack",
-        "intelPackRun": "Checked when Manus prospect-intelligence-pack has run for this lead"
+        "intelPackRun": "Checked when Manus prospect-intelligence-pack has run for this lead",
+        "xDate": "Current policy expiration date — drives the X-Date nurture loop"
+    },
+    "options": {
+        "status": {
+            "New / Uncontacted": "New / Uncontacted",
+            "Attempting Contact": "Attempting Contact",
+            "Connected": "Connected",
+            "Gathering Info": "Gathering Info",
+            "Qualified": "Qualified",
+            "Nurture": "Nurture",
+            "DNC": "DNC",
+            "Converted": "Converted"
+        }
     },
     "presetFilters": {
-        "actual": "Active Leads",
+        "actual": "Active Pipeline",
         "converted": "Converted",
-        "dead": "Dead / Lost"
+        "dead": "Dead / DNC"
     },
     "boolFilters": {
         "onlyMy": "Only My"
