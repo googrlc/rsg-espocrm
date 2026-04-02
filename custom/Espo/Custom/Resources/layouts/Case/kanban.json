@@ -1,12 +1,6 @@
-{
-    "rows": [
-        [
-            {"name": "name"},
-            {"name": "account"}
-        ],
-        [
-            {"name": "priority"},
-            {"name": "assignedUser"}
-        ]
-    ]
-}
+[
+    {"name": "name"},
+    {"name": "account"},
+    {"name": "priority"},
+    {"name": "assignedUser"}
+]

@@ -1,5 +1,18 @@
 define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], function (EnumFieldView) {
 
+    var NEW_BIZ_STAGES = [
+        'Prospect', 'Qualify', 'Quote', 'Proposal', 'Negotiate',
+        'Won - Bound', 'Lost'
+    ];
+
+    var RENEWAL_STAGES = [
+        'Renewal Notice Sent', 'Markets Out / Shopping', 'Quoted',
+        'Presented to Client', 'Bound / Renewed', 'Non-Renewal / Lost'
+    ];
+
+    var WON_STAGES = ['Won - Bound', 'Bound / Renewed'];
+    var LOST_STAGES = ['Lost', 'Non-Renewal / Lost'];
+
     return EnumFieldView.extend({
 
         detailTemplate: 'custom:opportunity/fields/stage-bar/detail',
@@ -7,52 +20,51 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
 
         data: function () {
             var data = EnumFieldView.prototype.data.call(this);
+            var current = this.model.get(this.name);
+
             data.stages = this.getStagesData();
-            data.isWon = this.model.get(this.name) === 'Closed Won';
-            data.isLost = this.model.get(this.name) === 'Closed Lost';
+            data.isWon = WON_STAGES.indexOf(current) !== -1;
+            data.isLost = LOST_STAGES.indexOf(current) !== -1;
+
             return data;
         },
 
         getStagesData: function () {
             var currentStage = this.model.get(this.name);
-            var lob = this.model.get('lineOfBusiness') || '';
+
             var stages;
-
-            var personalLobs = [
-                'Personal Auto', 'Homeowners', 'Renters', 'Condo',
-                'Dwelling Fire', 'Motorcycle', 'Boat', 'RV',
-                'Life', 'Health', 'Medicare'
-            ];
-
-            if (personalLobs.indexOf(lob) !== -1) {
-                stages = ['Discovery', 'Quoting', 'Proposal Presented', 'Closed Won', 'Closed Lost'];
+            if (RENEWAL_STAGES.indexOf(currentStage) !== -1) {
+                stages = RENEWAL_STAGES;
             } else {
-                stages = ['Discovery', 'Quoting', 'Proposal Presented', 'Negotiation', 'Closed Won', 'Closed Lost'];
+                stages = NEW_BIZ_STAGES;
             }
 
             var currentIndex = stages.indexOf(currentStage);
+            var probabilityMap = this.model.getFieldParam(this.name, 'probabilityMap') || {};
             var result = [];
 
             stages.forEach(function (stage, index) {
+                var isWon = WON_STAGES.indexOf(stage) !== -1;
+                var isLost = LOST_STAGES.indexOf(stage) !== -1;
+                var isTerminal = isWon || isLost;
                 var stageClass = 'stage-pending';
 
                 if (stage === currentStage) {
-                    if (stage === 'Closed Won') {
+                    if (isWon) {
                         stageClass = 'stage-won';
-                    } else if (stage === 'Closed Lost') {
+                    } else if (isLost) {
                         stageClass = 'stage-lost';
                     } else {
                         stageClass = 'stage-current';
                     }
-                } else if (stage === 'Closed Lost' || stage === 'Closed Won') {
+                } else if (isTerminal) {
                     stageClass = 'stage-terminal';
-                } else if (currentStage === 'Closed Won' || currentStage === 'Closed Lost') {
+                } else if (WON_STAGES.indexOf(currentStage) !== -1 ||
+                           LOST_STAGES.indexOf(currentStage) !== -1) {
                     stageClass = 'stage-completed';
                 } else if (index < currentIndex) {
                     stageClass = 'stage-completed';
                 }
-
-                var probabilityMap = this.model.getFieldParam(this.name, 'probabilityMap') || {};
 
                 result.push({
                     name: stage,
@@ -60,7 +72,7 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
                     stageClass: stageClass,
                     probability: probabilityMap[stage] || 0,
                     isCurrent: stage === currentStage,
-                    isTerminal: stage === 'Closed Lost' || stage === 'Closed Won'
+                    isTerminal: isTerminal
                 });
             }, this);
 
