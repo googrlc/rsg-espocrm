@@ -1,0 +1,98 @@
+{
+  "name": "RSG — Lead Qualification Handoff",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "espo-lead-qualified",
+        "responseMode": "onReceived"
+      },
+      "name": "Lead Qualified Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "mode": "manual",
+        "assignments": {
+          "assignments": [
+            {"id": "a1", "name": "oppName", "value": "={{ $json.body.name }} — {{ $json.body.insuranceInterest }}", "type": "string"},
+            {"id": "a2", "name": "accountId", "value": "={{ $json.body.accountId }}", "type": "string"},
+            {"id": "a3", "name": "contactId", "value": "={{ $json.body.contactId }}", "type": "string"},
+            {"id": "a4", "name": "lineOfBusiness", "value": "={{ $json.body.insuranceInterest }}", "type": "string"},
+            {"id": "a5", "name": "leadId", "value": "={{ $json.body.id }}", "type": "string"},
+            {"id": "a6", "name": "estimatedPremium", "value": "={{ $json.body.estimatedPremium }}", "type": "string"},
+            {"id": "a7", "name": "assignedUserId", "value": "={{ $json.body.assignedUserId }}", "type": "string"}
+          ]
+        },
+        "includeOtherFields": false
+      },
+      "name": "Prepare Opportunity Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.ESPO_URL }}/api/v1/Opportunity",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: $json.oppName, stage: 'Discovery', accountId: $json.accountId, contactId: $json.contactId, lineOfBusiness: $json.lineOfBusiness, estimatedPremium: Number($json.estimatedPremium) || 0, assignedUserId: $json.assignedUserId, closeDate: $today.plus({days: 90}).toISODate() }) }}"
+      },
+      "name": "Create Opportunity in EspoCRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [750, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "EspoCRM API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "={{ $env.ESPO_URL }}/api/v1/Lead/{{ $('Prepare Opportunity Data').item.json.leadId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "{\"status\": \"Converted\"}"
+      },
+      "name": "Set Lead to Converted",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1000, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "EspoCRM API Key"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Lead Qualified Webhook": {
+      "main": [[{"node": "Prepare Opportunity Data", "type": "main", "index": 0}]]
+    },
+    "Prepare Opportunity Data": {
+      "main": [[{"node": "Create Opportunity in EspoCRM", "type": "main", "index": 0}]]
+    },
+    "Create Opportunity in EspoCRM": {
+      "main": [[{"node": "Set Lead to Converted", "type": "main", "index": 0}]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "notes": "Automation A: When a Lead reaches 'Qualified' status in EspoCRM, this workflow creates an Opportunity in the Discovery stage and marks the Lead as Converted. Requires: ESPO_URL env var and EspoCRM API Key credential (X-Api-Key header)."
+  }
+}

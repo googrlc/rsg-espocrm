@@ -1,0 +1,146 @@
+{
+  "name": "RSG — X-Date Nurture Loop",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "days",
+              "daysInterval": 1,
+              "triggerAtHour": 7,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "name": "Daily 7am Check",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.ESPO_URL }}/api/v1/Lead",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "={{ JSON.stringify({ where: [{ type: 'or', value: [{ type: 'equals', attribute: 'status', value: 'Nurture' }] }, { type: 'isNotNull', attribute: 'xDate' }, { type: 'notEquals', attribute: 'status', value: 'DNC' }], select: 'id,name,status,xDate,insuranceInterest,assignedUserId,accountId,contactId,estimatedPremium', orderBy: 'xDate', order: 'asc', maxSize: 200 }) }}"
+      },
+      "name": "Fetch Nurture Leads with X-Date",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "EspoCRM API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.ESPO_URL }}/api/v1/Opportunity",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "specifyQuery": "json",
+        "jsonQuery": "={{ JSON.stringify({ where: [{ type: 'equals', attribute: 'stage', value: 'Closed Lost' }, { type: 'isNotNull', attribute: 'closeDate' }], select: 'id,name,stage,closeDate,lineOfBusiness,assignedUserId,accountId,accountName', orderBy: 'closeDate', order: 'asc', maxSize: 200 }) }}"
+      },
+      "name": "Fetch Closed Lost Opps with X-Date",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [500, 450],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "EspoCRM API Key"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "// Process both Nurture Leads and Closed Lost Opportunities\n// Determine alert window: Personal = 30 days, Commercial = 60 days before X-Date\n\nconst today = $today;\nconst results = [];\n\n// Process Leads from input 0\nconst leads = $('Fetch Nurture Leads with X-Date').all();\nfor (const lead of leads) {\n  const data = lead.json.list || [lead.json];\n  for (const item of (Array.isArray(data) ? data : [])) {\n    if (!item.xDate) continue;\n    const xDate = DateTime.fromISO(item.xDate);\n    const lob = (item.insuranceInterest || '').toLowerCase();\n    const isCommercial = lob.includes('commercial') || lob.includes('workers') || lob.includes('general') || lob.includes('bop') || lob.includes('umbrella') || lob.includes('group');\n    const alertDays = isCommercial ? 60 : 30;\n    const alertDate = xDate.minus({ days: alertDays });\n    \n    if (today >= alertDate && today <= xDate) {\n      results.push({\n        json: {\n          source: 'Lead',\n          sourceId: item.id,\n          name: item.name,\n          xDate: item.xDate,\n          lineOfBusiness: item.insuranceInterest,\n          alertDays: alertDays,\n          daysUntilXDate: Math.ceil(xDate.diff(today, 'days').days),\n          assignedUserId: item.assignedUserId,\n          accountId: item.accountId,\n          contactId: item.contactId,\n          estimatedPremium: item.estimatedPremium,\n          action: 'Create Opportunity from Nurture Lead'\n        }\n      });\n    }\n  }\n}\n\n// Process Closed Lost Opps from input 1\nconst opps = $('Fetch Closed Lost Opps with X-Date').all();\nfor (const opp of opps) {\n  const data = opp.json.list || [opp.json];\n  for (const item of (Array.isArray(data) ? data : [])) {\n    if (!item.closeDate) continue;\n    const xDate = DateTime.fromISO(item.closeDate);\n    const lob = (item.lineOfBusiness || '').toLowerCase();\n    const isCommercial = lob.includes('commercial') || lob.includes('workers') || lob.includes('general') || lob.includes('bop') || lob.includes('umbrella') || lob.includes('group');\n    const alertDays = isCommercial ? 60 : 30;\n    const alertDate = xDate.minus({ days: alertDays });\n    \n    if (today >= alertDate && today <= xDate) {\n      results.push({\n        json: {\n          source: 'Opportunity',\n          sourceId: item.id,\n          name: item.name || item.accountName,\n          xDate: item.closeDate,\n          lineOfBusiness: item.lineOfBusiness,\n          alertDays: alertDays,\n          daysUntilXDate: Math.ceil(xDate.diff(today, 'days').days),\n          assignedUserId: item.assignedUserId,\n          accountId: item.accountId,\n          action: 'Re-open Opportunity from Closed Lost'\n        }\n      });\n    }\n  }\n}\n\nreturn results.length > 0 ? results : [{ json: { skip: true } }];"
+      },
+      "name": "Calculate X-Date Alerts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict" },
+          "conditions": [
+            {
+              "id": "c1",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "notTrue" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "name": "Has Alerts?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.ESPO_URL }}/api/v1/Task",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ name: 'X-Date Alert: ' + $json.name + ' — ' + $json.lineOfBusiness + ' (' + $json.daysUntilXDate + ' days)', status: 'Not Started', priority: 'Urgent', assignedUserId: $json.assignedUserId, accountId: $json.accountId, dateEnd: $json.xDate, description: $json.action + '\\nSource: ' + $json.source + ' #' + $json.sourceId + '\\nX-Date: ' + $json.xDate + '\\nAlert Window: ' + $json.alertDays + ' days (LOB: ' + $json.lineOfBusiness + ')' }) }}"
+      },
+      "name": "Create X-Date Task in EspoCRM",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1300, 200],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "",
+          "name": "EspoCRM API Key"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 7am Check": {
+      "main": [
+        [
+          {"node": "Fetch Nurture Leads with X-Date", "type": "main", "index": 0},
+          {"node": "Fetch Closed Lost Opps with X-Date", "type": "main", "index": 0}
+        ]
+      ]
+    },
+    "Fetch Nurture Leads with X-Date": {
+      "main": [[{"node": "Calculate X-Date Alerts", "type": "main", "index": 0}]]
+    },
+    "Fetch Closed Lost Opps with X-Date": {
+      "main": [[{"node": "Calculate X-Date Alerts", "type": "main", "index": 0}]]
+    },
+    "Calculate X-Date Alerts": {
+      "main": [[{"node": "Has Alerts?", "type": "main", "index": 0}]]
+    },
+    "Has Alerts?": {
+      "main": [[{"node": "Create X-Date Task in EspoCRM", "type": "main", "index": 0}], []]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "notes": "Automation B: Daily at 7am, checks Nurture leads and Closed Lost opportunities for approaching X-Dates. Personal lines = 30-day alert window, Commercial = 60-day window. Creates urgent Tasks in EspoCRM. Requires: ESPO_URL env var and EspoCRM API Key credential."
+  }
+}
