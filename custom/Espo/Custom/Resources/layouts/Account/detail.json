@@ -24,6 +24,22 @@
         "rows": [[false, false]],
         "style": "default",
         "tabBreak": true,
+        "tabLabel": "Contacts",
+        "name": "contactsTabAnchor"
+    },
+
+    {
+        "rows": [[false, false]],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Policies",
+        "name": "policiesTabAnchor"
+    },
+
+    {
+        "rows": [[false, false]],
+        "style": "default",
+        "tabBreak": true,
         "tabLabel": "Activity",
         "name": "activityTabAnchor"
     },

@@ -1,52 +1,52 @@
 {
-    "contacts": {
-        "index": 0,
-        "tab": 0
-    },
     "stream": {
         "sticked": false,
-        "index": 1,
+        "index": 0,
         "tab": 0
     },
-    "policies": {
-        "index": 2,
-        "tab": 0
-    },
-    "renewals": {
-        "index": 3,
-        "tab": 0
-    },
-    "activityLogs": {
+    "contacts": {
         "index": 0,
         "tab": 1
     },
-    "emails": {
-        "index": 1,
-        "tab": 1
-    },
-    "meetings": {
-        "index": 2,
-        "tab": 1
-    },
-    "calls": {
-        "index": 3,
-        "tab": 1
-    },
-    "tasks": {
-        "index": 4,
-        "tab": 1
-    },
-    "opportunities": {
+    "policies": {
         "index": 0,
         "tab": 2
     },
-    "cases": {
+    "renewals": {
+        "index": 1,
+        "tab": 2
+    },
+    "activityLogs": {
+        "index": 0,
+        "tab": 3
+    },
+    "emails": {
+        "index": 1,
+        "tab": 3
+    },
+    "meetings": {
+        "index": 2,
+        "tab": 3
+    },
+    "calls": {
+        "index": 3,
+        "tab": 3
+    },
+    "tasks": {
+        "index": 4,
+        "tab": 3
+    },
+    "opportunities": {
         "index": 0,
         "tab": 4
     },
+    "cases": {
+        "index": 0,
+        "tab": 6
+    },
     "commissions": {
         "index": 1,
-        "tab": 4
+        "tab": 6
     },
     "activities": {
         "disabled": true
