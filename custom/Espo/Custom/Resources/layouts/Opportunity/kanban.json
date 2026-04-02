@@ -1,12 +1,6 @@
-{
-    "rows": [
-        [
-            {"name": "account"},
-            {"name": "lineOfBusiness"}
-        ],
-        [
-            {"name": "estimatedPremium"},
-            {"name": "assignedUser"}
-        ]
-    ]
-}
+[
+    {"name": "account"},
+    {"name": "lineOfBusiness"},
+    {"name": "estimatedPremium"},
+    {"name": "assignedUser"}
+]

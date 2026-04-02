@@ -1,12 +1,6 @@
-{
-    "rows": [
-        [
-            {"name": "name"},
-            {"name": "insuranceInterest"}
-        ],
-        [
-            {"name": "xDate"},
-            {"name": "assignedUser"}
-        ]
-    ]
-}
+[
+    {"name": "name"},
+    {"name": "insuranceInterest"},
+    {"name": "xDate"},
+    {"name": "assignedUser"}
+]

@@ -1,12 +1,6 @@
-{
-    "rows": [
-        [
-            {"name": "name"},
-            {"name": "opportunity"}
-        ],
-        [
-            {"name": "estimatedCommission"},
-            {"name": "assignedUser"}
-        ]
-    ]
-}
+[
+    {"name": "name"},
+    {"name": "opportunity"},
+    {"name": "estimatedCommission"},
+    {"name": "assignedUser"}
+]

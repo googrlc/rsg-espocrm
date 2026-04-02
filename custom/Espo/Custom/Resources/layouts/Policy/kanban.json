@@ -1,12 +1,6 @@
-{
-    "rows": [
-        [
-            {"name": "lineOfBusiness"},
-            {"name": "carrier"}
-        ],
-        [
-            {"name": "premiumAmount"},
-            {"name": "expirationDate"}
-        ]
-    ]
-}
+[
+    {"name": "lineOfBusiness"},
+    {"name": "carrier"},
+    {"name": "premiumAmount"},
+    {"name": "expirationDate"}
+]
