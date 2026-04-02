@@ -52,8 +52,7 @@ html {
 }
 
 .list-container > table,
-.list-container > .table,
-table.table {
+.list-container > .table {
     table-layout: fixed;
     width: 100%;
     max-width: 100%;
