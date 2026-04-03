@@ -33,16 +33,6 @@
                     ]
                 }
             },
-            "estimatedPremium": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "id"
-                        }
-                    ]
-                }
-            },
             "bindDate": {
                 "required": {
                     "conditionGroup": [
@@ -75,9 +65,129 @@
                         }
                     ]
                 }
+            },
+            "cRenewalDate": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "businessType",
+                            "value": "Renewal"
+                        }
+                    ]
+                }
+            },
+            "chkScopeOfAppt": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "chkPlanPresented": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "chkAppSubmitted": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "chkCmsConfirmation": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "chkWelcomeLetter": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "chkUnderlyingLinked": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Umbrella"
+                        }
+                    ]
+                }
+            },
+            "chkUnderlyingConfirmed": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Umbrella"
+                        }
+                    ]
+                }
+            },
+            "chkMvrsPulled": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": ["Personal Auto", "Commercial Auto", "Motorcycle"]
+                        }
+                    ]
+                }
+            },
+            "chkDecPageDelivered": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": ["Personal Auto", "Homeowners", "Renters", "Condo", "Dwelling Fire", "Motorcycle", "Boat", "RV"]
+                        }
+                    ]
+                }
             }
         },
         "panels": {
+            "common": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "lineOfBusiness"
+                        }
+                    ]
+                }
+            },
             "commAutoDetails": {
                 "visible": {
                     "conditionGroup": [
@@ -111,6 +221,72 @@
                     ]
                 }
             },
+            "commPropertyDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Commercial Property"
+                        }
+                    ]
+                }
+            },
+            "bopDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "BOP"
+                        }
+                    ]
+                }
+            },
+            "commPackageDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Commercial Package"
+                        }
+                    ]
+                }
+            },
+            "buildersRiskDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Builders Risk"
+                        }
+                    ]
+                }
+            },
+            "inlandMarineDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Inland Marine"
+                        }
+                    ]
+                }
+            },
+            "profLiabilityDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Professional Liability"
+                        }
+                    ]
+                }
+            },
             "umbrellaDetails": {
                 "visible": {
                     "conditionGroup": [
@@ -137,24 +313,75 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "or",
-                            "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Homeowners"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Renters"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Condo"
-                                }
-                            ]
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Homeowners"
+                        }
+                    ]
+                }
+            },
+            "rentersDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Renters"
+                        }
+                    ]
+                }
+            },
+            "condoDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Condo"
+                        }
+                    ]
+                }
+            },
+            "dwellingFireDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Dwelling Fire"
+                        }
+                    ]
+                }
+            },
+            "motorcycleDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Motorcycle"
+                        }
+                    ]
+                }
+            },
+            "boatDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Boat"
+                        }
+                    ]
+                }
+            },
+            "rvDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "RV"
                         }
                     ]
                 }
@@ -181,130 +408,108 @@
                     ]
                 }
             },
-            "propertyAssessment": {
+            "healthDetails": {
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "or",
-                            "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Homeowners"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Commercial Property"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Renters"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Condo"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Dwelling Fire"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Builders Risk"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Inland Marine"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "BOP"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Commercial Package"
-                                }
-                            ]
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Health"
                         }
                     ]
                 }
             },
-            "driverVehicleAssessment": {
+            "garagekeepersDetails": {
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "or",
-                            "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Personal Auto"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Commercial Auto"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Motorcycle"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Boat"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "RV"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Garagekeepers"
-                                }
-                            ]
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Garagekeepers"
                         }
                     ]
                 }
             },
-            "healthRiskAssessment": {
+            "groupBenefitsDetails": {
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "or",
-                            "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Life"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Health"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Medicare"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "lineOfBusiness",
-                                    "value": "Group Benefits"
-                                }
-                            ]
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Group Benefits"
+                        }
+                    ]
+                }
+            },
+            "otherDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Other"
+                        }
+                    ]
+                }
+            },
+            "bindDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "stage",
+                            "value": "Closed Won"
+                        }
+                    ]
+                }
+            },
+            "lostDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "stage",
+                            "value": "Closed Lost"
+                        }
+                    ]
+                }
+            },
+            "processIntake": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "id"
+                        }
+                    ]
+                }
+            },
+            "processMarketing": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "id"
+                        }
+                    ]
+                }
+            },
+            "processOnboarding": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "id"
+                        }
+                    ]
+                }
+            },
+            "internal": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "id"
                         }
                     ]
                 }

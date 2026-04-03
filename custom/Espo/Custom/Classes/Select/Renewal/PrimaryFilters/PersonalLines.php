@@ -8,6 +8,17 @@ class PersonalLines implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["lineOfBusiness" => ["Personal Auto", "Homeowners", "Renters", "Condo"]]);
+        $queryBuilder->where([
+            'lineOfBusiness' => [
+                'Personal Auto',
+                'Homeowners',
+                'Renters',
+                'Condo',
+                'Dwelling Fire',
+                'Motorcycle',
+                'Boat',
+                'RV',
+            ],
+        ]);
     }
 }

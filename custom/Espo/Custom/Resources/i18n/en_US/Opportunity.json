@@ -58,6 +58,16 @@
         "healthRiskClass": "Risk Class",
         "healthAssessmentNotes": "Health Risk Assessment Notes",
         "healthAssessmentDate": "Health Assessment Date",
+        "targetCarrier": "Target Carrier",
+        "effectiveDate": "Effective Date",
+        "cRenewalDate": "Renewal Date",
+        "gbEligibleEmployees": "Eligible Employees",
+        "gbParticipatingEmployees": "Participating Employees",
+        "gbCensusReceived": "Census Received?",
+        "gbMedicalCarrier": "Medical Carrier",
+        "gbMedicalPlanType": "Medical Plan Type",
+        "gbMedicalRenewalDate": "Medical Renewal Date",
+        "gbEmployerContribution": "Employer Contribution",
         "stage": "Stage"
     },
     "options": {

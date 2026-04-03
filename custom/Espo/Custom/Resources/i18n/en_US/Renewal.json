@@ -5,50 +5,39 @@
     "presetFilters": {
         "active": "Active Renewals",
         "criticalUrgent": "Critical / Urgent",
+        "commAuto": "Commercial Auto",
+        "genLiability": "General Liability",
+        "personalLines": "Personal Lines",
+        "medicare": "Medicare",
         "renewed": "Renewed",
         "lost": "Lost"
     },
     "boolFilters": {
         "onlyMy": "Only My",
+        "assignedToGretchen": "Assigned to Gretchen",
         "commercialLines": "Commercial Lines",
         "personalLines": "Personal Lines"
     },
     "fields": {
         "name": "Renewal Name",
         "stage": "Stage",
-        "probability": "Probability",
-        "outcome": "Outcome",
         "policy": "Expiring Policy",
         "newPolicy": "Renewed Policy",
         "account": "Account",
         "contact": "Contact",
         "expirationDate": "Expiration Date",
         "renewalEffectiveDate": "Renewal Effective Date",
-        "outreachStartDate": "Outreach Start Date",
-        "decisionDate": "Decision Date",
         "currentPremium": "Current Premium",
         "renewalPremium": "Renewal Premium",
         "premiumChange": "Premium Change %",
-        "premiumChangeCategory": "Premium Change Category",
         "commissionRate": "Renewal Commission Rate",
         "expectedCommission": "Expected Commission",
-        "newBusinessCommissionRate": "NB Commission Rate",
-        "commissionDelta": "Commission Delta",
         "urgency": "Urgency",
-        "retentionRisk": "Retention Risk",
-        "contactAttempts": "Contact Attempts",
         "lastContactDate": "Last Contact Date",
         "lastContactMethod": "Last Contact Method",
-        "emailSequenceStarted": "Email Sequence Started",
         "lineOfBusiness": "Line of Business",
-        "businessSegment": "Business Segment",
         "carrier": "Current Carrier",
-        "newCarrier": "New Carrier",
-        "remarketingReason": "Remarketing Reason",
-        "competitiveQuoteCount": "Competitive Quotes",
-        "lossRunsPulled": "Loss Runs Pulled",
         "lostReason": "Lost Reason",
-        "lostToCompetitor": "Lost to Competitor",
         "renewalNotes": "Renewal Notes",
         "tasks": "Tasks",
         "commissions": "Commissions"
@@ -64,82 +53,34 @@
     "options": {
         "stage": {
             "": "",
-            "Not Started": "Not Started",
-            "Outreach": "Outreach",
-            "Under Review": "Under Review",
-            "Remarketing": "Remarketing",
-            "Quoting": "Quoting",
-            "Presented": "Presented",
-            "Decision Pending": "Decision Pending",
+            "Identified": "Identified",
+            "Outreach Sent": "Outreach Sent",
+            "Quote Requested": "Quote Requested",
+            "Proposal Sent": "Proposal Sent",
+            "Negotiating": "Negotiating",
             "Renewed - Won": "Renewed - Won",
-            "Lost to Competitor": "Lost to Competitor",
-            "Non-Renewed (Carrier)": "Non-Renewed (Carrier)",
-            "Non-Renewed (Client)": "Non-Renewed (Client)"
-        },
-        "outcome": {
-            "": "",
-            "Pending": "Pending",
-            "Renewed": "Renewed",
-            "Lost": "Lost",
-            "Non-Renewed": "Non-Renewed",
-            "Cancelled": "Cancelled"
+            "Lost": "Lost"
         },
         "urgency": {
             "": "",
-            "Critical (0-7 days)": "Critical (0-7 days)",
-            "Urgent (8-14 days)": "Urgent (8-14 days)",
-            "Attention (15-30 days)": "Attention (15-30 days)",
-            "On Track (31-60 days)": "On Track (31-60 days)",
-            "Future (60+ days)": "Future (60+ days)"
-        },
-        "retentionRisk": {
-            "": "",
-            "Low": "Low",
-            "Medium": "Medium",
+            "Critical": "Critical",
             "High": "High",
-            "Critical": "Critical"
-        },
-        "businessSegment": {
-            "": "",
-            "Commercial Lines": "Commercial Lines",
-            "Personal Lines": "Personal Lines"
-        },
-        "premiumChangeCategory": {
-            "": "",
-            "TBD": "TBD",
-            "Decrease": "Decrease",
-            "Flat": "Flat",
-            "Increase 1-10%": "Increase 1-10%",
-            "Increase 10-25%": "Increase 10-25%",
-            "Increase 25%+": "Increase 25%+"
+            "Medium": "Medium",
+            "Low": "Low"
         },
         "lastContactMethod": {
             "": "",
             "Email": "Email",
-            "Phone": "Phone",
+            "Call": "Call",
             "Text": "Text",
-            "In Person": "In Person",
-            "Portal": "Portal",
-            "No Response": "No Response"
-        },
-        "remarketingReason": {
-            "": "",
-            "None": "None",
-            "Price": "Price",
-            "Coverage Gap": "Coverage Gap",
-            "Claims": "Claims",
-            "Carrier Non-Renewal": "Carrier Non-Renewal",
-            "Client Request": "Client Request",
-            "Better Coverage Available": "Better Coverage Available"
+            "In person": "In person"
         },
         "lostReason": {
             "": "",
             "Price": "Price",
             "Coverage": "Coverage",
-            "Service": "Service",
-            "Competitor": "Competitor",
-            "Carrier Decision": "Carrier Decision",
-            "No Longer Needed": "No Longer Needed",
+            "Unresponsive": "Unresponsive",
+            "Moved carrier": "Moved carrier",
             "Other": "Other"
         },
         "lineOfBusiness": {

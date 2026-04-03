@@ -12,7 +12,22 @@ class CommercialLines implements Filter
     public function apply(SelectBuilder $queryBuilder, OrGroupBuilder $orGroupBuilder): void
     {
         $orGroupBuilder->add(
-            Comparison::equal(Expression::column('businessSegment'), 'Commercial Lines')
+            Comparison::in(
+                Expression::column('lineOfBusiness'),
+                [
+                    'Commercial Auto',
+                    'General Liability',
+                    'Workers Comp',
+                    'Commercial Property',
+                    'BOP',
+                    'Professional Liability',
+                    'Umbrella',
+                    'Builders Risk',
+                    'Inland Marine',
+                    'Garagekeepers',
+                    'Commercial Package',
+                ]
+            )
         );
     }
 }

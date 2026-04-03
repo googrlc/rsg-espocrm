@@ -9,8 +9,14 @@ class CriticalUrgent implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'outcome' => 'Pending',
-            'urgency' => ['Critical (0-7 days)', 'Urgent (8-14 days)'],
+            'stage' => [
+                'Identified',
+                'Outreach Sent',
+                'Quote Requested',
+                'Proposal Sent',
+                'Negotiating',
+            ],
+            'urgency' => ['Critical', 'High'],
         ]);
     }
 }

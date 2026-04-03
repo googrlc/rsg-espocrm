@@ -12,6 +12,7 @@
     "boolFilterClassNameMap": {
         "onlyMy": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\OnlyMy",
         "commercialLines": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\CommercialLines",
-        "personalLines": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\PersonalLines"
+        "personalLines": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\PersonalLines",
+        "assignedToGretchen": "Espo\\Custom\\Classes\\Select\\Renewal\\BoolFilters\\AssignedToGretchen"
     }
 }

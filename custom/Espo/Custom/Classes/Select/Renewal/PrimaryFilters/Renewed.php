@@ -8,6 +8,6 @@ class Renewed implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(['outcome' => 'Renewed']);
+        $queryBuilder->where(['stage' => 'Renewed - Won']);
     }
 }

@@ -16,6 +16,14 @@
             ],
             [
                 {
+                    "name": "stage"
+                },
+                {
+                    "name": "businessType"
+                }
+            ],
+            [
+                {
                     "name": "leadSource"
                 },
                 {
@@ -26,9 +34,7 @@
                 {
                     "name": "priority"
                 },
-                {
-                    "name": "businessType"
-                }
+                false
             ]
         ],
         "style": "default",
@@ -45,6 +51,26 @@
                     "name": "targetCarrier"
                 }
             ],
+            [
+                {
+                    "name": "estimatedPremium"
+                },
+                {
+                    "name": "cRenewalDate"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "common",
+        "label": "Opportunity Details"
+    },
+    {
+        "rows": [
             [
                 {
                     "name": "caBusType"
@@ -92,14 +118,6 @@
         "rows": [
             [
                 {
-                    "name": "currentCarrier"
-                },
-                {
-                    "name": "targetCarrier"
-                }
-            ],
-            [
-                {
                     "name": "glClassCode"
                 },
                 false
@@ -132,14 +150,6 @@
         "rows": [
             [
                 {
-                    "name": "currentCarrier"
-                },
-                {
-                    "name": "targetCarrier"
-                }
-            ],
-            [
-                {
                     "name": "wcClassCode"
                 },
                 {
@@ -163,12 +173,233 @@
         "rows": [
             [
                 {
-                    "name": "currentCarrier"
-                },
-                {
-                    "name": "targetCarrier"
+                    "name": "propAddress"
                 }
             ],
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propSquareFootage"
+                }
+            ],
+            [
+                {
+                    "name": "propConstructionType"
+                },
+                {
+                    "name": "propOccupancy"
+                }
+            ],
+            [
+                {
+                    "name": "propCurrentPremium"
+                },
+                {
+                    "name": "propReplacementCost"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofType"
+                },
+                {
+                    "name": "propRoofAge"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "commPropertyDetails",
+        "label": "Commercial Property"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propSquareFootage"
+                }
+            ],
+            [
+                {
+                    "name": "propConstructionType"
+                },
+                {
+                    "name": "propOccupancy"
+                }
+            ],
+            [
+                {
+                    "name": "propCurrentPremium"
+                },
+                {
+                    "name": "propReplacementCost"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofType"
+                },
+                {
+                    "name": "propRoofAge"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "glOperationsDesc"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "bopDetails",
+        "label": "Business Owners Policy"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propSquareFootage"
+                }
+            ],
+            [
+                {
+                    "name": "propConstructionType"
+                },
+                {
+                    "name": "propOccupancy"
+                }
+            ],
+            [
+                {
+                    "name": "propCurrentPremium"
+                },
+                {
+                    "name": "propReplacementCost"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofType"
+                },
+                {
+                    "name": "propRoofAge"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "glOperationsDesc"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "commPackageDetails",
+        "label": "Commercial Package"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propConstructionType"
+                },
+                {
+                    "name": "propSquareFootage"
+                }
+            ],
+            [
+                {
+                    "name": "propReplacementCost"
+                },
+                {
+                    "name": "propYearBuilt"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "buildersRiskDetails",
+        "label": "Builders Risk"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propReplacementCost"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "glOperationsDesc"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "inlandMarineDetails",
+        "label": "Inland Marine"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "glOperationsDesc"
+                }
+            ],
+            [
+                {
+                    "name": "glAnnualRevenue"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "profLiabilityDetails",
+        "label": "Professional Liability"
+    },
+    {
+        "rows": [
             [
                 {
                     "name": "umbrellaLimit"
@@ -192,19 +423,25 @@
             ],
             [
                 {
-                    "name": "currentCarrier"
+                    "name": "autoYoungestDriverAge"
                 },
                 {
-                    "name": "paCurrentPremium"
+                    "name": "autoUseType"
                 }
             ],
             [
                 {
-                    "name": "paCurrentExpiration"
+                    "name": "paCurrentPremium"
                 },
                 {
-                    "name": "paPriorClaims"
+                    "name": "paCurrentExpiration"
                 }
+            ],
+            [
+                {
+                    "name": "paPriorClaims"
+                },
+                false
             ]
         ],
         "style": "default",
@@ -230,20 +467,203 @@
                 {
                     "name": "propConstructionType"
                 },
-                false
+                {
+                    "name": "propRoofType"
+                }
             ],
             [
                 {
-                    "name": "currentCarrier"
+                    "name": "propRoofAge"
                 },
                 {
                     "name": "propCurrentPremium"
                 }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
             ]
         ],
         "style": "default",
         "name": "homeownersDetails",
-        "label": "Homeowners \/ Renters \/ Condo"
+        "label": "Homeowners"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propOccupancy"
+                },
+                {
+                    "name": "propCurrentPremium"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "rentersDetails",
+        "label": "Renters"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propCurrentPremium"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "condoDetails",
+        "label": "Condo"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "propAddress"
+                }
+            ],
+            [
+                {
+                    "name": "propYearBuilt"
+                },
+                {
+                    "name": "propOccupancy"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofAge"
+                },
+                {
+                    "name": "propCurrentPremium"
+                }
+            ],
+            [
+                {
+                    "name": "propPriorClaims"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "dwellingFireDetails",
+        "label": "Dwelling Fire"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "autoVehicleCount"
+                },
+                {
+                    "name": "autoDriverCount"
+                }
+            ],
+            [
+                {
+                    "name": "autoUseType"
+                },
+                {
+                    "name": "paCurrentPremium"
+                }
+            ],
+            [
+                {
+                    "name": "paCurrentExpiration"
+                },
+                {
+                    "name": "paPriorClaims"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "motorcycleDetails",
+        "label": "Motorcycle"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "autoVehicleCount"
+                },
+                {
+                    "name": "autoUseType"
+                }
+            ],
+            [
+                {
+                    "name": "paCurrentPremium"
+                },
+                {
+                    "name": "paCurrentExpiration"
+                }
+            ],
+            [
+                {
+                    "name": "paPriorClaims"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "boatDetails",
+        "label": "Boat"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "autoVehicleCount"
+                },
+                {
+                    "name": "autoUseType"
+                }
+            ],
+            [
+                {
+                    "name": "paCurrentPremium"
+                },
+                {
+                    "name": "paCurrentExpiration"
+                }
+            ],
+            [
+                {
+                    "name": "paPriorClaims"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "rvDetails",
+        "label": "RV"
     },
     {
         "rows": [
@@ -307,59 +727,32 @@
         "rows": [
             [
                 {
-                    "name": "propYearBuilt"
+                    "name": "healthDateOfBirth"
                 },
                 {
-                    "name": "propSquareFootage"
+                    "name": "healthCoverageType"
                 }
             ],
             [
                 {
-                    "name": "propConstructionType"
-                },
-                {
-                    "name": "propRoofType"
-                }
-            ],
-            [
-                {
-                    "name": "propRoofAge"
-                },
-                {
-                    "name": "propReplacementCost"
-                }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
-                {
-                    "name": "propOccupancy"
-                }
-            ],
-            [
-                {
-                    "name": "propProtectionClass"
-                },
-                {
-                    "name": "propFloodZone"
-                }
-            ],
-            [
-                {
-                    "name": "propAssessmentDate"
+                    "name": "healthTobaccoUse"
                 },
                 false
             ],
             [
                 {
-                    "name": "propAssessmentNotes"
+                    "name": "healthPreExistingConditions"
+                }
+            ],
+            [
+                {
+                    "name": "healthMedications"
                 }
             ]
         ],
         "style": "default",
-        "name": "propertyAssessment",
-        "label": "Property Assessment"
+        "name": "healthDetails",
+        "label": "Health"
     },
     {
         "rows": [
@@ -373,122 +766,118 @@
             ],
             [
                 {
-                    "name": "autoYoungestDriverAge"
+                    "name": "paCurrentExpiration"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "garagekeepersDetails",
+        "label": "Garagekeepers"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "gbEligibleEmployees"
                 },
                 {
-                    "name": "autoUseType"
+                    "name": "gbParticipatingEmployees"
                 }
             ],
             [
                 {
-                    "name": "autoPriorAccidents"
-                },
-                {
-                    "name": "autoPriorViolations"
-                }
-            ],
-            [
-                {
-                    "name": "autoCurrentCarrierYears"
-                },
-                {
-                    "name": "autoGarageState"
-                }
-            ],
-            [
-                {
-                    "name": "autoSR22Required"
-                },
-                {
-                    "name": "autoTotalVehicleValue"
-                }
-            ],
-            [
-                {
-                    "name": "autoAssessmentDate"
+                    "name": "gbCensusReceived"
                 },
                 false
             ],
             [
                 {
-                    "name": "autoAssessmentNotes"
+                    "name": "gbMedicalCarrier"
+                },
+                {
+                    "name": "gbMedicalPlanType"
+                }
+            ],
+            [
+                {
+                    "name": "gbMedicalRenewalDate"
+                },
+                {
+                    "name": "gbEmployerContribution"
                 }
             ]
         ],
         "style": "default",
-        "name": "driverVehicleAssessment",
-        "label": "Driver \/ Vehicle Assessment"
+        "name": "groupBenefitsDetails",
+        "label": "Group Benefits"
     },
     {
         "rows": [
             [
                 {
-                    "name": "healthDateOfBirth"
-                },
-                {
-                    "name": "healthGender"
-                }
-            ],
-            [
-                {
-                    "name": "healthTobaccoUse"
-                },
-                {
-                    "name": "healthRiskClass"
-                }
-            ],
-            [
-                {
-                    "name": "healthHeightInches"
-                },
-                {
-                    "name": "healthWeightLbs"
-                }
-            ],
-            [
-                {
-                    "name": "healthPreExistingConditions"
-                }
-            ],
-            [
-                {
-                    "name": "healthMedications"
-                }
-            ],
-            [
-                {
-                    "name": "healthFaceAmount"
-                },
-                {
-                    "name": "healthCoverageType"
-                }
-            ],
-            [
-                {
-                    "name": "healthBeneficiaryName"
-                },
-                {
-                    "name": "healthAssessmentDate"
-                }
-            ],
-            [
-                {
-                    "name": "healthAssessmentNotes"
+                    "name": "glOperationsDesc"
                 }
             ]
         ],
         "style": "default",
-        "name": "healthRiskAssessment",
-        "label": "Health Risk Assessment"
+        "name": "otherDetails",
+        "label": "Other Details"
     },
     {
         "rows": [
             [
                 {
-                    "name": "chkScopeOfAppt"
+                    "name": "writtenPremium"
                 },
+                {
+                    "name": "bindDate"
+                }
+            ],
+            [
+                {
+                    "name": "effectiveDate"
+                },
+                {
+                    "name": "policyNumber"
+                }
+            ],
+            [
+                {
+                    "name": "commissionRate"
+                },
+                {
+                    "name": "estimatedCommission"
+                }
+            ]
+        ],
+        "style": "success",
+        "name": "bindDetails",
+        "label": "Bind Details"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "lostReason"
+                },
+                {
+                    "name": "lastContactMethod"
+                }
+            ]
+        ],
+        "style": "danger",
+        "name": "lostDetails",
+        "label": "Lost Details"
+    },
+    {
+        "rows": [
+            [
                 {
                     "name": "lossRunsRequested"
+                },
+                {
+                    "name": "chkScopeOfAppt"
                 }
             ],
             [
@@ -507,8 +896,10 @@
             ]
         ],
         "style": "default",
-        "name": "checklistIntake",
-        "label": "Checklist — Intake"
+        "name": "processIntake",
+        "label": "Process — Intake",
+        "tabBreak": true,
+        "tabLabel": "Workflow"
     },
     {
         "rows": [
@@ -538,8 +929,8 @@
             ]
         ],
         "style": "default",
-        "name": "checklistMarketing",
-        "label": "Checklist — Marketing"
+        "name": "processMarketing",
+        "label": "Process — Marketing"
     },
     {
         "rows": [
@@ -575,69 +966,37 @@
             ]
         ],
         "style": "default",
-        "name": "checklistOnboarding",
-        "label": "Checklist — Onboarding"
+        "name": "processOnboarding",
+        "label": "Process — Onboarding"
     },
     {
         "rows": [
-            [
-                {
-                    "name": "lastContactMethod"
-                },
-                {
-                    "name": "lostReason"
-                }
-            ],
             [
                 {
                     "name": "aiSummary"
                 }
-            ]
-        ],
-        "style": "default",
-        "name": "sales",
-        "label": "Sales"
-    },
-    {
-        "rows": [
+            ],
             [
                 {
-                    "name": "estimatedPremium"
+                    "name": "fein"
                 },
                 {
-                    "name": "writtenPremium"
+                    "name": "aggregatePageId"
                 }
             ],
             [
                 {
-                    "name": "commissionRate"
+                    "name": "policyStubId"
                 },
                 {
-                    "name": "estimatedCommission"
-                }
-            ],
-            [
-                {
-                    "name": "bindDate"
-                },
-                {
-                    "name": "effectiveDate"
+                    "name": "policyStubStatus"
                 }
             ]
         ],
         "style": "default",
-        "name": "financial",
-        "label": "Financial"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "description"
-                }
-            ]
-        ],
-        "style": "default",
-        "label": ""
+        "name": "internal",
+        "label": "Internal",
+        "tabBreak": true,
+        "tabLabel": "Internal"
     }
 ]

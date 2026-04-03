@@ -36,7 +36,9 @@
     ],
     "boolFilterList": [
         "onlyMy",
-        "assignedToGretchen"
+        "assignedToGretchen",
+        "commercialLines",
+        "personalLines"
     ],
     "dynamicLogic": {
         "fields": {

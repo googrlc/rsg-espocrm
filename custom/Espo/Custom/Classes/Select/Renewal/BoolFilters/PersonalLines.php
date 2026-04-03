@@ -12,7 +12,19 @@ class PersonalLines implements Filter
     public function apply(SelectBuilder $queryBuilder, OrGroupBuilder $orGroupBuilder): void
     {
         $orGroupBuilder->add(
-            Comparison::equal(Expression::column('businessSegment'), 'Personal Lines')
+            Comparison::in(
+                Expression::column('lineOfBusiness'),
+                [
+                    'Personal Auto',
+                    'Homeowners',
+                    'Renters',
+                    'Condo',
+                    'Dwelling Fire',
+                    'Motorcycle',
+                    'Boat',
+                    'RV',
+                ]
+            )
         );
     }
 }

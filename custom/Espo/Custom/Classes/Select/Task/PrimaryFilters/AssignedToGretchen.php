@@ -19,7 +19,7 @@ class AssignedToGretchen implements Filter
         // Find Gretchen's user by name
         $gretchen = $this->entityManager
             ->getRDBRepository('User')
-            ->where(['userName' => 'gretchen'])
+            ->where(['userName' => 'gretchcoates'])
             ->findOne();
 
         if ($gretchen) {
