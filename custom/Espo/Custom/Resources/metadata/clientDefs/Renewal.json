@@ -4,6 +4,9 @@
     "iconClass": "fas fa-sync-alt",
     "kanbanViewMode": true,
     "statusField": "stage",
+    "kanbanStatusIgnoreList": [
+        "Lost"
+    ],
     "filterList": [
         {
             "name": "active",

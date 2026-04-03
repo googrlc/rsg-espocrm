@@ -19,7 +19,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Lost"
+                            "value": "Closed Lost"
                         }
                     ]
                 },
@@ -28,7 +28,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Lost"
+                            "value": "Closed Lost"
                         }
                     ]
                 }
@@ -39,7 +39,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }
@@ -50,7 +50,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }
@@ -61,7 +61,7 @@
                         {
                             "type": "equals",
                             "attribute": "stage",
-                            "value": "Won - Bound"
+                            "value": "Closed Won"
                         }
                     ]
                 }

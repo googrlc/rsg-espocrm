@@ -58,11 +58,10 @@
             ],
             "customizationOptionsReferenceDisabled": true,
             "kanbanOrder": [
-                "Prospect",
-                "Qualify",
-                "Quote",
-                "Proposal",
-                "Negotiate",
+                "Discovery",
+                "Quoting",
+                "Proposal Presented",
+                "Negotiation",
                 "Renewal Notice Sent",
                 "Markets Out / Shopping",
                 "Quoted",
@@ -972,8 +971,8 @@
         "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
     },
     "kanbanStatusIgnoreList": [
-        "Won - Bound",
-        "Lost",
+        "Closed Won",
+        "Closed Lost",
         "Bound / Renewed",
         "Non-Renewal / Lost"
     ]
