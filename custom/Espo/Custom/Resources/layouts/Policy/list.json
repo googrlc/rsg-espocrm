@@ -1,5 +1,5 @@
 [
-  {"name": "name", "width": 10, "link": true},
+  {"name": "policyNumber", "width": 10, "link": true},
   {"name": "account", "width": 10, "link": true},
   {"name": "contact", "width": 10, "link": true},
   {"name": "lineOfBusiness", "width": 10},

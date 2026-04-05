@@ -2,7 +2,7 @@
   {
     "label": "Policy Info",
     "rows": [
-      [{"name": "name"}, {"name": "status"}],
+      [{"name": "policyNumber"}, {"name": "status"}],
       [{"name": "carrier"}, {"name": "lineOfBusiness"}],
       [{"name": "businessType"}, {"name": "assignedUser"}],
       [{"name": "effectiveDate"}, {"name": "expirationDate"}]

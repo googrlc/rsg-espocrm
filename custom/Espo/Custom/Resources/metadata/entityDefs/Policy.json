@@ -3,8 +3,18 @@
         "name": {
             "type": "varchar",
             "maxLength": 100,
+            "required": false,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "textFilterDisabled": true
+        },
+        "policyNumber": {
+            "type": "varchar",
+            "maxLength": 100,
             "required": true,
-            "tooltipText": "Policy number — used as record name/title"
+            "isCustom": true,
+            "tooltipText": "Policy number — primary identifier for this policy record"
         },
         "momentumPolicyId": {
             "type": "varchar",
@@ -306,15 +316,15 @@
         }
     },
     "collection": {
-        "orderBy": "name",
+        "orderBy": "policyNumber",
         "order": "asc",
         "textFilterFields": [
-            "name",
+            "policyNumber",
             "carrier",
             "momentumPolicyId"
         ],
         "sortByList": [
-            "name",
+            "policyNumber",
             "createdAt",
             "modifiedAt",
             "effectiveDate",

@@ -1,4 +1,7 @@
 {
+    "fields": {
+        "policyNumber": "Policy Number"
+    },
     "presetFilters": {
         "active": "Active",
         "expiringSoon": "Expiring Soon",

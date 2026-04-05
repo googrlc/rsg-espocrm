@@ -1,5 +1,5 @@
 [
-  {"name": "name", "link": true},
+  {"name": "policyNumber", "link": true},
   {"name": "carrier"},
   {"name": "status"},
   {"name": "premiumAmount"},
