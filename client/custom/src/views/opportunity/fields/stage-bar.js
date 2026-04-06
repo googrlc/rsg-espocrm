@@ -1,8 +1,8 @@
 define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], function (EnumFieldView) {
 
     var NEW_BIZ_STAGES = [
-        'Prospect', 'Qualify', 'Quote', 'Proposal', 'Negotiate',
-        'Won - Bound', 'Lost'
+        'Discovery', 'Quoting', 'Proposal Presented', 'Negotiation',
+        'Closed Won', 'Closed Lost'
     ];
 
     var RENEWAL_STAGES = [
@@ -10,8 +10,8 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
         'Presented to Client', 'Bound / Renewed', 'Non-Renewal / Lost'
     ];
 
-    var WON_STAGES = ['Won - Bound', 'Bound / Renewed'];
-    var LOST_STAGES = ['Lost', 'Non-Renewal / Lost'];
+    var WON_STAGES = ['Closed Won', 'Bound / Renewed'];
+    var LOST_STAGES = ['Closed Lost', 'Non-Renewal / Lost'];
 
     return EnumFieldView.extend({
 
