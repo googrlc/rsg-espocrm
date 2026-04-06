@@ -341,6 +341,51 @@
       "maxLength": 20,
       "isCustom": true
     },
+    "sicDescription": {
+      "type": "varchar",
+      "maxLength": 255,
+      "isCustom": true,
+      "tooltipText": "SIC code description synced from NowCerts",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Commercial Lines"
+          }
+        ]
+      }
+    },
+    "dba": {
+      "type": "varchar",
+      "maxLength": 255,
+      "isCustom": true,
+      "tooltipText": "Doing Business As name synced from NowCerts",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Commercial Lines"
+          }
+        ]
+      }
+    },
+    "naicsCode": {
+      "type": "varchar",
+      "maxLength": 10,
+      "isCustom": true,
+      "tooltipText": "NAICS code synced from NowCerts",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Commercial Lines"
+          }
+        ]
+      }
+    },
     "businessEntity": {
       "type": "enum",
       "options": [

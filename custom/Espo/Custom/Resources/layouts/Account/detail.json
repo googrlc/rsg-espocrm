@@ -5,7 +5,9 @@
                 {
                     "name": "name"
                 },
-                false
+                {
+                    "name": "dba"
+                }
             ],
             [
                 {
@@ -101,19 +103,25 @@
             ],
             [
                 {
-                    "name": "intelNaics"
+                    "name": "sicDescription"
                 },
                 {
-                    "name": "annualRevenue"
+                    "name": "naicsCode"
                 }
             ],
             [
                 {
-                    "name": "numberOfEmployees"
+                    "name": "annualRevenue"
                 },
                 {
-                    "name": "fein"
+                    "name": "numberOfEmployees"
                 }
+            ],
+            [
+                {
+                    "name": "fein"
+                },
+                false
             ]
         ],
         "dynamicLogicVisible": {
