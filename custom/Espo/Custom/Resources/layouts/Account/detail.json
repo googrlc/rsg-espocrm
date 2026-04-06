@@ -30,6 +30,22 @@
                     "name": "billingAddress"
                 },
                 false
+            ],
+            [
+                {
+                    "name": "prospectType"
+                },
+                {
+                    "name": "preferredLanguage"
+                }
+            ],
+            [
+                {
+                    "name": "leadSource"
+                },
+                {
+                    "name": "medicareId"
+                }
             ]
         ],
         "style": "default",
@@ -808,10 +824,13 @@
                     "name": "momentumClientId"
                 },
                 {
-                    "name": "momentumLastSynced"
+                    "name": "nowCertsCustomerId"
                 }
             ],
             [
+                {
+                    "name": "momentumLastSynced"
+                },
                 {
                     "name": "googleDriveFolderUrl"
                 }

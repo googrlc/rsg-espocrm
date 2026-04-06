@@ -30,6 +30,18 @@
       "type": "datetime",
       "isCustom": true
     },
+    "nowCertsCustomerId": {
+      "type": "varchar",
+      "maxLength": 50,
+      "isCustom": true,
+      "tooltipText": "NowCerts customer ID — visible account identifier from NowCerts"
+    },
+    "leadSource": {
+      "type": "varchar",
+      "maxLength": 255,
+      "isCustom": true,
+      "tooltipText": "Lead source synced from NowCerts leadSources array"
+    },
     "policies": {
       "type": "linkMultiple",
       "isCustom": true,
@@ -597,6 +609,63 @@
     "communicationNotes": {
       "type": "text",
       "isCustom": true
+    },
+    "preferredLanguage": {
+      "type": "enum",
+      "options": [
+        "",
+        "English",
+        "Spanish",
+        "Other"
+      ],
+      "isCustom": true,
+      "tooltipText": "Preferred language synced from NowCerts"
+    },
+    "prospectType": {
+      "type": "enum",
+      "options": [
+        "",
+        "Cold Prospect",
+        "Warm Prospect",
+        "Hot Prospect",
+        "Referral",
+        "Cross-Sell"
+      ],
+      "isCustom": true,
+      "tooltipText": "Prospect classification synced from NowCerts prospectType",
+      "style": {
+        "": null,
+        "Cold Prospect": "default",
+        "Warm Prospect": "info",
+        "Hot Prospect": "danger",
+        "Referral": "success",
+        "Cross-Sell": "primary"
+      }
+    },
+    "medicareId": {
+      "type": "varchar",
+      "maxLength": 20,
+      "isCustom": true,
+      "tooltipText": "Medicare Beneficiary Identifier (MBI/HICN) — person-level, synced from NowCerts medicareHICN",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "or",
+            "value": [
+              {
+                "type": "equals",
+                "attribute": "accountType",
+                "value": "Medicare"
+              },
+              {
+                "type": "equals",
+                "attribute": "accountType",
+                "value": "Personal Lines"
+              }
+            ]
+          }
+        ]
+      }
     },
     "primaryFirstName": {
       "type": "varchar",

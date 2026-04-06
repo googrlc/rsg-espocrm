@@ -147,6 +147,26 @@
             "isCustom": true,
             "tooltipText": "insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync"
         },
+        "partAEffectiveDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Medicare Part A effective date — synced from NowCerts"
+        },
+        "partBEffectiveDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Medicare Part B effective date — synced from NowCerts"
+        },
+        "drInformation": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Doctor/provider information — synced from NowCerts for Medicare policies"
+        },
+        "rxInformation": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Prescription/Rx information — synced from NowCerts for Medicare policies"
+        },
         "account": {
             "type": "link"
         },

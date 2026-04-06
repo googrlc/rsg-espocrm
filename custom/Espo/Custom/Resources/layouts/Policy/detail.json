@@ -30,6 +30,13 @@
     ]
   },
   {
+    "label": "Medicare",
+    "rows": [
+      [{"name": "partAEffectiveDate"}, {"name": "partBEffectiveDate"}],
+      [{"name": "drInformation"}, {"name": "rxInformation"}]
+    ]
+  },
+  {
     "label": "Notes",
     "rows": [
       [{"name": "policyNotes", "fullWidth": true}]
