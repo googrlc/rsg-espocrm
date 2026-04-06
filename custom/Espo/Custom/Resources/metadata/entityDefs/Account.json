@@ -471,6 +471,20 @@
       "type": "int",
       "isCustom": true
     },
+    "yearBusinessStarted": {
+      "type": "int",
+      "isCustom": true,
+      "tooltipText": "Year business was started — synced from NowCerts",
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Commercial Lines"
+          }
+        ]
+      }
+    },
     "yearsInBusiness": {
       "type": "int",
       "isCustom": true,

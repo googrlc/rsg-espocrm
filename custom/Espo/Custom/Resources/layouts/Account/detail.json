@@ -103,10 +103,10 @@
         "rows": [
             [
                 {
-                    "name": "intelYearsInBusiness"
+                    "name": "yearBusinessStarted"
                 },
                 {
-                    "name": "website"
+                    "name": "yearsInBusiness"
                 }
             ],
             [
@@ -114,15 +114,23 @@
                     "name": "businessEntity"
                 },
                 {
-                    "name": "sicCode"
+                    "name": "fein"
                 }
             ],
             [
                 {
-                    "name": "sicDescription"
+                    "name": "sicCode"
                 },
                 {
+                    "name": "sicDescription"
+                }
+            ],
+            [
+                {
                     "name": "naicsCode"
+                },
+                {
+                    "name": "websiteUrl"
                 }
             ],
             [
@@ -135,7 +143,15 @@
             ],
             [
                 {
-                    "name": "fein"
+                    "name": "emailAddress"
+                },
+                {
+                    "name": "nowCertsCustomerId"
+                }
+            ],
+            [
+                {
+                    "name": "billingAddress"
                 },
                 false
             ]

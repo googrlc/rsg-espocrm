@@ -16,6 +16,11 @@ These fields sync regardless of whether the account is Commercial, Personal, or 
 | `createDate` | `clientSince` | date | Extract date from datetime | Only set if `clientSince` is empty |
 | `changeDate` | `momentumLastSynced` | datetime | Direct | Track last sync timestamp |
 | `origin` | `referralSource` | enum | `"Data Import"` → `"NowCerts Import"` | Lead source attribution |
+| `addressLine1` + `addressLine2` | `billingAddressStreet` | address | Concat with newline | NowCerts address → EspoCRM billing address |
+| `city` | `billingAddressCity` | varchar | Direct | City component of billing address |
+| `state` | `billingAddressState` | varchar | Direct | State component of billing address |
+| `zipCode` | `billingAddressPostalCode` | varchar | Direct | Zip component of billing address |
+| `eMail` | `emailAddress` | email | Direct | Account email address |
 
 ## Commercial Lines Fields (Account)
 
@@ -24,12 +29,15 @@ Only sync when `insuredType` = `"Commercial"`.
 | NowCerts Field | EspoCRM Field | Type | Transform | Notes |
 |---|---|---|---|---|
 | `dba` | `dba` | varchar(255) | Direct | Doing Business As name |
-| `yearBusinessStarted` | `yearsInBusiness` | int | `currentYear - yearBusinessStarted` | Calculate; fallback to `yearsInBusiness` |
-| `yearsInBusiness` | `yearsInBusiness` | int | Direct | Only if `yearBusinessStarted` is null |
+| `yearBusinessStarted` | `yearBusinessStarted` | int | Direct | Raw year — new field added |
+| `yearBusinessStarted` | `yearsInBusiness` | int | `currentYear - yearBusinessStarted` | Also calculate years in business |
+| `yearsInBusiness` | `yearsInBusiness` | int | Direct | Fallback if `yearBusinessStarted` is null |
 | `naics` | `naicsCode` | varchar(10) | Direct | NAICS industry classification |
 | `sicCode` | `sicCode` | varchar(20) | Direct | SIC industry code |
 | `sicDescription` | `sicDescription` | varchar(255) | Direct | Human-readable SIC description |
 | `typeOfBusiness` | `businessEntity` | enum | Map values (see below) | Entity type for underwriting |
+| `fein` | `fein` | varchar(20) | Direct | Federal Employer ID Number |
+| `website` | `websiteUrl` | url | Direct | Business website |
 
 ## Personal Lines Fields (Account)
 
