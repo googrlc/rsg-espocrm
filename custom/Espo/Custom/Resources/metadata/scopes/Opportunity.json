@@ -1,7 +1,7 @@
 {
     "kanbanStatusIgnoreList": [
-        "Won - Bound",
-        "Lost",
+        "Closed Won",
+        "Closed Lost",
         "Bound / Renewed",
         "Non-Renewal / Lost"
     ]
