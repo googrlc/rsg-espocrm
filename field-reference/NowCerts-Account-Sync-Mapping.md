@@ -115,13 +115,89 @@ Use `momentumClientId` (NowCerts `database_id`) as the unique key to match/updat
 
 ## Sync Direction
 
-**NowCerts → EspoCRM only** (one-way). NowCerts is the system of record for these fields.
+**Bidirectional.** NowCerts is system of record; EspoCRM enrichments push back.
 
-## n8n Workflow Notes
+---
 
-- **Workflow ID:** `RUOvjckWMUyrzJeJ` (Commercial Lines — already deployed)
-- Trigger: Scheduled every 15 min or webhook from NowCerts
-- Upsert logic: Match on `momentumClientId`, update mapped fields, skip nulls
-- Set `momentumLastSynced` to current datetime on each successful sync
-- For personal lines: extend workflow to handle `insuredType` routing (Commercial vs Personal vs Medicare)
-- Medicare policy fields sync during policy sync, not account sync
+# Policy Sync — Field Mapping
+
+## NowCerts → EspoCRM Policy Fields
+
+| NowCerts Field | EspoCRM Field | Type | Notes |
+|---|---|---|---|
+| `databaseId` | `momentumPolicyId` | varchar(255) | Primary dedup key |
+| `insuredDatabaseId` | `insuredMomentumId` | varchar(255) | Resolves Account link |
+| `policyNumber` | `policyNumber` | varchar(100) | Policy identifier |
+| `carrierName` | `carrier` | varchar(255) | Insurance carrier |
+| `lineOfBusiness` | `lineOfBusiness` | varchar(500) | LOB (may be comma-separated) |
+| `status` | `status` | enum | Mapped to EspoCRM enum values |
+| `effectiveDate` | `effectiveDate` | date | Policy start date |
+| `expirationDate` | `expirationDate` | date | Renewal trigger date |
+| `totalPremium` | `premiumAmount` | currency | Annual premium |
+| `commissionPercentage` | `commissionRate` | float | Commission % |
+| `commissionAmount` | `commissionAmount` | currency | Commission $ |
+| `coverageAmount` | `coverageAmount` | currency | Coverage limit |
+| `deductible` | `deductible` | currency | Deductible amount |
+| `agencyFee` | `agencyFee` | currency | Agency fee |
+| `businessType` | `businessType` | enum | New Business / Renewal / Rewrite |
+| `notes` | `policyNotes` | text | Policy notes |
+| `partAEffectiveDate` | `partAEffectiveDate` | date | Medicare Part A (policy-level) |
+| `partBEffectiveDate` | `partBEffectiveDate` | date | Medicare Part B (policy-level) |
+| `drInformation` | `drInformation` | text | Doctor info (Medicare) |
+| `rxInformation` | `rxInformation` | text | Rx info (Medicare) |
+
+## Policy Dedup Key
+
+`momentumPolicyId` (NowCerts `databaseId`). Account link resolved via `insuredMomentumId` → Account.`momentumClientId`.
+
+---
+
+# Contact Sync — Field Mapping
+
+## NowCerts → EspoCRM Contact Fields
+
+| NowCerts Field | EspoCRM Field | Type | Notes |
+|---|---|---|---|
+| `database_id` | `momentumClientId` | varchar(255) | Primary dedup key |
+| `insuredDatabaseId` | — | — | Resolves Account link via `accountsIds` |
+| `firstName` | `firstName` | varchar | First name |
+| `lastName` | `lastName` | varchar | Last name |
+| `middleName` | `middleName` | varchar | Middle name |
+| `email` | `emailAddress` | email | Contact email |
+| `phone` | `phoneNumber` | phone | Contact phone |
+| `dateOfBirth` | `dateOfBirth` | date | DOB |
+| `contactType` | `householdRole` | enum | Primary / Spouse / Dependent / Co-insured |
+| `insuredType` | `clientType` | enum | Commercial / Personal |
+| `csrName` | `csrName` | varchar(255) | Assigned CSR |
+| `addressLine1/2` | `addressStreet` | address | Concat with newline |
+| `city` | `addressCity` | varchar | City |
+| `state` | `addressState` | varchar | State |
+| `zipCode` | `addressPostalCode` | varchar | Zip |
+
+## Contact Dedup Key
+
+`momentumClientId` (NowCerts `database_id`). Account link resolved via `insuredDatabaseId` → Account.`momentumClientId` → `accountsIds`.
+
+---
+
+# n8n Workflow Registry
+
+| # | Workflow | ID | Direction | Schedule | Entity |
+|---|---|---|---|---|---|
+| 1 | NowCerts → EspoCRM Account Sync | `RUOvjckWMUyrzJeJ` | Pull | Every hour | Account (all types) |
+| 2 | EspoCRM → NowCerts Account Reverse Sync | `wu4tql14ZPQSEimI` | Push | Webhook + 2x daily | Account (all types) |
+| 3 | NowCerts → EspoCRM Policy Sync | `h3z5WpwFAwQG0FOW` | Pull | Every hour | Policy |
+| 4 | EspoCRM → NowCerts Policy Reverse Sync | `jEhpIHl6FRucScf0` | Push | Webhook + 2x daily | Policy |
+| 5 | NowCerts → EspoCRM Contact Sync | `1Q2jyfy1rdqXGKlg` | Pull | Every hour | Contact |
+| 6 | EspoCRM → NowCerts Contact Reverse Sync | `pgM2Odt43m9sjH8p` | Push | Webhook + 2x daily | Contact |
+
+## Setup Checklist
+
+1. Create **"NowCerts API Key"** credential in n8n (Header Auth: `Authorization: Bearer YOUR_TOKEN`)
+2. Create **"EspoCRM API Key"** credential in n8n (Header Auth: `X-Api-Key: YOUR_KEY`)
+3. Update all placeholder URLs in the 6 workflows
+4. In EspoCRM Admin → Webhooks, create 3 webhooks:
+   - Account afterSave → webhook URL from workflow #2
+   - Policy afterSave → webhook URL from workflow #4
+   - Contact afterSave → webhook URL from workflow #6
+5. Activate all 6 workflows in n8n
