@@ -1,26 +1,39 @@
-# NowCerts → EspoCRM Account Sync — Field Mapping
+# NowCerts → EspoCRM Sync — Complete Field Mapping
 
-## Shared Fields (All Account Types)
+## API Endpoints
 
-These fields sync regardless of whether the account is Commercial, Personal, or Medicare.
+| Entity | NowCerts Endpoint | Method | Format |
+|---|---|---|---|
+| Accounts | `/api/InsuredDetailList` | GET | OData (`$filter`, `$count`, `$orderby`, `$skip`, `$top`) |
+| Policies | `/api/PolicyDetailList` | GET | OData |
+| Response format | `{ "@odata.count": N, "value": [...] }` | | |
+
+## Account Sync — InsuredDetailList Fields
+
+### Shared Fields (All Account Types)
 
 | NowCerts Field | EspoCRM Field | Type | Transform | Notes |
 |---|---|---|---|---|
-| `database_id` | `momentumClientId` | varchar(255) | Direct | Primary dedup key |
-| `customerId` | `nowCertsCustomerId` | varchar(50) | Direct | Human-readable NowCerts customer ID |
-| `leadSources` | `leadSource` | varchar(255) | Join array → string | First value from array, or comma-joined |
-| `insuredType` | `accountType` | enum | See mapping below | Maps NowCerts type to EspoCRM type |
-| `prospectType` | `prospectType` | enum | Map values (see below) | Prospect classification |
-| `preferredLanguage` | `preferredLanguage` | enum | Map to English/Spanish/Other | Person-level preference |
+| `id` | `momentumClientId` | varchar(255) | Direct | **Primary dedup key** (GUID) |
+| `customerId` | `nowCertsCustomerId` | varchar(50) | Direct | Internal billing/MC number |
+| `insuredId` | `nowCertsCustomerId` | varchar(50) | Fallback if customerId null | Internal ID number |
+| `insuredType` | `accountType` | enum | See mapping below | Commercial/Personal/etc |
+| `type` | — | — | "Insured" vs "Prospect" → accountStatus | Determines active vs prospect |
+| `prospectType` | `prospectType` | enum | Map values (see below) | Hot/Cold/Warm prospect |
 | `referralSourceCompanyName` | `referralName` | text | Direct | Referral source company |
-| `createDate` | `clientSince` | date | Extract date from datetime | Only set if `clientSince` is empty |
-| `changeDate` | `momentumLastSynced` | datetime | Direct | Track last sync timestamp |
-| `origin` | `referralSource` | enum | `"Data Import"` → `"NowCerts Import"` | Lead source attribution |
-| `addressLine1` + `addressLine2` | `billingAddressStreet` | address | Concat with newline | NowCerts address → EspoCRM billing address |
-| `city` | `billingAddressCity` | varchar | Direct | City component of billing address |
-| `state` | `billingAddressState` | varchar | Direct | State component of billing address |
-| `zipCode` | `billingAddressPostalCode` | varchar | Direct | Zip component of billing address |
-| `eMail` | `emailAddress` | email | Direct | Account email address |
+| `createDate` | `clientSince` | date | Extract date | Only on CREATE |
+| `changeDate` | `momentumLastSynced` | datetime | Direct | Used for incremental filter |
+| `addressLine1` + `addressLine2` | `billingAddressStreet` | address | Concat with newline | Street address |
+| `city` | `billingAddressCity` | varchar | Direct | City |
+| `state` | `billingAddressState` | varchar | Direct | State |
+| `zipCode` | `billingAddressPostalCode` | varchar | Direct | Zip |
+| `eMail` | `emailAddressData` | email | `[{emailAddress, primary: true}]` | **CREATE only** — EspoCRM format |
+| `eMail2`, `eMail3` | — | — | Not synced | Secondary/tertiary emails |
+| `phone` / `cellPhone` | `phoneNumberData` | phone | `[{phoneNumber, primary: true}]` | **CREATE only** — EspoCRM format |
+| `fax` | — | — | Not synced | Fax number |
+| `smsPhone` | — | — | Not synced | SMS number |
+| `description` | `description` | text | CREATE only | Account description |
+| `active` | — | — | Used as API filter `active eq true` | Only sync active records |
 
 ## Commercial Lines Fields (Account)
 
@@ -111,36 +124,50 @@ These fields go on the **Policy** record, NOT the Account. They are coverage-lev
 
 ## Dedup Key
 
-Use `momentumClientId` (NowCerts `database_id`) as the unique key to match/update existing EspoCRM accounts. Never create duplicates — always upsert by this key.
+Use `momentumClientId` (NowCerts `id` field — a GUID) as the unique key. Never create duplicates — always upsert by this key.
 
 ## Sync Direction
 
 **Bidirectional.** NowCerts is system of record; EspoCRM enrichments push back.
 
+## Incremental Sync
+
+API query: `$filter=changeDate ge {2hrs ago} and active eq true`
+This means only recently modified active records are pulled each hour.
+
 ---
 
-# Policy Sync — Field Mapping
+# Policy Sync — PolicyDetailList Field Mapping
 
 ## NowCerts → EspoCRM Policy Fields
 
 | NowCerts Field | EspoCRM Field | Type | Notes |
 |---|---|---|---|
-| `databaseId` | `momentumPolicyId` | varchar(255) | Primary dedup key |
+| `id` | `momentumPolicyId` | varchar(255) | **Primary dedup key** (GUID) |
 | `insuredDatabaseId` | `insuredMomentumId` | varchar(255) | Resolves Account link |
-| `policyNumber` | `policyNumber` | varchar(100) | Policy identifier |
+| `number` | `policyNumber` | varchar(100) | Policy number |
 | `carrierName` | `carrier` | varchar(255) | Insurance carrier |
-| `lineOfBusiness` | `lineOfBusiness` | varchar(500) | LOB (may be comma-separated) |
+| `carrierNAIC` | — | — | Not synced (available if needed) |
+| `mgaName` | — | — | Not synced (available if needed) |
+| `isQuote` | — | — | **Skipped if true** — only sync real policies |
 | `status` | `status` | enum | Mapped to EspoCRM enum values |
 | `effectiveDate` | `effectiveDate` | date | Policy start date |
 | `expirationDate` | `expirationDate` | date | Renewal trigger date |
-| `totalPremium` | `premiumAmount` | currency | Annual premium |
-| `commissionPercentage` | `commissionRate` | float | Commission % |
-| `commissionAmount` | `commissionAmount` | currency | Commission $ |
-| `coverageAmount` | `coverageAmount` | currency | Coverage limit |
-| `deductible` | `deductible` | currency | Deductible amount |
-| `agencyFee` | `agencyFee` | currency | Agency fee |
+| `totalPremium` | `premiumAmount` | currency | Total endorsements premium |
+| `totalAgencyCommission` | `commissionAmount` | currency | Total agency commission |
+| `totalNonPremium` | `agencyFee` | currency | Non-premium amount (fees) |
 | `businessType` | `businessType` | enum | New Business / Renewal / Rewrite |
-| `notes` | `policyNotes` | text | Policy notes |
+| `businessSubType` | — | — | Not synced (available if needed) |
+| `description` | `policyNotes` | text | Policy description |
+| `billingType` | — | — | Not synced (Direct_Bill_100 etc) |
+| `bindDate` | — | — | Not synced (available if needed) |
+| `cancellationDate` | — | — | Not synced (status covers this) |
+| `reinstatementDate` | — | — | Not synced |
+| `inceptionDate` | — | — | Not synced (effectiveDate covers this) |
+| `policyTerm` | — | — | Not synced (12 months etc) |
+| `percentageChange` | — | — | Not synced (renewal % change) |
+| `insuredType` | — | — | Not synced (already on Account) |
+| `insuredEmail/FirstName/LastName/CommercialName` | — | — | Not synced (already on Account) |
 | `partAEffectiveDate` | `partAEffectiveDate` | date | Medicare Part A (policy-level) |
 | `partBEffectiveDate` | `partBEffectiveDate` | date | Medicare Part B (policy-level) |
 | `drInformation` | `drInformation` | text | Doctor info (Medicare) |
@@ -148,7 +175,12 @@ Use `momentumClientId` (NowCerts `database_id`) as the unique key to match/updat
 
 ## Policy Dedup Key
 
-`momentumPolicyId` (NowCerts `databaseId`). Account link resolved via `insuredMomentumId` → Account.`momentumClientId`.
+`momentumPolicyId` (NowCerts `id` field — GUID). Account link resolved via `insuredMomentumId` → Account.`momentumClientId`.
+
+## Policy Incremental Sync
+
+API query: `$filter=changeDate ge {2hrs ago} and active eq true`
+Quotes filtered out: `isQuote === true` skipped in transform.
 
 ---
 
