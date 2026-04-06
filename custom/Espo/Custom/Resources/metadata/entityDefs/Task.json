@@ -106,6 +106,40 @@
             "isCustom": true,
             "tooltipText": "Parent account \u2014 all tasks roll up to this account"
         },
+        "momentumTaskId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "NowCerts task databaseId \u2014 primary dedup key for sync"
+        },
+        "insuredMomentumId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "NowCerts insuredDatabaseId \u2014 resolves Account link during sync"
+        },
+        "momentumLastSynced": {
+            "type": "datetime",
+            "isCustom": true
+        },
+        "taskSyncStatus": {
+            "type": "enum",
+            "options": [
+                "",
+                "Synced",
+                "Pending",
+                "Error",
+                "Skipped"
+            ],
+            "default": "Pending",
+            "isCustom": true,
+            "style": {
+                "Synced": "success",
+                "Pending": "warning",
+                "Error": "danger",
+                "Skipped": "default"
+            }
+        },
         "parent": {
             "entityList": [
                 "Account",

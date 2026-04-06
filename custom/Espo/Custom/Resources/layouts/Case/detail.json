@@ -1,0 +1,41 @@
+[
+    {
+        "label": "Case Info",
+        "rows": [
+            [
+                {"name": "name"},
+                {"name": "status"}
+            ],
+            [
+                {"name": "priority"},
+                {"name": "assignedUser"}
+            ],
+            [
+                {"name": "account"},
+                {"name": "contact"}
+            ]
+        ]
+    },
+    {
+        "label": "Description",
+        "rows": [
+            [
+                {"name": "description", "fullWidth": true}
+            ]
+        ]
+    },
+    {
+        "label": "Sync",
+        "isCollapsed": true,
+        "rows": [
+            [
+                {"name": "momentumCaseId"},
+                {"name": "insuredMomentumId"}
+            ],
+            [
+                {"name": "momentumLastSynced"},
+                {"name": "caseSyncStatus"}
+            ]
+        ]
+    }
+]

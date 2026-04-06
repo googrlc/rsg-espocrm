@@ -56,5 +56,19 @@
                 {"name": "description", "fullWidth": true}
             ]
         ]
+    },
+    {
+        "label": "Sync",
+        "isCollapsed": true,
+        "rows": [
+            [
+                {"name": "momentumTaskId"},
+                {"name": "insuredMomentumId"}
+            ],
+            [
+                {"name": "momentumLastSynced"},
+                {"name": "taskSyncStatus"}
+            ]
+        ]
     }
 ]
