@@ -576,9 +576,9 @@
       "dynamicLogicRequired": {
         "conditionGroup": [
           {
-            "type": "equals",
+            "type": "in",
             "attribute": "accountType",
-            "value": "Personal Lines"
+            "value": ["Personal Lines", "Medicare", "Life Insurance"]
           }
         ]
       }
