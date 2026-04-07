@@ -556,7 +556,7 @@
     "primaryFirstName": {
       "type": "varchar",
       "maxLength": 100,
-      "required": true,
+      "required": false,
       "isCustom": true
     },
     "primaryLastName": {
