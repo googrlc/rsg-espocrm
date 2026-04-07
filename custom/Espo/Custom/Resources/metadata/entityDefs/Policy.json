@@ -12,7 +12,7 @@
         "policyNumber": {
             "type": "varchar",
             "maxLength": 100,
-            "required": true,
+            "required": false,
             "isCustom": true,
             "tooltipText": "Policy number — primary identifier for this policy record"
         },
@@ -106,13 +106,8 @@
             "isCustom": true
         },
         "businessType": {
-            "type": "enum",
-            "options": [
-                "",
-                "New Business",
-                "Renewal",
-                "Rewrite"
-            ],
+            "type": "varchar",
+            "maxLength": 100,
             "isCustom": true
         },
         "policyNotes": {

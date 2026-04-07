@@ -123,12 +123,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -178,12 +178,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -254,12 +254,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -316,12 +316,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -378,12 +378,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -435,12 +435,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -482,12 +482,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "type",
+                            "attribute": "accountType",
                             "value": "Group Benefits"
                         }
                     ]
@@ -531,7 +531,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Personal Lines"
                 }
             ]
@@ -594,7 +594,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Personal Lines"
                 }
             ]
@@ -626,7 +626,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Group Benefits"
                 }
             ]
@@ -666,7 +666,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Group Benefits"
                 }
             ]
@@ -708,7 +708,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Group Benefits"
                 }
             ]
@@ -739,7 +739,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Group Benefits"
                 }
             ]
@@ -762,7 +762,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "type",
+                    "attribute": "accountType",
                     "value": "Group Benefits"
                 }
             ]

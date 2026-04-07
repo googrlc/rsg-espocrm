@@ -1,0 +1,37 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "accountType"
+                },
+                {
+                    "name": "accountStatus"
+                }
+            ],
+            [
+                {
+                    "name": "phoneNumber"
+                },
+                {
+                    "name": "emailAddress"
+                }
+            ],
+            [
+                {
+                    "name": "billingAddress"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "accountInfo",
+        "label": "Account Information"
+    }
+]
