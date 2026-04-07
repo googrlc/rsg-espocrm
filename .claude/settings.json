@@ -54,7 +54,31 @@
       "Bash(op vault:*)",
       "Bash(ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@rrespocrm-rsg-u69864.vm.elestio.app \"whoami && hostname\")",
       "Bash(ssh-add -l)",
-      "Bash(ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@openclaw-larau-u69864.vm.elestio.app \"whoami && hostname\")"
+      "Bash(ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 root@openclaw-larau-u69864.vm.elestio.app \"whoami && hostname\")",
+      "Bash(rsync -avz --progress /Users/lamarcoates/rsg-espocrm/custom/ root@rrespocrm-rsg-u69864.vm.elestio.app:/opt/app/custom/)",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'cd /opt/app && php command.php clear-cache')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'which php8* php7* php* 2>/dev/null | head -5; ls /usr/bin/php* 2>/dev/null; docker ps --format \"{{.Names}}\" 2>/dev/null')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 php /var/www/html/command.php clear-cache')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker inspect app-espocrm-1 --format \"{{json .Mounts}}\" | python3 -m json.tool 2>/dev/null || docker inspect app-espocrm-1 --format \"{{json .Mounts}}\"')",
+      "Bash(rsync -avz --progress /Users/lamarcoates/rsg-espocrm/custom/ root@rrespocrm-rsg-u69864.vm.elestio.app:/opt/app/espocrm/custom/)",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 php /var/www/html/command.php clear-cache && echo \"Done.\"')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 tail -100 /var/www/html/data/logs/espo.log 2>/dev/null || docker exec app-espocrm-1 find /var/www/html/data/logs -name \"*.log\" | head -5')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 tail -100 /var/www/html/data/logs/espo-2026-04-04.log')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 ls /var/www/html/data/logs/ && docker exec app-espocrm-1 tail -50 /var/www/html/data/logs/espo-2026-04-05.log 2>/dev/null || echo \"No log for today yet\"')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 php /var/www/html/command.php rebuild')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-mysql-1 mysql -u root -p$\\(grep DB_PASSWORD /opt/app/.env | cut -d= -f2\\) espocrm -e \"SHOW COLUMNS FROM policy LIKE \\\\\"policy_number\\\\\";\" 2>/dev/null || docker exec app-mysql-1 mysql -uroot espocrm -e \"SHOW COLUMNS FROM policy LIKE \\\\\"policy_number\\\\\";\" 2>/dev/null')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'cat /opt/app/.env | grep -i \"db\\\\|mysql\\\\|pass\" | head -10')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 cat /var/www/html/data/config.php | grep -i \"host\\\\|user\\\\|pass\\\\|dbname\" | head -10')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 php -r \"include \\\\\"/var/www/html/data/config.php\\\\\"; echo \\\\$data[\\\\\"database\\\\\"][\\\\\"user\\\\\"] . \\\\\":\\\\\" . \\\\$data[\\\\\"database\\\\\"][\\\\\"password\\\\\"] . \\\\\"@\\\\\" . \\\\$data[\\\\\"database\\\\\"][\\\\\"host\\\\\"] . \\\\\"/\\\\\" . \\\\$data[\\\\\"database\\\\\"][\\\\\"dbname\\\\\"];\"')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-mysql-1 mysql -uroot --password=\"\" espocrm -e \"SHOW COLUMNS FROM policy LIKE \\\\\"policy_number\\\\\";\" 2>/dev/null; docker exec app-mysql-1 env | grep -i \"pass\\\\|mysql\\\\|root\"')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-mysql-1 mysql -uroot -p\"eBK--5tbxWQONIpdgU3NB\" espocrm -e \"SHOW COLUMNS FROM policy LIKE \\\\\"policy_number\\\\\";\"')",
+      "Bash(ssh root@n8n-zpvua-u69864.vm.elestio.app 'find / -name \"*.json\" -path \"*/workflows/*\" 2>/dev/null | head -5; docker ps --format \"{{.Names}}\" 2>/dev/null')",
+      "Bash(ssh -o IdentitiesOnly=no -o PubkeyAuthentication=no -o PasswordAuthentication=yes root@n8n-zpvua-u69864.vm.elestio.app 'docker ps --format \"{{.Names}}\"')",
+      "Bash(rsync -az /Users/lamarcoates/rsg-espocrm/custom/Espo/Custom/Resources/metadata/entityDefs/Policy.json root@rrespocrm-rsg-u69864.vm.elestio.app:/opt/app/espocrm/custom/Espo/Custom/Resources/metadata/entityDefs/Policy.json)",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-espocrm-1 tail -20 /var/www/html/data/logs/espo-2026-04-05.log')",
+      "Bash(ssh root@rrespocrm-rsg-u69864.vm.elestio.app 'docker exec app-mysql-1 mysql -uroot -p\"eBK--5tbxWQONIpdgU3NB\" espocrm -e \":*)",
+      "Bash(scp n8n-elestio:/tmp/raw_nodes.json /tmp/raw_nodes.json)",
+      "Bash(scp /tmp/patched_nodes.json n8n-elestio:/tmp/patched_nodes.json)"
     ]
   }
 }
