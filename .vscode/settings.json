@@ -1,0 +1,7 @@
+{
+    "claudeCode.allowDangerouslySkipPermissions": true,
+    "json.trace.server": "messages",
+    "claudeCode.environmentVariables": {
+        "remote.SSH.enableAgentForwarding": true
+    }
+}
