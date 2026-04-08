@@ -5,8 +5,28 @@
       [{"name": "name"}, {"name": "activityType"}],
       [{"name": "classification"}, {"name": "dateTime"}],
       [{"name": "account"}, {"name": "contact"}],
-      [{"name": "policy"}, {"name": "loggedBy"}]
+      [{"name": "policy"}, {"name": "loggedBy"}],
+      [{"name": "source"}, false]
     ]
+  },
+  {
+    "label": "Policy Change",
+    "name": "policyChange",
+    "rows": [
+      [{"name": "changeType"}, {"name": "changeEffectiveDate"}],
+      [{"name": "oldPremium"}, {"name": "newPremium"}],
+      [{"name": "premiumDelta"}, {"name": "momentumTransactionId"}],
+      [{"name": "changeSummary", "fullWidth": true}]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "in",
+          "attribute": "activityType",
+          "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+        }
+      ]
+    }
   },
   {
     "label": "Call Details",

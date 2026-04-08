@@ -30,6 +30,11 @@
       "type": "datetime",
       "isCustom": true
     },
+    "agentOfRecordDate": {
+      "type": "date",
+      "isCustom": true,
+      "tooltipText": "Date RSG became Agent of Record — synced from NowCerts"
+    },
     "policies": {
       "type": "linkMultiple",
       "isCustom": true,

@@ -1,9 +1,10 @@
 [
-    {"name": "activityType", "width": 12, "link": false},
-    {"name": "name", "width": 25, "link": true},
-    {"name": "classification", "width": 15},
-    {"name": "account", "width": 15, "link": true},
-    {"name": "contact", "width": 12, "link": true},
-    {"name": "dateTime", "width": 12},
-    {"name": "loggedBy", "width": 9}
+    {"name": "activityType", "width": 11},
+    {"name": "name", "width": 20, "link": true},
+    {"name": "changeSummary", "width": 18},
+    {"name": "account", "width": 13, "link": true},
+    {"name": "policy", "width": 10, "link": true},
+    {"name": "premiumDelta", "width": 10},
+    {"name": "dateTime", "width": 10},
+    {"name": "source", "width": 8}
 ]

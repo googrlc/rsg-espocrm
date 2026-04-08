@@ -117,7 +117,7 @@
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
-            "tooltipText": "The carrier you are quoting this opportunity with (target/preferred carrier)"
+            "tooltipText": "Carrier being quoted"
         },
         "businessType": {
             "type": "enum",
@@ -421,6 +421,73 @@
             "isCustom": true,
             "default": false
         },
+        "partAEffectiveDate": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Medicare"
+                    }
+                ]
+            }
+        },
+        "partBEffectiveDate": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Medicare"
+                    }
+                ]
+            }
+        },
+        "medicareHICN": {
+            "type": "varchar",
+            "maxLength": 50,
+            "isCustom": true,
+            "tooltipText": "Medicare HICN — sensitive, will be purged. Source of truth is NowCerts.",
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Medicare"
+                    }
+                ]
+            }
+        },
+        "drInformation": {
+            "type": "text",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Medicare"
+                    }
+                ]
+            }
+        },
+        "rxInformation": {
+            "type": "text",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Medicare"
+                    }
+                ]
+            }
+        },
         "lifeCoverageType": {
             "type": "enum",
             "options": [
@@ -430,7 +497,16 @@
                 "Universal",
                 "IUL"
             ],
-            "isCustom": true
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
         },
         "lifeFaceAmountRequested": {
             "type": "currency",
@@ -607,7 +683,31 @@
                 "Individual",
                 "Other"
             ],
-            "isCustom": true
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "or",
+                        "value": [
+                            {
+                                "type": "equals",
+                                "attribute": "lineOfBusiness",
+                                "value": "Health"
+                            },
+                            {
+                                "type": "equals",
+                                "attribute": "lineOfBusiness",
+                                "value": "Medicare"
+                            },
+                            {
+                                "type": "equals",
+                                "attribute": "lineOfBusiness",
+                                "value": "Group Benefits"
+                            }
+                        ]
+                    }
+                ]
+            }
         },
         "healthBeneficiaryName": {
             "type": "varchar",

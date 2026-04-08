@@ -1,7 +1,8 @@
 [
   {"name": "policyNumber", "link": true},
-  {"name": "carrier"},
+  {"name": "lineOfBusiness"},
   {"name": "status"},
-  {"name": "premiumAmount"},
-  {"name": "expirationDate"}
+  {"name": "effectiveDate"},
+  {"name": "expirationDate"},
+  {"name": "premiumAmount"}
 ]

@@ -114,6 +114,34 @@
             "type": "text",
             "isCustom": true
         },
+        "bindDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "billingType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Direct Bill",
+                "Agency Bill",
+                "Direct Bill 100",
+                "Agency Bill 100"
+            ],
+            "isCustom": true
+        },
+        "policyTerm": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "Policy term in months (6 or 12)"
+        },
+        "cancellationDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "reinstatementDate": {
+            "type": "date",
+            "isCustom": true
+        },
         "momentumLastSynced": {
             "type": "datetime",
             "isCustom": true

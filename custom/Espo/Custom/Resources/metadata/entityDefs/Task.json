@@ -84,6 +84,16 @@
             "rowsMin": 2,
             "cutHeight": 80
         },
+        "momentumTaskId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "NowCerts task database_id — dedup key for bi-directional sync"
+        },
+        "momentumLastSynced": {
+            "type": "datetime",
+            "isCustom": true
+        },
         "taskSource": {
             "type": "enum",
             "options": [
@@ -141,5 +151,13 @@
             "priority",
             "assignedUserName"
         ]
+    },
+    "indexes": {
+        "momentumTaskId": {
+            "columns": [
+                "momentumTaskId"
+            ],
+            "unique": true
+        }
     }
 }

@@ -58,7 +58,7 @@
         "healthRiskClass": "Risk Class",
         "healthAssessmentNotes": "Health Risk Assessment Notes",
         "healthAssessmentDate": "Health Assessment Date",
-        "targetCarrier": "Quoting Carrier",
+        "targetCarrier": "Target Carrier",
         "effectiveDate": "Effective Date",
         "cRenewalDate": "Renewal Date",
         "gbEligibleEmployees": "Eligible Employees",
@@ -68,7 +68,18 @@
         "gbMedicalPlanType": "Medical Plan Type",
         "gbMedicalRenewalDate": "Medical Renewal Date",
         "gbEmployerContribution": "Employer Contribution",
-        "stage": "Stage"
+        "stage": "Stage",
+        "partAEffectiveDate": "Part A Effective Date",
+        "partBEffectiveDate": "Part B Effective Date",
+        "medicareHICN": "Medicare HICN",
+        "drInformation": "Doctor Information",
+        "rxInformation": "Rx Information",
+        "lifeCoverageType": "Life Coverage Type",
+        "medPlanType": "Medicare Plan Type",
+        "medCurrentCarrier": "Current Medicare Carrier",
+        "medCurrentPlan": "Current Plan",
+        "medAepSepDate": "AEP/SEP Date",
+        "medIrmaaApplies": "IRMAA Applies"
     },
     "options": {
         "stage": {

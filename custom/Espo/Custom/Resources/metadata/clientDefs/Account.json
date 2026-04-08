@@ -1,4 +1,7 @@
 {
+    "recordViews": {
+        "detail": "custom:views/account/record/detail"
+    },
     "views": {
         "list": "custom:views/account/list"
     },

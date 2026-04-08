@@ -9,7 +9,8 @@
         {"name": "emails"},
         {"name": "calls", "style": "warning"},
         {"name": "automated", "style": "info"},
-        {"name": "notes"}
+        {"name": "notes"},
+        {"name": "policyChanges", "style": "danger"}
     ],
     "boolFilterList": [
         "onlyMy"

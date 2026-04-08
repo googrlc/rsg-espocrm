@@ -1,6 +1,7 @@
 [
-  {"name": "name", "link": true, "width": 30},
-  {"name": "stage", "width": 20},
+  {"name": "name", "link": true, "width": 25},
+  {"name": "lineOfBusiness", "width": 15},
+  {"name": "stage", "width": 15},
   {"name": "expirationDate", "width": 15},
-  {"name": "urgency", "width": 15}
+  {"name": "urgency", "width": 12}
 ]

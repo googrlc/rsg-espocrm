@@ -17,7 +17,12 @@
                 "Manus AI",
                 "Note",
                 "Intel Run",
-                "Renewal Outreach"
+                "Renewal Outreach",
+                "Endorsement",
+                "Premium Change",
+                "Coverage Add",
+                "Coverage Remove",
+                "Cancellation"
             ],
             "required": true,
             "isCustom": true,
@@ -30,7 +35,12 @@
                 "Manus AI": "default",
                 "Note": "default",
                 "Intel Run": "info",
-                "Renewal Outreach": "primary"
+                "Renewal Outreach": "primary",
+                "Endorsement": "warning",
+                "Premium Change": "info",
+                "Coverage Add": "success",
+                "Coverage Remove": "danger",
+                "Cancellation": "danger"
             }
         },
         "classification": {
@@ -103,6 +113,111 @@
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "If filled, auto-creates a Task linked to this account on save"
+        },
+        "changeType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Endorsement",
+                "New Business",
+                "Cancellation",
+                "Reinstatement",
+                "Renewal"
+            ],
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "activityType",
+                        "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+                    }
+                ]
+            }
+        },
+        "oldPremium": {
+            "type": "currency",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "activityType",
+                        "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+                    }
+                ]
+            }
+        },
+        "newPremium": {
+            "type": "currency",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "activityType",
+                        "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+                    }
+                ]
+            }
+        },
+        "premiumDelta": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "activityType",
+                        "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+                    }
+                ]
+            }
+        },
+        "changeEffectiveDate": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "activityType",
+                        "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+                    }
+                ]
+            }
+        },
+        "changeSummary": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Human-readable summary of the policy change",
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "activityType",
+                        "value": ["Endorsement", "Premium Change", "Coverage Add", "Coverage Remove", "Cancellation"]
+                    }
+                ]
+            }
+        },
+        "momentumTransactionId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "NowCerts transaction ID — dedup key for n8n sync"
+        },
+        "source": {
+            "type": "enum",
+            "options": [
+                "",
+                "NowCerts Sync",
+                "Manual",
+                "n8n Automated"
+            ],
+            "default": "NowCerts Sync",
+            "isCustom": true
         },
         "account": {
             "type": "link",
@@ -201,6 +316,12 @@
                 "contactId",
                 "dateTime"
             ]
+        },
+        "momentumTransactionId": {
+            "columns": [
+                "momentumTransactionId"
+            ],
+            "unique": true
         }
     }
 }

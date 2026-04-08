@@ -10,11 +10,13 @@
     },
     "policies": {
         "index": 2,
-        "tab": 2
+        "tab": 2,
+        "noMaxHeight": true
     },
     "renewals": {
         "index": 3,
-        "tab": 2
+        "tab": 2,
+        "noMaxHeight": true
     },
     "activityLogs": {
         "index": 4,

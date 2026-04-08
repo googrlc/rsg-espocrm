@@ -1,0 +1,73 @@
+{
+    "fields": {
+        "name": "Subject",
+        "activityType": "Activity Type",
+        "classification": "Classification",
+        "dateTime": "Date/Time",
+        "direction": "Direction",
+        "duration": "Duration (min)",
+        "outcome": "Outcome",
+        "notes": "Notes",
+        "loggedBy": "Logged By",
+        "followUpTask": "Follow-Up Task",
+        "changeType": "Change Type",
+        "oldPremium": "Old Premium",
+        "newPremium": "New Premium",
+        "premiumDelta": "Premium Change",
+        "changeEffectiveDate": "Effective Date",
+        "changeSummary": "Change Summary",
+        "momentumTransactionId": "Transaction ID",
+        "source": "Source",
+        "account": "Account",
+        "contact": "Contact",
+        "policy": "Policy"
+    },
+    "links": {
+        "account": "Account",
+        "contact": "Contact",
+        "policy": "Policy"
+    },
+    "labels": {
+        "Create ActivityLog": "Log Activity"
+    },
+    "presetFilters": {
+        "all": "All",
+        "emails": "Emails",
+        "calls": "Calls",
+        "automated": "Automated",
+        "notes": "Notes",
+        "policyChanges": "Policy Changes"
+    },
+    "options": {
+        "activityType": {
+            "": "",
+            "Email Out": "Email Out",
+            "Email In": "Email In",
+            "Call": "Call",
+            "n8n Automated": "n8n Automated",
+            "Manus AI": "Manus AI",
+            "Note": "Note",
+            "Intel Run": "Intel Run",
+            "Renewal Outreach": "Renewal Outreach",
+            "Endorsement": "Endorsement",
+            "Premium Change": "Premium Change",
+            "Coverage Add": "Coverage Add",
+            "Coverage Remove": "Coverage Remove",
+            "Cancellation": "Cancellation"
+        },
+        "changeType": {
+            "": "",
+            "Endorsement": "Endorsement",
+            "New Business": "New Business",
+            "Cancellation": "Cancellation",
+            "Reinstatement": "Reinstatement",
+            "Renewal": "Renewal"
+        },
+        "source": {
+            "": "",
+            "NowCerts Sync": "NowCerts Sync",
+            "Manual": "Manual",
+            "n8n Automated": "n8n Automated"
+        }
+    }
+}

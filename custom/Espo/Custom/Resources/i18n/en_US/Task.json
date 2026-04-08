@@ -9,7 +9,14 @@
     },
     "fields": {
         "taskSource": "Source",
-        "linkedAccount": "Linked Account"
+        "linkedAccount": "Linked Account",
+        "momentumTaskId": "NowCerts Task ID",
+        "momentumLastSynced": "Last Synced",
+        "taskType": "Task Type",
+        "syncSource": "Sync Source",
+        "urgency": "Urgency",
+        "triageSummary": "Triage Summary",
+        "triageReason": "Triage Reason"
     },
     "links": {
         "linkedAccount": "Linked Account"

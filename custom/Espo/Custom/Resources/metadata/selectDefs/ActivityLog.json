@@ -4,6 +4,7 @@
         "emails": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Emails",
         "calls": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Calls",
         "automated": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Automated",
-        "notes": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Notes"
+        "notes": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Notes",
+        "policyChanges": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\PolicyChanges"
     }
 }
