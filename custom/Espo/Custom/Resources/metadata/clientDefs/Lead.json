@@ -8,6 +8,7 @@
     "boolFilterList": ["onlyMy"],
     "kanbanViewMode": true,
     "statusField": "status",
+    "kanbanCardView": "custom:views/lead/kanban-card",
     "dynamicLogic": {
         "panels": {
             "medicare": {

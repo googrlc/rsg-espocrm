@@ -537,6 +537,7 @@
     ],
     "kanbanViewMode": true,
     "statusField": "stage",
+    "kanbanCardView": "custom:views/opportunity/kanban-card",
     "views": {
         "detail": "custom:views/opportunity/record/detail-view"
     },

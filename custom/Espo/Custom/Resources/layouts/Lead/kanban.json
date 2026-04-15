@@ -1,6 +1,13 @@
 [
     {"name": "name"},
+    {"name": "accountName"},
+    {"name": "emailAddress"},
+    {"name": "phoneNumber"},
+    {"name": "estimatedPremium"},
+    {"name": "priority"},
+    {"name": "source"},
     {"name": "insuranceInterest"},
+    {"name": "status"},
     {"name": "xDate"},
     {"name": "assignedUser"}
 ]

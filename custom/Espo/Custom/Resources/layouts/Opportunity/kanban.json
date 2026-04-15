@@ -1,6 +1,11 @@
 [
+    {"name": "name"},
     {"name": "account"},
-    {"name": "lineOfBusiness"},
     {"name": "estimatedPremium"},
+    {"name": "priority"},
+    {"name": "lineOfBusiness"},
+    {"name": "businessType"},
+    {"name": "stage"},
+    {"name": "closeDate"},
     {"name": "assignedUser"}
 ]
