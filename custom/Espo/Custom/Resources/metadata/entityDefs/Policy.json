@@ -189,6 +189,7 @@
             "options": [
                 "",
                 "ACTIVE",
+                "UNKNOWN",
                 "RENEWAL WINDOW",
                 "CRITICAL RENEWAL",
                 "EXPIRED"
@@ -198,6 +199,7 @@
             "displayAsLabel": true,
             "style": {
                 "ACTIVE": "success",
+                "UNKNOWN": "info",
                 "RENEWAL WINDOW": "info",
                 "CRITICAL RENEWAL": "warning",
                 "EXPIRED": "danger"
