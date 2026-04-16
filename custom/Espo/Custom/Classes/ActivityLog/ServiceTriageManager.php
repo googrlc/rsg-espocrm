@@ -9,6 +9,8 @@ use Espo\ORM\EntityManager;
 
 class ServiceTriageManager
 {
+    private const AUTOMATION_KEY = 'activitylog:service-triage';
+
     public function __construct(
         private EntityManager $entityManager
     ) {}
@@ -20,13 +22,16 @@ class ServiceTriageManager
             return;
         }
 
-        $existingTask = $this->entityManager
+        $existingTaskList = $this->entityManager
             ->getRDBRepository('Task')
             ->where(['sourceActivityLogId' => $activityLog->getId()])
-            ->findOne();
+            ->find();
 
-        if ($existingTask) {
-            return;
+        foreach ($existingTaskList as $existingTask) {
+            $automationKey = trim((string) ($existingTask->get('automationKey') ?? ''));
+            if ($automationKey === '' || $automationKey === self::AUTOMATION_KEY) {
+                return;
+            }
         }
 
         $accountId = $activityLog->get('accountId');
@@ -70,6 +75,7 @@ class ServiceTriageManager
             'parentName' => $parentName,
             'dateEndDate' => $this->calculateDueDate($activityLog, $slaDays),
             'sourceActivityLogId' => $activityLog->getId(),
+            'automationKey' => self::AUTOMATION_KEY,
         ]);
 
         $this->entityManager->saveEntity($task);

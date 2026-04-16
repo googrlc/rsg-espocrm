@@ -6,7 +6,6 @@ use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
-use Espo\ORM\Repository\Option\SaveOptions;
 
 class PolicyAccountSync
 {
@@ -15,20 +14,6 @@ class PolicyAccountSync
         'Up for Renewal',
         'Renewing',
         'Renewed',
-    ];
-
-    private const EXPIRED_STATUSES = [
-        'Expired',
-        'Cancelled',
-        'Flat Cancel',
-        'Pending Cancel',
-        'Non-Renewed',
-        'Lapsed',
-    ];
-
-    private const RENEWAL_PENDING_STATUSES = [
-        'Up for Renewal',
-        'Renewing',
     ];
 
     public function __construct(
@@ -126,7 +111,7 @@ class PolicyAccountSync
         $activePolicyCount = 0;
         $nextExpiration = null;
         $nextExpirationLob = null;
-        $hasAtRiskPolicy = false;
+        $nextExpirationCarrier = null;
 
         foreach ($policyList as $policy) {
             $status = (string) ($policy->get('status') ?? '');
@@ -140,38 +125,22 @@ class PolicyAccountSync
                 if ($expirationDate && (!$nextExpiration || $expirationDate < $nextExpiration)) {
                     $nextExpiration = $expirationDate;
                     $nextExpirationLob = $policy->get('lineOfBusiness');
+                    $nextExpirationCarrier = $policy->get('carrier');
                 }
-            }
-
-            if (
-                !$hasAtRiskPolicy &&
-                $expirationDate &&
-                in_array($status, self::EXPIRED_STATUSES, true) &&
-                $expirationDate <= $today->modify('-10 days') &&
-                !$this->hasSuccessfulRenewal($policy->getId())
-            ) {
-                $hasAtRiskPolicy = true;
             }
         }
 
         $account->set('totalActivePremium', round($totalPremium, 2));
         $account->set('activePolicyCount', $activePolicyCount);
+        $account->set('policyCountActive', $activePolicyCount);
         $account->set('nextXDate', $nextExpiration?->format('Y-m-d'));
         $account->set('nextXDateLob', $nextExpirationLob);
-        $account->set('accountStatus', $this->determineAccountStatus($policyList, $activePolicyCount, $hasAtRiskPolicy));
+        $account->set('nextRenewalDate', $nextExpiration?->format('Y-m-d'));
+        $account->set('nextRenewalLob', $nextExpirationLob);
+        $account->set('nextRenewalCarrier', $nextExpirationCarrier);
+        $account->set('daysToRenewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
 
         $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
-    }
-
-    private function hasSuccessfulRenewal(string $policyId): bool
-    {
-        return (bool) $this->entityManager
-            ->getRDBRepository('Renewal')
-            ->where([
-                'policyId' => $policyId,
-                'stage' => 'Renewed - Won',
-            ])
-            ->findOne();
     }
 
     private function calculateDaysRemaining(?string $expirationDate): ?int
@@ -195,24 +164,5 @@ class PolicyAccountSync
         $numericRate = (float) $rate;
 
         return $numericRate > 1 ? $numericRate / 100 : $numericRate;
-    }
-
-    private function determineAccountStatus(iterable $policyList, int $activePolicyCount, bool $hasAtRiskPolicy): string
-    {
-        if ($hasAtRiskPolicy) {
-            return 'Urgent';
-        }
-
-        foreach ($policyList as $policy) {
-            if (in_array((string) ($policy->get('status') ?? ''), self::RENEWAL_PENDING_STATUSES, true)) {
-                return 'Renewing';
-            }
-        }
-
-        if ($activePolicyCount > 0) {
-            return 'Active';
-        }
-
-        return 'At Risk';
     }
 }

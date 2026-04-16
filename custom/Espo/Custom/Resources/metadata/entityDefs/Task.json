@@ -104,6 +104,16 @@
             "readOnly": true,
             "tooltipText": "Source ActivityLog ID for manual service triage deduplication"
         },
+        "automationKey": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "readOnly": true,
+            "tooltipText": "Automation key for deduping generated tasks"
+        },
         "taskSource": {
             "type": "enum",
             "options": [
@@ -172,6 +182,11 @@
         "sourceActivityLogId": {
             "columns": [
                 "sourceActivityLogId"
+            ]
+        },
+        "automationKey": {
+            "columns": [
+                "automationKey"
             ]
         }
     }
