@@ -21,18 +21,38 @@
                 "required": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Lost"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Lost"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Non-Renewal / Lost"
+                                }
+                            ]
                         }
                     ]
                 },
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Lost"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Lost"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Non-Renewal / Lost"
+                                }
+                            ]
                         }
                     ]
                 }
