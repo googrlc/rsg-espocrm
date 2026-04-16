@@ -5,14 +5,23 @@ namespace Espo\Custom\Hooks\Policy;
 use DateInterval;
 use DateTimeImmutable;
 use Espo\Core\Hook\Hook\AfterSave;
+use Espo\Custom\Classes\Renewal\RenewalOrchestrator;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 use Espo\ORM\Repository\Option\SaveOptions;
 
 class ActivateAutomation implements AfterSave
 {
+    private const LIVE_POLICY_STATUSES = [
+        'Active',
+        'Up for Renewal',
+        'Renewing',
+        'Renewed',
+    ];
+
     public function __construct(
-        private EntityManager $entityManager
+        private EntityManager $entityManager,
+        private RenewalOrchestrator $renewalOrchestrator
     ) {}
 
     public function afterSave(Entity $entity, SaveOptions $options): void
@@ -20,12 +29,14 @@ class ActivateAutomation implements AfterSave
         $status = (string) ($entity->get('status') ?? '');
         $fetchedStatus = (string) ($entity->getFetched('status') ?? '');
 
-        if ($status !== 'Active' || $fetchedStatus === 'Active') {
-            return;
+        if (
+            in_array($status, self::LIVE_POLICY_STATUSES, true) &&
+            !in_array($fetchedStatus, self::LIVE_POLICY_STATUSES, true)
+        ) {
+            $this->createCommissionIfMissing($entity);
         }
 
-        $this->createCommissionIfMissing($entity);
-        $this->createRenewalIfMissing($entity);
+        $this->renewalOrchestrator->syncFromPolicy($entity);
     }
 
     private function createCommissionIfMissing(Entity $policy): void
@@ -74,56 +85,11 @@ class ActivateAutomation implements AfterSave
 
         $this->entityManager->saveEntity($commission);
     }
-
-    private function createRenewalIfMissing(Entity $policy): void
-    {
-        $existing = $this->entityManager
-            ->getRDBRepository('Renewal')
-            ->where(['policyId' => $policy->getId()])
-            ->findOne();
-
-        if ($existing) {
-            return;
-        }
-
-        $expirationDate = $policy->get('expirationDate');
-
-        $renewal = $this->entityManager->getNewEntity('Renewal');
-        $renewal->set([
-            'name' => $this->buildRenewalName($policy),
-            'stage' => 'Identified',
-            'policyId' => $policy->getId(),
-            'policyName' => $policy->get('name'),
-            'accountId' => $policy->get('accountId'),
-            'accountName' => $policy->get('accountName'),
-            'contactId' => $policy->get('contactId'),
-            'contactName' => $policy->get('contactName'),
-            'assignedUserId' => $policy->get('assignedUserId'),
-            'assignedUserName' => $policy->get('assignedUserName'),
-            'expirationDate' => $expirationDate,
-            'renewalEffectiveDate' => $expirationDate,
-            'currentPremium' => $policy->get('premiumAmount'),
-            'lineOfBusiness' => $this->normalizeLineOfBusiness($policy->get('lineOfBusiness')),
-            'carrier' => $policy->get('carrier'),
-            'commissionRate' => $this->normalizeRate($policy->get('commissionRate')),
-        ]);
-
-        $this->entityManager->saveEntity($renewal);
-    }
-
     private function buildCommissionName(Entity $policy): string
     {
         $accountName = (string) ($policy->get('accountName') ?? 'Client');
 
         return $accountName . ' - Commission';
-    }
-
-    private function buildRenewalName(Entity $policy): string
-    {
-        $accountName = (string) ($policy->get('accountName') ?? 'Account');
-        $lineOfBusiness = (string) ($policy->get('lineOfBusiness') ?? $policy->get('businessType') ?? 'Policy');
-
-        return $accountName . ' - ' . $lineOfBusiness . ' Renewal';
     }
 
     private function normalizeRate(mixed $rate): float

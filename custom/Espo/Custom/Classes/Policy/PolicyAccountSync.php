@@ -82,6 +82,11 @@ class PolicyAccountSync
         $policy->set('commissionAmount', round($premiumAmount * $normalizedRate, 2));
 
         $status = (string) ($policy->get('status') ?? '');
+        if ($status === 'Active' && $daysRemaining !== null && $daysRemaining <= 60) {
+            $status = 'Up for Renewal';
+            $policy->set('status', $status);
+        }
+
         $policy->set(
             'premiumAtRisk',
             in_array($status, self::ACTIVE_STATUSES, true) ? $premiumAmount : 0.0
