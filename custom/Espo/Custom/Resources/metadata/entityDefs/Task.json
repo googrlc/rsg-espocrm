@@ -94,6 +94,16 @@
             "type": "datetime",
             "isCustom": true
         },
+        "sourceActivityLogId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "readOnly": true,
+            "tooltipText": "Source ActivityLog ID for manual service triage deduplication"
+        },
         "taskSource": {
             "type": "enum",
             "options": [
@@ -158,6 +168,11 @@
                 "momentumTaskId"
             ],
             "unique": true
+        },
+        "sourceActivityLogId": {
+            "columns": [
+                "sourceActivityLogId"
+            ]
         }
     }
 }
