@@ -14,6 +14,7 @@ require dirname(__DIR__, 2) . '/bootstrap.php';
  */
 
 $app = new Application();
+$app->setupSystemUser();
 $entityManager = $app->getContainer()->get('entityManager');
 
 $templates = [
