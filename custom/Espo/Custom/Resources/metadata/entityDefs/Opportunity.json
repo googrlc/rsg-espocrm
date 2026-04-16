@@ -1003,9 +1003,19 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Won"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Won"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Bound / Renewed"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -1014,9 +1024,19 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Won"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Won"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Bound / Renewed"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -1025,9 +1045,19 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Won"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Won"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Bound / Renewed"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -1036,9 +1066,19 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Won"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Won"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Bound / Renewed"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -1047,9 +1087,19 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Won"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Won"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Bound / Renewed"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -1058,9 +1108,19 @@
                 "visible": {
                     "conditionGroup": [
                         {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Closed Won"
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Closed Won"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "stage",
+                                    "value": "Bound / Renewed"
+                                }
+                            ]
                         }
                     ]
                 }

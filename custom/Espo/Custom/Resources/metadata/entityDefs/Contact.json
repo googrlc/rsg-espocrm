@@ -1,5 +1,11 @@
 {
     "fields": {
+        "profileSummary": {
+            "type": "text",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-generated snapshot from policies + client since year — does not replace Description"
+        },
         "dateOfBirth": {
             "type": "date",
             "isCustom": true

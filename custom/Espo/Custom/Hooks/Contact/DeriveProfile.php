@@ -32,7 +32,7 @@ class DeriveProfile implements BeforeSave
         $createdYear = $createdAt ? (new DateTimeImmutable($createdAt))->format('Y') : (new DateTimeImmutable())->format('Y');
 
         $entity->set(
-            'description',
+            'profileSummary',
             "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}"
         );
 

@@ -13,30 +13,8 @@
     "boolFilterList": [
         "onlyMy"
     ],
-    "views": {
-        "detail": "custom:views/contact/record/detail-view"
-    },
     "sidePanels": {
         "detail": [
-            {
-                "name": "recordInfo",
-                "label": "Record Info",
-                "view": "custom:views/contact/record/panels/record-info",
-                "order": 1,
-                "sticked": true
-            },
-            {
-                "name": "googleDrive",
-                "label": "Google Drive",
-                "view": "custom:views/widgets/google-drive-contact",
-                "order": 2
-            },
-            {
-                "name": "crossSellFlags",
-                "label": "Cross-Sell Flags",
-                "view": "custom:views/contact/record/panels/cross-sell-flags",
-                "order": 3
-            },
             {
                 "name": "activities",
                 "label": "Activities",
@@ -44,7 +22,7 @@
                 "aclScope": "Activities",
                 "orderBy": "dateStart",
                 "orderDirection": "desc",
-                "order": 4
+                "order": 1
             },
             {
                 "name": "history",
@@ -53,7 +31,7 @@
                 "aclScope": "Activities",
                 "orderBy": "dateStart",
                 "orderDirection": "desc",
-                "order": 5
+                "order": 2
             }
         ]
     },
@@ -67,8 +45,7 @@
             "createButton": true,
             "selectButton": true,
             "order": 1,
-            "label": "Personal Policies",
-            "view": "custom:views/contact/record/panels/personal-policies"
+            "label": "Personal Policies"
         },
         "tasks": {
             "orderBy": "dateStart",

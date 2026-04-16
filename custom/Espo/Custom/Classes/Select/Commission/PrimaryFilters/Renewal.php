@@ -8,6 +8,6 @@ class Renewal implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["businessType" => "Renewal"]);
+        $queryBuilder->where(['commissionType' => 'Renewal']);
     }
 }

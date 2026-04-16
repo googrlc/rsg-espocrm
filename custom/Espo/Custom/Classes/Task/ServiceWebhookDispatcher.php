@@ -5,12 +5,14 @@ namespace Espo\Custom\Classes\Task;
 use Espo\Core\Utils\Config;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
+use Psr\Log\LoggerInterface;
 
 class ServiceWebhookDispatcher
 {
     private const STATUS_EVENT_MAP = [
         'In Progress' => 'service.task_started',
         'Waiting on Client' => 'service.request_to_client',
+        'Waiting on Carrier' => 'service.waiting_on_carrier',
         'Completed' => 'service.task_completed',
     ];
 
@@ -23,11 +25,15 @@ class ServiceWebhookDispatcher
         'Onboarding',
         'Admin',
         'Other',
+        'Renewal',
+        'New Business',
+        'Commission',
     ];
 
     public function __construct(
         private Config $config,
-        private EntityManager $entityManager
+        private EntityManager $entityManager,
+        private LoggerInterface $log
     ) {}
 
     public function dispatch(Entity $task): void
@@ -65,6 +71,7 @@ class ServiceWebhookDispatcher
         $statusSpecificKey = match ($status) {
             'In Progress' => 'serviceStartedWebhookUrl',
             'Waiting on Client' => 'serviceRequestWebhookUrl',
+            'Waiting on Carrier' => 'serviceCarrierWebhookUrl',
             'Completed' => 'serviceCompletionWebhookUrl',
             default => null,
         };
@@ -140,6 +147,13 @@ class ServiceWebhookDispatcher
             $payload['request'] = [
                 'message' => 'Task moved to Waiting on Client in EspoCRM.',
                 'requestedAt' => $this->normalizeDateTime($task->get('modifiedAt')) ?? gmdate('c'),
+            ];
+        }
+
+        if ($eventType === 'service.waiting_on_carrier') {
+            $payload['carrier'] = [
+                'message' => 'Task moved to Waiting on Carrier in EspoCRM.',
+                'waitingAt' => $this->normalizeDateTime($task->get('modifiedAt')) ?? gmdate('c'),
             ];
         }
 
@@ -229,8 +243,38 @@ class ServiceWebhookDispatcher
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-        curl_exec($ch);
+
+        $responseBody = curl_exec($ch);
+        $curlErrNo = curl_errno($ch);
+        $curlError = curl_error($ch);
+        $httpCode = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $primaryIp = (string) curl_getinfo($ch, CURLINFO_PRIMARY_IP);
         curl_close($ch);
+
+        if ($curlErrNo !== 0) {
+            $this->log->warning('Service webhook curl error: {event} HTTP target={url} errno={errno} error={error}', [
+                'event' => $eventType,
+                'url' => $webhookUrl,
+                'errno' => $curlErrNo,
+                'error' => $curlError,
+            ]);
+
+            return;
+        }
+
+        if ($httpCode < 200 || $httpCode >= 300) {
+            $preview = is_string($responseBody) ? substr($responseBody, 0, 500) : '';
+            $this->log->warning(
+                'Service webhook non-success response: {event} HTTP {code} url={url} ip={ip} body={body}',
+                [
+                    'event' => $eventType,
+                    'code' => $httpCode,
+                    'url' => $webhookUrl,
+                    'ip' => $primaryIp,
+                    'body' => $preview,
+                ]
+            );
+        }
     }
 
     private function normalizeDateTime(mixed $value): ?string

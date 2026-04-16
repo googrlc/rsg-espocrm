@@ -5,6 +5,7 @@ namespace Espo\Custom\Classes\Renewal;
 use DateInterval;
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
+use Espo\Custom\Classes\Task\TaskPriorityMapper;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -234,6 +235,7 @@ class RenewalOrchestrator
             'assignedUserName' => $renewal->get('assignedUserName'),
             'teamsIds' => $renewal->get('teamsIds') ?? [],
             'urgency' => $this->mapTaskUrgency($expirationDate),
+            'priority' => TaskPriorityMapper::fromUrgency($this->mapTaskUrgency($expirationDate)),
             'dateEndDate' => $this->calculateInitialTaskDueDate($expirationDate),
             'description' => $this->buildTaskDescription($policy),
         ]);

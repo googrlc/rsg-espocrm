@@ -10,6 +10,7 @@ class ServiceActivityLogger
     private const STATUS_ACTIVITY_MAP = [
         'In Progress' => 'task_started',
         'Waiting on Client' => 'request_sent',
+        'Waiting on Carrier' => 'carrier_waiting',
         'Completed' => 'request_completed',
     ];
 
@@ -22,6 +23,9 @@ class ServiceActivityLogger
         'Onboarding',
         'Admin',
         'Other',
+        'Renewal',
+        'New Business',
+        'Commission',
     ];
 
     public function __construct(
@@ -86,6 +90,7 @@ class ServiceActivityLogger
         return match ($activityKey) {
             'task_started' => 'Service Task Started: ' . $taskName,
             'request_sent' => 'Service Request Sent: ' . $taskName,
+            'carrier_waiting' => 'Waiting on Carrier: ' . $taskName,
             'request_completed' => 'Service Request Completed: ' . $taskName,
             default => 'Service Activity: ' . $taskName,
         };
@@ -104,6 +109,7 @@ class ServiceActivityLogger
         $lines[] = match ($activityKey) {
             'task_started' => 'Service work started from task status change.',
             'request_sent' => 'Service request sent to client from task status change.',
+            'carrier_waiting' => 'Task moved to Waiting on Carrier from task status change.',
             'request_completed' => 'Completion acknowledgement sent to client from task status change.',
             default => 'Service lifecycle event triggered from task status change.',
         };
@@ -137,6 +143,7 @@ class ServiceActivityLogger
     {
         return match ($activityKey) {
             'task_started' => 'Note',
+            'carrier_waiting' => 'Note',
             default => 'Email Out',
         };
     }
@@ -147,6 +154,9 @@ class ServiceActivityLogger
             'Claims' => 'Claim related',
             'Onboarding' => 'Onboarding',
             'Policy Change' => 'Coverage question',
+            'Renewal' => 'Renewal inquiry',
+            'New Business' => 'Quote request',
+            'Commission' => 'Payment / billing',
             default => 'General correspondence',
         };
     }

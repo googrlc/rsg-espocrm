@@ -30,8 +30,5 @@
             "name": "waitingOnCarrier"
         }
     ],
-    "views": {
-        "detail": "custom:views/task/record/detail-view"
-    },
     "relationshipPanels": {}
 }
