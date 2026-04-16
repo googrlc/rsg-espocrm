@@ -1,6 +1,0 @@
-{
-    "primaryFilterClassNameMap": {
-        "open": "Espo\\Custom\\Classes\\Select\\Case_\\PrimaryFilters\\Open",
-        "closed": "Espo\\Custom\\Classes\\Select\\Case_\\PrimaryFilters\\Closed"
-    }
-}

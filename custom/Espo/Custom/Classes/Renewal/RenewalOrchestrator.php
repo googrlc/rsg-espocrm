@@ -238,6 +238,7 @@ class RenewalOrchestrator
             'priority' => TaskPriorityMapper::fromUrgency($this->mapTaskUrgency($expirationDate)),
             'dateEndDate' => $this->calculateInitialTaskDueDate($expirationDate),
             'description' => $this->buildTaskDescription($policy),
+            'automationKey' => 'renewal:initial-review',
         ]);
 
         $this->entityManager->saveEntity($task, [SaveOption::SILENT => true]);

@@ -127,6 +127,15 @@
             "type": "date",
             "isCustom": true,
             "tooltipText": "Expiration date of current policy — used for nurture loop automation"
+        },
+        "createdOpportunityId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "isCustom": true,
+            "readOnly": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true
         }
     },
     "convertFields": {

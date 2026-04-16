@@ -61,13 +61,37 @@ class SyncConvertedRecords implements AfterSave
             $name = 'New Opportunity';
         }
 
+        $lineOfBusiness = $this->resolveOpportunityLineOfBusiness($lead);
+        $existingOpportunity = $this->entityManager
+            ->getRDBRepository('Opportunity')
+            ->where([
+                'accountId' => $accountId,
+                'lineOfBusiness' => $lineOfBusiness,
+                'businessType' => 'New Business',
+                'stage!=' => ['Closed Won', 'Closed Lost', 'Bound / Renewed', 'Non-Renewal / Lost'],
+            ])
+            ->findOne();
+
+        if ($existingOpportunity) {
+            $lead->set('createdOpportunityId', $existingOpportunity->getId());
+            $this->entityManager->saveEntity($lead, [SaveOption::SILENT => true]);
+
+            return;
+        }
+
         $opportunity = $this->entityManager->getNewEntity('Opportunity');
         $opportunity->set([
             'name' => $name,
             'accountId' => $accountId,
             'accountName' => $account->get('name'),
             'stage' => 'Discovery',
+            'lineOfBusiness' => $lineOfBusiness,
+            'businessType' => 'New Business',
             'leadSource' => $lead->get('source') ?: $lead->get('campaignName'),
+            'currentCarrier' => $lead->get('currentCarrier'),
+            'estimatedPremium' => $lead->get('estimatedPremium'),
+            'priority' => $lead->get('priority'),
+            'description' => $lead->get('description'),
             'assignedUserId' => $lead->get('assignedUserId'),
             'assignedUserName' => $lead->get('assignedUserName'),
         ]);
@@ -76,6 +100,16 @@ class SyncConvertedRecords implements AfterSave
 
         $lead->set('createdOpportunityId', $opportunity->getId());
         $this->entityManager->saveEntity($lead, [SaveOption::SILENT => true]);
+    }
+
+    private function resolveOpportunityLineOfBusiness(Entity $lead): string
+    {
+        $interest = trim((string) ($lead->get('insuranceInterest') ?? ''));
+
+        return match ($interest) {
+            '', 'Multiple' => 'Other',
+            default => $interest,
+        };
     }
 
     private function syncContact(Entity $lead, Entity $contact, ?string $accountId): void

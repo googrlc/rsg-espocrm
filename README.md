@@ -21,7 +21,9 @@ Set these in EspoCRM config to enable outbound service-task webhooks:
 - `serviceCarrierWebhookUrl` — optional override for tasks moved to `Waiting on Carrier`
 - `serviceWebhookSecret` — optional shared secret sent in `X-Service-Webhook-Secret`
 
-Task types that participate in this pipeline include `Client Service`, `Policy Change`, `Claims`, `Follow Up`, `Onboarding`, `Admin`, `Other`, plus `Renewal`, `New Business`, and `Commission`.
+Task types that participate in this pipeline include `Client Service`, `Policy Change`, `Claims`, `Follow Up`, `Onboarding`, `Admin`, `Other`, plus client-facing `Renewal`, `New Business`, and `Commission` tasks.
+
+Automated account playbooks and the system-generated initial renewal review task are excluded so internal workflow items do not trigger client-facing lifecycle webhooks.
 
 The webhook fires for those task types when status changes to `In Progress`, `Waiting on Client`, `Waiting on Carrier`, or `Completed` (falls back to `serviceWebhookUrl` when a status-specific URL is unset).
 Those same status changes also create an `ActivityLog` record on the client in EspoCRM, so the account timeline has an internal audit trail even if n8n is only handling outbound email.

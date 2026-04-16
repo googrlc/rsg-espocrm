@@ -1,7 +1,0 @@
-{
-    "RecalculateAccountScores": {
-        "name": "Recalculate Account Scores",
-        "isSystem": true,
-        "scheduling": "0 2 * * *"
-    }
-}

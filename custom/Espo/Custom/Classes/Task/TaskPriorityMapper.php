@@ -12,7 +12,8 @@ class TaskPriorityMapper
         $u = strtolower(trim((string) $urgency));
 
         return match ($u) {
-            'urgent', 'critical' => 'High',
+            'urgent' => 'Urgent',
+            'critical' => 'High',
             'high' => 'High',
             'normal' => 'Normal',
             'low' => 'Low',

@@ -1,5 +1,0 @@
-{
-    "primaryFilterClassNameMap": {
-        "prospects": "Espo\\Custom\\Classes\\Select\\Account\\PrimaryFilters\\Prospects"
-    }
-}

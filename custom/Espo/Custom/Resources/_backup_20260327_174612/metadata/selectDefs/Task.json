@@ -1,6 +1,0 @@
-{
-    "primaryFilterClassNameMap": {
-        "assignedToMe": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\AssignedToMe",
-        "assignedToGretchen": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\AssignedToGretchen"
-    }
-}

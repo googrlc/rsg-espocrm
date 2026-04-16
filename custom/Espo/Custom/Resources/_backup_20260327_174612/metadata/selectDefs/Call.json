@@ -1,6 +1,0 @@
-{
-    "primaryFilterClassNameMap": {
-        "planned": "Espo\\Custom\\Classes\\Select\\Call\\PrimaryFilters\\Planned",
-        "held": "Espo\\Custom\\Classes\\Select\\Call\\PrimaryFilters\\Held"
-    }
-}

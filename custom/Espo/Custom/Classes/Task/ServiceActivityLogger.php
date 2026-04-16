@@ -14,20 +14,6 @@ class ServiceActivityLogger
         'Completed' => 'request_completed',
     ];
 
-    private const SERVICE_TASK_TYPES = [
-        '',
-        'Client Service',
-        'Policy Change',
-        'Claims',
-        'Follow Up',
-        'Onboarding',
-        'Admin',
-        'Other',
-        'Renewal',
-        'New Business',
-        'Commission',
-    ];
-
     public function __construct(
         private EntityManager $entityManager
     ) {}
@@ -78,9 +64,7 @@ class ServiceActivityLogger
 
     private function isServiceTask(Entity $task): bool
     {
-        $taskType = trim((string) ($task->get('taskType') ?? ''));
-
-        return in_array($taskType, self::SERVICE_TASK_TYPES, true);
+        return ServiceLifecycleTaskChecker::isEligible($task);
     }
 
     private function buildName(Entity $task, string $activityKey): string
