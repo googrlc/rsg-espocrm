@@ -1,4 +1,5 @@
 [
+    {"name": "urgencyIcon"},
     {"name": "lineOfBusiness"},
     {"name": "carrier"},
     {"name": "premiumAmount"},

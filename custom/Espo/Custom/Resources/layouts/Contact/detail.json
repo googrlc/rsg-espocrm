@@ -1,11 +1,13 @@
 [
   {
-    "label": "",
+    "label": "Relationship Snapshot",
     "name": "contactHeader",
     "rows": [
       [{"name": "name"}, {"name": "account"}],
+      [{"name": "contactType"}, {"name": "relationshipToAccount"}],
+      [{"name": "dateOfBirth"}, {"name": "daysUntil65"}],
       [{"name": "emailAddress"}, {"name": "phoneNumber"}],
-      [{"name": "dateOfBirth"}, {"name": "title"}],
+      [{"name": "originalLeadSource"}, {"name": "title"}],
       [{"name": "address"}, false]
     ]
   },

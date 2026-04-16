@@ -3,16 +3,49 @@
         "rows": [
             [
                 {
-                    "name": "name"
-                },
-                false
-            ],
-            [
-                {
                     "name": "accountStatus"
                 },
                 {
+                    "name": "totalActivePremium"
+                }
+            ],
+            [
+                {
+                    "name": "scoreTier"
+                },
+                {
+                    "name": "activePolicyCount"
+                }
+            ],
+            [
+                {
+                    "name": "nextXDate"
+                },
+                {
+                    "name": "nextXDateLob"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "coverageOverview",
+        "label": "Coverage Overview"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
                     "name": "accountType"
+                }
+            ],
+            [
+                {
+                    "name": "assignedUser"
+                },
+                {
+                    "name": "lastContactDate"
                 }
             ],
             [
@@ -32,30 +65,7 @@
         ],
         "style": "default",
         "name": "accountInfo",
-        "label": "Account Information"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "totalActivePremium"
-                },
-                {
-                    "name": "activePolicyCount"
-                }
-            ],
-            [
-                {
-                    "name": "nextXDate"
-                },
-                {
-                    "name": "nextXDateLob"
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "keyMetrics",
-        "label": "Key Metrics"
+        "label": "Client Snapshot"
     },
     {
         "rows": [],
@@ -811,6 +821,6 @@
         ],
         "style": "default",
         "name": "detailsInternal",
-        "label": "Internal"
+        "label": "External Documents"
     }
 ]

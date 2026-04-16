@@ -1,5 +1,9 @@
 {
     "fields": {
+        "contactType": "Type",
+        "relationshipToAccount": "Relationship to Account",
+        "originalLeadSource": "Original Lead Source",
+        "daysUntil65": "Days Until 65",
         "contactDriveFolderUrl": "Drive Folder URL",
         "medicareEligible": "Medicare Eligible",
         "medicarePartB": "Medicare Part B",
@@ -14,6 +18,22 @@
         "lifeAnnualPremium": "Annual Premium",
         "lifeBeneficiaryOnFile": "Beneficiary On File",
         "lifeReviewDate": "Life Review Date"
+    },
+    "options": {
+        "contactType": {
+            "": "",
+            "Client": "Client",
+            "Prospect": "Prospect",
+            "Spouse": "Spouse",
+            "Dependent": "Dependent",
+            "Business Owner": "Business Owner"
+        },
+        "relationshipToAccount": {
+            "": "",
+            "Head of Household": "Head of Household",
+            "Secondary": "Secondary",
+            "Employee": "Employee"
+        }
     },
     "labels": {
         "Personal Policies": "Personal Policies"

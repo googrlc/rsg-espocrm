@@ -36,7 +36,8 @@
         "calls": "Calls",
         "automated": "Automated",
         "notes": "Notes",
-        "policyChanges": "Policy Changes"
+        "policyChanges": "Policy Changes",
+        "overnightPolicyChanges": "Overnight Policy Changes"
     },
     "options": {
         "activityType": {

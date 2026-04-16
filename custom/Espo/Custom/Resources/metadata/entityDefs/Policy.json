@@ -50,6 +50,7 @@
             ],
             "default": "Active",
             "isCustom": true,
+            "audited": true,
             "style": {
                 "Active": "success",
                 "Up for Renewal": "warning",
@@ -91,7 +92,8 @@
         },
         "commissionAmount": {
             "type": "currency",
-            "isCustom": true
+            "isCustom": true,
+            "readOnly": true
         },
         "coverageAmount": {
             "type": "currency",
@@ -138,6 +140,10 @@
             "type": "date",
             "isCustom": true
         },
+        "cancellationReason": {
+            "type": "text",
+            "isCustom": true
+        },
         "reinstatementDate": {
             "type": "date",
             "isCustom": true
@@ -169,6 +175,53 @@
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync"
+        },
+        "carrierAccount": {
+            "type": "link"
+        },
+        "daysRemaining": {
+            "type": "int",
+            "isCustom": true,
+            "readOnly": true
+        },
+        "statusLabel": {
+            "type": "enum",
+            "options": [
+                "",
+                "ACTIVE",
+                "RENEWAL WINDOW",
+                "CRITICAL RENEWAL",
+                "EXPIRED"
+            ],
+            "isCustom": true,
+            "readOnly": true,
+            "displayAsLabel": true,
+            "style": {
+                "ACTIVE": "success",
+                "RENEWAL WINDOW": "info",
+                "CRITICAL RENEWAL": "warning",
+                "EXPIRED": "danger"
+            }
+        },
+        "urgencyIcon": {
+            "type": "varchar",
+            "maxLength": 8,
+            "isCustom": true,
+            "readOnly": true
+        },
+        "carrierPortalUrl": {
+            "type": "url",
+            "isCustom": true,
+            "readOnly": true
+        },
+        "vin": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "propertyAddress": {
+            "type": "text",
+            "isCustom": true
         },
         "account": {
             "type": "link"
@@ -280,6 +333,12 @@
             "type": "belongsTo",
             "entity": "Account",
             "foreign": "policies",
+            "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "carrierPolicies",
             "isCustom": true
         },
         "contact": {

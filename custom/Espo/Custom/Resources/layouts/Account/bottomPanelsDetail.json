@@ -5,11 +5,11 @@
         "tab": 0
     },
     "contacts": {
-        "index": 1,
+        "index": 2,
         "tab": 1
     },
     "policies": {
-        "index": 2,
+        "index": 1,
         "tab": 2,
         "noMaxHeight": true
     },

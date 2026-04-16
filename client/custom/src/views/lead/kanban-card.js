@@ -36,25 +36,23 @@ Espo.define('custom:views/lead/kanban-card', ['views/record/kanban'], function (
                 priorityLabel = 'COLD';
             }
 
-            // Due date color coding
-            const xDate = this.model.get('xDate');
+            // Countdown label for T65/new lead timing.
+            const countdownDate = this.model.get('targetDate') || this.model.get('xDate');
             let dueDateClass = 'due-date-upcoming';
             let dueDateLabel = '';
-            if (xDate) {
+            if (countdownDate) {
                 const now = new Date();
-                const due = new Date(xDate);
+                const due = new Date(countdownDate);
                 const diffDays = Math.floor((due - now) / (1000 * 60 * 60 * 24));
                 
                 if (diffDays < 0) {
                     dueDateClass = 'due-date-overdue';
-                    dueDateLabel = `Overdue (${Math.abs(diffDays)}d)`;
+                    dueDateLabel = `${Math.abs(diffDays)} Days Past Target`;
                 } else if (diffDays === 0) {
                     dueDateClass = 'due-date-today';
                     dueDateLabel = 'Today';
-                } else if (diffDays <= 7) {
-                    dueDateLabel = `${diffDays}d`;
                 } else {
-                    dueDateLabel = due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    dueDateLabel = `${diffDays} Days Remaining`;
                 }
             }
 

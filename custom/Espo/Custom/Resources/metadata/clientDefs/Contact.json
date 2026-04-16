@@ -70,6 +70,22 @@
             "label": "Personal Policies",
             "view": "custom:views/contact/record/panels/personal-policies"
         },
+        "tasks": {
+            "orderBy": "dateStart",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 2,
+            "label": "Tasks"
+        },
+        "cases": {
+            "orderBy": "createdAt",
+            "orderDirection": "desc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 3,
+            "label": "Cases"
+        },
         "commissions": {
             "orderBy": "createdAt",
             "orderDirection": "desc",

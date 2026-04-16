@@ -129,6 +129,11 @@
             "tooltipText": "Expiration date of current policy — used for nurture loop automation"
         }
     },
+    "convertFields": {
+        "Contact": {
+            "originalLeadSource": "source"
+        }
+    },
     "collection": {
         "orderBy": "name",
         "order": "asc",

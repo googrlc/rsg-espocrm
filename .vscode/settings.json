@@ -3,5 +3,6 @@
     "json.trace.server": "messages",
     "claudeCode.environmentVariables": {
         "remote.SSH.enableAgentForwarding": true
-    }
+    },
+    "gemini-cli.debug.logging.enabled": true
 }

@@ -25,6 +25,26 @@
             ],
             "isCustom": true
         },
+        "contactType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Client",
+                "Prospect",
+                "Spouse",
+                "Dependent",
+                "Business Owner"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Client": "success",
+                "Prospect": "info",
+                "Spouse": "primary",
+                "Dependent": "warning",
+                "Business Owner": "default"
+            }
+        },
         "householdRole": {
             "type": "enum",
             "options": [
@@ -41,6 +61,33 @@
                 "Dependent": "info",
                 "Co-insured": "warning"
             }
+        },
+        "relationshipToAccount": {
+            "type": "enum",
+            "options": [
+                "",
+                "Head of Household",
+                "Secondary",
+                "Employee"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Head of Household": "primary",
+                "Secondary": "info",
+                "Employee": "default"
+            }
+        },
+        "originalLeadSource": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "readOnly": true
+        },
+        "daysUntil65": {
+            "type": "int",
+            "isCustom": true,
+            "readOnly": true
         },
         "policies": {
             "type": "linkMultiple",
@@ -208,7 +255,9 @@
         "sortByList": [
             "name",
             "accountName",
+            "contactType",
             "householdRole",
+            "relationshipToAccount",
             "clientType",
             "emailAddress",
             "dateOfBirth",

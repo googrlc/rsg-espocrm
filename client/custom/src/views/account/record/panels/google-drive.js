@@ -93,10 +93,10 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
         `,
 
         data: function () {
-            var url = this.model.get("googleDriveFolderUrl");
+            var folderUrl = this.model.get("googleDriveFolderUrl");
             return {
-                hasDriveUrl: !!url,
-                driveUrl: url || "#"
+                hasDriveUrl: !!folderUrl,
+                driveUrl: folderUrl || "#"
             };
         },
 
@@ -129,18 +129,38 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
 
             if (!url) return;
 
-            if (url.indexOf("drive.google.com") === -1 && url.indexOf("docs.google.com") === -1) {
-                Espo.Ui.warning("Please paste a valid Google Drive URL.");
+            var folderUrl = url;
+            var folderId = this.extractFolderId(url);
+
+            if (!folderId && url.indexOf("drive.google.com") === -1 && url.indexOf("docs.google.com") === -1) {
+                Espo.Ui.warning("Please paste a valid Google Drive folder URL or folder ID.");
                 return;
             }
 
-            this.model.set("googleDriveFolderUrl", url);
+            if (folderId) {
+                folderUrl = "https://drive.google.com/drive/u/0/folders/" + encodeURIComponent(folderId);
+            }
 
-            this.model.save({googleDriveFolderUrl: url}, {patch: true}).then(
+            this.model.set("googleDriveFolderUrl", folderUrl);
+
+            this.model.save({googleDriveFolderUrl: folderUrl}, {patch: true}).then(
                 function () {
                     Espo.Ui.success("Drive folder linked.");
                 }.bind(this)
             );
+        },
+
+        extractFolderId: function (value) {
+            var match = value.match(/\/folders\/([^/?#]+)/);
+            if (match && match[1]) {
+                return match[1];
+            }
+
+            if (/^[A-Za-z0-9_-]{10,}$/.test(value)) {
+                return value;
+            }
+
+            return null;
         }
     });
 });

@@ -1,5 +1,6 @@
 {
     "controller": "controllers/record",
+    "colors": [],
     "kanbanViewMode": true,
     "statusField": "status",
     "color": "#4a6fa5",
@@ -19,28 +20,29 @@
     "boolFilterList": [
         "onlyMy"
     ],
+    "kanbanCardView": "custom:views/policy/kanban-card",
     "views": {
         "detail": "custom:views/policy/record/detail-view"
     },
     "sidePanels": {
         "detail": [
             {
-                "name": "financials",
-                "label": "Financials",
-                "view": "custom:views/policy/record/panels/financials",
+                "name": "daysRemaining",
+                "label": "Days Remaining",
+                "view": "custom:views/policy/record/panels/days-remaining",
                 "order": 1,
                 "sticked": true
             },
             {
-                "name": "renewalUrgency",
-                "label": "Renewal Status",
-                "view": "custom:views/policy/record/panels/renewal-urgency",
+                "name": "carrierDetails",
+                "label": "Carrier Details",
+                "view": "custom:views/policy/record/panels/carrier-details",
                 "order": 2
             },
             {
-                "name": "syncStatus",
-                "label": "NowCerts Sync",
-                "view": "custom:views/policy/record/panels/sync-status",
+                "name": "quickLinks",
+                "label": "Quick Links",
+                "view": "custom:views/policy/record/panels/quick-links",
                 "order": 3
             },
             {
@@ -54,6 +56,87 @@
             }
         ]
     },
+    "dynamicLogic": {
+        "fields": {
+            "cancellationReason": {
+                "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "status",
+                            "value": "Cancelled"
+                        }
+                    ]
+                },
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "status",
+                            "value": "Cancelled"
+                        }
+                    ]
+                }
+            },
+            "vin": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "businessType",
+                                    "value": "Auto"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "lineOfBusiness",
+                                    "value": "Auto"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "lineOfBusiness",
+                                    "value": "Personal Auto"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "lineOfBusiness",
+                                    "value": "Commercial Auto"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "propertyAddress": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {
+                                    "type": "equals",
+                                    "attribute": "businessType",
+                                    "value": "Home"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "lineOfBusiness",
+                                    "value": "Home"
+                                },
+                                {
+                                    "type": "equals",
+                                    "attribute": "lineOfBusiness",
+                                    "value": "Homeowners"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    },
     "relationshipPanels": {
         "activityLogs": {
             "orderBy": "dateTime",
@@ -61,6 +144,13 @@
             "createButton": true,
             "order": 1,
             "label": "Activity Log"
+        },
+        "renewals": {
+            "orderBy": "expirationDate",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 2
         }
     }
 }

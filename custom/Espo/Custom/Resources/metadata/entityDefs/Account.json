@@ -41,6 +41,12 @@
       "layoutDetailDisabled": true,
       "noLoad": true
     },
+    "carrierPolicies": {
+      "type": "linkMultiple",
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "noLoad": true
+    },
     "commissions": {
       "type": "linkMultiple",
       "isCustom": true,
@@ -1931,7 +1937,7 @@
     },
     "totalActivePremium": {
       "type": "currency",
-      "label": "Total Active Premium",
+      "label": "Total Portfolio Premium",
       "isCustom": true
     },
     "activePolicyCount": {
@@ -2387,6 +2393,12 @@
       "type": "hasMany",
       "entity": "Policy",
       "foreign": "account",
+      "isCustom": true
+    },
+    "carrierPolicies": {
+      "type": "hasMany",
+      "entity": "Policy",
+      "foreign": "carrierAccount",
       "isCustom": true
     },
     "commissions": {

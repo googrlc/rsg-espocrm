@@ -5,7 +5,10 @@
         "todays": "Today's",
         "overdue": "Overdue",
         "assignedToMe": "My Tasks",
-        "assignedToGretchen": "Gretchen's Tasks"
+        "assignedToGretchen": "Gretchen's Tasks",
+        "serviceQueue": "Service Queue",
+        "waitingOnClient": "Waiting on Client",
+        "waitingOnCarrier": "Waiting on Carrier"
     },
     "fields": {
         "taskSource": "Source",

@@ -1,10 +1,13 @@
 [
     {"name": "name", "link": true, "width": 18},
     {"name": "accountName", "link": true, "width": 14},
+    {"name": "contactType", "width": 10},
     {"name": "householdRole", "width": 9},
+    {"name": "relationshipToAccount", "width": 10},
     {"name": "clientType", "width": 9},
     {"name": "emailAddress", "width": 16},
     {"name": "phoneNumber", "width": 11},
     {"name": "dateOfBirth", "width": 9},
+    {"name": "daysUntil65", "width": 8},
     {"name": "createdAt", "width": 9}
 ]

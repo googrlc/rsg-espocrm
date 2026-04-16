@@ -3,6 +3,7 @@
     "colors": [],
     "iconClass": "fas fa-sync-alt",
     "kanbanViewMode": true,
+    "kanbanCardView": "custom:views/renewal/kanban-card",
     "statusField": "stage",
     "kanbanStatusIgnoreList": [
         "Lost"

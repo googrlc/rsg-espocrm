@@ -3,9 +3,11 @@
     "label": "Policy Info",
     "rows": [
       [{"name": "policyNumber"}, {"name": "status"}],
-      [{"name": "carrier"}, {"name": "lineOfBusiness"}],
+      [{"name": "carrier"}, {"name": "carrierAccount"}],
+      [{"name": "lineOfBusiness"}, {"name": "statusLabel"}],
       [{"name": "businessType"}, {"name": "assignedUser"}],
-      [{"name": "effectiveDate"}, {"name": "expirationDate"}]
+      [{"name": "effectiveDate"}, {"name": "expirationDate"}],
+      [{"name": "daysRemaining"}, {"name": "carrierPortalUrl"}]
     ]
   },
   {
@@ -20,7 +22,9 @@
     "label": "Renewal Tracking",
     "rows": [
       [{"name": "urgency"}, {"name": "premiumAtRisk"}],
-      [{"name": "lastContactMethod"}, {"name": "lastContactDate"}]
+      [{"name": "lastContactMethod"}, {"name": "lastContactDate"}],
+      [{"name": "cancellationReason", "fullWidth": true}],
+      [{"name": "vin"}, {"name": "propertyAddress"}]
     ]
   },
   {

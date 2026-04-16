@@ -1,6 +1,9 @@
 {
     "primaryFilterClassNameMap": {
         "assignedToMe": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\AssignedToMe",
-        "assignedToGretchen": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\AssignedToGretchen"
+        "assignedToGretchen": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\AssignedToGretchen",
+        "serviceQueue": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\ServiceQueue",
+        "waitingOnClient": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\WaitingOnClient",
+        "waitingOnCarrier": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\WaitingOnCarrier"
     }
 }

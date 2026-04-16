@@ -5,6 +5,7 @@
         "calls": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Calls",
         "automated": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Automated",
         "notes": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Notes",
-        "policyChanges": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\PolicyChanges"
+        "policyChanges": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\PolicyChanges",
+        "overnightPolicyChanges": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\OvernightPolicyChanges"
     }
 }

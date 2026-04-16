@@ -2,6 +2,7 @@
 namespace Espo\Custom\Hooks\Email;
 
 use Espo\Core\Hook\Hook\AfterSave;
+use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 use Espo\ORM\Repository\Option\SaveOptions;
@@ -55,7 +56,7 @@ class EmailAutoLink implements AfterSave
                     $entity->set('parentId', $account->getId());
                     $entity->set('parentType', 'Account');
                 }
-                $this->entityManager->saveEntity($entity, [SaveOptions::SILENT => true]);
+                $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true]);
                 return;
             }
 
@@ -70,7 +71,7 @@ class EmailAutoLink implements AfterSave
                     $entity->set('parentId', $contact->getId());
                     $entity->set('parentType', 'Contact');
                 }
-                $this->entityManager->saveEntity($entity, [SaveOptions::SILENT => true]);
+                $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true]);
                 return;
             }
         }

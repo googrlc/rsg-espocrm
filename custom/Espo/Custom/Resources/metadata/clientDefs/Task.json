@@ -19,6 +19,15 @@
         },
         {
             "name": "assignedToGretchen"
+        },
+        {
+            "name": "serviceQueue"
+        },
+        {
+            "name": "waitingOnClient"
+        },
+        {
+            "name": "waitingOnCarrier"
         }
     ],
     "views": {

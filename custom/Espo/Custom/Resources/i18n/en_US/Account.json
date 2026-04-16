@@ -11,7 +11,8 @@
     "annualPremium": "Annual Premium",
     "renewalDate": "Renewal Date",
     "carrier": "Carrier",
-    "accountStatus": "Account Status",
+    "accountStatus": "Policy Health",
+    "scoreTier": "Client Tier",
     "stage": "Stage",
     "intelRun": "Intel Run",
     "intelRunDate": "Last Run",
@@ -100,7 +101,7 @@
     "gbLtdCarrier": "LTD Carrier",
     "gbVoluntaryBenefits": "Voluntary Benefits",
     "gbNotes": "Group Benefits Notes",
-    "totalActivePremium": "Total Active Premium",
+    "totalActivePremium": "Total Portfolio Premium",
     "nextXDate": "Next X-Date",
     "nextXDateLob": "Next X-Date LOB",
     "numberOfEmployees": "Number of Employees",
@@ -110,7 +111,7 @@
     "keyFindings": "Key Findings",
     "momentumClientId": "Momentum Client ID",
     "momentumLastSynced": "Momentum Last Synced",
-    "googleDriveFolderUrl": "Google Drive Folder URL",
+    "googleDriveFolderUrl": "Google Drive Folder",
     "sicCode": "SIC Code",
     "riskScore": "Risk Score",
     "retentionRisk": "Retention Risk",
@@ -137,16 +138,17 @@
     "agentOfRecordDate": "Agent of Record Date"
   },
   "links": {
-    "linkedTasks": "Linked Tasks"
+    "linkedTasks": "Linked Tasks",
+    "carrierPolicies": "Carrier Policies"
   },
   "options": {
     "accountStatus": {
       "": "",
-      "Active": "Active",
-      "Urgent": "Urgent",
-      "Renewing": "Renewing",
-      "At Risk": "At Risk",
-      "Inactive": "Inactive"
+      "Active": "Portfolio Healthy",
+      "Urgent": "Action Required: Expired",
+      "Renewing": "Renewal in Progress",
+      "At Risk": "Under-Insured",
+      "Inactive": "No Active Policies"
     },
     "stage": {
       "": "",
