@@ -40,7 +40,42 @@ class SyncConvertedRecords implements AfterSave
             if ($account) {
                 $this->syncAccount($entity, $account);
             }
+
+            $this->ensureOpportunityFromLead($entity, $accountId);
         }
+    }
+
+    private function ensureOpportunityFromLead(Entity $lead, string $accountId): void
+    {
+        if ($lead->get('createdOpportunityId')) {
+            return;
+        }
+
+        $account = $this->entityManager->getEntityById('Account', $accountId);
+        if (!$account) {
+            return;
+        }
+
+        $name = trim((string) ($lead->get('name') ?? ''));
+        if ($name === '') {
+            $name = 'New Opportunity';
+        }
+
+        $opportunity = $this->entityManager->getNewEntity('Opportunity');
+        $opportunity->set([
+            'name' => $name,
+            'accountId' => $accountId,
+            'accountName' => $account->get('name'),
+            'stage' => 'Discovery',
+            'leadSource' => $lead->get('source') ?: $lead->get('campaignName'),
+            'assignedUserId' => $lead->get('assignedUserId'),
+            'assignedUserName' => $lead->get('assignedUserName'),
+        ]);
+
+        $this->entityManager->saveEntity($opportunity, [SaveOption::SILENT => true]);
+
+        $lead->set('createdOpportunityId', $opportunity->getId());
+        $this->entityManager->saveEntity($lead, [SaveOption::SILENT => true]);
     }
 
     private function syncContact(Entity $lead, Entity $contact, ?string $accountId): void

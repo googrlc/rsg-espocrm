@@ -2,6 +2,7 @@
 
 namespace Espo\Custom\Classes\Account;
 
+use Espo\Custom\Classes\Task\TaskPriorityMapper;
 use DateInterval;
 use DateTimeImmutable;
 use Espo\ORM\Entity;
@@ -178,6 +179,7 @@ class AccountPlaybookManager
             'taskType' => 'New Business',
             'taskSource' => 'Account',
             'urgency' => $playbook['urgency'],
+            'priority' => TaskPriorityMapper::fromUrgency($playbook['urgency']),
             'syncSource' => 'Manual',
             'linkedAccountId' => $account->getId(),
             'linkedAccountName' => $account->get('name'),

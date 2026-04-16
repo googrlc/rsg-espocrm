@@ -4,6 +4,7 @@ namespace Espo\Custom\Classes\ActivityLog;
 
 use DateInterval;
 use DateTimeImmutable;
+use Espo\Custom\Classes\Task\TaskPriorityMapper;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -25,16 +26,7 @@ class AccountRescueManager
             return;
         }
 
-        $existingTask = $this->entityManager
-            ->getRDBRepository('Task')
-            ->where([
-                'sourceActivityLogId' => $activityLog->getId(),
-                'automationKey' => $rule['automationKey'],
-                'status!=' => ['Completed', 'Cancelled'],
-            ])
-            ->findOne();
-
-        if ($existingTask) {
+        if ($this->hasOpenTaskForSourceActivityLog($activityLog->getId())) {
             return;
         }
 
@@ -55,6 +47,7 @@ class AccountRescueManager
             'taskSource' => $taskSource,
             'syncSource' => $this->resolveSyncSource($activityLog),
             'urgency' => $rule['urgency'],
+            'priority' => TaskPriorityMapper::fromUrgency($rule['urgency']),
             'triageSummary' => $this->buildSummary($activityLog, $rule),
             'triageReason' => $this->buildReason($activityLog, $rule),
             'description' => $this->buildDescription($activityLog, $rule),
@@ -76,6 +69,21 @@ class AccountRescueManager
         ]);
 
         $this->entityManager->saveEntity($task);
+    }
+
+    private function hasOpenTaskForSourceActivityLog(?string $sourceActivityLogId): bool
+    {
+        if (!$sourceActivityLogId) {
+            return false;
+        }
+
+        return (bool) $this->entityManager
+            ->getRDBRepository('Task')
+            ->where([
+                'sourceActivityLogId' => $sourceActivityLogId,
+                'status!=' => ['Completed', 'Cancelled'],
+            ])
+            ->findOne();
     }
 
     private function resolveRule(Entity $activityLog): ?array

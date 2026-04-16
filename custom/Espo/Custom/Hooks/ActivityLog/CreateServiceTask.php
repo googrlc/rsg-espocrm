@@ -19,8 +19,9 @@ class CreateServiceTask implements AfterSave
 
     public function afterSave(Entity $entity, SaveOptions $options): void
     {
-        $this->serviceTriageManager->createTaskFromActivity($entity);
+        // Rescue runs first so triage can skip when both apply (single open task per ActivityLog)
         $this->accountRescueManager->createTaskFromActivity($entity);
+        $this->serviceTriageManager->createTaskFromActivity($entity);
 
         $accountId = trim((string) ($entity->get('accountId') ?? ''));
         if ($accountId !== '') {

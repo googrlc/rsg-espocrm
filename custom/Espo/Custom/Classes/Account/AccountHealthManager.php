@@ -145,10 +145,7 @@ class AccountHealthManager
         $account->set('scoreChangeDirection', $this->resolveChangeDirection($scoreChangeAmount));
         $account->set('scoreChangeAmount', abs($scoreChangeAmount));
         $account->set('rateIncreaseFlag', $rateIncreaseFlag);
-        $account->set('nextRenewalDate', $policySignals['nextRenewalDate']);
-        $account->set('nextRenewalLob', $policySignals['nextRenewalLob']);
-        $account->set('nextRenewalCarrier', $policySignals['nextRenewalCarrier']);
-        $account->set('daysToRenewal', $policySignals['daysToRenewal']);
+        // nextRenewal* / daysToRenewal: PolicyAccountSync::refreshAccountMetricsById is the sole writer
         $account->set('accountStatus', $this->determineAccountStatus(
             $policySignals,
             $activitySignals,

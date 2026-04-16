@@ -4,6 +4,7 @@ namespace Espo\Custom\Classes\ActivityLog;
 
 use DateInterval;
 use DateTimeImmutable;
+use Espo\Custom\Classes\Task\TaskPriorityMapper;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -22,16 +23,8 @@ class ServiceTriageManager
             return;
         }
 
-        $existingTaskList = $this->entityManager
-            ->getRDBRepository('Task')
-            ->where(['sourceActivityLogId' => $activityLog->getId()])
-            ->find();
-
-        foreach ($existingTaskList as $existingTask) {
-            $automationKey = trim((string) ($existingTask->get('automationKey') ?? ''));
-            if ($automationKey === '' || $automationKey === self::AUTOMATION_KEY) {
-                return;
-            }
+        if ($this->hasOpenTaskForSourceActivityLog($activityLog->getId())) {
+            return;
         }
 
         $accountId = $activityLog->get('accountId');
@@ -58,6 +51,7 @@ class ServiceTriageManager
             'taskSource' => $taskSource,
             'syncSource' => 'Manual',
             'urgency' => $urgency,
+            'priority' => TaskPriorityMapper::fromUrgency($urgency),
             'triageSummary' => $this->buildTriageSummary($activityLog),
             'triageReason' => $this->buildTriageReason($activityLog, $taskType, $urgency, $slaDays),
             'description' => $this->buildDescription($activityLog),
@@ -79,6 +73,21 @@ class ServiceTriageManager
         ]);
 
         $this->entityManager->saveEntity($task);
+    }
+
+    private function hasOpenTaskForSourceActivityLog(?string $sourceActivityLogId): bool
+    {
+        if (!$sourceActivityLogId) {
+            return false;
+        }
+
+        return (bool) $this->entityManager
+            ->getRDBRepository('Task')
+            ->where([
+                'sourceActivityLogId' => $sourceActivityLogId,
+                'status!=' => ['Completed', 'Cancelled'],
+            ])
+            ->findOne();
     }
 
     private function resolveRouting(Entity $activityLog): array

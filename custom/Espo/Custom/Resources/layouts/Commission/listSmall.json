@@ -1,6 +1,7 @@
 [
   {"name": "name", "link": true},
-  {"name": "expectedAmount"},
-  {"name": "reconciliationStatus"},
+  {"name": "estimatedCommission"},
+  {"name": "postedAmount"},
+  {"name": "status"},
   {"name": "effectiveDate"}
 ]

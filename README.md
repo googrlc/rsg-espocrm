@@ -18,13 +18,16 @@ Set these in EspoCRM config to enable outbound service-task webhooks:
 - `serviceStartedWebhookUrl` — optional override for tasks moved to `In Progress`
 - `serviceRequestWebhookUrl` — optional override for tasks moved to `Waiting on Client`
 - `serviceCompletionWebhookUrl` — optional override for tasks moved to `Completed`
+- `serviceCarrierWebhookUrl` — optional override for tasks moved to `Waiting on Carrier`
 - `serviceWebhookSecret` — optional shared secret sent in `X-Service-Webhook-Secret`
 
-The webhook fires for service-oriented tasks when status changes to `In Progress`, `Waiting on Client`, or `Completed`.
+Task types that participate in this pipeline include `Client Service`, `Policy Change`, `Claims`, `Follow Up`, `Onboarding`, `Admin`, `Other`, plus `Renewal`, `New Business`, and `Commission`.
+
+The webhook fires for those task types when status changes to `In Progress`, `Waiting on Client`, `Waiting on Carrier`, or `Completed` (falls back to `serviceWebhookUrl` when a status-specific URL is unset).
 Those same status changes also create an `ActivityLog` record on the client in EspoCRM, so the account timeline has an internal audit trail even if n8n is only handling outbound email.
 
 Webhook payload highlights for n8n:
-- `eventType` values are `service.task_started`, `service.request_to_client`, and `service.task_completed`
+- `eventType` values include `service.task_started`, `service.request_to_client`, `service.waiting_on_carrier`, and `service.task_completed`
 - `task.status` and alias `task.queueStatus`
 - `task.dateDue` and alias `task.slaDueDate`
 - `task.assignedUserId` and alias `task.ownerId`

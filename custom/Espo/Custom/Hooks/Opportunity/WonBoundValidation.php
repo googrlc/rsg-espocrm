@@ -10,30 +10,32 @@ class WonBoundValidation implements BeforeSave
 {
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
-        $stage = $entity->get("stage");
+        $stage = $entity->get('stage');
 
-        if ($stage !== "Closed Won") {
+        if ($stage !== 'Closed Won' && $stage !== 'Bound / Renewed') {
             return;
         }
 
         $missing = [];
 
-        if (!$entity->get("bindDate")) {
-            $missing[] = "Bind Date";
+        if (!$entity->get('bindDate')) {
+            $missing[] = 'Bind Date';
         }
 
-        if (!$entity->get("writtenPremium")) {
-            $missing[] = "Written Premium";
+        $writtenPremium = $entity->get('writtenPremium');
+        if ($writtenPremium === null || $writtenPremium === '') {
+            $missing[] = 'Written Premium';
         }
 
-        if (!$entity->get("effectiveDate")) {
-            $missing[] = "Effective Date";
+        if (!$entity->get('effectiveDate')) {
+            $missing[] = 'Effective Date';
         }
 
         if (!empty($missing)) {
             throw new BadRequest(
-                "The following fields are required when Stage is \"Closed Won\": " .
-                implode(", ", $missing) . "."
+                'The following fields are required when Stage is "Closed Won" or "Bound / Renewed": ' .
+                implode(', ', $missing) .
+                '.'
             );
         }
     }

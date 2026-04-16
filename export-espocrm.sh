@@ -5,7 +5,7 @@
 ESPO_KEY=$(op item get 2clmog73qj45np6a5tswavfaza --fields claude_api 2>/dev/null)
 BASE="https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1"
 TAILSCALE_IP="100.117.239.109"
-REPO="/Users/lamarcoates/espocrm-workspace"
+REPO="/Users/lamarcoates/Documents/GitHub/rsg-espocrm"
 LOG="$REPO/export.log"
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting EspoCRM export..." >> $LOG
