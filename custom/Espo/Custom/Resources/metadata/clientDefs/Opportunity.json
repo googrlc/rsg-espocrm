@@ -9,6 +9,10 @@
                         {
                             "type": "isNotEmpty",
                             "attribute": "id"
+                        },
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "lineOfBusiness"
                         }
                     ]
                 }
