@@ -1,0 +1,471 @@
+{
+  "name": "CRM Service Lifecycle -> Notifications",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "95675aff-0c39-437e-9fd9-8757e513a076",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "Webhook_TaskStarted",
+      "name": "Webhook Task Started",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "5bfbd4c7-d07c-4a8f-8d7f-2dab001c0736",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "Webhook_RequestToClient",
+      "name": "Webhook Request To Client",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "7d1ec9f6-366a-42d1-b81f-b4ec52561734",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "Webhook_TaskCompleted",
+      "name": "Webhook Task Completed",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "eventType",
+              "value": "={{$json.eventType || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "taskId",
+              "value": "={{$json.task?.id || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "taskName",
+              "value": "={{$json.task?.name || 'Service Request'}}",
+              "type": "string"
+            },
+            {
+              "name": "taskType",
+              "value": "={{$json.task?.taskType || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "urgency",
+              "value": "={{$json.task?.urgency || 'Normal'}}",
+              "type": "string"
+            },
+            {
+              "name": "queueStatus",
+              "value": "={{$json.task?.queueStatus || $json.task?.status || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "slaDueDate",
+              "value": "={{$json.task?.slaDueDate || $json.task?.dateDue || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "ownerId",
+              "value": "={{$json.task?.ownerId || $json.task?.assignedUserId || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "linkedAccount",
+              "value": "={{$json.task?.linkedAccount || $json.task?.linkedAccountName || $json.task?.accountName || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "sourceActivityLogId",
+              "value": "={{$json.task?.sourceActivityLogId || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "clientEmail",
+              "value": "={{$json.task?.clientEmail || $json.contact?.emailAddress || $json.account?.emailAddress || ''}}",
+              "type": "string"
+            },
+            {
+              "name": "clientName",
+              "value": "={{$json.task?.clientName || $json.task?.contactName || $json.task?.accountName || 'there'}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "Normalize",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        540,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "email-check",
+              "leftValue": "={{$json.clientEmail}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "Gate",
+      "name": "Gate Email Present",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        800,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.eventType}}",
+                    "rightValue": "service.task_started",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.eventType}}",
+                    "rightValue": "service.request_to_client",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{$json.eventType}}",
+                    "rightValue": "service.task_completed",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": 3
+        }
+      },
+      "id": "SwitchEvent",
+      "name": "Switch Event Type",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        1040,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "emailSubject",
+              "value": "={{`Update: Your request is now in progress - ${$json.taskName}`}}",
+              "type": "string"
+            },
+            {
+              "name": "emailHtml",
+              "value": "={{`Hi ${$json.clientName},<br><br>Quick update: your request <strong>${$json.taskName}</strong> is now <strong>in progress</strong>.<br><br>Priority: <strong>${$json.urgency}</strong><br>Target Due Date: <strong>${$json.slaDueDate || 'TBD'}</strong><br>Reference ID: <strong>${$json.taskId}</strong><br><br>Our team will share another update as soon as we complete the next step.`}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "TemplateStarted",
+      "name": "Template - Started",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "emailSubject",
+              "value": "={{`Action Needed: We need a quick response - ${$json.taskName}`}}",
+              "type": "string"
+            },
+            {
+              "name": "emailHtml",
+              "value": "={{`Hi ${$json.clientName},<br><br>We are working on <strong>${$json.taskName}</strong> and need a bit more from you to keep moving.<br><br>Priority: <strong>${$json.urgency}</strong><br>Target Due Date: <strong>${$json.slaDueDate || 'TBD'}</strong><br>Reference ID: <strong>${$json.taskId}</strong><br><br>Please reply with the requested information when you can, and we’ll take it from there.`}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "TemplateRequest",
+      "name": "Template - Waiting on Client",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "emailSubject",
+              "value": "={{`Completed: ${$json.taskName}`}}",
+              "type": "string"
+            },
+            {
+              "name": "emailHtml",
+              "value": "={{`Hi ${$json.clientName},<br><br>Your request <strong>${$json.taskName}</strong> has been completed.<br><br>Reference ID: <strong>${$json.taskId}</strong><br><br>If you need anything else, just reply to this email and we’ll help.`}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "TemplateCompleted",
+      "name": "Template - Completed",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1280,
+        340
+      ]
+    },
+    {
+      "parameters": {
+        "fromEmail": "ops@yourdomain.com",
+        "toEmail": "={{$json.clientEmail}}",
+        "subject": "={{$json.emailSubject}}",
+        "message": "={{$json.emailHtml}}",
+        "options": {
+          "html": true
+        }
+      },
+      "id": "SendEmail",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        220
+      ],
+      "credentials": {
+        "smtp": {
+          "id": "REPLACE_SMTP_CREDENTIAL_ID",
+          "name": "SMTP Account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook Task Started": {
+      "main": [
+        [
+          {
+            "node": "Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Request To Client": {
+      "main": [
+        [
+          {
+            "node": "Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Task Completed": {
+      "main": [
+        [
+          {
+            "node": "Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Payload": {
+      "main": [
+        [
+          {
+            "node": "Gate Email Present",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gate Email Present": {
+      "main": [
+        [
+          {
+            "node": "Switch Event Type",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Switch Event Type": {
+      "main": [
+        [
+          {
+            "node": "Template - Started",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Template - Waiting on Client",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Template - Completed",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Template - Started": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template - Waiting on Client": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Template - Completed": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}

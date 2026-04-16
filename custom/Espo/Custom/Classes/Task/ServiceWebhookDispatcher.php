@@ -4,6 +4,7 @@ namespace Espo\Custom\Classes\Task;
 
 use Espo\Core\Utils\Config;
 use Espo\ORM\Entity;
+use Espo\ORM\EntityManager;
 
 class ServiceWebhookDispatcher
 {
@@ -25,7 +26,8 @@ class ServiceWebhookDispatcher
     ];
 
     public function __construct(
-        private Config $config
+        private Config $config,
+        private EntityManager $entityManager
     ) {}
 
     public function dispatch(Entity $task): void
@@ -77,6 +79,8 @@ class ServiceWebhookDispatcher
 
     private function buildPayload(Entity $task, string $eventType, string $previousStatus): array
     {
+        $clientContext = $this->resolveClientContext($task);
+        $dateDue = $this->normalizeDateTime($task->get('dateEnd') ?: $task->get('dateEndDate'));
         $completedAt = $this->normalizeDateTime(
             $task->get('dateCompleted')
             ?: ($task->get('modifiedAt') ?? null)
@@ -93,6 +97,7 @@ class ServiceWebhookDispatcher
                 'taskType' => (string) ($task->get('taskType') ?? ''),
                 'urgency' => (string) ($task->get('urgency') ?? ''),
                 'priority' => (string) ($task->get('priority') ?? ''),
+                'queueStatus' => (string) ($task->get('status') ?? ''),
                 'description' => (string) ($task->get('description') ?? ''),
                 'triageSummary' => (string) ($task->get('triageSummary') ?? ''),
                 'triageReason' => (string) ($task->get('triageReason') ?? ''),
@@ -100,18 +105,34 @@ class ServiceWebhookDispatcher
                 'taskSource' => (string) ($task->get('taskSource') ?? ''),
                 'assignedUserId' => $task->get('assignedUserId'),
                 'assignedUserName' => (string) ($task->get('assignedUserName') ?? ''),
+                'ownerId' => $task->get('assignedUserId'),
                 'linkedAccountId' => $task->get('linkedAccountId'),
                 'linkedAccountName' => (string) ($task->get('linkedAccountName') ?? ''),
+                'linkedAccount' => (string) ($task->get('linkedAccountName') ?? $task->get('accountName') ?? ''),
                 'accountId' => $task->get('accountId'),
                 'accountName' => (string) ($task->get('accountName') ?? ''),
                 'contactId' => $task->get('contactId'),
                 'contactName' => (string) ($task->get('contactName') ?? ''),
+                'clientEmail' => $clientContext['email'],
+                'clientName' => $clientContext['name'],
+                'sourceActivityLogId' => (string) ($task->get('sourceActivityLogId') ?? ''),
                 'parentType' => (string) ($task->get('parentType') ?? ''),
                 'parentId' => $task->get('parentId'),
                 'parentName' => (string) ($task->get('parentName') ?? ''),
                 'dateStart' => $this->normalizeDateTime($task->get('dateStart') ?: $task->get('dateStartDate')),
-                'dateDue' => $this->normalizeDateTime($task->get('dateEnd') ?: $task->get('dateEndDate')),
+                'dateDue' => $dateDue,
+                'slaDueDate' => $dateDue,
                 'dateCompleted' => $completedAt,
+            ],
+            'contact' => [
+                'id' => $task->get('contactId'),
+                'name' => (string) ($task->get('contactName') ?? ''),
+                'emailAddress' => $clientContext['contactEmail'],
+            ],
+            'account' => [
+                'id' => $task->get('linkedAccountId') ?: $task->get('accountId'),
+                'name' => (string) ($task->get('linkedAccountName') ?: $task->get('accountName') ?: ''),
+                'emailAddress' => $clientContext['accountEmail'],
             ],
         ];
 
@@ -137,6 +158,51 @@ class ServiceWebhookDispatcher
         }
 
         return $payload;
+    }
+
+    private function resolveClientContext(Entity $task): array
+    {
+        $name = trim((string) (
+            $task->get('contactName')
+            ?: $task->get('linkedAccountName')
+            ?: $task->get('accountName')
+            ?: 'there'
+        ));
+        $contactEmail = '';
+        $accountEmail = '';
+
+        $contactId = $task->get('contactId');
+        if ($contactId) {
+            $contact = $this->entityManager->getEntityById('Contact', $contactId);
+            if ($contact) {
+                $contactEmail = trim((string) ($contact->get('emailAddress') ?? ''));
+                $contactName = trim((string) ($contact->get('name') ?? ''));
+                if ($contactName !== '') {
+                    $name = $contactName;
+                }
+            }
+        }
+
+        $accountId = $task->get('linkedAccountId') ?: $task->get('accountId');
+        if ($accountId) {
+            $account = $this->entityManager->getEntityById('Account', $accountId);
+            if ($account) {
+                $accountEmail = trim((string) ($account->get('emailAddress') ?? ''));
+                if ($name === 'there') {
+                    $accountName = trim((string) ($account->get('name') ?? ''));
+                    if ($accountName !== '') {
+                        $name = $accountName;
+                    }
+                }
+            }
+        }
+
+        return [
+            'email' => $contactEmail !== '' ? $contactEmail : $accountEmail,
+            'name' => $name,
+            'contactEmail' => $contactEmail,
+            'accountEmail' => $accountEmail,
+        ];
     }
 
     private function send(string $webhookUrl, string $eventType, array $payload): void
