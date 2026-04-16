@@ -56,7 +56,7 @@ class PolicyAccountSync
         $policy->set('urgencyIcon', $urgencyIcon);
 
         if ($daysRemaining === null) {
-            $policy->set('urgency', null);
+            $policy->set('urgency', '');
         } elseif ($daysRemaining <= 30) {
             $policy->set('urgency', 'Critical');
         } elseif ($daysRemaining <= 60) {
