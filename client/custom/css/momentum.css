@@ -86,6 +86,87 @@ html {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Relationship panels should grow with their content instead of trapping rows in a fixed-height scroller. */
+.detail .bottom .panel,
+.record .bottom .panel {
+    overflow: visible;
+}
+
+.detail .bottom .panel .panel-body,
+.record .bottom .panel .panel-body,
+.detail .bottom .panel .list-container,
+.record .bottom .panel .list-container,
+.detail .bottom .panel .table-responsive,
+.record .bottom .panel .table-responsive {
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
+.detail .bottom .panel .list-container,
+.record .bottom .panel .list-container,
+.detail .bottom .panel .table-responsive,
+.record .bottom .panel .table-responsive {
+    overflow-x: auto;
+}
+
+.detail .bottom .panel .list-container > table,
+.detail .bottom .panel .list-container > .table,
+.record .bottom .panel .list-container > table,
+.record .bottom .panel .list-container > .table {
+    table-layout: auto;
+    width: 100%;
+}
+
+.detail .bottom .panel .list-row,
+.record .bottom .panel .list-row,
+.detail .bottom .panel tbody tr,
+.record .bottom .panel tbody tr {
+    min-height: 48px;
+}
+
+.detail .bottom .panel .panel-body {
+    padding: 0 0 8px;
+}
+
+.detail .bottom .panel .list-container > table th,
+.detail .bottom .panel .list-container > table td,
+.detail .bottom .panel .list-container > .table th,
+.detail .bottom .panel .list-container > .table td,
+.record .bottom .panel .list-container > table th,
+.record .bottom .panel .list-container > table td,
+.record .bottom .panel .list-container > .table th,
+.record .bottom .panel .list-container > .table td {
+    vertical-align: middle;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.detail .bottom .panel .list-container > table tbody tr:hover,
+.detail .bottom .panel .list-container > .table tbody tr:hover,
+.record .bottom .panel .list-container > table tbody tr:hover,
+.record .bottom .panel .list-container > .table tbody tr:hover {
+    background: rgba(34, 98, 232, 0.05);
+}
+
+.detail .bottom .panel[data-name="contacts"],
+.detail .bottom .panel[data-name="accounts"],
+.record .bottom .panel[data-name="contacts"],
+.record .bottom .panel[data-name="accounts"] {
+    border: 1px solid #dce5f5;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(20, 58, 147, 0.06);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+}
+
+.detail .bottom .panel[data-name="contacts"] .panel-heading,
+.detail .bottom .panel[data-name="accounts"] .panel-heading,
+.record .bottom .panel[data-name="contacts"] .panel-heading,
+.record .bottom .panel[data-name="accounts"] .panel-heading {
+    border-bottom: 1px solid #e7eefb;
+    background: transparent;
+}
+
 /* Small/embedded lists (listSmall) */
 .list-container.list-container-small table {
     table-layout: fixed;
@@ -530,6 +611,18 @@ html {
     .list-container table th {
         font-size: 12px;
         padding: 6px 4px;
+    }
+
+    .detail .bottom .panel .panel-body,
+    .record .bottom .panel .panel-body {
+        padding-bottom: 4px;
+    }
+
+    .detail .bottom .panel .list-container > table,
+    .detail .bottom .panel .list-container > .table,
+    .record .bottom .panel .list-container > table,
+    .record .bottom .panel .list-container > .table {
+        min-width: 640px;
     }
 
     /* Side panel full width on mobile */

@@ -9,13 +9,52 @@
         "renewal": "Renewal"
     },
     "fields": {
-        "sourceType": "Source Type"
+        "sourceType": "Source Type",
+        "commissionType": "Commission Type",
+        "status": "Commission Status",
+        "lineOfBusiness": "Line of Business",
+        "writtenPremium": "Written Premium",
+        "estimatedCommission": "Estimated Commission",
+        "postedAmount": "Posted Amount",
+        "effectiveDate": "Effective Date",
+        "expectedPaymentDate": "Expected Payment Date",
+        "paymentReceivedDate": "Payment Received Date"
     },
     "options": {
         "sourceType": {
             "": "",
             "New Business": "New Business",
             "Renewal": "Renewal",
+            "Other": "Other"
+        },
+        "commissionType": {
+            "": "",
+            "New Business": "New Business",
+            "Renewal": "Renewal"
+        },
+        "status": {
+            "": "",
+            "Estimated": "Estimated",
+            "Posted": "Posted",
+            "Overdue": "Overdue"
+        },
+        "lineOfBusiness": {
+            "": "",
+            "Commercial Auto": "Commercial Auto",
+            "General Liability": "General Liability",
+            "Workers Comp": "Workers' Compensation",
+            "Commercial Property": "Commercial Property",
+            "BOP": "Business Owners Policy",
+            "Professional Liability": "Professional Liability",
+            "Umbrella": "Umbrella",
+            "Personal Auto": "Personal Auto",
+            "Homeowners": "Homeowners",
+            "Renters": "Renters",
+            "Condo": "Condo",
+            "Life": "Life Insurance",
+            "Health": "Health Insurance",
+            "Medicare": "Medicare",
+            "Group Benefits": "Group Benefits",
             "Other": "Other"
         }
     }

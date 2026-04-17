@@ -50,6 +50,57 @@
         "renewalsDue": "Renewals Due",
         "commercialOnly": "Commercial Only"
     },
+    "options": {
+        "status": {
+            "": "",
+            "Active": "Active",
+            "Up for Renewal": "Up for Renewal",
+            "Renewing": "Renewing",
+            "Renewed": "Renewed",
+            "Expired": "Expired",
+            "Cancelled": "Cancelled",
+            "Flat Cancel": "Flat Cancellation",
+            "Pending Cancel": "Pending Cancellation",
+            "Non-Renewed": "Non-Renewed",
+            "Lapsed": "Lapsed"
+        },
+        "billingType": {
+            "": "",
+            "Direct Bill": "Direct Bill",
+            "Agency Bill": "Agency Bill",
+            "Direct Bill 100": "Direct Bill (100%)",
+            "Agency Bill 100": "Agency Bill (100%)"
+        },
+        "syncStatus": {
+            "": "",
+            "Synced": "Synced",
+            "Pending": "Pending Sync",
+            "Error": "Sync Error",
+            "Skipped": "Skipped"
+        },
+        "statusLabel": {
+            "": "",
+            "ACTIVE": "Active",
+            "UNKNOWN": "Unknown",
+            "RENEWAL WINDOW": "Renewal Window",
+            "CRITICAL RENEWAL": "Critical Renewal",
+            "EXPIRED": "Expired"
+        },
+        "urgency": {
+            "": "",
+            "Low": "Low",
+            "Medium": "Medium",
+            "High": "High",
+            "Critical": "Critical"
+        },
+        "lastContactMethod": {
+            "": "",
+            "Phone": "Phone Call",
+            "Email": "Email",
+            "Text": "Text Message",
+            "No Response": "No Response"
+        }
+    },
     "labels": {
         "Commercial Policies": "Commercial Policies",
         "Personal Policies": "Personal Policies"

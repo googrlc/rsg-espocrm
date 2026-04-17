@@ -5,9 +5,9 @@
         "currentCarrier": "Current Carrier",
         "businessType": "Business Type",
         "writtenPremium": "Written Premium",
-        "estimatedPremium": "Est. Premium",
+        "estimatedPremium": "Estimated Premium",
         "commissionRate": "Commission Rate %",
-        "estimatedCommission": "Est. Commission",
+        "estimatedCommission": "Estimated Commission",
         "bindDate": "Bind Date",
         "policyNumber": "Policy Number",
         "priority": "Priority",
@@ -82,6 +82,18 @@
         "medIrmaaApplies": "IRMAA Applies"
     },
     "options": {
+        "businessType": {
+            "": "",
+            "New Business": "New Business",
+            "Renewal": "Renewal",
+            "Rewrite": "Rewrite"
+        },
+        "priority": {
+            "": "",
+            "Hot": "High Priority",
+            "Warm": "Medium Priority",
+            "Cold": "Low Priority"
+        },
         "stage": {
             "": "",
             "Discovery": "Discovery",
@@ -91,11 +103,184 @@
             "Closed Won": "Closed Won",
             "Closed Lost": "Closed Lost",
             "Renewal Notice Sent": "Renewal Notice Sent",
-            "Markets Out / Shopping": "Markets Out / Shopping",
+            "Markets Out / Shopping": "Marketed",
             "Quoted": "Quoted",
             "Presented to Client": "Presented to Client",
             "Bound / Renewed": "Bound / Renewed",
-            "Non-Renewal / Lost": "Non-Renewal / Lost"
+            "Non-Renewal / Lost": "Non-Renewed / Lost"
+        },
+        "lineOfBusiness": {
+            "": "",
+            "Commercial Auto": "Commercial Auto",
+            "General Liability": "General Liability",
+            "Workers Comp": "Workers' Compensation",
+            "Commercial Property": "Commercial Property",
+            "BOP": "Business Owners Policy",
+            "Professional Liability": "Professional Liability",
+            "Umbrella": "Umbrella",
+            "Builders Risk": "Builders Risk",
+            "Inland Marine": "Inland Marine",
+            "Personal Auto": "Personal Auto",
+            "Homeowners": "Homeowners",
+            "Renters": "Renters",
+            "Condo": "Condo",
+            "Dwelling Fire": "Dwelling Fire",
+            "Motorcycle": "Motorcycle",
+            "Boat": "Boat",
+            "RV": "RV",
+            "Life": "Life Insurance",
+            "Health": "Health Insurance",
+            "Medicare": "Medicare",
+            "Group Benefits": "Group Benefits",
+            "Garagekeepers": "Garagekeepers",
+            "Commercial Package": "Commercial Package",
+            "Other": "Other"
+        },
+        "lostReason": {
+            "": "",
+            "Price": "Price",
+            "Coverage": "Coverage",
+            "Service": "Service",
+            "Competitor Stole": "Moved to Competitor",
+            "Business Closed": "Business Closed",
+            "Carrier Non-Renewed": "Carrier Non-Renewed",
+            "Client Moved": "Client Moved",
+            "Unknown": "Unknown",
+            "N/A": "Not Applicable"
+        },
+        "lastContactMethod": {
+            "": "",
+            "Phone": "Phone Call",
+            "Email": "Email",
+            "Text": "Text Message",
+            "No Response": "No Response"
+        },
+        "policyStubStatus": {
+            "": "",
+            "Pending Sync": "Pending Sync",
+            "Synced": "Synced"
+        },
+        "caBusType": {
+            "": "",
+            "Trucking": "Trucking",
+            "Contractor": "Contractor",
+            "Fleet": "Fleet",
+            "Delivery": "Delivery",
+            "Other": "Other"
+        },
+        "caRadius": {
+            "": "",
+            "Local <50mi": "Local Under 50 Miles",
+            "Intermediate 50-200mi": "Intermediate 50-200 Miles",
+            "Long haul 200+mi": "Long-Haul 200+ Miles"
+        },
+        "umbrellaLimit": {
+            "": "",
+            "$1M": "$1 Million",
+            "$2M": "$2 Million",
+            "$5M": "$5 Million",
+            "$10M": "$10 Million"
+        },
+        "paPriorClaims": {
+            "": "",
+            "None": "No Claims",
+            "1": "1 Claim",
+            "2+": "2+ Claims"
+        },
+        "medPlanType": {
+            "": "",
+            "Advantage": "Medicare Advantage",
+            "Supplement": "Medicare Supplement",
+            "Part D": "Prescription Drug Plan"
+        },
+        "lifeCoverageType": {
+            "": "",
+            "Term": "Term Life",
+            "Whole": "Whole Life",
+            "Universal": "Universal Life",
+            "IUL": "Indexed Universal Life"
+        },
+        "lifeTermLength": {
+            "": "",
+            "10yr": "10-Year Term",
+            "15yr": "15-Year Term",
+            "20yr": "20-Year Term",
+            "30yr": "30-Year Term"
+        },
+        "lifeHealthClassTarget": {
+            "": "",
+            "Preferred Plus": "Preferred Plus",
+            "Preferred": "Preferred",
+            "Standard": "Standard",
+            "Rated": "Rated"
+        },
+        "propConstructionType": {
+            "": "",
+            "Frame": "Frame",
+            "Masonry": "Masonry",
+            "Mixed": "Mixed Construction"
+        },
+        "autoUseType": {
+            "": "",
+            "Personal": "Personal Use",
+            "Business": "Business Use",
+            "Commercial": "Commercial Use",
+            "Rideshare": "Rideshare",
+            "Mixed": "Mixed Use"
+        },
+        "healthGender": {
+            "": "",
+            "Male": "Male",
+            "Female": "Female",
+            "Other": "Other"
+        },
+        "healthCoverageType": {
+            "": "",
+            "Term": "Term Life",
+            "Whole Life": "Whole Life",
+            "Universal Life": "Universal Life",
+            "Final Expense": "Final Expense",
+            "Medicare Supplement": "Medicare Supplement",
+            "Medicare Advantage": "Medicare Advantage",
+            "Group": "Group Coverage",
+            "Individual": "Individual Coverage",
+            "Other": "Other"
+        },
+        "healthRiskClass": {
+            "": "",
+            "Preferred Plus": "Preferred Plus",
+            "Preferred": "Preferred",
+            "Standard Plus": "Standard Plus",
+            "Standard": "Standard",
+            "Substandard": "Substandard",
+            "Declined": "Declined",
+            "Pending": "Pending"
+        },
+        "propRoofType": {
+            "": "",
+            "Asphalt Shingle": "Asphalt Shingle",
+            "Metal": "Metal",
+            "Tile": "Tile",
+            "Flat": "Flat",
+            "Slate": "Slate",
+            "Other": "Other"
+        },
+        "propOccupancy": {
+            "": "",
+            "Owner Occupied": "Owner-Occupied",
+            "Tenant Occupied": "Tenant-Occupied",
+            "Seasonal": "Seasonal",
+            "Vacant": "Vacant",
+            "Commercial": "Commercial"
+        },
+        "gbMedicalPlanType": {
+            "": "",
+            "PPO": "PPO",
+            "HMO": "HMO",
+            "HDHP": "High-Deductible Health Plan",
+            "EPO": "EPO",
+            "POS": "POS",
+            "Other": "Other"
         }
     },
     "tooltips": {

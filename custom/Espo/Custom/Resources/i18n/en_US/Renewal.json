@@ -71,25 +71,25 @@
         "lastContactMethod": {
             "": "",
             "Email": "Email",
-            "Call": "Call",
-            "Text": "Text",
-            "In person": "In person"
+            "Call": "Phone Call",
+            "Text": "Text Message",
+            "In person": "In-Person Meeting"
         },
         "lostReason": {
             "": "",
             "Price": "Price",
             "Coverage": "Coverage",
             "Unresponsive": "Unresponsive",
-            "Moved carrier": "Moved carrier",
+            "Moved carrier": "Moved to Another Carrier",
             "Other": "Other"
         },
         "lineOfBusiness": {
             "": "",
             "Commercial Auto": "Commercial Auto",
             "General Liability": "General Liability",
-            "Workers Comp": "Workers Comp",
+            "Workers Comp": "Workers' Compensation",
             "Commercial Property": "Commercial Property",
-            "BOP": "BOP",
+            "BOP": "Business Owners Policy",
             "Professional Liability": "Professional Liability",
             "Umbrella": "Umbrella",
             "Builders Risk": "Builders Risk",
@@ -102,8 +102,8 @@
             "Motorcycle": "Motorcycle",
             "Boat": "Boat",
             "RV": "RV",
-            "Life": "Life",
-            "Health": "Health",
+            "Life": "Life Insurance",
+            "Health": "Health Insurance",
             "Medicare": "Medicare",
             "Group Benefits": "Group Benefits",
             "Garagekeepers": "Garagekeepers",

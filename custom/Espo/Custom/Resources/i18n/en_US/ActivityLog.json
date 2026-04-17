@@ -3,9 +3,9 @@
         "name": "Subject",
         "activityType": "Activity Type",
         "classification": "Classification",
-        "dateTime": "Date/Time",
+        "dateTime": "Activity Date/Time",
         "direction": "Direction",
-        "duration": "Duration (min)",
+        "duration": "Duration (Minutes)",
         "outcome": "Outcome",
         "notes": "Notes",
         "loggedBy": "Logged By",
@@ -42,18 +42,18 @@
     "options": {
         "activityType": {
             "": "",
-            "Email Out": "Email Out",
-            "Email In": "Email In",
-            "Call": "Call",
-            "n8n Automated": "n8n Automated",
+            "Email Out": "Outgoing Email",
+            "Email In": "Incoming Email",
+            "Call": "Phone Call",
+            "n8n Automated": "n8n Automation",
             "Manus AI": "Manus AI",
             "Note": "Note",
-            "Intel Run": "Intel Run",
+            "Intel Run": "Intelligence Run",
             "Renewal Outreach": "Renewal Outreach",
             "Endorsement": "Endorsement",
             "Premium Change": "Premium Change",
-            "Coverage Add": "Coverage Add",
-            "Coverage Remove": "Coverage Remove",
+            "Coverage Add": "Coverage Added",
+            "Coverage Remove": "Coverage Removed",
             "Cancellation": "Cancellation"
         },
         "changeType": {
@@ -64,11 +64,38 @@
             "Reinstatement": "Reinstatement",
             "Renewal": "Renewal"
         },
+        "classification": {
+            "": "",
+            "Renewal inquiry": "Renewal Inquiry",
+            "Coverage question": "Coverage Question",
+            "Quote request": "Quote Request",
+            "Claim related": "Claim Related",
+            "Payment / billing": "Payment or Billing",
+            "Document request": "Document Request",
+            "Cancellation / non-renewal notice": "Cancellation or Non-Renewal Notice",
+            "Carrier correspondence": "Carrier Correspondence",
+            "Complaint": "Complaint",
+            "Onboarding": "Onboarding",
+            "Marketing outreach": "Marketing Outreach",
+            "General correspondence": "General Correspondence"
+        },
+        "direction": {
+            "": "",
+            "Outbound": "Outbound",
+            "Inbound": "Inbound"
+        },
+        "outcome": {
+            "": "",
+            "Connected": "Connected",
+            "No answer voicemail": "No Answer - Voicemail Left",
+            "No answer no voicemail": "No Answer - No Voicemail",
+            "Wrong number": "Wrong Number"
+        },
         "source": {
             "": "",
             "NowCerts Sync": "NowCerts Sync",
             "Manual": "Manual",
-            "n8n Automated": "n8n Automated"
+            "n8n Automated": "n8n Automation"
         }
     }
 }

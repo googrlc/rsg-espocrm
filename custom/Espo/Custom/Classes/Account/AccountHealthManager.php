@@ -34,17 +34,6 @@ class AccountHealthManager
         'Lost',
     ];
 
-    private const GAP_FIELDS = [
-        'gapUmbrella',
-        'gapLife',
-        'gapRenters',
-        'gapAutoUm',
-        'gapMedicare',
-        'gapLandlord',
-        'gapRideshare',
-        'gapFinalExpense',
-    ];
-
     private const CLIENT_TOUCH_TYPES = [
         'Email Out',
         'Email In',
@@ -100,15 +89,12 @@ class AccountHealthManager
             : [];
 
         $today = new DateTimeImmutable('today');
-        $policySignals = $this->analyzePolicies($account, $policyList, $renewalList, $today);
+        $policySignals = $this->analyzePolicies($policyList, $renewalList, $today);
         $activitySignals = $this->analyzeActivities($activityList, $today);
         $taskSignals = $this->analyzeTasks($taskList, $today);
 
-        $gapCount = $this->countGapFlags($account);
-        $rateIncreasePct = max(
-            round((float) ($account->get('premiumChangePct') ?? 0), 2),
-            $activitySignals['maxPremiumSpikePct']
-        );
+        $gapCount = $this->deriveRelationshipGapCount($account, $policySignals, $today);
+        $rateIncreasePct = $activitySignals['maxPremiumSpikePct'];
         $rateIncreaseFlag = $rateIncreasePct >= 15.0;
 
         $scoreBundleDepth = $this->scoreBundleDepth($policySignals['coverageDepth'], $gapCount);
@@ -145,7 +131,7 @@ class AccountHealthManager
         $account->set('scoreChangeDirection', $this->resolveChangeDirection($scoreChangeAmount));
         $account->set('scoreChangeAmount', abs($scoreChangeAmount));
         $account->set('rateIncreaseFlag', $rateIncreaseFlag);
-        // nextRenewal* / daysToRenewal: PolicyAccountSync::refreshAccountMetricsById is the sole writer
+        // nextXDate* / daysToRenewal: PolicyAccountSync::refreshAccountMetricsById is the sole writer
         $account->set('accountStatus', $this->determineAccountStatus(
             $policySignals,
             $activitySignals,
@@ -155,16 +141,13 @@ class AccountHealthManager
         ));
     }
 
-    private function analyzePolicies(Entity $account, iterable $policyList, iterable $renewalList, DateTimeImmutable $today): array
+    private function analyzePolicies(iterable $policyList, iterable $renewalList, DateTimeImmutable $today): array
     {
         $coverageSet = [];
         $carrierSet = [];
         $activePolicyCount = 0;
         $oldestEffectiveDate = null;
-        $nextRenewalDate = null;
-        $nextRenewalLob = null;
-        $nextRenewalCarrier = null;
-        $daysToRenewal = null;
+        $nextExpirationDate = null;
         $hasRenewingMotion = false;
         $hasUrgentRenewal = false;
         $hasCancellationStatus = false;
@@ -191,10 +174,8 @@ class AccountHealthManager
                 }
 
                 $expirationDate = $this->toDate((string) ($policy->get('expirationDate') ?? ''));
-                if ($expirationDate && ($nextRenewalDate === null || $expirationDate < $nextRenewalDate)) {
-                    $nextRenewalDate = $expirationDate;
-                    $nextRenewalLob = $line !== '' ? $line : null;
-                    $nextRenewalCarrier = $carrier !== '' ? $carrier : null;
+                if ($expirationDate && ($nextExpirationDate === null || $expirationDate < $nextExpirationDate)) {
+                    $nextExpirationDate = $expirationDate;
                 }
             }
 
@@ -207,13 +188,11 @@ class AccountHealthManager
             }
         }
 
-        foreach ($this->normalizeMultiEnum($account->get('lob')) as $line) {
-            $coverageSet[$line] = true;
-        }
-
-        if ($nextRenewalDate) {
-            $daysToRenewal = (int) $today->diff($nextRenewalDate)->format('%r%a');
+        if ($nextExpirationDate) {
+            $daysToRenewal = (int) $today->diff($nextExpirationDate)->format('%r%a');
             $hasUrgentRenewal = $daysToRenewal <= 15;
+        } else {
+            $daysToRenewal = null;
         }
 
         foreach ($renewalList as $renewal) {
@@ -228,20 +207,12 @@ class AccountHealthManager
             }
         }
 
-        if ($carrierSet === []) {
-            foreach ($this->extractCarrierValues((string) ($account->get('carrier') ?? '')) as $carrier) {
-                $carrierSet[$carrier] = true;
-            }
-        }
-
         return [
             'activePolicyCount' => $activePolicyCount,
             'coverageDepth' => count($coverageSet),
+            'coverageLines' => array_keys($coverageSet),
             'carrierMixCount' => count($carrierSet),
             'oldestEffectiveDate' => $oldestEffectiveDate,
-            'nextRenewalDate' => $nextRenewalDate?->format('Y-m-d'),
-            'nextRenewalLob' => $nextRenewalLob,
-            'nextRenewalCarrier' => $nextRenewalCarrier,
             'daysToRenewal' => $daysToRenewal,
             'hasRenewingMotion' => $hasRenewingMotion,
             'hasUrgentRenewal' => $hasUrgentRenewal,
@@ -509,14 +480,34 @@ class AccountHealthManager
         };
     }
 
-    private function countGapFlags(Entity $account): int
+    private function deriveRelationshipGapCount(Entity $account, array $policySignals, DateTimeImmutable $today): int
     {
+        $coverageLines = $policySignals['coverageLines'];
+        $hasUmbrella = in_array('Umbrella', $coverageLines, true);
+        $hasLife = in_array('Life', $coverageLines, true);
+        $hasMedicare = in_array('Medicare', $coverageLines, true);
+        $hasAuto = in_array('Auto', $coverageLines, true) || in_array('Personal Auto', $coverageLines, true);
+        $hasHome = in_array('Home', $coverageLines, true) || in_array('Homeowners', $coverageLines, true);
+        $hasCommercialCore = count(array_intersect($coverageLines, ['Commercial Auto', 'GL', 'BOP', 'Transportation'])) > 0;
+        $hasRenters = in_array('Renters', $coverageLines, true);
+
         $count = 0;
 
-        foreach (self::GAP_FIELDS as $field) {
-            if ((bool) $account->get($field)) {
-                $count++;
-            }
+        if (!$hasUmbrella && ($hasAuto || $hasHome || $hasCommercialCore)) {
+            $count++;
+        }
+
+        if (!$hasLife && ($hasAuto || $hasHome || $hasMedicare)) {
+            $count++;
+        }
+
+        $residenceType = trim((string) ($account->get('residenceType') ?? ''));
+        if ($residenceType === 'Rented' && !$hasRenters) {
+            $count++;
+        }
+
+        if (!$hasMedicare && $this->isMedicareEligible($account, $today)) {
+            $count++;
         }
 
         return $count;
@@ -552,23 +543,22 @@ class AccountHealthManager
         return trim($value);
     }
 
-    private function normalizeMultiEnum(mixed $value): array
+    private function isMedicareEligible(Entity $account, DateTimeImmutable $today): bool
     {
-        if (!is_array($value)) {
-            return [];
+        foreach (['primaryDob', 'dateOfBirth'] as $field) {
+            $date = $this->toDate((string) ($account->get($field) ?? ''));
+            if (!$date) {
+                continue;
+            }
+
+            $age = (float) $date->diff($today)->days / 365.25;
+
+            if ($age >= 64.5) {
+                return true;
+            }
         }
 
-        return array_values(array_filter(array_map(
-            fn ($item) => trim((string) $item),
-            $value
-        )));
-    }
-
-    private function extractCarrierValues(string $value): array
-    {
-        $parts = preg_split('/[;,|]+/', $value) ?: [];
-
-        return array_values(array_filter(array_map('trim', $parts)));
+        return false;
     }
 
     private function toDate(string $value): ?DateTimeImmutable

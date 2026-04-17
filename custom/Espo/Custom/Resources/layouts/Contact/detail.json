@@ -3,7 +3,7 @@
     "label": "Relationship Snapshot",
     "name": "contactHeader",
     "rows": [
-      [{"name": "name"}, {"name": "account"}],
+      [{"name": "name"}, {"name": "accounts"}],
       [{"name": "contactType"}, {"name": "relationshipToAccount"}],
       [{"name": "dateOfBirth"}, {"name": "daysUntil65"}],
       [{"name": "emailAddress"}, {"name": "phoneNumber"}],

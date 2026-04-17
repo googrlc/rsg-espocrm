@@ -1,95 +1,55 @@
 [
     {
-        "name": "primaryInsured",
-        "label": "Primary Insured",
+        "name": "clientSnapshot",
+        "label": "Client Snapshot",
         "style": "default",
         "rows": [
-            [{"name": "primaryFirstName"}, {"name": "primaryLastName"}],
-            [{"name": "primaryDob"}, {"name": "primaryGender"}],
-            [{"name": "maritalStatus"}, {"name": "primaryOccupation"}],
-            [{"name": "primaryPhone"}, {"name": "primaryEmail"}],
+            [{"name": "name"}, {"name": "accountType"}],
+            [{"name": "assignedUser"}, {"name": "clientSince"}],
+            [{"name": "phoneNumber"}, {"name": "emailAddress"}],
+            [{"name": "billingAddress"}, {"name": "mailingAddress"}],
             [{"name": "preferredContact"}, {"name": "bestTimeToCall"}]
         ]
     },
     {
-        "name": "spouseCoInsured",
-        "label": "Spouse / Co-Insured",
+        "name": "relationshipSummary",
+        "label": "Relationship Summary",
         "style": "default",
         "rows": [
-            [{"name": "spouseFirstName"}, {"name": "spouseLastName"}],
-            [{"name": "spouseDob"}, {"name": "spouseOccupation"}]
+            [{"name": "communicationNotes", "fullWidth": true}],
+            [{"name": "referralSource"}, {"name": "referralName"}],
+            [{"name": "lastContactDate"}, {"name": "lastContactType"}],
+            [{"name": "lastContactOutcome"}, {"name": "lastContactBy"}]
         ]
     },
     {
-        "name": "dependentsHousehold",
-        "label": "Dependents & Household",
+        "name": "relationshipHealth",
+        "label": "Relationship Health",
         "style": "default",
         "rows": [
-            [{"name": "dependentsCount"}, {"name": "dependentAges"}],
-            [{"name": "youthfulDriverFlag"}, {"name": "yearsAtAddress"}],
-            [{"name": "residenceType"}, {"name": "mailingAddressSame"}]
+            [{"name": "accountStatus"}, {"name": "scoreTier"}],
+            [{"name": "totalActivePremium"}, {"name": "activePolicyCount"}],
+            [{"name": "nextXDate"}, {"name": "nextXDateLob"}],
+            [{"name": "retentionRisk"}, {"name": "rateIncreaseFlag"}]
         ]
     },
     {
-        "name": "property",
-        "label": "Property",
+        "name": "claimsSummary",
+        "label": "Claims Summary",
         "style": "default",
         "rows": [
-            [{"name": "propertyAddress"}, {"name": "homeYearBuilt"}],
-            [{"name": "homeSquareFootage"}, {"name": "homeDwellingValue"}],
-            [{"name": "homeConstruction"}, {"name": "homeRoofMaterial"}],
-            [{"name": "homeRoofYear"}, {"name": "homePurchaseYear"}],
-            [{"name": "homeSecuritySystem"}, {"name": "homeAlarmMonitored"}],
-            [{"name": "homePool"}, {"name": "homeDog"}],
-            [{"name": "homeDogBreed"}, {"name": "homeTrampoline"}],
-            [{"name": "rentalPropertyFlag"}, {"name": "propertyCount"}],
-            [{"name": "rentalPropertyNotes", "fullWidth": true}]
+            [{"name": "claimsCount3yr"}, {"name": "claimsOpen"}],
+            [{"name": "lastClaimDate"}, {"name": "lastClaimType"}],
+            [{"name": "claimsNotes", "fullWidth": true}]
         ]
     },
     {
-        "name": "vehicles",
-        "label": "Vehicles",
+        "name": "accountNotes",
+        "label": "Account Notes",
         "style": "default",
         "rows": [
-            [{"name": "vehicleCount"}, false],
-            [{"name": "vehicle1Year"}, {"name": "vehicle1Make"}],
-            [{"name": "vehicle1Model"}, {"name": "vehicle1Vin"}],
-            [{"name": "vehicle1Ownership"}, {"name": "vehicle1Use"}],
-            [{"name": "vehicle1AnnualMiles"}, false],
-            [{"name": "vehicle2Year"}, {"name": "vehicle2Make"}],
-            [{"name": "vehicle2Model"}, {"name": "vehicle2Vin"}],
-            [{"name": "vehicle2Ownership"}, {"name": "vehicle2Use"}],
-            [{"name": "vehicle2AnnualMiles"}, false],
-            [{"name": "vehicleAdditionalNotes", "fullWidth": true}]
-        ]
-    },
-    {
-        "name": "drivers",
-        "label": "Drivers",
-        "style": "default",
-        "rows": [
-            [{"name": "driverCount"}, false],
-            [{"name": "driver1Name"}, {"name": "driver1Dob"}],
-            [{"name": "driver1LicenseState"}, {"name": "driver1Accidents"}],
-            [{"name": "driver1Violations"}, false],
-            [{"name": "driver2Name"}, {"name": "driver2Dob"}],
-            [{"name": "driver2LicenseState"}, {"name": "driver2Accidents"}],
-            [{"name": "driver2Violations"}, false],
-            [{"name": "mvrFlag"}, false],
-            [{"name": "driverAdditionalNotes", "fullWidth": true}]
-        ]
-    },
-    {
-        "name": "coverageGaps",
-        "label": "Coverage Gaps & Cross-Sell",
-        "style": "default",
-        "rows": [
-            [{"name": "coverageGaps", "fullWidth": true}],
-            [{"name": "gapUmbrella"}, {"name": "gapUmbrellaReason"}],
-            [{"name": "gapLife"}, {"name": "gapLifeNeedEst"}],
-            [{"name": "gapLifeReason"}, {"name": "gapAutoUm"}],
-            [{"name": "gapMedicare"}, {"name": "gapMedicareEligible"}],
-            [{"name": "gapRenters"}, {"name": "gapRideshare"}]
+            [{"name": "aiAssessment", "fullWidth": true}],
+            [{"name": "googleDriveFolderUrl"}, false]
         ]
     }
 ]

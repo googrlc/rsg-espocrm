@@ -156,8 +156,8 @@
             "type": "enum",
             "options": [
                 "",
-                "Synced",
                 "Pending",
+                "Synced",
                 "Error",
                 "Skipped"
             ],
@@ -265,10 +265,10 @@
             "type": "enum",
             "options": [
                 "",
-                "Low",
-                "Medium",
+                "Critical",
                 "High",
-                "Critical"
+                "Medium",
+                "Low"
             ],
             "isCustom": true,
             "tooltipText": "Auto-calculated by n8n renewal workflow based on days to expiration",

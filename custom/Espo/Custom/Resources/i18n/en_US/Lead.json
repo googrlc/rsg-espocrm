@@ -3,11 +3,11 @@
         "insuranceInterest": "Insurance Interest",
         "currentlyInsured": "Currently Insured?",
         "currentCarrier": "Current Carrier",
-        "estimatedPremium": "Est. Premium",
+        "estimatedPremium": "Estimated Premium",
         "priority": "Priority",
         "aiSummary": "AI Summary",
         "intelPackRun": "Intel Pack Run",
-        "xDate": "X-Date"
+        "xDate": "Expiration Date"
     },
     "tooltips": {
         "aiSummary": "Pre-call intel from Manus prospect intelligence pack",
@@ -15,14 +15,37 @@
         "xDate": "Expiration date of current policy — used for nurture loop automation"
     },
     "options": {
+        "insuranceInterest": {
+            "": "",
+            "Commercial Auto": "Commercial Auto",
+            "General Liability": "General Liability",
+            "Workers Comp": "Workers' Compensation",
+            "Commercial Property": "Commercial Property",
+            "BOP": "Business Owners Policy",
+            "Personal Auto": "Personal Auto",
+            "Homeowners": "Homeowners",
+            "Life": "Life Insurance",
+            "Health": "Health Insurance",
+            "Medicare": "Medicare",
+            "Group Benefits": "Group Benefits",
+            "Inland Marine": "Inland Marine",
+            "Multiple": "Multiple Lines",
+            "Other": "Other"
+        },
+        "priority": {
+            "": "",
+            "Hot": "High Priority",
+            "Warm": "Medium Priority",
+            "Cold": "Low Priority"
+        },
         "status": {
-            "New / Uncontacted": "New / Uncontacted",
+            "New / Uncontacted": "New Lead",
             "Attempting Contact": "Attempting Contact",
-            "Connected": "Connected",
-            "Gathering Info": "Gathering Info",
+            "Connected": "Contacted",
+            "Gathering Info": "Gathering Information",
             "Qualified": "Qualified",
-            "Nurture": "Nurture",
-            "DNC": "DNC",
+            "Nurture": "Nurture Campaign",
+            "DNC": "Do Not Contact",
             "Converted": "Converted"
         }
     },

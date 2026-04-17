@@ -1,5 +1,6 @@
 {
     "fields": {
+        "accounts": "Accounts",
         "contactType": "Type",
         "relationshipToAccount": "Relationship to Account",
         "originalLeadSource": "Original Lead Source",
@@ -36,6 +37,7 @@
         }
     },
     "labels": {
+        "Accounts": "Accounts",
         "Personal Policies": "Personal Policies"
     }
 }

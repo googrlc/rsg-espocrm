@@ -116,7 +116,6 @@ class PolicyAccountSync
         $activePolicyCount = 0;
         $nextExpiration = null;
         $nextExpirationLob = null;
-        $nextExpirationCarrier = null;
 
         foreach ($policyList as $policy) {
             $status = (string) ($policy->get('status') ?? '');
@@ -130,7 +129,6 @@ class PolicyAccountSync
                 if ($expirationDate && (!$nextExpiration || $expirationDate < $nextExpiration)) {
                     $nextExpiration = $expirationDate;
                     $nextExpirationLob = $policy->get('lineOfBusiness');
-                    $nextExpirationCarrier = $policy->get('carrier');
                 }
             }
         }
@@ -140,9 +138,6 @@ class PolicyAccountSync
         $account->set('policyCountActive', $activePolicyCount);
         $account->set('nextXDate', $nextExpiration?->format('Y-m-d'));
         $account->set('nextXDateLob', $nextExpirationLob);
-        $account->set('nextRenewalDate', $nextExpiration?->format('Y-m-d'));
-        $account->set('nextRenewalLob', $nextExpirationLob);
-        $account->set('nextRenewalCarrier', $nextExpirationCarrier);
         $account->set('daysToRenewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
 
         $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);

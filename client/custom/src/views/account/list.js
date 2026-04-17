@@ -5,7 +5,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
   (function () {
   if (!document.getElementById('rsg-select-nav-css')) {
     var s = document.createElement('style'); s.id = 'rsg-select-nav-css';
-    s.textContent = '.rsg-th-cb,.rsg-td-cb{width:36px!important;min-width:36px!important;padding:0 8px!important;text-align:center!important;vertical-align:middle!important}.rsg-th-cb input[type=checkbox],.rsg-td-cb input[type=checkbox],.rsg-row-cb{width:16px;height:16px;cursor:pointer;accent-color:#2262e8}.rsg-row-selected>td{background:#eef4ff!important}.rsg-row-selected:hover>td{background:#dce8ff!important}.rsg-selection-bar{display:flex;align-items:center;gap:12px;background:#e8f0ff;border:1px solid #b8ceff;border-radius:10px;padding:8px 14px;margin-bottom:8px;font-size:.85rem;font-weight:600;color:#1d4eb4}#rsg-selected-count{flex:1}.rsg-sel-btn{background:transparent;border:1px solid #8aafff;border-radius:999px;color:#1d4eb4;font-size:.78rem;font-weight:700;padding:4px 12px;cursor:pointer}.rsg-sel-btn:hover{background:#d0e0ff}.rsg-record-nav{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;margin-bottom:12px;background:rgba(255,255,255,.92);border:1px solid rgba(188,202,232,.7);border-radius:12px;box-shadow:0 2px 8px rgba(14,31,67,.06)}.rsg-nav-back{font-size:.82rem;font-weight:700;color:#2262e8;text-decoration:none}.rsg-nav-back:hover{text-decoration:underline}.rsg-nav-center{display:flex;align-items:center;gap:10px}.rsg-nav-pos{font-size:.8rem;color:#61708f;font-weight:600;min-width:60px;text-align:center}.rsg-nav-btn{background:#fff;border:1px solid #d7deee;border-radius:999px;color:#234170;font-size:.8rem;font-weight:700;padding:5px 14px;cursor:pointer;transition:background .15s,border-color .15s}.rsg-nav-btn:hover:not(:disabled){background:#eef4ff;border-color:#2262e8;color:#2262e8}.rsg-nav-btn.rsg-nav-disabled,.rsg-nav-btn:disabled{opacity:.35;cursor:not-allowed}';
+    s.textContent = '.rsg-th-cb,.rsg-td-cb{width:36px!important;min-width:36px!important;padding:0 8px!important;text-align:center!important;vertical-align:middle!important}.rsg-th-cb input[type=checkbox],.rsg-td-cb input[type=checkbox],.rsg-row-cb{width:16px;height:16px;cursor:pointer;accent-color:#2262e8}.rsg-row-selected>td{background:#eef4ff!important}.rsg-row-selected:hover>td{background:#dce8ff!important}.rsg-selection-bar{display:flex;align-items:center;gap:12px;background:#e8f0ff;border:1px solid #b8ceff;border-radius:10px;padding:8px 14px;margin-bottom:8px;font-size:.85rem;font-weight:600;color:#1d4eb4}#rsg-selected-count{flex:1}.rsg-sel-btn{background:transparent;border:1px solid #8aafff;border-radius:999px;color:#1d4eb4;font-size:.78rem;font-weight:700;padding:4px 12px;cursor:pointer}.rsg-sel-btn:hover{background:#d0e0ff}.rsg-record-nav{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;margin-bottom:12px;background:rgba(255,255,255,.92);border:1px solid rgba(188,202,232,.7);border-radius:12px;box-shadow:0 2px 8px rgba(14,31,67,.06)}.rsg-nav-back{font-size:.82rem;font-weight:700;color:#2262e8;text-decoration:none}.rsg-nav-back:hover{text-decoration:underline}.rsg-nav-center{display:flex;align-items:center;gap:10px}.rsg-nav-pos{font-size:.8rem;color:#61708f;font-weight:600;min-width:60px;text-align:center}.rsg-nav-btn{background:#fff;border:1px solid #d7deee;border-radius:999px;color:#234170;font-size:.8rem;font-weight:700;padding:5px 14px;cursor:pointer;transition:background .15s,border-color .15s}.rsg-nav-btn:hover:not(:disabled){background:#eef4ff;border-color:#2262e8;color:#2262e8}.rsg-nav-btn.rsg-nav-disabled,.rsg-nav-btn:disabled{opacity:.35;cursor:not-allowed}.rsg-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0}.rsg-search-wrap{display:flex;align-items:center;gap:8px;min-height:38px;padding:0 12px;border:1px solid #d7deee;border-radius:10px;background:#fff;box-shadow:inset 0 1px 2px rgba(15,23,42,.04);flex:1 1 280px;max-width:420px}.rsg-search-icon{display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#7b8aa8;font-size:14px;line-height:1}.rsg-search-wrap #rsg-search{display:block;flex:1 1 auto;width:100%;height:36px;margin:0;padding:0;border:0;background:transparent;box-shadow:none;outline:0;font-size:14px;line-height:20px;color:#1f2937}.rsg-search-wrap #rsg-search::placeholder{color:#94a3b8}.rsg-search-wrap #rsg-search:focus{outline:0;box-shadow:none}.rsg-count-note{font-size:12px;line-height:1.4;color:#6b7280;white-space:nowrap}';
     document.head.appendChild(s);
   }
   if (!window._rsgNavInit) {
@@ -47,49 +47,59 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
   _exports.default = Dep.extend({
     template: 'custom:account/list',
     setup: function () {
-      this.scope = 'Account'; this.activeTab = 'commercial'; this.searchQuery = {}; this.sortState = {}; this.cachedData = {}; this.selectedIds = {};
+      this.scope = 'Account'; this.activeTab = 'commercial'; this.searchQuery = {}; this.sortState = {}; this.cachedData = {}; this.selectedIds = {}; this.searchDebounceMs = 300; this._searchDebounceTimer = null;
       this.primaryTypes = ['Commercial Lines', 'Personal Lines', 'Prospect'];
       this.tabDefs = {
         commercial: { label: 'Commercial Lines', color: '#2563eb',
           where: [{ type: 'equals', attribute: 'accountType', value: 'Commercial Lines' },{ type: 'in', attribute: 'accountStatus', value: ['Active','Urgent','Renewing','At Risk'] }],
-          select: 'id,name,industry,phoneNumber,accountStatus,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          select: 'id,name,industry,phoneNumber,emailAddress,accountStatus,scoreTier,activePolicyCount,assignedUserName,nextXDate',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'scoreTier', label: 'Tier', type: 'text', sortable: true },{ key: 'activePolicyCount', label: 'Policies', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         personal: { label: 'Personal Lines', color: '#16a34a',
           where: [{ type: 'equals', attribute: 'accountType', value: 'Personal Lines' },{ type: 'in', attribute: 'accountStatus', value: ['Active','Urgent','Renewing','At Risk'] }],
-          select: 'id,name,phoneNumber,accountStatus,csrName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'csrName', label: 'CSR', type: 'text', sortable: true }],
+          select: 'id,name,phoneNumber,emailAddress,accountStatus,scoreTier,activePolicyCount,assignedUserName',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'emailAddress', label: 'Email', type: 'text', sortable: true },{ key: 'scoreTier', label: 'Tier', type: 'text', sortable: true },{ key: 'activePolicyCount', label: 'Policies', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         prospect: { label: 'Prospects', color: '#b45309',
           where: [{ type: 'equals', attribute: 'accountType', value: 'Prospect' }],
-          select: 'id,name,industry,estimatedPremium,stage,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: 'estimatedPremium', label: 'Est. Premium', type: 'currency', sortable: true },{ key: 'stage', label: 'Stage', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
-          defaultSort: { key: 'estimatedPremium', dir: 'desc' } },
+          select: 'id,name,industry,phoneNumber,emailAddress,assignedUserName,clientSince',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'emailAddress', label: 'Email', type: 'text', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          defaultSort: { key: 'name', dir: 'asc' } },
         inactive: { label: 'Inactive', color: '#6b7280',
           where: [{ type: 'equals', attribute: 'accountStatus', value: 'Inactive' }],
-          select: 'id,name,accountType,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'accountType', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Last Premium', type: 'currency', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          select: 'id,name,accountType,phoneNumber,emailAddress,assignedUserName,scoreTier',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'accountType', label: 'Type', type: 'text', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'scoreTier', label: 'Tier', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Last Premium', type: 'currency', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         needsReview: { label: 'Needs Review', color: '#f59e0b',
           where: [{ type: 'notEquals', attribute: 'accountStatus', value: 'Inactive' }],
           clientFilter: true,
-          select: 'id,name,accountType,accountStatus,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'accountType', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          select: 'id,name,accountType,accountStatus,scoreTier,phoneNumber,assignedUserName,activePolicyCount',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'accountType', label: 'Type', type: 'text', sortable: true },{ key: 'scoreTier', label: 'Tier', type: 'text', sortable: true },{ key: 'activePolicyCount', label: 'Policies', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: 'name', dir: 'asc' } }
       };
       this.counts = {};
     },
     afterRender: function () { this._bindEvents(); this._loadTab(this.activeTab, true); },
+    onRemove: function () { if (this._searchDebounceTimer) window.clearTimeout(this._searchDebounceTimer); },
     _bindEvents: function () {
       var self = this;
       this.$el.on('click', '[data-tab]', function () { var tab = $(this).data('tab'); if (tab !== self.activeTab) { self.activeTab = tab; self.$el.find('[data-tab]').removeClass('rsg-tab-active'); $(this).addClass('rsg-tab-active'); self._loadTab(tab, true); } });
-      this.$el.on('input', '#rsg-search', function () { self.searchQuery[self.activeTab] = $(this).val(); self._renderTable(self.activeTab); });
+      this.$el.on('input', '#rsg-search', function () { self._queueSearchRender(self.activeTab, $(this).val()); });
       this.$el.on('click', 'th[data-sort-key]', function () { var key = $(this).data('sort-key'); var cur = self.sortState[self.activeTab] || Object.assign({}, self.tabDefs[self.activeTab].defaultSort); self.sortState[self.activeTab] = cur.key === key ? { key: key, dir: cur.dir === 'asc' ? 'desc' : 'asc' } : { key: key, dir: 'asc' }; self._renderTable(self.activeTab); });
       this.$el.on('click', '#rsg-new-btn', function () { self.getRouter().navigate('#Account/create', { trigger: true }); });
       this.$el.on('change', '#rsg-select-all', function () { var checked = $(this).is(':checked'); if (!self.selectedIds[self.activeTab]) self.selectedIds[self.activeTab] = {}; self.$el.find('.rsg-row-cb').each(function () { var id = $(this).data('id'); $(this).prop('checked', checked); if (checked) { self.selectedIds[self.activeTab][id] = true; } else { delete self.selectedIds[self.activeTab][id]; } }); self.$el.find('.rsg-row').toggleClass('rsg-row-selected', checked); self._updateSelectionBar(); });
       this.$el.on('change', '.rsg-row-cb', function (e) { e.stopPropagation(); var id = $(this).data('id'); if (!self.selectedIds[self.activeTab]) self.selectedIds[self.activeTab] = {}; if ($(this).is(':checked')) { self.selectedIds[self.activeTab][id] = true; $(this).closest('tr').addClass('rsg-row-selected'); } else { delete self.selectedIds[self.activeTab][id]; $(this).closest('tr').removeClass('rsg-row-selected'); } var total = self.$el.find('.rsg-row-cb').length, checked = self.$el.find('.rsg-row-cb:checked').length; self.$el.find('#rsg-select-all').prop('indeterminate', checked > 0 && checked < total).prop('checked', checked === total && total > 0); self._updateSelectionBar(); });
       this.$el.on('click', '.rsg-td-cb', function (e) { e.stopPropagation(); });
       this.$el.on('click', '#rsg-clear-selection', function () { self.selectedIds[self.activeTab] = {}; self.$el.find('.rsg-row-cb').prop('checked', false); self.$el.find('.rsg-row').removeClass('rsg-row-selected'); self.$el.find('#rsg-select-all').prop('checked', false).prop('indeterminate', false); self._updateSelectionBar(); });
+    },
+    _queueSearchRender: function (tabId, value) {
+      var self = this;
+      this.searchQuery[tabId] = value;
+      if (this._searchDebounceTimer) window.clearTimeout(this._searchDebounceTimer);
+      this._searchDebounceTimer = window.setTimeout(function () {
+        self._searchDebounceTimer = null;
+        if (self.activeTab === tabId) self._renderTable(tabId);
+      }, this.searchDebounceMs);
     },
     _updateSelectionBar: function () { var selected = this.selectedIds[this.activeTab] || {}, count = Object.keys(selected).length, $bar = this.$el.find('#rsg-selection-bar'); if (count > 0) { $bar.find('#rsg-selected-count').text(count + ' record' + (count !== 1 ? 's' : '') + ' selected'); $bar.show(); } else { $bar.hide(); } },
     _loadTab: function (tabId, fetchFresh) {
@@ -112,11 +122,15 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
     _showTableLoading: function (tabId) { this.$el.find('#rsg-table-container').html('<div class="rsg-state-msg"><span class="rsg-spinner"></span> Loading ' + this.tabDefs[tabId].label + '…</div>'); },
     _showTableError: function (tabId, msg) { this.$el.find('#rsg-table-container').html('<div class="rsg-state-msg rsg-state-error">' + this._esc(msg) + '</div>'); },
     _renderTable: function (tabId) {
+      var activeEl = document.activeElement;
+      var shouldRestoreSearchFocus = !!(activeEl && this.el.contains(activeEl) && activeEl.id === 'rsg-search');
+      var searchSelectionStart = shouldRestoreSearchFocus ? activeEl.selectionStart : null;
+      var searchSelectionEnd = shouldRestoreSearchFocus ? activeEl.selectionEnd : null;
       var def = this.tabDefs[tabId], sort = this.sortState[tabId] || Object.assign({}, def.defaultSort);
       var query = (this.searchQuery[tabId] || '').toLowerCase().trim(), allRows = (this.cachedData[tabId] || []).slice();
       var rows = query ? allRows.filter(function (r) { return def.columns.some(function (col) { var v = r[col.key]; return v && String(v).toLowerCase().indexOf(query) !== -1; }); }) : allRows;
       rows.sort(function (a, b) { var av = a[sort.key], bv = b[sort.key]; if (av == null) av = sort.dir === 'asc' ? '￿' : ''; if (bv == null) bv = sort.dir === 'asc' ? '￿' : ''; if (typeof av === 'number' && typeof bv === 'number') return sort.dir === 'asc' ? av - bv : bv - av; return sort.dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av)); });
-      var total = allRows.length, premium = allRows.reduce(function (s, r) { return s + (r._totalPremium || r.estimatedPremium || 0); }, 0);
+      var total = allRows.length, premium = allRows.reduce(function (s, r) { return s + (r._totalPremium || 0); }, 0);
       var active = allRows.filter(function (r) { return r.accountStatus === 'Active'; }).length;
       var urgent = allRows.filter(function (r) { return r.accountStatus === 'Urgent' || r.accountStatus === 'At Risk'; }).length;
       var selected = this.selectedIds[tabId] || {}, self = this;
@@ -139,6 +153,13 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       html += '</tbody></table></div>';
       var $container = this.$el.find('#rsg-table-container');
       $container.html(html);
+      if (shouldRestoreSearchFocus) {
+        var input = $container.find('#rsg-search').get(0);
+        if (input) {
+          input.focus();
+          try { input.setSelectionRange(searchSelectionStart, searchSelectionEnd); } catch (e) {}
+        }
+      }
       if (someChecked) $container.find('#rsg-select-all').prop('indeterminate', true);
       $container.find('.rsg-row').on('click', function () { var id = $(this).data('id'); try { sessionStorage.setItem('rsg-nav-list', JSON.stringify(rows.map(function (r) { return r.id; }))); sessionStorage.setItem('rsg-nav-tab', tabId); } catch(e) {} self.getRouter().navigate('#Account/view/' + id, { trigger: true }); });
     },

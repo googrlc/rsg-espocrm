@@ -37,11 +37,11 @@ class AccountPlaybookManager
             ->where(['accountId' => $accountId])
             ->find();
 
-        $coverageLines = $this->collectCoverageLines($account, $policyList);
-        $carrierMixCount = $this->countCarriers($account, $policyList);
+        $coverageLines = $this->collectCoverageLines($policyList);
+        $carrierMixCount = $this->countCarriers($policyList);
         $annualPremium = max(
-            (float) ($account->get('annualPremium') ?? 0),
-            (float) ($account->get('totalActivePremium') ?? 0)
+            (float) ($account->get('totalActivePremium') ?? 0),
+            (float) ($account->get('totalAnnualPremium') ?? 0)
         );
         $recentChanges = $this->collectRecentChanges($activityList);
 
@@ -65,10 +65,15 @@ class AccountPlaybookManager
         $hasAuto = in_array('Auto', $coverageLines, true);
         $hasHome = in_array('Home', $coverageLines, true);
         $hasCommercialCore = count(array_intersect($coverageLines, ['Commercial Auto', 'GL', 'BOP', 'Transportation'])) > 0;
+        $hasRenters = in_array('Renters', $coverageLines, true);
+        $needsUmbrella = !$hasUmbrella && ($hasAuto || $hasHome || $hasCommercialCore);
+        $needsLife = !$hasLife && ($hasAuto || $hasHome || $hasMedicare);
+        $needsMedicare = !$hasMedicare && $this->isMedicareEligible($account);
+        $needsRenters = trim((string) ($account->get('residenceType') ?? '')) === 'Rented' && !$hasRenters;
 
         $playbooks = [];
 
-        if ((bool) $account->get('gapUmbrella') || (!$hasUmbrella && ($hasAuto || $hasHome || $hasCommercialCore))) {
+        if ($needsUmbrella) {
             $playbooks[] = [
                 'automationKey' => 'account-playbook:umbrella',
                 'name' => 'Cross-Sell Review: Umbrella - ' . $accountName,
@@ -80,12 +85,12 @@ class AccountPlaybookManager
                     'Current lines: ' . $coverageSummary,
                     'Annual premium: ' . number_format($annualPremium, 2),
                     'Carrier mix: ' . $carrierMixCount,
-                    'Trigger: Umbrella gap flag or missing umbrella with core lines on file.',
+                    'Trigger: Missing umbrella with core lines on file.',
                 ]),
             ];
         }
 
-        if ((bool) $account->get('gapLife') || (!$hasLife && ($hasAuto || $hasHome || $hasMedicare))) {
+        if ($needsLife) {
             $playbooks[] = [
                 'automationKey' => 'account-playbook:life',
                 'name' => 'Cross-Sell Review: Life Insurance - ' . $accountName,
@@ -96,16 +101,13 @@ class AccountPlaybookManager
                     'Playbook: Life Insurance',
                     'Current lines: ' . $coverageSummary,
                     'Annual premium: ' . number_format($annualPremium, 2),
-                    'Trigger: Life gap flag or household account without life coverage.',
+                    'Trigger: Household account without life coverage.',
                 ]),
             ];
         }
 
-        $medicareEligibilityDate = trim((string) ($account->get('gapMedicareEligible') ?? ''));
-        if (
-            (bool) $account->get('gapMedicare') ||
-            (!$hasMedicare && $this->isWithinDays($medicareEligibilityDate, 180))
-        ) {
+        $medicareEligibilityDate = $this->getMedicareEligibilityDate($account);
+        if ($needsMedicare && $this->isWithinDays($medicareEligibilityDate, 180)) {
             $playbooks[] = [
                 'automationKey' => 'account-playbook:medicare',
                 'name' => 'Cross-Sell Review: Medicare - ' . $accountName,
@@ -116,7 +118,23 @@ class AccountPlaybookManager
                     'Playbook: Medicare',
                     'Current lines: ' . $coverageSummary,
                     'Medicare eligible: ' . ($medicareEligibilityDate !== '' ? $medicareEligibilityDate : 'Not set'),
-                    'Trigger: Medicare gap flag or eligibility within 180 days.',
+                    'Trigger: Eligibility within 180 days without Medicare coverage.',
+                ]),
+            ];
+        }
+
+        if ($needsRenters) {
+            $playbooks[] = [
+                'automationKey' => 'account-playbook:renters',
+                'name' => 'Cross-Sell Review: Renters - ' . $accountName,
+                'urgency' => 'Normal',
+                'dueDays' => 5,
+                'reason' => 'Rented residence without renters coverage on file.',
+                'description' => $this->buildDescription([
+                    'Playbook: Renters',
+                    'Current lines: ' . $coverageSummary,
+                    'Residence type: Rented',
+                    'Trigger: Missing renters coverage for a rented household.',
                 ]),
             ];
         }
@@ -201,7 +219,7 @@ class AccountPlaybookManager
         $this->entityManager->saveEntity($task);
     }
 
-    private function collectCoverageLines(Entity $account, iterable $policyList): array
+    private function collectCoverageLines(iterable $policyList): array
     {
         $lines = [];
 
@@ -217,17 +235,13 @@ class AccountPlaybookManager
             }
         }
 
-        foreach ($this->normalizeMultiEnum($account->get('lob')) as $line) {
-            $lines[$line] = true;
-        }
-
         $normalized = array_keys($lines);
         sort($normalized);
 
         return $normalized;
     }
 
-    private function countCarriers(Entity $account, iterable $policyList): int
+    private function countCarriers(iterable $policyList): int
     {
         $carriers = [];
 
@@ -239,12 +253,6 @@ class AccountPlaybookManager
 
             $carrier = trim((string) ($policy->get('carrier') ?? ''));
             if ($carrier !== '') {
-                $carriers[$carrier] = true;
-            }
-        }
-
-        if ($carriers === []) {
-            foreach ($this->extractCarrierValues((string) ($account->get('carrier') ?? '')) as $carrier) {
                 $carriers[$carrier] = true;
             }
         }
@@ -324,23 +332,34 @@ class AccountPlaybookManager
         return implode("\n", array_filter($lines));
     }
 
-    private function normalizeMultiEnum(mixed $value): array
+    private function getMedicareEligibilityDate(Entity $account): string
     {
-        if (!is_array($value)) {
-            return [];
+        foreach (['primaryDob', 'dateOfBirth'] as $field) {
+            $dob = trim((string) ($account->get($field) ?? ''));
+            if ($dob === '') {
+                continue;
+            }
+
+            try {
+                $eligibilityDate = (new DateTimeImmutable($dob))->add(new DateInterval('P65Y'));
+            } catch (\Exception) {
+                continue;
+            }
+
+            return $eligibilityDate->format('Y-m-d');
         }
 
-        return array_values(array_filter(array_map(
-            fn ($item) => trim((string) $item),
-            $value
-        )));
+        return '';
     }
 
-    private function extractCarrierValues(string $value): array
+    private function isMedicareEligible(Entity $account): bool
     {
-        $parts = preg_split('/[;,|]+/', $value) ?: [];
+        $eligibilityDate = $this->getMedicareEligibilityDate($account);
+        if ($eligibilityDate === '') {
+            return false;
+        }
 
-        return array_values(array_filter(array_map('trim', $parts)));
+        return $this->isWithinDays($eligibilityDate, 180);
     }
 
     private function toDate(string $value): ?DateTimeImmutable

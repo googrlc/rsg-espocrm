@@ -39,6 +39,14 @@
         "detail": []
     },
     "relationshipPanels": {
+        "accounts": {
+            "orderBy": "name",
+            "orderDirection": "asc",
+            "createButton": false,
+            "selectButton": true,
+            "order": 0,
+            "label": "Accounts"
+        },
         "policies": {
             "orderBy": "expirationDate",
             "orderDirection": "asc",

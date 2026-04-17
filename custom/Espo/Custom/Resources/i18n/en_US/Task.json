@@ -11,7 +11,7 @@
         "waitingOnCarrier": "Waiting on Carrier"
     },
     "fields": {
-        "taskSource": "Source",
+        "taskSource": "Task Source",
         "linkedAccount": "Linked Account",
         "momentumTaskId": "NowCerts Task ID",
         "momentumLastSynced": "Last Synced",
@@ -20,6 +20,48 @@
         "urgency": "Urgency",
         "triageSummary": "Triage Summary",
         "triageReason": "Triage Reason"
+    },
+    "options": {
+        "status": {
+            "Inbox": "Inbox",
+            "In Progress": "In Progress",
+            "Waiting on Client": "Waiting on Client",
+            "Waiting on Carrier": "Waiting on Carrier",
+            "Completed": "Completed",
+            "Cancelled": "Cancelled"
+        },
+        "taskType": {
+            "Client Service": "Client Service",
+            "Policy Change": "Policy Change",
+            "Renewal": "Renewal",
+            "New Business": "New Business",
+            "Follow Up": "Follow-Up",
+            "Onboarding": "Onboarding",
+            "Claims": "Claims",
+            "Commission": "Commission",
+            "Admin": "Administrative",
+            "Other": "Other"
+        },
+        "syncSource": {
+            "Manual": "Manual",
+            "Gmail": "Gmail",
+            "Slack": "Slack",
+            "Momentum": "Momentum",
+            "n8n": "n8n Automation",
+            "Viktor": "Viktor AI"
+        },
+        "urgency": {
+            "Urgent": "Urgent",
+            "High": "High",
+            "Normal": "Normal",
+            "Low": "Low"
+        },
+        "taskSource": {
+            "": "",
+            "Account": "Account",
+            "Contact": "Contact",
+            "Policy": "Policy"
+        }
     },
     "links": {
         "linkedAccount": "Linked Account"

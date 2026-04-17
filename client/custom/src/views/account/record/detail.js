@@ -7,8 +7,8 @@
  *   1 = Contacts          (contacts)
  *   2 = Policies          (policies, renewals)
  *   3 = Activity          (activityLogs, emails, meetings, calls, tasks)
- *   4 = Business Profile  (opportunities) — conditional: CL/GB only
- *   5 = Group Benefits    — conditional: GB only
+ *   4 = Profile           (opportunities) — shown for all supported account types
+ *   5 = Relationship      — conditional: GB only
  *   6 = Internal          (cases, commissions)
  ************************************************************************/
 
@@ -55,9 +55,11 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
             if (bottomView) {
                 if (bottomView.isRendered()) {
                     self.syncBottomPanelsToTab(tab);
+                    self.refreshBottomPanelHeights();
                 } else {
                     this.listenToOnce(bottomView, "after:render", function () {
                         self.syncBottomPanelsToTab(tab);
+                        self.refreshBottomPanelHeights();
                     });
                 }
             }
@@ -66,16 +68,15 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
         selectTab: function (tab) {
             Dep.prototype.selectTab.call(this, tab);
             this.syncBottomPanelsToTab(tab);
+            this.refreshBottomPanelHeights();
         },
 
         /**
-         * Hide/show Business Profile (tab 4) and Group Benefits (tab 5)
+         * Hide/show Profile (tab 4) and Group Benefits relationship tab (tab 5)
          * based on accountType field value.
          *
-         * Commercial Lines → show Business Profile, hide Group Benefits
-         * Group Benefits → show both Business Profile and Group Benefits
-         * Personal Lines → show Business Profile (PL panels use dynamicLogicVisible)
-         * All others (Prospect, etc.) → hide both
+         * Most account types → show Profile, hide Group Benefits relationship tab
+         * Group Benefits → show both tabs
          */
         syncConditionalTabs: function () {
             var type = this.model.get("accountType") || "";
@@ -89,17 +90,11 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
             var $businessTab = $allTabs.eq(this.BUSINESS_PROFILE_TAB);
             var $gbTab = $allTabs.eq(this.GROUP_BENEFITS_TAB);
 
-            if (type === "Commercial Lines") {
-                $businessTab.removeClass("tab-hidden");
-                $gbTab.addClass("tab-hidden");
-            } else if (type === "Group Benefits") {
+            if (type === "Group Benefits") {
                 $businessTab.removeClass("tab-hidden");
                 $gbTab.removeClass("tab-hidden");
-            } else if (type === "Personal Lines") {
-                $businessTab.removeClass("tab-hidden");
-                $gbTab.addClass("tab-hidden");
             } else {
-                $businessTab.addClass("tab-hidden");
+                $businessTab.removeClass("tab-hidden");
                 $gbTab.addClass("tab-hidden");
             }
         },
@@ -132,6 +127,21 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
                     $panel.addClass("hidden");
                     panel.tabHidden = true;
                 }
+            });
+        },
+
+        refreshBottomPanelHeights: function () {
+            var bottomView = this.getView("bottom");
+
+            if (!bottomView || !bottomView.$el) return;
+
+            window.requestAnimationFrame(function () {
+                bottomView.$el.find(".panel:not(.hidden) .panel-body, .panel:not(.hidden) .list-container")
+                    .css({
+                        height: "auto",
+                        "max-height": "none",
+                        "overflow-y": "visible"
+                    });
             });
         },
     });

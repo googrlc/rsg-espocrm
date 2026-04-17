@@ -6,12 +6,12 @@
                     "name": "accountStatus"
                 },
                 {
-                    "name": "totalActivePremium"
+                    "name": "scoreTier"
                 }
             ],
             [
                 {
-                    "name": "scoreTier"
+                    "name": "totalActivePremium"
                 },
                 {
                     "name": "activePolicyCount"
@@ -24,11 +24,19 @@
                 {
                     "name": "nextXDateLob"
                 }
+            ],
+            [
+                {
+                    "name": "retentionRisk"
+                },
+                {
+                    "name": "rateIncreaseFlag"
+                }
             ]
         ],
         "style": "default",
-        "name": "coverageOverview",
-        "label": "Coverage Overview"
+        "name": "relationshipOverview",
+        "label": "Relationship Overview"
     },
     {
         "rows": [
@@ -45,7 +53,7 @@
                     "name": "assignedUser"
                 },
                 {
-                    "name": "lastContactDate"
+                    "name": "clientSince"
                 }
             ],
             [
@@ -60,7 +68,9 @@
                 {
                     "name": "billingAddress"
                 },
-                false
+                {
+                    "name": "mailingAddress"
+                }
             ]
         ],
         "style": "default",
@@ -95,121 +105,6 @@
         "rows": [
             [
                 {
-                    "name": "intelYearsInBusiness"
-                },
-                {
-                    "name": "website"
-                }
-            ],
-            [
-                {
-                    "name": "businessEntity"
-                },
-                {
-                    "name": "sicCode"
-                }
-            ],
-            [
-                {
-                    "name": "intelNaics"
-                },
-                {
-                    "name": "annualRevenue"
-                }
-            ],
-            [
-                {
-                    "name": "numberOfEmployees"
-                },
-                {
-                    "name": "fein"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Business Profile",
-        "hidden": false,
-        "name": "opportunitiesTab",
-        "customLabel": "Business Details"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "aiAssessment"
-                }
-            ],
-            [
-                {
-                    "name": "intelConfidence"
-                },
-                {
-                    "name": "intelPackLastRun"
-                }
-            ],
-            [
-                {
-                    "name": "intelUnderwritingFlag"
-                },
-                {
-                    "name": "assessmentDate"
-                }
-            ],
-            [
-                {
-                    "name": "keyFindings"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "aiAssessment",
-        "customLabel": "AI Account Assessment"
-    },
-    {
-        "rows": [
-            [
-                {
                     "name": "intelLegalName"
                 },
                 {
@@ -229,14 +124,6 @@
                     "name": "yearsInBusiness"
                 },
                 {
-                    "name": "annualRevenue"
-                }
-            ],
-            [
-                {
-                    "name": "numberOfEmployees"
-                },
-                {
                     "name": "fein"
                 }
             ],
@@ -250,37 +137,75 @@
             ],
             [
                 {
-                    "name": "intelNaics"
+                    "name": "numberOfEmployees"
                 },
                 {
-                    "name": "intelWebsite"
+                    "name": "websiteUrl"
+                }
+            ],
+            [
+                {
+                    "name": "linkedinUrl"
+                },
+                {
+                    "name": "googleDriveFolderUrl"
                 }
             ]
         ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Profile",
+        "name": "profileIdentity",
+        "customLabel": "Business Identity"
+    },
+    {
+        "rows": [
+            [
                 {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
+                    "name": "aiAssessment"
+                }
+            ],
+            [
+                {
+                    "name": "communicationNotes"
+                }
+            ],
+            [
+                {
+                    "name": "referralSource"
+                },
+                {
+                    "name": "referralName"
+                }
+            ],
+            [
+                {
+                    "name": "preferredContact"
+                },
+                {
+                    "name": "bestTimeToCall"
+                }
+            ],
+            [
+                {
+                    "name": "lastContactDate"
+                },
+                {
+                    "name": "lastContactType"
+                }
+            ],
+            [
+                {
+                    "name": "lastContactOutcome"
+                },
+                {
+                    "name": "lastContactBy"
                 }
             ]
-        },
+        ],
         "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "businessIdentity",
-        "customLabel": "Business Identity"
+        "name": "relationshipSummary",
+        "customLabel": "Relationship Summary"
     },
     {
         "rows": [
@@ -302,114 +227,6 @@
             ],
             [
                 {
-                    "name": "intelBbbNotes"
-                }
-            ],
-            [
-                {
-                    "name": "intelLinkedinUrl"
-                },
-                {
-                    "name": "intelLinkedinNotes"
-                }
-            ],
-            [
-                {
-                    "name": "intelNewsNotes"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "bbbReputation",
-        "customLabel": "BBB & Reputation"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "intelFleetSize"
-                },
-                {
-                    "name": "intelOperatingRadius"
-                }
-            ],
-            [
-                {
-                    "name": "intelCargoType"
-                },
-                {
-                    "name": "intelOwnerOperators"
-                }
-            ],
-            [
-                {
-                    "name": "intelDotIncidents"
-                },
-                {
-                    "name": "intelOshaViolations"
-                }
-            ],
-            [
-                {
-                    "name": "intelPainPoints"
-                }
-            ],
-            [
-                {
-                    "name": "intelCrossSell"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "fleetOperations",
-        "customLabel": "Fleet & Operations"
-    },
-    {
-        "rows": [
-            [
-                {
                     "name": "claimsCount3yr"
                 },
                 {
@@ -426,209 +243,43 @@
             ],
             [
                 {
-                    "name": "riskScore"
-                },
-                {
-                    "name": "retentionRisk"
-                }
-            ],
-            [
-                {
                     "name": "claimsNotes"
                 }
             ]
         ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
         "style": "default",
-        "name": "riskUnderwriting",
-        "customLabel": "Risk & Underwriting Signals"
+        "name": "reputationAndRisk",
+        "customLabel": "Reputation & Risk"
     },
     {
         "rows": [
             [
                 {
-                    "name": "gapUmbrella"
-                },
-                {
-                    "name": "gapLife"
+                    "name": "communicationNotes"
                 }
             ],
             [
                 {
-                    "name": "gapAutoUm"
+                    "name": "lastContactDate"
                 },
                 {
-                    "name": "gapCount"
+                    "name": "lastContactType"
                 }
             ],
             [
                 {
-                    "name": "coverageGaps"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "accountType",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "coverageGapsCl",
-        "customLabel": "Coverage Gaps & Cross-Sell"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "dependentsCount"
+                    "name": "referralSource"
                 },
                 {
-                    "name": "dependentAges"
+                    "name": "referralName"
                 }
             ],
             [
                 {
-                    "name": "youthfulDriverFlag"
+                    "name": "googleDriveFolderUrl"
                 },
                 {
-                    "name": "yearsAtAddress"
-                }
-            ],
-            [
-                {
-                    "name": "residenceType"
-                },
-                {
-                    "name": "mailingAddressSame"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "accountType",
-                    "value": "Personal Lines"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "dependentsHousehold",
-        "customLabel": "Dependents & Household"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gapUmbrella"
-                },
-                {
-                    "name": "gapLife"
-                }
-            ],
-            [
-                {
-                    "name": "gapUmbrellaReason"
-                },
-                {
-                    "name": "gapLifeReason"
-                }
-            ],
-            [
-                {
-                    "name": "gapLifeNeedEst"
-                },
-                {
-                    "name": "gapAutoUm"
-                }
-            ],
-            [
-                {
-                    "name": "gapMedicare"
-                },
-                {
-                    "name": "gapMedicareEligible"
-                }
-            ],
-            [
-                {
-                    "name": "gapRenters"
-                },
-                {
-                    "name": "gapRideshare"
-                }
-            ],
-            [
-                {
-                    "name": "coverageGaps"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "accountType",
-                    "value": "Personal Lines"
-                }
-            ]
-        },
-        "style": "default",
-        "name": "coverageGapsPl",
-        "customLabel": "Coverage Gaps & Cross-Sell"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbEligibleEmployees"
-                },
-                {
-                    "name": "gbParticipatingEmployees"
-                }
-            ],
-            [
-                {
-                    "name": "gbCensusReceived"
-                },
-                {
-                    "name": "gbCensusDate"
+                    "name": "retentionRisk"
                 }
             ]
         ],
@@ -643,143 +294,9 @@
         },
         "style": "default",
         "tabBreak": true,
-        "tabLabel": "Group Benefits",
-        "name": "gbCensus",
-        "customLabel": "Group Census"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbMedicalCarrier"
-                },
-                {
-                    "name": "gbMedicalPlanType"
-                }
-            ],
-            [
-                {
-                    "name": "gbMedicalRenewalDate"
-                },
-                {
-                    "name": "gbMedicalMonthlyPremium"
-                }
-            ],
-            [
-                {
-                    "name": "gbEmployerContribution"
-                },
-                false
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "accountType",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "gbMedical",
-        "customLabel": "Medical"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbDentalCarrier"
-                },
-                {
-                    "name": "gbDentalMonthlyPremium"
-                }
-            ],
-            [
-                {
-                    "name": "gbVisionCarrier"
-                },
-                {
-                    "name": "gbVisionMonthlyPremium"
-                }
-            ],
-            [
-                {
-                    "name": "gbLifeAdCarrier"
-                },
-                {
-                    "name": "gbLifeBenefitAmount"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "accountType",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "gbAncillary",
-        "customLabel": "Dental, Vision & Life"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbStdCarrier"
-                },
-                {
-                    "name": "gbLtdCarrier"
-                }
-            ],
-            [
-                {
-                    "name": "gbVoluntaryBenefits"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "accountType",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "gbDisabilityVoluntary",
-        "customLabel": "Disability & Voluntary"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbNotes"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "accountType",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "name": "gbNotesPanel",
-        "customLabel": "Group Benefits Notes"
+        "tabLabel": "Relationship",
+        "name": "gbRelationship",
+        "customLabel": "Relationship Notes"
     },
     {
         "rows": [
@@ -793,20 +310,6 @@
             ],
             [
                 {
-                    "name": "aiAssessment"
-                }
-            ]
-        ],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Internal",
-        "name": "aiIntelPack",
-        "label": "AI Intel Pack"
-    },
-    {
-        "rows": [
-            [
-                {
                     "name": "momentumClientId"
                 },
                 {
@@ -815,12 +318,17 @@
             ],
             [
                 {
-                    "name": "googleDriveFolderUrl"
+                    "name": "intelSources"
+                },
+                {
+                    "name": "intelSourcesHit"
                 }
             ]
         ],
         "style": "default",
-        "name": "detailsInternal",
-        "label": "External Documents"
+        "tabBreak": true,
+        "tabLabel": "Internal",
+        "name": "internalSystems",
+        "label": "Internal Systems"
     }
 ]

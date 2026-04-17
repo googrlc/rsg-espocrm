@@ -1,35 +1,35 @@
 [
     {
         "name": "name",
-        "width": 22,
+        "width": 20,
         "link": true
     },
     {
-        "name": "accountType",
+        "name": "phoneNumber",
+        "width": 10
+    },
+    {
+        "name": "emailAddress",
+        "width": 14
+    },
+    {
+        "name": "assignedUser",
+        "width": 10
+    },
+    {
+        "name": "scoreTier",
+        "width": 8
+    },
+    {
+        "name": "activePolicyCount",
+        "width": 8
+    },
+    {
+        "name": "totalActivePremium",
         "width": 10
     },
     {
         "name": "accountStatus",
-        "width": 8
-    },
-    {
-        "name": "totalAnnualPremium",
-        "width": 10
-    },
-    {
-        "name": "type",
-        "width": 16
-    },
-    {
-        "name": "scoreTotal",
-        "width": 7
-    },
-    {
-        "name": "gapCount",
-        "width": 7
-    },
-    {
-        "name": "assignedUser",
         "width": 8
     }
 ]
