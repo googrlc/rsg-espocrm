@@ -11,8 +11,6 @@ use Espo\ORM\EntityManager;
 
 class RenewalOrchestrator
 {
-    private const RENEWAL_WINDOW_DAYS = 60;
-
     private const POLICY_SYNC_STATUSES = [
         'Active',
         'Up for Renewal',
@@ -34,7 +32,12 @@ class RenewalOrchestrator
             return;
         }
 
-        $renewal = $this->findRenewalByPolicyId((string) $policy->getId()) ?? $this->entityManager->getNewEntity('Renewal');
+        $existingRenewal = $this->findRenewalByPolicyId((string) $policy->getId());
+        if ($existingRenewal === null && !$this->isWithinRenewalCreationWindow($policy)) {
+            return;
+        }
+
+        $renewal = $existingRenewal ?? $this->entityManager->getNewEntity('Renewal');
         $originalExpirationDate = (string) ($renewal->get('expirationDate') ?? '');
         $originalUrgency = (string) ($renewal->get('urgency') ?? '');
         $renewalIsNew = !$renewal->getId();
@@ -168,9 +171,8 @@ class RenewalOrchestrator
         }
 
         $targetStatus = $this->mapRenewalStageToPolicyStatus(
-            (string) ($renewal->get('stage') ?? ''),
-            (string) ($policy->get('expirationDate') ?? ''),
-            (string) ($policy->get('status') ?? '')
+            $policy,
+            (string) ($renewal->get('stage') ?? '')
         );
 
         if ($targetStatus === null || $targetStatus === (string) ($policy->get('status') ?? '')) {
@@ -189,6 +191,21 @@ class RenewalOrchestrator
             in_array((string) ($policy->get('status') ?? ''), self::POLICY_SYNC_STATUSES, true);
     }
 
+    /**
+     * New renewals only once expiration is within the LOB lead window (commercial 90d, personal 30d).
+     */
+    private function isWithinRenewalCreationWindow(Entity $policy): bool
+    {
+        $daysRemaining = $this->calculateDaysRemaining((string) ($policy->get('expirationDate') ?? ''));
+        if ($daysRemaining === null || $daysRemaining < 0) {
+            return false;
+        }
+
+        $window = RenewalLeadWindows::leadDaysForPolicy($policy);
+
+        return $daysRemaining <= $window;
+    }
+
     private function shouldCreateInitialTask(Entity $policy, Entity $renewal): bool
     {
         if (!$renewal->getId()) {
@@ -200,8 +217,9 @@ class RenewalOrchestrator
         }
 
         $daysRemaining = $this->calculateDaysRemaining((string) ($policy->get('expirationDate') ?? ''));
+        $window = RenewalLeadWindows::leadDaysForPolicy($policy);
 
-        return $daysRemaining !== null && $daysRemaining <= self::RENEWAL_WINDOW_DAYS;
+        return $daysRemaining !== null && $daysRemaining <= $window;
     }
 
     private function createInitialTaskIfMissing(Entity $policy, Entity $renewal): void
@@ -294,13 +312,17 @@ class RenewalOrchestrator
         };
     }
 
-    private function mapRenewalStageToPolicyStatus(string $stage, string $expirationDate, string $currentPolicyStatus): ?string
+    private function mapRenewalStageToPolicyStatus(Entity $policy, string $stage): ?string
     {
+        $expirationDate = (string) ($policy->get('expirationDate') ?? '');
+        $currentPolicyStatus = (string) ($policy->get('status') ?? '');
+        $daysRemaining = $this->calculateDaysRemaining($expirationDate);
+        $window = RenewalLeadWindows::leadDaysForPolicy($policy);
+
         return match ($stage) {
-            'Identified' => $this->calculateDaysRemaining($expirationDate) !== null
-                && $this->calculateDaysRemaining($expirationDate) <= self::RENEWAL_WINDOW_DAYS
-                    ? 'Up for Renewal'
-                    : ($currentPolicyStatus === 'Renewing' ? 'Up for Renewal' : null),
+            'Identified' => $daysRemaining !== null && $daysRemaining <= $window
+                ? 'Up for Renewal'
+                : ($currentPolicyStatus === 'Renewing' ? 'Up for Renewal' : null),
             'Outreach Sent', 'Quote Requested', 'Proposal Sent', 'Negotiating' => 'Renewing',
             'Renewed - Won' => 'Renewed',
             'Lost' => 'Non-Renewed',

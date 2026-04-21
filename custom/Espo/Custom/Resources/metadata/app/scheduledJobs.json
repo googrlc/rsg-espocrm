@@ -3,5 +3,10 @@
         "name": "Recalculate Account Scores",
         "isSystem": true,
         "scheduling": "0 2 * * *"
+    },
+    "SyncRenewalsFromPolicies": {
+        "name": "Sync Renewals From Policies",
+        "isSystem": true,
+        "scheduling": "0 6 * * *"
     }
 }

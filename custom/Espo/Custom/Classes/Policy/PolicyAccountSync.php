@@ -5,6 +5,7 @@ namespace Espo\Custom\Classes\Policy;
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\Custom\Classes\Account\AccountNameResolution;
+use Espo\Custom\Classes\Renewal\RenewalLeadWindows;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -79,7 +80,8 @@ class PolicyAccountSync
         $policy->set('commissionAmount', round($premiumAmount * $normalizedRate, 2));
 
         $status = (string) ($policy->get('status') ?? '');
-        if ($status === 'Active' && $daysRemaining !== null && $daysRemaining <= 60) {
+        $renewalLeadDays = RenewalLeadWindows::leadDaysForPolicy($policy);
+        if ($status === 'Active' && $daysRemaining !== null && $daysRemaining <= $renewalLeadDays) {
             $status = 'Up for Renewal';
             $policy->set('status', $status);
         }
