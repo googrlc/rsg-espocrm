@@ -9,5 +9,6 @@
     {"name": "insuranceInterest"},
     {"name": "status"},
     {"name": "xDate"},
+    {"name": "callbackDate"},
     {"name": "assignedUser"}
 ]

@@ -127,6 +127,25 @@
             "type": "date",
             "isCustom": true,
             "tooltipText": "Expiration date of current policy — used for nurture loop automation"
+        },
+        "callbackDate": {
+            "type": "date",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior)."
+        },
+        "sourceOpportunity": {
+            "type": "link",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Closed Lost opportunity this nurture lead came from."
+        }
+    },
+    "links": {
+        "sourceOpportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "isCustom": true
         }
     },
     "convertFields": {
@@ -149,7 +168,8 @@
             "modifiedAt",
             "status",
             "source",
-            "xDate"
+            "xDate",
+            "callbackDate"
         ]
     },
     "kanbanStatusIgnoreList": [

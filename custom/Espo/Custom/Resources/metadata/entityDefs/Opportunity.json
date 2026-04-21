@@ -6,16 +6,11 @@
                 "",
                 "Discovery",
                 "Quoting",
+                "Markets Out / Shopping",
                 "Proposal Presented",
                 "Negotiation",
                 "Closed Won",
-                "Closed Lost",
-                "Renewal Notice Sent",
-                "Markets Out / Shopping",
-                "Quoted",
-                "Presented to Client",
-                "Bound / Renewed",
-                "Non-Renewal / Lost"
+                "Closed Lost"
             ],
             "default": "Discovery",
             "audited": true,
@@ -25,30 +20,20 @@
             "probabilityMap": {
                 "Discovery": 10,
                 "Quoting": 30,
+                "Markets Out / Shopping": 45,
                 "Proposal Presented": 60,
                 "Negotiation": 80,
                 "Closed Won": 100,
-                "Closed Lost": 0,
-                "Renewal Notice Sent": 10,
-                "Markets Out / Shopping": 25,
-                "Quoted": 50,
-                "Presented to Client": 70,
-                "Bound / Renewed": 100,
-                "Non-Renewal / Lost": 0
+                "Closed Lost": 0
             },
             "style": {
                 "Discovery": "primary",
                 "Quoting": "primary",
+                "Markets Out / Shopping": "warning",
                 "Proposal Presented": "warning",
                 "Negotiation": "warning",
                 "Closed Won": "success",
-                "Closed Lost": "danger",
-                "Renewal Notice Sent": "default",
-                "Markets Out / Shopping": "primary",
-                "Quoted": "primary",
-                "Presented to Client": "warning",
-                "Bound / Renewed": "success",
-                "Non-Renewal / Lost": "danger"
+                "Closed Lost": "danger"
             },
             "fieldManagerAdditionalParamList": [
                 {
@@ -60,12 +45,11 @@
             "kanbanOrder": [
                 "Discovery",
                 "Quoting",
+                "Markets Out / Shopping",
                 "Proposal Presented",
                 "Negotiation",
-                "Renewal Notice Sent",
-                "Markets Out / Shopping",
-                "Quoted",
-                "Presented to Client"
+                "Closed Won",
+                "Closed Lost"
             ]
         },
         "lineOfBusiness": {
@@ -198,6 +182,29 @@
                 "N/A"
             ],
             "isCustom": true
+        },
+        "recycleToLead": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Enable to recycle this Closed Lost opportunity into Lead nurture."
+        },
+        "xDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Customer renewal date used for recycle callback timing."
+        },
+        "callbackDate": {
+            "type": "date",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior)."
+        },
+        "recycledLead": {
+            "type": "link",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Lead created for closed-lost recycle follow-up."
         },
         "aiSummary": {
             "type": "text",
@@ -975,6 +982,11 @@
             "entity": "Commission",
             "foreign": "opportunity",
             "isCustom": true
+        },
+        "recycledLead": {
+            "type": "belongsTo",
+            "entity": "Lead",
+            "isCustom": true
         }
     },
     "collection": {
@@ -1068,12 +1080,10 @@
         }
     },
     "formula": {
-        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
+        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Markets Out / Shopping',\n    entity\\setAttribute('probability', 45)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
     },
     "kanbanStatusIgnoreList": [
         "Closed Won",
-        "Closed Lost",
-        "Bound / Renewed",
-        "Non-Renewal / Lost"
+        "Closed Lost"
     ]
 }

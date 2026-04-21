@@ -23,6 +23,8 @@
       [{"name": "insuranceInterest"}, {"name": "priority"}],
       [{"name": "currentlyInsured"}, {"name": "currentCarrier"}],
       [{"name": "estimatedPremium"}, {"name": "intelPackRun"}],
+      [{"name": "xDate"}, {"name": "callbackDate"}],
+      [{"name": "sourceOpportunity"}, false],
       [{"name": "aiSummary", "fullWidth": true}]
     ]
   },

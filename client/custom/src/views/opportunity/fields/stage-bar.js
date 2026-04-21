@@ -1,30 +1,33 @@
 define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], function (EnumFieldView) {
 
-    var NEW_BIZ_STAGES = [
-        'Discovery', 'Quoting', 'Proposal Presented', 'Negotiation',
-        'Closed Won', 'Closed Lost'
+    var PIPELINE_STAGES = [
+        'Discovery',
+        'Quoting',
+        'Markets Out / Shopping',
+        'Proposal Presented',
+        'Negotiation',
+        'Closed Won',
+        'Closed Lost'
     ];
 
-    var RENEWAL_STAGES = [
-        'Renewal Notice Sent', 'Markets Out / Shopping', 'Quoted',
-        'Presented to Client', 'Bound / Renewed', 'Non-Renewal / Lost'
-    ];
-
-    var WON_STAGES = ['Closed Won', 'Bound / Renewed'];
-    var LOST_STAGES = ['Closed Lost', 'Non-Renewal / Lost'];
+    var WON_STAGES = ['Closed Won'];
+    var LOST_STAGES = ['Closed Lost'];
 
     return EnumFieldView.extend({
 
         detailTemplate: 'custom:opportunity/fields/stage-bar/detail',
         listTemplate: 'custom:opportunity/fields/stage-bar/list',
+        editTemplate: 'fields/enum/edit',
 
         data: function () {
             var data = EnumFieldView.prototype.data.call(this);
             var current = this.model.get(this.name);
 
-            data.stages = this.getStagesData();
-            data.isWon = WON_STAGES.indexOf(current) !== -1;
-            data.isLost = LOST_STAGES.indexOf(current) !== -1;
+            if (this.mode === 'detail') {
+                data.stages = this.getStagesData();
+                data.isWon = WON_STAGES.indexOf(current) !== -1;
+                data.isLost = LOST_STAGES.indexOf(current) !== -1;
+            }
 
             return data;
         },
@@ -32,12 +35,7 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
         getStagesData: function () {
             var currentStage = this.model.get(this.name);
 
-            var stages;
-            if (RENEWAL_STAGES.indexOf(currentStage) !== -1) {
-                stages = RENEWAL_STAGES;
-            } else {
-                stages = NEW_BIZ_STAGES;
-            }
+            var stages = PIPELINE_STAGES;
 
             var currentIndex = stages.indexOf(currentStage);
             var probabilityMap = this.model.getFieldParam(this.name, 'probabilityMap') || {};
@@ -82,7 +80,7 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
         afterRender: function () {
             EnumFieldView.prototype.afterRender.call(this);
 
-            if (this.isDetailMode()) {
+            if (this.mode === 'detail') {
                 this.$el.find('.stage-step').on('click', function (e) {
                     var stage = $(e.currentTarget).data('stage');
                     if (stage) {
@@ -91,10 +89,6 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
                     }
                 }.bind(this));
             }
-        },
-
-        isDetailMode: function () {
-            return this.mode === 'detail' || this.mode === 'edit';
         }
     });
 });

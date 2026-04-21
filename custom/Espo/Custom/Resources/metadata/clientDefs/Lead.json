@@ -1,6 +1,10 @@
 {
     "filterList": [
         {"name": "actual", "style": "primary"},
+        {"name": "cold", "style": "info"},
+        {"name": "warm", "style": "warning"},
+        {"name": "callbackDue", "style": "danger"},
+        {"name": "callbackNext14", "style": "primary"},
         {"name": "converted", "style": "success"},
         {"name": "dnc", "style": "danger"},
         {"name": "nurture", "style": "info"}

@@ -1,6 +1,10 @@
 {
     "primaryFilterClassNameMap": {
         "actual": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Actual",
+        "cold": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Cold",
+        "warm": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Warm",
+        "callbackDue": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\CallbackDue",
+        "callbackNext14": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\CallbackNext14",
         "converted": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Converted",
         "dnc": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Dnc",
         "nurture": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Nurture"

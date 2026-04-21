@@ -7,12 +7,16 @@
         "priority": "Priority",
         "aiSummary": "AI Summary",
         "intelPackRun": "Intel Pack Run",
-        "xDate": "X-Date"
+        "xDate": "X-Date",
+        "callbackDate": "Callback Date",
+        "sourceOpportunity": "Source Opportunity"
     },
     "tooltips": {
         "aiSummary": "Pre-call intel from Manus prospect intelligence pack",
         "intelPackRun": "Checked when Manus prospect-intelligence-pack has run for this lead",
-        "xDate": "Expiration date of current policy — used for nurture loop automation"
+        "xDate": "Expiration date of current policy — used for nurture loop automation",
+        "callbackDate": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior).",
+        "sourceOpportunity": "Closed Lost opportunity this nurture lead came from."
     },
     "options": {
         "status": {
@@ -30,7 +34,11 @@
         "actual": "Active Leads",
         "converted": "Converted",
         "dnc": "DNC",
-        "nurture": "Nurture (X-Date)"
+        "nurture": "Nurture (X-Date)",
+        "cold": "Cold Leads",
+        "warm": "Warm Leads",
+        "callbackDue": "Callback Due",
+        "callbackNext14": "Callback Next 14 Days"
     },
     "boolFilters": {
         "onlyMy": "Only My"

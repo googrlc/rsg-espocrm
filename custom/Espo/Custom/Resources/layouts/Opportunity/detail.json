@@ -864,6 +864,22 @@
                 {
                     "name": "lastContactMethod"
                 }
+            ],
+            [
+                {
+                    "name": "recycleToLead"
+                },
+                {
+                    "name": "xDate"
+                }
+            ],
+            [
+                {
+                    "name": "callbackDate"
+                },
+                {
+                    "name": "recycledLead"
+                }
             ]
         ],
         "style": "danger",
