@@ -4,6 +4,7 @@ namespace Espo\Custom\Classes\Policy;
 
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
+use Espo\Custom\Classes\Account\AccountNameResolution;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -22,6 +23,12 @@ class PolicyAccountSync
 
     public function applyDerivedFields(Entity $policy): void
     {
+        $resolved = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
+        $current = trim((string) ($policy->get('accountName') ?? ''));
+        if ($resolved !== '' && ($current === '' || AccountNameResolution::isPlaceholder($current))) {
+            $policy->set('accountName', $resolved);
+        }
+
         $accountName = $policy->get('accountName') ?: '';
         $lineOfBusiness = $policy->get('lineOfBusiness') ?: $policy->get('businessType') ?: '';
         $policyNumber = $policy->get('policyNumber') ?: '';

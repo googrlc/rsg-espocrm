@@ -5,6 +5,7 @@ namespace Espo\Custom\Classes\Renewal;
 use DateInterval;
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
+use Espo\Custom\Classes\Account\AccountNameResolution;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -41,15 +42,19 @@ class RenewalOrchestrator
 
         $expirationDate = (string) ($policy->get('expirationDate') ?? '');
         $normalizedLineOfBusiness = $this->normalizeLineOfBusiness($policy->get('lineOfBusiness') ?? $policy->get('businessType'));
+        $resolvedAccountName = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
+        $renewalAccountName = $resolvedAccountName !== ''
+            ? $resolvedAccountName
+            : trim((string) ($policy->get('accountName') ?? ''));
 
         $hasChanges = $this->setIfChanged($renewal, 'name', $this->buildRenewalName(
-            (string) ($policy->get('accountName') ?? ''),
+            $resolvedAccountName,
             $normalizedLineOfBusiness
         )) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'policyId', $policy->getId()) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'policyName', $policy->get('name')) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'accountId', $policy->get('accountId')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'accountName', $policy->get('accountName')) || $hasChanges;
+        $hasChanges = $this->setIfChanged($renewal, 'accountName', $renewalAccountName) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'contactId', $policy->get('contactId')) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'contactName', $policy->get('contactName')) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'assignedUserId', $policy->get('assignedUserId')) || $hasChanges;
@@ -86,9 +91,15 @@ class RenewalOrchestrator
 
     public function applyDerivedFields(Entity $renewal): void
     {
-        $accountName = (string) ($renewal->get('accountName') ?? 'Account');
+        $raw = trim((string) ($renewal->get('accountName') ?? ''));
+        $resolved = AccountNameResolution::resolveForRenewal($this->entityManager, $renewal);
+        if ($resolved !== '' && ($raw === '' || AccountNameResolution::isPlaceholder($raw))) {
+            $renewal->set('accountName', $resolved);
+        }
+
+        $accountName = trim((string) ($renewal->get('accountName') ?? ''));
         $lineOfBusiness = $this->normalizeLineOfBusiness($renewal->get('lineOfBusiness'));
-        $renewal->set('name', $this->buildRenewalName($accountName, $lineOfBusiness));
+        $renewal->set('name', $this->buildRenewalName($accountName !== '' ? $accountName : 'Account', $lineOfBusiness));
 
         $expirationDate = (string) ($renewal->get('expirationDate') ?? '');
         $fetchedExpirationDate = (string) ($renewal->getFetched('expirationDate') ?? '');
@@ -211,11 +222,15 @@ class RenewalOrchestrator
         $task = $this->entityManager->getNewEntity('Task');
         $expirationDate = (string) ($policy->get('expirationDate') ?? '');
         $lineOfBusiness = $this->normalizeLineOfBusiness($policy->get('lineOfBusiness') ?? $policy->get('businessType'));
+        $taskAccountName = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
+        if ($taskAccountName === '') {
+            $taskAccountName = trim((string) ($policy->get('accountName') ?? '')) ?: 'Account';
+        }
 
         $task->set([
             'name' => sprintf(
                 'Renewal Review: %s - %s',
-                (string) ($policy->get('accountName') ?? 'Account'),
+                $taskAccountName,
                 $lineOfBusiness
             ),
             'status' => 'Inbox',
@@ -225,9 +240,9 @@ class RenewalOrchestrator
             'parentType' => 'Renewal',
             'parentName' => $renewal->get('name'),
             'linkedAccountId' => $policy->get('accountId'),
-            'linkedAccountName' => $policy->get('accountName'),
+            'linkedAccountName' => $taskAccountName,
             'accountId' => $policy->get('accountId'),
-            'accountName' => $policy->get('accountName'),
+            'accountName' => $taskAccountName,
             'contactId' => $policy->get('contactId'),
             'contactName' => $policy->get('contactName'),
             'assignedUserId' => $renewal->get('assignedUserId'),
