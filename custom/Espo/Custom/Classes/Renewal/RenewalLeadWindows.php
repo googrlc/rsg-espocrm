@@ -6,8 +6,8 @@ use Espo\ORM\Entity;
 
 /**
  * Days-before-expiration when the renewal pipeline opens, by line of business.
- * Commercial P&C: 60 days. Personal P&C: 30 days. Other LOBs (e.g. Life, Health, Medicare) default to 60.
- * Multi-LOB policies use the largest window so mixed personal + commercial starts at 60 days.
+ * Commercial P&C: 60 days. Personal P&C: 30 days. Other LOBs (Life, Health, Medicare, Group, Other, blank): 30.
+ * Multi-LOB policies use the largest window so mixed personal + commercial still starts at 60 days.
  */
 class RenewalLeadWindows
 {
@@ -15,7 +15,7 @@ class RenewalLeadWindows
 
     public const PERSONAL_DAYS = 30;
 
-    public const DEFAULT_DAYS = 60;
+    public const DEFAULT_DAYS = 30;
 
     /** @var list<string> */
     private const COMMERCIAL_LOBS = [
