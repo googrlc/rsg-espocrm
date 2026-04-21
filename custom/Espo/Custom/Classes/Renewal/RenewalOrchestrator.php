@@ -40,7 +40,7 @@ class RenewalOrchestrator
         $renewal = $existingRenewal ?? $this->entityManager->getNewEntity('Renewal');
         $originalExpirationDate = (string) ($renewal->get('expirationDate') ?? '');
         $originalUrgency = (string) ($renewal->get('urgency') ?? '');
-        $renewalIsNew = !$renewal->getId();
+        $renewalIsNew = !$renewal->hasId();
         $hasChanges = false;
 
         $expirationDate = (string) ($policy->get('expirationDate') ?? '');
@@ -208,7 +208,7 @@ class RenewalOrchestrator
 
     private function shouldCreateInitialTask(Entity $policy, Entity $renewal): bool
     {
-        if (!$renewal->getId()) {
+        if (!$renewal->hasId()) {
             return false;
         }
 
