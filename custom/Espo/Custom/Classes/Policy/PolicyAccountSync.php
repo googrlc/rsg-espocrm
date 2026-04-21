@@ -40,7 +40,10 @@ class PolicyAccountSync
 
         $statusLabel = 'ACTIVE';
         $urgencyIcon = 'OK';
-        if ($daysRemaining <= 0) {
+        if ($daysRemaining === null) {
+            $statusLabel = 'UNKNOWN';
+            $urgencyIcon = '?';
+        } elseif ($daysRemaining <= 0) {
             $statusLabel = 'EXPIRED';
             $urgencyIcon = '!!';
         } elseif ($daysRemaining <= 30) {
@@ -52,7 +55,9 @@ class PolicyAccountSync
         $policy->set('statusLabel', $statusLabel);
         $policy->set('urgencyIcon', $urgencyIcon);
 
-        if ($daysRemaining <= 30) {
+        if ($daysRemaining === null) {
+            $policy->set('urgency', null);
+        } elseif ($daysRemaining <= 30) {
             $policy->set('urgency', 'Critical');
         } elseif ($daysRemaining <= 60) {
             $policy->set('urgency', 'High');

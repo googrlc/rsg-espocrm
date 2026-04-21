@@ -30,3 +30,17 @@ Webhook payload highlights for n8n:
 - `task.assignedUserId` and alias `task.ownerId`
 - `task.clientEmail` and `task.clientName`
 - `task.sourceActivityLogId`
+
+## Intel Pack webhook (Account)
+
+Set these in EspoCRM `data/config.php` for the **Run Intel Pack** action on Account records:
+
+- `intelPackWebhookUrl` — n8n (or other) HTTP endpoint URL
+- `intelPackWebhookSecret` — **required** when the URL is set; used for HMAC verification (do not commit real values to this repo)
+
+EspoCRM sends a `POST` with `Content-Type: application/json` and signs the **raw JSON body** with HMAC-SHA256:
+
+- Header: `X-Intel-Pack-Signature: sha256=<64-char lowercase hex>`
+- The `<hex>` value is `HMAC_SHA256(body, intelPackWebhookSecret)` in hex (same as PHP `hash_hmac('sha256', $body, $secret)`).
+
+On n8n, reject requests where the signature does not match (use a constant-time compare on the hex strings). Payload fields include `entityType`, `entityId`, `assignedUserName`, and `momentumId`.

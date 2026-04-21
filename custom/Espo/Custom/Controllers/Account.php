@@ -22,14 +22,22 @@ class Account extends \Espo\Modules\Crm\Controllers\Account
             throw new BadRequest("Account not found.");
         }
 
-        // Get webhook URL from config
+        // Webhook URL + HMAC secret (sign raw JSON body; n8n verifies X-Intel-Pack-Signature)
         $config = $this->getContainer()->getByClass(\Espo\Core\Utils\Config::class);
-        $webhookUrl = $config->get('intelPackWebhookUrl');
+        $webhookUrl = trim((string) ($config->get('intelPackWebhookUrl') ?? ''));
+        $webhookSecret = trim((string) ($config->get('intelPackWebhookSecret') ?? ''));
 
-        if (empty($webhookUrl)) {
+        if ($webhookUrl === '') {
             return (object) [
                 'success' => false,
                 'message' => 'Intel Pack webhook URL not configured. Set intelPackWebhookUrl in config.'
+            ];
+        }
+
+        if ($webhookSecret === '') {
+            return (object) [
+                'success' => false,
+                'message' => 'Intel Pack webhook secret not configured. Set intelPackWebhookSecret in config.'
             ];
         }
 
@@ -50,10 +58,19 @@ class Account extends \Espo\Modules\Crm\Controllers\Account
             'momentumId' => $account->get('momentumClientId') ?? '',
         ]);
 
+        if ($payload === false) {
+            throw new BadRequest('Failed to encode Intel Pack payload.');
+        }
+
+        $signature = 'sha256=' . hash_hmac('sha256', $payload, $webhookSecret);
+
         $ch = curl_init($webhookUrl);
         curl_setopt($ch, CURLOPT_POST, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'X-Intel-Pack-Signature: ' . $signature,
+        ]);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
         $result = curl_exec($ch);
