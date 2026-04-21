@@ -5,6 +5,7 @@ Backup of RSG EspoCRM customizations — field reference, entity definitions, la
 ## Contents
 - `field-reference/` — Complete field definitions for all entities
 - `custom/` — Server-side custom entity defs (requires SSH to refresh)
+- `COMMISSION-LEDGER-SYNC-CONTRACT.md` — one-way Espo-to-ledger sync contract and idempotency rules
 
 ## SSH Access
 Server: rrespocrm-rsg-u69864.vm.elestio.app
@@ -44,3 +45,22 @@ EspoCRM sends a `POST` with `Content-Type: application/json` and signs the **raw
 - The `<hex>` value is `HMAC_SHA256(body, intelPackWebhookSecret)` in hex (same as PHP `hash_hmac('sha256', $body, $secret)`).
 
 On n8n, reject requests where the signature does not match (use a constant-time compare on the hex strings). Payload fields include `entityType`, `entityId`, `assignedUserName`, and `momentumId`.
+
+## Policy Sync Governance (AMS-first)
+
+Policy records are AMS-first with controlled CRM correction workflow:
+
+- `acceptedByAmsAt` / `acceptedByAmsBy` capture AMS acceptance of CRM corrections.
+- `amsLockState` controls CRM edit lock lifecycle: `Unlocked` -> `Pending AMS` -> `Locked by AMS` (or `Rejected by AMS`).
+- When `amsLockState` is `Locked by AMS`, core policy fields are blocked in CRM and must be changed in AMS.
+- Sync decisions (`accepted`, `locked`, `rejected`, `blocked`) are logged to `ActivityLog` for global-stream timestamp visibility.
+
+Set these config keys to enable outbound correction payloads from CRM:
+
+- `policyCorrectionWebhookUrl` — endpoint that receives `policy.correction_submitted`
+- `policyCorrectionWebhookSecret` — optional shared secret sent as `X-Policy-Sync-Secret`
+
+Set these config keys to enable outbound account enrichment payloads from CRM:
+
+- `accountEnrichmentWebhookUrl` — endpoint that receives `account.enrichment_submitted`
+- `accountEnrichmentWebhookSecret` — optional shared secret sent as `X-Account-Sync-Secret`

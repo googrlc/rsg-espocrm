@@ -11,14 +11,16 @@
             "options": [
                 "",
                 "New Business",
-                "Renewal"
+                "Renewal",
+                "Endorsement"
             ],
             "required": true,
             "isCustom": true,
             "displayAsLabel": true,
             "style": {
                 "New Business": "primary",
-                "Renewal": "success"
+                "Renewal": "success",
+                "Endorsement": "warning"
             },
             "tooltipText": "Auto-set from source trigger"
         },
@@ -39,6 +41,24 @@
                 "Posted": "success",
                 "Overdue": "danger"
             }
+        },
+        "reconciliationStatus": {
+            "type": "enum",
+            "options": [
+                "",
+                "Unreconciled",
+                "Reconciled",
+                "Disputed"
+            ],
+            "default": "Unreconciled",
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Unreconciled": "warning",
+                "Reconciled": "success",
+                "Disputed": "danger"
+            },
+            "tooltipText": "Lifecycle state used for commission reconciliation queueing"
         },
         "producer": {
             "type": "varchar",
@@ -130,6 +150,53 @@
             "type": "text",
             "isCustom": true,
             "tooltipText": "Carrier adjustments, disputes, explanations"
+        },
+        "ledgerSyncStatus": {
+            "type": "enum",
+            "options": [
+                "",
+                "Pending",
+                "Synced",
+                "Error"
+            ],
+            "default": "Pending",
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Pending": "warning",
+                "Synced": "success",
+                "Error": "danger"
+            },
+            "tooltipText": "External ledger sync state (n8n/QuickBooks/etc.)"
+        },
+        "ledgerExternalId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "External ledger transaction ID written back after successful sync"
+        },
+        "ledgerSyncedAt": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true
+        },
+        "ledgerSyncError": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Latest external ledger sync error message"
+        },
+        "ledgerPayloadHash": {
+            "type": "varchar",
+            "maxLength": 128,
+            "isCustom": true,
+            "tooltipText": "Idempotency hash of the outbound ledger payload"
+        },
+        "ledgerKey": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Deterministic ledger key to prevent duplicate commission records"
         },
         "effectiveDate": {
             "type": "date",
@@ -242,7 +309,15 @@
             "carrier",
             "writtenPremium",
             "status",
+            "reconciliationStatus",
             "expectedPaymentDate"
         ]
+    },
+    "indexes": {
+        "ledgerKey": {
+            "columns": [
+                "ledgerKey"
+            ]
+        }
     }
 }

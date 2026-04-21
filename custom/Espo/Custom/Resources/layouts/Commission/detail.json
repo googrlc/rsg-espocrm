@@ -3,6 +3,7 @@
     "label": "Commission",
     "rows": [
       [{"name": "commissionType"}, {"name": "status"}],
+      [{"name": "reconciliationStatus"}, {"name": "ledgerSyncStatus"}],
       [{"name": "account"}, {"name": "policy"}],
       [{"name": "opportunity"}, {"name": "renewal"}],
       [{"name": "lineOfBusiness"}, {"name": "carrier"}],
@@ -21,7 +22,15 @@
     "label": "Dates",
     "rows": [
       [{"name": "effectiveDate"}, {"name": "expectedPaymentDate"}],
-      [{"name": "paymentReceivedDate"}, false]
+      [{"name": "paymentReceivedDate"}, {"name": "ledgerSyncedAt"}]
+    ]
+  },
+  {
+    "label": "Ledger",
+    "rows": [
+      [{"name": "ledgerExternalId"}, {"name": "ledgerPayloadHash"}],
+      [{"name": "ledgerKey", "fullWidth": true}],
+      [{"name": "ledgerSyncError", "fullWidth": true}]
     ]
   },
   {

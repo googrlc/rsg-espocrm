@@ -7,10 +7,15 @@
     "filterList": [
         {"name": "all"},
         {"name": "newBusiness"},
+        {"name": "endorsement", "style": "warning"},
         {"name": "renewal", "style": "success"},
         {"name": "posted", "style": "success"},
         {"name": "estimated", "style": "info"},
-        {"name": "overdue", "style": "danger"}
+        {"name": "overdue", "style": "danger"},
+        {"name": "postedUnmatched", "style": "warning"},
+        {"name": "highVariance", "style": "danger"},
+        {"name": "unreconciled", "style": "warning"},
+        {"name": "reconciled", "style": "success"}
     ],
     "boolFilterList": [
         "onlyMy"

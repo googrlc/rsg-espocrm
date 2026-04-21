@@ -1,5 +1,14 @@
 {
     "presetFilters": {
+        "all": "All",
+        "newBusiness": "New Business",
+        "endorsement": "Endorsements",
+        "renewal": "Renewals",
+        "posted": "Posted",
+        "estimated": "Estimated",
+        "overdue": "Overdue",
+        "postedUnmatched": "Posted Unmatched",
+        "highVariance": "High Variance",
         "unreconciled": "Unreconciled",
         "reconciled": "Reconciled"
     },
@@ -9,14 +18,32 @@
         "renewal": "Renewal"
     },
     "fields": {
-        "sourceType": "Source Type"
+        "reconciliationStatus": "Reconciliation Status",
+        "ledgerSyncStatus": "Ledger Sync Status",
+        "ledgerExternalId": "Ledger External ID",
+        "ledgerSyncedAt": "Ledger Synced At",
+        "ledgerSyncError": "Ledger Sync Error",
+        "ledgerPayloadHash": "Ledger Payload Hash",
+        "ledgerKey": "Ledger Key"
     },
     "options": {
-        "sourceType": {
+        "commissionType": {
             "": "",
             "New Business": "New Business",
             "Renewal": "Renewal",
-            "Other": "Other"
+            "Endorsement": "Endorsement"
+        },
+        "reconciliationStatus": {
+            "": "",
+            "Unreconciled": "Unreconciled",
+            "Reconciled": "Reconciled",
+            "Disputed": "Disputed"
+        },
+        "ledgerSyncStatus": {
+            "": "",
+            "Pending": "Pending",
+            "Synced": "Synced",
+            "Error": "Error"
         }
     }
 }

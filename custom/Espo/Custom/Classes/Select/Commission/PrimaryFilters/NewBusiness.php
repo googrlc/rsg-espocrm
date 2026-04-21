@@ -8,6 +8,6 @@ class NewBusiness implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["businessType" => "New Business"]);
+        $queryBuilder->where(["commissionType" => "New Business"]);
     }
 }

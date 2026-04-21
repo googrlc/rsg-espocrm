@@ -8,6 +8,8 @@
     {"name": "estimatedCommission", "width": 9},
     {"name": "postedAmount", "width": 9},
     {"name": "status", "width": 8},
+    {"name": "reconciliationStatus", "width": 10},
+    {"name": "ledgerSyncStatus", "width": 8},
     {"name": "expectedPaymentDate", "width": 8},
     {"name": "producer", "width": 7}
 ]

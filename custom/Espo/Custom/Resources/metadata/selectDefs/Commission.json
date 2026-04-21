@@ -4,10 +4,13 @@
         "reconciled": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Reconciled",
         "all": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\All",
         "newBusiness": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\NewBusiness",
+        "endorsement": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Endorsement",
         "renewal": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Renewal",
         "posted": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Posted",
         "estimated": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Estimated",
-        "overdue": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Overdue"
+        "overdue": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\Overdue",
+        "postedUnmatched": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\PostedUnmatched",
+        "highVariance": "Espo\\Custom\\Classes\\Select\\Commission\\PrimaryFilters\\HighVariance"
     },
     "boolFilterClassNameMap": {
         "newBusiness": "Espo\\Custom\\Classes\\Select\\Commission\\BoolFilters\\NewBusiness",

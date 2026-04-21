@@ -12,7 +12,7 @@ class RenewalSource implements Filter
     public function apply(SelectBuilder $queryBuilder, OrGroupBuilder $orGroupBuilder): void
     {
         $orGroupBuilder->add(
-            Comparison::equal(Expression::column('sourceType'), 'Renewal')
+            Comparison::equal(Expression::column('commissionType'), 'Renewal')
         );
     }
 }

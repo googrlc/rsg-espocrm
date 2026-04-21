@@ -12,7 +12,7 @@ class NewBusiness implements Filter
     public function apply(SelectBuilder $queryBuilder, OrGroupBuilder $orGroupBuilder): void
     {
         $orGroupBuilder->add(
-            Comparison::equal(Expression::column('sourceType'), 'New Business')
+            Comparison::equal(Expression::column('commissionType'), 'New Business')
         );
     }
 }
