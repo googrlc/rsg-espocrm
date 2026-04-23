@@ -129,6 +129,17 @@
 | `Direct_Bill` | `Direct Bill` |
 | `Agency_Bill` | `Agency Bill` |
 
+### Policy Governance Rules (AMS as System of Record)
+
+- AMS remains authoritative for all policy core fields.
+- CRM may submit approved correction payloads, but cannot delete policies or renumber policies in AMS.
+- After AMS accepts a correction, CRM sets:
+  - `acceptedByAmsAt`
+  - `acceptedByAmsBy`
+  - `amsLockState = "Locked by AMS"`
+- Once locked, core policy fields are edited in AMS (not CRM).
+- Timestamp-based sync decisions are written to Activity Log/global stream (`accepted`, `locked`, `rejected`, `blocked`).
+
 ---
 
 ## 3. MEDICARE FIELDS → Opportunity
@@ -159,6 +170,15 @@
    b. If found → PUT /api/v1/Account/{id} with mapped fields
    c. If not found → POST /api/v1/Account with mapped fields
    d. Always set momentumLastSynced = NOW()
+```
+
+### Daily CRM -> AMS Account Enrichment (DOB/FEIN and related fields)
+```
+1. Trigger daily job and on CRM account updates with momentumClientId present
+2. Collect approved enrichment fields (DOB, FEIN, legal name components, spouse DOB, SIC/NAICS)
+3. Compare modified timestamps: only push field when CRM modifiedAt > AMS field/entity modifiedAt
+4. POST account.enrichment_submitted payload to AMS integration endpoint
+5. Write global stream ActivityLog decision: pushed or skipped with timestamp + changed field list
 ```
 
 ### Policy Sync
@@ -194,7 +214,7 @@ POST /api/v1/ActivityLog
 
 ---
 
-## 4. TASKS ↔ Task (Bi-Directional)
+## 4. TASKS -> Task (CRM to AMS Only)
 
 **NowCerts Endpoints:**
 - Pull: `GET /api/TasksList` or `POST /api/Insured/InsuredTasks`
@@ -202,9 +222,9 @@ POST /api/v1/ActivityLog
 
 **EspoCRM Endpoint:** `POST /api/v1/Task` (create) or `PUT /api/v1/Task/{id}` (update)
 **Dedup Key:** `momentumTaskId` = NowCerts `databaseId`
-**Direction:** Bi-directional — EspoCRM creates → pushes to NowCerts, NowCerts changes → syncs back
+**Direction:** One-way from EspoCRM to AMS — no inbound task updates from AMS/NowCerts
 
-### Synced Fields
+### Synced Fields (EspoCRM -> AMS)
 
 | # | NowCerts Field | EspoCRM Field | EspoCRM Type | Notes |
 |---|---|---|---|---|
@@ -275,17 +295,7 @@ POST /api/v1/ActivityLog
 
 ### n8n Workflow Patterns
 
-**Pull: NowCerts → EspoCRM**
-```
-1. GET NowCerts /api/TasksList (changed since last sync)
-2. For each task:
-   a. Search EspoCRM: GET /api/v1/Task?where[momentumTaskId]={databaseId}
-   b. If found → PUT /api/v1/Task/{id} with mapped fields
-   c. If not found → POST /api/v1/Task with mapped fields
-   d. Set syncSource = "Momentum", momentumLastSynced = NOW()
-```
-
-**Push: EspoCRM → NowCerts**
+**Push: EspoCRM -> AMS**
 ```
 1. Trigger: EspoCRM webhook on Task create/update (where syncSource != "Momentum")
 2. If momentumTaskId is empty:
@@ -294,4 +304,5 @@ POST /api/v1/ActivityLog
 3. If momentumTaskId exists:
    a. POST NowCerts /api/Zapier/UpdateTask with database_id + mapped fields
 4. Set momentumLastSynced = NOW()
+5. Do not run inbound NowCerts -> EspoCRM task sync for these records
 ```

@@ -170,6 +170,44 @@
                 "Skipped": "default"
             }
         },
+        "acceptedByAmsAt": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Timestamp when AMS accepted the latest CRM correction payload."
+        },
+        "acceptedByAmsBy": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "AMS user or integration identity that accepted the latest CRM correction."
+        },
+        "amsLockState": {
+            "type": "enum",
+            "options": [
+                "",
+                "Unlocked",
+                "Pending AMS",
+                "Locked by AMS",
+                "Rejected by AMS"
+            ],
+            "default": "Unlocked",
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Unlocked": "success",
+                "Pending AMS": "warning",
+                "Locked by AMS": "info",
+                "Rejected by AMS": "danger"
+            },
+            "tooltipText": "CRM policy edit lock state controlled by AMS correction acceptance."
+        },
+        "amsLockReason": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Reason for current AMS lock state, including rejection detail when present."
+        },
         "insuredMomentumId": {
             "type": "varchar",
             "maxLength": 255,

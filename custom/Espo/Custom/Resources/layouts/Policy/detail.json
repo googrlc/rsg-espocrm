@@ -43,7 +43,9 @@
     "label": "Sync",
     "rows": [
       [{"name": "momentumPolicyId"}, {"name": "insuredMomentumId"}],
-      [{"name": "momentumLastSynced"}, {"name": "syncStatus"}]
+      [{"name": "momentumLastSynced"}, {"name": "syncStatus"}],
+      [{"name": "acceptedByAmsAt"}, {"name": "acceptedByAmsBy"}],
+      [{"name": "amsLockState"}, {"name": "amsLockReason"}]
     ]
   }
 ]
