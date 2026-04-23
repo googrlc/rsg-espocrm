@@ -568,7 +568,16 @@
       "type": "varchar",
       "maxLength": 100,
       "required": false,
-      "isCustom": true
+      "isCustom": true,
+      "dynamicLogicRequired": {
+        "conditionGroup": [
+          {
+            "type": "in",
+            "attribute": "accountType",
+            "value": ["Personal Lines", "Medicare", "Life Insurance"]
+          }
+        ]
+      }
     },
     "primaryLastName": {
       "type": "varchar",
@@ -578,9 +587,9 @@
       "dynamicLogicRequired": {
         "conditionGroup": [
           {
-            "type": "equals",
+            "type": "in",
             "attribute": "accountType",
-            "value": "Personal Lines"
+            "value": ["Personal Lines", "Medicare", "Life Insurance"]
           }
         ]
       }
