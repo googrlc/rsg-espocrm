@@ -3,7 +3,7 @@
         "name": {
             "type": "varchar",
             "maxLength": 255,
-            "required": true,
+            "required": false,
             "tooltipText": "Auto-generated: {Account} - {LOB} Renewal"
         },
         "stage": {
