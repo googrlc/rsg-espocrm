@@ -192,7 +192,8 @@ class RenewalOrchestrator
     }
 
     /**
-     * New renewals only once expiration is within the LOB lead window (commercial 90d, personal 30d).
+     * New renewals only once expiration is within the LOB lead window
+     * (see RenewalLeadWindows: commercial 60d, personal 30d).
      */
     private function isWithinRenewalCreationWindow(Entity $policy): bool
     {

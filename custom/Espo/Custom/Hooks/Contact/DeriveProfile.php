@@ -31,10 +31,13 @@ class DeriveProfile implements BeforeSave
         $createdAt = $entity->get('createdAt') ?: $entity->getFetched('createdAt');
         $createdYear = $createdAt ? (new DateTimeImmutable($createdAt))->format('Y') : (new DateTimeImmutable())->format('Y');
 
-        $entity->set(
-            'description',
-            "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}"
-        );
+        $derivedDescription = "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}";
+        $existingDescription = trim((string) ($entity->get('description') ?? ''));
+        $previousDerived = trim((string) ($entity->getFetched('description') ?? ''));
+
+        if ($existingDescription === '' || $existingDescription === $previousDerived) {
+            $entity->set('description', $derivedDescription);
+        }
 
         $dateOfBirth = $entity->get('dateOfBirth');
         if ($dateOfBirth) {
