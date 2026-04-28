@@ -1,0 +1,97 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": false
+        },
+        "driverName": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "required": true
+        },
+        "driverLicenseNumber": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "dateOfBirth": {
+            "type": "date",
+            "isCustom": true
+        },
+        "stateIssued": {
+            "type": "varchar",
+            "maxLength": 50,
+            "isCustom": true
+        },
+        "licenseExpirationDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "vehicle": {
+            "type": "link"
+        },
+        "driverSchedule": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true
+        },
+        "lineOfBusiness": {
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial Auto",
+                "Transportation / Trucking",
+                "Personal Auto",
+                "Motorcycle",
+                "Boat",
+                "RV",
+                "Garagekeepers",
+                "Other"
+            ],
+            "isCustom": true
+        },
+        "opportunity": {
+            "type": "link",
+            "required": true
+        },
+        "account": {
+            "type": "link"
+        }
+    },
+    "links": {
+        "opportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "foreign": "opportunityDrivers",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "opportunityDrivers",
+            "isCustom": true
+        },
+        "vehicle": {
+            "type": "belongsTo",
+            "entity": "OpportunityVehicle",
+            "foreign": "drivers",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "driverName",
+            "driverLicenseNumber",
+            "stateIssued"
+        ],
+        "sortByList": [
+            "createdAt",
+            "driverName",
+            "licenseExpirationDate"
+        ]
+    }
+}

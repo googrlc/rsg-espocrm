@@ -116,16 +116,6 @@
                 {
                     "name": "caCurrentExpiration"
                 }
-            ],
-            [
-                {
-                    "name": "driverDetails"
-                }
-            ],
-            [
-                {
-                    "name": "vehicleDetails"
-                }
             ]
         ],
         "style": "default",
@@ -170,16 +160,6 @@
                 },
                 {
                     "name": "caCurrentExpiration"
-                }
-            ],
-            [
-                {
-                    "name": "driverDetails"
-                }
-            ],
-            [
-                {
-                    "name": "vehicleDetails"
                 }
             ]
         ],

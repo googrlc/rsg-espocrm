@@ -16,5 +16,11 @@
     },
     "tasks": {
         "index": 13
+    },
+    "opportunityVehicles": {
+        "index": 7
+    },
+    "opportunityDrivers": {
+        "index": 8
     }
 }

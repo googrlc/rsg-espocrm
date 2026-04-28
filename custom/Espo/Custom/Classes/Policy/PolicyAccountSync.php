@@ -106,6 +106,15 @@ class PolicyAccountSync
         foreach ($accountIds as $accountId) {
             $this->refreshAccountMetricsById((string) $accountId);
         }
+
+        $carrierAccountIds = array_filter(array_unique([
+            $policy->get('carrierAccountId'),
+            $policy->getFetched('carrierAccountId'),
+        ]));
+
+        foreach ($carrierAccountIds as $carrierAccountId) {
+            $this->refreshCarrierPremiumById((string) $carrierAccountId);
+        }
     }
 
     public function refreshAccountMetricsById(string $accountId): void
@@ -153,6 +162,32 @@ class PolicyAccountSync
         $account->set('nextRenewalLob', $nextExpirationLob);
         $account->set('nextRenewalCarrier', $nextExpirationCarrier);
         $account->set('daysToRenewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
+
+        $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
+    }
+
+    public function refreshCarrierPremiumById(string $carrierAccountId): void
+    {
+        $account = $this->entityManager->getEntityById('Account', $carrierAccountId);
+        if (!$account) {
+            return;
+        }
+
+        $policyList = $this->entityManager
+            ->getRDBRepository('Policy')
+            ->where([
+                'carrierAccountId' => $carrierAccountId,
+                'status' => self::ACTIVE_STATUSES,
+            ])
+            ->find();
+
+        $totalCarrierPremium = 0.0;
+
+        foreach ($policyList as $policy) {
+            $totalCarrierPremium += (float) ($policy->get('premiumAmount') ?? 0);
+        }
+
+        $account->set('totalCarrierPremium', round($totalCarrierPremium, 2));
 
         $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
     }

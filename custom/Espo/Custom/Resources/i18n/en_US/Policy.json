@@ -19,6 +19,7 @@
         "syncStatus": "Sync Status",
         "insuredMomentumId": "NowCerts Insured ID",
         "carrierAccount": "Carrier Account",
+        "underwriter": "Underwriter",
         "daysRemaining": "Days Remaining",
         "statusLabel": "Status Badge",
         "urgencyIcon": "Urgency",

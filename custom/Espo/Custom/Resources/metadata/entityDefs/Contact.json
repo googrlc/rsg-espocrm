@@ -45,6 +45,18 @@
                 "Business Owner": "default"
             }
         },
+        "contactRole": {
+            "type": "enum",
+            "options": [
+                "",
+                "Underwriter"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Underwriter": "danger"
+            }
+        },
         "householdRole": {
             "type": "enum",
             "options": [
@@ -90,6 +102,12 @@
             "readOnly": true
         },
         "policies": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true
+        },
+        "underwrittenPolicies": {
             "type": "linkMultiple",
             "isCustom": true,
             "layoutDetailDisabled": true,
@@ -215,6 +233,12 @@
             "type": "hasMany",
             "entity": "Policy",
             "foreign": "contact",
+            "isCustom": true
+        },
+        "underwrittenPolicies": {
+            "type": "hasMany",
+            "entity": "Policy",
+            "foreign": "underwriter",
             "isCustom": true
         },
         "commissions": {

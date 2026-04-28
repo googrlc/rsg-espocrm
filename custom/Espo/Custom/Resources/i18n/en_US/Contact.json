@@ -1,6 +1,7 @@
 {
     "fields": {
         "contactType": "Type",
+        "contactRole": "Contact Role",
         "relationshipToAccount": "Relationship to Account",
         "originalLeadSource": "Original Lead Source",
         "daysUntil65": "Days Until 65",
@@ -17,7 +18,8 @@
         "lifeHealthClass": "Health Class",
         "lifeAnnualPremium": "Annual Premium",
         "lifeBeneficiaryOnFile": "Beneficiary On File",
-        "lifeReviewDate": "Life Review Date"
+        "lifeReviewDate": "Life Review Date",
+        "underwrittenPolicies": "Underwritten Policies"
     },
     "options": {
         "contactType": {
@@ -33,6 +35,10 @@
             "Head of Household": "Head of Household",
             "Secondary": "Secondary",
             "Employee": "Employee"
+        },
+        "contactRole": {
+            "": "",
+            "Underwriter": "Underwriter"
         }
     },
     "labels": {

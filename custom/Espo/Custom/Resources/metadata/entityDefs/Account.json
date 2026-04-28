@@ -1,8 +1,7 @@
 {
   "fields": {
     "momentumClientId": {
-      "type": "varchar",
-      "maxLength": 255,
+      "type": "text",
       "isCustom": true,
       "tooltipText": "NowCerts/Momentum AMS insured database_id \u2014 dedup key"
     },
@@ -22,8 +21,7 @@
       }
     },
     "csrName": {
-      "type": "varchar",
-      "maxLength": 255,
+      "type": "text",
       "isCustom": true
     },
     "momentumLastSynced": {
@@ -68,7 +66,9 @@
         "Personal Lines",
         "Group Benefits",
         "Medicare",
-        "Life Insurance"
+        "Life Insurance",
+        "Carrier",
+        "MGA"
       ],
       "isCustom": true,
       "audited": true,
@@ -79,7 +79,49 @@
         "Personal Lines": "success",
         "Group Benefits": "info",
         "Medicare": "warning",
-        "Life Insurance": "default"
+        "Life Insurance": "default",
+        "Carrier": "danger",
+        "MGA": "warning"
+      }
+    },
+    "agentOfAgencyCode": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Carrier"
+          }
+        ]
+      }
+    },
+    "carrierCode": {
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Carrier"
+          }
+        ]
+      }
+    },
+    "totalCarrierPremium": {
+      "type": "currency",
+      "isCustom": true,
+      "readOnly": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Carrier"
+          }
+        ]
       }
     },
     "lob": {
@@ -118,9 +160,17 @@
       "isCustom": true
     },
     "carrier": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true
+      "type": "text",
+      "isCustom": true,
+      "dynamicLogicVisible": {
+        "conditionGroup": [
+          {
+            "type": "equals",
+            "attribute": "accountType",
+            "value": "Carrier"
+          }
+        ]
+      }
     },
     "accountStatus": {
       "type": "enum",
@@ -176,8 +226,7 @@
       "isCustom": true
     },
     "intelRunBy": {
-      "type": "varchar",
-      "maxLength": 100,
+      "type": "text",
       "isCustom": true
     },
     "intelSourcesHit": {
@@ -245,8 +294,7 @@
       "isCustom": true
     },
     "intelSic": {
-      "type": "varchar",
-      "maxLength": 20,
+      "type": "text",
       "isCustom": true
     },
     "intelEntityType": {
@@ -348,8 +396,7 @@
       "isCustom": true
     },
     "sicCode": {
-      "type": "varchar",
-      "maxLength": 20,
+      "type": "text",
       "isCustom": true
     },
     "businessEntity": {
@@ -463,8 +510,7 @@
       "isCustom": true
     },
     "bbbRating": {
-      "type": "varchar",
-      "maxLength": 10,
+      "type": "text",
       "isCustom": true,
       "options": []
     },
@@ -1952,9 +1998,8 @@
       "isCustom": true
     },
     "nextXDateLob": {
-      "type": "varchar",
+      "type": "text",
       "label": "Next X-Date LOB",
-      "maxLength": 255,
       "isCustom": true
     },
     "intelPackLastRun": {
@@ -2162,8 +2207,7 @@
       }
     },
     "gbMedicalCarrier": {
-      "type": "varchar",
-      "maxLength": 150,
+      "type": "text",
       "isCustom": true,
       "dynamicLogicVisible": {
         "conditionGroup": [
@@ -2225,8 +2269,7 @@
       }
     },
     "gbEmployerContribution": {
-      "type": "varchar",
-      "maxLength": 50,
+      "type": "text",
       "isCustom": true,
       "tooltipText": "e.g. 75% EE / 50% Dep",
       "dynamicLogicVisible": {
@@ -2240,8 +2283,7 @@
       }
     },
     "gbDentalCarrier": {
-      "type": "varchar",
-      "maxLength": 150,
+      "type": "text",
       "isCustom": true,
       "dynamicLogicVisible": {
         "conditionGroup": [
@@ -2267,8 +2309,7 @@
       }
     },
     "gbVisionCarrier": {
-      "type": "varchar",
-      "maxLength": 150,
+      "type": "text",
       "isCustom": true,
       "dynamicLogicVisible": {
         "conditionGroup": [
@@ -2294,8 +2335,7 @@
       }
     },
     "gbLifeAdCarrier": {
-      "type": "varchar",
-      "maxLength": 150,
+      "type": "text",
       "isCustom": true,
       "tooltipText": "Group Life & AD&D carrier",
       "dynamicLogicVisible": {
@@ -2323,8 +2363,7 @@
       }
     },
     "gbStdCarrier": {
-      "type": "varchar",
-      "maxLength": 150,
+      "type": "text",
       "isCustom": true,
       "tooltipText": "Short-Term Disability carrier",
       "dynamicLogicVisible": {
@@ -2338,8 +2377,7 @@
       }
     },
     "gbLtdCarrier": {
-      "type": "varchar",
-      "maxLength": 150,
+      "type": "text",
       "isCustom": true,
       "tooltipText": "Long-Term Disability carrier",
       "dynamicLogicVisible": {

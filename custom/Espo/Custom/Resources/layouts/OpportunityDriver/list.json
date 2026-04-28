@@ -1,0 +1,37 @@
+[
+    {
+        "name": "driverName",
+        "width": 16,
+        "link": true
+    },
+    {
+        "name": "driverLicenseNumber",
+        "width": 14
+    },
+    {
+        "name": "dateOfBirth",
+        "width": 10
+    },
+    {
+        "name": "stateIssued",
+        "width": 10
+    },
+    {
+        "name": "licenseExpirationDate",
+        "width": 10
+    },
+    {
+        "name": "vehicle",
+        "width": 14,
+        "link": true
+    },
+    {
+        "name": "driverSchedule",
+        "width": 14
+    },
+    {
+        "name": "opportunity",
+        "width": 12,
+        "link": true
+    }
+]

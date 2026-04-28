@@ -302,34 +302,6 @@
                     ]
                 }
             },
-            "driverDetails": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "in",
-                            "attribute": "lineOfBusiness",
-                            "value": [
-                                "Commercial Auto",
-                                "Transportation / Trucking"
-                            ]
-                        }
-                    ]
-                }
-            },
-            "vehicleDetails": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "in",
-                            "attribute": "lineOfBusiness",
-                            "value": [
-                                "Commercial Auto",
-                                "Transportation / Trucking"
-                            ]
-                        }
-                    ]
-                }
-            },
             "caEquipmentType": {
                 "visible": {
                     "conditionGroup": [

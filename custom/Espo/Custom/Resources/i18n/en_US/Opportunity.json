@@ -99,7 +99,9 @@
         "driverDetails": "Driver Details",
         "vehicleDetails": "Vehicle Details",
         "leadSource": "Lead Source",
-        "quoteNumber": "Quote Number"
+        "quoteNumber": "Quote Number",
+        "opportunityDrivers": "Driver Details",
+        "opportunityVehicles": "Vehicle Details"
     },
     "options": {
         "stage": {

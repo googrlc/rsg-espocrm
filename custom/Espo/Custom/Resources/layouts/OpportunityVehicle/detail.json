@@ -1,0 +1,45 @@
+[
+    {
+        "label": "Vehicle Details",
+        "rows": [
+            [
+                {
+                    "name": "opportunity"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "year"
+                },
+                {
+                    "name": "make"
+                }
+            ],
+            [
+                {
+                    "name": "model"
+                },
+                {
+                    "name": "vin"
+                }
+            ],
+            [
+                {
+                    "name": "mileageDriven"
+                },
+                {
+                    "name": "ownershipType"
+                }
+            ],
+            [
+                {
+                    "name": "lineOfBusiness"
+                },
+                false
+            ]
+        ]
+    }
+]

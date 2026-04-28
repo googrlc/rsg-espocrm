@@ -131,6 +131,24 @@
                         }
                     ]
                 }
+            },
+            "underwriter": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "carrierAccountId"
+                        }
+                    ]
+                },
+                "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "carrierAccountId"
+                        }
+                    ]
+                }
             }
         }
     },

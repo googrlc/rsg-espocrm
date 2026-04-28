@@ -1,0 +1,14 @@
+{
+    "fields": {
+        "driverName": "Driver Name",
+        "driverLicenseNumber": "Driver License Number",
+        "dateOfBirth": "Date of Birth",
+        "stateIssued": "State Issued",
+        "licenseExpirationDate": "License Expiration Date",
+        "vehicle": "Assigned Vehicle",
+        "driverSchedule": "Driver Schedule",
+        "lineOfBusiness": "Line of Business",
+        "opportunity": "Opportunity",
+        "account": "Account"
+    }
+}

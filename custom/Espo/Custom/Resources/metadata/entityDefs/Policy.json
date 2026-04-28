@@ -181,6 +181,10 @@
         "carrierAccount": {
             "type": "link"
         },
+        "underwriter": {
+            "type": "link",
+            "isCustom": true
+        },
         "daysRemaining": {
             "type": "int",
             "isCustom": true,
@@ -346,6 +350,12 @@
             "type": "belongsTo",
             "entity": "Account",
             "foreign": "carrierPolicies",
+            "isCustom": true
+        },
+        "underwriter": {
+            "type": "belongsTo",
+            "entity": "Contact",
+            "foreign": "underwrittenPolicies",
             "isCustom": true
         },
         "contact": {
