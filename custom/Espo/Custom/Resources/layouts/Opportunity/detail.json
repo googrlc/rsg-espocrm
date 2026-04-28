@@ -3,6 +3,9 @@
         "rows": [
             [
                 {
+                    "name": "name"
+                },
+                {
                     "name": "account"
                 }
             ],
@@ -61,6 +64,12 @@
             ],
             [
                 {
+                    "name": "quoteNumber"
+                },
+                false
+            ],
+            [
+                {
                     "name": "description"
                 }
             ]
@@ -68,6 +77,60 @@
         "style": "default",
         "name": "common",
         "label": "Opportunity Details"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "caBusType"
+                },
+                {
+                    "name": "caRadius"
+                }
+            ],
+            [
+                {
+                    "name": "caVehicleCount"
+                },
+                {
+                    "name": "caDriverCount"
+                }
+            ],
+            [
+                {
+                    "name": "caEquipmentType"
+                },
+                {
+                    "name": "caEquipmentValue"
+                }
+            ],
+            [
+                {
+                    "name": "caCurrentVehicleModifications"
+                }
+            ],
+            [
+                {
+                    "name": "caCurrentPolicyNum"
+                },
+                {
+                    "name": "caCurrentExpiration"
+                }
+            ],
+            [
+                {
+                    "name": "driverDetails"
+                }
+            ],
+            [
+                {
+                    "name": "vehicleDetails"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "commAutoDetails",
+        "label": "Commercial Auto Intake"
     },
     {
         "rows": [
@@ -108,11 +171,21 @@
                 {
                     "name": "caCurrentExpiration"
                 }
+            ],
+            [
+                {
+                    "name": "driverDetails"
+                }
+            ],
+            [
+                {
+                    "name": "vehicleDetails"
+                }
             ]
         ],
         "style": "default",
-        "name": "commAutoDetails",
-        "label": "Commercial Auto"
+        "name": "transportationDetails",
+        "label": "Transportation / Trucking Intake"
     },
     {
         "rows": [
@@ -913,7 +986,7 @@
         ],
         "style": "default",
         "name": "processIntake",
-        "label": "Process — Intake",
+        "label": "Process \u2014 Intake",
         "tabBreak": true,
         "tabLabel": "Workflow"
     },
@@ -946,7 +1019,7 @@
         ],
         "style": "default",
         "name": "processMarketing",
-        "label": "Process — Marketing"
+        "label": "Process \u2014 Marketing"
     },
     {
         "rows": [
@@ -983,7 +1056,7 @@
         ],
         "style": "default",
         "name": "processOnboarding",
-        "label": "Process — Onboarding"
+        "label": "Process \u2014 Onboarding"
     },
     {
         "rows": [

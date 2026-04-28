@@ -2,6 +2,9 @@
     "contacts": {
         "index": 1
     },
+    "quotes": {
+        "index": 9
+    },
     "commissions": {
         "index": 10
     },

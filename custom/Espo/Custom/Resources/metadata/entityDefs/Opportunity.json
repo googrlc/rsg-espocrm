@@ -57,6 +57,7 @@
             "options": [
                 "",
                 "Commercial Auto",
+                "Transportation / Trucking",
                 "General Liability",
                 "Workers Comp",
                 "Commercial Property",
@@ -84,7 +85,7 @@
             "isCustom": true,
             "required": true,
             "audited": true,
-            "tooltipText": "Line of Business — locked after first save. Create a new Opportunity to change LOB."
+            "tooltipText": "Line of Business \u2014 locked after first save. Create a new Opportunity to change LOB."
         },
         "carrier": {
             "type": "varchar",
@@ -121,7 +122,7 @@
             "type": "currency",
             "isCustom": true,
             "defaultCurrency": "USD",
-            "tooltipText": "Estimated annual premium — update as quotes come in"
+            "tooltipText": "Estimated annual premium \u2014 update as quotes come in"
         },
         "commissionRate": {
             "type": "float",
@@ -138,7 +139,7 @@
         "effectiveDate": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Policy effective date — entered at bind"
+            "tooltipText": "Policy effective date \u2014 entered at bind"
         },
         "policyNumber": {
             "type": "varchar",
@@ -209,7 +210,7 @@
         "aiSummary": {
             "type": "text",
             "isCustom": true,
-            "tooltipText": "2-3 sentence brief from Manus intel — pre-call context"
+            "tooltipText": "2-3 sentence brief from Manus intel \u2014 pre-call context"
         },
         "lastContactMethod": {
             "type": "enum",
@@ -235,6 +236,12 @@
             "noLoad": true
         },
         "commissions": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true
+        },
+        "quotes": {
             "type": "linkMultiple",
             "isCustom": true,
             "layoutDetailDisabled": true,
@@ -272,7 +279,7 @@
                 "Other"
             ],
             "isCustom": true,
-            "tooltipText": "Commercial Auto — business type"
+            "tooltipText": "Commercial Auto \u2014 business type"
         },
         "caVehicleCount": {
             "type": "int",
@@ -458,7 +465,7 @@
             "type": "varchar",
             "maxLength": 50,
             "isCustom": true,
-            "tooltipText": "Medicare HICN — sensitive, will be purged. Source of truth is NowCerts.",
+            "tooltipText": "Medicare HICN \u2014 sensitive, will be purged. Source of truth is NowCerts.",
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
@@ -905,55 +912,55 @@
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Umbrella — underlying opps/policies linked"
+            "tooltipText": "Umbrella \u2014 underlying opps/policies linked"
         },
         "chkUnderlyingConfirmed": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Umbrella — underlying limits confirmed"
+            "tooltipText": "Umbrella \u2014 underlying limits confirmed"
         },
         "chkMvrsPulled": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Personal Auto — MVRs pulled"
+            "tooltipText": "Personal Auto \u2014 MVRs pulled"
         },
         "chkDecPageDelivered": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Personal Lines — dec page delivered to client"
+            "tooltipText": "Personal Lines \u2014 dec page delivered to client"
         },
         "chkScopeOfAppt": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — Scope of Appointment completed"
+            "tooltipText": "Medicare \u2014 Scope of Appointment completed"
         },
         "chkPlanPresented": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — plan options presented"
+            "tooltipText": "Medicare \u2014 plan options presented"
         },
         "chkAppSubmitted": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — application submitted"
+            "tooltipText": "Medicare \u2014 application submitted"
         },
         "chkCmsConfirmation": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — CMS confirmation received"
+            "tooltipText": "Medicare \u2014 CMS confirmation received"
         },
         "chkWelcomeLetter": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — welcome letter delivered"
+            "tooltipText": "Medicare \u2014 welcome letter delivered"
         },
         "amount": {
             "type": "currency",
@@ -967,6 +974,66 @@
             "min": 0,
             "max": 100,
             "audited": true
+        },
+        "name": {
+            "required": true
+        },
+        "leadSource": {
+            "type": "enum",
+            "options": [
+                "",
+                "Call",
+                "Email",
+                "Existing Customer",
+                "Client Referral",
+                "Partner Referral",
+                "Public Relations",
+                "Web Site",
+                "Campaign",
+                "Other"
+            ],
+            "isCustom": true,
+            "audited": true
+        },
+        "caEquipmentType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Owned",
+                "Leased",
+                "Rented",
+                "Mixed",
+                "Other"
+            ],
+            "isCustom": true,
+            "tooltipText": "Primary equipment ownership type"
+        },
+        "caEquipmentValue": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Total estimated equipment value"
+        },
+        "caCurrentVehicleModifications": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Current modifications on scheduled vehicles"
+        },
+        "driverDetails": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Repeatable driver table (Name | License Number | License State | DOB | Years Experience | Violations/Accidents | Status). Enter one driver per line."
+        },
+        "vehicleDetails": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Repeatable vehicle table (Year | Make | Model | VIN | Vehicle Type | Usage | Radius | Garaging Address | Stated Value | Current Modifications). Enter one vehicle per line."
+        },
+        "quoteNumber": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "audited": true,
+            "tooltipText": "Carrier-provided quote reference number."
         }
     },
     "links": {
@@ -980,6 +1047,12 @@
         "commissions": {
             "type": "hasMany",
             "entity": "Commission",
+            "foreign": "opportunity",
+            "isCustom": true
+        },
+        "quotes": {
+            "type": "hasMany",
+            "entity": "Quote",
             "foreign": "opportunity",
             "isCustom": true
         },

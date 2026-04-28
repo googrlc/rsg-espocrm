@@ -1,0 +1,10 @@
+[
+    {"name": "quoteNumber", "width": 14, "link": true},
+    {"name": "carrier", "width": 18},
+    {"name": "premium", "width": 10},
+    {"name": "status", "width": 10},
+    {"name": "effectiveDate", "width": 10},
+    {"name": "expirationDate", "width": 10},
+    {"name": "opportunity", "width": 14, "link": true},
+    {"name": "account", "width": 14, "link": true}
+]

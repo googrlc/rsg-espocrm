@@ -240,7 +240,11 @@
                         {
                             "type": "in",
                             "attribute": "lineOfBusiness",
-                            "value": ["Personal Auto", "Commercial Auto", "Motorcycle"]
+                            "value": [
+                                "Personal Auto",
+                                "Commercial Auto",
+                                "Motorcycle"
+                            ]
                         }
                     ]
                 }
@@ -251,7 +255,110 @@
                         {
                             "type": "in",
                             "attribute": "lineOfBusiness",
-                            "value": ["Personal Auto", "Homeowners", "Renters", "Condo", "Dwelling Fire", "Motorcycle", "Boat", "RV"]
+                            "value": [
+                                "Personal Auto",
+                                "Homeowners",
+                                "Renters",
+                                "Condo",
+                                "Dwelling Fire",
+                                "Motorcycle",
+                                "Boat",
+                                "RV"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "caDotNumber": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Transportation / Trucking"
+                        }
+                    ]
+                }
+            },
+            "caMcNumber": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Transportation / Trucking"
+                        }
+                    ]
+                }
+            },
+            "caCommodity": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Transportation / Trucking"
+                        }
+                    ]
+                }
+            },
+            "driverDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Commercial Auto",
+                                "Transportation / Trucking"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "vehicleDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Commercial Auto",
+                                "Transportation / Trucking"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "caEquipmentType": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Commercial Auto"
+                        }
+                    ]
+                }
+            },
+            "caEquipmentValue": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Commercial Auto"
+                        }
+                    ]
+                }
+            },
+            "caCurrentVehicleModifications": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Commercial Auto"
                         }
                     ]
                 }
@@ -590,6 +697,17 @@
                         {
                             "type": "isNotEmpty",
                             "attribute": "id"
+                        }
+                    ]
+                }
+            },
+            "transportationDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Transportation / Trucking"
                         }
                     ]
                 }

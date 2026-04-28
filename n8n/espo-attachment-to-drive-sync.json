@@ -1,0 +1,262 @@
+{
+  "id": "Q7n2pL9mXa4tR8vK",
+  "name": "Espo Attachment -> Google Drive Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "espo-attachment-drive-sync",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "Webhook_Inbound",
+      "name": "Inbound Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "webhookId": "d8f5b7b2-5d47-4f34-9a9a-32b4ec4d6b21",
+      "position": [
+        240,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "accountName",
+              "type": "string",
+              "value": "={{$json.body?.accountName || $json.accountName || ''}}"
+            },
+            {
+              "name": "opportunityName",
+              "type": "string",
+              "value": "={{$json.body?.opportunityName || $json.opportunityName || ''}}"
+            },
+            {
+              "name": "fileName",
+              "type": "string",
+              "value": "={{$json.body?.fileName || $json.fileName || ''}}"
+            },
+            {
+              "name": "mimeType",
+              "type": "string",
+              "value": "={{$json.body?.mimeType || $json.mimeType || 'application/octet-stream'}}"
+            },
+            {
+              "name": "fileContentBase64",
+              "type": "string",
+              "value": "={{$json.body?.fileContentBase64 || $json.fileContentBase64 || ''}}"
+            },
+            {
+              "name": "driveFolderId",
+              "type": "string",
+              "value": "={{(($json.body?.driveFolderId || $json.driveFolderId || '').replace(/^\\/+/, '')) || '0AEQC2PbifwZTUk9PVA'}}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "Normalize_Payload",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        520,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "leftValue": "={{$json.fileName}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "leftValue": "={{$json.fileContentBase64}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            },
+            {
+              "leftValue": "={{$json.driveFolderId}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "Gate_Required_Fields",
+      "name": "Gate Required Fields",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        780,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "jsonToBinary",
+        "options": {},
+        "sourceKey": "fileContentBase64",
+        "destinationKey": "fileData",
+        "dataIsBase64": true
+      },
+      "id": "Decode_File_Content",
+      "name": "Decode File Content",
+      "type": "n8n-nodes-base.moveBinaryData",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "operation": "upload",
+        "binaryData": true,
+        "binaryPropertyName": "fileData",
+        "name": "={{$json.fileName}}",
+        "parents": "={{$json.driveFolderId}}",
+        "options": {}
+      },
+      "id": "Upload_To_Google_Drive",
+      "name": "Upload To Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1280,
+        180
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "7OQ3yv4voOcGrOCq",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"ok\": true, \"driveFileId\": $json.id || '', \"driveFileName\": $json.name || '', \"driveWebViewLink\": $json.webViewLink || ''}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "Respond_Success",
+      "name": "Respond Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\"ok\": false, \"error\": \"Missing required payload fields: fileName, fileContentBase64, driveFolderId.\"}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "Respond_Invalid",
+      "name": "Respond Invalid",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1040,
+        360
+      ]
+    }
+  ],
+  "connections": {
+    "Inbound Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Payload": {
+      "main": [
+        [
+          {
+            "node": "Gate Required Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gate Required Fields": {
+      "main": [
+        [
+          {
+            "node": "Decode File Content",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Invalid",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Decode File Content": {
+      "main": [
+        [
+          {
+            "node": "Upload To Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload To Google Drive": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {},
+  "pinData": {},
+  "versionId": "b83e7f2b-1f71-4a7c-a7cc-4f1fc4dc4fd6",
+  "active": false
+}

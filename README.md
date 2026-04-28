@@ -64,3 +64,17 @@ Set these config keys to enable outbound account enrichment payloads from CRM:
 
 - `accountEnrichmentWebhookUrl` — endpoint that receives `account.enrichment_submitted`
 - `accountEnrichmentWebhookSecret` — optional shared secret sent as `X-Account-Sync-Secret`
+
+## Attachment -> Google Drive sync
+
+Set these in EspoCRM `data/config.php` to sync new attachments to n8n/Drive:
+
+- `attachmentDriveSyncWebhookUrl` — n8n webhook URL (for this setup: `https://n8n-n8fq.srv1624160.hstgr.cloud/webhook/espo-attachment-drive-sync`)
+- `attachmentDriveSyncWebhookSecret` — optional shared secret sent as `X-Attachment-Sync-Secret`
+
+When an `Attachment` is created (or finishes uploading), Espo sends:
+
+- file metadata (`attachmentId`, `fileName`, `mimeType`, `fileSize`)
+- file body (`fileContentBase64`)
+- CRM context (`accountId`, `accountName`, `opportunityId`, `opportunityName`)
+- folder routing (`driveFolderId` extracted from `Account.googleDriveFolderUrl` when available)
