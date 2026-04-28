@@ -9,6 +9,13 @@ use Espo\ORM\EntityManager;
 
 class AccountHealthManager
 {
+    /**
+     * Save option flag set by callers (e.g. RecalculateAccountScores job) that
+     * have already invoked applyToAccount, so the BeforeSave health hook can
+     * skip the redundant recomputation.
+     */
+    public const SKIP_HEALTH_SNAPSHOT_OPTION = 'skipHealthSnapshot';
+
     private const ACTIVE_POLICY_STATUSES = [
         'Active',
         'Up for Renewal',
@@ -74,7 +81,10 @@ class AccountHealthManager
         }
 
         $this->applyToAccount($account);
-        $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
+        $this->entityManager->saveEntity($account, [
+            SaveOption::SILENT => true,
+            self::SKIP_HEALTH_SNAPSHOT_OPTION => true,
+        ]);
     }
 
     public function applyToAccount(Entity $account): void

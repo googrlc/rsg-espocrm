@@ -33,9 +33,8 @@ class DeriveProfile implements BeforeSave
 
         $derivedDescription = "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}";
         $existingDescription = trim((string) ($entity->get('description') ?? ''));
-        $previousDerived = trim((string) ($entity->getFetched('description') ?? ''));
 
-        if ($existingDescription === '' || $existingDescription === $previousDerived) {
+        if ($existingDescription === '' || $this->looksLikeDerivedDescription($existingDescription)) {
             $entity->set('description', $derivedDescription);
         }
 
@@ -55,5 +54,18 @@ class DeriveProfile implements BeforeSave
                 $entity->set('originalLeadSource', $campaignName);
             }
         }
+    }
+
+    /**
+     * Detect whether the existing description matches the auto-derived shape
+     * (`Active Policies: N\nClient Since: YYYY`). User-typed notes won't match,
+     * so they are preserved across saves.
+     */
+    private function looksLikeDerivedDescription(string $value): bool
+    {
+        return (bool) preg_match(
+            '/\AActive Policies:\s*\d+\s*[\r\n]+Client Since:\s*\d{4}\s*\z/',
+            $value
+        );
     }
 }
