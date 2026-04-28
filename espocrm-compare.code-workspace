@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "name": "rsg-espocrm",
+      "path": "."
+    },
+    {
+      "name": "official-espocrm",
+      "path": "../official-espocrm"
+    }
+  ],
+  "settings": {}
+}

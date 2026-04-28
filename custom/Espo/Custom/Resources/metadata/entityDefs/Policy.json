@@ -51,13 +51,14 @@
             "default": "Active",
             "isCustom": true,
             "audited": true,
+            "displayAsLabel": true,
             "style": {
                 "Active": "success",
                 "Up for Renewal": "warning",
                 "Renewing": "warning",
                 "Renewed": "success",
-                "Expired": "default",
-                "Cancelled": "danger",
+                "Expired": "danger",
+                "Cancelled": "default",
                 "Flat Cancel": "danger",
                 "Pending Cancel": "warning",
                 "Non-Renewed": "danger",
@@ -163,6 +164,7 @@
             ],
             "default": "Pending",
             "isCustom": true,
+            "displayAsLabel": true,
             "style": {
                 "Synced": "success",
                 "Pending": "warning",
@@ -329,6 +331,9 @@
             "layoutDetailDisabled": true,
             "noLoad": true
         }
+    },
+    "formula": {
+        "beforeSaveScript": "\n$premiumAmount = entity\\attribute('premiumAmount');\n$commissionRate = entity\\attribute('commissionRate');\n\nifThen(\n    $premiumAmount != null && $commissionRate != null,\n    entity\\setAttribute('commissionAmount', $premiumAmount * $commissionRate)\n);\n\nifThen(\n    $premiumAmount == null || $commissionRate == null,\n    entity\\setAttribute('commissionAmount', null)\n);\n"
     },
     "links": {
         "account": {

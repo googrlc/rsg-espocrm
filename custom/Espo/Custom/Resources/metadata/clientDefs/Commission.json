@@ -21,15 +21,7 @@
         "onlyMy"
     ],
     "sidePanels": {
-        "detail": [
-            {
-                "name": "markAsPosted",
-                "label": "Mark as Posted",
-                "view": "custom:views/commission/record/panels/mark-as-posted",
-                "order": 1,
-                "sticked": true
-            }
-        ]
+        "detail": []
     },
     "dynamicLogic": {
         "fields": {

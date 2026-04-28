@@ -618,35 +618,23 @@
     "kanbanViewMode": true,
     "statusField": "stage",
     "kanbanCardView": "custom:views/opportunity/kanban-card",
-    "views": {
-        "detail": "custom:views/opportunity/record/detail-view"
-    },
     "sidePanels": {
         "detail": [
             {
-                "name": "recordInfo",
-                "label": "Record Info",
-                "view": "custom:views/opportunity/record/panels/record-info",
-                "order": 1,
-                "sticked": true
+                "name": "activities",
+                "reference": "activities",
+                "view": "crm:views/opportunity/record/panels/activities",
+                "order": 1
             },
             {
-                "name": "contactsWidget",
-                "label": "Contacts",
-                "view": "custom:views/opportunity/record/panels/contacts-widget",
+                "name": "history",
+                "reference": "history",
                 "order": 2
             },
             {
-                "name": "tasksWidget",
-                "label": "Tasks",
-                "view": "custom:views/opportunity/record/panels/tasks-widget",
+                "name": "tasks",
+                "reference": "tasks",
                 "order": 3
-            },
-            {
-                "name": "policyStub",
-                "label": "Policy Stub",
-                "view": "custom:views/opportunity/record/panels/policy-stub",
-                "order": 4
             }
         ]
     }

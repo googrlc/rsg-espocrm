@@ -1,21 +1,27 @@
 [
   {
+    "label": "Overview",
+    "rows": [
+      [{"name": "premiumAmount"}, {"name": "carrier"}],
+      [{"name": "effectiveDate"}, {"name": "expirationDate"}]
+    ]
+  },
+  {
     "label": "Policy Info",
     "rows": [
       [{"name": "policyNumber"}, {"name": "status"}],
-      [{"name": "carrier"}, {"name": "carrierAccount"}],
-      [{"name": "lineOfBusiness"}, {"name": "statusLabel"}],
-      [{"name": "businessType"}, {"name": "assignedUser"}],
-      [{"name": "effectiveDate"}, {"name": "expirationDate"}],
+      [{"name": "carrierAccount"}, {"name": "statusLabel"}],
+      [{"name": "lineOfBusiness"}, {"name": "businessType"}],
+      [{"name": "assignedUser"}, false],
       [{"name": "daysRemaining"}, {"name": "carrierPortalUrl"}]
     ]
   },
   {
     "label": "Financial",
     "rows": [
-      [{"name": "premiumAmount"}, {"name": "commissionRate"}],
-      [{"name": "commissionAmount"}, {"name": "coverageAmount"}],
-      [{"name": "deductible"}, {"name": "agencyFee"}]
+      [{"name": "commissionRate"}, {"name": "commissionAmount"}],
+      [{"name": "coverageAmount"}, {"name": "deductible"}],
+      [{"name": "agencyFee"}, false]
     ]
   },
   {
@@ -40,10 +46,13 @@
     ]
   },
   {
-    "label": "Sync",
+    "label": "NowCerts Sync",
+    "style": "side",
     "rows": [
-      [{"name": "momentumPolicyId"}, {"name": "insuredMomentumId"}],
-      [{"name": "momentumLastSynced"}, {"name": "syncStatus"}]
+      [{"name": "momentumPolicyId"}],
+      [{"name": "syncStatus"}],
+      [{"name": "momentumLastSynced"}],
+      [{"name": "insuredMomentumId"}]
     ]
   }
 ]

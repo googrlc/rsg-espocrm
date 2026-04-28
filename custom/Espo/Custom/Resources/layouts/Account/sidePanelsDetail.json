@@ -2,23 +2,16 @@
     "_delimiter_": {
         "disabled": true
     },
-    "accountScore": {
-        "sticked": true,
+    "commissionSummary": {
         "index": 0
     },
     "googleDrive": {
         "index": 1
     },
-    "default": {
-        "dynamicLogicVisible": null,
-        "style": "default",
-        "sticked": false,
+    "recordInfo": {
         "index": 2
     },
-    "recordInfo": {
-        "index": 3
-    },
     "internalIds": {
-        "index": 4
+        "index": 3
     }
 }

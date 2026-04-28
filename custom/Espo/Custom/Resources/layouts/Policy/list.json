@@ -7,6 +7,7 @@
   {"name": "premiumAmount", "width": 8},
   {"name": "expirationDate", "width": 8},
   {"name": "status", "width": 8},
+  {"name": "syncStatus", "width": 8},
   {"name": "assignedUser", "width": 8},
   {"name": "urgency", "width": 8}
 ]

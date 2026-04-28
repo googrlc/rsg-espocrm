@@ -8,35 +8,27 @@
     "sidePanels": {
         "detail": [
             {
-                "name": "accountScore",
-                "label": "Account Score",
-                "view": "custom:views/account/record/panels/account-score",
-                "sticked": true,
-                "order": 1
-            },
-            {
                 "name": "commissionSummary",
                 "label": "Commission Summary",
                 "view": "custom:views/account/record/panels/commission-summary",
-                "order": 2
+                "order": 1
             },
             {
                 "name": "googleDrive",
                 "label": "Google Drive",
                 "view": "custom:views/account/record/panels/google-drive",
-                "order": 3
+                "order": 2
             },
             {
                 "name": "internalIds",
                 "label": "Internal IDs",
                 "view": "custom:views/account/record/panels/internal-ids",
-                "order": 4
+                "order": 3
             },
             {
                 "name": "recordInfo",
-                "label": "Record Info",
-                "view": "custom:views/account/record/panels/record-info",
-                "order": 5
+                "reference": "recordInfo",
+                "order": 4
             }
         ]
     },

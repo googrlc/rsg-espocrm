@@ -21,9 +21,6 @@
         "onlyMy"
     ],
     "kanbanCardView": "custom:views/policy/kanban-card",
-    "views": {
-        "detail": "custom:views/policy/record/detail-view"
-    },
     "sidePanels": {
         "detail": [
             {
