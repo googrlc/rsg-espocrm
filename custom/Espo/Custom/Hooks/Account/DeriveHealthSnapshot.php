@@ -15,6 +15,10 @@ class DeriveHealthSnapshot implements BeforeSave
 
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
+        if ($options->get(AccountHealthManager::SKIP_HEALTH_SNAPSHOT_OPTION) === true) {
+            return;
+        }
+
         $this->accountHealthManager->applyToAccount($entity);
     }
 }
