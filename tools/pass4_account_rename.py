@@ -1,5 +1,13 @@
 #!/usr/bin/env python3
-"""Pass 4: rename Account entityDefs field keys, fix nested attribute refs, collection sortBy."""
+"""Pass 4: rename Account entityDefs field keys, fix nested attribute refs, collection sortBy.
+
+After deploying metadata, the MySQL `account` table must use matching column names or
+GET /Account/{id} will fail (e.g. Unknown column 'claims_count_3yr'). Apply:
+
+  tools/migrations/pass4_account_rename_mysql8.sql
+
+(Regenerate from tools/migrations/build_pass4_account_mysql.py if RENAME changes.)
+"""
 
 import json
 from pathlib import Path
