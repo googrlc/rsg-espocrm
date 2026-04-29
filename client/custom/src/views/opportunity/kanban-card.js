@@ -58,14 +58,14 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
             }
 
             // Owner avatar initials
-            const assignedUser = this.model.get('assignedUser');
+            const assignedUserName = this.model.get('assignedUserName');
             let ownerInitials = '??';
-            if (assignedUser) {
-                const nameParts = assignedUser.split(' ');
+            if (assignedUserName) {
+                const nameParts = assignedUserName.trim().split(/\s+/).filter(Boolean);
                 if (nameParts.length >= 2) {
                     ownerInitials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
-                } else {
-                    ownerInitials = assignedUser.substring(0, 2).toUpperCase();
+                } else if (nameParts.length === 1) {
+                    ownerInitials = nameParts[0].substring(0, 2).toUpperCase();
                 }
             }
 
@@ -113,6 +113,7 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
                 dueDateClass: dueDateClass,
                 dueDateLabel: dueDateLabel,
                 ownerInitials: ownerInitials,
+                assignedUserName: assignedUserName,
                 lineOfBusiness: lineOfBusiness,
                 businessType: businessType,
                 formattedValue: formattedValue,

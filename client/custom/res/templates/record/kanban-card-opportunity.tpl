@@ -37,7 +37,7 @@
         </div>
         {{/if}}
         
-        <div class="owner-avatar" title="{{assignedUser}}">
+        <div class="owner-avatar" title="{{assignedUserName}}">
             {{ownerInitials}}
         </div>
     </div>

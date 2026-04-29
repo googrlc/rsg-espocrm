@@ -67,6 +67,16 @@ class EmailAutoLink implements AfterSave
 
             if ($contact && $contact->get('accountId')) {
                 $entity->set('accountId', $contact->get('accountId'));
+                $accountName = $contact->get('accountName');
+                if (!$accountName) {
+                    $relatedAccount = $this->entityManager->getEntityById('Account', $contact->get('accountId'));
+                    if ($relatedAccount) {
+                        $accountName = $relatedAccount->get('name');
+                    }
+                }
+                if ($accountName) {
+                    $entity->set('accountName', $accountName);
+                }
                 if (!$entity->get('parentId')) {
                     $entity->set('parentId', $contact->getId());
                     $entity->set('parentType', 'Contact');

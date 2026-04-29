@@ -31,10 +31,12 @@ class DeriveProfile implements BeforeSave
         $createdAt = $entity->get('createdAt') ?: $entity->getFetched('createdAt');
         $createdYear = $createdAt ? (new DateTimeImmutable($createdAt))->format('Y') : (new DateTimeImmutable())->format('Y');
 
-        $entity->set(
-            'description',
-            "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}"
-        );
+        $derivedDescription = "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}";
+        $existingDescription = trim((string) ($entity->get('description') ?? ''));
+
+        if ($existingDescription === '' || $this->looksLikeDerivedDescription($existingDescription)) {
+            $entity->set('description', $derivedDescription);
+        }
 
         $dateOfBirth = $entity->get('dateOfBirth');
         if ($dateOfBirth) {
@@ -52,5 +54,18 @@ class DeriveProfile implements BeforeSave
                 $entity->set('originalLeadSource', $campaignName);
             }
         }
+    }
+
+    /**
+     * Detect whether the existing description matches the auto-derived shape
+     * (`Active Policies: N\nClient Since: YYYY`). User-typed notes won't match,
+     * so they are preserved across saves.
+     */
+    private function looksLikeDerivedDescription(string $value): bool
+    {
+        return (bool) preg_match(
+            '/\AActive Policies:\s*\d+\s*[\r\n]+Client Since:\s*\d{4}\s*\z/',
+            $value
+        );
     }
 }
