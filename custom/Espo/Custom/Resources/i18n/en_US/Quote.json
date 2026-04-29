@@ -2,7 +2,7 @@
     "fields": {
         "quoteNumber": "Quote Number",
         "carrier": "Carrier",
-        "premium": "Premium",
+        "premium": "Premium Amount",
         "status": "Status",
         "effectiveDate": "Effective Date",
         "expirationDate": "Expiration Date",

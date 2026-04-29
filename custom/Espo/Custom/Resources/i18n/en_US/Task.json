@@ -14,7 +14,7 @@
         "taskSource": "Source",
         "linkedAccount": "Linked Account",
         "momentumTaskId": "NowCerts Task ID",
-        "momentumLastSynced": "Last Synced",
+        "momentumLastSynced": "Momentum Last Synced",
         "taskType": "Task Type",
         "syncSource": "Sync Source",
         "urgency": "Urgency",

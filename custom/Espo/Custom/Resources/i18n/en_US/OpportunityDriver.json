@@ -3,7 +3,7 @@
         "driverName": "Driver Name",
         "driverLicenseNumber": "Driver License Number",
         "dateOfBirth": "Date of Birth",
-        "stateIssued": "State Issued",
+        "stateIssued": "Driver License Issuing State",
         "licenseExpirationDate": "License Expiration Date",
         "vehicle": "Assigned Vehicle",
         "driverSchedule": "Driver Schedule",

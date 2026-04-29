@@ -14,7 +14,7 @@
                     "name": "scoreTier"
                 },
                 {
-                    "name": "activePolicyCount"
+                    "name": "policyCountActive"
                 }
             ],
             [
@@ -149,7 +149,7 @@
             ],
             [
                 {
-                    "name": "numberOfEmployees"
+                    "name": "employeeCount"
                 },
                 {
                     "name": "fein"
@@ -193,9 +193,7 @@
                 {
                     "name": "intelConfidence"
                 },
-                {
-                    "name": "intelPackLastRun"
-                }
+                false
             ],
             [
                 {
@@ -264,7 +262,7 @@
             ],
             [
                 {
-                    "name": "numberOfEmployees"
+                    "name": "employeeCount"
                 },
                 {
                     "name": "fein"
@@ -282,9 +280,7 @@
                 {
                     "name": "intelNaics"
                 },
-                {
-                    "name": "intelWebsite"
-                }
+                false
             ]
         ],
         "dynamicLogicVisible": {
@@ -316,7 +312,7 @@
         "rows": [
             [
                 {
-                    "name": "intelBbbRating"
+                    "name": "bbbRating"
                 },
                 {
                     "name": "intelBbbAccredited"
@@ -337,7 +333,7 @@
             ],
             [
                 {
-                    "name": "intelLinkedinUrl"
+                    "name": "linkedinUrl"
                 },
                 {
                     "name": "intelLinkedinNotes"
@@ -810,28 +806,6 @@
         "style": "default",
         "name": "gbNotesPanel",
         "customLabel": "Group Benefits Notes"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "intelPackRun"
-                },
-                {
-                    "name": "intelPackLastRun"
-                }
-            ],
-            [
-                {
-                    "name": "aiAssessment"
-                }
-            ]
-        ],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Internal",
-        "name": "aiIntelPack",
-        "label": "AI Intel Pack"
     },
     {
         "rows": [

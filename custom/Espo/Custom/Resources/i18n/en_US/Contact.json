@@ -1,6 +1,8 @@
 {
     "fields": {
-        "contactType": "Type",
+        "contactType": "Contact Type",
+        "csrName": "Customer Service Representative Name",
+        "momentumClientId": "Momentum Client ID",
         "contactRole": "Contact Role",
         "relationshipToAccount": "Relationship to Account",
         "originalLeadSource": "Original Lead Source",
