@@ -3,7 +3,7 @@
 namespace Espo\Custom\Jobs;
 
 use Espo\Core\Job\JobDataLess;
-use Espo\Custom\Classes\Renewal\RenewalOrchestrator;
+use Espo\Modules\RsgCore\Classes\Renewal\RenewalOrchestrator;
 use Espo\ORM\EntityManager;
 
 /**

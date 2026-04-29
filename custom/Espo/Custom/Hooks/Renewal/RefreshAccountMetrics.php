@@ -3,7 +3,7 @@
 namespace Espo\Custom\Hooks\Renewal;
 
 use Espo\Core\Hook\Hook\AfterSave;
-use Espo\Custom\Classes\Policy\PolicyAccountSync;
+use Espo\Modules\RsgCore\Classes\Policy\PolicyAccountSync;
 use Espo\ORM\Entity;
 use Espo\ORM\Repository\Option\SaveOptions;
 

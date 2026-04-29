@@ -1,6 +1,6 @@
 <?php
 
-namespace Espo\Custom\Classes\Policy;
+namespace Espo\Modules\RsgCore\Classes\Policy;
 
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;

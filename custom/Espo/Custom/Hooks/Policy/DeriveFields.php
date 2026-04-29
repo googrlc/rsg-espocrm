@@ -3,7 +3,7 @@
 namespace Espo\Custom\Hooks\Policy;
 
 use Espo\Core\Hook\Hook\BeforeSave;
-use Espo\Custom\Classes\Policy\PolicyAccountSync;
+use Espo\Modules\RsgCore\Classes\Policy\PolicyAccountSync;
 use Espo\ORM\Entity;
 use Espo\ORM\Repository\Option\SaveOptions;
 
