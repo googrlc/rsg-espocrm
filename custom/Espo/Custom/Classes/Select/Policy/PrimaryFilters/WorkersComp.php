@@ -10,9 +10,9 @@ class WorkersComp implements Filter
     {
         $queryBuilder->where([
             'OR' => [
-                ['lineOfBusiness*' => '%workers%'],
-                ['lineOfBusiness*' => '%comp%'],
-                ['lineOfBusiness*' => '%WC%'],
+                ['line_of_business*' => '%workers%'],
+                ['line_of_business*' => '%comp%'],
+                ['line_of_business*' => '%WC%'],
             ],
         ]);
     }

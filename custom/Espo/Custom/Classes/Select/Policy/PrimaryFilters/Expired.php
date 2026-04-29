@@ -14,7 +14,7 @@ class Expired implements Filter
             'OR' => [
                 ['status' => 'Expired'],
                 [
-                    'expirationDate<' => $now,
+                    'expiration_date<' => $now,
                     'status!=' => 'Cancelled',
                 ],
             ],

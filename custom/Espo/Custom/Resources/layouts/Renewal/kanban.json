@@ -4,9 +4,9 @@
         "link": true
     },
     {
-        "name": "expirationDate"
+        "name": "expiration_date"
     },
     {
-        "name": "currentPremium"
+        "name": "current_premium"
     }
 ]

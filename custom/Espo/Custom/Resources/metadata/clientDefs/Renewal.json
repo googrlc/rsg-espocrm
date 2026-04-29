@@ -46,7 +46,7 @@
     ],
     "dynamicLogic": {
         "fields": {
-            "lostReason": {
+            "lost_reason": {
                 "required": {
                     "conditionGroup": [
                         {
@@ -77,7 +77,7 @@
                     ]
                 }
             },
-            "renewalPremium": {
+            "renewal_premium": {
                 "visible": {
                     "conditionGroup": [
                         {

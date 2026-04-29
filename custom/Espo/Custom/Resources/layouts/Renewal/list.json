@@ -1,10 +1,10 @@
 [
     {"name": "name", "width": 18, "link": true},
-    {"name": "lineOfBusiness", "width": 10},
-    {"name": "expirationDate", "width": 10},
-    {"name": "currentPremium", "width": 10},
-    {"name": "renewalPremium", "width": 10},
-    {"name": "premiumChange", "width": 7},
+    {"name": "line_of_business", "width": 10},
+    {"name": "expiration_date", "width": 10},
+    {"name": "current_premium", "width": 10},
+    {"name": "renewal_premium", "width": 10},
+    {"name": "premium_change", "width": 7},
     {"name": "stage", "width": 10},
     {"name": "assignedUser", "width": 10, "link": true},
     {"name": "urgency", "width": 8}

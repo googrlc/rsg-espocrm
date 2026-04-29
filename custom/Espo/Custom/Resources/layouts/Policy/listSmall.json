@@ -1,8 +1,8 @@
 [
-  {"name": "policyNumber", "link": true},
-  {"name": "lineOfBusiness"},
+  {"name": "policy_number", "link": true},
+  {"name": "line_of_business"},
   {"name": "status"},
-  {"name": "effectiveDate"},
-  {"name": "expirationDate"},
-  {"name": "premiumAmount"}
+  {"name": "effective_date"},
+  {"name": "expiration_date"},
+  {"name": "premium_amount"}
 ]

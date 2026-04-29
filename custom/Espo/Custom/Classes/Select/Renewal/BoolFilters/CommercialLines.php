@@ -13,7 +13,7 @@ class CommercialLines implements Filter
     {
         $orGroupBuilder->add(
             Comparison::in(
-                Expression::column('lineOfBusiness'),
+                Expression::column('line_of_business'),
                 [
                     'Commercial Auto',
                     'General Liability',

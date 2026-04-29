@@ -13,7 +13,7 @@ class PersonalLines implements Filter
     {
         $orGroupBuilder->add(
             Comparison::in(
-                Expression::column('lineOfBusiness'),
+                Expression::column('line_of_business'),
                 [
                     'Personal Auto',
                     'Homeowners',

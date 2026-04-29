@@ -33,7 +33,7 @@ class SyncRenewalsFromPolicies implements JobDataLess
 
         $count = 0;
         foreach ($policies as $policy) {
-            if (!$policy->get('accountId') || !$policy->get('expirationDate')) {
+            if (!$policy->get('accountId') || !$policy->get('expiration_date')) {
                 continue;
             }
             $this->renewalOrchestrator->syncFromPolicy($policy);

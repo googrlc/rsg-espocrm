@@ -4,7 +4,7 @@
     "name": "pipeline",
     "rows": [
       [{"name": "stage", "fullWidth": true}],
-      [{"name": "urgency"}, {"name": "expirationDate"}]
+      [{"name": "urgency"}, {"name": "expiration_date"}]
     ]
   },
   {
@@ -12,7 +12,7 @@
     "name": "overview",
     "rows": [
       [{"name": "account"}, {"name": "contact"}],
-      [{"name": "policy"}, {"name": "lineOfBusiness"}],
+      [{"name": "policy"}, {"name": "line_of_business"}],
       [{"name": "carrier"}, {"name": "assignedUser"}]
     ]
   },
@@ -20,24 +20,24 @@
     "label": "Premium",
     "name": "premium",
     "rows": [
-      [{"name": "currentPremium"}, {"name": "renewalPremium"}],
-      [{"name": "premiumChange"}, false],
-      [{"name": "commissionRate"}, {"name": "expectedCommission"}]
+      [{"name": "current_premium"}, {"name": "renewal_premium"}],
+      [{"name": "premium_change"}, false],
+      [{"name": "commission_rate"}, {"name": "expected_commission"}]
     ]
   },
   {
     "label": "Outreach",
     "name": "outreach",
     "rows": [
-      [{"name": "lastContactMethod"}, {"name": "lastContactDate"}],
-      [{"name": "renewalEffectiveDate"}, false]
+      [{"name": "last_contact_method"}, {"name": "last_contact_date"}],
+      [{"name": "renewal_effective_date"}, false]
     ]
   },
   {
     "label": "Lost Details",
     "name": "lostDetails",
     "rows": [
-      [{"name": "lostReason"}, false]
+      [{"name": "lost_reason"}, false]
     ]
   },
   {
@@ -50,7 +50,7 @@
   {
     "label": "Notes",
     "rows": [
-      [{"name": "renewalNotes", "fullWidth": true}]
+      [{"name": "renewal_notes", "fullWidth": true}]
     ]
   }
 ]

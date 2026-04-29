@@ -30,9 +30,11 @@ class PolicyAccountSync
             $policy->set('accountName', $resolved);
         }
 
+        $this->applyLineOfBusinessFromSync($policy);
+
         $accountName = $policy->get('accountName') ?: '';
-        $lineOfBusiness = $policy->get('lineOfBusiness') ?: $policy->get('businessType') ?: '';
-        $policyNumber = $policy->get('policyNumber') ?: '';
+        $lineOfBusiness = $policy->get('line_of_business') ?: $policy->get('business_type') ?: '';
+        $policyNumber = $policy->get('policy_number') ?: '';
 
         $nameParts = array_values(array_filter([$accountName, $lineOfBusiness, $policyNumber]));
         if ($nameParts !== []) {
@@ -43,7 +45,7 @@ class PolicyAccountSync
             $policy->set('carrier', $policy->get('carrierAccountName'));
         }
 
-        $daysRemaining = $this->calculateDaysRemaining($policy->get('expirationDate'));
+        $daysRemaining = $this->calculateDaysRemaining($policy->get('expiration_date'));
         $policy->set('daysRemaining', $daysRemaining);
 
         $statusLabel = 'ACTIVE';
@@ -75,8 +77,8 @@ class PolicyAccountSync
             $policy->set('urgency', 'Low');
         }
 
-        $premiumAmount = (float) ($policy->get('premiumAmount') ?? 0);
-        $normalizedRate = $this->normalizeRate($policy->get('commissionRate'));
+        $premiumAmount = (float) ($policy->get('premium_amount') ?? 0);
+        $normalizedRate = $this->normalizeRate($policy->get('commission_rate'));
         $policy->set('commissionAmount', round($premiumAmount * $normalizedRate, 2));
 
         $status = (string) ($policy->get('status') ?? '');
@@ -92,8 +94,48 @@ class PolicyAccountSync
         );
 
         if ($policyNumber !== '') {
-            $policy->set('carrierPortalUrl', 'https://carrier-portal.com/policy/' . rawurlencode($policyNumber));
+            $policy->set('carrierPortalUrl', 'https://carrier-portal.com/policy/' . rawurlencode((string) $policyNumber));
         }
+    }
+
+    /**
+     * Persists upstream LOB snapshot and a normalized varchar for reporting / Renewal automation.
+     * Raw input precedence: explicit line_of_business_raw, then unchanged line_of_business, then business_type.
+     */
+    private function applyLineOfBusinessFromSync(Entity $policy): void
+    {
+        $rawCandidate = trim((string) ($policy->get('line_of_business_raw') ?? ''));
+        if ($rawCandidate === '') {
+            $rawCandidate = trim((string) ($policy->get('line_of_business') ?? ''));
+        }
+        if ($rawCandidate === '') {
+            $rawCandidate = trim((string) ($policy->get('business_type') ?? ''));
+        }
+
+        if ($rawCandidate !== '') {
+            $policy->set('line_of_business_raw', $rawCandidate);
+        }
+
+        $normalized = $this->normalizeLineOfBusinessValue($rawCandidate !== '' ? $rawCandidate : null);
+
+        if ($normalized !== '') {
+            $policy->set('line_of_business', $normalized);
+        }
+    }
+
+    private function normalizeLineOfBusinessValue(?string $value): string
+    {
+        $line = trim((string) $value);
+        if ($line === '') {
+            return '';
+        }
+
+        return match ($line) {
+            'GL' => 'General Liability',
+            'Auto' => 'Personal Auto',
+            'Home' => 'Homeowners',
+            default => $line,
+        };
     }
 
     public function refreshAccountMetricsByPolicy(Entity $policy): void
@@ -138,16 +180,16 @@ class PolicyAccountSync
 
         foreach ($policyList as $policy) {
             $status = (string) ($policy->get('status') ?? '');
-            $expirationDateRaw = $policy->get('expirationDate');
+            $expirationDateRaw = $policy->get('expiration_date');
             $expirationDate = $expirationDateRaw ? new DateTimeImmutable($expirationDateRaw) : null;
 
             if (in_array($status, self::ACTIVE_STATUSES, true)) {
-                $totalPremium += (float) ($policy->get('premiumAmount') ?? 0);
+                $totalPremium += (float) ($policy->get('premium_amount') ?? 0);
                 $activePolicyCount++;
 
                 if ($expirationDate && (!$nextExpiration || $expirationDate < $nextExpiration)) {
                     $nextExpiration = $expirationDate;
-                    $nextExpirationLob = $policy->get('lineOfBusiness');
+                    $nextExpirationLob = $policy->get('line_of_business');
                     $nextExpirationCarrier = $policy->get('carrier');
                 }
             }
@@ -184,7 +226,7 @@ class PolicyAccountSync
         $totalCarrierPremium = 0.0;
 
         foreach ($policyList as $policy) {
-            $totalCarrierPremium += (float) ($policy->get('premiumAmount') ?? 0);
+            $totalCarrierPremium += (float) ($policy->get('premium_amount') ?? 0);
         }
 
         $account->set('totalCarrierPremium', round($totalCarrierPremium, 2));

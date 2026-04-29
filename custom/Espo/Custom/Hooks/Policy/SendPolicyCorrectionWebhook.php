@@ -76,7 +76,7 @@ class SendPolicyCorrectionWebhook implements AfterSave
         $entity->set([
             'amsLockState' => 'Pending AMS',
             'amsLockReason' => 'CRM correction submitted. Waiting for AMS acceptance timestamp.',
-            'syncStatus' => 'Pending',
+            'sync_status' => 'Pending',
         ]);
 
         $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true]);

@@ -9,7 +9,7 @@ class LifeInsurance implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'lineOfBusiness*' => '%life%',
+            'line_of_business*' => '%life%',
         ]);
     }
 }

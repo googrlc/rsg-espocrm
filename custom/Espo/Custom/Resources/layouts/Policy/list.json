@@ -1,13 +1,13 @@
 [
-  {"name": "policyNumber", "width": 10, "link": true},
+  {"name": "policy_number", "width": 10, "link": true},
   {"name": "account", "width": 10, "link": true},
   {"name": "contact", "width": 10, "link": true},
-  {"name": "lineOfBusiness", "width": 10},
+  {"name": "line_of_business", "width": 10},
   {"name": "carrier", "width": 10},
-  {"name": "premiumAmount", "width": 8},
-  {"name": "expirationDate", "width": 8},
+  {"name": "premium_amount", "width": 8},
+  {"name": "expiration_date", "width": 8},
   {"name": "status", "width": 8},
-  {"name": "syncStatus", "width": 8},
+  {"name": "sync_status", "width": 8},
   {"name": "assignedUser", "width": 8},
   {"name": "urgency", "width": 8}
 ]

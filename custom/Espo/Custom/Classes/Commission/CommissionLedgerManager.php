@@ -21,10 +21,10 @@ class CommissionLedgerManager
         }
 
         $commissionType = $this->mapPolicyCommissionType($policy);
-        $effectiveDate = (string) ($policy->get('effectiveDate') ?? '');
+        $effectiveDate = (string) ($policy->get('effective_date') ?? '');
         $key = $this->buildLedgerKey($policyId, $commissionType, $effectiveDate, 'policy', $policyId);
-        $rate = $this->normalizeRateOrNull($policy->get('commissionRate'));
-        $premium = (float) ($policy->get('premiumAmount') ?? 0);
+        $rate = $this->normalizeRateOrNull($policy->get('commission_rate'));
+        $premium = (float) ($policy->get('premium_amount') ?? 0);
 
         $this->upsertByKey($key, [
             'name' => $this->buildCommissionName($policy->get('accountName'), $commissionType),
@@ -40,7 +40,7 @@ class CommissionLedgerManager
             'assignedUserName' => $policy->get('assignedUserName'),
             'producer' => $policy->get('assignedUserName'),
             'carrier' => $policy->get('carrier'),
-            'lineOfBusiness' => $this->normalizeLineOfBusiness($policy->get('lineOfBusiness')),
+            'lineOfBusiness' => $this->normalizeLineOfBusiness($policy->get('line_of_business')),
             'writtenPremium' => $premium,
             'commissionRate' => $rate,
             'estimatedCommission' => $this->calculateEstimatedCommission($premium, $rate),
@@ -57,10 +57,10 @@ class CommissionLedgerManager
             return;
         }
 
-        $effectiveDate = (string) ($renewal->get('renewalEffectiveDate') ?? $renewal->get('expirationDate') ?? '');
+        $effectiveDate = (string) ($renewal->get('renewal_effective_date') ?? $renewal->get('expiration_date') ?? '');
         $key = $this->buildLedgerKey($policyId, 'Renewal', $effectiveDate, 'renewal', $renewalId);
-        $rate = $this->normalizeRateOrNull($renewal->get('commissionRate'));
-        $premium = (float) ($renewal->get('renewalPremium') ?? $renewal->get('currentPremium') ?? 0);
+        $rate = $this->normalizeRateOrNull($renewal->get('commission_rate'));
+        $premium = (float) ($renewal->get('renewal_premium') ?? $renewal->get('current_premium') ?? 0);
 
         $policy = $this->entityManager->getEntityById('Policy', $policyId);
 
@@ -80,7 +80,7 @@ class CommissionLedgerManager
             'assignedUserName' => $renewal->get('assignedUserName'),
             'producer' => $renewal->get('assignedUserName'),
             'carrier' => $renewal->get('carrier') ?: ($policy?->get('carrier')),
-            'lineOfBusiness' => $this->normalizeLineOfBusiness($renewal->get('lineOfBusiness')),
+            'lineOfBusiness' => $this->normalizeLineOfBusiness($renewal->get('line_of_business')),
             'writtenPremium' => $premium,
             'commissionRate' => $rate,
             'estimatedCommission' => $this->calculateEstimatedCommission($premium, $rate),
@@ -107,10 +107,10 @@ class CommissionLedgerManager
         }
 
         $commissionType = $this->mapOpportunityCommissionType((string) ($opportunity->get('businessType') ?? ''));
-        $effectiveDate = (string) ($opportunity->get('effectiveDate') ?? $policy->get('effectiveDate') ?? '');
+        $effectiveDate = (string) ($opportunity->get('effectiveDate') ?? $policy->get('effective_date') ?? '');
         $key = $this->buildLedgerKey($policyId, $commissionType, $effectiveDate, 'opportunity', $opportunityId);
-        $rate = $this->normalizeRateOrNull($opportunity->get('commissionRate') ?? $policy->get('commissionRate'));
-        $premium = (float) ($opportunity->get('writtenPremium') ?? $policy->get('premiumAmount') ?? 0);
+        $rate = $this->normalizeRateOrNull($opportunity->get('commissionRate') ?? $policy->get('commission_rate'));
+        $premium = (float) ($opportunity->get('writtenPremium') ?? $policy->get('premium_amount') ?? 0);
 
         $this->upsertByKey($key, [
             'name' => $this->buildCommissionName($opportunity->get('accountName'), $commissionType),
@@ -128,7 +128,7 @@ class CommissionLedgerManager
             'assignedUserName' => $opportunity->get('assignedUserName') ?: $policy->get('assignedUserName'),
             'producer' => $opportunity->get('assignedUserName') ?: $policy->get('assignedUserName'),
             'carrier' => $opportunity->get('carrier') ?: $policy->get('carrier'),
-            'lineOfBusiness' => $this->normalizeLineOfBusiness($opportunity->get('lineOfBusiness') ?: $policy->get('lineOfBusiness')),
+            'lineOfBusiness' => $this->normalizeLineOfBusiness($opportunity->get('lineOfBusiness') ?: $policy->get('line_of_business')),
             'writtenPremium' => $premium,
             'commissionRate' => $rate,
             'estimatedCommission' => $this->calculateEstimatedCommission($premium, $rate),
@@ -155,7 +155,7 @@ class CommissionLedgerManager
 
     private function mapPolicyCommissionType(Entity $policy): string
     {
-        $businessType = strtolower(trim((string) ($policy->get('businessType') ?? '')));
+        $businessType = strtolower(trim((string) ($policy->get('business_type') ?? '')));
 
         if (str_contains($businessType, 'renew')) {
             return 'Renewal';
@@ -193,7 +193,7 @@ class CommissionLedgerManager
         $policy = $this->entityManager
             ->getRDBRepository('Policy')
             ->where([
-                'policyNumber' => $policyNumber,
+                'policy_number' => $policyNumber,
                 'accountId' => $accountId,
             ])
             ->findOne();

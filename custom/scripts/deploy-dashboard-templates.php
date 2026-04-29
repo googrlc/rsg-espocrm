@@ -203,7 +203,7 @@ function buildProducerTemplate(): array
                 'entityType' => 'Renewal',
                 'primaryFilter' => 'active',
                 'boolFilterList' => ['onlyMy'],
-                'sortBy' => 'expirationDate',
+                'sortBy' => 'expiration_date',
                 'sortDirection' => 'asc',
                 'displayRecords' => 8,
                 'expandedLayout' => [
@@ -213,7 +213,7 @@ function buildProducerTemplate(): array
                         ],
                         [
                             ['name' => 'stage'],
-                            ['name' => 'expirationDate', 'soft' => true],
+                            ['name' => 'expiration_date', 'soft' => true],
                         ],
                         [
                             ['name' => 'account', 'link' => true],
@@ -227,7 +227,7 @@ function buildProducerTemplate(): array
                 'entityType' => 'Policy',
                 'primaryFilter' => 'expiringSoon',
                 'boolFilterList' => ['onlyMy'],
-                'sortBy' => 'expirationDate',
+                'sortBy' => 'expiration_date',
                 'sortDirection' => 'asc',
                 'displayRecords' => 8,
                 'expandedLayout' => [
@@ -236,12 +236,12 @@ function buildProducerTemplate(): array
                             ['name' => 'name', 'link' => true],
                         ],
                         [
-                            ['name' => 'policyNumber'],
-                            ['name' => 'expirationDate', 'soft' => true],
+                            ['name' => 'policy_number'],
+                            ['name' => 'expiration_date', 'soft' => true],
                         ],
                         [
                             ['name' => 'carrier'],
-                            ['name' => 'lineOfBusiness'],
+                            ['name' => 'line_of_business'],
                         ],
                     ],
                 ],

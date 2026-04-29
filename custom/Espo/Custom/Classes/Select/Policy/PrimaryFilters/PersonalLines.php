@@ -10,9 +10,9 @@ class PersonalLines implements Filter
     {
         $queryBuilder->where([
             'OR' => [
-                ['lineOfBusiness*' => '%personal%'],
-                ['lineOfBusiness*' => '%homeowner%'],
-                ['lineOfBusiness*' => '%home%'],
+                ['line_of_business*' => '%personal%'],
+                ['line_of_business*' => '%homeowner%'],
+                ['line_of_business*' => '%home%'],
             ],
         ]);
     }

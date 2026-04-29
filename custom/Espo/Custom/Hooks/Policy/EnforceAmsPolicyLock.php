@@ -11,19 +11,19 @@ use Espo\ORM\Repository\Option\SaveOptions;
 class EnforceAmsPolicyLock implements BeforeSave
 {
     private const CORE_FIELDS = [
-        'policyNumber',
+        'policy_number',
         'status',
         'carrier',
-        'lineOfBusiness',
-        'effectiveDate',
-        'expirationDate',
-        'premiumAmount',
-        'businessType',
-        'bindDate',
-        'billingType',
-        'policyTerm',
-        'cancellationDate',
-        'reinstatementDate',
+        'line_of_business',
+        'effective_date',
+        'expiration_date',
+        'premium_amount',
+        'business_type',
+        'bind_date',
+        'billing_type',
+        'policy_term',
+        'cancellation_date',
+        'reinstatement_date',
         'momentumPolicyId',
         'insuredMomentumId',
     ];
@@ -43,14 +43,14 @@ class EnforceAmsPolicyLock implements BeforeSave
             return;
         }
 
-        if ($this->hasFieldChanged($entity, 'policyNumber')) {
+        if ($this->hasFieldChanged($entity, 'policy_number')) {
             $this->policySyncAuditLogger->logDecision(
                 $entity,
                 'rejected',
-                'CRM attempted to change policyNumber on AMS-linked policy.',
+                'CRM attempted to change policy number on AMS-linked policy.',
                 [
                     'sourceTimestamp' => (string) ($entity->get('modifiedAt') ?? ''),
-                    'changedFields' => ['policyNumber'],
+                    'changedFields' => ['policy_number'],
                 ]
             );
 

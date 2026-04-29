@@ -101,8 +101,8 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
         self.counts[tabId] = accounts.length; self._updateCount(tabId);
         if (accounts.length === 0) { self.cachedData[tabId] = accounts; self._renderTable(tabId); return; }
         var accountIds = accounts.map(function (a) { return a.id; });
-        Espo.Ajax.getRequest('Policy', { maxSize: 200, offset: 0, select: 'id,accountId,premiumAmount', where: [{ type: 'in', attribute: 'accountId', value: accountIds },{ type: 'in', attribute: 'status', value: ['Active', 'Renewing'] }] }).then(function (policyData) {
-          var premiumMap = {}; (policyData.list || []).forEach(function (p) { if (p.accountId && p.premiumAmount) premiumMap[p.accountId] = (premiumMap[p.accountId] || 0) + p.premiumAmount; });
+        Espo.Ajax.getRequest('Policy', { maxSize: 200, offset: 0, select: 'id,accountId,premium_amount', where: [{ type: 'in', attribute: 'accountId', value: accountIds },{ type: 'in', attribute: 'status', value: ['Active', 'Renewing'] }] }).then(function (policyData) {
+          var premiumMap = {}; (policyData.list || []).forEach(function (p) { if (p.accountId && p.premium_amount) premiumMap[p.accountId] = (premiumMap[p.accountId] || 0) + p.premium_amount; });
           accounts.forEach(function (a) { a._totalPremium = premiumMap[a.id] || 0; });
           self.cachedData[tabId] = accounts; self._renderTable(tabId);
         }).catch(function () { self.cachedData[tabId] = accounts; self._renderTable(tabId); });

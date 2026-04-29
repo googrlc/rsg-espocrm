@@ -61,7 +61,7 @@ class RenewalLeadWindows
      */
     public static function leadDaysForPolicy(Entity $policy): int
     {
-        $raw = trim((string) ($policy->get('lineOfBusiness') ?? $policy->get('businessType') ?? ''));
+        $raw = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
         if ($raw === '') {
             return self::DEFAULT_DAYS;
         }

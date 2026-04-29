@@ -8,6 +8,6 @@ class GenLiability implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["lineOfBusiness" => "General Liability"]);
+        $queryBuilder->where(["line_of_business" => "General Liability"]);
     }
 }

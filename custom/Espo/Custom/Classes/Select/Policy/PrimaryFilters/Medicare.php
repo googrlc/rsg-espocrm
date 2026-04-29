@@ -9,7 +9,7 @@ class Medicare implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'lineOfBusiness*' => '%medicare%',
+            'line_of_business*' => '%medicare%',
         ]);
     }
 }

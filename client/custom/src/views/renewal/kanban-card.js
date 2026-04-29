@@ -6,11 +6,11 @@ Espo.define('custom:views/renewal/kanban-card', ['views/record/kanban'], functio
 
         data: function () {
             const data = Dep.prototype.data.call(this);
-            const countdown = this.buildCountdown(this.model.get('expirationDate'), 'Until Renewal');
+            const countdown = this.buildCountdown(this.model.get('expiration_date'), 'Until Renewal');
 
             return Object.assign({}, data, {
                 cardSubtitle: this.model.get('accountName') || this.model.get('carrier'),
-                secondaryText: this.model.get('lineOfBusiness'),
+                secondaryText: this.model.get('line_of_business'),
                 countdownClass: countdown.className,
                 countdownLabel: countdown.label
             });

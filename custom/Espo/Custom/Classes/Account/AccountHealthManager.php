@@ -174,7 +174,7 @@ class AccountHealthManager
 
         foreach ($policyList as $policy) {
             $status = trim((string) ($policy->get('status') ?? ''));
-            $line = $this->normalizeLine((string) ($policy->get('lineOfBusiness') ?? $policy->get('businessType') ?? ''));
+            $line = $this->normalizeLine((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
             $carrier = trim((string) ($policy->get('carrier') ?? ''));
 
             if (in_array($status, self::ACTIVE_POLICY_STATUSES, true)) {
@@ -188,12 +188,12 @@ class AccountHealthManager
                     $carrierSet[$carrier] = true;
                 }
 
-                $effectiveDate = $this->toDate((string) ($policy->get('effectiveDate') ?? ''));
+                $effectiveDate = $this->toDate((string) ($policy->get('effective_date') ?? ''));
                 if ($effectiveDate && ($oldestEffectiveDate === null || $effectiveDate < $oldestEffectiveDate)) {
                     $oldestEffectiveDate = $effectiveDate;
                 }
 
-                $expirationDate = $this->toDate((string) ($policy->get('expirationDate') ?? ''));
+                $expirationDate = $this->toDate((string) ($policy->get('expiration_date') ?? ''));
                 if ($expirationDate && ($nextRenewalDate === null || $expirationDate < $nextRenewalDate)) {
                     $nextRenewalDate = $expirationDate;
                     $nextRenewalLob = $line !== '' ? $line : null;

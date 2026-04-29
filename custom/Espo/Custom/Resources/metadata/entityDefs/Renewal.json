@@ -50,34 +50,34 @@
         "contact": {
             "type": "link"
         },
-        "expirationDate": {
+        "expiration_date": {
             "type": "date",
             "isCustom": true,
             "audited": true,
-            "tooltipText": "Auto-populated from linked Policy expirationDate"
+            "tooltipText": "Auto-populated from linked Policy expiration_date"
         },
-        "renewalEffectiveDate": {
+        "renewal_effective_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "New policy effective date (usually = expirationDate)"
         },
-        "currentPremium": {
+        "current_premium": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Auto-populated from linked Policy premiumAmount"
+            "tooltipText": "Auto-populated from linked Policy premium_amount"
         },
-        "renewalPremium": {
+        "renewal_premium": {
             "type": "currency",
             "isCustom": true,
             "tooltipText": "Manually entered when quote is received \u2014 blank until then"
         },
-        "premiumChange": {
+        "premium_change": {
             "type": "float",
             "isCustom": true,
             "readOnly": true,
             "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 \u2014 premium delta %"
         },
-        "lineOfBusiness": {
+        "line_of_business": {
             "type": "enum",
             "options": [
                 "",
@@ -135,7 +135,7 @@
                 "Low": "default"
             }
         },
-        "lastContactMethod": {
+        "last_contact_method": {
             "type": "enum",
             "options": [
                 "",
@@ -147,12 +147,12 @@
             "isCustom": true,
             "tooltipText": "Updated when activity is logged"
         },
-        "lastContactDate": {
+        "last_contact_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Updated when activity is logged"
         },
-        "lostReason": {
+        "lost_reason": {
             "type": "enum",
             "options": [
                 "",
@@ -165,17 +165,17 @@
             "isCustom": true,
             "tooltipText": "Required when stage = Lost"
         },
-        "renewalNotes": {
+        "renewal_notes": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "Free text notes for this renewal cycle"
         },
-        "commissionRate": {
+        "commission_rate": {
             "type": "float",
             "isCustom": true,
             "tooltipText": "Renewal commission rate %"
         },
-        "expectedCommission": {
+        "expected_commission": {
             "type": "currency",
             "isCustom": true,
             "tooltipText": "renewalPremium * commissionRate"
@@ -272,7 +272,7 @@
         }
     },
     "collection": {
-        "orderBy": "expirationDate",
+        "orderBy": "expiration_date",
         "order": "asc",
         "textFilterFields": [
             "name",
@@ -280,25 +280,25 @@
         ],
         "sortByList": [
             "name",
-            "expirationDate",
+            "expiration_date",
             "createdAt",
             "modifiedAt",
             "stage",
             "urgency",
-            "currentPremium",
+            "current_premium",
             "carrier"
         ]
     },
     "indexes": {
-        "expirationDate": {
-            "columns": [
-                "expirationDate"
-            ]
-        },
         "stageUrgency": {
             "columns": [
                 "stage",
                 "urgency"
+            ]
+        },
+        "expiration_date": {
+            "columns": [
+                "expiration_date"
             ]
         }
     },

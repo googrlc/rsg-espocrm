@@ -9,7 +9,7 @@ class CommAuto implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'lineOfBusiness*' => '%auto%',
+            'line_of_business*' => '%auto%',
         ]);
     }
 }

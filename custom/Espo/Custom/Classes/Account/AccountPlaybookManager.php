@@ -209,7 +209,7 @@ class AccountPlaybookManager
                 continue;
             }
 
-            $line = trim((string) ($policy->get('lineOfBusiness') ?? $policy->get('businessType') ?? ''));
+            $line = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
             if ($line !== '') {
                 $lines[$line] = true;
             }

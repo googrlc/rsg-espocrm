@@ -40,7 +40,7 @@
     },
     "relationshipPanels": {
         "policies": {
-            "orderBy": "expirationDate",
+            "orderBy": "expiration_date",
             "orderDirection": "asc",
             "createButton": true,
             "selectButton": true,
@@ -71,7 +71,7 @@
             "order": 10
         },
         "renewals": {
-            "orderBy": "expirationDate",
+            "orderBy": "expiration_date",
             "orderDirection": "asc",
             "createButton": true,
             "selectButton": true,
