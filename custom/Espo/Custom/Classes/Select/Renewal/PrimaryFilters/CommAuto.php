@@ -8,6 +8,6 @@ class CommAuto implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["lineOfBusiness" => "Commercial Auto"]);
+        $queryBuilder->where(["line_of_business" => "Commercial Auto"]);
     }
 }

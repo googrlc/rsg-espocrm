@@ -39,13 +39,17 @@ class RenewalOrchestrator
         }
 
         $renewal = $existingRenewal ?? $this->entityManager->getNewEntity('Renewal');
-        $originalExpirationDate = (string) ($renewal->get('expirationDate') ?? '');
+        $originalExpirationDate = (string) ($renewal->get('expiration_date') ?? '');
         $originalUrgency = (string) ($renewal->get('urgency') ?? '');
         $renewalIsNew = !$renewal->hasId();
         $hasChanges = false;
 
-        $expirationDate = (string) ($policy->get('expirationDate') ?? '');
-        $normalizedLineOfBusiness = $this->normalizeLineOfBusiness($policy->get('lineOfBusiness') ?? $policy->get('businessType'));
+        $expirationDate = (string) ($policy->get('expiration_date') ?? '');
+        $lobSourceRaw = trim((string) ($policy->get('line_of_business_raw') ?? ''));
+        if ($lobSourceRaw === '') {
+            $lobSourceRaw = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
+        }
+        $normalizedLineOfBusiness = $this->normalizeLineOfBusiness($lobSourceRaw);
         $resolvedAccountName = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
         $renewalAccountName = $resolvedAccountName !== ''
             ? $resolvedAccountName
@@ -64,14 +68,14 @@ class RenewalOrchestrator
         $hasChanges = $this->setIfChanged($renewal, 'assignedUserId', $policy->get('assignedUserId')) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'assignedUserName', $policy->get('assignedUserName')) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'teamsIds', $policy->get('teamsIds') ?? []) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'expirationDate', $expirationDate) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'currentPremium', $policy->get('premiumAmount')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'lineOfBusiness', $normalizedLineOfBusiness) || $hasChanges;
+        $hasChanges = $this->setIfChanged($renewal, 'expiration_date', $expirationDate) || $hasChanges;
+        $hasChanges = $this->setIfChanged($renewal, 'current_premium', $policy->get('premium_amount')) || $hasChanges;
+        $hasChanges = $this->setIfChanged($renewal, 'line_of_business', $normalizedLineOfBusiness) || $hasChanges;
         $hasChanges = $this->setIfChanged($renewal, 'carrier', $policy->get('carrier')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'commissionRate', $this->normalizeRate($policy->get('commissionRate'))) || $hasChanges;
+        $hasChanges = $this->setIfChanged($renewal, 'commission_rate', $this->normalizeRate($policy->get('commission_rate'))) || $hasChanges;
 
         if ($this->shouldSyncRenewalEffectiveDate($renewal, $originalExpirationDate, $expirationDate)) {
-            $hasChanges = $this->setIfChanged($renewal, 'renewalEffectiveDate', $expirationDate) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'renewal_effective_date', $expirationDate) || $hasChanges;
         }
 
         $computedUrgency = $this->calculateUrgency($expirationDate);
@@ -102,13 +106,13 @@ class RenewalOrchestrator
         }
 
         $accountName = trim((string) ($renewal->get('accountName') ?? ''));
-        $lineOfBusiness = $this->normalizeLineOfBusiness($renewal->get('lineOfBusiness'));
+        $lineOfBusiness = $this->normalizeLineOfBusiness($renewal->get('line_of_business'));
         $renewal->set('name', $this->buildRenewalName($accountName !== '' ? $accountName : 'Account', $lineOfBusiness));
 
-        $expirationDate = (string) ($renewal->get('expirationDate') ?? '');
-        $fetchedExpirationDate = (string) ($renewal->getFetched('expirationDate') ?? '');
-        $effectiveDate = (string) ($renewal->get('renewalEffectiveDate') ?? '');
-        $fetchedEffectiveDate = (string) ($renewal->getFetched('renewalEffectiveDate') ?? '');
+        $expirationDate = (string) ($renewal->get('expiration_date') ?? '');
+        $fetchedExpirationDate = (string) ($renewal->getFetched('expiration_date') ?? '');
+        $effectiveDate = (string) ($renewal->get('renewal_effective_date') ?? '');
+        $fetchedEffectiveDate = (string) ($renewal->getFetched('renewal_effective_date') ?? '');
 
         if (
             $expirationDate !== '' &&
@@ -121,23 +125,23 @@ class RenewalOrchestrator
                 )
             )
         ) {
-            $renewal->set('renewalEffectiveDate', $expirationDate);
+            $renewal->set('renewal_effective_date', $expirationDate);
         }
 
-        $renewalPremium = $renewal->get('renewalPremium');
-        $currentPremium = (float) ($renewal->get('currentPremium') ?? 0);
+        $renewalPremium = $renewal->get('renewal_premium');
+        $currentPremium = (float) ($renewal->get('current_premium') ?? 0);
         if ($renewalPremium !== null && $renewalPremium !== '' && $currentPremium > 0) {
             $premiumChange = (((float) $renewalPremium - $currentPremium) / $currentPremium) * 100;
-            $renewal->set('premiumChange', round($premiumChange, 2));
+            $renewal->set('premium_change', round($premiumChange, 2));
         } else {
-            $renewal->set('premiumChange', null);
+            $renewal->set('premium_change', null);
         }
 
         if ($renewalPremium !== null && $renewalPremium !== '') {
-            $expectedCommission = (float) $renewalPremium * $this->normalizeRate($renewal->get('commissionRate'));
-            $renewal->set('expectedCommission', round($expectedCommission, 2));
+            $expectedCommission = (float) $renewalPremium * $this->normalizeRate($renewal->get('commission_rate'));
+            $renewal->set('expected_commission', round($expectedCommission, 2));
         } else {
-            $renewal->set('expectedCommission', null);
+            $renewal->set('expected_commission', null);
         }
 
         $currentUrgency = (string) ($renewal->get('urgency') ?? '');
@@ -188,7 +192,7 @@ class RenewalOrchestrator
     {
         return
             (bool) $policy->get('accountId') &&
-            (bool) $policy->get('expirationDate') &&
+            (bool) $policy->get('expiration_date') &&
             in_array((string) ($policy->get('status') ?? ''), self::POLICY_SYNC_STATUSES, true);
     }
 
@@ -198,7 +202,7 @@ class RenewalOrchestrator
      */
     private function isWithinRenewalCreationWindow(Entity $policy): bool
     {
-        $daysRemaining = $this->calculateDaysRemaining((string) ($policy->get('expirationDate') ?? ''));
+        $daysRemaining = $this->calculateDaysRemaining((string) ($policy->get('expiration_date') ?? ''));
         if ($daysRemaining === null || $daysRemaining < 0) {
             return false;
         }
@@ -218,7 +222,7 @@ class RenewalOrchestrator
             return false;
         }
 
-        $daysRemaining = $this->calculateDaysRemaining((string) ($policy->get('expirationDate') ?? ''));
+        $daysRemaining = $this->calculateDaysRemaining((string) ($policy->get('expiration_date') ?? ''));
         $window = RenewalLeadWindows::leadDaysForPolicy($policy);
 
         return $daysRemaining !== null && $daysRemaining <= $window;
@@ -240,8 +244,12 @@ class RenewalOrchestrator
         }
 
         $task = $this->entityManager->getNewEntity('Task');
-        $expirationDate = (string) ($policy->get('expirationDate') ?? '');
-        $lineOfBusiness = $this->normalizeLineOfBusiness($policy->get('lineOfBusiness') ?? $policy->get('businessType'));
+        $expirationDate = (string) ($policy->get('expiration_date') ?? '');
+        $lobSource = trim((string) ($policy->get('line_of_business_raw') ?? ''));
+        if ($lobSource === '') {
+            $lobSource = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
+        }
+        $lineOfBusiness = $this->normalizeLineOfBusiness($lobSource);
         $taskAccountName = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
         if ($taskAccountName === '') {
             $taskAccountName = trim((string) ($policy->get('accountName') ?? '')) ?: 'Account';
@@ -281,8 +289,8 @@ class RenewalOrchestrator
         $lines = [];
         $lines[] = 'Expiring Policy: ' . (string) ($policy->get('name') ?? '');
         $lines[] = 'Carrier: ' . (string) ($policy->get('carrier') ?? '');
-        $lines[] = 'Expiration Date: ' . (string) ($policy->get('expirationDate') ?? '');
-        $lines[] = 'Current Premium: ' . (string) ($policy->get('premiumAmount') ?? '');
+        $lines[] = 'Expiration Date: ' . (string) ($policy->get('expiration_date') ?? '');
+        $lines[] = 'Current Premium: ' . (string) ($policy->get('premium_amount') ?? '');
 
         return implode("\n", array_filter($lines));
     }
@@ -316,7 +324,7 @@ class RenewalOrchestrator
 
     private function mapRenewalStageToPolicyStatus(Entity $policy, string $stage): ?string
     {
-        $expirationDate = (string) ($policy->get('expirationDate') ?? '');
+        $expirationDate = (string) ($policy->get('expiration_date') ?? '');
         $currentPolicyStatus = (string) ($policy->get('status') ?? '');
         $daysRemaining = $this->calculateDaysRemaining($expirationDate);
         $window = RenewalLeadWindows::leadDaysForPolicy($policy);
@@ -334,7 +342,7 @@ class RenewalOrchestrator
 
     private function shouldSyncRenewalEffectiveDate(Entity $renewal, string $originalExpirationDate, string $newExpirationDate): bool
     {
-        $currentEffectiveDate = (string) ($renewal->get('renewalEffectiveDate') ?? '');
+        $currentEffectiveDate = (string) ($renewal->get('renewal_effective_date') ?? '');
 
         return
             $newExpirationDate !== '' &&

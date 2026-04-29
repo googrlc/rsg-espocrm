@@ -12,8 +12,8 @@ class ExpiringSoon implements Filter
         $sixtyDays = date('Y-m-d', strtotime('+60 days'));
 
         $queryBuilder->where([
-            'expirationDate>=' => $now,
-            'expirationDate<=' => $sixtyDays,
+            'expiration_date>=' => $now,
+            'expiration_date<=' => $sixtyDays,
         ]);
     }
 }

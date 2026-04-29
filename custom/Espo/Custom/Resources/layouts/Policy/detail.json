@@ -2,17 +2,18 @@
   {
     "label": "Overview",
     "rows": [
-      [{"name": "premiumAmount"}, {"name": "carrier"}],
-      [{"name": "effectiveDate"}, {"name": "expirationDate"}]
+      [{"name": "premium_amount"}, {"name": "carrier"}],
+      [{"name": "effective_date"}, {"name": "expiration_date"}]
     ]
   },
   {
     "label": "Policy Info",
     "rows": [
-      [{"name": "policyNumber"}, {"name": "status"}],
+      [{"name": "policy_number"}, {"name": "status"}],
       [{"name": "carrierAccount"}, {"name": "underwriter"}],
       [{"name": "statusLabel"}, false],
-      [{"name": "lineOfBusiness"}, {"name": "businessType"}],
+      [{"name": "line_of_business"}, {"name": "line_of_business_raw"}],
+      [{"name": "business_type"}, false],
       [{"name": "assignedUser"}, false],
       [{"name": "daysRemaining"}, {"name": "carrierPortalUrl"}]
     ]
@@ -20,17 +21,17 @@
   {
     "label": "Financial",
     "rows": [
-      [{"name": "commissionRate"}, {"name": "commissionAmount"}],
-      [{"name": "coverageAmount"}, {"name": "deductible"}],
-      [{"name": "agencyFee"}, false]
+      [{"name": "commission_rate"}, {"name": "commissionAmount"}],
+      [{"name": "coverage_amount"}, {"name": "deductible"}],
+      [{"name": "agency_fee"}, false]
     ]
   },
   {
     "label": "Renewal Tracking",
     "rows": [
       [{"name": "urgency"}, {"name": "premiumAtRisk"}],
-      [{"name": "lastContactMethod"}, {"name": "lastContactDate"}],
-      [{"name": "cancellationReason", "fullWidth": true}],
+      [{"name": "last_contact_method"}, {"name": "last_contact_date"}],
+      [{"name": "cancellation_reason", "fullWidth": true}],
       [{"name": "vin"}, {"name": "propertyAddress"}]
     ]
   },
@@ -43,7 +44,7 @@
   {
     "label": "Notes",
     "rows": [
-      [{"name": "policyNotes", "fullWidth": true}]
+      [{"name": "policy_notes", "fullWidth": true}]
     ]
   },
   {
@@ -51,7 +52,7 @@
     "style": "side",
     "rows": [
       [{"name": "momentumPolicyId"}, {"name": "insuredMomentumId"}],
-      [{"name": "momentumLastSynced"}, {"name": "syncStatus"}],
+      [{"name": "momentum_last_synced"}, {"name": "sync_status"}],
       [{"name": "acceptedByAmsAt"}, {"name": "acceptedByAmsBy"}],
       [{"name": "amsLockState"}, {"name": "amsLockReason"}]
     ]

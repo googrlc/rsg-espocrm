@@ -1,7 +1,7 @@
 [
     {"name": "urgencyIcon"},
-    {"name": "lineOfBusiness"},
+    {"name": "line_of_business"},
     {"name": "carrier"},
-    {"name": "premiumAmount"},
-    {"name": "expirationDate"}
+    {"name": "premium_amount"},
+    {"name": "expiration_date"}
 ]

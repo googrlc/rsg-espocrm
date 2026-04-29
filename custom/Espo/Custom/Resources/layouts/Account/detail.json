@@ -3,26 +3,26 @@
         "rows": [
             [
                 {
-                    "name": "accountStatus"
+                    "name": "account_status"
                 },
                 {
-                    "name": "totalActivePremium"
+                    "name": "total_active_premium"
                 }
             ],
             [
                 {
-                    "name": "scoreTier"
+                    "name": "score_tier"
                 },
                 {
-                    "name": "activePolicyCount"
+                    "name": "policyCountActive"
                 }
             ],
             [
                 {
-                    "name": "nextXDate"
+                    "name": "next_x_date"
                 },
                 {
-                    "name": "nextXDateLob"
+                    "name": "next_x_date_lob"
                 }
             ]
         ],
@@ -37,7 +37,7 @@
                     "name": "name"
                 },
                 {
-                    "name": "accountType"
+                    "name": "account_type"
                 }
             ],
             [
@@ -45,7 +45,7 @@
                     "name": "assignedUser"
                 },
                 {
-                    "name": "lastContactDate"
+                    "name": "last_contact_date"
                 }
             ],
             [
@@ -71,15 +71,15 @@
         "rows": [
             [
                 {
-                    "name": "agentOfAgencyCode"
+                    "name": "agent_of_agency_code"
                 },
                 {
-                    "name": "carrierCode"
+                    "name": "carrier_code"
                 }
             ],
             [
                 {
-                    "name": "totalCarrierPremium"
+                    "name": "total_carrier_premium"
                 },
                 false
             ]
@@ -88,7 +88,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Carrier"
                 }
             ]
@@ -125,7 +125,7 @@
         "rows": [
             [
                 {
-                    "name": "intelYearsInBusiness"
+                    "name": "intel_years_in_business"
                 },
                 {
                     "name": "website"
@@ -136,20 +136,20 @@
                     "name": "businessEntity"
                 },
                 {
-                    "name": "sicCode"
+                    "name": "sic_code"
                 }
             ],
             [
                 {
-                    "name": "intelNaics"
+                    "name": "intel_naics"
                 },
                 {
-                    "name": "annualRevenue"
+                    "name": "annual_revenue"
                 }
             ],
             [
                 {
-                    "name": "numberOfEmployees"
+                    "name": "employee_count"
                 },
                 {
                     "name": "fein"
@@ -163,12 +163,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -186,28 +186,26 @@
         "rows": [
             [
                 {
-                    "name": "aiAssessment"
+                    "name": "ai_assessment"
                 }
             ],
             [
                 {
-                    "name": "intelConfidence"
+                    "name": "intel_confidence"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "intel_underwriting_flag"
                 },
                 {
-                    "name": "intelPackLastRun"
+                    "name": "assessment_date"
                 }
             ],
             [
                 {
-                    "name": "intelUnderwritingFlag"
-                },
-                {
-                    "name": "assessmentDate"
-                }
-            ],
-            [
-                {
-                    "name": "keyFindings"
+                    "name": "key_findings"
                 }
             ]
         ],
@@ -218,12 +216,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -233,17 +231,17 @@
         "style": "default",
         "tabBreak": false,
         "hidden": false,
-        "name": "aiAssessment",
+        "name": "ai_assessment",
         "customLabel": "AI Account Assessment"
     },
     {
         "rows": [
             [
                 {
-                    "name": "intelLegalName"
+                    "name": "intel_legal_name"
                 },
                 {
-                    "name": "intelDba"
+                    "name": "intel_dba"
                 }
             ],
             [
@@ -256,15 +254,15 @@
             ],
             [
                 {
-                    "name": "yearsInBusiness"
+                    "name": "years_in_business"
                 },
                 {
-                    "name": "annualRevenue"
+                    "name": "annual_revenue"
                 }
             ],
             [
                 {
-                    "name": "numberOfEmployees"
+                    "name": "employee_count"
                 },
                 {
                     "name": "fein"
@@ -275,16 +273,14 @@
                     "name": "industry"
                 },
                 {
-                    "name": "sicCode"
+                    "name": "sic_code"
                 }
             ],
             [
                 {
-                    "name": "intelNaics"
+                    "name": "intel_naics"
                 },
-                {
-                    "name": "intelWebsite"
-                }
+                false
             ]
         ],
         "dynamicLogicVisible": {
@@ -294,12 +290,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -316,36 +312,36 @@
         "rows": [
             [
                 {
-                    "name": "intelBbbRating"
+                    "name": "bbb_rating"
                 },
                 {
-                    "name": "intelBbbAccredited"
+                    "name": "intel_bbb_accredited"
                 }
             ],
             [
                 {
-                    "name": "intelBbbComplaints"
+                    "name": "intel_bbb_complaints"
                 },
                 {
-                    "name": "intelGrowthIndicator"
+                    "name": "intel_growth_indicator"
                 }
             ],
             [
                 {
-                    "name": "intelBbbNotes"
+                    "name": "intel_bbb_notes"
                 }
             ],
             [
                 {
-                    "name": "intelLinkedinUrl"
+                    "name": "linkedin_url"
                 },
                 {
-                    "name": "intelLinkedinNotes"
+                    "name": "intel_linkedin_notes"
                 }
             ],
             [
                 {
-                    "name": "intelNewsNotes"
+                    "name": "intel_news_notes"
                 }
             ]
         ],
@@ -356,12 +352,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -378,36 +374,36 @@
         "rows": [
             [
                 {
-                    "name": "intelFleetSize"
+                    "name": "intel_fleet_size"
                 },
                 {
-                    "name": "intelOperatingRadius"
+                    "name": "intel_operating_radius"
                 }
             ],
             [
                 {
-                    "name": "intelCargoType"
+                    "name": "intel_cargo_type"
                 },
                 {
-                    "name": "intelOwnerOperators"
+                    "name": "intel_owner_operators"
                 }
             ],
             [
                 {
-                    "name": "intelDotIncidents"
+                    "name": "intel_dot_incidents"
                 },
                 {
-                    "name": "intelOshaViolations"
+                    "name": "intel_osha_violations"
                 }
             ],
             [
                 {
-                    "name": "intelPainPoints"
+                    "name": "intel_pain_points"
                 }
             ],
             [
                 {
-                    "name": "intelCrossSell"
+                    "name": "intel_cross_sell"
                 }
             ]
         ],
@@ -418,12 +414,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -440,31 +436,31 @@
         "rows": [
             [
                 {
-                    "name": "claimsCount3yr"
+                    "name": "claims_count_3yr"
                 },
                 {
-                    "name": "claimsOpen"
+                    "name": "claims_open"
                 }
             ],
             [
                 {
-                    "name": "lastClaimDate"
+                    "name": "last_claim_date"
                 },
                 {
-                    "name": "lastClaimType"
+                    "name": "last_claim_type"
                 }
             ],
             [
                 {
-                    "name": "riskScore"
+                    "name": "risk_score"
                 },
                 {
-                    "name": "retentionRisk"
+                    "name": "retention_risk"
                 }
             ],
             [
                 {
-                    "name": "claimsNotes"
+                    "name": "claims_notes"
                 }
             ]
         ],
@@ -475,12 +471,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -511,7 +507,7 @@
             ],
             [
                 {
-                    "name": "coverageGaps"
+                    "name": "coverage_gaps"
                 }
             ]
         ],
@@ -522,12 +518,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]
@@ -552,7 +548,7 @@
             ],
             [
                 {
-                    "name": "youthfulDriverFlag"
+                    "name": "youthful_driver_flag"
                 },
                 {
                     "name": "yearsAtAddress"
@@ -571,7 +567,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Personal Lines"
                 }
             ]
@@ -626,7 +622,7 @@
             ],
             [
                 {
-                    "name": "coverageGaps"
+                    "name": "coverage_gaps"
                 }
             ]
         ],
@@ -634,7 +630,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Personal Lines"
                 }
             ]
@@ -666,7 +662,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Group Benefits"
                 }
             ]
@@ -706,7 +702,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Group Benefits"
                 }
             ]
@@ -748,7 +744,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Group Benefits"
                 }
             ]
@@ -779,7 +775,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Group Benefits"
                 }
             ]
@@ -802,7 +798,7 @@
             "conditionGroup": [
                 {
                     "type": "equals",
-                    "attribute": "accountType",
+                    "attribute": "account_type",
                     "value": "Group Benefits"
                 }
             ]
@@ -815,37 +811,15 @@
         "rows": [
             [
                 {
-                    "name": "intelPackRun"
+                    "name": "momentum_client_id"
                 },
                 {
-                    "name": "intelPackLastRun"
+                    "name": "momentum_last_synced"
                 }
             ],
             [
                 {
-                    "name": "aiAssessment"
-                }
-            ]
-        ],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Internal",
-        "name": "aiIntelPack",
-        "label": "AI Intel Pack"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "momentumClientId"
-                },
-                {
-                    "name": "momentumLastSynced"
-                }
-            ],
-            [
-                {
-                    "name": "googleDriveFolderUrl"
+                    "name": "google_drive_folder_url"
                 }
             ]
         ],

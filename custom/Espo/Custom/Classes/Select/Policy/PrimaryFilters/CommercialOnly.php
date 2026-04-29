@@ -10,16 +10,16 @@ class CommercialOnly implements Filter
     {
         $queryBuilder->where([
             'OR' => [
-                ['lineOfBusiness*' => '%auto%'],
-                ['lineOfBusiness*' => '%liability%'],
-                ['lineOfBusiness*' => '%workers%'],
-                ['lineOfBusiness*' => '%comp%'],
-                ['lineOfBusiness*' => '%commercial%'],
-                ['lineOfBusiness*' => '%property%'],
-                ['lineOfBusiness*' => '%BOP%'],
-                ['lineOfBusiness*' => '%umbrella%'],
-                ['lineOfBusiness*' => '%professional%'],
-                ['lineOfBusiness*' => '%transport%'],
+                ['line_of_business*' => '%auto%'],
+                ['line_of_business*' => '%liability%'],
+                ['line_of_business*' => '%workers%'],
+                ['line_of_business*' => '%comp%'],
+                ['line_of_business*' => '%commercial%'],
+                ['line_of_business*' => '%property%'],
+                ['line_of_business*' => '%BOP%'],
+                ['line_of_business*' => '%umbrella%'],
+                ['line_of_business*' => '%professional%'],
+                ['line_of_business*' => '%transport%'],
             ],
         ]);
     }

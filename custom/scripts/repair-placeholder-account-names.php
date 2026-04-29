@@ -49,8 +49,8 @@ foreach ($em->getRDBRepository('Policy')->where(['deleted' => false])->find() as
         continue;
     }
 
-    $lineOfBusiness = $policy->get('lineOfBusiness') ?: $policy->get('businessType') ?: '';
-    $policyNumber = $policy->get('policyNumber') ?: '';
+    $lineOfBusiness = $policy->get('line_of_business') ?: $policy->get('business_type') ?: '';
+    $policyNumber = $policy->get('policy_number') ?: '';
     $parts = array_values(array_filter([$resolved, $lineOfBusiness, $policyNumber]));
     $newPolicyName = $parts !== [] ? implode(' | ', $parts) : (string) ($policy->get('name') ?? '');
 
@@ -87,7 +87,7 @@ foreach ($em->getRDBRepository('Renewal')->where(['deleted' => false])->find() a
 
     $newName = buildRenewalTitle(
         trim($nextAccountName) !== '' ? trim($nextAccountName) : 'Account',
-        normalizeLineOfBusiness($renewal->get('lineOfBusiness'))
+        normalizeLineOfBusiness($renewal->get('line_of_business'))
     );
 
     $accountChanged = $nextAccountName !== $raw;

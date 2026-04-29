@@ -19,7 +19,7 @@ class PolicySyncAuditLogger
         }
 
         $decisionLabel = strtoupper(str_replace('_', ' ', $decision));
-        $policyNumber = trim((string) ($policy->get('policyNumber') ?? ''));
+        $policyNumber = trim((string) ($policy->get('policy_number') ?? ''));
 
         $activity = $this->entityManager->getNewEntity('ActivityLog');
         $activity->set([
@@ -56,7 +56,7 @@ class PolicySyncAuditLogger
         $lines[] = 'Reason: ' . $reason;
         $lines[] = 'Policy Id: ' . $policy->getId();
 
-        $policyNumber = trim((string) ($policy->get('policyNumber') ?? ''));
+        $policyNumber = trim((string) ($policy->get('policy_number') ?? ''));
         if ($policyNumber !== '') {
             $lines[] = 'Policy Number: ' . $policyNumber;
         }

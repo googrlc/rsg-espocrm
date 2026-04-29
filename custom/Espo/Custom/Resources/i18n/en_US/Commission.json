@@ -18,13 +18,19 @@
         "renewal": "Renewal"
     },
     "fields": {
+        "carrier": "Carrier",
+        "commissionRate": "Commission Rate (Percent)",
+        "effectiveDate": "Effective Date",
+        "estimatedCommission": "Estimated Commission",
+        "lineOfBusiness": "Line of Business",
         "reconciliationStatus": "Reconciliation Status",
         "ledgerSyncStatus": "Ledger Sync Status",
         "ledgerExternalId": "Ledger External ID",
         "ledgerSyncedAt": "Ledger Synced At",
         "ledgerSyncError": "Ledger Sync Error",
         "ledgerPayloadHash": "Ledger Payload Hash",
-        "ledgerKey": "Ledger Key"
+        "ledgerKey": "Ledger Key",
+        "writtenPremium": "Written Premium"
     },
     "options": {
         "commissionType": {

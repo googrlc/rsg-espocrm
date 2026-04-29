@@ -9,29 +9,35 @@
             "layoutMassUpdateDisabled": true,
             "textFilterDisabled": true
         },
-        "policyNumber": {
+        "policy_number": {
             "type": "varchar",
             "maxLength": 100,
             "required": false,
             "isCustom": true,
-            "tooltipText": "Policy number — primary identifier for this policy record"
+            "tooltipText": "Policy number \u2014 primary identifier for this policy record"
         },
         "momentumPolicyId": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
-            "tooltipText": "NowCerts/Momentum AMS policy databaseId — primary dedup key for sync. NEVER change this value once set."
+            "tooltipText": "NowCerts/Momentum AMS policy databaseId \u2014 primary dedup key for sync. NEVER change this value once set."
         },
         "carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
         },
-        "lineOfBusiness": {
+        "line_of_business_raw": {
             "type": "varchar",
             "maxLength": 500,
             "isCustom": true,
-            "tooltipText": "Raw string from Momentum — may contain multiple LOBs comma-separated"
+            "tooltipText": "Original NowCerts / AMS line-of-business string before normalization."
+        },
+        "line_of_business": {
+            "type": "varchar",
+            "maxLength": 500,
+            "isCustom": true,
+            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass)."
         },
         "status": {
             "type": "enum",
@@ -74,20 +80,20 @@
                 "Pending Cancel"
             ]
         },
-        "effectiveDate": {
+        "effective_date": {
             "type": "date",
             "isCustom": true
         },
-        "expirationDate": {
+        "expiration_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Renewal trigger date — used by renewal pipeline automation"
+            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation"
         },
-        "premiumAmount": {
+        "premium_amount": {
             "type": "currency",
             "isCustom": true
         },
-        "commissionRate": {
+        "commission_rate": {
             "type": "float",
             "isCustom": true
         },
@@ -96,7 +102,7 @@
             "isCustom": true,
             "readOnly": true
         },
-        "coverageAmount": {
+        "coverage_amount": {
             "type": "currency",
             "isCustom": true
         },
@@ -104,24 +110,24 @@
             "type": "currency",
             "isCustom": true
         },
-        "agencyFee": {
+        "agency_fee": {
             "type": "currency",
             "isCustom": true
         },
-        "businessType": {
+        "business_type": {
             "type": "varchar",
             "maxLength": 100,
             "isCustom": true
         },
-        "policyNotes": {
+        "policy_notes": {
             "type": "text",
             "isCustom": true
         },
-        "bindDate": {
+        "bind_date": {
             "type": "date",
             "isCustom": true
         },
-        "billingType": {
+        "billing_type": {
             "type": "enum",
             "options": [
                 "",
@@ -132,28 +138,28 @@
             ],
             "isCustom": true
         },
-        "policyTerm": {
+        "policy_term": {
             "type": "int",
             "isCustom": true,
             "tooltipText": "Policy term in months (6 or 12)"
         },
-        "cancellationDate": {
+        "cancellation_date": {
             "type": "date",
             "isCustom": true
         },
-        "cancellationReason": {
+        "cancellation_reason": {
             "type": "text",
             "isCustom": true
         },
-        "reinstatementDate": {
+        "reinstatement_date": {
             "type": "date",
             "isCustom": true
         },
-        "momentumLastSynced": {
+        "momentum_last_synced": {
             "type": "datetime",
             "isCustom": true
         },
-        "syncStatus": {
+        "sync_status": {
             "type": "enum",
             "options": [
                 "",
@@ -214,7 +220,7 @@
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
-            "tooltipText": "insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync"
+            "tooltipText": "insuredDatabaseId from Momentum \u2014 used to resolve Account/Contact relation during sync"
         },
         "carrierAccount": {
             "type": "link"
@@ -303,7 +309,7 @@
         "premiumAtRisk": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Annual premium value at risk if policy lapses — used by renewal outreach automation"
+            "tooltipText": "Annual premium value at risk if policy lapses \u2014 used by renewal outreach automation"
         },
         "urgency": {
             "type": "enum",
@@ -324,7 +330,7 @@
                 "Low": "success"
             }
         },
-        "lastContactMethod": {
+        "last_contact_method": {
             "type": "enum",
             "options": [
                 "",
@@ -336,7 +342,7 @@
             "isCustom": true,
             "tooltipText": "Set by renewal outreach automation after each email send"
         },
-        "lastContactDate": {
+        "last_contact_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Set by renewal outreach automation after each contact attempt"
@@ -347,7 +353,7 @@
             "layoutDetailDisabled": true,
             "noLoad": true
         },
-        "emailSequenceStarted": {
+        "email_sequence_started": {
             "type": "bool",
             "default": false,
             "isCustom": true,
@@ -373,6 +379,9 @@
             "layoutDetailDisabled": true,
             "noLoad": true
         }
+    },
+    "formula": {
+        "beforeSaveScript": "\n$premium_amount = entity\\attribute('premium_amount');\nifThen(\n    $premium_amount == null,\n    $premium_amount = 0\n);\n\n$commission_rate = entity\\attribute('commission_rate');\nifThen(\n    $commission_rate == null,\n    $commission_rate = 0.10\n);\nifThen(\n    $commission_rate == '',\n    $commission_rate = 0.10\n);\nifThen(\n    $commission_rate > 1,\n    $commission_rate = $commission_rate / 100\n);\n\nentity\\setAttribute(\n    'commissionAmount',\n    number\\round($premium_amount * $commission_rate, 2)\n);\n\n$status = entity\\attribute('status');\n$premiumAtRiskCalc = 0;\nifThen(\n    $status == 'Active',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Up for Renewal',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Renewing',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Renewed',\n    $premiumAtRiskCalc = $premium_amount\n);\n\nentity\\setAttribute('premiumAtRisk', $premiumAtRiskCalc);\n"
     },
     "links": {
         "account": {
@@ -450,22 +459,22 @@
         }
     },
     "collection": {
-        "orderBy": "policyNumber",
+        "orderBy": "policy_number",
         "order": "asc",
         "textFilterFields": [
-            "policyNumber",
+            "policy_number",
             "carrier",
             "momentumPolicyId"
         ],
         "sortByList": [
-            "policyNumber",
+            "policy_number",
             "createdAt",
             "modifiedAt",
-            "effectiveDate",
-            "expirationDate",
+            "effective_date",
+            "expiration_date",
             "carrier",
             "status",
-            "lineOfBusiness"
+            "line_of_business"
         ]
     },
     "indexes": {
@@ -479,9 +488,6 @@
                 "insuredMomentumId"
             ]
         }
-    },
-    "formula": {
-        "beforeSaveScript": "\n$premiumAmount = entity\\attribute('premiumAmount');\nifThen(\n    $premiumAmount == null,\n    $premiumAmount = 0\n);\n\n$commissionRate = entity\\attribute('commissionRate');\nifThen(\n    $commissionRate == null,\n    $commissionRate = 0.10\n);\nifThen(\n    $commissionRate == '',\n    $commissionRate = 0.10\n);\nifThen(\n    $commissionRate > 1,\n    $commissionRate = $commissionRate / 100\n);\n\nentity\\setAttribute(\n    'commissionAmount',\n    number\\round($premiumAmount * $commissionRate, 2)\n);\n\n$status = entity\\attribute('status');\n$premiumAtRisk = 0;\nifThen(\n    $status == 'Active',\n    $premiumAtRisk = $premiumAmount\n);\nifThen(\n    $status == 'Up for Renewal',\n    $premiumAtRisk = $premiumAmount\n);\nifThen(\n    $status == 'Renewing',\n    $premiumAtRisk = $premiumAmount\n);\nifThen(\n    $status == 'Renewed',\n    $premiumAtRisk = $premiumAmount\n);\n\nentity\\setAttribute('premiumAtRisk', $premiumAtRisk);\n"
     },
     "kanbanStatusIgnoreList": [
         "Expired",

@@ -8,6 +8,6 @@ class Medicare implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["accountType" => "Medicare"]);
+        $queryBuilder->where(["account_type" => "Medicare"]);
     }
 }

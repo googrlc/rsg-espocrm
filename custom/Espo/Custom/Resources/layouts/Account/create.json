@@ -9,10 +9,10 @@
             ],
             [
                 {
-                    "name": "accountType"
+                    "name": "account_type"
                 },
                 {
-                    "name": "accountStatus"
+                    "name": "account_status"
                 }
             ],
             [

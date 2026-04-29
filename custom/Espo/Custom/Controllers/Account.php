@@ -55,7 +55,7 @@ class Account extends \Espo\Modules\Crm\Controllers\Account
             'entityType' => 'Account',
             'entityId' => $account->get('id'),
             'assignedUserName' => $assignedUserName,
-            'momentumId' => $account->get('momentumClientId') ?? '',
+            'momentumId' => $account->get('momentum_client_id') ?? '',
         ]);
 
         if ($payload === false) {

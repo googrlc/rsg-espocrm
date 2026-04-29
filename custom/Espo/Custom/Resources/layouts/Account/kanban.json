@@ -4,9 +4,9 @@
         "link": true
     },
     {
-        "name": "accountStatus"
+        "name": "account_status"
     },
     {
-        "name": "accountType"
+        "name": "account_type"
     }
 ]

@@ -25,20 +25,20 @@
         "newPolicy": "Renewed Policy",
         "account": "Account",
         "contact": "Contact",
-        "expirationDate": "Expiration Date",
-        "renewalEffectiveDate": "Renewal Effective Date",
-        "currentPremium": "Current Premium",
-        "renewalPremium": "Renewal Premium",
-        "premiumChange": "Premium Change %",
-        "commissionRate": "Renewal Commission Rate",
-        "expectedCommission": "Expected Commission",
+        "expiration_date": "Expiration Date",
+        "renewal_effective_date": "Renewal Effective Date",
+        "current_premium": "Current Premium",
+        "renewal_premium": "Renewal Premium",
+        "premium_change": "Premium Change (Percent)",
+        "commission_rate": "Commission Rate (Percent)",
+        "expected_commission": "Expected Commission",
         "urgency": "Urgency",
-        "lastContactDate": "Last Contact Date",
-        "lastContactMethod": "Last Contact Method",
-        "lineOfBusiness": "Line of Business",
-        "carrier": "Current Carrier",
-        "lostReason": "Lost Reason",
-        "renewalNotes": "Renewal Notes",
+        "last_contact_date": "Last Contact Date",
+        "last_contact_method": "Last Contact Method",
+        "line_of_business": "Line of Business",
+        "carrier": "Carrier",
+        "lost_reason": "Lost Reason",
+        "renewal_notes": "Renewal Notes",
         "tasks": "Tasks",
         "commissions": "Commissions"
     },
@@ -68,14 +68,14 @@
             "Medium": "Medium",
             "Low": "Low"
         },
-        "lastContactMethod": {
+        "last_contact_method": {
             "": "",
             "Email": "Email",
             "Call": "Call",
             "Text": "Text",
             "In person": "In person"
         },
-        "lostReason": {
+        "lost_reason": {
             "": "",
             "Price": "Price",
             "Coverage": "Coverage",
@@ -83,7 +83,7 @@
             "Moved carrier": "Moved carrier",
             "Other": "Other"
         },
-        "lineOfBusiness": {
+        "line_of_business": {
             "": "",
             "Commercial Auto": "Commercial Auto",
             "General Liability": "General Liability",

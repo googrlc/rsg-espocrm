@@ -142,7 +142,7 @@ class AttachmentDriveSyncDispatcher
             $account = $this->entityManager->getEntityById('Account', $accountId);
             if ($account) {
                 $accountName = trim((string) ($account->get('name') ?? ''));
-                $driveFolderId = $this->extractDriveFolderId((string) ($account->get('googleDriveFolderUrl') ?? ''));
+                $driveFolderId = $this->extractDriveFolderId((string) ($account->get('google_drive_folder_url') ?? ''));
             }
         }
 

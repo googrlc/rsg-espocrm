@@ -9,7 +9,7 @@ class Prospects implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            "accountType" => "Prospect"
+            "account_type" => "Prospect"
         ]);
     }
 }

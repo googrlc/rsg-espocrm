@@ -10,18 +10,18 @@ class PolicyCorrectionWebhookDispatcher
     private const CORE_FIELDS = [
         'status',
         'carrier',
-        'lineOfBusiness',
-        'effectiveDate',
-        'expirationDate',
-        'premiumAmount',
-        'businessType',
-        'bindDate',
-        'billingType',
-        'policyTerm',
-        'cancellationDate',
-        'reinstatementDate',
+        'line_of_business',
+        'effective_date',
+        'expiration_date',
+        'premium_amount',
+        'business_type',
+        'bind_date',
+        'billing_type',
+        'policy_term',
+        'cancellation_date',
+        'reinstatement_date',
         'insuredMomentumId',
-        'policyNotes',
+        'policy_notes',
     ];
 
     public function __construct(
@@ -83,7 +83,7 @@ class PolicyCorrectionWebhookDispatcher
             'policy' => [
                 'id' => $policy->getId(),
                 'momentumPolicyId' => (string) ($policy->get('momentumPolicyId') ?? ''),
-                'policyNumber' => (string) ($policy->get('policyNumber') ?? ''),
+                'policy_number' => (string) ($policy->get('policy_number') ?? ''),
                 'accountId' => $policy->get('accountId'),
                 'accountName' => (string) ($policy->get('accountName') ?? ''),
                 'contactId' => $policy->get('contactId'),

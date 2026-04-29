@@ -6,7 +6,7 @@
                 {"name": "type"}
             ],
             [
-                {"name": "accountStatus"},
+                {"name": "account_status"},
                 false
             ],
             [
@@ -24,12 +24,12 @@
     {
         "rows": [
             [
-                {"name": "totalActivePremium"},
+                {"name": "total_active_premium"},
                 {"name": "activePolicyCount"}
             ],
             [
-                {"name": "nextXDate"},
-                {"name": "nextXDateLob"}
+                {"name": "next_x_date"},
+                {"name": "next_x_date_lob"}
             ]
         ],
         "style": "default",
@@ -86,14 +86,14 @@
             ],
             [
                 {"name": "industry"},
-                {"name": "sicCode"}
+                {"name": "sic_code"}
             ],
             [
-                {"name": "yearsInBusiness"},
+                {"name": "years_in_business"},
                 {"name": "numberOfEmployees"}
             ],
             [
-                {"name": "annualRevenue"},
+                {"name": "annual_revenue"},
                 false
             ],
             [
@@ -118,11 +118,11 @@
     {
         "rows": [
             [
-                {"name": "momentumClientId"},
-                {"name": "momentumLastSynced"}
+                {"name": "momentum_client_id"},
+                {"name": "momentum_last_synced"}
             ],
             [
-                {"name": "googleDriveFolderUrl"}
+                {"name": "google_drive_folder_url"}
             ]
         ],
         "style": "default",
@@ -132,11 +132,11 @@
     {
         "rows": [
             [
-                {"name": "intelPackRun"},
-                {"name": "intelPackLastRun"}
+                {"name": "intel_pack_run"},
+                {"name": "intel_pack_last_run"}
             ],
             [
-                {"name": "aiAssessment"}
+                {"name": "ai_assessment"}
             ]
         ],
         "style": "default",
@@ -186,16 +186,16 @@
     {
         "rows": [
             [
-                {"name": "intelYearsInBusiness"},
+                {"name": "intel_years_in_business"},
                 {"name": "website"}
             ],
             [
                 {"name": "businessEntity"},
-                {"name": "sicCode"}
+                {"name": "sic_code"}
             ],
             [
-                {"name": "intelNaics"},
-                {"name": "annualRevenue"}
+                {"name": "intel_naics"},
+                {"name": "annual_revenue"}
             ]
         ],
         "dynamicLogicVisible": {

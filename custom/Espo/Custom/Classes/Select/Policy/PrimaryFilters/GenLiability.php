@@ -10,8 +10,8 @@ class GenLiability implements Filter
     {
         $queryBuilder->where([
             'OR' => [
-                ['lineOfBusiness*' => '%general liability%'],
-                ['lineOfBusiness*' => '%GL%'],
+                ['line_of_business*' => '%general liability%'],
+                ['line_of_business*' => '%GL%'],
             ],
         ]);
     }

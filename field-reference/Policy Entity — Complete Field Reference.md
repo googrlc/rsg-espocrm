@@ -12,6 +12,10 @@ Here is the complete reference for all fields in the **Policy** entity:
 | Account | account | Link | — |
 | Activity Logs | activityLogs | Link Multiple | — |
 | Agency Fee | agencyFee | Currency | — |
+| AMS Accepted At | acceptedByAmsAt | Date-Time | *(read-only in CRM; AMS acceptance)* |
+| AMS Accepted By | acceptedByAmsBy | Varchar | *(read-only in CRM)* |
+| AMS Lock Reason | amsLockReason | Text | — |
+| AMS Lock State | amsLockState | **Enum** | Unlocked, Pending AMS, Locked by AMS, Rejected by AMS |
 | Assigned User | assignedUser | Link | — |
 | Business Type | businessType | **Enum** | New Business, Renewal, Rewrite |
 | Carrier | carrier | Varchar | — |
@@ -50,7 +54,7 @@ Here is the complete reference for all fields in the **Policy** entity:
 ---
 
 **Summary counts:**
-- **Total fields:** 49 (excluding currency Converted/Currency sub-fields)
+- **Total fields:** 53 (excluding currency Converted/Currency sub-fields; includes AMS governance fields above)
 - **Enum fields:** 5 with defined options (+ 5 currency selector enums)
 - **Currency fields:** 5 (+ Converted sub-fields)
 - **Boolean fields:** 1

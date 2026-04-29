@@ -40,3 +40,14 @@ Every inbound webhook from EspoCRM to n8n must verify the matching shared secret
 
 - Policy sync: `X-Policy-Sync-Secret` == `POLICY_SYNC_SHARED_SECRET`
 - Account sync: `X-Account-Sync-Secret` == `ACCOUNT_SYNC_SHARED_SECRET`
+
+## 5) Policy PUT vs AMS lock (align with `EnforceAmsPolicyLock`)
+
+When n8n updates an existing Policy:
+
+1. **GET** the Policy first (or keep fields from the last read).
+2. If **`amsLockState`** is **`Locked by AMS`**, do **not** send changes to the locked core fields (policy number, status, carrier, LOB, dates, premium, billing, term, cancellation/reinstatement, `momentumPolicyId`, `insuredMomentumId`). Merge only non-core fields (e.g. renewal outreach) or skip the update.
+3. Never populate **`acceptedByAmsAt`**, **`acceptedByAmsBy`**, **`amsLockState`**, **`amsLockReason`** from Momentum/NowCerts payloads — those come from the CRM correction / AMS acceptance flow.
+4. After a successful Momentum→Espo sync, set **`syncStatus`** to **`Synced`**; on failure use **`Error`**.
+
+Canonical field list: `field-reference/nowcerts-to-espocrm-mapping.md` → *When `amsLockState` = `Locked by AMS`*.

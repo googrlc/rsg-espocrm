@@ -1,4 +1,5 @@
 {
+    "statusField": "account_type",
     "recordViews": {
         "detail": "custom:views/account/record/detail"
     },
@@ -34,17 +35,17 @@
     },
     "relationshipPanels": {
         "policies": {
-            "orderBy": "expirationDate",
+            "orderBy": "expiration_date",
             "orderDirection": "asc",
             "createButton": true,
             "selectButton": true,
             "order": 1,
             "label": "Policies",
             "layout": [
-                {"name": "policyNumber", "link": true},
+                {"name": "policy_number", "link": true},
                 {"name": "status"},
-                {"name": "expirationDate"},
-                {"name": "premiumAmount"},
+                {"name": "expiration_date"},
+                {"name": "premium_amount"},
                 {"name": "carrier"}
             ]
         },

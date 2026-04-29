@@ -51,30 +51,30 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       this.primaryTypes = ['Commercial Lines', 'Personal Lines', 'Prospect'];
       this.tabDefs = {
         commercial: { label: 'Commercial Lines', color: '#2563eb',
-          where: [{ type: 'equals', attribute: 'accountType', value: 'Commercial Lines' },{ type: 'in', attribute: 'accountStatus', value: ['Active','Urgent','Renewing','At Risk'] }],
-          select: 'id,name,industry,phoneNumber,accountStatus,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          where: [{ type: 'equals', attribute: 'account_type', value: 'Commercial Lines' },{ type: 'in', attribute: 'account_status', value: ['Active','Urgent','Renewing','At Risk'] }],
+          select: 'id,name,industry,phoneNumber,account_status,assignedUserName',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'account_status', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         personal: { label: 'Personal Lines', color: '#16a34a',
-          where: [{ type: 'equals', attribute: 'accountType', value: 'Personal Lines' },{ type: 'in', attribute: 'accountStatus', value: ['Active','Urgent','Renewing','At Risk'] }],
-          select: 'id,name,phoneNumber,accountStatus,csrName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'csrName', label: 'CSR', type: 'text', sortable: true }],
+          where: [{ type: 'equals', attribute: 'account_type', value: 'Personal Lines' },{ type: 'in', attribute: 'account_status', value: ['Active','Urgent','Renewing','At Risk'] }],
+          select: 'id,name,phoneNumber,account_status,csrName',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'account_status', label: 'Status', type: 'badge', sortable: true },{ key: 'csrName', label: 'CSR', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         prospect: { label: 'Prospects', color: '#b45309',
-          where: [{ type: 'equals', attribute: 'accountType', value: 'Prospect' }],
-          select: 'id,name,industry,estimatedPremium,stage,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: 'estimatedPremium', label: 'Est. Premium', type: 'currency', sortable: true },{ key: 'stage', label: 'Stage', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
-          defaultSort: { key: 'estimatedPremium', dir: 'desc' } },
+          where: [{ type: 'equals', attribute: 'account_type', value: 'Prospect' }],
+          select: 'id,name,industry,estimated_premium,stage,assignedUserName',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: 'estimated_premium', label: 'Est. Premium', type: 'currency', sortable: true },{ key: 'stage', label: 'Stage', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          defaultSort: { key: 'estimated_premium', dir: 'desc' } },
         inactive: { label: 'Inactive', color: '#6b7280',
-          where: [{ type: 'equals', attribute: 'accountStatus', value: 'Inactive' }],
-          select: 'id,name,accountType,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'accountType', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Last Premium', type: 'currency', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          where: [{ type: 'equals', attribute: 'account_status', value: 'Inactive' }],
+          select: 'id,name,account_type,assignedUserName',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'account_type', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Last Premium', type: 'currency', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         needsReview: { label: 'Needs Review', color: '#f59e0b',
-          where: [{ type: 'notEquals', attribute: 'accountStatus', value: 'Inactive' }],
+          where: [{ type: 'notEquals', attribute: 'account_status', value: 'Inactive' }],
           clientFilter: true,
-          select: 'id,name,accountType,accountStatus,assignedUserName',
-          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'accountType', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'accountStatus', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
+          select: 'id,name,account_type,account_status,assignedUserName',
+          columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'account_type', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'account_status', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: 'name', dir: 'asc' } }
       };
       this.counts = {};
@@ -97,12 +97,12 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       if (!fetchFresh && this.cachedData[tabId]) { this._renderTable(tabId); return; }
       Espo.Ajax.getRequest('Account', { maxSize: 200, offset: 0, select: def.select, where: def.where }).then(function (data) {
         var accounts = data.list || [];
-        if (def.clientFilter) accounts = accounts.filter(function (a) { return !a.accountType || self.primaryTypes.indexOf(a.accountType) === -1; });
+        if (def.clientFilter) accounts = accounts.filter(function (a) { return !a.account_type || self.primaryTypes.indexOf(a.account_type) === -1; });
         self.counts[tabId] = accounts.length; self._updateCount(tabId);
         if (accounts.length === 0) { self.cachedData[tabId] = accounts; self._renderTable(tabId); return; }
         var accountIds = accounts.map(function (a) { return a.id; });
-        Espo.Ajax.getRequest('Policy', { maxSize: 200, offset: 0, select: 'id,accountId,premiumAmount', where: [{ type: 'in', attribute: 'accountId', value: accountIds },{ type: 'in', attribute: 'status', value: ['Active', 'Renewing'] }] }).then(function (policyData) {
-          var premiumMap = {}; (policyData.list || []).forEach(function (p) { if (p.accountId && p.premiumAmount) premiumMap[p.accountId] = (premiumMap[p.accountId] || 0) + p.premiumAmount; });
+        Espo.Ajax.getRequest('Policy', { maxSize: 200, offset: 0, select: 'id,accountId,premium_amount', where: [{ type: 'in', attribute: 'accountId', value: accountIds },{ type: 'in', attribute: 'status', value: ['Active', 'Renewing'] }] }).then(function (policyData) {
+          var premiumMap = {}; (policyData.list || []).forEach(function (p) { if (p.accountId && p.premium_amount) premiumMap[p.accountId] = (premiumMap[p.accountId] || 0) + p.premium_amount; });
           accounts.forEach(function (a) { a._totalPremium = premiumMap[a.id] || 0; });
           self.cachedData[tabId] = accounts; self._renderTable(tabId);
         }).catch(function () { self.cachedData[tabId] = accounts; self._renderTable(tabId); });
@@ -116,9 +116,9 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       var query = (this.searchQuery[tabId] || '').toLowerCase().trim(), allRows = (this.cachedData[tabId] || []).slice();
       var rows = query ? allRows.filter(function (r) { return def.columns.some(function (col) { var v = r[col.key]; return v && String(v).toLowerCase().indexOf(query) !== -1; }); }) : allRows;
       rows.sort(function (a, b) { var av = a[sort.key], bv = b[sort.key]; if (av == null) av = sort.dir === 'asc' ? '￿' : ''; if (bv == null) bv = sort.dir === 'asc' ? '￿' : ''; if (typeof av === 'number' && typeof bv === 'number') return sort.dir === 'asc' ? av - bv : bv - av; return sort.dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av)); });
-      var total = allRows.length, premium = allRows.reduce(function (s, r) { return s + (r._totalPremium || r.estimatedPremium || 0); }, 0);
-      var active = allRows.filter(function (r) { return r.accountStatus === 'Active'; }).length;
-      var urgent = allRows.filter(function (r) { return r.accountStatus === 'Urgent' || r.accountStatus === 'At Risk'; }).length;
+      var total = allRows.length, premium = allRows.reduce(function (s, r) { return s + (r._totalPremium || r.estimated_premium || 0); }, 0);
+      var active = allRows.filter(function (r) { return r.account_status === 'Active'; }).length;
+      var urgent = allRows.filter(function (r) { return r.account_status === 'Urgent' || r.account_status === 'At Risk'; }).length;
       var selected = this.selectedIds[tabId] || {}, self = this;
       var html = '<div class="rsg-stats">';
       html += '<div class="rsg-stat"><div class="rsg-stat-label">Accounts</div><div class="rsg-stat-val rsg-accent">' + total + '</div></div>';

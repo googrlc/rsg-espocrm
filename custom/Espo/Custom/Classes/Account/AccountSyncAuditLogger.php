@@ -50,7 +50,7 @@ class AccountSyncAuditLogger
         $lines[] = 'Reason: ' . $reason;
         $lines[] = 'Account Id: ' . $account->getId();
 
-        $momentumClientId = trim((string) ($account->get('momentumClientId') ?? ''));
+        $momentumClientId = trim((string) ($account->get('momentum_client_id') ?? ''));
         if ($momentumClientId !== '') {
             $lines[] = 'AMS Client Id: ' . $momentumClientId;
         }

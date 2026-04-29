@@ -45,8 +45,8 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
             // Sync conditional tab visibility on render
             this.syncConditionalTabs();
 
-            // Listen for accountType field changes (edit mode / inline edit)
-            this.listenTo(this.model, "change:accountType", function () {
+            // Listen for account_type field changes (edit mode / inline edit)
+            this.listenTo(this.model, "change:account_type", function () {
                 self.syncConditionalTabs();
             });
 
@@ -70,7 +70,7 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
 
         /**
          * Hide/show Business Profile (tab 4) and Group Benefits (tab 5)
-         * based on accountType field value.
+         * based on account_type field value.
          *
          * Commercial Lines → show Business Profile, hide Group Benefits
          * Group Benefits → show both Business Profile and Group Benefits
@@ -78,7 +78,7 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
          * All others (Prospect, etc.) → hide both
          */
         syncConditionalTabs: function () {
-            var type = this.model.get("accountType") || "";
+            var type = this.model.get("account_type") || "";
             var $tabContainer = this.$el.find(".detail-button-container .nav-pills, .record > .middle > .tabs");
 
             if (!$tabContainer.length) return;

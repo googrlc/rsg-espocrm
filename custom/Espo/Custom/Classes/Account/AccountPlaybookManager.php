@@ -39,8 +39,8 @@ class AccountPlaybookManager
         $coverageLines = $this->collectCoverageLines($account, $policyList);
         $carrierMixCount = $this->countCarriers($account, $policyList);
         $annualPremium = max(
-            (float) ($account->get('annualPremium') ?? 0),
-            (float) ($account->get('totalActivePremium') ?? 0)
+            (float) ($account->get('annual_premium') ?? 0),
+            (float) ($account->get('total_active_premium') ?? 0)
         );
         $recentChanges = $this->collectRecentChanges($activityList);
 
@@ -209,7 +209,7 @@ class AccountPlaybookManager
                 continue;
             }
 
-            $line = trim((string) ($policy->get('lineOfBusiness') ?? $policy->get('businessType') ?? ''));
+            $line = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
             if ($line !== '') {
                 $lines[$line] = true;
             }

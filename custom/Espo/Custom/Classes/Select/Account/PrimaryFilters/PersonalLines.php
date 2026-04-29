@@ -8,6 +8,6 @@ class PersonalLines implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["accountType" => "Personal Lines"]);
+        $queryBuilder->where(["account_type" => "Personal Lines"]);
     }
 }

@@ -55,7 +55,7 @@
     },
     "dynamicLogic": {
         "fields": {
-            "policyNumber": {
+            "policy_number": {
                 "readOnly": {
                     "conditionGroup": [
                         {
@@ -88,7 +88,7 @@
                     ]
                 }
             },
-            "lineOfBusiness": {
+            "line_of_business": {
                 "readOnly": {
                     "conditionGroup": [
                         {
@@ -99,7 +99,7 @@
                     ]
                 }
             },
-            "effectiveDate": {
+            "effective_date": {
                 "readOnly": {
                     "conditionGroup": [
                         {
@@ -110,7 +110,7 @@
                     ]
                 }
             },
-            "expirationDate": {
+            "expiration_date": {
                 "readOnly": {
                     "conditionGroup": [
                         {
@@ -121,7 +121,7 @@
                     ]
                 }
             },
-            "premiumAmount": {
+            "premium_amount": {
                 "readOnly": {
                     "conditionGroup": [
                         {
@@ -143,7 +143,7 @@
                     ]
                 }
             },
-            "cancellationReason": {
+            "cancellation_reason": {
                 "required": {
                     "conditionGroup": [
                         {
@@ -171,22 +171,22 @@
                             "value": [
                                 {
                                     "type": "equals",
-                                    "attribute": "businessType",
+                                    "attribute": "business_type",
                                     "value": "Auto"
                                 },
                                 {
                                     "type": "equals",
-                                    "attribute": "lineOfBusiness",
+                                    "attribute": "line_of_business",
                                     "value": "Auto"
                                 },
                                 {
                                     "type": "equals",
-                                    "attribute": "lineOfBusiness",
+                                    "attribute": "line_of_business",
                                     "value": "Personal Auto"
                                 },
                                 {
                                     "type": "equals",
-                                    "attribute": "lineOfBusiness",
+                                    "attribute": "line_of_business",
                                     "value": "Commercial Auto"
                                 }
                             ]
@@ -202,17 +202,17 @@
                             "value": [
                                 {
                                     "type": "equals",
-                                    "attribute": "businessType",
+                                    "attribute": "business_type",
                                     "value": "Home"
                                 },
                                 {
                                     "type": "equals",
-                                    "attribute": "lineOfBusiness",
+                                    "attribute": "line_of_business",
                                     "value": "Home"
                                 },
                                 {
                                     "type": "equals",
-                                    "attribute": "lineOfBusiness",
+                                    "attribute": "line_of_business",
                                     "value": "Homeowners"
                                 }
                             ]
@@ -249,7 +249,7 @@
             "label": "Activity Log"
         },
         "renewals": {
-            "orderBy": "expirationDate",
+            "orderBy": "expiration_date",
             "orderDirection": "asc",
             "createButton": true,
             "selectButton": true,

@@ -8,6 +8,6 @@ class LifeInsurance implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["accountType" => "Life Insurance"]);
+        $queryBuilder->where(["account_type" => "Life Insurance"]);
     }
 }

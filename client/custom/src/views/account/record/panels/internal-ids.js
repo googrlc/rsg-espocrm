@@ -106,14 +106,14 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
         `,
 
         data: function () {
-            var momentumLastSynced = this.model.get("momentumLastSynced");
-            var intelPackLastRun = this.model.get("intelPackLastRun");
+            var momentumLastSynced = this.model.get("momentum_last_synced");
+            var intelPackLastRun = this.model.get("intel_pack_last_run");
 
             return {
-                momentumClientId: this.model.get("momentumClientId"),
+                momentumClientId: this.model.get("momentum_client_id"),
                 momentumLastSyncedFormatted: this.formatDate(momentumLastSynced),
-                googleDriveFolderUrl: this.model.get("googleDriveFolderUrl"),
-                intelPackRun: this.model.get("intelPackRun"),
+                googleDriveFolderUrl: this.model.get("google_drive_folder_url"),
+                intelPackRun: this.model.get("intel_pack_run"),
                 intelPackLastRunFormatted: this.formatDate(intelPackLastRun)
             };
         },
@@ -134,7 +134,7 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
         setup: function () {
             Dep.prototype.setup.call(this);
             this.listenTo(this.model,
-                "change:momentumClientId change:momentumLastSynced change:googleDriveFolderUrl change:intelPackRun change:intelPackLastRun",
+                "change:momentum_client_id change:momentum_last_synced change:google_drive_folder_url change:intel_pack_run change:intel_pack_last_run",
                 this.reRender, this
             );
         }

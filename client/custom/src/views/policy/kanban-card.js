@@ -6,11 +6,11 @@ Espo.define('custom:views/policy/kanban-card', ['views/record/kanban'], function
 
         data: function () {
             const data = Dep.prototype.data.call(this);
-            const countdown = this.buildCountdown(this.model.get('effectiveDate'), 'Until Active');
+            const countdown = this.buildCountdown(this.model.get('effective_date'), 'Until Active');
 
             return Object.assign({}, data, {
                 cardSubtitle: this.model.get('carrier'),
-                secondaryText: this.model.get('lineOfBusiness'),
+                secondaryText: this.model.get('line_of_business'),
                 countdownClass: countdown.className,
                 countdownLabel: countdown.label
             });

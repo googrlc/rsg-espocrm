@@ -94,6 +94,29 @@
 | 16 | `reinstatementDate` | `reinstatementDate` | date | |
 | 17 | `description` | `policyNotes` | text | |
 | 18 | `changeDate` | `momentumLastSynced` | datetime | Set on every sync |
+| 19 | *(n8n — not on NowCerts payload)* | `syncStatus` | enum | After a **successful** Momentum→Espo PUT, set `Synced`. On API/validation failure, set `Error`. Leave unchanged when skipping a row. Do **not** clear to empty. |
+
+### Automation-only & AMS fields (not from NowCerts GET)
+
+These Espo fields have **no** NowCerts column. **Inbound Momentum/n8n sync must not overwrite** them on routine policy pulls (merge from existing Espo record, or omit from PUT):
+
+| EspoCRM Field | Type | Who sets it |
+|---|---|---|
+| `acceptedByAmsAt` | datetime | AMS acceptance callback / integration after AMS confirms a CRM correction |
+| `acceptedByAmsBy` | varchar | Same |
+| `amsLockState` | enum | CRM hooks (`SendPolicyCorrectionWebhook` → `Pending AMS`); AMS integration when accepted → `Locked by AMS`; reject paths → `Rejected by AMS` |
+| `amsLockReason` | text | CRM hooks + AMS integration messages |
+| `syncStatus` | enum | n8n on sync outcome; CRM sets `Pending` when a correction is queued for AMS (see hooks) |
+
+### When `amsLockState` = `Locked by AMS` (inbound sync must skip core fields)
+
+Espo **`EnforceAmsPolicyLock`** blocks CRM saves that change these attributes while locked. **n8n** (or any job doing `PUT /api/v1/Policy/{id}`) must **merge**: keep Espo’s current values for locked attributes and only send safe updates (e.g. renewal outreach fields), **or** omit those keys from the PUT body entirely.
+
+Locked **core** attributes (same list as server hook `CORE_FIELDS`):
+
+`policyNumber`, `status`, `carrier`, `lineOfBusiness`, `effectiveDate`, `expirationDate`, `premiumAmount`, `businessType`, `bindDate`, `billingType`, `policyTerm`, `cancellationDate`, `reinstatementDate`, `momentumPolicyId`, `insuredMomentumId`
+
+`policyNumber` is also rejected on change whenever `momentumPolicyId` is set, even if not fully locked — always treat as immutable from Momentum→CRM once linked.
 
 ### Skipped Fields (Policies)
 
@@ -188,9 +211,14 @@
 3. For each policy:
    a. Look up accountId: GET /api/v1/Account?where[momentumClientId]={insuredDatabaseId}
    b. Search EspoCRM: GET /api/v1/Policy?where[momentumPolicyId]={databaseId}
-   c. If found → PUT /api/v1/Policy/{id} with mapped fields + accountId
-   d. If not found → POST /api/v1/Policy with mapped fields + accountId
-   e. Always set momentumLastSynced = NOW()
+   c. If found:
+      - Read existing `amsLockState`, `acceptedByAmsAt`, `acceptedByAmsBy`, `amsLockReason`, `syncStatus`
+      - Build PUT body from NowCerts mapped fields + accountId + momentumLastSynced (NOW)
+      - If amsLockState == "Locked by AMS": strip locked core fields from PUT (see section above); keep governance fields as on server
+      - On successful PUT: set syncStatus to "Synced" in payload (or follow-up PATCH)
+      - On Espo 4xx/5xx: set syncStatus "Error" when you retry logging is available
+   d. If not found → POST /api/v1/Policy with mapped fields + accountId + momentumLastSynced; set syncStatus "Synced" on success
+   e. Never send acceptedByAmsAt / acceptedByAmsBy / amsLockState / amsLockReason from NowCerts data — preserve existing on updates
 ```
 
 ### Policy Change Logging (ActivityLog)

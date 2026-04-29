@@ -1,13 +1,35 @@
 [
     {
-        "name": "aiAssessment",
+        "name": "ai_assessment",
         "label": "AI Account Assessment",
         "style": "default",
         "rows": [
-            [{"name": "aiAssessment", "fullWidth": true}],
-            [{"name": "intelConfidence"}, {"name": "intelPackLastRun"}],
-            [{"name": "intelUnderwritingFlag"}, {"name": "assessmentDate"}],
-            [{"name": "keyFindings", "fullWidth": true}]
+            [
+                {
+                    "name": "ai_assessment",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "intel_confidence"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "intel_underwriting_flag"
+                },
+                {
+                    "name": "assessment_date"
+                }
+            ],
+            [
+                {
+                    "name": "key_findings",
+                    "fullWidth": true
+                }
+            ]
         ]
     },
     {
@@ -15,12 +37,54 @@
         "label": "Business Identity",
         "style": "default",
         "rows": [
-            [{"name": "intelLegalName"}, {"name": "intelDba"}],
-            [{"name": "businessEntity"}, {"name": "cYearBusinessEst"}],
-            [{"name": "yearsInBusiness"}, {"name": "annualRevenue"}],
-            [{"name": "employeeCount"}, {"name": "fein"}],
-            [{"name": "industry"}, {"name": "sicCode"}],
-            [{"name": "intelNaics"}, {"name": "intelWebsite"}]
+            [
+                {
+                    "name": "intel_legal_name"
+                },
+                {
+                    "name": "intel_dba"
+                }
+            ],
+            [
+                {
+                    "name": "businessEntity"
+                },
+                {
+                    "name": "cYearBusinessEst"
+                }
+            ],
+            [
+                {
+                    "name": "years_in_business"
+                },
+                {
+                    "name": "annual_revenue"
+                }
+            ],
+            [
+                {
+                    "name": "employee_count"
+                },
+                {
+                    "name": "fein"
+                }
+            ],
+            [
+                {
+                    "name": "industry"
+                },
+                {
+                    "name": "sic_code"
+                }
+            ],
+            [
+                {
+                    "name": "intel_naics"
+                },
+                {
+                    "name": "website"
+                }
+            ]
         ]
     },
     {
@@ -28,11 +92,42 @@
         "label": "BBB & Reputation",
         "style": "default",
         "rows": [
-            [{"name": "bbbRating"}, {"name": "intelBbbAccredited"}],
-            [{"name": "intelBbbComplaints"}, {"name": "intelGrowthIndicator"}],
-            [{"name": "intelBbbNotes", "fullWidth": true}],
-            [{"name": "intelLinkedinUrl"}, {"name": "intelLinkedinNotes"}],
-            [{"name": "intelNewsNotes", "fullWidth": true}]
+            [
+                {
+                    "name": "bbb_rating"
+                },
+                {
+                    "name": "intel_bbb_accredited"
+                }
+            ],
+            [
+                {
+                    "name": "intel_bbb_complaints"
+                },
+                {
+                    "name": "intel_growth_indicator"
+                }
+            ],
+            [
+                {
+                    "name": "intel_bbb_notes",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "linkedin_url"
+                },
+                {
+                    "name": "intel_linkedin_notes"
+                }
+            ],
+            [
+                {
+                    "name": "intel_news_notes",
+                    "fullWidth": true
+                }
+            ]
         ]
     },
     {
@@ -40,11 +135,42 @@
         "label": "Fleet & Operations",
         "style": "default",
         "rows": [
-            [{"name": "intelFleetSize"}, {"name": "intelOperatingRadius"}],
-            [{"name": "intelCargoType"}, {"name": "intelOwnerOperators"}],
-            [{"name": "intelDotIncidents"}, {"name": "intelOshaViolations"}],
-            [{"name": "intelPainPoints", "fullWidth": true}],
-            [{"name": "intelCrossSell", "fullWidth": true}]
+            [
+                {
+                    "name": "intel_fleet_size"
+                },
+                {
+                    "name": "intel_operating_radius"
+                }
+            ],
+            [
+                {
+                    "name": "intel_cargo_type"
+                },
+                {
+                    "name": "intel_owner_operators"
+                }
+            ],
+            [
+                {
+                    "name": "intel_dot_incidents"
+                },
+                {
+                    "name": "intel_osha_violations"
+                }
+            ],
+            [
+                {
+                    "name": "intel_pain_points",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "intel_cross_sell",
+                    "fullWidth": true
+                }
+            ]
         ]
     },
     {
@@ -52,21 +178,73 @@
         "label": "Risk & Underwriting Signals",
         "style": "default",
         "rows": [
-            [{"name": "claimsCount3yr"}, {"name": "claimsOpen"}],
-            [{"name": "lastClaimDate"}, {"name": "lastClaimType"}],
-            [{"name": "riskScore"}, {"name": "retentionRisk"}],
-            [{"name": "claimsNotes", "fullWidth": true}]
+            [
+                {
+                    "name": "claims_count_3yr"
+                },
+                {
+                    "name": "claims_open"
+                }
+            ],
+            [
+                {
+                    "name": "last_claim_date"
+                },
+                {
+                    "name": "last_claim_type"
+                }
+            ],
+            [
+                {
+                    "name": "risk_score"
+                },
+                {
+                    "name": "retention_risk"
+                }
+            ],
+            [
+                {
+                    "name": "claims_notes",
+                    "fullWidth": true
+                }
+            ]
         ]
     },
     {
-        "name": "coverageGaps",
+        "name": "coverage_gaps",
         "label": "Coverage Gaps & Cross-Sell",
         "style": "default",
         "rows": [
-            [{"name": "coverageGaps", "fullWidth": true}],
-            [{"name": "gapUmbrella"}, {"name": "gapUmbrellaReason"}],
-            [{"name": "gapLife"}, {"name": "gapLifeNeedEst"}],
-            [{"name": "gapLifeReason"}, {"name": "gapAutoUm"}]
+            [
+                {
+                    "name": "coverage_gaps",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "gapUmbrella"
+                },
+                {
+                    "name": "gapUmbrellaReason"
+                }
+            ],
+            [
+                {
+                    "name": "gapLife"
+                },
+                {
+                    "name": "gapLifeNeedEst"
+                }
+            ],
+            [
+                {
+                    "name": "gapLifeReason"
+                },
+                {
+                    "name": "gapAutoUm"
+                }
+            ]
         ]
     }
 ]
