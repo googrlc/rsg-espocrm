@@ -1,11 +1,12 @@
 <?php
 
-namespace Espo\Custom\Classes\Renewal;
+namespace Espo\Modules\RsgCore\Classes\Renewal;
 
 use DateInterval;
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\Custom\Classes\Account\AccountNameResolution;
+use Espo\Custom\Classes\Renewal\RenewalLeadWindows;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 

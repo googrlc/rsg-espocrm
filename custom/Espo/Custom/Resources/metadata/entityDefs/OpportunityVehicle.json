@@ -1,0 +1,102 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": false
+        },
+        "year": {
+            "type": "int",
+            "isCustom": true
+        },
+        "make": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "required": true
+        },
+        "model": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "required": true
+        },
+        "vin": {
+            "type": "varchar",
+            "maxLength": 64,
+            "isCustom": true
+        },
+        "mileageDriven": {
+            "type": "int",
+            "isCustom": true
+        },
+        "ownershipType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Own",
+                "Lease"
+            ],
+            "isCustom": true
+        },
+        "lineOfBusiness": {
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial Auto",
+                "Transportation / Trucking",
+                "Personal Auto",
+                "Motorcycle",
+                "Boat",
+                "RV",
+                "Garagekeepers",
+                "Other"
+            ],
+            "isCustom": true
+        },
+        "opportunity": {
+            "type": "link",
+            "required": true
+        },
+        "account": {
+            "type": "link"
+        }
+    },
+    "links": {
+        "opportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "foreign": "opportunityVehicles",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "opportunityVehicles",
+            "isCustom": true
+        },
+        "drivers": {
+            "type": "hasMany",
+            "entity": "OpportunityDriver",
+            "foreign": "vehicle",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "make",
+            "model",
+            "vin"
+        ],
+        "sortByList": [
+            "createdAt",
+            "year",
+            "make",
+            "model",
+            "ownershipType"
+        ]
+    }
+}

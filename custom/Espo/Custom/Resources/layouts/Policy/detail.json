@@ -10,7 +10,8 @@
     "label": "Policy Info",
     "rows": [
       [{"name": "policyNumber"}, {"name": "status"}],
-      [{"name": "carrierAccount"}, {"name": "statusLabel"}],
+      [{"name": "carrierAccount"}, {"name": "underwriter"}],
+      [{"name": "statusLabel"}, false],
       [{"name": "lineOfBusiness"}, {"name": "businessType"}],
       [{"name": "assignedUser"}, false],
       [{"name": "daysRemaining"}, {"name": "carrierPortalUrl"}]
@@ -49,10 +50,10 @@
     "label": "NowCerts Sync",
     "style": "side",
     "rows": [
-      [{"name": "momentumPolicyId"}],
-      [{"name": "syncStatus"}],
-      [{"name": "momentumLastSynced"}],
-      [{"name": "insuredMomentumId"}]
+      [{"name": "momentumPolicyId"}, {"name": "insuredMomentumId"}],
+      [{"name": "momentumLastSynced"}, {"name": "syncStatus"}],
+      [{"name": "acceptedByAmsAt"}, {"name": "acceptedByAmsBy"}],
+      [{"name": "amsLockState"}, {"name": "amsLockReason"}]
     ]
   }
 ]

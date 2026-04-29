@@ -1,0 +1,24 @@
+{
+    "fields": {
+        "quoteNumber": "Quote Number",
+        "carrier": "Carrier",
+        "premium": "Premium",
+        "status": "Status",
+        "effectiveDate": "Effective Date",
+        "expirationDate": "Expiration Date",
+        "lineOfBusiness": "Line of Business",
+        "opportunity": "Opportunity",
+        "account": "Account",
+        "notes": "Notes"
+    },
+    "options": {
+        "status": {
+            "": "",
+            "Draft": "Draft",
+            "Received": "Received",
+            "Presented": "Presented",
+            "Bound": "Bound",
+            "Declined": "Declined"
+        }
+    }
+}

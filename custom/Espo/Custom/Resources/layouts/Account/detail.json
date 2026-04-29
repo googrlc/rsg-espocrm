@@ -68,6 +68,36 @@
         "label": "Client Snapshot"
     },
     {
+        "rows": [
+            [
+                {
+                    "name": "agentOfAgencyCode"
+                },
+                {
+                    "name": "carrierCode"
+                }
+            ],
+            [
+                {
+                    "name": "totalCarrierPremium"
+                },
+                false
+            ]
+        ],
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "equals",
+                    "attribute": "accountType",
+                    "value": "Carrier"
+                }
+            ]
+        },
+        "style": "default",
+        "name": "carrierDetails",
+        "label": "Carrier Details"
+    },
+    {
         "rows": [],
         "style": "default",
         "tabBreak": true,

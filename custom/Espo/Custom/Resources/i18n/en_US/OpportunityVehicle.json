@@ -1,0 +1,20 @@
+{
+    "fields": {
+        "year": "Year",
+        "make": "Make",
+        "model": "Model",
+        "vin": "VIN",
+        "mileageDriven": "Mileage Driven",
+        "ownershipType": "Own / Lease",
+        "lineOfBusiness": "Line of Business",
+        "opportunity": "Opportunity",
+        "account": "Account"
+    },
+    "options": {
+        "ownershipType": {
+            "": "",
+            "Own": "Own",
+            "Lease": "Lease"
+        }
+    }
+}

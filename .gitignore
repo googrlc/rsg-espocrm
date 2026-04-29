@@ -1,2 +1,8 @@
 .DS_Store
 *.env
+.env
+.venv/
+.venv-*/
+
+# Local clone for side-by-side compare (see rsg-espocrm/espocrm-compare.code-workspace)
+official-espocrm/

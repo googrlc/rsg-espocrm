@@ -126,7 +126,7 @@
         "xDate": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Expiration date of current policy — used for nurture loop automation"
+            "tooltipText": "Expiration date of current policy \u2014 used for nurture loop automation"
         },
         "callbackDate": {
             "type": "date",
@@ -139,6 +139,22 @@
             "isCustom": true,
             "readOnly": true,
             "tooltipText": "Closed Lost opportunity this nurture lead came from."
+        },
+        "source": {
+            "type": "enum",
+            "options": [
+                "",
+                "Call",
+                "Email",
+                "Existing Customer",
+                "Client Referral",
+                "Partner Referral",
+                "Public Relations",
+                "Web Site",
+                "Campaign",
+                "Other"
+            ],
+            "isCustom": true
         }
     },
     "links": {

@@ -83,7 +83,25 @@
         "medCurrentCarrier": "Current Medicare Carrier",
         "medCurrentPlan": "Current Plan",
         "medAepSepDate": "AEP/SEP Date",
-        "medIrmaaApplies": "IRMAA Applies"
+        "medIrmaaApplies": "IRMAA Applies",
+        "caBusType": "Business Type",
+        "caVehicleCount": "Vehicle Count",
+        "caDriverCount": "Driver Count",
+        "caRadius": "Operating Radius",
+        "caDotNumber": "DOT Number",
+        "caMcNumber": "MC Number",
+        "caCommodity": "Commodity",
+        "caCurrentPolicyNum": "Current Policy Number",
+        "caCurrentExpiration": "Current Policy Expiration",
+        "caEquipmentType": "Equipment Type",
+        "caEquipmentValue": "Equipment Value",
+        "caCurrentVehicleModifications": "Current Vehicle Modifications",
+        "driverDetails": "Driver Details",
+        "vehicleDetails": "Vehicle Details",
+        "leadSource": "Lead Source",
+        "quoteNumber": "Quote Number",
+        "opportunityDrivers": "Driver Details",
+        "opportunityVehicles": "Vehicle Details"
     },
     "options": {
         "stage": {
@@ -95,21 +113,37 @@
             "Negotiation": "Negotiation",
             "Closed Won": "Closed Won",
             "Closed Lost": "Closed Lost"
+        },
+        "lineOfBusiness": {
+            "Transportation / Trucking": "Transportation / Trucking"
+        },
+        "leadSource": {
+            "": "",
+            "Call": "Call",
+            "Email": "Email",
+            "Existing Customer": "Existing Customer",
+            "Client Referral": "Client Referral",
+            "Partner Referral": "Partner Referral",
+            "Public Relations": "Public Relations",
+            "Web Site": "Web Site",
+            "Campaign": "Campaign",
+            "Other": "Other"
         }
     },
     "tooltips": {
         "policyNumber": "Enter after bind",
         "fein": "Enter if Account not yet created",
         "commissionLogged": "Auto-set by n8n when commission ledger entry created",
-        "aiSummary": "2-3 sentence brief from Manus intel — pre-call context",
+        "aiSummary": "2-3 sentence brief from Manus intel \u2014 pre-call context",
         "recycleToLead": "Enable to recycle this closed-lost opportunity into Lead nurture.",
         "xDate": "Customer renewal date used for callback timing.",
         "callbackDate": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior).",
         "recycledLead": "Lead record created for nurture follow-up.",
-        "aggregatePageId": "Legacy Notion sync field — can be deprecated after full EspoCRM migration",
+        "aggregatePageId": "Legacy Notion sync field \u2014 can be deprecated after full EspoCRM migration",
         "propAssessmentNotes": "AI-generated property assessment notes from Viktor or Manus",
         "autoAssessmentNotes": "AI-generated driver and vehicle risk assessment",
-        "healthAssessmentNotes": "AI-generated health risk assessment notes"
+        "healthAssessmentNotes": "AI-generated health risk assessment notes",
+        "quoteNumber": "Carrier-provided quote reference number for this opportunity."
     },
     "presetFilters": {
         "open": "Open Pipeline",

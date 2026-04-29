@@ -64,3 +64,40 @@ Set these config keys to enable outbound account enrichment payloads from CRM:
 
 - `accountEnrichmentWebhookUrl` — endpoint that receives `account.enrichment_submitted`
 - `accountEnrichmentWebhookSecret` — optional shared secret sent as `X-Account-Sync-Secret`
+
+## Attachment -> Google Drive sync
+
+Set these in EspoCRM `data/config.php` to sync new attachments to n8n/Drive:
+
+- `attachmentDriveSyncWebhookUrl` — n8n webhook URL (for this setup: `https://n8n-n8fq.srv1624160.hstgr.cloud/webhook/espo-attachment-drive-sync`)
+- `attachmentDriveSyncWebhookSecret` — optional shared secret sent as `X-Attachment-Sync-Secret`
+
+When an `Attachment` is created (or finishes uploading), Espo sends:
+
+- file metadata (`attachmentId`, `fileName`, `mimeType`, `fileSize`)
+- file body (`fileContentBase64`)
+- CRM context (`accountId`, `accountName`, `opportunityId`, `opportunityName`)
+- folder routing (`driveFolderId` extracted from `Account.googleDriveFolderUrl` when available)
+
+## Canonical Integration Env Variables (n8n)
+
+Use this standardized set for Momentum + CRM sync workflows:
+
+- `MOMENTUM_BASE_URL`
+- `MOMENTUM_API_KEY`
+- `ESPO_BASE_URL`
+- `ESPO_API_KEY`
+- `POLICY_SYNC_SHARED_SECRET`
+- `ACCOUNT_SYNC_SHARED_SECRET`
+
+### Value Notes
+
+- `MOMENTUM_BASE_URL`
+  - Prod: `https://api.momentumamp.com`
+  - Staging: `https://staging-api.momentumamp.com`
+- `MOMENTUM_API_KEY` is exchanged for JWT via Momentum endpoint `/api/token/exchange-api-key`.
+
+### Mapping to EspoCRM Config Keys
+
+- `policyCorrectionWebhookSecret` in EspoCRM should match `POLICY_SYNC_SHARED_SECRET` in n8n.
+- `accountEnrichmentWebhookSecret` in EspoCRM should match `ACCOUNT_SYNC_SHARED_SECRET` in n8n.

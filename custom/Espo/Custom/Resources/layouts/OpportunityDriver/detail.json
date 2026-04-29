@@ -1,0 +1,47 @@
+[
+    {
+        "label": "Driver Details",
+        "rows": [
+            [
+                {
+                    "name": "opportunity"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "driverName"
+                },
+                {
+                    "name": "driverLicenseNumber"
+                }
+            ],
+            [
+                {
+                    "name": "dateOfBirth"
+                },
+                {
+                    "name": "stateIssued"
+                }
+            ],
+            [
+                {
+                    "name": "licenseExpirationDate"
+                },
+                {
+                    "name": "vehicle"
+                }
+            ],
+            [
+                {
+                    "name": "driverSchedule"
+                },
+                {
+                    "name": "lineOfBusiness"
+                }
+            ]
+        ]
+    }
+]

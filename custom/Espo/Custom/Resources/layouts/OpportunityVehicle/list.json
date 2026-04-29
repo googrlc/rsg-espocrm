@@ -1,0 +1,31 @@
+[
+    {
+        "name": "year",
+        "width": 8
+    },
+    {
+        "name": "make",
+        "width": 14
+    },
+    {
+        "name": "model",
+        "width": 14
+    },
+    {
+        "name": "vin",
+        "width": 16
+    },
+    {
+        "name": "mileageDriven",
+        "width": 10
+    },
+    {
+        "name": "ownershipType",
+        "width": 10
+    },
+    {
+        "name": "opportunity",
+        "width": 14,
+        "link": true
+    }
+]

@@ -54,7 +54,7 @@
     "intelSignalNews": "News Signal",
     "intelSignalLinkedin": "LinkedIn Signal",
     "cYearBusinessEst": "Year Business Est",
-    "accountType": "Account type",
+    "accountType": "Account Type",
     "accountScore": "Account Score",
     "activePolicyCount": "Active Policy Count",
     "aiAssessment": "AI Assessment",
@@ -135,7 +135,10 @@
     "gapRenters": "Gap: Renters",
     "gapRideshare": "Gap: Rideshare",
     "intelConfidence": "Confidence",
-    "agentOfRecordDate": "Agent of Record Date"
+    "agentOfRecordDate": "Agent of Record Date",
+    "agentOfAgencyCode": "Agent / Agency Code",
+    "carrierCode": "Carrier Code",
+    "totalCarrierPremium": "Total Carrier Premium"
   },
   "links": {
     "linkedTasks": "Linked Tasks",
@@ -172,6 +175,17 @@
       "Sole Prop": "Sole Prop",
       "Partnership": "Partnership",
       "Other": "Other"
+    },
+    "accountType": {
+      "": "",
+      "Prospect": "Prospect",
+      "Commercial Lines": "Commercial Lines",
+      "Personal Lines": "Personal Lines",
+      "Group Benefits": "Group Benefits",
+      "Medicare": "Medicare",
+      "Life Insurance": "Life Insurance",
+      "Carrier": "Carrier",
+      "MGA": "MGA"
     }
   }
 }
