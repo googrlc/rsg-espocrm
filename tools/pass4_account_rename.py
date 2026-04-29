@@ -4,9 +4,12 @@
 After deploying metadata, the MySQL `account` table must use matching column names or
 GET /Account/{id} will fail (e.g. Unknown column 'claims_count_3yr'). Apply:
 
-  tools/migrations/pass4_account_rename_mysql8.sql
+  tools/migrations/pass4_account_rename_mysql8.sql   # all Pass 4 renames (idempotent)
+  tools/migrations/pass4_one_shot_claims_count_3yr.sql  # emergency: only claims_count_3yr
 
-(Regenerate from tools/migrations/build_pass4_account_mysql.py if RENAME changes.)
+Elestio helper: scripts/apply-pass4-account-mysql-elestio.sh <db> [full|claims]
+
+(Regenerate full SQL from tools/migrations/build_pass4_account_mysql.py if RENAME changes.)
 """
 
 import json
