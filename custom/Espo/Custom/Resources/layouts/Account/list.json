@@ -5,15 +5,15 @@
         "link": true
     },
     {
-        "name": "accountType",
+        "name": "account_type",
         "width": 10
     },
     {
-        "name": "accountStatus",
+        "name": "account_status",
         "width": 8
     },
     {
-        "name": "totalActivePremium",
+        "name": "total_active_premium",
         "width": 10
     },
     {
@@ -21,7 +21,7 @@
         "width": 16
     },
     {
-        "name": "scoreTotal",
+        "name": "score_total",
         "width": 7
     },
     {

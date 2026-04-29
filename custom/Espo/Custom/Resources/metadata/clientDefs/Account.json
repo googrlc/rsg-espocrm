@@ -1,4 +1,5 @@
 {
+    "statusField": "account_type",
     "recordViews": {
         "detail": "custom:views/account/record/detail"
     },

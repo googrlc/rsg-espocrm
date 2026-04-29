@@ -106,7 +106,7 @@ class AccountHealthManager
 
         $gapCount = $this->countGapFlags($account);
         $rateIncreasePct = max(
-            round((float) ($account->get('premiumChangePct') ?? 0), 2),
+            round((float) ($account->get('premium_change_pct') ?? 0), 2),
             $activitySignals['maxPremiumSpikePct']
         );
         $rateIncreaseFlag = $rateIncreasePct >= 15.0;
@@ -130,26 +130,26 @@ class AccountHealthManager
             + $scoreLastContact;
         $scoreTier = $this->resolveScoreTier($scoreTotal);
 
-        $previousScore = (int) ($account->getFetched('scoreTotal') ?? $account->get('scoreTotal') ?? 0);
+        $previousScore = (int) ($account->getFetched('score_total') ?? $account->get('score_total') ?? 0);
         $scoreChangeAmount = $scoreTotal - $previousScore;
 
         $account->set('gapCount', $gapCount);
-        $account->set('scoreBundleDepth', $scoreBundleDepth);
-        $account->set('scorePaymentHistory', $scorePaymentHistory);
-        $account->set('scoreYearsRetained', $scoreYearsRetained);
-        $account->set('scoreClaimsActivity', $scoreClaimsActivity);
-        $account->set('scoreLastContact', $scoreLastContact);
-        $account->set('scoreTotal', $scoreTotal);
-        $account->set('scoreTier', $scoreTier);
-        $account->set('scoreLastCalculated', gmdate('Y-m-d H:i:s'));
-        $account->set('scoreChangeDirection', $this->resolveChangeDirection($scoreChangeAmount));
-        $account->set('scoreChangeAmount', abs($scoreChangeAmount));
-        $account->set('rateIncreaseFlag', $rateIncreaseFlag);
-        $account->set('nextRenewalDate', $policySignals['nextRenewalDate']);
-        $account->set('nextRenewalLob', $policySignals['nextRenewalLob']);
-        $account->set('nextRenewalCarrier', $policySignals['nextRenewalCarrier']);
-        $account->set('daysToRenewal', $policySignals['daysToRenewal']);
-        $account->set('accountStatus', $this->determineAccountStatus(
+        $account->set('score_bundle_depth', $scoreBundleDepth);
+        $account->set('score_payment_history', $scorePaymentHistory);
+        $account->set('score_years_retained', $scoreYearsRetained);
+        $account->set('score_claims_activity', $scoreClaimsActivity);
+        $account->set('score_last_contact', $scoreLastContact);
+        $account->set('score_total', $scoreTotal);
+        $account->set('score_tier', $scoreTier);
+        $account->set('score_last_calculated', gmdate('Y-m-d H:i:s'));
+        $account->set('score_change_direction', $this->resolveChangeDirection($scoreChangeAmount));
+        $account->set('score_change_amount', abs($scoreChangeAmount));
+        $account->set('rate_increase_flag', $rateIncreaseFlag);
+        $account->set('next_renewal_date', $policySignals['nextRenewalDate']);
+        $account->set('next_renewal_lob', $policySignals['nextRenewalLob']);
+        $account->set('next_renewal_carrier', $policySignals['nextRenewalCarrier']);
+        $account->set('days_to_renewal', $policySignals['daysToRenewal']);
+        $account->set('account_status', $this->determineAccountStatus(
             $policySignals,
             $activitySignals,
             $taskSignals,

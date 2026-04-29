@@ -93,7 +93,7 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
         `,
 
         data: function () {
-            var folderUrl = this.model.get("googleDriveFolderUrl");
+            var folderUrl = this.model.get("google_drive_folder_url");
             return {
                 hasDriveUrl: !!folderUrl,
                 driveUrl: folderUrl || "#"
@@ -102,7 +102,7 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
 
         setup: function () {
             Dep.prototype.setup.call(this);
-            this.listenTo(this.model, "change:googleDriveFolderUrl", this.reRender, this);
+            this.listenTo(this.model, "change:google_drive_folder_url", this.reRender, this);
         },
 
         actionShowInput: function () {
@@ -110,7 +110,7 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
             var $input = $editWrap.find("[data-name='driveUrlEditInput']");
 
             $editWrap.removeClass("hidden");
-            $input.val(this.model.get("googleDriveFolderUrl") || "");
+            $input.val(this.model.get("google_drive_folder_url") || "");
             $input.focus();
         },
 
@@ -141,9 +141,9 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
                 folderUrl = "https://drive.google.com/drive/u/0/folders/" + encodeURIComponent(folderId);
             }
 
-            this.model.set("googleDriveFolderUrl", folderUrl);
+            this.model.set("google_drive_folder_url", folderUrl);
 
-            this.model.save({googleDriveFolderUrl: folderUrl}, {patch: true}).then(
+            this.model.save({google_drive_folder_url: folderUrl}, {patch: true}).then(
                 function () {
                     Espo.Ui.success("Drive folder linked.");
                 }.bind(this)

@@ -141,10 +141,10 @@ define("custom:views/account/record/panels/account-score", ["view"], function (D
         `,
 
         data: function () {
-            var totalActivePremium = this.asNumber(this.model.get("totalActivePremium"));
+            var totalActivePremium = this.asNumber(this.model.get("total_active_premium"));
             var score = this.calculatePremiumScore(totalActivePremium);
             var activePolicyCount = this.model.get("activePolicyCount") || this.model.get("policyCountActive") || 0;
-            var daysToRenewal = this.model.get("daysToRenewal");
+            var daysToRenewal = this.model.get("days_to_renewal");
             var scoreStyle = this.getScoreStyle(score);
 
             return {
@@ -156,7 +156,7 @@ define("custom:views/account/record/panels/account-score", ["view"], function (D
                 priorityLabel: this.getPriorityLabel(score, daysToRenewal),
                 priorityStyle: this.getPriorityStyle(score, daysToRenewal),
                 activePolicyCount: activePolicyCount,
-                nextRenewalDateFormatted: this.formatDate(this.model.get("nextRenewalDate") || this.model.get("nextXDate")),
+                nextRenewalDateFormatted: this.formatDate(this.model.get("next_renewal_date") || this.model.get("next_x_date")),
                 daysToRenewalFormatted: this.formatDays(daysToRenewal)
             };
         },
@@ -166,7 +166,7 @@ define("custom:views/account/record/panels/account-score", ["view"], function (D
 
             this.listenTo(
                 this.model,
-                "change:totalActivePremium change:activePolicyCount change:policyCountActive change:nextRenewalDate change:nextXDate change:daysToRenewal",
+                "change:total_active_premium change:activePolicyCount change:policyCountActive change:next_renewal_date change:next_x_date change:days_to_renewal",
                 this.reRender,
                 this
             );

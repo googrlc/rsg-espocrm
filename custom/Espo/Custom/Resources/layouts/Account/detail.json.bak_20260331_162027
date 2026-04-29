@@ -11,10 +11,10 @@
             ],
             [
                 {
-                    "name": "accountStatus"
+                    "name": "account_status"
                 },
                 {
-                    "name": "accountScore"
+                    "name": "account_score"
                 }
             ],
             [
@@ -45,7 +45,7 @@
         "rows": [
             [
                 {
-                    "name": "totalActivePremium"
+                    "name": "total_active_premium"
                 },
                 {
                     "name": "activePolicyCount"
@@ -53,10 +53,10 @@
             ],
             [
                 {
-                    "name": "nextXDate"
+                    "name": "next_x_date"
                 },
                 {
-                    "name": "nextXDateLob"
+                    "name": "next_x_date_lob"
                 }
             ]
         ],
@@ -76,7 +76,7 @@
             ],
             [
                 {
-                    "name": "yearsInBusiness"
+                    "name": "years_in_business"
                 },
                 {
                     "name": "numberOfEmployees"
@@ -112,15 +112,15 @@
         "rows": [
             [
                 {
-                    "name": "momentumClientId"
+                    "name": "momentum_client_id"
                 },
                 {
-                    "name": "momentumLastSynced"
+                    "name": "momentum_last_synced"
                 }
             ],
             [
                 {
-                    "name": "googleDriveFolderUrl"
+                    "name": "google_drive_folder_url"
                 }
             ]
         ],
@@ -132,15 +132,15 @@
         "rows": [
             [
                 {
-                    "name": "intelPackRun"
+                    "name": "intel_pack_run"
                 },
                 {
-                    "name": "intelPackLastRun"
+                    "name": "intel_pack_last_run"
                 }
             ],
             [
                 {
-                    "name": "aiAssessment"
+                    "name": "ai_assessment"
                 }
             ]
         ],
@@ -200,7 +200,7 @@
         "rows": [
             [
                 {
-                    "name": "intelYearsInBusiness"
+                    "name": "intel_years_in_business"
                 },
                 {
                     "name": "website"
@@ -211,15 +211,15 @@
                     "name": "businessEntity"
                 },
                 {
-                    "name": "sicCode"
+                    "name": "sic_code"
                 }
             ],
             [
                 {
-                    "name": "intelNaics"
+                    "name": "intel_naics"
                 },
                 {
-                    "name": "annualRevenue"
+                    "name": "annual_revenue"
                 }
             ]
         ],
@@ -230,12 +230,12 @@
                     "value": [
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Commercial Lines"
                         },
                         {
                             "type": "equals",
-                            "attribute": "accountType",
+                            "attribute": "account_type",
                             "value": "Group Benefits"
                         }
                     ]

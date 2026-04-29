@@ -17,8 +17,8 @@ class AccountEnrichmentWebhookDispatcher
         'spouseLastName',
         'spouseDob',
         'businessEntity',
-        'sicCode',
-        'intelNaics',
+        'sic_code',
+        'intel_naics',
     ];
 
     public function __construct(
@@ -45,7 +45,7 @@ class AccountEnrichmentWebhookDispatcher
             'triggeredAt' => gmdate('c'),
             'account' => [
                 'id' => $account->getId(),
-                'momentumClientId' => (string) ($account->get('momentumClientId') ?? ''),
+                'momentumClientId' => (string) ($account->get('momentum_client_id') ?? ''),
                 'name' => (string) ($account->get('name') ?? ''),
                 'modifiedAt' => (string) ($account->get('modifiedAt') ?? ''),
             ],

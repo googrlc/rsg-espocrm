@@ -10,12 +10,12 @@ class DeriveDriveLink implements BeforeSave
 {
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
-        $folderUrl = trim((string) ($entity->get('googleDriveFolderUrl') ?? ''));
+        $folderUrl = trim((string) ($entity->get('google_drive_folder_url') ?? ''));
 
         if ($folderUrl !== '' && strpos($folderUrl, 'drive.google.com') === false) {
             $folderId = $this->extractFolderId($folderUrl);
             if ($folderId !== '') {
-                $entity->set('googleDriveFolderUrl', 'https://drive.google.com/drive/u/0/folders/' . rawurlencode($folderId));
+                $entity->set('google_drive_folder_url', 'https://drive.google.com/drive/u/0/folders/' . rawurlencode($folderId));
             }
         }
     }

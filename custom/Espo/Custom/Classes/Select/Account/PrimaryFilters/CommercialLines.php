@@ -8,6 +8,6 @@ class CommercialLines implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["accountType" => "Commercial Lines"]);
+        $queryBuilder->where(["account_type" => "Commercial Lines"]);
     }
 }

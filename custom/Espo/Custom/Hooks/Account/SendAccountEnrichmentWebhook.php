@@ -21,7 +21,7 @@ class SendAccountEnrichmentWebhook implements AfterSave
             return;
         }
 
-        $momentumClientId = trim((string) ($entity->get('momentumClientId') ?? ''));
+        $momentumClientId = trim((string) ($entity->get('momentum_client_id') ?? ''));
         if ($momentumClientId === '') {
             return;
         }

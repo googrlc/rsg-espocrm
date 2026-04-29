@@ -195,15 +195,15 @@ class PolicyAccountSync
             }
         }
 
-        $account->set('totalActivePremium', round($totalPremium, 2));
+        $account->set('total_active_premium', round($totalPremium, 2));
         $account->set('activePolicyCount', $activePolicyCount);
         $account->set('policyCountActive', $activePolicyCount);
-        $account->set('nextXDate', $nextExpiration?->format('Y-m-d'));
-        $account->set('nextXDateLob', $nextExpirationLob);
-        $account->set('nextRenewalDate', $nextExpiration?->format('Y-m-d'));
-        $account->set('nextRenewalLob', $nextExpirationLob);
-        $account->set('nextRenewalCarrier', $nextExpirationCarrier);
-        $account->set('daysToRenewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
+        $account->set('next_x_date', $nextExpiration?->format('Y-m-d'));
+        $account->set('next_x_date_lob', $nextExpirationLob);
+        $account->set('next_renewal_date', $nextExpiration?->format('Y-m-d'));
+        $account->set('next_renewal_lob', $nextExpirationLob);
+        $account->set('next_renewal_carrier', $nextExpirationCarrier);
+        $account->set('days_to_renewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
 
         $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
     }
@@ -229,7 +229,7 @@ class PolicyAccountSync
             $totalCarrierPremium += (float) ($policy->get('premium_amount') ?? 0);
         }
 
-        $account->set('totalCarrierPremium', round($totalCarrierPremium, 2));
+        $account->set('total_carrier_premium', round($totalCarrierPremium, 2));
 
         $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
     }

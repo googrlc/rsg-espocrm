@@ -8,7 +8,7 @@
             [{"name": "primaryDob"}, {"name": "primaryGender"}],
             [{"name": "maritalStatus"}, {"name": "primaryOccupation"}],
             [{"name": "primaryPhone"}, {"name": "primaryEmail"}],
-            [{"name": "preferredContact"}, {"name": "bestTimeToCall"}]
+            [{"name": "preferred_contact"}, {"name": "best_time_to_call"}]
         ]
     },
     {
@@ -26,7 +26,7 @@
         "style": "default",
         "rows": [
             [{"name": "dependentsCount"}, {"name": "dependentAges"}],
-            [{"name": "youthfulDriverFlag"}, {"name": "yearsAtAddress"}],
+            [{"name": "youthful_driver_flag"}, {"name": "yearsAtAddress"}],
             [{"name": "residenceType"}, {"name": "mailingAddressSame"}]
         ]
     },
@@ -35,15 +35,15 @@
         "label": "Property",
         "style": "default",
         "rows": [
-            [{"name": "propertyAddress"}, {"name": "homeYearBuilt"}],
+            [{"name": "property_address"}, {"name": "homeYearBuilt"}],
             [{"name": "homeSquareFootage"}, {"name": "homeDwellingValue"}],
             [{"name": "homeConstruction"}, {"name": "homeRoofMaterial"}],
             [{"name": "homeRoofYear"}, {"name": "homePurchaseYear"}],
             [{"name": "homeSecuritySystem"}, {"name": "homeAlarmMonitored"}],
             [{"name": "homePool"}, {"name": "homeDog"}],
             [{"name": "homeDogBreed"}, {"name": "homeTrampoline"}],
-            [{"name": "rentalPropertyFlag"}, {"name": "propertyCount"}],
-            [{"name": "rentalPropertyNotes", "fullWidth": true}]
+            [{"name": "rental_property_flag"}, {"name": "property_count"}],
+            [{"name": "rental_property_notes", "fullWidth": true}]
         ]
     },
     {
@@ -51,7 +51,7 @@
         "label": "Vehicles",
         "style": "default",
         "rows": [
-            [{"name": "vehicleCount"}, false],
+            [{"name": "vehicle_count"}, false],
             [{"name": "vehicle1Year"}, {"name": "vehicle1Make"}],
             [{"name": "vehicle1Model"}, {"name": "vehicle1Vin"}],
             [{"name": "vehicle1Ownership"}, {"name": "vehicle1Use"}],
@@ -68,23 +68,23 @@
         "label": "Drivers",
         "style": "default",
         "rows": [
-            [{"name": "driverCount"}, false],
+            [{"name": "driver_count"}, false],
             [{"name": "driver1Name"}, {"name": "driver1Dob"}],
             [{"name": "driver1LicenseState"}, {"name": "driver1Accidents"}],
             [{"name": "driver1Violations"}, false],
             [{"name": "driver2Name"}, {"name": "driver2Dob"}],
             [{"name": "driver2LicenseState"}, {"name": "driver2Accidents"}],
             [{"name": "driver2Violations"}, false],
-            [{"name": "mvrFlag"}, false],
+            [{"name": "mvr_flag"}, false],
             [{"name": "driverAdditionalNotes", "fullWidth": true}]
         ]
     },
     {
-        "name": "coverageGaps",
+        "name": "coverage_gaps",
         "label": "Coverage Gaps & Cross-Sell",
         "style": "default",
         "rows": [
-            [{"name": "coverageGaps", "fullWidth": true}],
+            [{"name": "coverage_gaps", "fullWidth": true}],
             [{"name": "gapUmbrella"}, {"name": "gapUmbrellaReason"}],
             [{"name": "gapLife"}, {"name": "gapLifeNeedEst"}],
             [{"name": "gapLifeReason"}, {"name": "gapAutoUm"}],

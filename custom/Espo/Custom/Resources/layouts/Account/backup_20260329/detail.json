@@ -11,7 +11,7 @@
             ],
             [
                 {
-                    "name": "accountStatus"
+                    "name": "account_status"
                 },
                 {
                     "name": "assignedUser"
@@ -34,15 +34,15 @@
                     "name": "activePolicyCount"
                 },
                 {
-                    "name": "totalActivePremium"
+                    "name": "total_active_premium"
                 }
             ],
             [
                 {
-                    "name": "nextXDate"
+                    "name": "next_x_date"
                 },
                 {
-                    "name": "nextXDateLob"
+                    "name": "next_x_date_lob"
                 }
             ]
         ],
@@ -57,7 +57,7 @@
                     "name": "industry"
                 },
                 {
-                    "name": "yearsInBusiness"
+                    "name": "years_in_business"
                 }
             ],
             [
@@ -70,7 +70,7 @@
             ],
             [
                 {
-                    "name": "estimatedRevenue"
+                    "name": "estimated_revenue"
                 },
                 false
             ],
@@ -119,25 +119,25 @@
         "rows": [
             [
                 {
-                    "name": "intelWebsiteNotes"
+                    "name": "intel_website_notes"
                 },
                 false
             ],
             [
                 {
-                    "name": "intelNewsNotes"
+                    "name": "intel_news_notes"
                 },
                 false
             ],
             [
                 {
-                    "name": "intelLinkedinNotes"
+                    "name": "intel_linkedin_notes"
                 },
                 false
             ],
             [
                 {
-                    "name": "intelBbbNotes"
+                    "name": "intel_bbb_notes"
                 }
             ]
         ],
@@ -149,15 +149,15 @@
         "rows": [
             [
                 {
-                    "name": "momentumClientId"
+                    "name": "momentum_client_id"
                 },
                 {
-                    "name": "momentumLastSynced"
+                    "name": "momentum_last_synced"
                 }
             ],
             [
                 {
-                    "name": "googleDriveFolderUrl"
+                    "name": "google_drive_folder_url"
                 }
             ]
         ],
@@ -169,15 +169,15 @@
         "rows": [
             [
                 {
-                    "name": "intelPackRun"
+                    "name": "intel_pack_run"
                 },
                 {
-                    "name": "intelPackLastRun"
+                    "name": "intel_pack_last_run"
                 }
             ],
             [
                 {
-                    "name": "aiAssessment"
+                    "name": "ai_assessment"
                 }
             ]
         ],
@@ -189,47 +189,47 @@
         "rows": [
             [
                 {
-                    "name": "scoreTotal"
+                    "name": "score_total"
                 },
                 {
-                    "name": "scoreTier"
+                    "name": "score_tier"
                 }
             ],
             [
                 {
-                    "name": "scoreChangeDirection"
+                    "name": "score_change_direction"
                 },
                 {
-                    "name": "scoreChangeAmount"
+                    "name": "score_change_amount"
                 }
             ],
             [
                 {
-                    "name": "scoreLastCalculated"
+                    "name": "score_last_calculated"
                 }
             ],
             [
                 {
-                    "name": "scoreBundleDepth"
+                    "name": "score_bundle_depth"
                 },
                 {
-                    "name": "scorePaymentHistory"
+                    "name": "score_payment_history"
                 }
             ],
             [
                 {
-                    "name": "scoreYearsRetained"
+                    "name": "score_years_retained"
                 },
                 {
-                    "name": "scoreClaimsActivity"
+                    "name": "score_claims_activity"
                 }
             ],
             [
                 {
-                    "name": "scoreLastContact"
+                    "name": "score_last_contact"
                 },
                 {
-                    "name": "scoreAlertSent"
+                    "name": "score_alert_sent"
                 }
             ]
         ],
@@ -296,28 +296,28 @@
             ],
             [
                 {
-                    "name": "youthfulDriverFlag"
+                    "name": "youthful_driver_flag"
                 },
                 {
-                    "name": "rideshareDriverFlag"
+                    "name": "rideshare_driver_flag"
                 }
             ],
             [
                 {
-                    "name": "propertyAddress"
+                    "name": "property_address"
                 }
             ],
             [
                 {
-                    "name": "propertyCity"
+                    "name": "property_city"
                 },
                 {
-                    "name": "propertyState"
+                    "name": "property_state"
                 }
             ],
             [
                 {
-                    "name": "propertyZip"
+                    "name": "property_zip"
                 },
                 {
                     "name": "residenceType"
@@ -338,31 +338,31 @@
             ],
             [
                 {
-                    "name": "clientSince"
+                    "name": "client_since"
                 },
                 {
-                    "name": "referralSource"
+                    "name": "referral_source"
                 }
             ],
             [
                 {
-                    "name": "referralName"
+                    "name": "referral_name"
                 },
                 {
-                    "name": "preferredContact"
+                    "name": "preferred_contact"
                 }
             ],
             [
                 {
-                    "name": "bestTimeToCall"
+                    "name": "best_time_to_call"
                 },
                 {
-                    "name": "doNotContact"
+                    "name": "do_not_contact"
                 }
             ],
             [
                 {
-                    "name": "communicationNotes"
+                    "name": "communication_notes"
                 }
             ]
         ],
@@ -377,15 +377,15 @@
                     "name": "totalAnnualPremium"
                 },
                 {
-                    "name": "nextRenewalDate"
+                    "name": "next_renewal_date"
                 }
             ],
             [
                 {
-                    "name": "daysToRenewal"
+                    "name": "days_to_renewal"
                 },
                 {
-                    "name": "claimsOpen"
+                    "name": "claims_open"
                 }
             ],
             [
@@ -639,7 +639,7 @@
             ],
             [
                 {
-                    "name": "vehicleCount"
+                    "name": "vehicle_count"
                 },
                 false
             ],
@@ -710,7 +710,7 @@
             ],
             [
                 {
-                    "name": "driverCount"
+                    "name": "driver_count"
                 },
                 false
             ],
@@ -765,15 +765,15 @@
             ],
             [
                 {
-                    "name": "mvrFlag"
+                    "name": "mvr_flag"
                 },
                 {
-                    "name": "youthfulDriverFlag"
+                    "name": "youthful_driver_flag"
                 }
             ],
             [
                 {
-                    "name": "rideshareDriverFlag"
+                    "name": "rideshare_driver_flag"
                 },
                 false
             ]
@@ -880,15 +880,15 @@
             ],
             [
                 {
-                    "name": "rentalPropertyFlag"
+                    "name": "rental_property_flag"
                 },
                 {
-                    "name": "rentalPropertyCount"
+                    "name": "rental_property_count"
                 }
             ],
             [
                 {
-                    "name": "rentalPropertyNotes"
+                    "name": "rental_property_notes"
                 }
             ]
         ],
@@ -1020,23 +1020,23 @@
         "rows": [
             [
                 {
-                    "name": "nextRenewalDate"
+                    "name": "next_renewal_date"
                 },
                 {
-                    "name": "nextRenewalLob"
+                    "name": "next_renewal_lob"
                 }
             ],
             [
                 {
-                    "name": "nextRenewalCarrier"
+                    "name": "next_renewal_carrier"
                 },
                 {
-                    "name": "daysToRenewal"
+                    "name": "days_to_renewal"
                 }
             ],
             [
                 {
-                    "name": "renewalOutreachStage"
+                    "name": "renewal_outreach_stage"
                 }
             ]
         ],
@@ -1050,18 +1050,18 @@
         "rows": [
             [
                 {
-                    "name": "renewalQuoteReceived"
+                    "name": "renewal_quote_received"
                 },
                 {
-                    "name": "renewalQuoteDate"
+                    "name": "renewal_quote_date"
                 }
             ],
             [
                 {
-                    "name": "renewalQuoteAmount"
+                    "name": "renewal_quote_amount"
                 },
                 {
-                    "name": "renewalQuoteCarrier"
+                    "name": "renewal_quote_carrier"
                 }
             ]
         ],
@@ -1073,26 +1073,26 @@
         "rows": [
             [
                 {
-                    "name": "renewalDecision"
+                    "name": "renewal_decision"
                 }
             ],
             [
                 {
-                    "name": "premiumChangeAmount"
+                    "name": "premium_change_amount"
                 },
                 {
-                    "name": "premiumChangePct"
+                    "name": "premium_change_pct"
                 }
             ],
             [
                 {
-                    "name": "rateIncreaseFlag"
+                    "name": "rate_increase_flag"
                 },
                 false
             ],
             [
                 {
-                    "name": "renewalDecisionNotes"
+                    "name": "renewal_decision_notes"
                 }
             ]
         ],
@@ -1104,37 +1104,37 @@
         "rows": [
             [
                 {
-                    "name": "claimsCountLifetime"
+                    "name": "claims_count_lifetime"
                 },
                 {
-                    "name": "claimsCount3yr"
+                    "name": "claims_count_3yr"
                 }
             ],
             [
                 {
-                    "name": "claimsOpen"
+                    "name": "claims_open"
                 },
                 {
-                    "name": "lastClaimDate"
+                    "name": "last_claim_date"
                 }
             ],
             [
                 {
-                    "name": "lastClaimLob"
+                    "name": "last_claim_lob"
                 },
                 {
-                    "name": "lastClaimType"
+                    "name": "last_claim_type"
                 }
             ],
             [
                 {
-                    "name": "lastClaimStatus"
+                    "name": "last_claim_status"
                 },
                 false
             ],
             [
                 {
-                    "name": "claimsNotes"
+                    "name": "claims_notes"
                 }
             ]
         ],
@@ -1146,10 +1146,10 @@
         "rows": [
             [
                 {
-                    "name": "lastContactDate"
+                    "name": "last_contact_date"
                 },
                 {
-                    "name": "lastContactType"
+                    "name": "last_contact_type"
                 }
             ],
             [
@@ -1157,21 +1157,21 @@
                     "name": "lastContactBy"
                 },
                 {
-                    "name": "lastContactOutcome"
+                    "name": "last_contact_outcome"
                 }
             ],
             [
                 {
-                    "name": "outreachAttemptsCurrent"
+                    "name": "outreach_attempts_current"
                 },
                 false
             ],
             [
                 {
-                    "name": "npsScore"
+                    "name": "nps_score"
                 },
                 {
-                    "name": "npsDate"
+                    "name": "nps_date"
                 }
             ],
             [
@@ -1189,23 +1189,23 @@
         "rows": [
             [
                 {
-                    "name": "intelRun"
+                    "name": "intel_run"
                 },
                 {
-                    "name": "intelConfidence"
+                    "name": "intel_confidence"
                 }
             ],
             [
                 {
-                    "name": "intelRunDate"
+                    "name": "intel_run_date"
                 },
                 {
-                    "name": "intelSourcesHit"
+                    "name": "intel_sources_hit"
                 }
             ],
             [
                 {
-                    "name": "intelRunBy"
+                    "name": "intel_run_by"
                 },
                 false
             ]
@@ -1220,7 +1220,7 @@
         "rows": [
             [
                 {
-                    "name": "intelAiSummary"
+                    "name": "intel_ai_summary"
                 }
             ]
         ],
@@ -1232,22 +1232,22 @@
         "rows": [
             [
                 {
-                    "name": "insightOpener"
+                    "name": "insight_opener"
                 }
             ],
             [
                 {
-                    "name": "insightSignal"
+                    "name": "insight_signal"
                 }
             ],
             [
                 {
-                    "name": "insightObjection"
+                    "name": "insight_objection"
                 }
             ],
             [
                 {
-                    "name": "insightRelationship"
+                    "name": "insight_relationship"
                 }
             ]
         ],
@@ -1259,17 +1259,17 @@
         "rows": [
             [
                 {
-                    "name": "intelPainPoints"
+                    "name": "intel_pain_points"
                 }
             ],
             [
                 {
-                    "name": "intelCrossSell"
+                    "name": "intel_cross_sell"
                 }
             ],
             [
                 {
-                    "name": "intelGrowthIndicator"
+                    "name": "intel_growth_indicator"
                 }
             ]
         ],
@@ -1281,55 +1281,55 @@
         "rows": [
             [
                 {
-                    "name": "intelLegalName"
+                    "name": "intel_legal_name"
                 },
                 {
-                    "name": "intelDba"
+                    "name": "intel_dba"
                 }
             ],
             [
                 {
-                    "name": "intelNaics"
+                    "name": "intel_naics"
                 },
                 {
-                    "name": "intelSic"
+                    "name": "intel_sic"
                 }
             ],
             [
                 {
-                    "name": "intelEntityType"
+                    "name": "intel_entity_type"
                 },
                 {
-                    "name": "intelYearsInBusiness"
+                    "name": "intel_years_in_business"
                 }
             ],
             [
                 {
-                    "name": "intelEmployeeCount"
+                    "name": "intel_employee_count"
                 },
                 {
-                    "name": "intelAnnualRevenueEst"
+                    "name": "intel_annual_revenue_est"
                 }
             ],
             [
                 {
-                    "name": "intelWebsite"
+                    "name": "intel_website"
                 },
                 {
-                    "name": "intelLinkedinUrl"
+                    "name": "intel_linkedin_url"
                 }
             ],
             [
                 {
-                    "name": "intelBbbRating"
+                    "name": "intel_bbb_rating"
                 },
                 {
-                    "name": "intelBbbAccredited"
+                    "name": "intel_bbb_accredited"
                 }
             ],
             [
                 {
-                    "name": "intelBbbComplaints"
+                    "name": "intel_bbb_complaints"
                 },
                 false
             ]
@@ -1342,34 +1342,34 @@
         "rows": [
             [
                 {
-                    "name": "intelFleetSize"
+                    "name": "intel_fleet_size"
                 },
                 {
-                    "name": "intelOperatingRadius"
+                    "name": "intel_operating_radius"
                 }
             ],
             [
                 {
-                    "name": "intelCargoType"
+                    "name": "intel_cargo_type"
                 },
                 {
-                    "name": "intelOwnerOperators"
+                    "name": "intel_owner_operators"
                 }
             ],
             [
                 {
-                    "name": "intelDotIncidents"
+                    "name": "intel_dot_incidents"
                 },
                 false
             ],
             [
                 {
-                    "name": "intelOshaViolations"
+                    "name": "intel_osha_violations"
                 }
             ],
             [
                 {
-                    "name": "intelUnderwritingFlag"
+                    "name": "intel_underwriting_flag"
                 }
             ]
         ],
