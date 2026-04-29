@@ -78,3 +78,26 @@ When an `Attachment` is created (or finishes uploading), Espo sends:
 - file body (`fileContentBase64`)
 - CRM context (`accountId`, `accountName`, `opportunityId`, `opportunityName`)
 - folder routing (`driveFolderId` extracted from `Account.googleDriveFolderUrl` when available)
+
+## Canonical Integration Env Variables (n8n)
+
+Use this standardized set for Momentum + CRM sync workflows:
+
+- `MOMENTUM_BASE_URL`
+- `MOMENTUM_API_KEY`
+- `ESPO_BASE_URL`
+- `ESPO_API_KEY`
+- `POLICY_SYNC_SHARED_SECRET`
+- `ACCOUNT_SYNC_SHARED_SECRET`
+
+### Value Notes
+
+- `MOMENTUM_BASE_URL`
+  - Prod: `https://api.momentumamp.com`
+  - Staging: `https://staging-api.momentumamp.com`
+- `MOMENTUM_API_KEY` is exchanged for JWT via Momentum endpoint `/api/token/exchange-api-key`.
+
+### Mapping to EspoCRM Config Keys
+
+- `policyCorrectionWebhookSecret` in EspoCRM should match `POLICY_SYNC_SHARED_SECRET` in n8n.
+- `accountEnrichmentWebhookSecret` in EspoCRM should match `ACCOUNT_SYNC_SHARED_SECRET` in n8n.

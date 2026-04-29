@@ -172,6 +172,44 @@
                 "Skipped": "default"
             }
         },
+        "acceptedByAmsAt": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Timestamp when AMS accepted the latest CRM correction payload."
+        },
+        "acceptedByAmsBy": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "AMS user or integration identity that accepted the latest CRM correction."
+        },
+        "amsLockState": {
+            "type": "enum",
+            "options": [
+                "",
+                "Unlocked",
+                "Pending AMS",
+                "Locked by AMS",
+                "Rejected by AMS"
+            ],
+            "default": "Unlocked",
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Unlocked": "success",
+                "Pending AMS": "warning",
+                "Locked by AMS": "info",
+                "Rejected by AMS": "danger"
+            },
+            "tooltipText": "CRM policy edit lock state controlled by AMS correction acceptance."
+        },
+        "amsLockReason": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Reason for current AMS lock state, including rejection detail when present."
+        },
         "insuredMomentumId": {
             "type": "varchar",
             "maxLength": 255,
@@ -444,6 +482,9 @@
                 "insuredMomentumId"
             ]
         }
+    },
+    "formula": {
+        "beforeSaveScript": "\n$premiumAmount = entity\\attribute('premiumAmount');\nifThen(\n    $premiumAmount == null,\n    $premiumAmount = 0\n);\n\n$commissionRate = entity\\attribute('commissionRate');\nifThen(\n    $commissionRate == null,\n    $commissionRate = 0.10\n);\nifThen(\n    $commissionRate == '',\n    $commissionRate = 0.10\n);\nifThen(\n    $commissionRate > 1,\n    $commissionRate = $commissionRate / 100\n);\n\nentity\\setAttribute(\n    'commissionAmount',\n    number\\round($premiumAmount * $commissionRate, 2)\n);\n\n$status = entity\\attribute('status');\n$premiumAtRisk = 0;\nifThen(\n    $status == 'Active',\n    $premiumAtRisk = $premiumAmount\n);\nifThen(\n    $status == 'Up for Renewal',\n    $premiumAtRisk = $premiumAmount\n);\nifThen(\n    $status == 'Renewing',\n    $premiumAtRisk = $premiumAmount\n);\nifThen(\n    $status == 'Renewed',\n    $premiumAtRisk = $premiumAmount\n);\n\nentity\\setAttribute('premiumAtRisk', $premiumAtRisk);\n"
     },
     "kanbanStatusIgnoreList": [
         "Expired",

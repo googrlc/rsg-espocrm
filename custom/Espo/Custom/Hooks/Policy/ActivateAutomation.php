@@ -4,7 +4,7 @@ namespace Espo\Custom\Hooks\Policy;
 
 use Espo\Core\Hook\Hook\AfterSave;
 use Espo\Custom\Classes\Commission\CommissionLedgerManager;
-use Espo\Custom\Classes\Renewal\RenewalOrchestrator;
+use Espo\Modules\RsgCore\Classes\Renewal\RenewalOrchestrator;
 use Espo\ORM\Entity;
 use Espo\ORM\Repository\Option\SaveOptions;
 

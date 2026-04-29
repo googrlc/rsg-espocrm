@@ -50,10 +50,10 @@
     "label": "NowCerts Sync",
     "style": "side",
     "rows": [
-      [{"name": "momentumPolicyId"}],
-      [{"name": "syncStatus"}],
-      [{"name": "momentumLastSynced"}],
-      [{"name": "insuredMomentumId"}]
+      [{"name": "momentumPolicyId"}, {"name": "insuredMomentumId"}],
+      [{"name": "momentumLastSynced"}, {"name": "syncStatus"}],
+      [{"name": "acceptedByAmsAt"}, {"name": "acceptedByAmsBy"}],
+      [{"name": "amsLockState"}, {"name": "amsLockReason"}]
     ]
   }
 ]

@@ -55,6 +55,94 @@
     },
     "dynamicLogic": {
         "fields": {
+            "policyNumber": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "status": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "carrier": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "lineOfBusiness": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "effectiveDate": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "expirationDate": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "premiumAmount": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
+            "momentumPolicyId": {
+                "readOnly": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "amsLockState",
+                            "value": "Locked by AMS"
+                        }
+                    ]
+                }
+            },
             "cancellationReason": {
                 "required": {
                     "conditionGroup": [
