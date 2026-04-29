@@ -108,6 +108,7 @@ Espo.define('custom:views/lead/kanban-card', ['views/record/kanban'], function (
                 dueDateClass: dueDateClass,
                 dueDateLabel: dueDateLabel,
                 ownerInitials: ownerInitials,
+                assignedUserName: assignedUserName,
                 source: source,
                 insuranceInterest: insuranceInterest,
                 formattedValue: formattedValue,
