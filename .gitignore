@@ -4,5 +4,8 @@
 .venv/
 .venv-*/
 
-# Local clone for side-by-side compare (see rsg-espocrm/espocrm-compare.code-workspace)
+# Local clone for side-by-side compare (see espocrm-compare.code-workspace)
 official-espocrm/
+
+# Never nest a second copy of this repo here (causes duplicate trees and confusion)
+rsg-espocrm/
