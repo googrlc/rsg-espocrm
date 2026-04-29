@@ -4,7 +4,7 @@
 .venv/
 .venv-*/
 
-# Local clone for side-by-side compare (see espocrm-compare.code-workspace)
+# Optional local vanilla Espo clone for diffs (never commit upstream sources)
 official-espocrm/
 
 # Never nest a second copy of this repo here (causes duplicate trees and confusion)
