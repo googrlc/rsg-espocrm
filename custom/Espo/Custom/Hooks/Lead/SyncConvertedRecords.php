@@ -47,7 +47,7 @@ class SyncConvertedRecords implements AfterSave
     {
         $hasChanges = false;
 
-        $hasChanges = $this->setIfEmpty($contact, 'dateOfBirth', $lead->get('dateOfBirth')) || $hasChanges;
+        $hasChanges = $this->setIfEmpty($contact, 'dateOfBirth', $lead->get('date_of_birth')) || $hasChanges;
         $hasChanges = $this->setIfEmpty($contact, 'phoneNumber', $lead->get('phoneNumber')) || $hasChanges;
         $hasChanges = $this->setIfEmpty($contact, 'emailAddress', $lead->get('emailAddress')) || $hasChanges;
         $hasChanges = $this->setIfEmpty($contact, 'originalLeadSource', $lead->get('source') ?: $lead->get('campaignName')) || $hasChanges;

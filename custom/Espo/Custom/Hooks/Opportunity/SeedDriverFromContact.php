@@ -31,7 +31,7 @@ class SeedDriverFromContact implements AfterSave
             return;
         }
 
-        $lineOfBusiness = trim((string) ($entity->get('lineOfBusiness') ?? ''));
+        $lineOfBusiness = trim((string) ($entity->get('line_of_business') ?? ''));
         if (!in_array($lineOfBusiness, self::AUTO_LINE_OF_BUSINESS, true)) {
             return;
         }
@@ -78,8 +78,8 @@ class SeedDriverFromContact implements AfterSave
     private function resolveExpectedDriverCount(Entity $opportunity): int
     {
         $counts = [
-            (int) ($opportunity->get('caDriverCount') ?? 0),
-            (int) ($opportunity->get('autoDriverCount') ?? 0),
+            (int) ($opportunity->get('ca_driver_count') ?? 0),
+            (int) ($opportunity->get('auto_driver_count') ?? 0),
         ];
 
         $max = max($counts);

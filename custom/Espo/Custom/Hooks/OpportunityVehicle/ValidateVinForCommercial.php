@@ -28,7 +28,7 @@ class ValidateVinForCommercial implements BeforeSave
             if ($opportunityId !== '') {
                 $opportunity = $this->entityManager->getEntityById('Opportunity', $opportunityId);
                 if ($opportunity) {
-                    $lineOfBusiness = trim((string) ($opportunity->get('lineOfBusiness') ?? ''));
+                    $lineOfBusiness = trim((string) ($opportunity->get('line_of_business') ?? ''));
                 }
             }
         }

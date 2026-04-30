@@ -37,7 +37,7 @@ Espo.define('custom:views/lead/kanban-card', ['views/record/kanban'], function (
             }
 
             // Countdown label for T65/new lead timing.
-            const countdownDate = this.model.get('targetDate') || this.model.get('xDate');
+            const countdownDate = this.model.get('targetDate') || this.model.get('x_date');
             let dueDateClass = 'due-date-upcoming';
             let dueDateLabel = '';
             if (countdownDate) {
@@ -72,10 +72,10 @@ Espo.define('custom:views/lead/kanban-card', ['views/record/kanban'], function (
             const source = this.model.get('source');
             
             // Product category tag
-            const insuranceInterest = this.model.get('insuranceInterest');
+            const insuranceInterest = this.model.get('insurance_interest');
 
             // Deal value
-            const estimatedPremium = this.model.get('estimatedPremium');
+            const estimatedPremium = this.model.get('estimated_premium');
             let formattedValue = '';
             if (estimatedPremium) {
                 formattedValue = this.getHelper().formatCurrency(estimatedPremium, 'USD');

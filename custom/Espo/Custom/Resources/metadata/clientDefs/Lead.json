@@ -1,15 +1,41 @@
 {
     "filterList": [
-        {"name": "actual", "style": "primary"},
-        {"name": "cold", "style": "info"},
-        {"name": "warm", "style": "warning"},
-        {"name": "callbackDue", "style": "danger"},
-        {"name": "callbackNext14", "style": "primary"},
-        {"name": "converted", "style": "success"},
-        {"name": "dnc", "style": "danger"},
-        {"name": "nurture", "style": "info"}
+        {
+            "name": "actual",
+            "style": "primary"
+        },
+        {
+            "name": "cold",
+            "style": "info"
+        },
+        {
+            "name": "warm",
+            "style": "warning"
+        },
+        {
+            "name": "callbackDue",
+            "style": "danger"
+        },
+        {
+            "name": "callbackNext14",
+            "style": "primary"
+        },
+        {
+            "name": "converted",
+            "style": "success"
+        },
+        {
+            "name": "dnc",
+            "style": "danger"
+        },
+        {
+            "name": "nurture",
+            "style": "info"
+        }
     ],
-    "boolFilterList": ["onlyMy"],
+    "boolFilterList": [
+        "onlyMy"
+    ],
     "kanbanViewMode": true,
     "statusField": "status",
     "kanbanCardView": "custom:views/lead/kanban-card",
@@ -21,10 +47,31 @@
                         {
                             "type": "or",
                             "value": [
-                                {"type": "in", "attribute": "industry", "value": ["Medicare", "Health", "Senior Services"]},
-                                {"type": "isNotEmpty", "attribute": "dateOfBirth"},
-                                {"type": "isTrue", "attribute": "medicareEligible"},
-                                {"type": "in", "attribute": "source", "value": ["Medicare Referral", "T65 Campaign"]}
+                                {
+                                    "type": "in",
+                                    "attribute": "industry",
+                                    "value": [
+                                        "Medicare",
+                                        "Health",
+                                        "Senior Services"
+                                    ]
+                                },
+                                {
+                                    "type": "isNotEmpty",
+                                    "attribute": "date_of_birth"
+                                },
+                                {
+                                    "type": "isTrue",
+                                    "attribute": "medicare_eligible"
+                                },
+                                {
+                                    "type": "in",
+                                    "attribute": "source",
+                                    "value": [
+                                        "Medicare Referral",
+                                        "T65 Campaign"
+                                    ]
+                                }
                             ]
                         }
                     ]
