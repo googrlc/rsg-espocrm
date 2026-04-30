@@ -76,7 +76,7 @@
         "part_a_effective_date": "Part A Effective Date",
         "part_b_effective_date": "Part B Effective Date",
         "medicare_hicn": "Medicare HICN",
-        "driver_information": "Doctor Information",
+        "doctor_information": "Doctor Information",
         "rx_information": "Rx Information",
         "life_coverage_type": "Life Coverage Type",
         "med_plan_type": "Medicare Plan Type",
