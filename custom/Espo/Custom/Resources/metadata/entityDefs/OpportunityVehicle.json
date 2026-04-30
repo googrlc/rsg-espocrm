@@ -83,8 +83,8 @@
         }
     },
     "collection": {
-        "orderBy": "createdAt",
-        "order": "desc",
+        "orderBy": "name",
+        "order": "asc",
         "textFilterFields": [
             "name",
             "make",
@@ -92,7 +92,7 @@
             "vin"
         ],
         "sortByList": [
-            "createdAt",
+            "name",
             "year",
             "make",
             "model",

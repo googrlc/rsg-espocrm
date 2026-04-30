@@ -1,8 +1,6 @@
-{
-    "rows": [
-        {"name": "name", "link": true, "width": 30},
-        {"name": "householdRole", "width": 20},
-        {"name": "emailAddress", "width": 25},
-        {"name": "phoneNumber", "width": 25}
-    ]
-}
+[
+    {"name": "name", "link": true, "width": 30},
+    {"name": "householdRole", "width": 20},
+    {"name": "emailAddress", "width": 25},
+    {"name": "phoneNumber", "width": 25}
+]

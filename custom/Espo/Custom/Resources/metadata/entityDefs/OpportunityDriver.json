@@ -81,16 +81,16 @@
         }
     },
     "collection": {
-        "orderBy": "createdAt",
-        "order": "desc",
+        "orderBy": "driverName",
+        "order": "asc",
         "textFilterFields": [
             "driverName",
             "driverLicenseNumber",
             "stateIssued"
         ],
         "sortByList": [
-            "createdAt",
             "driverName",
+            "name",
             "licenseExpirationDate"
         ]
     }

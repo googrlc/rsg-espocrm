@@ -96,7 +96,7 @@
         }
     },
     "collection": {
-        "orderBy": "createdAt",
+        "orderBy": "effectiveDate",
         "order": "desc",
         "textFilterFields": [
             "name",
@@ -104,14 +104,12 @@
             "carrier"
         ],
         "sortByList": [
-            "createdAt",
-            "modifiedAt",
+            "effectiveDate",
+            "expirationDate",
             "quoteNumber",
             "carrier",
             "premium",
-            "status",
-            "effectiveDate",
-            "expirationDate"
+            "status"
         ]
     }
 }

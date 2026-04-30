@@ -28,7 +28,8 @@
             },
             {
                 "name": "recordInfo",
-                "reference": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/account/record/panels/record-info",
                 "order": 4
             }
         ]
