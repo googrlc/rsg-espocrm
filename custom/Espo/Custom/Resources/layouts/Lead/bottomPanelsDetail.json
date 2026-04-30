@@ -1,8 +1,4 @@
 {
-"emails": {
-"index": 1
-},
-"tasks": {
-"index": 2
-}
+    "emails": {"index": 1},
+    "tasks": {"index": 2}
 }

@@ -476,7 +476,7 @@
                 ]
             }
         },
-        "driver_information": {
+        "doctor_information": {
             "type": "text",
             "isCustom": true,
             "dynamicLogicVisible": {
