@@ -76,9 +76,10 @@ Espo.define('custom:views/lead/kanban-card', ['views/record/kanban'], function (
 
             // Deal value
             const estimatedPremium = this.model.get('estimated_premium');
+            const estimatedPremiumCurrency = this.model.get('estimated_premiumCurrency') || 'USD';
             let formattedValue = '';
-            if (estimatedPremium) {
-                formattedValue = this.getHelper().formatCurrency(estimatedPremium, 'USD');
+            if (estimatedPremium || estimatedPremium === 0) {
+                formattedValue = this.getHelper().formatCurrency(estimatedPremium, estimatedPremiumCurrency);
             }
 
             // High value card conditional formatting
