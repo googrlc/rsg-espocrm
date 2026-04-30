@@ -16,7 +16,7 @@ class EnsureNameOnSave implements BeforeSave
         }
 
         $accountName = trim((string) ($entity->get('accountName') ?? ''));
-        $lineOfBusiness = trim((string) ($entity->get('lineOfBusiness') ?? ''));
+        $lineOfBusiness = trim((string) ($entity->get('line_of_business') ?? ''));
         $date = (new \DateTimeImmutable())->format('Y-m-d');
 
         $parts = [];

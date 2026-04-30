@@ -1,14 +1,38 @@
 [
-    {"name": "name"},
-    {"name": "accountName"},
-    {"name": "emailAddress"},
-    {"name": "phoneNumber"},
-    {"name": "estimatedPremium"},
-    {"name": "priority"},
-    {"name": "source"},
-    {"name": "insuranceInterest"},
-    {"name": "status"},
-    {"name": "xDate"},
-    {"name": "callbackDate"},
-    {"name": "assignedUser"}
+    {
+        "name": "name"
+    },
+    {
+        "name": "accountName"
+    },
+    {
+        "name": "emailAddress"
+    },
+    {
+        "name": "phoneNumber"
+    },
+    {
+        "name": "estimated_premium"
+    },
+    {
+        "name": "priority"
+    },
+    {
+        "name": "source"
+    },
+    {
+        "name": "insurance_interest"
+    },
+    {
+        "name": "status"
+    },
+    {
+        "name": "x_date"
+    },
+    {
+        "name": "callback_date"
+    },
+    {
+        "name": "assignedUser"
+    }
 ]

@@ -1,11 +1,29 @@
 [
-    {"name": "name"},
-    {"name": "account"},
-    {"name": "estimatedPremium"},
-    {"name": "priority"},
-    {"name": "lineOfBusiness"},
-    {"name": "businessType"},
-    {"name": "stage"},
-    {"name": "closeDate"},
-    {"name": "assignedUser"}
+    {
+        "name": "name"
+    },
+    {
+        "name": "account"
+    },
+    {
+        "name": "estimated_premium"
+    },
+    {
+        "name": "priority"
+    },
+    {
+        "name": "line_of_business"
+    },
+    {
+        "name": "business_type"
+    },
+    {
+        "name": "stage"
+    },
+    {
+        "name": "closeDate"
+    },
+    {
+        "name": "assignedUser"
+    }
 ]
