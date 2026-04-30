@@ -52,7 +52,7 @@
                 "Closed Lost"
             ]
         },
-        "lineOfBusiness": {
+        "line_of_business": {
             "type": "enum",
             "options": [
                 "",
@@ -92,19 +92,19 @@
             "maxLength": 255,
             "isCustom": true
         },
-        "currentCarrier": {
+        "current_carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "Incumbent carrier name"
         },
-        "targetCarrier": {
+        "target_carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "Carrier being quoted"
         },
-        "businessType": {
+        "business_type": {
             "type": "enum",
             "options": [
                 "",
@@ -114,34 +114,34 @@
             ],
             "isCustom": true
         },
-        "writtenPremium": {
+        "written_premium": {
             "type": "currency",
             "isCustom": true
         },
-        "estimatedPremium": {
+        "estimated_premium": {
             "type": "currency",
             "isCustom": true,
             "defaultCurrency": "USD",
             "tooltipText": "Estimated annual premium \u2014 update as quotes come in"
         },
-        "commissionRate": {
+        "commission_rate": {
             "type": "float",
             "isCustom": true
         },
-        "estimatedCommission": {
+        "estimated_commission": {
             "type": "currency",
             "isCustom": true
         },
-        "bindDate": {
+        "bind_date": {
             "type": "date",
             "isCustom": true
         },
-        "effectiveDate": {
+        "effective_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Policy effective date \u2014 entered at bind"
         },
-        "policyNumber": {
+        "policy_number": {
             "type": "varchar",
             "maxLength": 100,
             "isCustom": true,
@@ -168,7 +168,7 @@
             "isCustom": true,
             "tooltipText": "Enter if Account not yet created"
         },
-        "lostReason": {
+        "lost_reason": {
             "type": "enum",
             "options": [
                 "",
@@ -184,18 +184,18 @@
             ],
             "isCustom": true
         },
-        "recycleToLead": {
+        "recycle_to_lead": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Enable to recycle this Closed Lost opportunity into Lead nurture."
         },
-        "xDate": {
+        "x_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Customer renewal date used for recycle callback timing."
         },
-        "callbackDate": {
+        "callback_date": {
             "type": "date",
             "isCustom": true,
             "readOnly": true,
@@ -207,12 +207,12 @@
             "readOnly": true,
             "tooltipText": "Lead created for closed-lost recycle follow-up."
         },
-        "aiSummary": {
+        "intel_ai_summary": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "2-3 sentence brief from Manus intel \u2014 pre-call context"
         },
-        "lastContactMethod": {
+        "last_contact_method": {
             "type": "enum",
             "options": [
                 "",
@@ -247,14 +247,14 @@
             "layoutDetailDisabled": true,
             "noLoad": true
         },
-        "policyStubId": {
+        "policy_stub_id": {
             "type": "varchar",
             "maxLength": 50,
             "isCustom": true,
             "readOnly": true,
             "tooltipText": "ID of the auto-created Policy stub when Won-Bound"
         },
-        "policyStubStatus": {
+        "policy_stub_status": {
             "type": "enum",
             "options": [
                 "",
@@ -268,7 +268,7 @@
                 "Synced": "success"
             }
         },
-        "caBusType": {
+        "ca_bus_type": {
             "type": "enum",
             "options": [
                 "",
@@ -281,17 +281,17 @@
             "isCustom": true,
             "tooltipText": "Commercial Auto \u2014 business type"
         },
-        "caVehicleCount": {
+        "ca_vehicle_count": {
             "type": "int",
             "isCustom": true,
             "tooltipText": "Total scheduled vehicles"
         },
-        "caDriverCount": {
+        "ca_driver_count": {
             "type": "int",
             "isCustom": true,
             "tooltipText": "Total listed drivers"
         },
-        "caRadius": {
+        "ca_radius": {
             "type": "enum",
             "options": [
                 "",
@@ -301,80 +301,80 @@
             ],
             "isCustom": true
         },
-        "caDotNumber": {
+        "ca_dot_number": {
             "type": "varchar",
             "maxLength": 20,
             "isCustom": true,
             "tooltipText": "Federal DOT number"
         },
-        "caMcNumber": {
+        "ca_mc_number": {
             "type": "varchar",
             "maxLength": 20,
             "isCustom": true,
             "tooltipText": "Motor Carrier number"
         },
-        "caCommodity": {
+        "ca_commodity": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "Primary cargo type"
         },
-        "caCurrentPolicyNum": {
+        "ca_current_policy_num": {
             "type": "varchar",
             "maxLength": 100,
             "isCustom": true,
             "tooltipText": "Incumbent policy number"
         },
-        "caCurrentExpiration": {
+        "ca_current_expiration": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Incumbent expiration date"
         },
-        "glClassCode": {
+        "gl_class_code": {
             "type": "varchar",
             "maxLength": 20,
             "isCustom": true,
             "tooltipText": "ISO class code"
         },
-        "glOperationsDesc": {
+        "gl_operations_desc": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "What does the business do"
         },
-        "glAnnualPayroll": {
+        "gl_annual_payroll": {
             "type": "currency",
             "isCustom": true
         },
-        "glAnnualRevenue": {
+        "gl_annual_revenue": {
             "type": "currency",
             "isCustom": true
         },
-        "glSubcontractorsUsed": {
+        "gl_subcontractors_used": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Affects rating"
         },
-        "wcClassCode": {
+        "wc_class_code": {
             "type": "varchar",
             "maxLength": 20,
             "isCustom": true,
             "tooltipText": "NCCI class code"
         },
-        "wcAnnualPayroll": {
+        "wc_annual_payroll": {
             "type": "currency",
             "isCustom": true
         },
-        "wcExperienceMod": {
+        "wc_experience_mod": {
             "type": "float",
             "isCustom": true,
             "tooltipText": "Current experience modification factor (X-Mod)"
         },
-        "wcEmployeeCount": {
+        "wc_employee_count": {
             "type": "int",
             "isCustom": true
         },
-        "umbrellaLimit": {
+        "umbrella_limit": {
             "type": "enum",
             "options": [
                 "",
@@ -385,16 +385,16 @@
             ],
             "isCustom": true
         },
-        "paCurrentPremium": {
+        "pa_current_premium": {
             "type": "currency",
             "isCustom": true,
             "tooltipText": "What they pay now"
         },
-        "paCurrentExpiration": {
+        "pa_current_expiration": {
             "type": "date",
             "isCustom": true
         },
-        "paPriorClaims": {
+        "pa_prior_claims": {
             "type": "enum",
             "options": [
                 "",
@@ -405,7 +405,7 @@
             "isCustom": true,
             "tooltipText": "Prior claims in last 3 years"
         },
-        "medPlanType": {
+        "med_plan_type": {
             "type": "enum",
             "options": [
                 "",
@@ -415,53 +415,53 @@
             ],
             "isCustom": true
         },
-        "medCurrentCarrier": {
+        "med_current_carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
         },
-        "medCurrentPlan": {
+        "med_current_plan": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "Plan name or letter"
         },
-        "medAepSepDate": {
+        "med_aep_sep_date": {
             "type": "date",
             "isCustom": true
         },
-        "medIrmaaApplies": {
+        "med_irmaa_applies": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "partAEffectiveDate": {
+        "part_a_effective_date": {
             "type": "date",
             "isCustom": true,
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "lineOfBusiness",
+                        "attribute": "line_of_business",
                         "value": "Medicare"
                     }
                 ]
             }
         },
-        "partBEffectiveDate": {
+        "part_b_effective_date": {
             "type": "date",
             "isCustom": true,
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "lineOfBusiness",
+                        "attribute": "line_of_business",
                         "value": "Medicare"
                     }
                 ]
             }
         },
-        "medicareHICN": {
+        "medicare_hicn": {
             "type": "varchar",
             "maxLength": 50,
             "isCustom": true,
@@ -470,39 +470,39 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "lineOfBusiness",
+                        "attribute": "line_of_business",
                         "value": "Medicare"
                     }
                 ]
             }
         },
-        "drInformation": {
+        "doctor_information": {
             "type": "text",
             "isCustom": true,
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "lineOfBusiness",
+                        "attribute": "line_of_business",
                         "value": "Medicare"
                     }
                 ]
             }
         },
-        "rxInformation": {
+        "rx_information": {
             "type": "text",
             "isCustom": true,
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "lineOfBusiness",
+                        "attribute": "line_of_business",
                         "value": "Medicare"
                     }
                 ]
             }
         },
-        "lifeCoverageType": {
+        "life_coverage_type": {
             "type": "enum",
             "options": [
                 "",
@@ -516,17 +516,17 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "lineOfBusiness",
+                        "attribute": "line_of_business",
                         "value": "Life"
                     }
                 ]
             }
         },
-        "lifeFaceAmountRequested": {
+        "life_face_amount_requested": {
             "type": "currency",
             "isCustom": true
         },
-        "lifeTermLength": {
+        "life_term_length": {
             "type": "enum",
             "options": [
                 "",
@@ -538,7 +538,7 @@
             "isCustom": true,
             "tooltipText": "Only applicable for Term life"
         },
-        "lifeHealthClassTarget": {
+        "life_health_class_target": {
             "type": "enum",
             "options": [
                 "",
@@ -549,20 +549,20 @@
             ],
             "isCustom": true
         },
-        "lifeTobaccoUser": {
+        "life_tobacco_user": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "propYearBuilt": {
+        "prop_year_built": {
             "type": "int",
             "isCustom": true
         },
-        "propSquareFootage": {
+        "prop_square_footage": {
             "type": "int",
             "isCustom": true
         },
-        "propConstructionType": {
+        "prop_construction_type": {
             "type": "enum",
             "options": [
                 "",
@@ -572,50 +572,50 @@
             ],
             "isCustom": true
         },
-        "propCurrentCarrier": {
+        "prop_current_carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
         },
-        "propCurrentPremium": {
+        "prop_current_premium": {
             "type": "currency",
             "isCustom": true
         },
-        "propAddress": {
+        "prop_address": {
             "type": "address",
             "isCustom": true,
             "tooltipText": "Insured property location"
         },
-        "autoVehicleCount": {
+        "auto_vehicle_count": {
             "type": "int",
             "isCustom": true
         },
-        "autoDriverCount": {
+        "auto_driver_count": {
             "type": "int",
             "isCustom": true
         },
-        "autoYoungestDriverAge": {
+        "auto_youngest_driver_age": {
             "type": "int",
             "isCustom": true
         },
-        "autoPriorAccidents": {
+        "auto_prior_accidents": {
             "type": "int",
             "isCustom": true
         },
-        "autoPriorViolations": {
+        "auto_prior_violations": {
             "type": "int",
             "isCustom": true
         },
-        "autoCurrentCarrierYears": {
+        "auto_current_carrier_years": {
             "type": "int",
             "isCustom": true
         },
-        "autoGarageState": {
+        "auto_garage_state": {
             "type": "varchar",
             "maxLength": 50,
             "isCustom": true
         },
-        "autoUseType": {
+        "auto_use_type": {
             "type": "enum",
             "options": [
                 "",
@@ -627,28 +627,28 @@
             ],
             "isCustom": true
         },
-        "autoSR22Required": {
+        "auto_sr22_required": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "autoTotalVehicleValue": {
+        "auto_total_vehicle_value": {
             "type": "currency",
             "isCustom": true
         },
-        "autoAssessmentNotes": {
+        "auto_assessment_notes": {
             "type": "text",
             "isCustom": true
         },
-        "autoAssessmentDate": {
+        "auto_assessment_date": {
             "type": "datetime",
             "isCustom": true
         },
-        "healthDateOfBirth": {
+        "health_date_of_birth": {
             "type": "date",
             "isCustom": true
         },
-        "healthGender": {
+        "health_gender": {
             "type": "enum",
             "options": [
                 "",
@@ -658,32 +658,32 @@
             ],
             "isCustom": true
         },
-        "healthTobaccoUse": {
+        "health_tobacco_use": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "healthHeightInches": {
+        "health_height_inches": {
             "type": "int",
             "isCustom": true
         },
-        "healthWeightLbs": {
+        "health_weight_lbs": {
             "type": "int",
             "isCustom": true
         },
-        "healthPreExistingConditions": {
+        "health_pre_existing_conditions": {
             "type": "text",
             "isCustom": true
         },
-        "healthMedications": {
+        "health_medications": {
             "type": "text",
             "isCustom": true
         },
-        "healthFaceAmount": {
+        "health_face_amount": {
             "type": "currency",
             "isCustom": true
         },
-        "healthCoverageType": {
+        "health_coverage_type": {
             "type": "enum",
             "options": [
                 "",
@@ -705,17 +705,17 @@
                         "value": [
                             {
                                 "type": "equals",
-                                "attribute": "lineOfBusiness",
+                                "attribute": "line_of_business",
                                 "value": "Health"
                             },
                             {
                                 "type": "equals",
-                                "attribute": "lineOfBusiness",
+                                "attribute": "line_of_business",
                                 "value": "Medicare"
                             },
                             {
                                 "type": "equals",
-                                "attribute": "lineOfBusiness",
+                                "attribute": "line_of_business",
                                 "value": "Group Benefits"
                             }
                         ]
@@ -723,12 +723,12 @@
                 ]
             }
         },
-        "healthBeneficiaryName": {
+        "health_beneficiary_name": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
         },
-        "healthRiskClass": {
+        "health_risk_class": {
             "type": "enum",
             "options": [
                 "",
@@ -742,15 +742,15 @@
             ],
             "isCustom": true
         },
-        "healthAssessmentNotes": {
+        "health_assessment_notes": {
             "type": "text",
             "isCustom": true
         },
-        "healthAssessmentDate": {
+        "health_assessment_date": {
             "type": "datetime",
             "isCustom": true
         },
-        "propRoofType": {
+        "prop_roof_type": {
             "type": "enum",
             "options": [
                 "",
@@ -763,19 +763,19 @@
             ],
             "isCustom": true
         },
-        "propRoofAge": {
+        "prop_roof_age": {
             "type": "int",
             "isCustom": true
         },
-        "propReplacementCost": {
+        "prop_replacement_cost": {
             "type": "currency",
             "isCustom": true
         },
-        "propPriorClaims": {
+        "prop_prior_claims": {
             "type": "int",
             "isCustom": true
         },
-        "propOccupancy": {
+        "prop_occupancy": {
             "type": "enum",
             "options": [
                 "",
@@ -787,47 +787,47 @@
             ],
             "isCustom": true
         },
-        "propProtectionClass": {
+        "prop_protection_class": {
             "type": "varchar",
             "maxLength": 10,
             "isCustom": true
         },
-        "propFloodZone": {
+        "prop_flood_zone": {
             "type": "varchar",
             "maxLength": 20,
             "isCustom": true
         },
-        "propAssessmentNotes": {
+        "prop_assessment_notes": {
             "type": "text",
             "isCustom": true
         },
-        "propAssessmentDate": {
+        "prop_assessment_date": {
             "type": "datetime",
             "isCustom": true
         },
-        "gbEligibleEmployees": {
+        "gb_eligible_employees": {
             "type": "int",
             "isCustom": true,
             "tooltipText": "Total eligible employees for benefits"
         },
-        "gbParticipatingEmployees": {
+        "gb_participating_employees": {
             "type": "int",
             "isCustom": true,
             "tooltipText": "Employees currently enrolled"
         },
-        "gbCensusReceived": {
+        "gb_census_received": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Has the employee census been received?"
         },
-        "gbMedicalCarrier": {
+        "gb_medical_carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
             "tooltipText": "Current medical insurance carrier"
         },
-        "gbMedicalPlanType": {
+        "gb_medical_plan_type": {
             "type": "enum",
             "options": [
                 "",
@@ -840,123 +840,123 @@
             ],
             "isCustom": true
         },
-        "gbMedicalRenewalDate": {
+        "gb_medical_renewal_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Current group medical renewal date"
         },
-        "gbEmployerContribution": {
+        "gb_employer_contribution": {
             "type": "varchar",
             "maxLength": 100,
             "isCustom": true,
             "tooltipText": "Employer contribution level (e.g. 50%, $500/mo)"
         },
-        "cClientEmail": {
+        "client_email": {
             "type": "email",
             "label": "Client Email",
             "isCustom": true
         },
-        "cRenewalDate": {
+        "current_renewal_date": {
             "type": "date",
             "label": "Renewal Date",
             "isCustom": true
         },
-        "lossRunsRequested": {
+        "loss_runs_requested": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "commissionLogged": {
+        "commission_logged": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Auto-set by n8n when commission ledger entry created"
         },
-        "onboardingSent": {
+        "onboarding_sent": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "emailSequenceStarted": {
+        "email_sequence_started": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "skipEmailSequence": {
+        "skip_email_sequence": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "chkQuoteSubmitted": {
+        "chk_quote_submitted": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "chkProposalSent": {
+        "chk_proposal_sent": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "chkSignedAppReceived": {
+        "chk_signed_app_received": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "chkBound": {
+        "chk_bound": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Bind order sent"
         },
-        "chkUnderlyingLinked": {
+        "chk_underlying_linked": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Umbrella \u2014 underlying opps/policies linked"
         },
-        "chkUnderlyingConfirmed": {
+        "chk_underlying_confirmed": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Umbrella \u2014 underlying limits confirmed"
         },
-        "chkMvrsPulled": {
+        "chk_mvrs_pulled": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Personal Auto \u2014 MVRs pulled"
         },
-        "chkDecPageDelivered": {
+        "chk_dec_page_delivered": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Personal Lines \u2014 dec page delivered to client"
         },
-        "chkScopeOfAppt": {
+        "chk_scope_of_appt": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Medicare \u2014 Scope of Appointment completed"
         },
-        "chkPlanPresented": {
+        "chk_plan_presented": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Medicare \u2014 plan options presented"
         },
-        "chkAppSubmitted": {
+        "chk_app_submitted": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Medicare \u2014 application submitted"
         },
-        "chkCmsConfirmation": {
+        "chk_cms_confirmation": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Medicare \u2014 CMS confirmation received"
         },
-        "chkWelcomeLetter": {
+        "chk_welcome_letter": {
             "type": "bool",
             "isCustom": true,
             "default": false,
@@ -978,7 +978,7 @@
         "name": {
             "required": true
         },
-        "leadSource": {
+        "lead_source": {
             "type": "enum",
             "options": [
                 "",
@@ -995,7 +995,7 @@
             "isCustom": true,
             "audited": true
         },
-        "caEquipmentType": {
+        "ca_equipment_type": {
             "type": "enum",
             "options": [
                 "",
@@ -1008,27 +1008,27 @@
             "isCustom": true,
             "tooltipText": "Primary equipment ownership type"
         },
-        "caEquipmentValue": {
+        "ca_equipment_value": {
             "type": "currency",
             "isCustom": true,
             "tooltipText": "Total estimated equipment value"
         },
-        "caCurrentVehicleModifications": {
+        "ca_current_vehicle_modifications": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "Current modifications on scheduled vehicles"
         },
-        "driverDetails": {
+        "driver_details": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "Repeatable driver table (Name | License Number | License State | DOB | Years Experience | Violations/Accidents | Status). Enter one driver per line."
         },
-        "vehicleDetails": {
+        "vehicle_details": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "Repeatable vehicle table (Year | Make | Model | VIN | Vehicle Type | Usage | Radius | Garaging Address | Stated Value | Current Modifications). Enter one vehicle per line."
         },
-        "quoteNumber": {
+        "quote_number": {
             "type": "varchar",
             "maxLength": 100,
             "isCustom": true,
@@ -1093,7 +1093,7 @@
             "name",
             "accountName",
             "carrier",
-            "lineOfBusiness"
+            "line_of_business"
         ],
         "sortByList": [
             "name",
@@ -1101,14 +1101,14 @@
             "modifiedAt",
             "closeDate",
             "stage",
-            "estimatedPremium",
-            "lineOfBusiness",
+            "estimated_premium",
+            "line_of_business",
             "carrier"
         ]
     },
     "dynamicLogic": {
         "fields": {
-            "writtenPremium": {
+            "written_premium": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1119,7 +1119,7 @@
                     ]
                 }
             },
-            "commissionRate": {
+            "commission_rate": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1130,7 +1130,7 @@
                     ]
                 }
             },
-            "estimatedCommission": {
+            "estimated_commission": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1141,7 +1141,7 @@
                     ]
                 }
             },
-            "bindDate": {
+            "bind_date": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1152,7 +1152,7 @@
                     ]
                 }
             },
-            "effectiveDate": {
+            "effective_date": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1163,7 +1163,7 @@
                     ]
                 }
             },
-            "policyNumber": {
+            "policy_number": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1177,7 +1177,7 @@
         }
     },
     "formula": {
-        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Markets Out / Shopping',\n    entity\\setAttribute('probability', 45)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
+        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Markets Out / Shopping',\n    entity\\setAttribute('probability', 45)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimated_premium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimated_premiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
     },
     "kanbanStatusIgnoreList": [
         "Closed Won",

@@ -18,15 +18,15 @@ class WonBoundValidation implements BeforeSave
 
         $missing = [];
 
-        if (!$entity->get("bindDate")) {
+        if (!$entity->get("bind_date")) {
             $missing[] = "Bind Date";
         }
 
-        if (!$entity->get("writtenPremium")) {
+        if (!$entity->get("written_premium")) {
             $missing[] = "Written Premium";
         }
 
-        if (!$entity->get("effectiveDate")) {
+        if (!$entity->get("effective_date")) {
             $missing[] = "Effective Date";
         }
 

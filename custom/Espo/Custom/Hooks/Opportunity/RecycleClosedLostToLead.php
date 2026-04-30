@@ -18,18 +18,18 @@ class RecycleClosedLostToLead implements AfterSave
     public function afterSave(Entity $entity, SaveOptions $options): void
     {
         $stage = (string) ($entity->get('stage') ?? '');
-        $recycleToLead = (bool) ($entity->get('recycleToLead') ?? false);
+        $recycleToLead = (bool) ($entity->get('recycle_to_lead') ?? false);
 
         if ($stage !== 'Closed Lost' || !$recycleToLead) {
             return;
         }
 
-        $xDate = trim((string) ($entity->get('xDate') ?? ''));
+        $xDate = trim((string) ($entity->get('x_date') ?? ''));
         if ($xDate === '') {
             return;
         }
 
-        $lineOfBusiness = (string) ($entity->get('lineOfBusiness') ?? '');
+        $lineOfBusiness = (string) ($entity->get('line_of_business') ?? '');
         $callbackDate = ClosedLostRecycleWindows::callbackDateFromXDate($xDate, $lineOfBusiness);
         if ($callbackDate === null) {
             return;
@@ -73,7 +73,7 @@ class RecycleClosedLostToLead implements AfterSave
     ): void {
         $opportunityName = trim((string) ($opportunity->get('name') ?? ''));
         $accountName = trim((string) ($opportunity->get('accountName') ?? ''));
-        $lineOfBusiness = trim((string) ($opportunity->get('lineOfBusiness') ?? ''));
+        $lineOfBusiness = trim((string) ($opportunity->get('line_of_business') ?? ''));
 
         $leadName = $accountName !== ''
             ? sprintf('%s - Recycle Follow-up', $accountName)
@@ -84,8 +84,8 @@ class RecycleClosedLostToLead implements AfterSave
         $lead->set([
             'name' => $leadName,
             'status' => 'Nurture',
-            'xDate' => $xDate,
-            'callbackDate' => $callbackDate,
+            'x_date' => $xDate,
+            'callback_date' => $callbackDate,
             'sourceOpportunityId' => $opportunity->getId(),
             'sourceOpportunityName' => $opportunityName,
             'accountName' => $accountName !== '' ? $accountName : null,
@@ -94,7 +94,7 @@ class RecycleClosedLostToLead implements AfterSave
             'teamsIds' => $opportunity->get('teamsIds') ?? [],
             'phoneNumber' => $opportunity->get('phoneNumber'),
             'emailAddress' => $opportunity->get('emailAddress'),
-            'insuranceInterest' => $insuranceInterest,
+            'insurance_interest' => $insuranceInterest,
             'description' => $this->buildLeadDescription($opportunity, $callbackDate),
         ]);
 
@@ -109,10 +109,10 @@ class RecycleClosedLostToLead implements AfterSave
         $lines = [
             'Auto-generated from Closed Lost opportunity recycle.',
             'Original Opportunity: ' . (string) ($opportunity->get('name') ?? ''),
-            'Line of Business: ' . (string) ($opportunity->get('lineOfBusiness') ?? ''),
-            'Renewal X-Date: ' . (string) ($opportunity->get('xDate') ?? ''),
+            'Line of Business: ' . (string) ($opportunity->get('line_of_business') ?? ''),
+            'Renewal X-Date: ' . (string) ($opportunity->get('x_date') ?? ''),
             'Callback Date: ' . $callbackDate,
-            'Lost Reason: ' . (string) ($opportunity->get('lostReason') ?? ''),
+            'Lost Reason: ' . (string) ($opportunity->get('lost_reason') ?? ''),
         ];
 
         return implode("\n", array_filter($lines));
@@ -134,7 +134,7 @@ class RecycleClosedLostToLead implements AfterSave
             $task = $this->entityManager->getNewEntity('Task');
         }
 
-        $lineOfBusiness = trim((string) ($opportunity->get('lineOfBusiness') ?? ''));
+        $lineOfBusiness = trim((string) ($opportunity->get('line_of_business') ?? ''));
         $label = trim((string) ($opportunity->get('accountName') ?? $opportunity->get('name') ?? 'Lead'));
 
         $task->set([
@@ -179,8 +179,8 @@ class RecycleClosedLostToLead implements AfterSave
 
         $hasChanges = false;
 
-        if ((string) ($opportunity->get('callbackDate') ?? '') !== $callbackDate) {
-            $opportunity->set('callbackDate', $callbackDate);
+        if ((string) ($opportunity->get('callback_date') ?? '') !== $callbackDate) {
+            $opportunity->set('callback_date', $callbackDate);
             $hasChanges = true;
         }
 

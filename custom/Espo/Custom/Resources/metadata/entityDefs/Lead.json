@@ -1,6 +1,6 @@
 {
     "fields": {
-        "insuranceInterest": {
+        "insurance_interest": {
             "type": "enum",
             "options": [
                 "",
@@ -21,17 +21,17 @@
             ],
             "isCustom": true
         },
-        "currentlyInsured": {
+        "currently_insured": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "currentCarrier": {
+        "current_carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
         },
-        "estimatedPremium": {
+        "estimated_premium": {
             "type": "currency",
             "isCustom": true
         },
@@ -50,40 +50,40 @@
                 "Cold": "info"
             }
         },
-        "aiSummary": {
+        "intel_ai_summary": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "Pre-call intel from Manus prospect intelligence pack"
         },
-        "intelPackRun": {
+        "intel_pack_run": {
             "type": "bool",
             "isCustom": true,
             "default": false,
             "tooltipText": "Checked when Manus prospect-intelligence-pack has run for this lead"
         },
-        "dateOfBirth": {
+        "date_of_birth": {
             "type": "date",
             "isCustom": true
         },
-        "medicareEligible": {
+        "medicare_eligible": {
             "type": "bool",
             "isCustom": true,
             "default": false
         },
-        "medicarePartADate": {
+        "medicare_part_a_date": {
             "type": "date",
             "isCustom": true
         },
-        "medicarePartBDate": {
+        "medicare_part_b_date": {
             "type": "date",
             "isCustom": true
         },
-        "currentMedicarePlan": {
+        "current_medicare_plan": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
         },
-        "t65AlertSent": {
+        "t65_alert_sent": {
             "type": "bool",
             "isCustom": true,
             "default": false,
@@ -123,12 +123,12 @@
                 "Nurture"
             ]
         },
-        "xDate": {
+        "x_date": {
             "type": "date",
             "isCustom": true,
             "tooltipText": "Expiration date of current policy \u2014 used for nurture loop automation"
         },
-        "callbackDate": {
+        "callback_date": {
             "type": "date",
             "isCustom": true,
             "readOnly": true,
@@ -184,8 +184,8 @@
             "modifiedAt",
             "status",
             "source",
-            "xDate",
-            "callbackDate"
+            "x_date",
+            "callback_date"
         ]
     },
     "kanbanStatusIgnoreList": [

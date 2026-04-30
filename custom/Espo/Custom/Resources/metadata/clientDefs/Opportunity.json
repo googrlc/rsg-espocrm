@@ -3,7 +3,7 @@
     "iconClass": "fas fa-money-bill-wave",
     "dynamicLogic": {
         "fields": {
-            "lineOfBusiness": {
+            "line_of_business": {
                 "readOnly": {
                     "conditionGroup": [
                         {
@@ -13,7 +13,7 @@
                     ]
                 }
             },
-            "lostReason": {
+            "lost_reason": {
                 "required": {
                     "conditionGroup": [
                         {
@@ -33,7 +33,7 @@
                     ]
                 }
             },
-            "recycleToLead": {
+            "recycle_to_lead": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -44,7 +44,7 @@
                     ]
                 }
             },
-            "xDate": {
+            "x_date": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -66,14 +66,14 @@
                                 },
                                 {
                                     "type": "isTrue",
-                                    "attribute": "recycleToLead"
+                                    "attribute": "recycle_to_lead"
                                 }
                             ]
                         }
                     ]
                 }
             },
-            "callbackDate": {
+            "callback_date": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -86,7 +86,7 @@
                                 },
                                 {
                                     "type": "isTrue",
-                                    "attribute": "recycleToLead"
+                                    "attribute": "recycle_to_lead"
                                 }
                             ]
                         }
@@ -106,14 +106,14 @@
                                 },
                                 {
                                     "type": "isTrue",
-                                    "attribute": "recycleToLead"
+                                    "attribute": "recycle_to_lead"
                                 }
                             ]
                         }
                     ]
                 }
             },
-            "bindDate": {
+            "bind_date": {
                 "required": {
                     "conditionGroup": [
                         {
@@ -124,7 +124,7 @@
                     ]
                 }
             },
-            "writtenPremium": {
+            "written_premium": {
                 "required": {
                     "conditionGroup": [
                         {
@@ -135,7 +135,7 @@
                     ]
                 }
             },
-            "effectiveDate": {
+            "effective_date": {
                 "required": {
                     "conditionGroup": [
                         {
@@ -146,100 +146,100 @@
                     ]
                 }
             },
-            "cRenewalDate": {
+            "current_renewal_date": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "businessType",
+                            "attribute": "business_type",
                             "value": "Renewal"
                         }
                     ]
                 }
             },
-            "chkScopeOfAppt": {
+            "chk_scope_of_appt": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Medicare"
                         }
                     ]
                 }
             },
-            "chkPlanPresented": {
+            "chk_plan_presented": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Medicare"
                         }
                     ]
                 }
             },
-            "chkAppSubmitted": {
+            "chk_app_submitted": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Medicare"
                         }
                     ]
                 }
             },
-            "chkCmsConfirmation": {
+            "chk_cms_confirmation": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Medicare"
                         }
                     ]
                 }
             },
-            "chkWelcomeLetter": {
+            "chk_welcome_letter": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Medicare"
                         }
                     ]
                 }
             },
-            "chkUnderlyingLinked": {
+            "chk_underlying_linked": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Umbrella"
                         }
                     ]
                 }
             },
-            "chkUnderlyingConfirmed": {
+            "chk_underlying_confirmed": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Umbrella"
                         }
                     ]
                 }
             },
-            "chkMvrsPulled": {
+            "chk_mvrs_pulled": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "in",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": [
                                 "Personal Auto",
                                 "Commercial Auto",
@@ -249,12 +249,12 @@
                     ]
                 }
             },
-            "chkDecPageDelivered": {
+            "chk_dec_page_delivered": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "in",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": [
                                 "Personal Auto",
                                 "Homeowners",
@@ -269,67 +269,67 @@
                     ]
                 }
             },
-            "caDotNumber": {
+            "ca_dot_number": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Transportation / Trucking"
                         }
                     ]
                 }
             },
-            "caMcNumber": {
+            "ca_mc_number": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Transportation / Trucking"
                         }
                     ]
                 }
             },
-            "caCommodity": {
+            "ca_commodity": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Transportation / Trucking"
                         }
                     ]
                 }
             },
-            "caEquipmentType": {
+            "ca_equipment_type": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Commercial Auto"
                         }
                     ]
                 }
             },
-            "caEquipmentValue": {
+            "ca_equipment_value": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Commercial Auto"
                         }
                     ]
                 }
             },
-            "caCurrentVehicleModifications": {
+            "ca_current_vehicle_modifications": {
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Commercial Auto"
                         }
                     ]
@@ -342,7 +342,7 @@
                     "conditionGroup": [
                         {
                             "type": "isNotEmpty",
-                            "attribute": "lineOfBusiness"
+                            "attribute": "line_of_business"
                         }
                     ]
                 }
@@ -352,7 +352,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Commercial Auto"
                         }
                     ]
@@ -363,7 +363,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "General Liability"
                         }
                     ]
@@ -374,7 +374,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Workers Comp"
                         }
                     ]
@@ -385,7 +385,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Commercial Property"
                         }
                     ]
@@ -396,7 +396,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "BOP"
                         }
                     ]
@@ -407,7 +407,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Commercial Package"
                         }
                     ]
@@ -418,7 +418,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Builders Risk"
                         }
                     ]
@@ -429,7 +429,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Inland Marine"
                         }
                     ]
@@ -440,7 +440,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Professional Liability"
                         }
                     ]
@@ -451,7 +451,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Umbrella"
                         }
                     ]
@@ -462,7 +462,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Personal Auto"
                         }
                     ]
@@ -473,7 +473,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Homeowners"
                         }
                     ]
@@ -484,7 +484,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Renters"
                         }
                     ]
@@ -495,7 +495,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Condo"
                         }
                     ]
@@ -506,7 +506,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Dwelling Fire"
                         }
                     ]
@@ -517,7 +517,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Motorcycle"
                         }
                     ]
@@ -528,7 +528,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Boat"
                         }
                     ]
@@ -539,7 +539,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "RV"
                         }
                     ]
@@ -550,7 +550,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Medicare"
                         }
                     ]
@@ -561,7 +561,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Life"
                         }
                     ]
@@ -572,7 +572,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Health"
                         }
                     ]
@@ -583,7 +583,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Garagekeepers"
                         }
                     ]
@@ -594,7 +594,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Group Benefits"
                         }
                     ]
@@ -605,7 +605,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Other"
                         }
                     ]
@@ -678,7 +678,7 @@
                     "conditionGroup": [
                         {
                             "type": "equals",
-                            "attribute": "lineOfBusiness",
+                            "attribute": "line_of_business",
                             "value": "Transportation / Trucking"
                         }
                     ]
