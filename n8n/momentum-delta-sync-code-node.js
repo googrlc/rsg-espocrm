@@ -1,7 +1,7 @@
 // n8n Code Node: Momentum-to-EspoCRM Delta Sync
 // ------------------------------------------------
 // Reads Momentum OData policy objects (PascalCase), maps them to the
-// EspoCRM snake_case schema, computes a high-water mark for the next
+// EspoCRM schema (snake_case + legacy camelCase ids), computes a high-water mark for the next
 // OData $filter, and tags every record with sync_status = "Synced".
 //
 // Inputs
@@ -13,7 +13,14 @@
 //   { processed_records, new_high_water_mark }
 
 const items = $input.all();
-const staticLastSync = $('Schedule Trigger').first().json.static_last_sync
+
+let staticLastSync;
+try {
+  staticLastSync = $('Schedule Trigger').first().json.static_last_sync;
+} catch (_) {
+  // Trigger node may have a different name; fall through to input fallback.
+}
+staticLastSync = staticLastSync
   ?? items[0]?.json?.static_last_sync
   ?? new Date(0).toISOString();
 
@@ -48,8 +55,8 @@ for (const item of items) {
   const src = item.json;
   try {
     const mapped = {
-      momentum_policy_id:   String(src.DatabaseId ?? ''),
-      momentum_client_id:   String(src.InsuredId ?? ''),
+      momentumPolicyId:      String(src.DatabaseId ?? ''),
+      insuredMomentumId:     String(src.InsuredId ?? ''),
       policy_number:        src.PolicyNumber ?? null,
       premium_amount:       toFloat(src.TotalPremium),
       effective_date:       toDateOnly(src.EffectiveDate),
