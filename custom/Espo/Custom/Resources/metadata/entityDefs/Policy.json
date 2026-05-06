@@ -37,7 +37,8 @@
             "type": "varchar",
             "maxLength": 500,
             "isCustom": true,
-            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass)."
+            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass).",
+            "dbName": "lineOfBusiness"
         },
         "status": {
             "type": "enum",
@@ -82,20 +83,24 @@
         },
         "effective_date": {
             "type": "date",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "effectiveDate"
         },
         "expiration_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation"
+            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation",
+            "dbName": "expirationDate"
         },
         "premium_amount": {
             "type": "currency",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "premiumAmount"
         },
         "commission_rate": {
             "type": "float",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "commissionRate"
         },
         "commissionAmount": {
             "type": "currency",
@@ -104,7 +109,8 @@
         },
         "coverage_amount": {
             "type": "currency",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "coverageAmount"
         },
         "deductible": {
             "type": "currency",
@@ -112,16 +118,19 @@
         },
         "agency_fee": {
             "type": "currency",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "agencyFee"
         },
         "business_type": {
             "type": "varchar",
             "maxLength": 100,
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "businessType"
         },
         "policy_notes": {
             "type": "text",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "policyNotes"
         },
         "bind_date": {
             "type": "date",
@@ -157,7 +166,8 @@
         },
         "momentum_last_synced": {
             "type": "datetime",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "momentumLastSynced"
         },
         "sync_status": {
             "type": "enum",
@@ -176,7 +186,8 @@
                 "Pending": "warning",
                 "Error": "danger",
                 "Skipped": "default"
-            }
+            },
+            "dbName": "syncStatus"
         },
         "acceptedByAmsAt": {
             "type": "datetime",
@@ -340,12 +351,14 @@
                 "No Response"
             ],
             "isCustom": true,
-            "tooltipText": "Set by renewal outreach automation after each email send"
+            "tooltipText": "Set by renewal outreach automation after each email send",
+            "dbName": "lastContactMethod"
         },
         "last_contact_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Set by renewal outreach automation after each contact attempt"
+            "tooltipText": "Set by renewal outreach automation after each contact attempt",
+            "dbName": "lastContactDate"
         },
         "commissions": {
             "type": "linkMultiple",
@@ -357,7 +370,8 @@
             "type": "bool",
             "default": false,
             "isCustom": true,
-            "tooltipText": "Set to true by renewal outreach automation after first email sent"
+            "tooltipText": "Set to true by renewal outreach automation after first email sent",
+            "dbName": "emailSequenceStarted"
         },
         "renewals": {
             "type": "linkMultiple",

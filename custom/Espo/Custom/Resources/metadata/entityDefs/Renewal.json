@@ -54,28 +54,33 @@
             "type": "date",
             "isCustom": true,
             "audited": true,
-            "tooltipText": "Auto-populated from linked Policy expiration_date"
+            "tooltipText": "Auto-populated from linked Policy expiration_date",
+            "dbName": "expirationDate"
         },
         "renewal_effective_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "New policy effective date (usually = expirationDate)"
+            "tooltipText": "New policy effective date (usually = expirationDate)",
+            "dbName": "renewalEffectiveDate"
         },
         "current_premium": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Auto-populated from linked Policy premium_amount"
+            "tooltipText": "Auto-populated from linked Policy premium_amount",
+            "dbName": "currentPremium"
         },
         "renewal_premium": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Manually entered when quote is received \u2014 blank until then"
+            "tooltipText": "Manually entered when quote is received \u2014 blank until then",
+            "dbName": "renewalPremium"
         },
         "premium_change": {
             "type": "float",
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 \u2014 premium delta %"
+            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 \u2014 premium delta %",
+            "dbName": "premiumChange"
         },
         "line_of_business": {
             "type": "enum",
@@ -108,7 +113,8 @@
             ],
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-populated from linked Policy \u2014 not editable"
+            "tooltipText": "Auto-populated from linked Policy \u2014 not editable",
+            "dbName": "lineOfBusiness"
         },
         "carrier": {
             "type": "varchar",
@@ -145,12 +151,14 @@
                 "In person"
             ],
             "isCustom": true,
-            "tooltipText": "Updated when activity is logged"
+            "tooltipText": "Updated when activity is logged",
+            "dbName": "lastContactMethod"
         },
         "last_contact_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Updated when activity is logged"
+            "tooltipText": "Updated when activity is logged",
+            "dbName": "lastContactDate"
         },
         "lost_reason": {
             "type": "enum",
@@ -163,22 +171,26 @@
                 "Other"
             ],
             "isCustom": true,
-            "tooltipText": "Required when stage = Lost"
+            "tooltipText": "Required when stage = Lost",
+            "dbName": "lostReason"
         },
         "renewal_notes": {
             "type": "text",
             "isCustom": true,
-            "tooltipText": "Free text notes for this renewal cycle"
+            "tooltipText": "Free text notes for this renewal cycle",
+            "dbName": "renewalNotes"
         },
         "commission_rate": {
             "type": "float",
             "isCustom": true,
-            "tooltipText": "Renewal commission rate %"
+            "tooltipText": "Renewal commission rate %",
+            "dbName": "commissionRate"
         },
         "expected_commission": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "renewalPremium * commissionRate"
+            "tooltipText": "renewalPremium * commissionRate",
+            "dbName": "expectedCommission"
         },
         "assignedUser": {
             "type": "link"
