@@ -23,15 +23,28 @@ LINKISH = frozenset({"link", "linkMultiple", "file", "image", "attachmentMultipl
 
 
 def snake_to_camel(name: str) -> str:
+    """Return ``snake_case`` as ``camelCase`` (first segment unchanged, rest title-cased)."""
     parts = name.split("_")
     return parts[0] + "".join(p.title() for p in parts[1:])
 
 
 def patch_entity(entity: str) -> int:
+    """Write ``dbName`` on custom fields where the dump still lists a camelCase field name.
+
+    Raises:
+        FileNotFoundError: If the entity dump or custom entityDefs file is missing.
+    """
     dump_path = ENTITY_DEFS / f"{entity}.json"
     cur_path = CUSTOM / f"{entity}.json"
-    if not dump_path.is_file() or not cur_path.is_file():
-        return 0
+    missing: list[str] = []
+    if not dump_path.is_file():
+        missing.append(str(dump_path))
+    if not cur_path.is_file():
+        missing.append(str(cur_path))
+    if missing:
+        raise FileNotFoundError(
+            f"Missing required files for entity {entity}: {', '.join(missing)}"
+        )
 
     dump_fields = set(json.loads(dump_path.read_text())["entityDefs"][entity]["fields"])
     data = json.loads(cur_path.read_text())
@@ -58,14 +71,20 @@ def patch_entity(entity: str) -> int:
 
 
 def main() -> int:
+    """CLI entry: optional entity names; default Policy and Renewal."""
     entities = sys.argv[1:] or ["Policy", "Renewal"]
     total = 0
+    failed = False
     for ent in entities:
-        n = patch_entity(ent)
-        print(f"{ent}: added/updated dbName on {n} fields")
-        total += n
+        try:
+            n = patch_entity(ent)
+            print(f"{ent}: added/updated dbName on {n} fields")
+            total += n
+        except FileNotFoundError as exc:
+            failed = True
+            print(str(exc), file=sys.stderr)
     print(f"total fields: {total}")
-    return 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
