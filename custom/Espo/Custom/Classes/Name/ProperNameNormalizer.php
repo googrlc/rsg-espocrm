@@ -34,27 +34,36 @@ class ProperNameNormalizer
         'travelers' => 'Travelers',
     ];
 
-    /**
-     * @return null Keep original value (already mixed case or no letters).
-     */
     public function normalize(?string $value): ?string
     {
+        return $this->normalizeWithReview($value)['normalized'];
+    }
+
+    /**
+     * @return array{normalized: ?string, reviewNeeded: bool}
+     */
+    public function normalizeWithReview(?string $value): array
+    {
         if ($value === null) {
-            return null;
+            return ['normalized' => null, 'reviewNeeded' => false];
         }
 
         $collapsed = preg_replace('/\s+/u', ' ', trim($value));
         if ($collapsed === '') {
-            return '';
+            return ['normalized' => '', 'reviewNeeded' => false];
         }
 
         $overrideKey = mb_strtolower($collapsed, 'UTF-8');
         if (isset(self::EXACT_OVERRIDES[$overrideKey])) {
-            return self::EXACT_OVERRIDES[$overrideKey];
+            return ['normalized' => self::EXACT_OVERRIDES[$overrideKey], 'reviewNeeded' => false];
         }
 
         if (!$this->shouldNormalize($collapsed)) {
-            return null;
+            return ['normalized' => null, 'reviewNeeded' => false];
+        }
+
+        if ($this->shouldRouteToReview($collapsed)) {
+            return ['normalized' => null, 'reviewNeeded' => true];
         }
 
         $words = preg_split('/\s+/u', $collapsed, -1, PREG_SPLIT_NO_EMPTY);
@@ -64,7 +73,7 @@ class ProperNameNormalizer
             $out[] = $this->normalizeWord($word);
         }
 
-        return implode(' ', $out);
+        return ['normalized' => implode(' ', $out), 'reviewNeeded' => false];
     }
 
     private function shouldNormalize(string $value): bool
@@ -116,5 +125,29 @@ class ProperNameNormalizer
         $plain = mb_strtolower(preg_replace('/\.+$/u', '', $t), 'UTF-8');
 
         return self::BUSINESS_TOKENS[$plain] ?? $t;
+    }
+
+    private function shouldRouteToReview(string $value): bool
+    {
+        if (str_contains($value, ' ')) {
+            return false;
+        }
+
+        $letters = preg_replace('/[^\p{L}]/u', '', $value);
+        if ($letters === '') {
+            return false;
+        }
+
+        if ($letters !== mb_strtoupper($letters, 'UTF-8')) {
+            return false;
+        }
+
+        if (mb_strlen($letters, 'UTF-8') < 3) {
+            return false;
+        }
+
+        $plain = mb_strtolower(preg_replace('/\.+$/u', '', $letters), 'UTF-8');
+
+        return !isset(self::BUSINESS_TOKENS[$plain]) && !isset(self::EXACT_OVERRIDES[$plain]);
     }
 }

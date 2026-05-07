@@ -25,6 +25,7 @@
       [{"name": "estimatedPremium"}, {"name": "intelPackRun"}],
       [{"name": "xDate"}, {"name": "callbackDate"}],
       [{"name": "sourceOpportunity"}, false],
+      [{"name": "properNounReviewNeeded"}, false],
       [{"name": "aiSummary", "fullWidth": true}]
     ]
   },

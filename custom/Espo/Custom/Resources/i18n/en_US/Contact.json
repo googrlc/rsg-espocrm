@@ -3,6 +3,7 @@
         "contactType": "Contact Type",
         "csrName": "Customer Service Representative Name",
         "momentumClientId": "Momentum Client ID",
+        "properNounReviewNeeded": "Proper Noun Review Needed",
         "contactRole": "Contact Role",
         "relationshipToAccount": "Relationship to Account",
         "originalLeadSource": "Original Lead Source",
@@ -45,5 +46,8 @@
     },
     "labels": {
         "Personal Policies": "Personal Policies"
+    },
+    "boolFilters": {
+        "properNounReviewNeeded": "Proper Noun Review Needed"
     }
 }

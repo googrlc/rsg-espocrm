@@ -31,6 +31,7 @@
     "rows": [
       [{"name": "clientType"}, {"name": "householdRole"}],
       [{"name": "momentumClientId"}, {"name": "csrName"}],
+      [{"name": "properNounReviewNeeded"}, false],
       [{"name": "description", "fullWidth": true}]
     ]
   }

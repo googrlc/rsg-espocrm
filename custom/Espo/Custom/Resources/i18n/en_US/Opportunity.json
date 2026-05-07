@@ -10,6 +10,7 @@
         "estimatedCommission": "Estimated Commission",
         "bindDate": "Bind Date",
         "policyNumber": "Policy Number",
+        "properNounReviewNeeded": "Proper Noun Review Needed",
         "priority": "Priority",
         "fein": "Federal Employer Identification Number",
         "lossRunsRequested": "Loss Runs Requested",
@@ -153,6 +154,7 @@
     "boolFilters": {
         "onlyMy": "Only My",
         "newBusiness": "New Business Only",
-        "stalled": "Stalled Only"
+        "stalled": "Stalled Only",
+        "properNounReviewNeeded": "Proper Noun Review Needed"
     }
 }

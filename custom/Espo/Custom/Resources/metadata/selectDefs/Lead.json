@@ -8,5 +8,8 @@
         "converted": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Converted",
         "dnc": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Dnc",
         "nurture": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Nurture"
+    },
+    "boolFilterClassNameMap": {
+        "properNounReviewNeeded": "Espo\\Custom\\Classes\\Select\\Lead\\BoolFilters\\ProperNounReviewNeeded"
     }
 }

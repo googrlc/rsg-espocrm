@@ -52,6 +52,12 @@
                 "Closed Lost"
             ]
         },
+        "properNounReviewNeeded": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Set when name normalization finds uncertain proper-noun casing that requires human review."
+        },
         "lineOfBusiness": {
             "type": "enum",
             "options": [

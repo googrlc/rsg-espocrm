@@ -9,5 +9,6 @@
     {"name": "phoneNumber", "width": 11},
     {"name": "dateOfBirth", "width": 9},
     {"name": "daysUntil65", "width": 8},
+    {"name": "properNounReviewNeeded", "width": 8},
     {"name": "createdAt", "width": 9}
 ]

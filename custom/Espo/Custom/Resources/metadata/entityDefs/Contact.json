@@ -4,6 +4,12 @@
             "type": "date",
             "isCustom": true
         },
+        "properNounReviewNeeded": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Set when name normalization finds uncertain proper-noun casing that requires human review."
+        },
         "momentumClientId": {
             "type": "varchar",
             "maxLength": 255,

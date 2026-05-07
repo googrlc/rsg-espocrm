@@ -21,6 +21,9 @@ class NormalizeProperNames implements BeforeSave
 
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
+        $processed = false;
+        $reviewNeeded = false;
+
         foreach (self::FIELDS as $field) {
             $value = $entity->get($field);
             if ($value === null || $value === '') {
@@ -29,10 +32,21 @@ class NormalizeProperNames implements BeforeSave
             if (!is_string($value)) {
                 continue;
             }
-            $normalized = $this->properNameNormalizer->normalize($value);
-            if ($normalized !== null) {
-                $entity->set($field, $normalized);
+            $processed = true;
+
+            $result = $this->properNameNormalizer->normalizeWithReview($value);
+            if ($result['reviewNeeded']) {
+                $reviewNeeded = true;
+                continue;
             }
+
+            if ($result['normalized'] !== null) {
+                $entity->set($field, $result['normalized']);
+            }
+        }
+
+        if ($processed) {
+            $entity->set('properNounReviewNeeded', $reviewNeeded);
         }
     }
 }

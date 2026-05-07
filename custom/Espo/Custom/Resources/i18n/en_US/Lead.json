@@ -4,6 +4,7 @@
         "currentlyInsured": "Currently Insured?",
         "currentCarrier": "Current Carrier",
         "estimatedPremium": "Estimated Premium",
+        "properNounReviewNeeded": "Proper Noun Review Needed",
         "medicareEligible": "Medicare Eligible",
         "priority": "Priority",
         "aiSummary": "AI Summary",
@@ -42,6 +43,7 @@
         "callbackNext14": "Callback Next 14 Days"
     },
     "boolFilters": {
-        "onlyMy": "Only My"
+        "onlyMy": "Only My",
+        "properNounReviewNeeded": "Proper Noun Review Needed"
     }
 }

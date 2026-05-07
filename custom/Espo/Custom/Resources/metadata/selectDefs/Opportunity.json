@@ -6,6 +6,7 @@
     },
     "boolFilterClassNameMap": {
         "newBusiness": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\NewBusiness",
-        "stalled": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\Stalled"
+        "stalled": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\Stalled",
+        "properNounReviewNeeded": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\ProperNounReviewNeeded"
     }
 }
