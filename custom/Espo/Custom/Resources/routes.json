@@ -1,0 +1,7 @@
+[
+    {
+        "route": "/GlobalSearch",
+        "method": "get",
+        "actionClassName": "Espo\\Custom\\Api\\GetGlobalSearch"
+    }
+]

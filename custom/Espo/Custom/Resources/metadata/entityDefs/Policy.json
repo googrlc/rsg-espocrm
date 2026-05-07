@@ -476,7 +476,6 @@
         "orderBy": "policy_number",
         "order": "asc",
         "textFilterFields": [
-            "policy_number",
             "carrier",
             "momentumPolicyId"
         ],
