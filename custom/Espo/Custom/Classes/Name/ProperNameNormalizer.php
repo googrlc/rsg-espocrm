@@ -16,6 +16,22 @@ class ProperNameNormalizer
         'pllc' => 'PLLC',
         'dba' => 'DBA',
         'usa' => 'USA',
+        'usaa' => 'USAA',
+        'aig' => 'AIG',
+        'aaa' => 'AAA',
+    ];
+
+    /** @var array<string, string> */
+    private const EXACT_OVERRIDES = [
+        'at&t' => 'AT&T',
+        'assurant' => 'Assurant',
+        'bankers life' => 'Bankers Life',
+        'blue cross blue shield' => 'Blue Cross Blue Shield',
+        'liberty mutual' => 'Liberty Mutual',
+        'mcdonalds' => "McDonald's",
+        'nationwide' => 'Nationwide',
+        'state farm' => 'State Farm',
+        'travelers' => 'Travelers',
     ];
 
     /**
@@ -30,6 +46,11 @@ class ProperNameNormalizer
         $collapsed = preg_replace('/\s+/u', ' ', trim($value));
         if ($collapsed === '') {
             return '';
+        }
+
+        $overrideKey = mb_strtolower($collapsed, 'UTF-8');
+        if (isset(self::EXACT_OVERRIDES[$overrideKey])) {
+            return self::EXACT_OVERRIDES[$overrideKey];
         }
 
         if (!$this->shouldNormalize($collapsed)) {
