@@ -9,3 +9,6 @@ official-espocrm/
 
 # Never nest a second copy of this repo here (causes duplicate trees and confusion)
 rsg-espocrm/
+
+# Local clone of canonical schema repo (push DDL to googrlc/rsg-data-schema when permitted)
+rsg-data-schema/
