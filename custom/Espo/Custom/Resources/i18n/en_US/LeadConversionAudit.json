@@ -1,0 +1,19 @@
+{
+    "labels": {
+        "Create LeadConversionAudit": "Create Lead Conversion Audit"
+    },
+    "fields": {
+        "leadRecordId": "Lead ID",
+        "opportunityRecordId": "Opportunity ID",
+        "accountRecordId": "Account ID",
+        "contactRecordId": "Contact ID",
+        "convertedAt": "Converted At",
+        "convertedByUser": "Converted By User",
+        "convertedByUserName": "Converted By",
+        "leadStatusAtConversion": "Lead Stage At Conversion",
+        "lead": "Lead",
+        "opportunity": "Opportunity",
+        "account": "Account",
+        "contact": "Contact"
+    }
+}

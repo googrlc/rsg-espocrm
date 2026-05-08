@@ -80,12 +80,14 @@ class RecycleClosedLostToLead implements AfterSave
             : ($opportunityName !== '' ? sprintf('%s - Recycle Follow-up', $opportunityName) : 'Recycle Follow-up');
 
         $insuranceInterest = $lineOfBusiness !== '' ? $lineOfBusiness : 'Other';
+        $leadType = $this->resolveLeadTypeFromLob($lineOfBusiness);
 
         $lead->set([
             'name' => $leadName,
             'status' => 'Nurture',
             'xDate' => $xDate,
             'callbackDate' => $callbackDate,
+            'nextFollowUpDate' => $callbackDate,
             'sourceOpportunityId' => $opportunity->getId(),
             'sourceOpportunityName' => $opportunityName,
             'accountName' => $accountName !== '' ? $accountName : null,
@@ -95,6 +97,7 @@ class RecycleClosedLostToLead implements AfterSave
             'phoneNumber' => $opportunity->get('phoneNumber'),
             'emailAddress' => $opportunity->get('emailAddress'),
             'insuranceInterest' => $insuranceInterest,
+            'leadType' => $leadType,
             'description' => $this->buildLeadDescription($opportunity, $callbackDate),
         ]);
 
@@ -169,6 +172,58 @@ class RecycleClosedLostToLead implements AfterSave
         }
 
         return 'Normal';
+    }
+
+    private function resolveLeadTypeFromLob(string $lineOfBusiness): string
+    {
+        $lob = trim($lineOfBusiness);
+        if ($lob === '') {
+            return 'Other';
+        }
+
+        $commercial = [
+            'Commercial Auto',
+            'Transportation / Trucking',
+            'General Liability',
+            'Workers Comp',
+            'Commercial Property',
+            'BOP',
+            'Professional Liability',
+            'Builders Risk',
+            'Inland Marine',
+            'Commercial Package',
+            'Garagekeepers',
+        ];
+
+        $personal = [
+            'Personal Auto',
+            'Homeowners',
+            'Renters',
+            'Condo',
+            'Dwelling Fire',
+            'Motorcycle',
+            'Boat',
+            'RV',
+            'Umbrella',
+        ];
+
+        if (in_array($lob, $commercial, true)) {
+            return 'Commercial';
+        }
+
+        if (in_array($lob, $personal, true)) {
+            return 'Personal Lines';
+        }
+
+        if (in_array($lob, ['Life', 'Health', 'Medicare'], true)) {
+            return 'Life / Health';
+        }
+
+        if ($lob === 'Group Benefits') {
+            return 'Group Benefits';
+        }
+
+        return 'Other';
     }
 
     private function syncOpportunityLinks(Entity $opportunity, Entity $lead, string $callbackDate): void

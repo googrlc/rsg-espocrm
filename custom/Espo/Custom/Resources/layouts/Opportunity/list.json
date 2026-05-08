@@ -1,0 +1,11 @@
+[
+    {"name": "name", "width": 16, "link": true},
+    {"name": "account", "width": 12, "link": true},
+    {"name": "lineOfBusiness", "width": 10},
+    {"name": "estimatedPremium", "width": 9},
+    {"name": "stage", "width": 12},
+    {"name": "closeDate", "width": 9},
+    {"name": "nextFollowUpDate", "width": 9},
+    {"name": "priority", "width": 8},
+    {"name": "assignedUser", "width": 9}
+]

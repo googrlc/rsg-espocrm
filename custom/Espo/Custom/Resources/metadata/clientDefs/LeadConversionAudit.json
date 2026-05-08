@@ -1,0 +1,5 @@
+{
+    "controller": "controllers/record",
+    "color": "#455a64",
+    "iconClass": "fas fa-clipboard-check"
+}

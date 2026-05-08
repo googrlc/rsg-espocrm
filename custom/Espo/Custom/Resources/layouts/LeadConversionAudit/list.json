@@ -1,0 +1,13 @@
+[
+    {"name": "convertedAt", "width": 11},
+    {"name": "lead", "width": 12, "link": true},
+    {"name": "opportunity", "width": 12, "link": true},
+    {"name": "account", "width": 12, "link": true},
+    {"name": "contact", "width": 12, "link": true},
+    {"name": "leadRecordId", "width": 9},
+    {"name": "opportunityRecordId", "width": 9},
+    {"name": "accountRecordId", "width": 9},
+    {"name": "contactRecordId", "width": 9},
+    {"name": "convertedByUser", "width": 10, "link": true},
+    {"name": "convertedByUserName", "width": 10}
+]

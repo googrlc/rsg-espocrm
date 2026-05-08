@@ -1,0 +1,162 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": true
+        },
+        "leadRecordId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "required": true,
+            "isCustom": true
+        },
+        "opportunityRecordId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "isCustom": true
+        },
+        "accountRecordId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "isCustom": true
+        },
+        "contactRecordId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "isCustom": true
+        },
+        "convertedAt": {
+            "type": "datetime",
+            "required": true,
+            "isCustom": true
+        },
+        "convertedByUserName": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "leadStatusAtConversion": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "lead": {
+            "type": "link"
+        },
+        "opportunity": {
+            "type": "link"
+        },
+        "account": {
+            "type": "link"
+        },
+        "contact": {
+            "type": "link"
+        },
+        "convertedByUser": {
+            "type": "link"
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        }
+    },
+    "links": {
+        "lead": {
+            "type": "belongsTo",
+            "entity": "Lead",
+            "isCustom": true
+        },
+        "opportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        },
+        "contact": {
+            "type": "belongsTo",
+            "entity": "Contact",
+            "isCustom": true
+        },
+        "convertedByUser": {
+            "type": "belongsTo",
+            "entity": "User",
+            "isCustom": true
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        }
+    },
+    "collection": {
+        "orderBy": "convertedAt",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "leadRecordId",
+            "opportunityRecordId",
+            "accountRecordId",
+            "contactRecordId",
+            "convertedByUserName"
+        ],
+        "sortByList": [
+            "name",
+            "convertedAt",
+            "createdAt",
+            "leadRecordId",
+            "opportunityRecordId",
+            "accountRecordId",
+            "contactRecordId",
+            "convertedByUserName"
+        ]
+    },
+    "indexes": {
+        "leadConvertedAt": {
+            "columns": [
+                "leadRecordId",
+                "convertedAt"
+            ]
+        },
+        "opportunityRecordId": {
+            "columns": [
+                "opportunityRecordId"
+            ]
+        }
+    }
+}

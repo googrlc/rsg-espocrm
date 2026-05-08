@@ -688,8 +688,27 @@
     },
     "filterList": [
         {
-            "name": "open",
+            "name": "openRecords",
             "style": "primary"
+        },
+        {
+            "name": "overdue",
+            "style": "danger"
+        },
+        {
+            "name": "dueToday"
+        },
+        {
+            "name": "dueThisWeek"
+        },
+        {
+            "name": "highPriority"
+        },
+        {
+            "name": "missingData"
+        },
+        {
+            "name": "aiCreated"
         },
         {
             "name": "won",
@@ -697,13 +716,11 @@
         },
         {
             "name": "lost",
-            "style": "danger"
+            "style": "default"
         }
     ],
     "boolFilterList": [
-        "onlyMy",
-        "newBusiness",
-        "stalled"
+        "onlyMy"
     ],
     "kanbanViewMode": true,
     "statusField": "stage",

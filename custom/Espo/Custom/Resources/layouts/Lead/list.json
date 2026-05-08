@@ -1,0 +1,17 @@
+[
+    {"name": "name", "width": 12, "link": true},
+    {"name": "accountName", "width": 12},
+    {"name": "leadType", "width": 9},
+    {"name": "source", "width": 9},
+    {"name": "status", "width": 11},
+    {"name": "insuranceInterest", "width": 11},
+    {"name": "addressCity", "width": 8},
+    {"name": "addressState", "width": 7},
+    {"name": "estimatedPremium", "width": 8},
+    {"name": "xDate", "width": 8},
+    {"name": "assignedUser", "width": 9},
+    {"name": "lastContactDate", "width": 8},
+    {"name": "nextFollowUpDate", "width": 8},
+    {"name": "leadScore", "width": 6},
+    {"name": "statusReason", "width": 10}
+]

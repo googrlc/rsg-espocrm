@@ -1,9 +1,17 @@
 {
     "fields": {
-        "insuranceInterest": "Insurance Interest",
+        "leadType": "Lead Type",
+        "insuranceInterest": "Target Line of Business",
         "currentlyInsured": "Currently Insured?",
         "currentCarrier": "Current Carrier",
         "estimatedPremium": "Estimated Premium",
+        "nextFollowUpDate": "Next Follow-Up Date",
+        "lastContactDate": "Last Contact Date",
+        "leadScore": "Lead Score",
+        "statusReason": "Status Reason",
+        "nextStep": "Next Step",
+        "convertedDate": "Converted Date",
+        "convertedOpportunity": "Converted Opportunity",
         "medicareEligible": "Medicare Eligible",
         "priority": "Priority",
         "aiSummary": "AI Summary",
@@ -20,28 +28,46 @@
         "sourceOpportunity": "Closed Lost opportunity this nurture lead came from."
     },
     "options": {
+        "leadType": {
+            "": "",
+            "Commercial": "Commercial",
+            "Personal Lines": "Personal Lines",
+            "Life / Health": "Life / Health",
+            "Group Benefits": "Group Benefits",
+            "Medicare": "Medicare",
+            "Referral": "Referral",
+            "Other": "Other"
+        },
         "status": {
-            "New / Uncontacted": "New / Uncontacted",
+            "New Lead": "New Lead",
+            "Research Needed": "Research Needed",
             "Attempting Contact": "Attempting Contact",
-            "Connected": "Connected",
-            "Gathering Info": "Gathering Info",
+            "Contacted": "Contacted",
             "Qualified": "Qualified",
             "Nurture": "Nurture",
-            "DNC": "DNC",
-            "Converted": "Converted"
+            "Converted": "Converted to Opportunity",
+            "Disqualified": "Disqualified",
+            "Converted to Opportunity": "Converted to Opportunity"
         }
     },
     "presetFilters": {
-        "actual": "Active Leads",
-        "converted": "Converted",
-        "dnc": "DNC",
-        "nurture": "Nurture (X-Date)",
-        "cold": "Cold Leads",
-        "warm": "Warm Leads",
-        "callbackDue": "Callback Due",
-        "callbackNext14": "Callback Next 14 Days"
+        "allLeads": "All Leads",
+        "newLeads": "New Leads",
+        "myLeads": "My Leads",
+        "hotLeads": "Hot Leads",
+        "commercialLeads": "Commercial Leads",
+        "personalLinesLeads": "Personal Lines Leads",
+        "lifeHealthLeads": "Life / Health Leads",
+        "referralLeads": "Referral Leads",
+        "websiteLeads": "Website Leads",
+        "noFollowUpDate": "No Follow-Up Date",
+        "overdueFollowUp": "Overdue Follow-Up",
+        "futureXDate": "Future X-Date",
+        "nurtureLeads": "Nurture Leads",
+        "disqualifiedLeads": "Disqualified Leads",
+        "convertedLeads": "Converted Leads"
     },
     "boolFilters": {
-        "onlyMy": "Only My"
+        "onlyMy": "Assigned To Me"
     }
 }

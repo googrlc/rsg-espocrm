@@ -1,0 +1,23 @@
+[
+    {
+        "label": "Conversion Audit",
+        "rows": [
+            [{"name": "convertedAt"}, {"name": "convertedByUser"}],
+            [{"name": "convertedByUserName"}, {"name": "leadStatusAtConversion"}]
+        ]
+    },
+    {
+        "label": "Linked Records",
+        "rows": [
+            [{"name": "lead"}, {"name": "opportunity"}],
+            [{"name": "account"}, {"name": "contact"}]
+        ]
+    },
+    {
+        "label": "Record IDs",
+        "rows": [
+            [{"name": "leadRecordId"}, {"name": "opportunityRecordId"}],
+            [{"name": "accountRecordId"}, {"name": "contactRecordId"}]
+        ]
+    }
+]

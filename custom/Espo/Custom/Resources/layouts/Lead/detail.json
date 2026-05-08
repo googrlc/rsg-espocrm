@@ -11,9 +11,12 @@
   {
     "label": "Details",
     "rows": [
-      [{"name": "status"}, {"name": "source"}],
+      [{"name": "status"}, {"name": "statusReason"}],
+      [{"name": "source"}, {"name": "leadType"}],
       [{"name": "opportunityAmount"}, {"name": "campaign"}],
       [{"name": "industry"}, {"name": "assignedUser"}],
+      [{"name": "lastContactDate"}, {"name": "nextFollowUpDate"}],
+      [{"name": "leadScore"}, {"name": "nextStep"}],
       [{"name": "description", "fullWidth": true}]
     ]
   },
@@ -25,6 +28,7 @@
       [{"name": "estimatedPremium"}, {"name": "intelPackRun"}],
       [{"name": "xDate"}, {"name": "callbackDate"}],
       [{"name": "sourceOpportunity"}, false],
+      [{"name": "convertedDate"}, {"name": "convertedOpportunity"}],
       [{"name": "aiSummary", "fullWidth": true}]
     ]
   },

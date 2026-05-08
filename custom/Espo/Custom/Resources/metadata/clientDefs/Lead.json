@@ -1,13 +1,20 @@
 {
     "filterList": [
-        {"name": "actual", "style": "primary"},
-        {"name": "cold", "style": "info"},
-        {"name": "warm", "style": "warning"},
-        {"name": "callbackDue", "style": "danger"},
-        {"name": "callbackNext14", "style": "primary"},
-        {"name": "converted", "style": "success"},
-        {"name": "dnc", "style": "danger"},
-        {"name": "nurture", "style": "info"}
+        {"name": "allLeads", "style": "primary"},
+        {"name": "newLeads"},
+        {"name": "myLeads"},
+        {"name": "hotLeads", "style": "danger"},
+        {"name": "commercialLeads"},
+        {"name": "personalLinesLeads"},
+        {"name": "lifeHealthLeads"},
+        {"name": "referralLeads"},
+        {"name": "websiteLeads"},
+        {"name": "noFollowUpDate", "style": "warning"},
+        {"name": "overdueFollowUp", "style": "danger"},
+        {"name": "futureXDate"},
+        {"name": "nurtureLeads", "style": "info"},
+        {"name": "disqualifiedLeads", "style": "default"},
+        {"name": "convertedLeads", "style": "success"}
     ],
     "boolFilterList": ["onlyMy"],
     "kanbanViewMode": true,

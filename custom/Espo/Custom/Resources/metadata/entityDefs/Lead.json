@@ -21,6 +21,20 @@
             ],
             "isCustom": true
         },
+        "leadType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial",
+                "Personal Lines",
+                "Life / Health",
+                "Group Benefits",
+                "Medicare",
+                "Referral",
+                "Other"
+            ],
+            "isCustom": true
+        },
         "currentlyInsured": {
             "type": "bool",
             "isCustom": true,
@@ -34,6 +48,38 @@
         "estimatedPremium": {
             "type": "currency",
             "isCustom": true
+        },
+        "nextFollowUpDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "lastContactDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "leadScore": {
+            "type": "int",
+            "isCustom": true
+        },
+        "statusReason": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true
+        },
+        "nextStep": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true
+        },
+        "convertedDate": {
+            "type": "date",
+            "isCustom": true,
+            "readOnly": true
+        },
+        "convertedOpportunity": {
+            "type": "link",
+            "isCustom": true,
+            "readOnly": true
         },
         "priority": {
             "type": "enum",
@@ -92,35 +138,40 @@
         "status": {
             "type": "enum",
             "options": [
-                "New / Uncontacted",
+                "New Lead",
+                "Research Needed",
                 "Attempting Contact",
-                "Connected",
-                "Gathering Info",
+                "Contacted",
                 "Qualified",
                 "Nurture",
-                "DNC",
-                "Converted"
+                "Disqualified",
+                "Converted",
+                "Converted to Opportunity"
             ],
-            "default": "New / Uncontacted",
+            "default": "New Lead",
             "displayAsLabel": true,
             "labelType": "state",
             "style": {
-                "New / Uncontacted": "primary",
+                "New Lead": "primary",
+                "Research Needed": "info",
                 "Attempting Contact": "primary",
-                "Connected": "warning",
-                "Gathering Info": "warning",
+                "Contacted": "warning",
                 "Qualified": "success",
                 "Nurture": "info",
-                "DNC": "danger",
-                "Converted": "success"
+                "Disqualified": "danger",
+                "Converted": "success",
+                "Converted to Opportunity": "success"
             },
             "kanbanOrder": [
-                "New / Uncontacted",
+                "New Lead",
+                "Research Needed",
                 "Attempting Contact",
-                "Connected",
-                "Gathering Info",
+                "Contacted",
                 "Qualified",
-                "Nurture"
+                "Nurture",
+                "Disqualified",
+                "Converted",
+                "Converted to Opportunity"
             ]
         },
         "xDate": {
@@ -162,15 +213,31 @@
             "type": "belongsTo",
             "entity": "Opportunity",
             "isCustom": true
+        },
+        "convertedOpportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "isCustom": true
         }
     },
     "convertFields": {
+        "Opportunity": {
+            "leadSource": "source",
+            "campaign": "campaign",
+            "lineOfBusiness": "insuranceInterest",
+            "estimatedPremium": "estimatedPremium",
+            "priority": "priority",
+            "nextFollowUpDate": "nextFollowUpDate"
+        },
+        "Account": {
+            "name": "accountName"
+        },
         "Contact": {
             "originalLeadSource": "source"
         }
     },
     "collection": {
-        "orderBy": "name",
+        "orderBy": "nextFollowUpDate",
         "order": "asc",
         "textFilterFields": [
             "name",
@@ -184,12 +251,18 @@
             "modifiedAt",
             "status",
             "source",
+            "estimatedPremium",
+            "leadScore",
+            "lastContactDate",
+            "nextFollowUpDate",
             "xDate",
-            "callbackDate"
+            "callbackDate",
+            "assignedUserName"
         ]
     },
     "kanbanStatusIgnoreList": [
-        "DNC",
-        "Converted"
+        "Converted",
+        "Disqualified",
+        "Converted to Opportunity"
     ]
 }

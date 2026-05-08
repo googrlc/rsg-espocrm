@@ -1,6 +1,7 @@
 {
     "kanbanStatusIgnoreList": [
-        "DNC",
-        "Converted"
+        "Converted",
+        "Disqualified",
+        "Converted to Opportunity"
     ]
 }

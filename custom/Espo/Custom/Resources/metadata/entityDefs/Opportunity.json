@@ -4,34 +4,40 @@
             "type": "enum",
             "options": [
                 "",
-                "Discovery",
+                "Discovery / Intake",
+                "Data Gathering",
                 "Quoting",
-                "Markets Out / Shopping",
-                "Proposal Presented",
-                "Negotiation",
+                "Submitted to Carrier",
+                "Proposal Sent",
+                "Negotiation / Follow-Up",
+                "Verbal Commitment",
                 "Closed Won",
                 "Closed Lost"
             ],
-            "default": "Discovery",
+            "default": "Discovery / Intake",
             "audited": true,
             "view": "custom:views/opportunity/fields/stage-bar",
             "displayAsLabel": true,
             "labelType": "state",
             "probabilityMap": {
-                "Discovery": 10,
-                "Quoting": 30,
-                "Markets Out / Shopping": 45,
-                "Proposal Presented": 60,
-                "Negotiation": 80,
+                "Discovery / Intake": 30,
+                "Data Gathering": 40,
+                "Quoting": 50,
+                "Submitted to Carrier": 60,
+                "Proposal Sent": 70,
+                "Negotiation / Follow-Up": 80,
+                "Verbal Commitment": 90,
                 "Closed Won": 100,
                 "Closed Lost": 0
             },
             "style": {
-                "Discovery": "primary",
-                "Quoting": "primary",
-                "Markets Out / Shopping": "warning",
-                "Proposal Presented": "warning",
-                "Negotiation": "warning",
+                "Discovery / Intake": "primary",
+                "Data Gathering": "primary",
+                "Quoting": "warning",
+                "Submitted to Carrier": "warning",
+                "Proposal Sent": "warning",
+                "Negotiation / Follow-Up": "warning",
+                "Verbal Commitment": "success",
                 "Closed Won": "success",
                 "Closed Lost": "danger"
             },
@@ -43,11 +49,13 @@
             ],
             "customizationOptionsReferenceDisabled": true,
             "kanbanOrder": [
-                "Discovery",
+                "Discovery / Intake",
+                "Data Gathering",
                 "Quoting",
-                "Markets Out / Shopping",
-                "Proposal Presented",
-                "Negotiation",
+                "Submitted to Carrier",
+                "Proposal Sent",
+                "Negotiation / Follow-Up",
+                "Verbal Commitment",
                 "Closed Won",
                 "Closed Lost"
             ]
@@ -161,6 +169,15 @@
                 "Warm": "warning",
                 "Cold": "info"
             }
+        },
+        "nextFollowUpDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "aiCreated": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
         },
         "fein": {
             "type": "varchar",
@@ -1087,7 +1104,7 @@
         }
     },
     "collection": {
-        "orderBy": "name",
+        "orderBy": "closeDate",
         "order": "asc",
         "textFilterFields": [
             "name",
@@ -1103,7 +1120,9 @@
             "stage",
             "estimatedPremium",
             "lineOfBusiness",
-            "carrier"
+            "carrier",
+            "nextFollowUpDate",
+            "priority"
         ]
     },
     "dynamicLogic": {
@@ -1177,7 +1196,7 @@
         }
     },
     "formula": {
-        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Markets Out / Shopping',\n    entity\\setAttribute('probability', 45)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
+        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery / Intake',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Data Gathering',\n    entity\\setAttribute('probability', 40)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 50)\n);\nifThen(\n    $stage == 'Submitted to Carrier',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Proposal Sent',\n    entity\\setAttribute('probability', 70)\n);\nifThen(\n    $stage == 'Negotiation / Follow-Up',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Verbal Commitment',\n    entity\\setAttribute('probability', 90)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
     },
     "kanbanStatusIgnoreList": [
         "Closed Won",

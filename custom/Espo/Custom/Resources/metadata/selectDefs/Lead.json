@@ -1,12 +1,19 @@
 {
     "primaryFilterClassNameMap": {
-        "actual": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Actual",
-        "cold": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Cold",
-        "warm": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Warm",
-        "callbackDue": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\CallbackDue",
-        "callbackNext14": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\CallbackNext14",
-        "converted": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Converted",
-        "dnc": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Dnc",
-        "nurture": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\Nurture"
+        "allLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\AllLeads",
+        "newLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\NewLeads",
+        "myLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\MyLeads",
+        "hotLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\HotLeads",
+        "commercialLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\CommercialLeads",
+        "personalLinesLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\PersonalLinesLeads",
+        "lifeHealthLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\LifeHealthLeads",
+        "referralLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\ReferralLeads",
+        "websiteLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\WebsiteLeads",
+        "noFollowUpDate": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\NoFollowUpDate",
+        "overdueFollowUp": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\OverdueFollowUp",
+        "futureXDate": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\FutureXDate",
+        "nurtureLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\NurtureLeads",
+        "disqualifiedLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\DisqualifiedLeads",
+        "convertedLeads": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\ConvertedLeads"
     }
 }

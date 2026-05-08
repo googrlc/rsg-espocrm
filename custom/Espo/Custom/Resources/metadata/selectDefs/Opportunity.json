@@ -1,11 +1,13 @@
 {
     "primaryFilterClassNameMap": {
-        "open": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Open",
+        "openRecords": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\OpenRecords",
+        "overdue": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Overdue",
+        "dueToday": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\DueToday",
+        "dueThisWeek": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\DueThisWeek",
+        "highPriority": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\HighPriority",
+        "missingData": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\MissingData",
+        "aiCreated": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\AiCreated",
         "won": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Won",
         "lost": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Lost"
-    },
-    "boolFilterClassNameMap": {
-        "newBusiness": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\NewBusiness",
-        "stalled": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\Stalled"
     }
 }

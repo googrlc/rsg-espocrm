@@ -1,0 +1,20 @@
+{
+    "entity": true,
+    "layouts": true,
+    "tab": true,
+    "acl": true,
+    "aclPortal": false,
+    "customizable": false,
+    "importable": false,
+    "notifications": false,
+    "calendar": false,
+    "activity": false,
+    "type": "BasePlus",
+    "module": "Custom",
+    "isCustom": true,
+    "stream": false,
+    "color": "#455a64",
+    "iconClass": "fas fa-clipboard-check",
+    "disabled": false,
+    "object": true
+}

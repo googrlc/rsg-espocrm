@@ -1,14 +1,11 @@
 [
     {"name": "name"},
     {"name": "accountName"},
-    {"name": "emailAddress"},
-    {"name": "phoneNumber"},
-    {"name": "estimatedPremium"},
-    {"name": "priority"},
+    {"name": "leadType"},
     {"name": "source"},
     {"name": "insuranceInterest"},
-    {"name": "status"},
+    {"name": "estimatedPremium"},
     {"name": "xDate"},
-    {"name": "callbackDate"},
-    {"name": "assignedUser"}
+    {"name": "assignedUser"},
+    {"name": "nextFollowUpDate"}
 ]

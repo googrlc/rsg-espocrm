@@ -11,6 +11,8 @@
         "bindDate": "Bind Date",
         "policyNumber": "Policy Number",
         "priority": "Priority",
+        "nextFollowUpDate": "Next Follow-Up Date",
+        "aiCreated": "AI Created",
         "fein": "Federal Employer Identification Number",
         "lossRunsRequested": "Loss Runs Requested",
         "commissionLogged": "Commission Logged",
@@ -106,11 +108,13 @@
     "options": {
         "stage": {
             "": "",
-            "Discovery": "Discovery",
+            "Discovery / Intake": "Discovery / Intake",
+            "Data Gathering": "Data Gathering",
             "Quoting": "Quoting",
-            "Markets Out / Shopping": "Markets Out / Shopping",
-            "Proposal Presented": "Proposal Presented",
-            "Negotiation": "Negotiation",
+            "Submitted to Carrier": "Submitted to Carrier",
+            "Proposal Sent": "Proposal Sent",
+            "Negotiation / Follow-Up": "Negotiation / Follow-Up",
+            "Verbal Commitment": "Verbal Commitment",
             "Closed Won": "Closed Won",
             "Closed Lost": "Closed Lost"
         },
@@ -146,13 +150,17 @@
         "quoteNumber": "Carrier-provided quote reference number for this opportunity."
     },
     "presetFilters": {
-        "open": "Open Pipeline",
+        "openRecords": "Open Records",
+        "overdue": "Overdue",
+        "dueToday": "Due Today",
+        "dueThisWeek": "Due This Week",
+        "highPriority": "High Priority",
+        "missingData": "Missing Data",
+        "aiCreated": "AI Created",
         "won": "Closed Won",
         "lost": "Closed Lost"
     },
     "boolFilters": {
-        "onlyMy": "Only My",
-        "newBusiness": "New Business Only",
-        "stalled": "Stalled Only"
+        "onlyMy": "Assigned To Me"
     }
 }
