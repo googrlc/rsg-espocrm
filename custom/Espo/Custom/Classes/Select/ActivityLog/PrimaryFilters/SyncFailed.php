@@ -4,16 +4,12 @@ namespace Espo\Custom\Classes\Select\ActivityLog\PrimaryFilters;
 use Espo\Core\Select\Primary\Filter;
 use Espo\ORM\Query\SelectBuilder;
 
-class Automated implements Filter
+class SyncFailed implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'activityType' => [
-                'n8n Automated',
-                'Manus AI',
-                'Intel Run',
-            ],
+            'syncCompletionStatus' => 'Failed',
         ]);
     }
 }

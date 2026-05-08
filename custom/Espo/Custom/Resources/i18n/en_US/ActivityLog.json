@@ -18,6 +18,10 @@
         "changeSummary": "Change Summary",
         "momentumTransactionId": "Transaction ID",
         "source": "Source",
+        "syncDirection": "Sync Direction",
+        "syncCompletionStatus": "Sync Completion",
+        "syncNeedsAttention": "Needs Attention",
+        "syncRunId": "Sync Run ID",
         "account": "Account",
         "contact": "Contact",
         "policy": "Policy"
@@ -37,7 +41,11 @@
         "automated": "Automated",
         "notes": "Notes",
         "policyChanges": "Policy Changes",
-        "overnightPolicyChanges": "Overnight Policy Changes"
+        "overnightPolicyChanges": "Overnight Policy Changes",
+        "syncCompleted": "Sync Completed",
+        "syncIncomplete": "Sync Incomplete",
+        "syncFailed": "Sync Failed",
+        "bidirectionalSync": "Bidirectional Sync"
     },
     "options": {
         "activityType": {
@@ -69,6 +77,17 @@
             "NowCerts Sync": "NowCerts Sync",
             "Manual": "Manual",
             "n8n Automated": "n8n Automated"
+        },
+        "syncDirection": {
+            "": "",
+            "Outbound CRM -> AMS": "Outbound CRM -> AMS",
+            "Inbound AMS -> CRM": "Inbound AMS -> CRM"
+        },
+        "syncCompletionStatus": {
+            "": "",
+            "Pending": "Pending",
+            "Completed": "Completed",
+            "Failed": "Failed"
         }
     }
 }

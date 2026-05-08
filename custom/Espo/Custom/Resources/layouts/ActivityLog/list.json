@@ -4,7 +4,11 @@
     {"name": "changeSummary", "width": 18},
     {"name": "account", "width": 13, "link": true},
     {"name": "policy", "width": 10, "link": true},
+    {"name": "syncCompletionStatus", "width": 9},
+    {"name": "syncNeedsAttention", "width": 6},
+    {"name": "syncDirection", "width": 11},
     {"name": "premiumDelta", "width": 10},
     {"name": "dateTime", "width": 10},
-    {"name": "source", "width": 8}
+    {"name": "source", "width": 8},
+    {"name": "syncRunId", "width": 10}
 ]

@@ -4,6 +4,10 @@
         "emails": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Emails",
         "calls": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Calls",
         "automated": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Automated",
+        "bidirectionalSync": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\BidirectionalSync",
+        "syncCompleted": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\SyncCompleted",
+        "syncIncomplete": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\SyncIncomplete",
+        "syncFailed": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\SyncFailed",
         "notes": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\Notes",
         "policyChanges": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\PolicyChanges",
         "overnightPolicyChanges": "Espo\\Custom\\Classes\\Select\\ActivityLog\\PrimaryFilters\\OvernightPolicyChanges"

@@ -51,6 +51,9 @@ class EnforceAmsPolicyLock implements BeforeSave
                 [
                     'sourceTimestamp' => (string) ($entity->get('modifiedAt') ?? ''),
                     'changedFields' => ['policy_number'],
+                    'syncDirection' => 'Outbound CRM -> AMS',
+                    'syncCompletionStatus' => 'Failed',
+                    'syncNeedsAttention' => true,
                 ]
             );
 
@@ -76,6 +79,9 @@ class EnforceAmsPolicyLock implements BeforeSave
             [
                 'sourceTimestamp' => (string) ($entity->get('modifiedAt') ?? ''),
                 'changedFields' => $changedCoreFields,
+                'syncDirection' => 'Outbound CRM -> AMS',
+                'syncCompletionStatus' => 'Failed',
+                'syncNeedsAttention' => true,
             ]
         );
 

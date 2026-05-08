@@ -39,6 +39,9 @@ class LogAmsSyncEvents implements AfterSave
             [
                 'sourceTimestamp' => (string) ($entity->get('modifiedAt') ?? ''),
                 'targetTimestamp' => $acceptedAt,
+                'syncDirection' => 'Inbound AMS -> CRM',
+                'syncCompletionStatus' => 'Completed',
+                'syncNeedsAttention' => false,
             ]
         );
     }
@@ -59,6 +62,9 @@ class LogAmsSyncEvents implements AfterSave
                 'Policy core fields locked in CRM after AMS acceptance.',
                 [
                     'targetTimestamp' => (string) ($entity->get('acceptedByAmsAt') ?? ''),
+                    'syncDirection' => 'Inbound AMS -> CRM',
+                    'syncCompletionStatus' => 'Completed',
+                    'syncNeedsAttention' => false,
                 ]
             );
 
@@ -77,6 +83,9 @@ class LogAmsSyncEvents implements AfterSave
                 $reason,
                 [
                     'targetTimestamp' => (string) ($entity->get('acceptedByAmsAt') ?? ''),
+                    'syncDirection' => 'Inbound AMS -> CRM',
+                    'syncCompletionStatus' => 'Failed',
+                    'syncNeedsAttention' => true,
                 ]
             );
         }

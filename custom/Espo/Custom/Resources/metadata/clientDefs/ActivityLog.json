@@ -9,6 +9,10 @@
         {"name": "emails"},
         {"name": "calls", "style": "warning"},
         {"name": "automated", "style": "info"},
+        {"name": "bidirectionalSync", "style": "info"},
+        {"name": "syncCompleted", "style": "success"},
+        {"name": "syncIncomplete", "style": "warning"},
+        {"name": "syncFailed", "style": "danger"},
         {"name": "notes"},
         {"name": "policyChanges", "style": "danger"}
     ],

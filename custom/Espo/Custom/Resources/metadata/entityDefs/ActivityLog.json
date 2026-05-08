@@ -219,6 +219,50 @@
             "default": "NowCerts Sync",
             "isCustom": true
         },
+        "syncDirection": {
+            "type": "enum",
+            "options": [
+                "",
+                "Outbound CRM -> AMS",
+                "Inbound AMS -> CRM"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Outbound CRM -> AMS": "warning",
+                "Inbound AMS -> CRM": "info"
+            },
+            "tooltipText": "Direction of the CRM/AMS policy sync event."
+        },
+        "syncCompletionStatus": {
+            "type": "enum",
+            "options": [
+                "",
+                "Pending",
+                "Completed",
+                "Failed"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Pending": "warning",
+                "Completed": "success",
+                "Failed": "danger"
+            },
+            "tooltipText": "Completion state for the logged sync event."
+        },
+        "syncNeedsAttention": {
+            "type": "bool",
+            "default": false,
+            "isCustom": true,
+            "tooltipText": "True when sync is pending or failed and needs follow-up."
+        },
+        "syncRunId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "Correlation id tying attempt and completion events together."
+        },
         "account": {
             "type": "link",
             "required": true
@@ -322,6 +366,18 @@
                 "momentumTransactionId"
             ],
             "unique": true
+        },
+        "syncCompletionDateTime": {
+            "columns": [
+                "syncCompletionStatus",
+                "dateTime"
+            ]
+        },
+        "syncNeedsAttentionDateTime": {
+            "columns": [
+                "syncNeedsAttention",
+                "dateTime"
+            ]
         }
     }
 }

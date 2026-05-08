@@ -50,6 +50,9 @@ class SendPolicyCorrectionWebhook implements AfterSave
                 [
                     'sourceTimestamp' => (string) ($entity->get('modifiedAt') ?? ''),
                     'changedFields' => $changedFields,
+                    'syncDirection' => 'Outbound CRM -> AMS',
+                    'syncCompletionStatus' => 'Pending',
+                    'syncNeedsAttention' => true,
                 ]
             );
 
@@ -63,6 +66,9 @@ class SendPolicyCorrectionWebhook implements AfterSave
             [
                 'sourceTimestamp' => (string) ($entity->get('modifiedAt') ?? ''),
                 'changedFields' => $changedFields,
+                'syncDirection' => 'Outbound CRM -> AMS',
+                'syncCompletionStatus' => 'Failed',
+                'syncNeedsAttention' => true,
             ]
         );
     }

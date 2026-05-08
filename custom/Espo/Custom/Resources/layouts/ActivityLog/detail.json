@@ -6,7 +6,9 @@
       [{"name": "classification"}, {"name": "dateTime"}],
       [{"name": "account"}, {"name": "contact"}],
       [{"name": "policy"}, {"name": "loggedBy"}],
-      [{"name": "source"}, false]
+      [{"name": "source"}, {"name": "syncDirection"}],
+      [{"name": "syncCompletionStatus"}, {"name": "syncNeedsAttention"}],
+      [{"name": "syncRunId"}, false]
     ]
   },
   {
