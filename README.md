@@ -12,6 +12,8 @@ Server: rrespocrm-rsg-u69864.vm.elestio.app
 Key: RSG Elestio EspoCRM (1Password)
 Note: Port 22 is IP-restricted — whitelist your IP in Elestio dashboard first
 
+Use repository-managed deployment flow (`deploy-to-crm.sh`), not direct production edits.
+
 ## Service Webhooks
 Set these in EspoCRM config to enable outbound service-task webhooks:
 
@@ -101,3 +103,22 @@ Use this standardized set for Momentum + CRM sync workflows:
 
 - `policyCorrectionWebhookSecret` in EspoCRM should match `POLICY_SYNC_SHARED_SECRET` in n8n.
 - `accountEnrichmentWebhookSecret` in EspoCRM should match `ACCOUNT_SYNC_SHARED_SECRET` in n8n.
+
+## Engineering Guardrails
+
+- Never write directly to production.
+- Never change database schema without a migration file.
+- Never modify EspoCRM core files.
+- Only use `custom/` and `client/custom/` for EspoCRM customizations.
+- All sync changes must include logging, rollback notes, and test cases.
+- All Supabase writes must respect RLS and use service-role keys only on backend services.
+- All client data must be treated as confidential.
+
+## Enforcement Checklist (PR + CI Hints)
+
+- [ ] No direct production writes; all changes come from git-backed deployment.
+- [ ] Schema updates include migration files and rollback notes.
+- [ ] No EspoCRM core file changes; customizations stay in `custom/` and `client/custom/`.
+- [ ] Sync changes include logging coverage and test cases.
+- [ ] Supabase writes respect RLS and keep service-role keys on backend services only.
+- [ ] Validation checks run before merge: PHP lint, JS syntax check, and JSON validation.
