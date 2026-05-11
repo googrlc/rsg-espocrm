@@ -23,24 +23,50 @@
                     "name": "dateOfBirth"
                 },
                 {
-                    "name": "stateIssued"
+                    "name": "actualAge"
                 }
             ],
             [
+                {
+                    "name": "stateIssued"
+                },
                 {
                     "name": "licenseExpirationDate"
-                },
-                {
-                    "name": "vehicle"
                 }
             ],
             [
                 {
-                    "name": "driverSchedule"
+                    "name": "relationshipToInsured"
                 },
                 {
-                    "name": "lineOfBusiness"
+                    "name": "yearsLicensed"
                 }
+            ],
+            [
+                {
+                    "name": "violationsAccidents",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "notes",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "vehicle"
+                },
+                {
+                    "name": "driverSchedule"
+                }
+            ],
+            [
+                {
+                    "name": "lineOfBusiness"
+                },
+                false
             ]
         ]
     }

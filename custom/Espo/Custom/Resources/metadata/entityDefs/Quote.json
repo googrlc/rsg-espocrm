@@ -13,6 +13,11 @@
             "isCustom": true,
             "audited": true
         },
+        "quoteDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Date the quote was issued or received"
+        },
         "carrier": {
             "type": "varchar",
             "maxLength": 255,
@@ -22,6 +27,12 @@
         "premium": {
             "type": "currency",
             "isCustom": true
+        },
+        "coverageType": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "Coverage or product type quoted"
         },
         "status": {
             "type": "enum",
@@ -104,12 +115,14 @@
             "carrier"
         ],
         "sortByList": [
+            "quoteDate",
             "effectiveDate",
             "expirationDate",
             "quoteNumber",
             "carrier",
             "premium",
-            "status"
+            "status",
+            "coverageType"
         ]
     }
 }

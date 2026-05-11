@@ -1,10 +1,13 @@
 [
-    {"name": "quoteNumber", "width": 14, "link": true},
-    {"name": "carrier", "width": 18},
+    {"name": "carrier", "width": 14},
+    {"name": "quoteNumber", "width": 12, "link": true},
+    {"name": "quoteDate", "width": 10},
     {"name": "premium", "width": 10},
+    {"name": "coverageType", "width": 14},
     {"name": "status", "width": 10},
     {"name": "effectiveDate", "width": 10},
     {"name": "expirationDate", "width": 10},
+    {"name": "notes", "width": 16},
     {"name": "opportunity", "width": 14, "link": true},
-    {"name": "account", "width": 14, "link": true}
+    {"name": "account", "width": 12, "link": true}
 ]

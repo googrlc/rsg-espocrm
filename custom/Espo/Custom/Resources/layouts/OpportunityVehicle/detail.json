@@ -36,6 +36,34 @@
             ],
             [
                 {
+                    "name": "useType"
+                },
+                {
+                    "name": "currentPremium"
+                }
+            ],
+            [
+                {
+                    "name": "currentExpiration"
+                },
+                {
+                    "name": "priorClaims"
+                }
+            ],
+            [
+                {
+                    "name": "garagingAddress",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "notes",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
                     "name": "lineOfBusiness"
                 },
                 false

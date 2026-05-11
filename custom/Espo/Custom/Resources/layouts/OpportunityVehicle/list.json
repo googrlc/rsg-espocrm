@@ -1,27 +1,43 @@
 [
     {
         "name": "year",
-        "width": 8
+        "width": 6
     },
     {
         "name": "make",
-        "width": 14
+        "width": 12
     },
     {
         "name": "model",
-        "width": 14
+        "width": 12
     },
     {
         "name": "vin",
+        "width": 14
+    },
+    {
+        "name": "useType",
+        "width": 10
+    },
+    {
+        "name": "garagingAddress",
+        "width": 18
+    },
+    {
+        "name": "currentPremium",
+        "width": 10
+    },
+    {
+        "name": "currentExpiration",
+        "width": 10
+    },
+    {
+        "name": "priorClaims",
+        "width": 8
+    },
+    {
+        "name": "notes",
         "width": 16
-    },
-    {
-        "name": "mileageDriven",
-        "width": 10
-    },
-    {
-        "name": "ownershipType",
-        "width": 10
     },
     {
         "name": "opportunity",

@@ -1,32 +1,39 @@
 [
     {
         "name": "driverName",
-        "width": 16,
-        "link": true
-    },
-    {
-        "name": "driverLicenseNumber",
-        "width": 14
-    },
-    {
-        "name": "dateOfBirth",
-        "width": 10
-    },
-    {
-        "name": "stateIssued",
-        "width": 10
-    },
-    {
-        "name": "licenseExpirationDate",
-        "width": 10
-    },
-    {
-        "name": "vehicle",
         "width": 14,
         "link": true
     },
     {
-        "name": "driverSchedule",
+        "name": "dateOfBirth",
+        "width": 9
+    },
+    {
+        "name": "actualAge",
+        "width": 6
+    },
+    {
+        "name": "driverLicenseNumber",
+        "width": 12
+    },
+    {
+        "name": "stateIssued",
+        "width": 8
+    },
+    {
+        "name": "relationshipToInsured",
+        "width": 12
+    },
+    {
+        "name": "yearsLicensed",
+        "width": 8
+    },
+    {
+        "name": "violationsAccidents",
+        "width": 14
+    },
+    {
+        "name": "notes",
         "width": 14
     },
     {

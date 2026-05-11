@@ -54,6 +54,50 @@
             ],
             "isCustom": true
         },
+        "useType": {
+            "type": "enum",
+            "options": [
+                "",
+                "Personal",
+                "Business",
+                "Commercial",
+                "Rideshare",
+                "Mixed"
+            ],
+            "isCustom": true,
+            "tooltipText": "Primary use for this vehicle on this opportunity"
+        },
+        "garagingAddress": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Garaging location for this vehicle"
+        },
+        "currentPremium": {
+            "type": "currency",
+            "isCustom": true,
+            "defaultCurrency": "USD",
+            "tooltipText": "Current policy premium for this vehicle"
+        },
+        "currentExpiration": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Current policy expiration date"
+        },
+        "priorClaims": {
+            "type": "enum",
+            "options": [
+                "",
+                "None",
+                "1",
+                "2+"
+            ],
+            "isCustom": true,
+            "tooltipText": "Prior claims in last 3 years"
+        },
+        "notes": {
+            "type": "text",
+            "isCustom": true
+        },
         "opportunity": {
             "type": "link",
             "required": true

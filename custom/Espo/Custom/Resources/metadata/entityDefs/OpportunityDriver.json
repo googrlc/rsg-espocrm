@@ -20,6 +20,12 @@
             "type": "date",
             "isCustom": true
         },
+        "actualAge": {
+            "type": "int",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Computed from date of birth"
+        },
         "stateIssued": {
             "type": "varchar",
             "maxLength": 50,
@@ -58,6 +64,35 @@
         },
         "account": {
             "type": "link"
+        },
+        "relationshipToInsured": {
+            "type": "enum",
+            "options": [
+                "",
+                "Self",
+                "Spouse",
+                "Child",
+                "Parent",
+                "Sibling",
+                "Trust",
+                "Estate",
+                "Other"
+            ],
+            "isCustom": true
+        },
+        "yearsLicensed": {
+            "type": "int",
+            "isCustom": true,
+            "min": 0
+        },
+        "violationsAccidents": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Violations or accidents (free text)"
+        },
+        "notes": {
+            "type": "text",
+            "isCustom": true
         }
     },
     "links": {
@@ -93,5 +128,8 @@
             "name",
             "licenseExpirationDate"
         ]
+    },
+    "formula": {
+        "beforeSaveScript": "\n$dob = entity\\attribute('dateOfBirth');\nifThen(\n    $dob != null && $dob != '',\n    entity\\setAttribute('actualAge', datetime\\diff($dob, datetime\\today(), 'years'))\n);\nifThen(\n    $dob == null || $dob == '',\n    entity\\setAttribute('actualAge', null)\n);\n"
     }
 }

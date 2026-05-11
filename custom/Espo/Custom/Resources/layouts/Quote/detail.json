@@ -11,6 +11,10 @@
                 {"name": "carrier"}
             ],
             [
+                {"name": "quoteDate"},
+                {"name": "coverageType"}
+            ],
+            [
                 {"name": "premium"},
                 {"name": "status"}
             ],
