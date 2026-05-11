@@ -16,7 +16,6 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
     return EnumFieldView.extend({
 
         detailTemplate: 'custom:opportunity/fields/stage-bar/detail',
-        listTemplate: 'custom:opportunity/fields/stage-bar/list',
         editTemplate: 'fields/enum/edit',
 
         data: function () {

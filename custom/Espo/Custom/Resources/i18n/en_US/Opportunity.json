@@ -84,7 +84,7 @@
         "medCurrentPlan": "Current Plan",
         "medAepSepDate": "AEP/SEP Date",
         "medIrmaaApplies": "IRMAA Applies",
-        "caBusType": "Business Type",
+        "caBusType": "Commercial Operation Type",
         "caVehicleCount": "Vehicle Count",
         "caDriverCount": "Driver Count",
         "caRadius": "Operating Radius",
@@ -101,7 +101,47 @@
         "leadSource": "Lead Source",
         "quoteNumber": "Quote Number",
         "opportunityDrivers": "Driver Details",
-        "opportunityVehicles": "Vehicle Details"
+        "opportunityVehicles": "Vehicle Details",
+        "closeDate": "Close Date",
+        "glClassCode": "GL Class Code",
+        "glOperationsDesc": "GL Operations Description",
+        "glAnnualPayroll": "GL Annual Payroll",
+        "glAnnualRevenue": "GL Annual Revenue",
+        "glSubcontractorsUsed": "GL Subcontractors Used",
+        "wcClassCode": "WC Class Code",
+        "wcAnnualPayroll": "WC Annual Payroll",
+        "wcExperienceMod": "WC Experience Modifier",
+        "wcEmployeeCount": "WC Employee Count",
+        "propCurrentPremium": "Current Property Premium",
+        "propAddress": "Property Address",
+        "umbrellaLimit": "Umbrella Limit",
+        "lifeFaceAmountRequested": "Face Amount Requested",
+        "lifeTermLength": "Term Length",
+        "lifeHealthClassTarget": "Health Class Target",
+        "lifeTobaccoUser": "Tobacco User",
+        "policyStubId": "Policy Stub ID",
+        "policyStubStatus": "Policy Status",
+        "paCurrentPremium": "Current Personal Auto Premium",
+        "paCurrentExpiration": "Current Policy Expiration",
+        "paPriorClaims": "Prior Claims",
+        "chkScopeOfAppt": "Scope of Appointment Completed",
+        "chkQuoteSubmitted": "Quote Submitted",
+        "chkProposalSent": "Proposal Sent",
+        "chkSignedAppReceived": "Signed Application Received",
+        "chkAppSubmitted": "Application Submitted",
+        "chkCmsConfirmation": "CMS Confirmation Received",
+        "chkPlanPresented": "Plan Presented",
+        "chkWelcomeLetter": "Welcome Letter Sent",
+        "chkBound": "Bound",
+        "chkUnderlyingLinked": "Underlying Policies Linked",
+        "chkUnderlyingConfirmed": "Underlying Limits Confirmed",
+        "chkMvrsPulled": "MVRs Pulled",
+        "chkDecPageDelivered": "Dec Page Delivered",
+        "description": "Description",
+        "contacts": "Contacts",
+        "account": "Account",
+        "name": "Name",
+        "assignedUser": "Assigned User"
     },
     "options": {
         "stage": {
@@ -115,7 +155,32 @@
             "Closed Lost": "Closed Lost"
         },
         "lineOfBusiness": {
-            "Transportation / Trucking": "Transportation / Trucking"
+            "": "",
+            "Commercial Auto": "Commercial Auto",
+            "Transportation / Trucking": "Transportation / Trucking",
+            "General Liability": "General Liability",
+            "Workers Comp": "Workers Comp",
+            "Commercial Property": "Commercial Property",
+            "BOP": "BOP",
+            "Professional Liability": "Professional Liability",
+            "Umbrella": "Umbrella",
+            "Builders Risk": "Builders Risk",
+            "Inland Marine": "Inland Marine",
+            "Personal Auto": "Personal Auto",
+            "Homeowners": "Homeowners",
+            "Renters": "Renters",
+            "Condo": "Condo",
+            "Dwelling Fire": "Dwelling Fire",
+            "Motorcycle": "Motorcycle",
+            "Boat": "Boat",
+            "RV": "RV",
+            "Life": "Life",
+            "Health": "Health",
+            "Medicare": "Medicare",
+            "Group Benefits": "Group Benefits",
+            "Garagekeepers": "Garagekeepers",
+            "Commercial Package": "Commercial Package",
+            "Other": "Other"
         },
         "leadSource": {
             "": "",
@@ -128,18 +193,184 @@
             "Web Site": "Web Site",
             "Campaign": "Campaign",
             "Other": "Other"
+        },
+        "businessType": {
+            "": "",
+            "New Business": "New Business",
+            "Renewal": "Renewal",
+            "Rewrite": "Rewrite"
+        },
+        "priority": {
+            "": "",
+            "Hot": "Hot",
+            "Warm": "Warm",
+            "Cold": "Cold"
+        },
+        "lostReason": {
+            "": "",
+            "Price": "Price",
+            "Coverage": "Coverage",
+            "Service": "Service",
+            "Competitor Stole": "Competitor Stole",
+            "Business Closed": "Business Closed",
+            "Carrier Non-Renewed": "Carrier Non-Renewed",
+            "Client Moved": "Client Moved",
+            "Unknown": "Unknown",
+            "N/A": "N/A"
+        },
+        "lastContactMethod": {
+            "": "",
+            "Phone": "Phone",
+            "Email": "Email",
+            "Text": "Text",
+            "No Response": "No Response"
+        },
+        "policyStubStatus": {
+            "": "",
+            "Pending Sync": "Pending Sync",
+            "Synced": "Synced"
+        },
+        "caBusType": {
+            "": "",
+            "Trucking": "Trucking",
+            "Contractor": "Contractor",
+            "Fleet": "Fleet",
+            "Delivery": "Delivery",
+            "Other": "Other"
+        },
+        "caRadius": {
+            "": "",
+            "Local <50mi": "Local (<50 mi)",
+            "Intermediate 50-200mi": "Intermediate (50-200 mi)",
+            "Long haul 200+mi": "Long haul (200+ mi)"
+        },
+        "umbrellaLimit": {
+            "": "",
+            "$1M": "$1M",
+            "$2M": "$2M",
+            "$5M": "$5M",
+            "$10M": "$10M"
+        },
+        "paPriorClaims": {
+            "": "",
+            "None": "None",
+            "1": "1",
+            "2+": "2+"
+        },
+        "medPlanType": {
+            "": "",
+            "Advantage": "Advantage",
+            "Supplement": "Supplement",
+            "Part D": "Part D"
+        },
+        "lifeCoverageType": {
+            "": "",
+            "Term": "Term",
+            "Whole": "Whole Life",
+            "Universal": "Universal Life",
+            "IUL": "Indexed Universal Life (IUL)"
+        },
+        "lifeTermLength": {
+            "": "",
+            "10yr": "10 Year",
+            "15yr": "15 Year",
+            "20yr": "20 Year",
+            "30yr": "30 Year"
+        },
+        "lifeHealthClassTarget": {
+            "": "",
+            "Preferred Plus": "Preferred Plus",
+            "Preferred": "Preferred",
+            "Standard": "Standard",
+            "Rated": "Rated"
+        },
+        "propConstructionType": {
+            "": "",
+            "Frame": "Frame",
+            "Masonry": "Masonry",
+            "Mixed": "Mixed"
+        },
+        "autoUseType": {
+            "": "",
+            "Personal": "Personal",
+            "Business": "Business",
+            "Commercial": "Commercial",
+            "Rideshare": "Rideshare",
+            "Mixed": "Mixed"
+        },
+        "healthGender": {
+            "": "",
+            "Male": "Male",
+            "Female": "Female",
+            "Other": "Other"
+        },
+        "healthCoverageType": {
+            "": "",
+            "Term": "Term",
+            "Whole Life": "Whole Life",
+            "Universal Life": "Universal Life",
+            "Final Expense": "Final Expense",
+            "Medicare Supplement": "Medicare Supplement",
+            "Medicare Advantage": "Medicare Advantage",
+            "Group": "Group",
+            "Individual": "Individual",
+            "Other": "Other"
+        },
+        "healthRiskClass": {
+            "": "",
+            "Preferred Plus": "Preferred Plus",
+            "Preferred": "Preferred",
+            "Standard Plus": "Standard Plus",
+            "Standard": "Standard",
+            "Substandard": "Substandard",
+            "Declined": "Declined",
+            "Pending": "Pending"
+        },
+        "propRoofType": {
+            "": "",
+            "Asphalt Shingle": "Asphalt Shingle",
+            "Metal": "Metal",
+            "Tile": "Tile",
+            "Flat": "Flat",
+            "Slate": "Slate",
+            "Other": "Other"
+        },
+        "propOccupancy": {
+            "": "",
+            "Owner Occupied": "Owner Occupied",
+            "Tenant Occupied": "Tenant Occupied",
+            "Seasonal": "Seasonal",
+            "Vacant": "Vacant",
+            "Commercial": "Commercial"
+        },
+        "gbMedicalPlanType": {
+            "": "",
+            "PPO": "PPO",
+            "HMO": "HMO",
+            "HDHP": "HDHP",
+            "EPO": "EPO",
+            "POS": "POS",
+            "Other": "Other"
+        },
+        "caEquipmentType": {
+            "": "",
+            "Owned": "Owned",
+            "Leased": "Leased",
+            "Rented": "Rented",
+            "Mixed": "Mixed",
+            "Other": "Other"
         }
     },
     "tooltips": {
         "policyNumber": "Enter after bind",
         "fein": "Enter if Account not yet created",
         "commissionLogged": "Auto-set by n8n when commission ledger entry created",
-        "aiSummary": "2-3 sentence brief from Manus intel \u2014 pre-call context",
+        "aiSummary": "2-3 sentence brief from Manus intel — pre-call context",
         "recycleToLead": "Enable to recycle this closed-lost opportunity into Lead nurture.",
         "xDate": "Customer renewal date used for callback timing.",
         "callbackDate": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior).",
         "recycledLead": "Lead record created for nurture follow-up.",
-        "aggregatePageId": "Legacy Notion sync field \u2014 can be deprecated after full EspoCRM migration",
+        "aggregatePageId": "Legacy Notion sync field — can be deprecated after full EspoCRM migration",
         "propAssessmentNotes": "AI-generated property assessment notes from Viktor or Manus",
         "autoAssessmentNotes": "AI-generated driver and vehicle risk assessment",
         "healthAssessmentNotes": "AI-generated health risk assessment notes",
