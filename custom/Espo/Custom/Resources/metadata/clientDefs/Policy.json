@@ -228,14 +228,6 @@
                             "attribute": "carrierAccountId"
                         }
                     ]
-                },
-                "required": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "carrierAccountId"
-                        }
-                    ]
                 }
             }
         }
