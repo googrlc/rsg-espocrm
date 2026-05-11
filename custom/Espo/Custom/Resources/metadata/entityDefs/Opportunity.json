@@ -121,6 +121,7 @@
         "estimatedPremium": {
             "type": "currency",
             "isCustom": true,
+            "required": true,
             "defaultCurrency": "USD",
             "tooltipText": "Estimated annual premium \u2014 update as quotes come in"
         },
