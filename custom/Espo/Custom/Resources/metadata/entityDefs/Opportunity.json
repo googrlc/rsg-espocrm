@@ -555,6 +555,257 @@
             "isCustom": true,
             "default": false
         },
+        "applicantName": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "applicantDateOfBirth": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "applicantLicenseNumber": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "applicantLicenseState": {
+            "type": "varchar",
+            "maxLength": 2,
+            "isCustom": true,
+            "tooltipText": "Two-letter state code",
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary1Name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary1Dob": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary1Relationship": {
+            "type": "enum",
+            "options": [
+                "",
+                "Spouse",
+                "Child",
+                "Parent",
+                "Sibling",
+                "Trust",
+                "Estate",
+                "Other"
+            ],
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary1Pct": {
+            "type": "int",
+            "min": 0,
+            "max": 100,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary2Name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary2Dob": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary2Relationship": {
+            "type": "enum",
+            "options": [
+                "",
+                "Spouse",
+                "Child",
+                "Parent",
+                "Sibling",
+                "Trust",
+                "Estate",
+                "Other"
+            ],
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary2Pct": {
+            "type": "int",
+            "min": 0,
+            "max": 100,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary3Name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary3Dob": {
+            "type": "date",
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary3Relationship": {
+            "type": "enum",
+            "options": [
+                "",
+                "Spouse",
+                "Child",
+                "Parent",
+                "Sibling",
+                "Trust",
+                "Estate",
+                "Other"
+            ],
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
+        "beneficiary3Pct": {
+            "type": "int",
+            "min": 0,
+            "max": 100,
+            "isCustom": true,
+            "dynamicLogicVisible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Life"
+                    }
+                ]
+            }
+        },
         "propYearBuilt": {
             "type": "int",
             "isCustom": true
