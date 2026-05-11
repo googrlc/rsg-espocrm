@@ -962,6 +962,12 @@
             "default": false,
             "tooltipText": "Medicare \u2014 welcome letter delivered"
         },
+        "properNounReviewNeeded": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "True when name or carrier text could not be auto title-cased and may need review"
+        },
         "amount": {
             "type": "currency",
             "required": false,

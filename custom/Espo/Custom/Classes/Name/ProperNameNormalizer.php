@@ -46,6 +46,35 @@ class ProperNameNormalizer
         return implode(' ', $out);
     }
 
+    /**
+     * Normalize when safe; flag records that need human review when casing is ambiguous.
+     *
+     * @return array{reviewNeeded: bool, normalized: ?string}
+     */
+    public function normalizeWithReview(?string $value): array
+    {
+        if ($value === null) {
+            return ['reviewNeeded' => false, 'normalized' => null];
+        }
+
+        $collapsed = preg_replace('/\s+/u', ' ', trim($value));
+        if ($collapsed === '') {
+            return ['reviewNeeded' => false, 'normalized' => null];
+        }
+
+        $normalized = $this->normalize($value);
+        if ($normalized !== null) {
+            return ['reviewNeeded' => false, 'normalized' => $normalized];
+        }
+
+        $letters = preg_replace('/[^\p{L}]/u', '', $collapsed);
+        if ($letters === '') {
+            return ['reviewNeeded' => false, 'normalized' => null];
+        }
+
+        return ['reviewNeeded' => true, 'normalized' => null];
+    }
+
     private function shouldNormalize(string $value): bool
     {
         $letters = preg_replace('/[^\p{L}]/u', '', $value);
