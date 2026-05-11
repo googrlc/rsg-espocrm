@@ -1,14 +1,32 @@
 {
     "fields": {
         "driverName": "Driver Name",
-        "driverLicenseNumber": "Driver License Number",
+        "driverLicenseNumber": "Driver's License Number",
         "dateOfBirth": "Date of Birth",
-        "stateIssued": "Driver License Issuing State",
+        "actualAge": "Actual Age",
+        "stateIssued": "License State",
         "licenseExpirationDate": "License Expiration Date",
         "vehicle": "Assigned Vehicle",
         "driverSchedule": "Driver Schedule",
         "lineOfBusiness": "Line of Business",
         "opportunity": "Opportunity",
-        "account": "Account"
+        "account": "Account",
+        "relationshipToInsured": "Relationship to Insured",
+        "yearsLicensed": "Years Licensed",
+        "violationsAccidents": "Violations / Accidents",
+        "notes": "Notes"
+    },
+    "options": {
+        "relationshipToInsured": {
+            "": "",
+            "Self": "Self",
+            "Spouse": "Spouse",
+            "Child": "Child",
+            "Parent": "Parent",
+            "Sibling": "Sibling",
+            "Trust": "Trust",
+            "Estate": "Estate",
+            "Other": "Other"
+        }
     }
 }

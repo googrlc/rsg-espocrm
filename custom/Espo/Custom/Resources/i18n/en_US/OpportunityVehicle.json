@@ -1,20 +1,40 @@
 {
     "fields": {
-        "year": "Vehicle Model Year",
-        "make": "Vehicle Make",
-        "model": "Vehicle Model",
+        "year": "Year",
+        "make": "Make",
+        "model": "Model",
         "vin": "Vehicle Identification Number",
         "mileageDriven": "Mileage Driven",
         "ownershipType": "Ownership Type",
         "lineOfBusiness": "Line of Business",
         "opportunity": "Opportunity",
-        "account": "Account"
+        "account": "Account",
+        "useType": "Vehicle Use Type",
+        "garagingAddress": "Garaging Address",
+        "currentPremium": "Current Premium",
+        "currentExpiration": "Current Policy Expiration",
+        "priorClaims": "Prior Claims",
+        "notes": "Notes"
     },
     "options": {
         "ownershipType": {
             "": "",
             "Own": "Owned",
             "Lease": "Leased"
+        },
+        "useType": {
+            "": "",
+            "Personal": "Personal",
+            "Business": "Business",
+            "Commercial": "Commercial",
+            "Rideshare": "Rideshare",
+            "Mixed": "Mixed"
+        },
+        "priorClaims": {
+            "": "",
+            "None": "None",
+            "1": "1",
+            "2+": "2+"
         }
     }
 }

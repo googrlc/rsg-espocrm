@@ -1,7 +1,9 @@
 {
     "fields": {
         "quoteNumber": "Quote Number",
+        "quoteDate": "Quote Date",
         "carrier": "Carrier",
+        "coverageType": "Coverage Type",
         "premium": "Premium Amount",
         "status": "Status",
         "effectiveDate": "Effective Date",
