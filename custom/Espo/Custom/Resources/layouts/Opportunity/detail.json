@@ -37,7 +37,9 @@
                 {
                     "name": "priority"
                 },
-                false
+                {
+                    "name": "closeDate"
+                }
             ]
         ],
         "style": "default",
