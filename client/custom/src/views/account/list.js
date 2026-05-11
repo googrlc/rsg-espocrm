@@ -78,13 +78,29 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
           defaultSort: { key: 'name', dir: 'asc' } }
       };
       this.counts = {};
+      this._rsgSearchDebounceMs = 350;
+      this._rsgSearchTimer = null;
     },
     afterRender: function () { this._bindEvents(); this._loadTab(this.activeTab, true); },
+    _clearRsgSearchTimer: function () {
+      if (this._rsgSearchTimer) {
+        clearTimeout(this._rsgSearchTimer);
+        this._rsgSearchTimer = null;
+      }
+    },
+    _scheduleRenderTableFromSearch: function (tabId) {
+      var self = this;
+      this._clearRsgSearchTimer();
+      this._rsgSearchTimer = setTimeout(function () {
+        self._rsgSearchTimer = null;
+        self._renderTable(tabId);
+      }, this._rsgSearchDebounceMs);
+    },
     _bindEvents: function () {
       var self = this;
-      this.$el.on('click', '[data-tab]', function () { var tab = $(this).data('tab'); if (tab !== self.activeTab) { self.activeTab = tab; self.$el.find('[data-tab]').removeClass('rsg-tab-active'); $(this).addClass('rsg-tab-active'); self._loadTab(tab, true); } });
-      this.$el.on('input', '#rsg-search', function () { self.searchQuery[self.activeTab] = $(this).val(); self._renderTable(self.activeTab); });
-      this.$el.on('click', 'th[data-sort-key]', function () { var key = $(this).data('sort-key'); var cur = self.sortState[self.activeTab] || Object.assign({}, self.tabDefs[self.activeTab].defaultSort); self.sortState[self.activeTab] = cur.key === key ? { key: key, dir: cur.dir === 'asc' ? 'desc' : 'asc' } : { key: key, dir: 'asc' }; self._renderTable(self.activeTab); });
+      this.$el.on('click', '[data-tab]', function () { var tab = $(this).data('tab'); if (tab !== self.activeTab) { self._clearRsgSearchTimer(); self.activeTab = tab; self.$el.find('[data-tab]').removeClass('rsg-tab-active'); $(this).addClass('rsg-tab-active'); self._loadTab(tab, true); } });
+      this.$el.on('input', '#rsg-search', function () { self.searchQuery[self.activeTab] = $(this).val(); self._scheduleRenderTableFromSearch(self.activeTab); });
+      this.$el.on('click', 'th[data-sort-key]', function () { self._clearRsgSearchTimer(); var key = $(this).data('sort-key'); var cur = self.sortState[self.activeTab] || Object.assign({}, self.tabDefs[self.activeTab].defaultSort); self.sortState[self.activeTab] = cur.key === key ? { key: key, dir: cur.dir === 'asc' ? 'desc' : 'asc' } : { key: key, dir: 'asc' }; self._renderTable(self.activeTab); });
       this.$el.on('click', '#rsg-new-btn', function () { self.getRouter().navigate('#Account/create', { trigger: true }); });
       this.$el.on('change', '#rsg-select-all', function () { var checked = $(this).is(':checked'); if (!self.selectedIds[self.activeTab]) self.selectedIds[self.activeTab] = {}; self.$el.find('.rsg-row-cb').each(function () { var id = $(this).data('id'); $(this).prop('checked', checked); if (checked) { self.selectedIds[self.activeTab][id] = true; } else { delete self.selectedIds[self.activeTab][id]; } }); self.$el.find('.rsg-row').toggleClass('rsg-row-selected', checked); self._updateSelectionBar(); });
       this.$el.on('change', '.rsg-row-cb', function (e) { e.stopPropagation(); var id = $(this).data('id'); if (!self.selectedIds[self.activeTab]) self.selectedIds[self.activeTab] = {}; if ($(this).is(':checked')) { self.selectedIds[self.activeTab][id] = true; $(this).closest('tr').addClass('rsg-row-selected'); } else { delete self.selectedIds[self.activeTab][id]; $(this).closest('tr').removeClass('rsg-row-selected'); } var total = self.$el.find('.rsg-row-cb').length, checked = self.$el.find('.rsg-row-cb:checked').length; self.$el.find('#rsg-select-all').prop('indeterminate', checked > 0 && checked < total).prop('checked', checked === total && total > 0); self._updateSelectionBar(); });
@@ -109,9 +125,16 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       }).catch(function (xhr) { self._showTableError(tabId, 'API error ' + (xhr && xhr.status ? xhr.status : 'unknown')); });
     },
     _updateCount: function (tabId) { this.$el.find('[data-tab-count="' + tabId + '"]').text(this.counts[tabId] || ''); },
-    _showTableLoading: function (tabId) { this.$el.find('#rsg-table-container').html('<div class="rsg-state-msg"><span class="rsg-spinner"></span> Loading ' + this.tabDefs[tabId].label + '…</div>'); },
+    _showTableLoading: function (tabId) { this._clearRsgSearchTimer(); this.$el.find('#rsg-table-container').html('<div class="rsg-state-msg"><span class="rsg-spinner"></span> Loading ' + this.tabDefs[tabId].label + '…</div>'); },
     _showTableError: function (tabId, msg) { this.$el.find('#rsg-table-container').html('<div class="rsg-state-msg rsg-state-error">' + this._esc(msg) + '</div>'); },
     _renderTable: function (tabId) {
+      var $container = this.$el.find('#rsg-table-container');
+      var $oldSearch = $container.find('#rsg-search');
+      var rsgCapture = null;
+      if ($oldSearch.length && document.activeElement === $oldSearch.get(0)) {
+        var activeEl = $oldSearch.get(0);
+        rsgCapture = { start: activeEl.selectionStart, end: activeEl.selectionEnd };
+      }
       var def = this.tabDefs[tabId], sort = this.sortState[tabId] || Object.assign({}, def.defaultSort);
       var query = (this.searchQuery[tabId] || '').toLowerCase().trim(), allRows = (this.cachedData[tabId] || []).slice();
       var rows = query ? allRows.filter(function (r) { return def.columns.some(function (col) { var v = r[col.key]; return v && String(v).toLowerCase().indexOf(query) !== -1; }); }) : allRows;
@@ -137,8 +160,19 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       if (rows.length === 0) { html += '<tr><td colspan="' + (def.columns.length + 1) + '"><div class="rsg-state-msg">No accounts match.</div></td></tr>'; }
       else { rows.forEach(function (r) { var isSel = !!selected[r.id]; html += '<tr class="rsg-row' + (isSel ? ' rsg-row-selected' : '') + '" data-id="' + r.id + '"><td class="rsg-td-cb"><input type="checkbox" class="rsg-row-cb" data-id="' + r.id + '"' + (isSel ? ' checked' : '') + ' /></td>'; def.columns.forEach(function (col) { html += '<td class="' + self._tdClass(col.type) + '">' + self._renderCell(r, col) + '</td>'; }); html += '</tr>'; }); }
       html += '</tbody></table></div>';
-      var $container = this.$el.find('#rsg-table-container');
       $container.html(html);
+      if (rsgCapture) {
+        var $newSearch = $container.find('#rsg-search');
+        if ($newSearch.length) {
+          var nel = $newSearch.get(0);
+          nel.focus();
+          try {
+            if (typeof rsgCapture.start === 'number' && typeof rsgCapture.end === 'number') {
+              nel.setSelectionRange(rsgCapture.start, rsgCapture.end);
+            }
+          } catch (e) { /* ignore invalid ranges for type=search etc. */ }
+        }
+      }
       if (someChecked) $container.find('#rsg-select-all').prop('indeterminate', true);
       $container.find('.rsg-row').on('click', function () { var id = $(this).data('id'); try { sessionStorage.setItem('rsg-nav-list', JSON.stringify(rows.map(function (r) { return r.id; }))); sessionStorage.setItem('rsg-nav-tab', tabId); } catch(e) {} self.getRouter().navigate('#Account/view/' + id, { trigger: true }); });
     },

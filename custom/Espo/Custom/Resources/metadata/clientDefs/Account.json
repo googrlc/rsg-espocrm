@@ -1,7 +1,8 @@
 {
     "statusField": "account_type",
     "recordViews": {
-        "detail": "custom:views/account/record/detail"
+        "detail": "custom:views/account/record/detail",
+        "search": "custom:views/record/search"
     },
     "views": {
         "list": "custom:views/account/list"

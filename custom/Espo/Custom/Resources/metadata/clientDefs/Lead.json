@@ -1,4 +1,7 @@
 {
+    "recordViews": {
+        "search": "custom:views/record/search"
+    },
     "filterList": [
         {"name": "actual", "style": "primary"},
         {"name": "cold", "style": "info"},

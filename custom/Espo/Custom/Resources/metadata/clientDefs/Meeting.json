@@ -1,4 +1,7 @@
 {
+    "recordViews": {
+        "search": "custom:views/record/search"
+    },
     "filterList": [
         {
             "name": "planned",

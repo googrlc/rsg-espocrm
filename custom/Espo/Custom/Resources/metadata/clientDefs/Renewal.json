@@ -1,4 +1,7 @@
 {
+    "recordViews": {
+        "search": "custom:views/record/search"
+    },
     "controller": "controllers/record",
     "colors": [],
     "iconClass": "fas fa-sync-alt",

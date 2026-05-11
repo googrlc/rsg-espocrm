@@ -1,4 +1,7 @@
 {
+    "recordViews": {
+        "search": "custom:views/record/search"
+    },
     "controller": "controllers/record",
     "color": "#2d7d46",
     "iconClass": "fas fa-dollar-sign",

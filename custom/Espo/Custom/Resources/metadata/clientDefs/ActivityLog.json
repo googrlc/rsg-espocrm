@@ -1,4 +1,7 @@
 {
+    "recordViews": {
+        "search": "custom:views/record/search"
+    },
     "controller": "controllers/record",
     "color": "#607d8b",
     "iconClass": "fas fa-clipboard-list",
