@@ -157,6 +157,213 @@
                     ]
                 }
             },
+            "caCurrentPolicyNum": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Commercial Auto",
+                                "Transportation / Trucking"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "caCurrentExpiration": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Commercial Auto",
+                                "Transportation / Trucking"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "propCurrentPremium": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Commercial Property",
+                                "BOP",
+                                "Commercial Package",
+                                "Homeowners",
+                                "Renters",
+                                "Condo",
+                                "Dwelling Fire"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "propPriorClaims": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Commercial Property",
+                                "BOP",
+                                "Commercial Package",
+                                "Homeowners",
+                                "Renters",
+                                "Condo",
+                                "Dwelling Fire"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "paCurrentPremium": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Personal Auto",
+                                "Motorcycle",
+                                "Boat",
+                                "RV"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "paCurrentExpiration": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Personal Auto",
+                                "Motorcycle",
+                                "Boat",
+                                "RV",
+                                "Garagekeepers"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "paPriorClaims": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Personal Auto",
+                                "Motorcycle",
+                                "Boat",
+                                "RV"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "medCurrentCarrier": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "medCurrentPlan": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "medAepSepDate": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "medIrmaaApplies": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Medicare"
+                        }
+                    ]
+                }
+            },
+            "gbMedicalCarrier": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Group Benefits"
+                        }
+                    ]
+                }
+            },
+            "gbMedicalPlanType": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Group Benefits"
+                        }
+                    ]
+                }
+            },
+            "gbMedicalRenewalDate": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Group Benefits"
+                        }
+                    ]
+                }
+            },
+            "autoCurrentCarrierYears": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Personal Auto",
+                                "Commercial Auto",
+                                "Motorcycle"
+                            ]
+                        }
+                    ]
+                }
+            },
             "chkScopeOfAppt": {
                 "visible": {
                     "conditionGroup": [
@@ -683,6 +890,66 @@
                         }
                     ]
                 }
+            },
+            "opportunityVehicles": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Personal Auto",
+                                "Commercial Auto",
+                                "Transportation / Trucking",
+                                "Motorcycle",
+                                "Boat",
+                                "RV",
+                                "Garagekeepers"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "opportunityDrivers": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "in",
+                            "attribute": "lineOfBusiness",
+                            "value": [
+                                "Personal Auto",
+                                "Commercial Auto",
+                                "Transportation / Trucking",
+                                "Motorcycle",
+                                "Boat",
+                                "RV",
+                                "Garagekeepers"
+                            ]
+                        }
+                    ]
+                }
+            },
+            "lifeApplicantDetails": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Life"
+                        }
+                    ]
+                }
+            },
+            "lifeBeneficiaries": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "equals",
+                            "attribute": "lineOfBusiness",
+                            "value": "Life"
+                        }
+                    ]
+                }
             }
         }
     },
@@ -711,6 +978,162 @@
     "sidePanels": {
         "detail": [
             {
+                "name": "priorCoverage",
+                "label": "priorCoverage",
+                "view": "views/record/panels/side",
+                "isForm": true,
+                "readOnly": false,
+                "options": {
+                    "fieldList": [
+                        {
+                            "name": "currentCarrier"
+                        },
+                        {
+                            "name": "targetCarrier"
+                        },
+                        {
+                            "name": "cRenewalDate"
+                        },
+                        {
+                            "name": "quoteNumber"
+                        },
+                        {
+                            "name": "caCurrentPolicyNum"
+                        },
+                        {
+                            "name": "caCurrentExpiration"
+                        },
+                        {
+                            "name": "propCurrentPremium"
+                        },
+                        {
+                            "name": "propPriorClaims"
+                        },
+                        {
+                            "name": "paCurrentPremium"
+                        },
+                        {
+                            "name": "paCurrentExpiration"
+                        },
+                        {
+                            "name": "paPriorClaims"
+                        },
+                        {
+                            "name": "medCurrentCarrier"
+                        },
+                        {
+                            "name": "medCurrentPlan"
+                        },
+                        {
+                            "name": "medAepSepDate"
+                        },
+                        {
+                            "name": "medIrmaaApplies"
+                        },
+                        {
+                            "name": "gbMedicalCarrier"
+                        },
+                        {
+                            "name": "gbMedicalPlanType"
+                        },
+                        {
+                            "name": "gbMedicalRenewalDate"
+                        },
+                        {
+                            "name": "autoCurrentCarrierYears"
+                        }
+                    ]
+                },
+                "order": 0
+            },
+            {
+                "name": "activities",
+                "reference": "activities",
+                "view": "crm:views/opportunity/record/panels/activities",
+                "order": 1
+            },
+            {
+                "name": "history",
+                "reference": "history",
+                "order": 2
+            },
+            {
+                "name": "tasks",
+                "reference": "tasks",
+                "order": 3
+            }
+        ],
+        "edit": [
+            {
+                "name": "priorCoverage",
+                "label": "priorCoverage",
+                "view": "views/record/panels/side",
+                "isForm": true,
+                "readOnly": false,
+                "options": {
+                    "fieldList": [
+                        {
+                            "name": "currentCarrier"
+                        },
+                        {
+                            "name": "targetCarrier"
+                        },
+                        {
+                            "name": "cRenewalDate"
+                        },
+                        {
+                            "name": "quoteNumber"
+                        },
+                        {
+                            "name": "caCurrentPolicyNum"
+                        },
+                        {
+                            "name": "caCurrentExpiration"
+                        },
+                        {
+                            "name": "propCurrentPremium"
+                        },
+                        {
+                            "name": "propPriorClaims"
+                        },
+                        {
+                            "name": "paCurrentPremium"
+                        },
+                        {
+                            "name": "paCurrentExpiration"
+                        },
+                        {
+                            "name": "paPriorClaims"
+                        },
+                        {
+                            "name": "medCurrentCarrier"
+                        },
+                        {
+                            "name": "medCurrentPlan"
+                        },
+                        {
+                            "name": "medAepSepDate"
+                        },
+                        {
+                            "name": "medIrmaaApplies"
+                        },
+                        {
+                            "name": "gbMedicalCarrier"
+                        },
+                        {
+                            "name": "gbMedicalPlanType"
+                        },
+                        {
+                            "name": "gbMedicalRenewalDate"
+                        },
+                        {
+                            "name": "autoCurrentCarrierYears"
+                        }
+                    ]
+                },
+                "order": 0
+            },
+            {
                 "name": "activities",
                 "reference": "activities",
                 "view": "crm:views/opportunity/record/panels/activities",
@@ -727,5 +1150,59 @@
                 "order": 3
             }
         ]
+    },
+    "relationshipPanels": {
+        "opportunityVehicles": {
+            "createButton": true,
+            "selectButton": true,
+            "order": 20,
+            "label": "Vehicles",
+            "layout": [
+                {"name": "year"},
+                {"name": "make"},
+                {"name": "model"},
+                {"name": "vin"},
+                {"name": "useType"},
+                {"name": "garagingAddress"},
+                {"name": "currentPremium"},
+                {"name": "currentExpiration"},
+                {"name": "priorClaims"},
+                {"name": "notes"}
+            ]
+        },
+        "opportunityDrivers": {
+            "createButton": true,
+            "selectButton": true,
+            "order": 21,
+            "label": "Drivers",
+            "layout": [
+                {"name": "driverName"},
+                {"name": "dateOfBirth"},
+                {"name": "actualAge"},
+                {"name": "driverLicenseNumber"},
+                {"name": "stateIssued"},
+                {"name": "relationshipToInsured"},
+                {"name": "yearsLicensed"},
+                {"name": "violationsAccidents"},
+                {"name": "notes"}
+            ]
+        },
+        "quotes": {
+            "createButton": true,
+            "selectButton": true,
+            "order": 22,
+            "label": "Quotes",
+            "layout": [
+                {"name": "carrier"},
+                {"name": "quoteNumber"},
+                {"name": "quoteDate"},
+                {"name": "premium"},
+                {"name": "coverageType"},
+                {"name": "status"},
+                {"name": "effectiveDate"},
+                {"name": "expirationDate"},
+                {"name": "notes"}
+            ]
+        }
     }
 }

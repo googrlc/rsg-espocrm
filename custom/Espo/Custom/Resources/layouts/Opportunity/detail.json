@@ -40,6 +40,12 @@
                 {
                     "name": "closeDate"
                 }
+            ],
+            [
+                {
+                    "name": "estimatedPremium"
+                },
+                false
             ]
         ],
         "style": "default",
@@ -48,28 +54,6 @@
     },
     {
         "rows": [
-            [
-                {
-                    "name": "currentCarrier"
-                },
-                {
-                    "name": "targetCarrier"
-                }
-            ],
-            [
-                {
-                    "name": "estimatedPremium"
-                },
-                {
-                    "name": "cRenewalDate"
-                }
-            ],
-            [
-                {
-                    "name": "quoteNumber"
-                },
-                false
-            ],
             [
                 {
                     "name": "description"
@@ -110,14 +94,6 @@
                 {
                     "name": "caCurrentVehicleModifications"
                 }
-            ],
-            [
-                {
-                    "name": "caCurrentPolicyNum"
-                },
-                {
-                    "name": "caCurrentExpiration"
-                }
             ]
         ],
         "style": "default",
@@ -155,14 +131,6 @@
                     "name": "caCommodity"
                 },
                 false
-            ],
-            [
-                {
-                    "name": "caCurrentPolicyNum"
-                },
-                {
-                    "name": "caCurrentExpiration"
-                }
             ]
         ],
         "style": "default",
@@ -249,11 +217,9 @@
             ],
             [
                 {
-                    "name": "propCurrentPremium"
-                },
-                {
                     "name": "propReplacementCost"
-                }
+                },
+                false
             ],
             [
                 {
@@ -262,12 +228,6 @@
                 {
                     "name": "propRoofAge"
                 }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
-                false
             ]
         ],
         "style": "default",
@@ -299,11 +259,9 @@
             ],
             [
                 {
-                    "name": "propCurrentPremium"
-                },
-                {
                     "name": "propReplacementCost"
-                }
+                },
+                false
             ],
             [
                 {
@@ -312,12 +270,6 @@
                 {
                     "name": "propRoofAge"
                 }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
-                false
             ],
             [
                 {
@@ -354,11 +306,9 @@
             ],
             [
                 {
-                    "name": "propCurrentPremium"
-                },
-                {
                     "name": "propReplacementCost"
-                }
+                },
+                false
             ],
             [
                 {
@@ -367,12 +317,6 @@
                 {
                     "name": "propRoofAge"
                 }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
-                false
             ],
             [
                 {
@@ -475,28 +419,6 @@
                 {
                     "name": "autoDriverCount"
                 }
-            ],
-            [
-                {
-                    "name": "autoYoungestDriverAge"
-                },
-                {
-                    "name": "autoUseType"
-                }
-            ],
-            [
-                {
-                    "name": "paCurrentPremium"
-                },
-                {
-                    "name": "paCurrentExpiration"
-                }
-            ],
-            [
-                {
-                    "name": "paPriorClaims"
-                },
-                false
             ]
         ],
         "style": "default",
@@ -530,14 +452,6 @@
                 {
                     "name": "propRoofAge"
                 },
-                {
-                    "name": "propCurrentPremium"
-                }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
                 false
             ]
         ],
@@ -556,14 +470,6 @@
                 {
                     "name": "propOccupancy"
                 },
-                {
-                    "name": "propCurrentPremium"
-                }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
                 false
             ]
         ],
@@ -581,14 +487,6 @@
             [
                 {
                     "name": "propYearBuilt"
-                },
-                {
-                    "name": "propCurrentPremium"
-                }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
                 },
                 false
             ]
@@ -616,14 +514,6 @@
                 {
                     "name": "propRoofAge"
                 },
-                {
-                    "name": "propCurrentPremium"
-                }
-            ],
-            [
-                {
-                    "name": "propPriorClaims"
-                },
                 false
             ]
         ],
@@ -640,22 +530,6 @@
                 {
                     "name": "autoDriverCount"
                 }
-            ],
-            [
-                {
-                    "name": "autoUseType"
-                },
-                {
-                    "name": "paCurrentPremium"
-                }
-            ],
-            [
-                {
-                    "name": "paCurrentExpiration"
-                },
-                {
-                    "name": "paPriorClaims"
-                }
             ]
         ],
         "style": "default",
@@ -669,22 +543,8 @@
                     "name": "autoVehicleCount"
                 },
                 {
-                    "name": "autoUseType"
+                    "name": "autoDriverCount"
                 }
-            ],
-            [
-                {
-                    "name": "paCurrentPremium"
-                },
-                {
-                    "name": "paCurrentExpiration"
-                }
-            ],
-            [
-                {
-                    "name": "paPriorClaims"
-                },
-                false
             ]
         ],
         "style": "default",
@@ -698,22 +558,8 @@
                     "name": "autoVehicleCount"
                 },
                 {
-                    "name": "autoUseType"
+                    "name": "autoDriverCount"
                 }
-            ],
-            [
-                {
-                    "name": "paCurrentPremium"
-                },
-                {
-                    "name": "paCurrentExpiration"
-                }
-            ],
-            [
-                {
-                    "name": "paPriorClaims"
-                },
-                false
             ]
         ],
         "style": "default",
@@ -726,17 +572,7 @@
                 {
                     "name": "medPlanType"
                 },
-                {
-                    "name": "medCurrentCarrier"
-                }
-            ],
-            [
-                {
-                    "name": "medCurrentPlan"
-                },
-                {
-                    "name": "medAepSepDate"
-                }
+                false
             ],
             [
                 {
@@ -782,6 +618,78 @@
         "rows": [
             [
                 {
+                    "name": "applicantName"
+                },
+                {
+                    "name": "applicantDateOfBirth"
+                }
+            ],
+            [
+                {
+                    "name": "applicantLicenseNumber"
+                },
+                {
+                    "name": "applicantLicenseState"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "lifeApplicantDetails",
+        "label": "Life Insurance Applicant Details"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "beneficiary1Name"
+                },
+                {
+                    "name": "beneficiary1Dob"
+                },
+                {
+                    "name": "beneficiary1Relationship"
+                },
+                {
+                    "name": "beneficiary1Pct"
+                }
+            ],
+            [
+                {
+                    "name": "beneficiary2Name"
+                },
+                {
+                    "name": "beneficiary2Dob"
+                },
+                {
+                    "name": "beneficiary2Relationship"
+                },
+                {
+                    "name": "beneficiary2Pct"
+                }
+            ],
+            [
+                {
+                    "name": "beneficiary3Name"
+                },
+                {
+                    "name": "beneficiary3Dob"
+                },
+                {
+                    "name": "beneficiary3Relationship"
+                },
+                {
+                    "name": "beneficiary3Pct"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "lifeBeneficiaries",
+        "label": "Beneficiaries"
+    },
+    {
+        "rows": [
+            [
+                {
                     "name": "healthDateOfBirth"
                 },
                 {
@@ -818,12 +726,6 @@
                 {
                     "name": "autoDriverCount"
                 }
-            ],
-            [
-                {
-                    "name": "paCurrentExpiration"
-                },
-                false
             ]
         ],
         "style": "default",
@@ -848,19 +750,9 @@
             ],
             [
                 {
-                    "name": "gbMedicalCarrier"
-                },
-                {
-                    "name": "gbMedicalPlanType"
-                }
-            ],
-            [
-                {
-                    "name": "gbMedicalRenewalDate"
-                },
-                {
                     "name": "gbEmployerContribution"
-                }
+                },
+                false
             ]
         ],
         "style": "default",
