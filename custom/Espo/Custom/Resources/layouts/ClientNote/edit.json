@@ -1,0 +1,16 @@
+[
+    {
+        "rows": [
+            [
+                {"name": "category"},
+                {"name": "account"}
+            ],
+            [
+                {"name": "content", "fullWidth": true}
+            ]
+        ],
+        "style": "default",
+        "name": "main",
+        "label": "Client Note"
+    }
+]
