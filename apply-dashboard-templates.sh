@@ -5,6 +5,9 @@ set -euo pipefail
 
 HOST="root@rrespocrm-rsg-u69864.vm.elestio.app"
 SSH_KEY="$HOME/.ssh/rsg_crm_deploy"
+if [[ ! -f "$SSH_KEY" ]]; then
+    SSH_KEY="$HOME/.ssh/elestio_espocrm"
+fi
 SSH_OPTS=(-i "$SSH_KEY" -o BatchMode=yes -o StrictHostKeyChecking=accept-new)
 
 if [[ ! -f "$SSH_KEY" ]]; then

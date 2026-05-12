@@ -167,10 +167,12 @@ function buildProducerTemplate(): array
                 'layout' => [
                     dashlet('overnight-policy-changes', 'Records', 0, 0, 2, 4),
                     dashlet('my-renewals', 'Records', 2, 0, 2, 4),
-                    dashlet('policies-expiring-soon', 'Records', 0, 4, 2, 4),
-                    dashlet('my-pipeline', 'Records', 2, 4, 2, 4),
-                    dashlet('follow-up-tasks', 'Records', 0, 8, 2, 4),
-                    dashlet('commission-snapshot', 'Records', 2, 8, 2, 4),
+                    dashlet('sync-exceptions', 'Records', 0, 4, 2, 4),
+                    dashlet('recent-bidirectional-sync', 'Records', 2, 4, 2, 4),
+                    dashlet('policies-expiring-soon', 'Records', 0, 8, 2, 4),
+                    dashlet('my-pipeline', 'Records', 2, 8, 2, 4),
+                    dashlet('follow-up-tasks', 'Records', 0, 12, 2, 4),
+                    dashlet('commission-snapshot', 'Records', 2, 12, 2, 4),
                 ],
             ],
         ],
@@ -194,6 +196,56 @@ function buildProducerTemplate(): array
                         [
                             ['name' => 'policy', 'link' => true],
                             ['name' => 'account', 'link' => true],
+                        ],
+                    ],
+                ],
+            ],
+            'sync-exceptions' => [
+                'title' => 'Sync Incomplete / Failed',
+                'entityType' => 'ActivityLog',
+                'primaryFilter' => 'syncIncomplete',
+                'sortBy' => 'dateTime',
+                'sortDirection' => 'desc',
+                'displayRecords' => 8,
+                'expandedLayout' => [
+                    'rows' => [
+                        [
+                            ['name' => 'name', 'link' => true],
+                        ],
+                        [
+                            ['name' => 'syncCompletionStatus'],
+                            ['name' => 'syncNeedsAttention'],
+                        ],
+                        [
+                            ['name' => 'syncDirection'],
+                            ['name' => 'dateTime', 'soft' => true],
+                        ],
+                        [
+                            ['name' => 'policy', 'link' => true],
+                            ['name' => 'account', 'link' => true],
+                        ],
+                    ],
+                ],
+            ],
+            'recent-bidirectional-sync' => [
+                'title' => 'Recent Bidirectional Sync',
+                'entityType' => 'ActivityLog',
+                'primaryFilter' => 'bidirectionalSync',
+                'sortBy' => 'dateTime',
+                'sortDirection' => 'desc',
+                'displayRecords' => 8,
+                'expandedLayout' => [
+                    'rows' => [
+                        [
+                            ['name' => 'name', 'link' => true],
+                        ],
+                        [
+                            ['name' => 'syncCompletionStatus'],
+                            ['name' => 'syncDirection'],
+                        ],
+                        [
+                            ['name' => 'policy', 'link' => true],
+                            ['name' => 'dateTime', 'soft' => true],
                         ],
                     ],
                 ],
@@ -335,7 +387,8 @@ function buildServiceTemplate(): array
                     dashlet('due-today', 'Records', 2, 4, 2, 4),
                     dashlet('waiting-on-client', 'Records', 0, 8, 2, 4),
                     dashlet('waiting-on-carrier', 'Records', 2, 8, 2, 4),
-                    dashlet('recent-policy-changes', 'Records', 0, 12, 4, 4),
+                    dashlet('sync-exceptions-service', 'Records', 0, 12, 2, 4),
+                    dashlet('recent-policy-changes', 'Records', 2, 12, 2, 4),
                 ],
             ],
         ],
@@ -478,6 +531,29 @@ function buildServiceTemplate(): array
                         [
                             ['name' => 'taskType'],
                             ['name' => 'linkedAccount', 'link' => true],
+                        ],
+                    ],
+                ],
+            ],
+            'sync-exceptions-service' => [
+                'title' => 'Sync Incomplete / Failed',
+                'entityType' => 'ActivityLog',
+                'primaryFilter' => 'syncIncomplete',
+                'sortBy' => 'dateTime',
+                'sortDirection' => 'desc',
+                'displayRecords' => 8,
+                'expandedLayout' => [
+                    'rows' => [
+                        [
+                            ['name' => 'name', 'link' => true],
+                        ],
+                        [
+                            ['name' => 'syncCompletionStatus'],
+                            ['name' => 'syncNeedsAttention'],
+                        ],
+                        [
+                            ['name' => 'policy', 'link' => true],
+                            ['name' => 'account', 'link' => true],
                         ],
                     ],
                 ],
