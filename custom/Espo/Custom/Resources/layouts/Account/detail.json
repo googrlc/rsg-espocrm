@@ -98,32 +98,6 @@
         "label": "Carrier Details"
     },
     {
-        "rows": [
-            [
-                {
-                    "name": "general_notes",
-                    "fullWidth": true
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "generalNotesPanel",
-        "label": "General Notes & Requests"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "what_you_have_today",
-                    "fullWidth": true
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "whatYouHaveTodayPanel",
-        "label": "What You Have Today"
-    },
-    {
         "rows": [],
         "style": "default",
         "tabBreak": true,
@@ -832,6 +806,34 @@
         "style": "default",
         "name": "gbNotesPanel",
         "customLabel": "Group Benefits Notes"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "general_notes",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Internal",
+        "name": "generalNotesPanel",
+        "label": "General Notes & Requests"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "what_you_have_today",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "whatYouHaveTodayPanel",
+        "label": "What You Have Today"
     },
     {
         "rows": [
