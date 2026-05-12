@@ -1,0 +1,26 @@
+{
+    "fields": {
+        "category": "Category",
+        "content": "Note",
+        "account": "Account",
+        "createdAt": "Date",
+        "createdBy": "Added By",
+        "modifiedAt": "Modified",
+        "modifiedBy": "Modified By"
+    },
+    "links": {
+        "account": "Account"
+    },
+    "labels": {
+        "Create ClientNote": "Add Note",
+        "Client Note": "Client Note",
+        "Client Notes": "Client Notes"
+    },
+    "options": {
+        "category": {
+            "": "",
+            "General Note": "General Note",
+            "Request": "Request"
+        }
+    }
+}

@@ -149,7 +149,8 @@
   },
   "links": {
     "linkedTasks": "Linked Tasks",
-    "carrierPolicies": "Carrier Policies"
+    "carrierPolicies": "Carrier Policies",
+    "clientNotes": "Client Notes"
   },
   "options": {
     "account_status": {

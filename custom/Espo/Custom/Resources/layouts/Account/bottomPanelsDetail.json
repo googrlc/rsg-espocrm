@@ -4,6 +4,11 @@
         "index": 0,
         "tab": 0
     },
+    "clientNotes": {
+        "index": 1,
+        "tab": 0,
+        "label": "Client Notes"
+    },
     "contacts": {
         "index": 2,
         "tab": 1

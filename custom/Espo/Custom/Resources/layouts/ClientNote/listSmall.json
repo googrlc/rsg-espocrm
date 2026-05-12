@@ -1,0 +1,6 @@
+[
+    {"name": "createdAt", "width": 18},
+    {"name": "createdBy", "width": 18},
+    {"name": "category", "width": 14},
+    {"name": "content", "width": 50}
+]

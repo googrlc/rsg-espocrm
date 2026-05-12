@@ -19,6 +19,7 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
         // Map bottom panel names → middle tab index (must match detail.json)
         bottomPanelTabMap: {
             "stream":        0,
+            "clientNotes":   0,
             "contacts":      1,
             "policies":      2,
             "renewals":      2,

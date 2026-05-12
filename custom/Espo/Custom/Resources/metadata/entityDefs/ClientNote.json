@@ -1,0 +1,89 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": false,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true
+        },
+        "category": {
+            "type": "enum",
+            "options": [
+                "",
+                "General Note",
+                "Request"
+            ],
+            "required": true,
+            "isCustom": true,
+            "displayAsLabel": true,
+            "default": "General Note",
+            "style": {
+                "General Note": "default",
+                "Request": "warning"
+            }
+        },
+        "content": {
+            "type": "text",
+            "required": true,
+            "isCustom": true,
+            "rowsMin": 3
+        },
+        "account": {
+            "type": "link",
+            "required": true
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        }
+    },
+    "links": {
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "clientNotes",
+            "isCustom": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "content"
+        ],
+        "sortByList": [
+            "createdAt",
+            "category"
+        ]
+    },
+    "indexes": {
+        "accountCreatedAt": {
+            "columns": [
+                "accountId",
+                "createdAt"
+            ]
+        }
+    }
+}

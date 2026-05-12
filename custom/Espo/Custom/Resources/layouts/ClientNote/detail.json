@@ -1,0 +1,20 @@
+[
+    {
+        "rows": [
+            [
+                {"name": "category"},
+                {"name": "account"}
+            ],
+            [
+                {"name": "content", "fullWidth": true}
+            ],
+            [
+                {"name": "createdAt"},
+                {"name": "createdBy"}
+            ]
+        ],
+        "style": "default",
+        "name": "main",
+        "label": "Client Note"
+    }
+]

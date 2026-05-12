@@ -614,6 +614,13 @@
       "type": "text",
       "isCustom": true
     },
+    "clientNotes": {
+      "type": "linkMultiple",
+      "isCustom": true,
+      "layoutDetailDisabled": true,
+      "layoutListDisabled": true,
+      "noLoad": true
+    },
     "general_notes": {
       "type": "text",
       "isCustom": true
@@ -2501,6 +2508,12 @@
     "activityLogs": {
       "type": "hasMany",
       "entity": "ActivityLog",
+      "foreign": "account",
+      "isCustom": true
+    },
+    "clientNotes": {
+      "type": "hasMany",
+      "entity": "ClientNote",
       "foreign": "account",
       "isCustom": true
     },
