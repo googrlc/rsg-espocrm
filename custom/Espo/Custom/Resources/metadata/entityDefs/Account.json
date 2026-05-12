@@ -614,6 +614,14 @@
       "type": "text",
       "isCustom": true
     },
+    "general_notes": {
+      "type": "text",
+      "isCustom": true
+    },
+    "what_you_have_today": {
+      "type": "text",
+      "isCustom": true
+    },
     "primaryFirstName": {
       "type": "varchar",
       "maxLength": 100,
