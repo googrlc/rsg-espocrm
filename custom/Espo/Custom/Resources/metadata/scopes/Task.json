@@ -13,8 +13,5 @@
     ],
     "canceledStatusList": [
         "Cancelled"
-    ],
-    "kanbanStatusIgnoreList": [
-        "Cancelled"
     ]
 }

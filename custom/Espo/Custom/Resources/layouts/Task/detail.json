@@ -7,16 +7,20 @@
                 {"name": "status"}
             ],
             [
-                {"name": "taskType"},
-                {"name": "assignedUser"}
-            ],
-            [
-                {"name": "dateEnd"},
-                {"name": "priority"}
-            ],
-            [
                 {"name": "linkedAccount"},
+                {"name": "contact"}
+            ],
+            [
+                {"name": "priority"},
+                {"name": "dateEnd"}
+            ],
+            [
+                {"name": "taskType"},
                 {"name": "taskSource"}
+            ],
+            [
+                {"name": "assignedUser"},
+                false
             ]
         ]
     },
@@ -27,8 +31,8 @@
                 {"name": "parent", "fullWidth": true}
             ],
             [
-                {"name": "account"},
-                {"name": "contact"}
+                {"name": "syncSource"},
+                false
             ]
         ]
     },

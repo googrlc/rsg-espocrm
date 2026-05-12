@@ -1,6 +1,10 @@
 {
     "kanbanViewMode": true,
     "statusField": "status",
+    "kanbanCardView": "custom:views/task/kanban-card",
+    "recordViews": {
+        "edit": "custom:views/task/record/edit"
+    },
     "filterList": [
         "actual",
         {

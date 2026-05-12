@@ -1,6 +1,7 @@
 [
-    {"name": "assignedUser"},
-    {"name": "taskType"},
+    {"name": "linkedAccount"},
+    {"name": "priority"},
     {"name": "dateEnd"},
-    {"name": "priority"}
+    {"name": "taskType"},
+    {"name": "assignedUser"}
 ]
