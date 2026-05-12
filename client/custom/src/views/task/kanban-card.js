@@ -18,22 +18,23 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
             const account = this.resolveAccount();
             const dueDate = this.buildDueDate(this.model.get('dateEnd') || this.model.get('dateEndDate'));
             const priority = this.buildPriority(this.model.get('priority'));
-            const status = this.buildStatus(this.model.get('status'));
             const assignedUserName = this.model.get('assignedUserName') || 'Unassigned';
+            const hasPriority = Boolean(priority.label);
+            const hasDueDate = Boolean(dueDate.label);
 
             return Object.assign({}, data, {
                 accountId: account.id,
                 accountName: account.name,
-                statusLabel: status.label,
-                statusClass: status.className,
                 priorityLabel: priority.label,
                 priorityClass: priority.className,
                 dueDateLabel: dueDate.label,
                 dueDateClass: dueDate.className,
-                taskType: this.model.get('taskType'),
+                hasMetaLine: hasPriority || hasDueDate,
+                showMetaSeparator: hasPriority && hasDueDate,
                 assignedUserName: assignedUserName,
                 ownerInitials: this.buildInitials(assignedUserName),
-                cardClass: dueDate.cardClass
+                cardClass: dueDate.cardClass,
+                ownerClass: this.buildOwnerClass(assignedUserName)
             });
         },
 
@@ -47,16 +48,6 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
             }
 
             return { id: id, name: name };
-        },
-
-        buildStatus: function (status) {
-            const label = status || '';
-            const normalized = String(status || '').toLowerCase().replace(/\s+/g, '-');
-
-            return {
-                label: label,
-                className: normalized ? 'task-status-' + normalized : ''
-            };
         },
 
         buildPriority: function (priority) {
@@ -84,7 +75,7 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
 
             if (diffDays < 0) {
                 return {
-                    label: Math.abs(diffDays) + 'd overdue',
+                    label: 'Overdue',
                     className: 'task-due-overdue',
                     cardClass: 'task-card-overdue'
                 };
@@ -92,18 +83,10 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
 
             if (diffDays === 0) {
                 return {
-                    label: 'Due today',
+                    label: 'Today',
                     className: 'task-due-today',
                     cardClass: 'task-card-due-today'
                 };
-            }
-
-            if (diffDays === 1) {
-                return { label: 'Due tomorrow', className: 'task-due-soon', cardClass: '' };
-            }
-
-            if (diffDays <= 7) {
-                return { label: 'Due in ' + diffDays + 'd', className: 'task-due-soon', cardClass: '' };
             }
 
             return {
@@ -125,6 +108,20 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
             }
 
             return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        },
+
+        buildOwnerClass: function (name) {
+            const normalizedName = String(name || '').toLowerCase();
+
+            if (normalizedName.includes('gretch')) {
+                return 'task-owner-gretchen';
+            }
+
+            if (normalizedName.includes('lamar')) {
+                return 'task-owner-lamar';
+            }
+
+            return 'task-owner-default';
         },
 
         actionQuickRemove: function () {

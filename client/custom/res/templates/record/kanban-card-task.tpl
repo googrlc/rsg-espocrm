@@ -27,30 +27,24 @@
         </div>
         {{/if}}
 
-        <div class="task-card-row task-card-scan-row">
-            {{#if statusLabel}}
-            <span class="task-status-pill {{statusClass}}">{{statusLabel}}</span>
-            {{/if}}
-
+        {{#if hasMetaLine}}
+        <div class="task-card-meta-line">
             {{#if priorityLabel}}
             <span class="task-priority-pill {{priorityClass}}">{{priorityLabel}}</span>
+            {{/if}}
+
+            {{#if showMetaSeparator}}
+            <span class="task-meta-separator">&bull;</span>
             {{/if}}
 
             {{#if dueDateLabel}}
             <span class="task-due-pill {{dueDateClass}}">{{dueDateLabel}}</span>
             {{/if}}
         </div>
-
-        {{#if taskType}}
-        <div class="task-card-row task-card-type-row">
-            <span class="task-card-label">Type</span>
-            <span class="task-card-value">{{taskType}}</span>
-        </div>
         {{/if}}
     </div>
 
-    <div class="task-card-assignee" title="{{assignedUserName}}">
+    <div class="task-card-owner-strip {{ownerClass}}" title="{{assignedUserName}}">
         <span class="owner-avatar">{{ownerInitials}}</span>
-        <span class="task-card-assignee-name">{{assignedUserName}}</span>
     </div>
 </div>
