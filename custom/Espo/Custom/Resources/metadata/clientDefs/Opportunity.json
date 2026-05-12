@@ -1,4 +1,5 @@
 {
+    "streamPanelView": "custom:views/stream/panel-read-only",
     "colors": [],
     "iconClass": "fas fa-money-bill-wave",
     "dynamicLogic": {

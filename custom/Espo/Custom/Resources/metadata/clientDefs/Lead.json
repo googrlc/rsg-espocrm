@@ -1,4 +1,5 @@
 {
+    "streamPanelView": "custom:views/stream/panel-read-only",
     "filterList": [
         {"name": "actual", "style": "primary"},
         {"name": "cold", "style": "info"},

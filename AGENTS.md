@@ -17,9 +17,17 @@ This is a **configuration-as-code** repository for a customized EspoCRM instance
 | Templates | Handlebars (.tpl) |
 | Theme | CSS (`client/custom/css/momentum.css`) |
 | Migrations | Python 3 (stdlib only, no pip dependencies) |
+| Database | MySQL / MariaDB-compatible, running in Docker as `app-mysql-1` |
 | Metadata/Config | JSON |
 | Workflows | n8n JSON exports |
 | Deployment | Bash + rsync + SSH |
+
+### Runtime Database
+
+- EspoCRM stores application data in a MySQL-compatible database.
+- The Elestio Docker runtime uses the database container/service `app-mysql-1`.
+- The active database name is `espocrm`.
+- Do not commit database passwords or live secrets. Keep them in 1Password, Elestio settings, or local `.env` files only.
 
 ### Linting / Validation Commands
 

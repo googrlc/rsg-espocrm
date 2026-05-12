@@ -12,6 +12,12 @@ Server: rrespocrm-rsg-u69864.vm.elestio.app
 Key: RSG Elestio EspoCRM (1Password)
 Note: Port 22 is IP-restricted — whitelist your IP in Elestio dashboard first
 
+## Runtime Database
+
+EspoCRM sits on a MySQL / MariaDB-compatible database. The Elestio Docker runtime uses the database container/service `app-mysql-1`, and the active database name is `espocrm`.
+
+Do not commit the database password or other live secrets to this repo. Keep those in 1Password, Elestio settings, or local `.env` files only.
+
 ## Service Webhooks
 Set these in EspoCRM config to enable outbound service-task webhooks:
 
