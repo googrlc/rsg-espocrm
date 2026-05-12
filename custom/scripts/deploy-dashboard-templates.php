@@ -457,7 +457,7 @@ function buildServiceTemplate(): array
                             ['name' => 'dateEnd', 'soft' => true],
                         ],
                         [
-                            ['name' => 'urgency'],
+                            ['name' => 'priority'],
                             ['name' => 'linkedAccount', 'link' => true],
                         ],
                     ],
@@ -502,7 +502,7 @@ function buildServiceTemplate(): array
                         ],
                         [
                             ['name' => 'dateEnd', 'soft' => true],
-                            ['name' => 'urgency'],
+                            ['name' => 'priority'],
                         ],
                         [
                             ['name' => 'taskType'],
@@ -526,7 +526,7 @@ function buildServiceTemplate(): array
                         ],
                         [
                             ['name' => 'dateEnd', 'soft' => true],
-                            ['name' => 'urgency'],
+                            ['name' => 'priority'],
                         ],
                         [
                             ['name' => 'taskType'],

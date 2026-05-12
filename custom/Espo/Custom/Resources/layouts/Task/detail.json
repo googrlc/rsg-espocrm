@@ -16,11 +16,11 @@
             ],
             [
                 {"name": "taskType"},
-                {"name": "taskSource"}
+                {"name": "assignedUser"}
             ],
             [
-                {"name": "assignedUser"},
-                false
+                {"name": "taskSource"},
+                {"name": "syncSource"}
             ]
         ]
     },
@@ -29,27 +29,6 @@
         "rows": [
             [
                 {"name": "parent", "fullWidth": true}
-            ],
-            [
-                {"name": "syncSource"},
-                false
-            ]
-        ]
-    },
-    {
-        "label": "Triage Info",
-        "name": "triageInfo",
-        "isCollapsed": true,
-        "rows": [
-            [
-                {"name": "urgency"},
-                {"name": "syncSource"}
-            ],
-            [
-                {"name": "triageSummary", "fullWidth": true}
-            ],
-            [
-                {"name": "triageReason", "fullWidth": true}
             ]
         ]
     },
