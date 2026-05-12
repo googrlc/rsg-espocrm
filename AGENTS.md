@@ -68,6 +68,44 @@ print('All JSON valid')
 
 Deployment is via `deploy-to-crm.sh` which rsyncs `custom/` and `client/custom/` to the remote server, then runs `clear-cache` and `rebuild` inside the Docker container. This requires SSH keys configured for the Elestio host.
 
+#### SSH Access — EspoCRM Server
+
+**Direct (Elestio public IP):**
+```bash
+ssh root@rrespocrm-rsg-u69864.vm.elestio.app
+```
+> Port 22 is IP-restricted on the EspoCRM box — you may need to whitelist your current IP in the Elestio dashboard first.
+
+**Via Tailscale (preferred, no IP restriction):**
+```bash
+ssh espocrm-ts
+# or directly: ssh root@100.117.239.109
+```
+
+**SSH key:** `RSG Elestio EspoCRM` in 1Password. Ensure it is loaded before connecting:
+```bash
+ssh-add -l   # check loaded keys
+```
+`~/.ssh/config` has aliases set up (`espocrm-ts`, `n8n-ts`, `n8n-elestio`) — those shorthand names work if the config is intact.
+
+#### API Deploy (layouts + metadata only, no SSH needed)
+
+```bash
+API_KEY="e5df7c321b47427d24046bab814dbb58"
+CRM_URL="https://rrespocrm-rsg-u69864.vm.elestio.app"
+
+# Deploy a layout (example: Account detail)
+curl -X PUT "$CRM_URL/api/v1/Layout/Account/detail" \
+  -H "X-Api-Key: $API_KEY" -H "Content-Type: application/json" \
+  -d @custom/Espo/Custom/Resources/layouts/Account/detail.json
+
+# Deploy entity metadata (example: Account entityDefs)
+curl -X PUT "$CRM_URL/api/v1/Metadata/entityDefs/Account" \
+  -H "X-Api-Key: $API_KEY" -H "Content-Type: application/json" \
+  -d @custom/Espo/Custom/Resources/metadata/entityDefs/Account.json
+```
+> CSS, JS, and PHP files must still be deployed via SSH (`deploy-to-crm.sh`).
+
 ### Important Notes
 
 - No `package.json`, `composer.json`, or `requirements.txt` exists — no package manager is needed.
