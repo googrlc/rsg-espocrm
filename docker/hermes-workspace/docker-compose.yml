@@ -1,0 +1,122 @@
+services:
+  hermes-workspace:
+    image: ghcr.io/outsourc-e/hermes-workspace:latest
+    restart: unless-stopped
+    depends_on:
+      hermes-agent:
+        condition: service_healthy
+      mcp-bridge:
+        condition: service_started
+    ports:
+      - "3000:3000"
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${COMPOSE_PROJECT_NAME}.${TRAEFIK_HOST}`)
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=websecure
+      - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls.certresolver=letsencrypt
+      - traefik.http.services.${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=3000
+    environment:
+      HOME: /home/workspace
+      HERMES_WORKSPACE_DIR: /home/workspace/workspace
+      HERMES_API_URL: http://hermes-agent:8642
+      HERMES_DASHBOARD_URL: http://mcp-bridge:9119
+      HERMES_API_TOKEN: ${API_SERVER_KEY:-}
+      HERMES_DASHBOARD_TOKEN: ${API_SERVER_KEY:-}
+      HERMES_PASSWORD: ${HERMES_PASSWORD:-}
+      COOKIE_SECURE: '1'
+      TRUST_PROXY: '1'
+    volumes:
+      - hermes-workspace-data:/home/workspace/.hermes
+      - hermes-shared-workspace:/home/workspace/workspace
+    networks:
+      - hermes-shared
+
+  mcp-bridge:
+    build:
+      context: ./mcp-bridge
+    restart: unless-stopped
+    depends_on:
+      hermes-agent:
+        condition: service_healthy
+    expose:
+      - 9119
+    environment:
+      UPSTREAM_DASHBOARD_URL: http://hermes-agent:9119
+      HERMES_CONFIG_PATH: /opt/data/config.yaml
+      API_SERVER_KEY: ${API_SERVER_KEY:-}
+    volumes:
+      - hermes-data:/opt/data
+    networks:
+      - hermes-shared
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:9119/api/mcp', timeout=5)\""]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  hermes-agent:
+    image: nousresearch/hermes-agent:latest
+    restart: unless-stopped
+    working_dir: /home/workspace/workspace
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        set -e
+        CFG=/opt/data/config.yaml
+        mkdir -p /opt/data
+        if [ ! -f "$$CFG" ]; then
+          if [ -n "$$ANTHROPIC_API_KEY" ]; then
+            printf 'model:\n  default: claude-sonnet-4-5-20250929\n  provider: anthropic\n' > "$$CFG"
+          elif [ -n "$$OPENROUTER_API_KEY" ]; then
+            : # fall through — upstream default already targets OpenRouter
+          elif [ -n "$$GOOGLE_API_KEY" ]; then
+            printf 'model:\n  default: gemini-2.0-flash-exp\n  provider: gemini\n' > "$$CFG"
+          elif [ -n "$$OPENAI_API_KEY" ]; then
+            printf 'model:\n  default: gpt-4o\n  provider: openai-api\ncustom_providers:\n  - name: openai-api\n    base_url: https://api.openai.com/v1\n    api_key: %s\n    api_mode: chat_completions\n' "$$OPENAI_API_KEY" > "$$CFG"
+          elif [ -n "$$GROQ_API_KEY" ]; then
+            printf 'model:\n  default: llama-3.3-70b-versatile\n  provider: groq-api\ncustom_providers:\n  - name: groq-api\n    base_url: https://api.groq.com/openai/v1\n    api_key: %s\n    api_mode: chat_completions\n' "$$GROQ_API_KEY" > "$$CFG"
+          elif [ -n "$$MISTRAL_API_KEY" ]; then
+            printf 'model:\n  default: mistral-large-latest\n  provider: mistral-api\ncustom_providers:\n  - name: mistral-api\n    base_url: https://api.mistral.ai/v1\n    api_key: %s\n    api_mode: chat_completions\n' "$$MISTRAL_API_KEY" > "$$CFG"
+          fi
+        fi
+        exec /usr/bin/tini -g -- /opt/hermes/docker/entrypoint.sh "$$@"
+      - --
+    command: ["gateway", "run"]
+    expose:
+      - 8642
+      - 9119
+    environment:
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      MISTRAL_API_KEY: ${MISTRAL_API_KEY:-}
+      API_SERVER_KEY: ${API_SERVER_KEY:-}
+      API_SERVER_HOST: '0.0.0.0'
+      API_SERVER_ENABLED: 'true'
+      HERMES_DASHBOARD: '1'
+      HERMES_DASHBOARD_HOST: '0.0.0.0'
+      HERMES_DASHBOARD_PORT: '9119'
+    volumes:
+      - hermes-data:/opt/data
+      - hermes-shared-workspace:/home/workspace/workspace
+    networks:
+      - hermes-shared
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8642/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 60s
+
+volumes:
+  hermes-data:
+  hermes-workspace-data:
+  hermes-shared-workspace:
+
+networks:
+  hermes-shared:
+    external: true
