@@ -173,6 +173,26 @@ async def list_mcp_via_short_path(request: Request):
     return await list_mcp(request)
 
 
+@app.get("/mcp/discover")
+async def mcp_discover_get(request: Request):
+    if not _check_auth(request):
+        return JSONResponse({"ok": False, "error": "Unauthorized"}, status_code=401)
+    return JSONResponse(
+        {
+            "name": SERVER_NAME,
+            "version": SERVER_VERSION,
+            "protocolVersion": MCP_PROTOCOL_VERSION,
+            "capabilities": {"tools": True},
+            "tools": _mcp_tools(),
+        }
+    )
+
+
+@app.post("/mcp/discover")
+async def mcp_discover_post(request: Request):
+    return await mcp_discover_get(request)
+
+
 @app.post("/mcp")
 async def mcp_jsonrpc(request: Request):
     if not _check_auth(request):
@@ -206,6 +226,19 @@ async def mcp_jsonrpc(request: Request):
 
     if method == "tools/list":
         return _jsonrpc_result(request_id, {"tools": _mcp_tools()})
+
+    # Compatibility alias for clients that probe with a non-standard discover method.
+    if method == "discover":
+        return _jsonrpc_result(
+            request_id,
+            {
+                "name": SERVER_NAME,
+                "version": SERVER_VERSION,
+                "protocolVersion": MCP_PROTOCOL_VERSION,
+                "capabilities": {"tools": True},
+                "tools": _mcp_tools(),
+            },
+        )
 
     if method == "tools/call":
         tool_name = params.get("name")
