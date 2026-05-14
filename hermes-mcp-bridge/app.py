@@ -10,6 +10,8 @@ from __future__ import annotations
 
 import logging
 import os
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import Any
 
@@ -23,6 +25,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(name)s %(levelname
 CONFIG_PATH = Path(os.environ.get("HERMES_CONFIG_PATH", "/data/config.yaml"))
 AUTH_TOKEN = os.environ.get("API_SERVER_KEY", "")
 KNOWN_CATEGORIES = ["All", "Connected", "Failed", "Disabled"]
+MCP_PROTOCOL_VERSION = "2024-11-05"
+SERVER_NAME = "rsg-espocrm-mcp-bridge"
+SERVER_VERSION = "1.0.0"
 
 app = FastAPI(title="Hermes MCP Bridge", docs_url=None, redoc_url=None)
 
@@ -96,6 +101,68 @@ def _to_entry(body: dict[str, Any]) -> dict[str, Any]:
     return out
 
 
+def _jsonrpc_result(request_id: Any, result: dict[str, Any]) -> JSONResponse:
+    return JSONResponse({"jsonrpc": "2.0", "id": request_id, "result": result})
+
+
+def _jsonrpc_error(request_id: Any, code: int, message: str) -> JSONResponse:
+    return JSONResponse(
+        {
+            "jsonrpc": "2.0",
+            "id": request_id,
+            "error": {"code": code, "message": message},
+        }
+    )
+
+
+def _mcp_tools() -> list[dict[str, Any]]:
+    return [
+        {
+            "name": "ping",
+            "description": "Health check tool that confirms bridge availability.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string", "description": "Optional ping message."}
+                },
+                "additionalProperties": False,
+            },
+        },
+        {
+            "name": "espocrm_get_current_user",
+            "description": "Fetch current EspoCRM API user via /api/v1/App/user.",
+            "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
+        },
+    ]
+
+
+def _run_ping(arguments: dict[str, Any]) -> str:
+    message = arguments.get("message", "pong")
+    return f"Bridge reachable: {message}"
+
+
+def _run_espocrm_get_current_user() -> str:
+    base_url = os.environ.get("ESPOCRM_BASE_URL", "").strip().rstrip("/")
+    api_key = os.environ.get("ESPOCRM_API_KEY", "").strip()
+    if not base_url:
+        return "Missing ESPOCRM_BASE_URL."
+    if not api_key:
+        return "Missing ESPOCRM_API_KEY."
+
+    req = urllib.request.Request(
+        url=f"{base_url}/api/v1/App/user",
+        headers={"X-Api-Key": api_key, "Accept": "application/json"},
+        method="GET",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as response:
+            return response.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        return f"EspoCRM request failed with HTTP {exc.code}."
+    except urllib.error.URLError as exc:
+        return f"EspoCRM request failed: {exc.reason}"
+
+
 @app.get("/healthz")
 async def healthz() -> JSONResponse:
     return JSONResponse({"ok": True})
@@ -104,6 +171,57 @@ async def healthz() -> JSONResponse:
 @app.get("/mcp")
 async def list_mcp_via_short_path(request: Request):
     return await list_mcp(request)
+
+
+@app.post("/mcp")
+async def mcp_jsonrpc(request: Request):
+    if not _check_auth(request):
+        return _jsonrpc_error(None, -32001, "Unauthorized")
+
+    try:
+        payload = await request.json()
+    except Exception:
+        return _jsonrpc_error(None, -32700, "Invalid JSON payload")
+
+    request_id = payload.get("id")
+    method = payload.get("method")
+    params = payload.get("params") or {}
+
+    if not method:
+        return _jsonrpc_error(request_id, -32600, "Missing method")
+
+    if method == "initialize":
+        requested_version = params.get("protocolVersion", MCP_PROTOCOL_VERSION)
+        return _jsonrpc_result(
+            request_id,
+            {
+                "protocolVersion": requested_version,
+                "capabilities": {"tools": {"listChanged": False}},
+                "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
+            },
+        )
+
+    if method == "notifications/initialized":
+        return JSONResponse(status_code=202, content=None)
+
+    if method == "tools/list":
+        return _jsonrpc_result(request_id, {"tools": _mcp_tools()})
+
+    if method == "tools/call":
+        tool_name = params.get("name")
+        arguments = params.get("arguments") or {}
+
+        if tool_name == "ping":
+            text = _run_ping(arguments)
+            return _jsonrpc_result(request_id, {"content": [{"type": "text", "text": text}]})
+
+        if tool_name == "espocrm_get_current_user":
+            text = _run_espocrm_get_current_user()
+            return _jsonrpc_result(request_id, {"content": [{"type": "text", "text": text}]})
+
+        return _jsonrpc_error(request_id, -32602, f"Unknown tool: {tool_name}")
+
+    return _jsonrpc_error(request_id, -32601, f"Method not found: {method}")
 
 
 @app.get("/api/mcp")

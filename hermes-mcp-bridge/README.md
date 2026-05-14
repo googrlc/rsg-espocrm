@@ -5,7 +5,8 @@ Standalone MCP bridge service for Hermes configuration flows.
 ## Exposed Endpoints
 
 - `GET /healthz` - health check
-- `GET /mcp` - short MCP probe/list path
+- `POST /mcp` - MCP JSON-RPC endpoint (use this in Hermes)
+- `GET /mcp` - legacy probe/list path
 - `GET /api/mcp` - Hermes dashboard-compatible MCP list
 - `POST /api/mcp`, `PUT /api/mcp/{name}`, `DELETE /api/mcp/{name}`
 
@@ -13,6 +14,8 @@ Standalone MCP bridge service for Hermes configuration flows.
 
 - `API_SERVER_KEY` - bearer token expected by the bridge (optional but recommended)
 - `HERMES_CONFIG_PATH` - where `config.yaml` is persisted (default `/data/config.yaml`)
+- `ESPOCRM_BASE_URL` - required for `espocrm_get_current_user` tool
+- `ESPOCRM_API_KEY` - required for `espocrm_get_current_user` tool
 
 ## Persistence (Important)
 
