@@ -163,6 +163,19 @@ def _run_espocrm_get_current_user() -> str:
         return f"EspoCRM request failed: {exc.reason}"
 
 
+def _discover_payload() -> dict[str, Any]:
+    tools = _mcp_tools()
+    return {
+        "name": SERVER_NAME,
+        "description": "RSG EspoCRM MCP bridge",
+        "version": SERVER_VERSION,
+        "protocolVersion": MCP_PROTOCOL_VERSION,
+        "capabilities": {"tools": {"listChanged": False}},
+        "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
+        "tools": tools,
+    }
+
+
 @app.get("/healthz")
 async def healthz() -> JSONResponse:
     return JSONResponse({"ok": True})
@@ -170,22 +183,16 @@ async def healthz() -> JSONResponse:
 
 @app.get("/mcp")
 async def list_mcp_via_short_path(request: Request):
-    return await list_mcp(request)
+    if not _check_auth(request):
+        return JSONResponse({"ok": False, "error": "Unauthorized"}, status_code=401)
+    return JSONResponse(_discover_payload())
 
 
 @app.get("/mcp/discover")
 async def mcp_discover_get(request: Request):
     if not _check_auth(request):
         return JSONResponse({"ok": False, "error": "Unauthorized"}, status_code=401)
-    return JSONResponse(
-        {
-            "name": SERVER_NAME,
-            "version": SERVER_VERSION,
-            "protocolVersion": MCP_PROTOCOL_VERSION,
-            "capabilities": {"tools": True},
-            "tools": _mcp_tools(),
-        }
-    )
+    return JSONResponse(_discover_payload())
 
 
 @app.post("/mcp/discover")
@@ -229,16 +236,7 @@ async def mcp_jsonrpc(request: Request):
 
     # Compatibility alias for clients that probe with a non-standard discover method.
     if method == "discover":
-        return _jsonrpc_result(
-            request_id,
-            {
-                "name": SERVER_NAME,
-                "version": SERVER_VERSION,
-                "protocolVersion": MCP_PROTOCOL_VERSION,
-                "capabilities": {"tools": True},
-                "tools": _mcp_tools(),
-            },
-        )
+        return _jsonrpc_result(request_id, _discover_payload())
 
     if method == "tools/call":
         tool_name = params.get("name")
