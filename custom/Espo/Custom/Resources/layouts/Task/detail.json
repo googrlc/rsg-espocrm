@@ -3,20 +3,80 @@
         "label": "Task Details",
         "rows": [
             [
-                {"name": "name"},
-                {"name": "status"}
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "status"
+                }
             ],
             [
-                {"name": "account"},
-                {"name": "assignedUser"}
+                {
+                    "name": "taskType"
+                },
+                {
+                    "name": "assignedUser"
+                }
             ],
             [
-                {"name": "priority"},
-                {"name": "dateEnd"}
+                {
+                    "name": "dateEnd"
+                },
+                {
+                    "name": "priority"
+                }
             ],
             [
-                {"name": "taskType"},
-                false
+                {
+                    "name": "taskSource",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Context",
+        "rows": [
+            [
+                {
+                    "name": "parent",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "account"
+                },
+                {
+                    "name": "contact"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Triage Info",
+        "name": "triageInfo",
+        "isCollapsed": true,
+        "rows": [
+            [
+                {
+                    "name": "urgency"
+                },
+                {
+                    "name": "syncSource"
+                }
+            ],
+            [
+                {
+                    "name": "triageSummary",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "triageReason",
+                    "fullWidth": true
+                }
             ]
         ]
     },
@@ -24,7 +84,10 @@
         "label": "Description",
         "rows": [
             [
-                {"name": "description", "fullWidth": true}
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
             ]
         ]
     }
