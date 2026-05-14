@@ -23,6 +23,17 @@ Use separate URLs for EspoCRM and Hermes/OpenClaw MCP connectivity.
 
 Do not point Hermes MCP clients at the CRM homepage/API URL directly. This works only when an MCP server is actually deployed and reachable at the MCP endpoint.
 
+### MCP Bridge Source of Truth
+
+To avoid deployment confusion, use these paths intentionally:
+
+- `hermes-mcp-bridge/` - canonical, standalone Railway deployment target.
+- `docker/hermes-workspace/mcp-bridge/` - legacy Hermes Workspace dashboard proxy path (deprecated for Railway MCP endpoint deployment).
+
+For current Hermes HTTP MCP server configuration, deploy `hermes-mcp-bridge/` and set:
+
+- `MCP_URL=https://<your-domain>/mcp`
+
 ## Service Webhooks
 Set these in EspoCRM config to enable outbound service-task webhooks:
 

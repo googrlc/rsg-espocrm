@@ -1,4 +1,7 @@
-# MCP Bridge
+# MCP Bridge (Legacy Workspace Proxy)
+
+> Deprecated for standalone Railway MCP deployments.  
+> Use `hermes-mcp-bridge/` as the production MCP endpoint service.
 
 Lightweight reverse proxy that sits between Hermes Workspace and the Hermes Agent
 dashboard, adding `/api/mcp` CRUD endpoints backed by `config.yaml`.
@@ -34,3 +37,7 @@ Workspace  →  mcp-bridge:9119  →  hermes-agent:9119
 Once a future `hermes-agent` release ships native `/api/mcp`, remove the
 `mcp-bridge` service from `docker-compose.yml` and point `HERMES_DASHBOARD_URL`
 back to `http://hermes-agent:9119`.
+
+For this repository's current hosted MCP endpoint pattern, this path is considered
+legacy and should be removed once no active Hermes Workspace docker-compose users
+depend on it.
