@@ -106,9 +106,6 @@ class ServiceWebhookDispatcher
                 'assignedUserId' => $task->get('assignedUserId'),
                 'assignedUserName' => (string) ($task->get('assignedUserName') ?? ''),
                 'ownerId' => $task->get('assignedUserId'),
-                'linkedAccountId' => $task->get('linkedAccountId'),
-                'linkedAccountName' => (string) ($task->get('linkedAccountName') ?? ''),
-                'linkedAccount' => (string) ($task->get('linkedAccountName') ?? $task->get('accountName') ?? ''),
                 'accountId' => $task->get('accountId'),
                 'accountName' => (string) ($task->get('accountName') ?? ''),
                 'contactId' => $task->get('contactId'),
@@ -130,8 +127,8 @@ class ServiceWebhookDispatcher
                 'emailAddress' => $clientContext['contactEmail'],
             ],
             'account' => [
-                'id' => $task->get('linkedAccountId') ?: $task->get('accountId'),
-                'name' => (string) ($task->get('linkedAccountName') ?: $task->get('accountName') ?: ''),
+                'id' => $task->get('accountId'),
+                'name' => (string) ($task->get('accountName') ?: ''),
                 'emailAddress' => $clientContext['accountEmail'],
             ],
         ];
@@ -164,7 +161,6 @@ class ServiceWebhookDispatcher
     {
         $name = trim((string) (
             $task->get('contactName')
-            ?: $task->get('linkedAccountName')
             ?: $task->get('accountName')
             ?: 'there'
         ));
@@ -183,7 +179,7 @@ class ServiceWebhookDispatcher
             }
         }
 
-        $accountId = $task->get('linkedAccountId') ?: $task->get('accountId');
+        $accountId = $task->get('accountId');
         if ($accountId) {
             $account = $this->entityManager->getEntityById('Account', $accountId);
             if ($account) {

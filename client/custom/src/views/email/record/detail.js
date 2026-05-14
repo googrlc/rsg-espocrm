@@ -60,8 +60,6 @@ define('custom:views/email/record/detail', ['views/email/record/detail'], functi
             if (account.id) {
                 defaults.accountId = account.id;
                 defaults.accountName = account.name;
-                defaults.linkedAccountId = account.id;
-                defaults.linkedAccountName = account.name;
             }
 
             if (contact.id) {

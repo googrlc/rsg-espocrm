@@ -100,7 +100,7 @@ class AccountHealthManager
             ? $this->entityManager
                 ->getRDBRepository('Task')
                 ->where([
-                    'linkedAccountId' => $accountId,
+                    'accountId' => $accountId,
                     'status!=' => ['Completed', 'Cancelled'],
                 ])
                 ->find()
@@ -355,7 +355,7 @@ class AccountHealthManager
                 $openRescueCount++;
             }
 
-            $dueDate = $this->toDate((string) ($task->get('dateEndDate') ?? $task->get('dateEnd') ?? ''));
+            $dueDate = $this->toDate((string) ($task->get('dateEnd') ?? $task->get('dateEndDate') ?? ''));
             if ($dueDate && $dueDate < $today) {
                 $overdueCount++;
                 if ($urgency === 'Urgent') {

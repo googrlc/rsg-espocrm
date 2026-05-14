@@ -37,6 +37,32 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
         BUSINESS_PROFILE_TAB: 4,
         GROUP_BENEFITS_TAB: 5,
 
+        setup: function () {
+            Dep.prototype.setup.call(this);
+
+            this.addMenuItem("buttons", {
+                name: "createTask",
+                label: "+ Task",
+                style: "primary",
+                acl: "create",
+                aclScope: "Task",
+                action: "createTask"
+            });
+        },
+
+        actionCreateTask: function () {
+            this.createView("createTaskModal", "custom:views/task/record/create-modal", {
+                scope: "Task",
+                accountId: this.model.id,
+                accountName: this.model.get("name"),
+                parentType: "Account",
+                parentId: this.model.id,
+                parentName: this.model.get("name")
+            }, function (view) {
+                view.render();
+            });
+        },
+
         afterRender: function () {
             Dep.prototype.afterRender.call(this);
 

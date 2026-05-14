@@ -120,6 +120,7 @@
                 "",
                 "Account",
                 "Contact",
+                "Opportunity",
                 "Policy"
             ],
             "isCustom": true,
@@ -127,6 +128,7 @@
             "style": {
                 "Account": "warning",
                 "Contact": "success",
+                "Opportunity": "primary",
                 "Policy": "info"
             },
             "tooltipText": "Where this task was created from \u2014 enables Account rollup"
@@ -134,7 +136,13 @@
         "linkedAccount": {
             "type": "link",
             "isCustom": true,
-            "tooltipText": "Parent account \u2014 all tasks roll up to this account"
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "tooltipText": "Legacy account link retained for migration and older task creators"
+        },
+        "assignedUser": {
+            "view": "custom:views/task/fields/assigned-user"
         },
         "parent": {
             "entityList": [

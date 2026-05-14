@@ -2502,7 +2502,7 @@
     "linkedTasks": {
       "type": "hasMany",
       "entity": "Task",
-      "foreign": "linkedAccount",
+      "foreign": "account",
       "isCustom": true
     },
     "activityLogs": {

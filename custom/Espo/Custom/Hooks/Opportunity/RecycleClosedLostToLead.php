@@ -6,7 +6,7 @@ use Espo\Core\Hook\Hook\AfterSave;
 use Espo\Custom\Classes\Opportunity\ClosedLostRecycleWindows;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
-use Espo\ORM\Repository\Option\SaveOption;
+use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\ORM\Repository\Option\SaveOptions;
 
 class RecycleClosedLostToLead implements AfterSave
@@ -142,17 +142,14 @@ class RecycleClosedLostToLead implements AfterSave
             'status' => 'Inbox',
             'taskType' => 'Follow Up',
             'urgency' => $this->resolveTaskUrgency($callbackDate),
-            'dateEndDate' => $callbackDate,
+            'dateEnd' => $callbackDate,
             'parentType' => 'Lead',
             'parentId' => $lead->getId(),
             'parentName' => $lead->get('name'),
             'assignedUserId' => $lead->get('assignedUserId'),
             'assignedUserName' => $lead->get('assignedUserName'),
-            'teamsIds' => $lead->get('teamsIds') ?? [],
             'accountId' => $opportunity->get('accountId'),
             'accountName' => $opportunity->get('accountName'),
-            'linkedAccountId' => $opportunity->get('accountId'),
-            'linkedAccountName' => $opportunity->get('accountName'),
             'description' => 'Follow up for recycled Closed Lost opportunity at callback window.',
             'automationKey' => $automationKey,
         ]);

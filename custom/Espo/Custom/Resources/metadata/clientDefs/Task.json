@@ -3,6 +3,7 @@
     "statusField": "status",
     "kanbanCardView": "custom:views/task/kanban-card",
     "recordViews": {
+        "detail": "custom:views/task/record/detail-view",
         "edit": "custom:views/task/record/edit"
     },
     "filterList": [

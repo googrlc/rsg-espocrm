@@ -5,7 +5,7 @@ namespace Espo\Custom\Hooks\Lead;
 use Espo\Core\Hook\Hook\AfterSave;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
-use Espo\ORM\Repository\Option\SaveOption;
+use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\ORM\Repository\Option\SaveOptions;
 
 class SyncConvertedRecords implements AfterSave

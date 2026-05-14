@@ -28,6 +28,8 @@ class SendServiceWebhook implements AfterSave
         }
 
         $accountIds = array_filter(array_unique([
+            $entity->get('accountId'),
+            $entity->getFetched('accountId'),
             $entity->get('linkedAccountId'),
             $entity->getFetched('linkedAccountId'),
         ]));

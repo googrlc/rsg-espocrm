@@ -20,6 +20,9 @@
     "boolFilterList": [
         "onlyMy"
     ],
+    "recordViews": {
+        "detail": "custom:views/policy/record/detail-view"
+    },
     "kanbanCardView": "custom:views/policy/kanban-card",
     "sidePanels": {
         "detail": [

@@ -1,5 +1,5 @@
 [
-    {"name": "linkedAccount"},
+    {"name": "account"},
     {"name": "priority"},
     {"name": "dateEnd"},
     {"name": "taskType"},

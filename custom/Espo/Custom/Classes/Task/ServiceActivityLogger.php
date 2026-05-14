@@ -66,7 +66,6 @@ class ServiceActivityLogger
             'policyName' => $context['policyName'],
             'assignedUserId' => $task->get('assignedUserId'),
             'assignedUserName' => $task->get('assignedUserName'),
-            'teamsIds' => $task->get('teamsIds') ?? [],
         ]);
 
         $this->entityManager->saveEntity($activity);
@@ -168,8 +167,8 @@ class ServiceActivityLogger
 
     private function resolveContext(Entity $task): array
     {
-        $accountId = $task->get('linkedAccountId') ?: $task->get('accountId');
-        $accountName = (string) ($task->get('linkedAccountName') ?: $task->get('accountName') ?: '');
+        $accountId = $task->get('accountId') ?: $task->get('linkedAccountId');
+        $accountName = (string) ($task->get('accountName') ?: $task->get('linkedAccountName') ?: '');
         $contactId = $task->get('contactId');
         $contactName = (string) ($task->get('contactName') ?? '');
         $policyId = null;

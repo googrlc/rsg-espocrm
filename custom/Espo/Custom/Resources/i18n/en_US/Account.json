@@ -4,7 +4,7 @@
     "Tasks \u2014 All Related": "Tasks \u2014 All Related"
   },
   "fields": {
-    "linkedTasks": "Linked Tasks",
+    "linkedTasks": "Account Tasks",
     "lob": "Line of Business",
     "x_date": "Renewal X-Date",
     "estimated_premium": "Estimated Premium",
@@ -148,7 +148,7 @@
     "nps_score": "Net Promoter Score"
   },
   "links": {
-    "linkedTasks": "Linked Tasks",
+    "linkedTasks": "Account Tasks",
     "carrierPolicies": "Carrier Policies",
     "clientNotes": "Client Notes"
   },

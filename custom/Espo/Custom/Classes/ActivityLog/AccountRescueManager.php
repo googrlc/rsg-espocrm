@@ -44,7 +44,7 @@ class AccountRescueManager
         }
 
         $account = $this->entityManager->getEntityById('Account', $accountId);
-        [$assignedUserId, $assignedUserName, $teamsIds] = $this->resolveOwnership($activityLog, $policy, $account);
+        [$assignedUserId, $assignedUserName] = $this->resolveOwnership($activityLog, $policy, $account);
         [$parentType, $parentId, $parentName, $taskSource] = $this->resolveParent($activityLog, $policy);
 
         $task = $this->entityManager->getNewEntity('Task');
@@ -58,19 +58,16 @@ class AccountRescueManager
             'triageSummary' => $this->buildSummary($activityLog, $rule),
             'triageReason' => $this->buildReason($activityLog, $rule),
             'description' => $this->buildDescription($activityLog, $rule),
-            'linkedAccountId' => $activityLog->get('accountId'),
-            'linkedAccountName' => $activityLog->get('accountName'),
             'accountId' => $activityLog->get('accountId'),
             'accountName' => $activityLog->get('accountName'),
             'contactId' => $activityLog->get('contactId'),
             'contactName' => $activityLog->get('contactName'),
             'assignedUserId' => $assignedUserId,
             'assignedUserName' => $assignedUserName,
-            'teamsIds' => $teamsIds,
             'parentType' => $parentType,
             'parentId' => $parentId,
             'parentName' => $parentName,
-            'dateEndDate' => $this->calculateDueDate((int) $rule['slaDays']),
+            'dateEnd' => $this->calculateDueDate((int) $rule['slaDays']),
             'sourceActivityLogId' => $activityLog->getId(),
             'automationKey' => $rule['automationKey'],
         ]);
@@ -123,21 +120,17 @@ class AccountRescueManager
     {
         $assignedUserId = $activityLog->get('assignedUserId');
         $assignedUserName = $activityLog->get('assignedUserName');
-        $teamsIds = $activityLog->get('teamsIds') ?? [];
-
         if (!$assignedUserId && $policy) {
             $assignedUserId = $policy->get('assignedUserId');
             $assignedUserName = $policy->get('assignedUserName');
-            $teamsIds = $teamsIds ?: ($policy->get('teamsIds') ?? []);
         }
 
         if (!$assignedUserId && $account) {
             $assignedUserId = $account->get('assignedUserId');
             $assignedUserName = $account->get('assignedUserName');
-            $teamsIds = $teamsIds ?: ($account->get('teamsIds') ?? []);
         }
 
-        return [$assignedUserId, $assignedUserName, $teamsIds];
+        return [$assignedUserId, $assignedUserName];
     }
 
     private function resolveParent(Entity $activityLog, ?Entity $policy): array

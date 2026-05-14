@@ -1,6 +1,9 @@
 {
     "colors": [],
     "iconClass": "fas fa-money-bill-wave",
+    "recordViews": {
+        "detail": "custom:views/opportunity/record/detail-view"
+    },
     "dynamicLogic": {
         "fields": {
             "lineOfBusiness": {
@@ -711,20 +714,26 @@
     "sidePanels": {
         "detail": [
             {
+                "name": "tasksWidget",
+                "label": "Tasks",
+                "view": "custom:views/opportunity/record/panels/tasks-widget",
+                "order": 1
+            },
+            {
                 "name": "activities",
                 "reference": "activities",
                 "view": "crm:views/opportunity/record/panels/activities",
-                "order": 1
+                "order": 2
             },
             {
                 "name": "history",
                 "reference": "history",
-                "order": 2
+                "order": 3
             },
             {
                 "name": "tasks",
                 "reference": "tasks",
-                "order": 3
+                "order": 4
             }
         ]
     }

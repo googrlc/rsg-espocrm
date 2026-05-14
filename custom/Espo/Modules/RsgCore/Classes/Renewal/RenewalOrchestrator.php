@@ -267,17 +267,14 @@ class RenewalOrchestrator
             'parentId' => $renewal->getId(),
             'parentType' => 'Renewal',
             'parentName' => $renewal->get('name'),
-            'linkedAccountId' => $policy->get('accountId'),
-            'linkedAccountName' => $taskAccountName,
             'accountId' => $policy->get('accountId'),
             'accountName' => $taskAccountName,
             'contactId' => $policy->get('contactId'),
             'contactName' => $policy->get('contactName'),
             'assignedUserId' => $renewal->get('assignedUserId'),
             'assignedUserName' => $renewal->get('assignedUserName'),
-            'teamsIds' => $renewal->get('teamsIds') ?? [],
             'urgency' => $this->mapTaskUrgency($expirationDate),
-            'dateEndDate' => $this->calculateInitialTaskDueDate($expirationDate),
+            'dateEnd' => $this->calculateInitialTaskDueDate($expirationDate),
             'description' => $this->buildTaskDescription($policy),
         ]);
 

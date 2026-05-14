@@ -161,7 +161,7 @@ class AccountPlaybookManager
         $existingTask = $this->entityManager
             ->getRDBRepository('Task')
             ->where([
-                'linkedAccountId' => $account->getId(),
+                'accountId' => $account->getId(),
                 'automationKey' => $playbook['automationKey'],
                 'status!=' => ['Completed', 'Cancelled'],
             ])
@@ -179,20 +179,17 @@ class AccountPlaybookManager
             'taskSource' => 'Account',
             'urgency' => $playbook['urgency'],
             'syncSource' => 'Manual',
-            'linkedAccountId' => $account->getId(),
-            'linkedAccountName' => $account->get('name'),
             'accountId' => $account->getId(),
             'accountName' => $account->get('name'),
             'assignedUserId' => $account->get('assignedUserId'),
             'assignedUserName' => $account->get('assignedUserName'),
-            'teamsIds' => $account->get('teamsIds') ?? [],
             'parentType' => 'Account',
             'parentId' => $account->getId(),
             'parentName' => $account->get('name'),
             'triageSummary' => $playbook['name'],
             'triageReason' => $playbook['reason'],
             'description' => $playbook['description'],
-            'dateEndDate' => $this->calculateDueDate((int) $playbook['dueDays']),
+            'dateEnd' => $this->calculateDueDate((int) $playbook['dueDays']),
             'automationKey' => $playbook['automationKey'],
         ]);
 

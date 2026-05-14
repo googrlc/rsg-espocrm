@@ -1,26 +1,17 @@
-Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) {
+define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) {
 
     return Dep.extend({
 
         template: 'custom:record/kanban-card-task',
 
-        events: _.extend({}, Dep.prototype.events || {}, {
-            'click .task-card-actions': function (e) {
-                e.stopPropagation();
-            },
-            'click a': function (e) {
-                e.stopPropagation();
-            }
-        }),
-
         data: function () {
-            const data = Dep.prototype.data.call(this);
-            const account = this.resolveAccount();
-            const dueDate = this.buildDueDate(this.model.get('dateEnd') || this.model.get('dateEndDate'));
-            const priority = this.buildPriority(this.model.get('priority'));
-            const assignedUserName = this.model.get('assignedUserName') || 'Unassigned';
-            const hasPriority = Boolean(priority.label);
-            const hasDueDate = Boolean(dueDate.label);
+            var data = Dep.prototype.data.call(this);
+            var account = this.resolveAccount();
+            var dueDate = this.buildDueDate(this.model.get('dateEnd') || this.model.get('dateEndDate'));
+            var priority = this.buildPriority(this.model.get('priority'));
+            var assignedUserName = this.model.get('assignedUserName') || 'Unassigned';
+            var hasPriority = Boolean(priority.label);
+            var hasDueDate = Boolean(dueDate.label);
 
             return Object.assign({}, data, {
                 accountId: account.id,
@@ -39,20 +30,20 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
         },
 
         resolveAccount: function () {
-            let id = this.model.get('linkedAccountId') || this.model.get('accountId');
-            let name = this.model.get('linkedAccountName') || this.model.get('accountName');
+            var id = this.model.get('accountId');
+            var name = this.model.get('accountName');
 
             if (!id && this.model.get('parentType') === 'Account') {
                 id = this.model.get('parentId');
                 name = this.model.get('parentName');
             }
 
-            return { id: id, name: name };
+            return {id: id, name: name};
         },
 
         buildPriority: function (priority) {
-            const label = priority || '';
-            const normalized = String(priority || '').toLowerCase().replace(/\s+/g, '-');
+            var label = priority || '';
+            var normalized = String(priority || '').toLowerCase().replace(/\s+/g, '-');
 
             return {
                 label: label,
@@ -62,16 +53,16 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
 
         buildDueDate: function (dateValue) {
             if (!dateValue) {
-                return { label: '', className: '', cardClass: '' };
+                return {label: '', className: '', cardClass: ''};
             }
 
-            const today = new Date();
+            var today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            const due = new Date(dateValue);
+            var due = new Date(dateValue);
             due.setHours(0, 0, 0, 0);
 
-            const diffDays = Math.floor((due - today) / 86400000);
+            var diffDays = Math.floor((due - today) / 86400000);
 
             if (diffDays < 0) {
                 return {
@@ -90,14 +81,14 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
             }
 
             return {
-                label: due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                label: due.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}),
                 className: 'task-due-upcoming',
                 cardClass: ''
             };
         },
 
         buildInitials: function (name) {
-            const parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+            var parts = String(name || '').trim().split(/\s+/).filter(Boolean);
 
             if (!parts.length || name === 'Unassigned') {
                 return '--';
@@ -111,7 +102,7 @@ Espo.define('custom:views/task/kanban-card', ['views/record/kanban'], function (
         },
 
         buildOwnerClass: function (name) {
-            const normalizedName = String(name || '').toLowerCase();
+            var normalizedName = String(name || '').toLowerCase();
 
             if (normalizedName.includes('gretch')) {
                 return 'task-owner-gretchen';

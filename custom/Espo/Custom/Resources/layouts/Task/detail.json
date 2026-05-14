@@ -7,8 +7,8 @@
                 {"name": "status"}
             ],
             [
-                {"name": "linkedAccount"},
-                {"name": "contact"}
+                {"name": "account"},
+                {"name": "assignedUser"}
             ],
             [
                 {"name": "priority"},
@@ -16,19 +16,7 @@
             ],
             [
                 {"name": "taskType"},
-                {"name": "assignedUser"}
-            ],
-            [
-                {"name": "taskSource"},
-                {"name": "syncSource"}
-            ]
-        ]
-    },
-    {
-        "label": "Context",
-        "rows": [
-            [
-                {"name": "parent", "fullWidth": true}
+                false
             ]
         ]
     },
