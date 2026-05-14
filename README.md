@@ -12,6 +12,17 @@ Server: rrespocrm-rsg-u69864.vm.elestio.app
 Key: RSG Elestio EspoCRM (1Password)
 Note: Port 22 is IP-restricted — whitelist your IP in Elestio dashboard first
 
+## CRM vs MCP Endpoints
+
+Use separate URLs for EspoCRM and Hermes/OpenClaw MCP connectivity.
+
+- `ESPOCRM_BASE_URL` (or `CRM_URL`) should be the EspoCRM instance base URL:
+  - `https://rrespocrm-rsg-u69864.vm.elestio.app/`
+- `MCP_URL` should be the MCP server endpoint URL used by Hermes/agents:
+  - `https://your-mcp-server-domain/mcp`
+
+Do not point Hermes MCP clients at the CRM homepage/API URL directly. This works only when an MCP server is actually deployed and reachable at the MCP endpoint.
+
 ## Service Webhooks
 Set these in EspoCRM config to enable outbound service-task webhooks:
 

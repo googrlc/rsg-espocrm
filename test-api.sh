@@ -1,7 +1,7 @@
 #!/bin/bash
 # test-api.sh — Test EspoCRM API connection
 
-CRM_URL="https://YOUR_CRM_DOMAIN.com"
+CRM_URL="https://rrespocrm-rsg-u69864.vm.elestio.app"
 API_KEY="YOUR_API_KEY_HERE"
 
 # Test with API key
