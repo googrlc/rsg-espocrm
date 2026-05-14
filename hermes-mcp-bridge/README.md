@@ -2,6 +2,8 @@
 
 Standalone MCP bridge service for Hermes configuration flows.
 
+This is the canonical MCP bridge path for hosted deployment in this repository.
+
 ## Exposed Endpoints
 
 - `GET /healthz` - health check
