@@ -8,7 +8,7 @@ This is the canonical MCP bridge path for hosted deployment in this repository.
 
 - `GET /healthz` - health check
 - `POST /mcp` - MCP JSON-RPC endpoint (use this in Hermes)
-- `GET /mcp` - legacy probe/list path
+- `GET /mcp` - MCP discovery/probe path
 - `GET /api/mcp` - Hermes dashboard-compatible MCP list
 - `POST /api/mcp`, `PUT /api/mcp/{name}`, `DELETE /api/mcp/{name}`
 

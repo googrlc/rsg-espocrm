@@ -192,11 +192,7 @@ async def healthz() -> JSONResponse:
 async def list_mcp_via_short_path(request: Request):
     if not _check_auth(request):
         return JSONResponse({"ok": False, "error": "Unauthorized"}, status_code=401)
-    # Preserve existing management contract for legacy clients while including
-    # discovery fields used by newer MCP client probes.
-    payload = _server_list_payload()
-    payload.update(_discover_payload())
-    return JSONResponse(payload)
+    return JSONResponse(_discover_payload())
 
 
 @app.get("/mcp/discover")
