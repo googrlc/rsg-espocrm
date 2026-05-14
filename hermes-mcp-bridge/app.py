@@ -176,6 +176,13 @@ def _discover_payload() -> dict[str, Any]:
     }
 
 
+def _server_list_payload() -> dict[str, Any]:
+    config = _read_config()
+    servers = _get_servers(config)
+    items = [_normalize(name, entry) for name, entry in servers.items() if entry is not None]
+    return {"servers": items, "total": len(items), "categories": KNOWN_CATEGORIES}
+
+
 @app.get("/healthz")
 async def healthz() -> JSONResponse:
     return JSONResponse({"ok": True})
@@ -185,7 +192,11 @@ async def healthz() -> JSONResponse:
 async def list_mcp_via_short_path(request: Request):
     if not _check_auth(request):
         return JSONResponse({"ok": False, "error": "Unauthorized"}, status_code=401)
-    return JSONResponse(_discover_payload())
+    # Preserve existing management contract for legacy clients while including
+    # discovery fields used by newer MCP client probes.
+    payload = _server_list_payload()
+    payload.update(_discover_payload())
+    return JSONResponse(payload)
 
 
 @app.get("/mcp/discover")
@@ -259,10 +270,7 @@ async def mcp_jsonrpc(request: Request):
 async def list_mcp(request: Request):
     if not _check_auth(request):
         return JSONResponse({"ok": False, "error": "Unauthorized"}, status_code=401)
-    config = _read_config()
-    servers = _get_servers(config)
-    items = [_normalize(n, e) for n, e in servers.items() if e is not None]
-    return JSONResponse({"servers": items, "total": len(items), "categories": KNOWN_CATEGORIES})
+    return JSONResponse(_server_list_payload())
 
 
 @app.post("/api/mcp")
