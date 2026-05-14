@@ -125,13 +125,19 @@ def _mcp_tools() -> list[dict[str, Any]]:
                 "properties": {
                     "message": {"type": "string", "description": "Optional ping message."}
                 },
+                "required": [],
                 "additionalProperties": False,
             },
         },
         {
             "name": "espocrm_get_current_user",
             "description": "Fetch current EspoCRM API user via /api/v1/App/user.",
-            "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False},
+            "inputSchema": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": False,
+            },
         },
     ]
 
@@ -164,15 +170,17 @@ def _run_espocrm_get_current_user() -> str:
 
 
 def _discover_payload() -> dict[str, Any]:
-    tools = _mcp_tools()
+    """Return a valid MCP 2024-11-05 HTTP transport discovery payload.
+
+    The response mirrors the ``initialize`` result shape plus a ``tools``
+    array (equivalent to a ``tools/list`` result) so that MCP clients can
+    discover capabilities and available tools in a single request.
+    """
     return {
-        "name": SERVER_NAME,
-        "description": "RSG EspoCRM MCP bridge",
-        "version": SERVER_VERSION,
         "protocolVersion": MCP_PROTOCOL_VERSION,
         "capabilities": {"tools": {"listChanged": False}},
         "serverInfo": {"name": SERVER_NAME, "version": SERVER_VERSION},
-        "tools": tools,
+        "tools": _mcp_tools(),
     }
 
 
