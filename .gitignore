@@ -1,14 +1,59 @@
-.DS_Store
-*.env
-.env
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+*.class
+*.exe
+*.dll
+*.so
+*.a
+*.out
+
+# Dependencies
+node_modules/
+venv/
 .venv/
-.venv-*/
+.env
+.env.local
+*.env.*
 
-# Optional local vanilla Espo clone for diffs (never commit upstream sources)
-official-espocrm/
+# Build directories
+dist/
+build/
+target/
+.gradle/
 
-# Never nest a second copy of this repo here (causes duplicate trees and confusion)
-rsg-espocrm/
+# Python specific
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+*.so
+.Python
+*.egg-info/
+.eggs/
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage/
+htmlcov/
 
-# Local clone of canonical schema repo (push DDL to googrlc/rsg-data-schema when permitted)
-rsg-data-schema/
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db
+```

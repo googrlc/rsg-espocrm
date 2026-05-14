@@ -561,13 +561,6 @@
         "High": "danger"
       }
     },
-    "linkedTasks": {
-      "type": "linkMultiple",
-      "isCustom": true,
-      "layoutDetailDisabled": true,
-      "layoutListDisabled": true,
-      "noLoad": true
-    },
     "client_since": {
       "notNull": false,
       "type": "date",
@@ -2498,12 +2491,6 @@
       "entity": "Task",
       "foreign": "parent",
       "layoutRelationshipsDisabled": false
-    },
-    "linkedTasks": {
-      "type": "hasMany",
-      "entity": "Task",
-      "foreign": "linkedAccount",
-      "isCustom": true
     },
     "activityLogs": {
       "type": "hasMany",
