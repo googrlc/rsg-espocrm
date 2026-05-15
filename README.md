@@ -35,6 +35,7 @@ The MCP bridge runs as the `espo-mcp` Docker sidecar in the Hermes Compose stack
 
 - `MCP_URL=https://<espo-mcp-domain>/mcp`
 
+
 ## Service Webhooks
 Set these in EspoCRM config to enable outbound service-task webhooks:
 
