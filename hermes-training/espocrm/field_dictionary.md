@@ -117,7 +117,7 @@ Per-LOB shortcut fields: `policyAutoActive`, `policyAutoCarrier`, `policyAutoPre
 
 | Field name | Label | Notes |
 |---|---|---|
-| `status` | Status | `New`, `Assigned`, `In Process`, `Converted`, `Recycled`, `Dead` |
+| `status` | Status | `New / Uncontacted`, `Attempting Contact`, `Connected`, `Gathering Info`, `Qualified`, `Nurture`, `DNC`, `Converted` |
 | `priority` | Priority | `Hot`, `Warm`, `Cold` |
 | `source` | Source | `Call`, `Email`, `Existing Customer`, `Partner`, `Public Relations`, `Web Site`, `Campaign`, `Other` |
 | `doNotCall` | Do Not Call | **Boolean — if true, do NOT call** |
@@ -150,9 +150,9 @@ Per-LOB shortcut fields: `policyAutoActive`, `policyAutoCarrier`, `policyAutoPre
 
 | Field name | Label | Notes |
 |---|---|---|
-| `stage` | Stage | See `schema.md` for pipeline order |
+| `stage` | Stage | `Discovery`, `Quoting`, `Markets Out / Shopping`, `Proposal Presented`, `Negotiation`, `Closed Won`, `Closed Lost` |
 | `businessType` | Business Type | `New Business`, `Renewal`, `Rewrite` |
-| `lineOfBusiness` | Line of Business | Full LOB enum — see `schema.md` |
+| `lineOfBusiness` | Line of Business | `Commercial Auto`, `Transportation / Trucking`, `General Liability`, `Workers Comp`, `Commercial Property`, `BOP`, `Professional Liability`, `Umbrella`, `Builders Risk`, `Inland Marine`, `Personal Auto`, `Homeowners`, `Renters`, `Condo`, `Dwelling Fire`, `Motorcycle`, `Boat`, `RV`, `Life`, `Health`, `Medicare`, `Group Benefits`, `Garagekeepers`, `Commercial Package`, `Other` |
 | `priority` | Priority | `Hot`, `Warm`, `Cold` |
 | `closeDate` | Close Date | Projected close/bind date |
 | `amount` | Amount | Bound/written premium (Currency) |
@@ -297,7 +297,7 @@ Per-LOB shortcut fields: `policyAutoActive`, `policyAutoCarrier`, `policyAutoPre
 
 | Field name | Label | Notes |
 |---|---|---|
-| `taskSource` | Source | `Account`, `Contact`, `Policy` |
+| `taskSource` | Source | `Account`, `Contact`, `Opportunity`, `Policy` |
 | `syncSource` | Sync Source | `Manual`, `Gmail`, `Slack`, `Momentum`, `n8n`, `Viktor` |
 | `triageReason` | Triage Reason | Text explaining why task was escalated |
 | `triageSummary` | Triage Summary | AI-generated summary of triage |

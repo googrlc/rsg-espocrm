@@ -15,7 +15,7 @@ Entity purposes, key enums, and immutable identifiers. For full field tables see
 
 Central hub record for a client or prospect household/business.
 
-**accountType** (Enum): `Prospect` · `Commercial Lines` · `Personal Lines` · `Group Benefits` · `Medicare` · `Life Insurance`
+**accountType** (Enum): `Prospect` · `Commercial Lines` · `Personal Lines` · `Group Benefits` · `Medicare` · `Life Insurance` · `Carrier` · `MGA`
 
 **accountStatus** (Enum): `Active` · `Urgent` · `Renewing` · `At Risk` · `Inactive`
 
@@ -55,11 +55,11 @@ Individual person linked to one or more Accounts.
 
 Unqualified prospect. Converts to Account + Contact + Opportunity.
 
-**status** (Enum, pipeline order): `New` → `Assigned` → `In Process` → `Converted` · `Recycled` · `Dead`
+**status** (Enum, pipeline order): `New / Uncontacted` → `Attempting Contact` → `Connected` → `Gathering Info` → `Qualified` · `Nurture` · `DNC` · `Converted`
 
 **priority** (Enum): `Hot` · `Warm` · `Cold`
 
-**source** (Enum): `Call` · `Email` · `Existing Customer` · `Partner` · `Public Relations` · `Web Site` · `Campaign` · `Other`
+**source** (Enum): `Call` · `Email` · `Existing Customer` · `Client Referral` · `Partner Referral` · `Public Relations` · `Web Site` · `Campaign` · `Other`
 
 > Once `status = Converted`, do not edit the Lead — edit the resulting Account, Contact, and Opportunity instead.
 
@@ -69,15 +69,13 @@ Unqualified prospect. Converts to Account + Contact + Opportunity.
 
 Sales pipeline item for new business or renewal.
 
-**stage** (Enum, new business pipeline): `Prospect` → `Qualify` → `Quote` → `Proposal` → `Negotiate` → `Won - Bound` · `Lost`
-
-**stage** (Enum, renewal pipeline): `Renewal Notice Sent` → `Markets Out / Shopping` → `Quoted` → `Presented to Client` → `Bound / Renewed` · `Non-Renewal / Lost`
+**stage** (Enum, pipeline order): `Discovery` → `Quoting` → `Markets Out / Shopping` → `Proposal Presented` → `Negotiation` → `Closed Won` · `Closed Lost`
 
 **businessType** (Enum): `New Business` · `Renewal` · `Rewrite`
 
 **priority** (Enum): `Hot` · `Warm` · `Cold`
 
-**lineOfBusiness** (Enum): `Commercial Auto` · `GL` · `Workers Comp` · `Property` · `BOP` · `PLI` · `Umbrella` · `Builders Risk` · `Inland Marine` · `Personal Auto` · `Homeowners` · `Renters` · `Condo` · `Dwelling Fire` · `Motorcycle` · `Boat` · `RV` · `Life` · `Health` · `Medicare` · `Group Benefits` · `Garagekeepers` · `Commercial Package` · `Other`
+**lineOfBusiness** (Enum): `Commercial Auto` · `Transportation / Trucking` · `General Liability` · `Workers Comp` · `Commercial Property` · `BOP` · `Professional Liability` · `Umbrella` · `Builders Risk` · `Inland Marine` · `Personal Auto` · `Homeowners` · `Renters` · `Condo` · `Dwelling Fire` · `Motorcycle` · `Boat` · `RV` · `Life` · `Health` · `Medicare` · `Group Benefits` · `Garagekeepers` · `Commercial Package` · `Other`
 
 **lostReason** (Enum): `Price` · `Coverage` · `Service` · `Competitor Stole` · `Business Closed` · `Carrier Non-Renewed` · `Client Moved` · `Unknown` · `N/A`
 
@@ -111,9 +109,9 @@ Tracks the window between renewal notice and re-bind or loss.
 
 **urgency** (Enum): `Critical` · `High` · `Medium` · `Low`
 
-**lastContactMethod** (Enum): `Email` · `Call` · `Text` · `In Person`
+**lastContactMethod** (Enum): `Email` · `Call` · `Text` · `In person`
 
-**lostReason** (Enum): `Price` · `Coverage` · `Unresponsive` · `Moved Carrier` · `Other`
+**lostReason** (Enum): `Price` · `Coverage` · `Unresponsive` · `Moved carrier` · `Other`
 
 ---
 
@@ -121,7 +119,7 @@ Tracks the window between renewal notice and re-bind or loss.
 
 Commission transaction tied to an Opportunity, Policy, or Renewal.
 
-**commissionType** (Enum): `New Business` · `Renewal`
+**commissionType** (Enum): `New Business` · `Renewal` · `Endorsement`
 
 **status** (Enum): `Estimated` · `Posted` · `Overdue`
 
@@ -133,7 +131,7 @@ Commission transaction tied to an Opportunity, Policy, or Renewal.
 
 ## Task
 
-Actionable to-do item. Client Service tasks fire outbound webhooks on status changes.
+Actionable to-do item. Most task types fire outbound webhooks on status changes — see `guardrails.md` §Task webhooks.
 
 **status** (Enum): `Inbox` · `In Progress` · `Waiting on Client` · `Waiting on Carrier` · `Completed` · `Cancelled`
 
@@ -143,7 +141,7 @@ Actionable to-do item. Client Service tasks fire outbound webhooks on status cha
 
 **syncSource** (Enum): `Manual` · `Gmail` · `Slack` · `Momentum` · `n8n` · `Viktor`
 
-> Status changes on `Client Service` tasks send real client-facing notifications. Update one at a time with user confirmation. See `guardrails.md` §Task webhooks.
+> Status changes on most task types send real client-facing notifications. Update one at a time with user confirmation. See `guardrails.md` §Task webhooks.
 
 ---
 

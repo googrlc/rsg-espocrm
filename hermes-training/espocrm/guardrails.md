@@ -71,12 +71,13 @@ Do not overwrite any of these:
 
 ---
 
-## Task webhooks — Client Service tasks
+## Task webhooks — most task types
 
 | Rule | Detail |
 |---|---|
-| **Status changes fire real client notifications** | Moving a `Client Service` task to `In Progress`, `Waiting on Client`, or `Completed` triggers n8n webhooks that send emails/notifications to clients |
-| **Do not bulk-update service task statuses** | Each status change has real client-facing consequences; update one at a time with user confirmation |
+| **Status changes fire real client notifications** | Moving a task to `In Progress`, `Waiting on Client`, or `Completed` triggers n8n webhooks that send emails/notifications to clients — for task types: `Client Service`, `Policy Change`, `Claims`, `Follow Up`, `Onboarding`, `Admin`, `Other` (and blank type) |
+| **`New Business`, `Renewal`, `Commission` do NOT fire webhooks** | Only those task types are safe to bulk-update without client impact |
+| **Do not bulk-update webhook-triggering task statuses** | Each status change has real client-facing consequences; update one at a time with user confirmation |
 
 ---
 

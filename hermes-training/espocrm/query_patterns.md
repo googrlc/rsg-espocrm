@@ -27,7 +27,7 @@ Common patterns for searching and filtering CRM records via MCP tools.
 Filter Accounts where `daysToRenewal <= 60` and `accountStatus = Active`. Sort by `daysToRenewal` ascending.
 
 ### Open opportunities in pipeline
-Filter Opportunities where `stage` NOT IN (`Won - Bound`, `Lost`, `Bound / Renewed`, `Non-Renewal / Lost`). Sort by `closeDate` ascending.
+Filter Opportunities where `stage` NOT IN (`Closed Won`, `Closed Lost`). Sort by `closeDate` ascending.
 
 ### Overdue tasks
 Filter Tasks where `isOverdue = true` and `status` NOT IN (`Completed`, `Cancelled`). Sort by `dateEnd` ascending.
