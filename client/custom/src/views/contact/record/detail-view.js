@@ -1,11 +1,11 @@
-define('custom:views/contact/record/detail-view', ['crm:views/contact/detail'], function (ContactDetailView) {
+define('custom:views/contact/record/detail-view', ['views/record/detail'], function (Dep) {
 
-    return ContactDetailView.extend({
+    return Dep.extend({
 
         setup: function () {
-            ContactDetailView.prototype.setup.call(this);
+            Dep.prototype.setup.call(this);
 
-            this.addMenuItem('buttons', {
+            this.addButton({
                 name: 'createTask',
                 label: '+ Task',
                 action: 'createTask',

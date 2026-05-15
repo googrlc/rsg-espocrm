@@ -3,15 +3,15 @@
         "name": ":assignedUser"
     },
     {
-        "name": "line_of_business"
+        "name": "lineOfBusiness"
     },
     {
         "name": "probability"
     },
     {
-        "name": "business_type"
+        "name": "businessType"
     },
     {
-        "name": "health_coverage_type"
+        "name": "healthCoverageType"
     }
 ]

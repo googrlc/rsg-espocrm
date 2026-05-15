@@ -8,6 +8,6 @@ class NewBusiness implements Filter
 {
     public function apply(SelectBuilder $queryBuilder, string $boolFilterName): void
     {
-        $queryBuilder->where(["business_type" => "New Business"]);
+        $queryBuilder->where(["businessType" => "New Business"]);
     }
 }

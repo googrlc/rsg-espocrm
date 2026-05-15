@@ -6,16 +6,16 @@
         "name": "account"
     },
     {
-        "name": "estimated_premium"
+        "name": "estimatedPremium"
     },
     {
         "name": "priority"
     },
     {
-        "name": "line_of_business"
+        "name": "lineOfBusiness"
     },
     {
-        "name": "business_type"
+        "name": "businessType"
     },
     {
         "name": "stage"

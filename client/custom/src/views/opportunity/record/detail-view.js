@@ -1,11 +1,11 @@
-define('custom:views/opportunity/record/detail-view', ['crm:views/opportunity/detail'], function (OpportunityDetailView) {
+define('custom:views/opportunity/record/detail-view', ['views/record/detail'], function (Dep) {
 
-    return OpportunityDetailView.extend({
+    return Dep.extend({
 
         setup: function () {
-            OpportunityDetailView.prototype.setup.call(this);
+            Dep.prototype.setup.call(this);
 
-            this.addMenuItem('buttons', {
+            this.addButton({
                 name: 'createTask',
                 label: '+ Task',
                 action: 'createTask',
@@ -25,7 +25,7 @@ define('custom:views/opportunity/record/detail-view', ['crm:views/opportunity/de
         },
 
         afterRender: function () {
-            OpportunityDetailView.prototype.afterRender.call(this);
+            Dep.prototype.afterRender.call(this);
             this.handlePolicyStubBanner();
         },
 

@@ -1,5 +1,4 @@
 {
-    "streamPanelView": "custom:views/stream/panel-read-only",
     "filterList": [
         {
             "name": "recentlyCreated"

@@ -52,12 +52,12 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       this.tabDefs = {
         commercial: { label: 'Commercial Lines', color: '#2563eb',
           where: [{ type: 'equals', attribute: 'account_type', value: 'Commercial Lines' },{ type: 'in', attribute: 'account_status', value: ['Active','Urgent','Renewing','At Risk'] }],
-          select: 'id,name,industry,phoneNumber,account_status,assignedUserName',
+          select: 'id,name,industry,phoneNumber,account_status,assignedUserName,total_active_premium',
           columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'industry', label: 'Industry', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: 'account_status', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         personal: { label: 'Personal Lines', color: '#16a34a',
           where: [{ type: 'equals', attribute: 'account_type', value: 'Personal Lines' },{ type: 'in', attribute: 'account_status', value: ['Active','Urgent','Renewing','At Risk'] }],
-          select: 'id,name,phoneNumber,account_status,csrName',
+          select: 'id,name,phoneNumber,account_status,csrName,total_active_premium',
           columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'phoneNumber', label: 'Phone', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'account_status', label: 'Status', type: 'badge', sortable: true },{ key: 'csrName', label: 'CSR', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         prospect: { label: 'Prospects', color: '#b45309',
@@ -67,13 +67,13 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
           defaultSort: { key: 'estimated_premium', dir: 'desc' } },
         inactive: { label: 'Inactive', color: '#6b7280',
           where: [{ type: 'equals', attribute: 'account_status', value: 'Inactive' }],
-          select: 'id,name,account_type,assignedUserName',
+          select: 'id,name,account_type,assignedUserName,total_active_premium',
           columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'account_type', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Last Premium', type: 'currency', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: '_totalPremium', dir: 'desc' } },
         needsReview: { label: 'Needs Review', color: '#f59e0b',
           where: [{ type: 'notEquals', attribute: 'account_status', value: 'Inactive' }],
           clientFilter: true,
-          select: 'id,name,account_type,account_status,assignedUserName',
+          select: 'id,name,account_type,account_status,assignedUserName,total_active_premium',
           columns: [{ key: 'name', label: 'Account', type: 'link', sortable: true },{ key: 'account_type', label: 'Type', type: 'text', sortable: true },{ key: '_totalPremium', label: 'Premium', type: 'currency', sortable: true },{ key: 'account_status', label: 'Status', type: 'badge', sortable: true },{ key: 'assignedUserName', label: 'Assigned', type: 'text', sortable: true }],
           defaultSort: { key: 'name', dir: 'asc' } }
       };
@@ -101,9 +101,10 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
         self.counts[tabId] = accounts.length; self._updateCount(tabId);
         if (accounts.length === 0) { self.cachedData[tabId] = accounts; self._renderTable(tabId); return; }
         var accountIds = accounts.map(function (a) { return a.id; });
-        Espo.Ajax.getRequest('Policy', { maxSize: 200, offset: 0, select: 'id,accountId,premium_amount', where: [{ type: 'in', attribute: 'accountId', value: accountIds },{ type: 'in', attribute: 'status', value: ['Active', 'Renewing'] }] }).then(function (policyData) {
+        accounts.forEach(function (a) { a._totalPremium = a.total_active_premium || 0; });
+        Espo.Ajax.getRequest('Policy', { maxSize: 200, offset: 0, select: 'id,accountId,premium_amount', where: [{ type: 'in', attribute: 'accountId', value: accountIds },{ type: 'in', attribute: 'status', value: ['Active', 'Renewing', 'Up for Renewal'] }] }).then(function (policyData) {
           var premiumMap = {}; (policyData.list || []).forEach(function (p) { if (p.accountId && p.premium_amount) premiumMap[p.accountId] = (premiumMap[p.accountId] || 0) + p.premium_amount; });
-          accounts.forEach(function (a) { a._totalPremium = premiumMap[a.id] || 0; });
+          accounts.forEach(function (a) { if (!a.total_active_premium && premiumMap[a.id]) a._totalPremium = premiumMap[a.id]; });
           self.cachedData[tabId] = accounts; self._renderTable(tabId);
         }).catch(function () { self.cachedData[tabId] = accounts; self._renderTable(tabId); });
       }).catch(function (xhr) { self._showTableError(tabId, 'API error ' + (xhr && xhr.status ? xhr.status : 'unknown')); });

@@ -1,11 +1,11 @@
-define('custom:views/policy/record/detail-view', ['views/detail'], function (DetailView) {
+define('custom:views/policy/record/detail-view', ['views/record/detail'], function (Dep) {
 
-    return DetailView.extend({
+    return Dep.extend({
 
         setup: function () {
-            DetailView.prototype.setup.call(this);
+            Dep.prototype.setup.call(this);
 
-            this.addMenuItem('buttons', {
+            this.addButton({
                 name: 'createTask',
                 label: '+ Task',
                 action: 'createTask',

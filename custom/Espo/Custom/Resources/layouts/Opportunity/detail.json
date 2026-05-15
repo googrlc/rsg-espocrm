@@ -14,7 +14,7 @@
                     "name": "contacts"
                 },
                 {
-                    "name": "line_of_business"
+                    "name": "lineOfBusiness"
                 }
             ],
             [
@@ -22,12 +22,12 @@
                     "name": "stage"
                 },
                 {
-                    "name": "business_type"
+                    "name": "businessType"
                 }
             ],
             [
                 {
-                    "name": "lead_source"
+                    "name": "leadSource"
                 },
                 {
                     "name": "assignedUser"
@@ -48,23 +48,23 @@
         "rows": [
             [
                 {
-                    "name": "current_carrier"
+                    "name": "currentCarrier"
                 },
                 {
-                    "name": "target_carrier"
+                    "name": "targetCarrier"
                 }
             ],
             [
                 {
-                    "name": "estimated_premium"
+                    "name": "estimatedPremium"
                 },
                 {
-                    "name": "current_renewal_date"
+                    "name": "cRenewalDate"
                 }
             ],
             [
                 {
-                    "name": "quote_number"
+                    "name": "quoteNumber"
                 },
                 false
             ],
@@ -82,39 +82,39 @@
         "rows": [
             [
                 {
-                    "name": "ca_bus_type"
+                    "name": "caBusType"
                 },
                 {
-                    "name": "ca_radius"
+                    "name": "caRadius"
                 }
             ],
             [
                 {
-                    "name": "ca_vehicle_count"
+                    "name": "caVehicleCount"
                 },
                 {
-                    "name": "ca_driver_count"
+                    "name": "caDriverCount"
                 }
             ],
             [
                 {
-                    "name": "ca_equipment_type"
+                    "name": "caEquipmentType"
                 },
                 {
-                    "name": "ca_equipment_value"
+                    "name": "caEquipmentValue"
                 }
             ],
             [
                 {
-                    "name": "ca_current_vehicle_modifications"
+                    "name": "caCurrentVehicleModifications"
                 }
             ],
             [
                 {
-                    "name": "ca_current_policy_num"
+                    "name": "caCurrentPolicyNum"
                 },
                 {
-                    "name": "ca_current_expiration"
+                    "name": "caCurrentExpiration"
                 }
             ]
         ],
@@ -126,40 +126,40 @@
         "rows": [
             [
                 {
-                    "name": "ca_bus_type"
+                    "name": "caBusType"
                 },
                 {
-                    "name": "ca_radius"
+                    "name": "caRadius"
                 }
             ],
             [
                 {
-                    "name": "ca_vehicle_count"
+                    "name": "caVehicleCount"
                 },
                 {
-                    "name": "ca_driver_count"
+                    "name": "caDriverCount"
                 }
             ],
             [
                 {
-                    "name": "ca_dot_number"
+                    "name": "caDotNumber"
                 },
                 {
-                    "name": "ca_mc_number"
+                    "name": "caMcNumber"
                 }
             ],
             [
                 {
-                    "name": "ca_commodity"
+                    "name": "caCommodity"
                 },
                 false
             ],
             [
                 {
-                    "name": "ca_current_policy_num"
+                    "name": "caCurrentPolicyNum"
                 },
                 {
-                    "name": "ca_current_expiration"
+                    "name": "caCurrentExpiration"
                 }
             ]
         ],
@@ -171,26 +171,26 @@
         "rows": [
             [
                 {
-                    "name": "gl_class_code"
+                    "name": "glClassCode"
                 },
                 false
             ],
             [
                 {
-                    "name": "gl_operations_desc"
+                    "name": "glOperationsDesc"
                 }
             ],
             [
                 {
-                    "name": "gl_annual_payroll"
+                    "name": "glAnnualPayroll"
                 },
                 {
-                    "name": "gl_annual_revenue"
+                    "name": "glAnnualRevenue"
                 }
             ],
             [
                 {
-                    "name": "gl_subcontractors_used"
+                    "name": "glSubcontractorsUsed"
                 },
                 false
             ]
@@ -203,18 +203,18 @@
         "rows": [
             [
                 {
-                    "name": "wc_class_code"
+                    "name": "wcClassCode"
                 },
                 {
-                    "name": "wc_experience_mod"
+                    "name": "wcExperienceMod"
                 }
             ],
             [
                 {
-                    "name": "wc_annual_payroll"
+                    "name": "wcAnnualPayroll"
                 },
                 {
-                    "name": "wc_employee_count"
+                    "name": "wcEmployeeCount"
                 }
             ]
         ],
@@ -226,44 +226,44 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 },
                 {
-                    "name": "prop_square_footage"
+                    "name": "propSquareFootage"
                 }
             ],
             [
                 {
-                    "name": "prop_construction_type"
+                    "name": "propConstructionType"
                 },
                 {
-                    "name": "prop_occupancy"
+                    "name": "propOccupancy"
                 }
             ],
             [
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 },
                 {
-                    "name": "prop_replacement_cost"
+                    "name": "propReplacementCost"
                 }
             ],
             [
                 {
-                    "name": "prop_roof_type"
+                    "name": "propRoofType"
                 },
                 {
-                    "name": "prop_roof_age"
+                    "name": "propRoofAge"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ]
@@ -276,50 +276,50 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 },
                 {
-                    "name": "prop_square_footage"
+                    "name": "propSquareFootage"
                 }
             ],
             [
                 {
-                    "name": "prop_construction_type"
+                    "name": "propConstructionType"
                 },
                 {
-                    "name": "prop_occupancy"
+                    "name": "propOccupancy"
                 }
             ],
             [
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 },
                 {
-                    "name": "prop_replacement_cost"
+                    "name": "propReplacementCost"
                 }
             ],
             [
                 {
-                    "name": "prop_roof_type"
+                    "name": "propRoofType"
                 },
                 {
-                    "name": "prop_roof_age"
+                    "name": "propRoofAge"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ],
             [
                 {
-                    "name": "gl_operations_desc"
+                    "name": "glOperationsDesc"
                 }
             ]
         ],
@@ -331,50 +331,50 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 },
                 {
-                    "name": "prop_square_footage"
+                    "name": "propSquareFootage"
                 }
             ],
             [
                 {
-                    "name": "prop_construction_type"
+                    "name": "propConstructionType"
                 },
                 {
-                    "name": "prop_occupancy"
+                    "name": "propOccupancy"
                 }
             ],
             [
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 },
                 {
-                    "name": "prop_replacement_cost"
+                    "name": "propReplacementCost"
                 }
             ],
             [
                 {
-                    "name": "prop_roof_type"
+                    "name": "propRoofType"
                 },
                 {
-                    "name": "prop_roof_age"
+                    "name": "propRoofAge"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ],
             [
                 {
-                    "name": "gl_operations_desc"
+                    "name": "glOperationsDesc"
                 }
             ]
         ],
@@ -386,23 +386,23 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_construction_type"
+                    "name": "propConstructionType"
                 },
                 {
-                    "name": "prop_square_footage"
+                    "name": "propSquareFootage"
                 }
             ],
             [
                 {
-                    "name": "prop_replacement_cost"
+                    "name": "propReplacementCost"
                 },
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 }
             ]
         ],
@@ -414,18 +414,18 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_replacement_cost"
+                    "name": "propReplacementCost"
                 },
                 false
             ],
             [
                 {
-                    "name": "gl_operations_desc"
+                    "name": "glOperationsDesc"
                 }
             ]
         ],
@@ -437,12 +437,12 @@
         "rows": [
             [
                 {
-                    "name": "gl_operations_desc"
+                    "name": "glOperationsDesc"
                 }
             ],
             [
                 {
-                    "name": "gl_annual_revenue"
+                    "name": "glAnnualRevenue"
                 },
                 false
             ]
@@ -455,7 +455,7 @@
         "rows": [
             [
                 {
-                    "name": "umbrella_limit"
+                    "name": "umbrellaLimit"
                 },
                 false
             ]
@@ -468,31 +468,31 @@
         "rows": [
             [
                 {
-                    "name": "auto_vehicle_count"
+                    "name": "autoVehicleCount"
                 },
                 {
-                    "name": "auto_driver_count"
+                    "name": "autoDriverCount"
                 }
             ],
             [
                 {
-                    "name": "auto_youngest_driver_age"
+                    "name": "autoYoungestDriverAge"
                 },
                 {
-                    "name": "auto_use_type"
+                    "name": "autoUseType"
                 }
             ],
             [
                 {
-                    "name": "pa_current_premium"
+                    "name": "paCurrentPremium"
                 },
                 {
-                    "name": "pa_current_expiration"
+                    "name": "paCurrentExpiration"
                 }
             ],
             [
                 {
-                    "name": "pa_prior_claims"
+                    "name": "paPriorClaims"
                 },
                 false
             ]
@@ -505,36 +505,36 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 },
                 {
-                    "name": "prop_square_footage"
+                    "name": "propSquareFootage"
                 }
             ],
             [
                 {
-                    "name": "prop_construction_type"
+                    "name": "propConstructionType"
                 },
                 {
-                    "name": "prop_roof_type"
+                    "name": "propRoofType"
                 }
             ],
             [
                 {
-                    "name": "prop_roof_age"
+                    "name": "propRoofAge"
                 },
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ]
@@ -547,20 +547,20 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_occupancy"
+                    "name": "propOccupancy"
                 },
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ]
@@ -573,20 +573,20 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 },
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ]
@@ -599,28 +599,28 @@
         "rows": [
             [
                 {
-                    "name": "prop_address"
+                    "name": "propAddress"
                 }
             ],
             [
                 {
-                    "name": "prop_year_built"
+                    "name": "propYearBuilt"
                 },
                 {
-                    "name": "prop_occupancy"
+                    "name": "propOccupancy"
                 }
             ],
             [
                 {
-                    "name": "prop_roof_age"
+                    "name": "propRoofAge"
                 },
                 {
-                    "name": "prop_current_premium"
+                    "name": "propCurrentPremium"
                 }
             ],
             [
                 {
-                    "name": "prop_prior_claims"
+                    "name": "propPriorClaims"
                 },
                 false
             ]
@@ -633,26 +633,26 @@
         "rows": [
             [
                 {
-                    "name": "auto_vehicle_count"
+                    "name": "autoVehicleCount"
                 },
                 {
-                    "name": "auto_driver_count"
+                    "name": "autoDriverCount"
                 }
             ],
             [
                 {
-                    "name": "auto_use_type"
+                    "name": "autoUseType"
                 },
                 {
-                    "name": "pa_current_premium"
+                    "name": "paCurrentPremium"
                 }
             ],
             [
                 {
-                    "name": "pa_current_expiration"
+                    "name": "paCurrentExpiration"
                 },
                 {
-                    "name": "pa_prior_claims"
+                    "name": "paPriorClaims"
                 }
             ]
         ],
@@ -664,23 +664,23 @@
         "rows": [
             [
                 {
-                    "name": "auto_vehicle_count"
+                    "name": "autoVehicleCount"
                 },
                 {
-                    "name": "auto_use_type"
+                    "name": "autoUseType"
                 }
             ],
             [
                 {
-                    "name": "pa_current_premium"
+                    "name": "paCurrentPremium"
                 },
                 {
-                    "name": "pa_current_expiration"
+                    "name": "paCurrentExpiration"
                 }
             ],
             [
                 {
-                    "name": "pa_prior_claims"
+                    "name": "paPriorClaims"
                 },
                 false
             ]
@@ -693,23 +693,23 @@
         "rows": [
             [
                 {
-                    "name": "auto_vehicle_count"
+                    "name": "autoVehicleCount"
                 },
                 {
-                    "name": "auto_use_type"
+                    "name": "autoUseType"
                 }
             ],
             [
                 {
-                    "name": "pa_current_premium"
+                    "name": "paCurrentPremium"
                 },
                 {
-                    "name": "pa_current_expiration"
+                    "name": "paCurrentExpiration"
                 }
             ],
             [
                 {
-                    "name": "pa_prior_claims"
+                    "name": "paPriorClaims"
                 },
                 false
             ]
@@ -722,23 +722,23 @@
         "rows": [
             [
                 {
-                    "name": "med_plan_type"
+                    "name": "medPlanType"
                 },
                 {
-                    "name": "med_current_carrier"
+                    "name": "medCurrentCarrier"
                 }
             ],
             [
                 {
-                    "name": "med_current_plan"
+                    "name": "medCurrentPlan"
                 },
                 {
-                    "name": "med_aep_sep_date"
+                    "name": "medAepSepDate"
                 }
             ],
             [
                 {
-                    "name": "med_irmaa_applies"
+                    "name": "medIrmaaApplies"
                 },
                 false
             ]
@@ -751,23 +751,23 @@
         "rows": [
             [
                 {
-                    "name": "life_coverage_type"
+                    "name": "lifeCoverageType"
                 },
                 {
-                    "name": "life_face_amount_requested"
+                    "name": "lifeFaceAmountRequested"
                 }
             ],
             [
                 {
-                    "name": "life_term_length"
+                    "name": "lifeTermLength"
                 },
                 {
-                    "name": "life_health_class_target"
+                    "name": "lifeHealthClassTarget"
                 }
             ],
             [
                 {
-                    "name": "life_tobacco_user"
+                    "name": "lifeTobaccoUser"
                 },
                 false
             ]
@@ -780,26 +780,26 @@
         "rows": [
             [
                 {
-                    "name": "health_date_of_birth"
+                    "name": "healthDateOfBirth"
                 },
                 {
-                    "name": "health_coverage_type"
+                    "name": "healthCoverageType"
                 }
             ],
             [
                 {
-                    "name": "health_tobacco_use"
+                    "name": "healthTobaccoUse"
                 },
                 false
             ],
             [
                 {
-                    "name": "health_pre_existing_conditions"
+                    "name": "healthPreExistingConditions"
                 }
             ],
             [
                 {
-                    "name": "health_medications"
+                    "name": "healthMedications"
                 }
             ]
         ],
@@ -811,15 +811,15 @@
         "rows": [
             [
                 {
-                    "name": "auto_vehicle_count"
+                    "name": "autoVehicleCount"
                 },
                 {
-                    "name": "auto_driver_count"
+                    "name": "autoDriverCount"
                 }
             ],
             [
                 {
-                    "name": "pa_current_expiration"
+                    "name": "paCurrentExpiration"
                 },
                 false
             ]
@@ -832,32 +832,32 @@
         "rows": [
             [
                 {
-                    "name": "gb_eligible_employees"
+                    "name": "gbEligibleEmployees"
                 },
                 {
-                    "name": "gb_participating_employees"
+                    "name": "gbParticipatingEmployees"
                 }
             ],
             [
                 {
-                    "name": "gb_census_received"
+                    "name": "gbCensusReceived"
                 },
                 false
             ],
             [
                 {
-                    "name": "gb_medical_carrier"
+                    "name": "gbMedicalCarrier"
                 },
                 {
-                    "name": "gb_medical_plan_type"
+                    "name": "gbMedicalPlanType"
                 }
             ],
             [
                 {
-                    "name": "gb_medical_renewal_date"
+                    "name": "gbMedicalRenewalDate"
                 },
                 {
-                    "name": "gb_employer_contribution"
+                    "name": "gbEmployerContribution"
                 }
             ]
         ],
@@ -869,7 +869,7 @@
         "rows": [
             [
                 {
-                    "name": "gl_operations_desc"
+                    "name": "glOperationsDesc"
                 }
             ]
         ],
@@ -881,26 +881,26 @@
         "rows": [
             [
                 {
-                    "name": "written_premium"
+                    "name": "writtenPremium"
                 },
                 {
-                    "name": "bind_date"
+                    "name": "bindDate"
                 }
             ],
             [
                 {
-                    "name": "effective_date"
+                    "name": "effectiveDate"
                 },
                 {
-                    "name": "policy_number"
+                    "name": "policyNumber"
                 }
             ],
             [
                 {
-                    "name": "commission_rate"
+                    "name": "commissionRate"
                 },
                 {
-                    "name": "estimated_commission"
+                    "name": "estimatedCommission"
                 }
             ]
         ],
@@ -912,23 +912,23 @@
         "rows": [
             [
                 {
-                    "name": "lost_reason"
+                    "name": "lostReason"
                 },
                 {
-                    "name": "last_contact_method"
+                    "name": "lastContactMethod"
                 }
             ],
             [
                 {
-                    "name": "recycle_to_lead"
+                    "name": "recycleToLead"
                 },
                 {
-                    "name": "x_date"
+                    "name": "xDate"
                 }
             ],
             [
                 {
-                    "name": "callback_date"
+                    "name": "callbackDate"
                 },
                 {
                     "name": "recycledLead"
@@ -943,30 +943,30 @@
         "rows": [
             [
                 {
-                    "name": "loss_runs_requested"
+                    "name": "lossRunsRequested"
                 },
                 {
-                    "name": "chk_scope_of_appt"
+                    "name": "chkScopeOfAppt"
                 }
             ],
             [
                 {
-                    "name": "chk_underlying_linked"
+                    "name": "chkUnderlyingLinked"
                 },
                 {
-                    "name": "chk_underlying_confirmed"
+                    "name": "chkUnderlyingConfirmed"
                 }
             ],
             [
                 {
-                    "name": "chk_mvrs_pulled"
+                    "name": "chkMvrsPulled"
                 },
                 false
             ]
         ],
         "style": "default",
         "name": "processIntake",
-        "label": "Process \u2014 Intake",
+        "label": "Process — Intake",
         "tabBreak": true,
         "tabLabel": "Workflow"
     },
@@ -974,75 +974,75 @@
         "rows": [
             [
                 {
-                    "name": "chk_quote_submitted"
+                    "name": "chkQuoteSubmitted"
                 },
                 {
-                    "name": "chk_proposal_sent"
+                    "name": "chkProposalSent"
                 }
             ],
             [
                 {
-                    "name": "chk_plan_presented"
+                    "name": "chkPlanPresented"
                 },
                 {
-                    "name": "chk_signed_app_received"
+                    "name": "chkSignedAppReceived"
                 }
             ],
             [
                 {
-                    "name": "chk_app_submitted"
+                    "name": "chkAppSubmitted"
                 },
                 {
-                    "name": "chk_cms_confirmation"
+                    "name": "chkCmsConfirmation"
                 }
             ]
         ],
         "style": "default",
         "name": "processMarketing",
-        "label": "Process \u2014 Marketing"
+        "label": "Process — Marketing"
     },
     {
         "rows": [
             [
                 {
-                    "name": "chk_bound"
+                    "name": "chkBound"
                 },
                 {
-                    "name": "commission_logged"
+                    "name": "commissionLogged"
                 }
             ],
             [
                 {
-                    "name": "email_sequence_started"
+                    "name": "emailSequenceStarted"
                 },
                 {
-                    "name": "onboarding_sent"
+                    "name": "onboardingSent"
                 }
             ],
             [
                 {
-                    "name": "chk_dec_page_delivered"
+                    "name": "chkDecPageDelivered"
                 },
                 {
-                    "name": "chk_welcome_letter"
+                    "name": "chkWelcomeLetter"
                 }
             ],
             [
                 {
-                    "name": "skip_email_sequence"
+                    "name": "skipEmailSequence"
                 },
                 false
             ]
         ],
         "style": "default",
         "name": "processOnboarding",
-        "label": "Process \u2014 Onboarding"
+        "label": "Process — Onboarding"
     },
     {
         "rows": [
             [
                 {
-                    "name": "intel_ai_summary"
+                    "name": "aiSummary"
                 }
             ],
             [
@@ -1055,10 +1055,10 @@
             ],
             [
                 {
-                    "name": "policy_stub_id"
+                    "name": "policyStubId"
                 },
                 {
-                    "name": "policy_stub_status"
+                    "name": "policyStubStatus"
                 }
             ]
         ],

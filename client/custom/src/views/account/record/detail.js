@@ -40,7 +40,7 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
         setup: function () {
             Dep.prototype.setup.call(this);
 
-            this.addMenuItem("buttons", {
+            this.addButton({
                 name: "createTask",
                 label: "+ Task",
                 style: "primary",
