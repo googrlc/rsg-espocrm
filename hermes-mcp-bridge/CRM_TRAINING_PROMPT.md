@@ -456,13 +456,15 @@ diagnosing the root cause first.
 
 ## 5. MCP Tool Usage Notes
 
-The MCP bridge exposes EspoCRM via the following tools (expand as the bridge
-gains more tools):
+The MCP bridge (`espo-mcp` Docker sidecar in the Hermes Compose stack)
+exposes EspoCRM via the following tools (expand as the bridge gains more tools):
 
 | Tool | Purpose |
 |---|---|
 | `ping` | Health check — confirm the bridge is reachable |
 | `espocrm_get_current_user` | Fetch the API user the bridge is authenticated as |
+
+Connect Hermes by setting `MCP_URL=https://<espo-mcp-domain>/mcp`.
 
 When additional EspoCRM CRUD tools are added, apply the following patterns:
 
