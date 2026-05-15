@@ -87,12 +87,26 @@ fi
 
 echo "Fixing ownership and rebuilding EspoCRM..."
 
-ssh "${SSH_OPTS[@]}" "$HOST" << EOF
+ssh "${SSH_OPTS[@]}" "$HOST" << 'DEPLOY_EOF'
     set -e
-    chown -R www-data:www-data "$REMOTE_APP_PATH/custom" "$REMOTE_APP_PATH/client/custom"
+    chown -R www-data:www-data /opt/app/espocrm/custom /opt/app/espocrm/client/custom
     cd /opt/app
     docker exec -u www-data app-espocrm-1 php command.php clear-cache
     docker exec -u www-data app-espocrm-1 php command.php rebuild
-EOF
+    echo "Bumping appTimestamp to bust JS cache..."
+    docker exec -u www-data app-espocrm-1 php -r '
+        $now = time();
+        foreach (["data/state.php", "data/config.php"] as $f) {
+            $path = "/var/www/html/" . $f;
+            if (!is_file($path)) continue;
+            $data = include $path;
+            $data["appTimestamp"] = $now;
+            $data["cacheTimestamp"] = $now;
+            file_put_contents($path, "<?php\nreturn " . var_export($data, true) . ";\n");
+        }
+        echo "appTimestamp set to: $now\n";
+    '
+    docker exec app-espocrm-1 apache2ctl graceful 2>/dev/null || true
+DEPLOY_EOF
 
 echo "Deployment complete."
