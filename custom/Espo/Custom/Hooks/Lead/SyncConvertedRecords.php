@@ -2,6 +2,8 @@
 
 namespace Espo\Custom\Hooks\Lead;
 
+use DateInterval;
+use DateTimeImmutable;
 use Espo\Core\Hook\Hook\AfterSave;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
@@ -85,6 +87,9 @@ class SyncConvertedRecords implements AfterSave
             'accountId' => $accountId,
             'accountName' => $account->get('name'),
             'stage' => 'Discovery',
+            'closeDate' => (new DateTimeImmutable('today'))
+                ->add(new DateInterval('P30D'))
+                ->format('Y-m-d'),
             'lineOfBusiness' => $lineOfBusiness,
             'businessType' => 'New Business',
             'leadSource' => $lead->get('source') ?: $lead->get('campaignName'),

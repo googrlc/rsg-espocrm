@@ -28,10 +28,12 @@ class AccountPlaybookManager
             return;
         }
 
-        $policyList = $this->entityManager
-            ->getRDBRepository('Policy')
-            ->where(['accountId' => $accountId])
-            ->find();
+        $policyList = iterator_to_array(
+            $this->entityManager
+                ->getRDBRepository('Policy')
+                ->where(['accountId' => $accountId])
+                ->find()
+        );
         $activityList = $this->entityManager
             ->getRDBRepository('ActivityLog')
             ->where(['accountId' => $accountId])
@@ -62,8 +64,8 @@ class AccountPlaybookManager
         $hasUmbrella = in_array('Umbrella', $coverageLines, true);
         $hasLife = in_array('Life', $coverageLines, true);
         $hasMedicare = in_array('Medicare', $coverageLines, true);
-        $hasAuto = in_array('Auto', $coverageLines, true);
-        $hasHome = in_array('Home', $coverageLines, true);
+        $hasAuto = in_array('Auto', $coverageLines, true) || in_array('Personal Auto', $coverageLines, true);
+        $hasHome = in_array('Home', $coverageLines, true) || in_array('Homeowners', $coverageLines, true);
         $hasCommercialCore = count(array_intersect($coverageLines, ['Commercial Auto', 'GL', 'BOP', 'Transportation'])) > 0;
         $hasRenters = in_array('Renters', $coverageLines, true);
         $needsUmbrella = !$hasUmbrella && ($hasAuto || $hasHome || $hasCommercialCore);
