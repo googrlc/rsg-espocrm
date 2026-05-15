@@ -88,7 +88,7 @@
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
-            "tooltipText": "NowCerts task database_id — dedup key for bi-directional sync"
+            "tooltipText": "NowCerts task database_id \u2014 dedup key for bi-directional sync"
         },
         "momentumLastSynced": {
             "type": "datetime",
@@ -133,14 +133,6 @@
             },
             "tooltipText": "Where this task was created from \u2014 enables Account rollup"
         },
-        "linkedAccount": {
-            "type": "link",
-            "isCustom": true,
-            "layoutDetailDisabled": true,
-            "layoutListDisabled": true,
-            "layoutMassUpdateDisabled": true,
-            "tooltipText": "Legacy account link retained for migration and older task creators"
-        },
         "assignedUser": {
             "view": "custom:views/task/fields/assigned-user"
         },
@@ -156,13 +148,7 @@
             ]
         }
     },
-    "links": {
-        "linkedAccount": {
-            "type": "belongsTo",
-            "entity": "Account",
-            "isCustom": true
-        }
-    },
+    "links": {},
     "collection": {
         "orderBy": "dateEnd",
         "order": "asc",

@@ -12,6 +12,12 @@ Server: rrespocrm-rsg-u69864.vm.elestio.app
 Key: RSG Elestio EspoCRM (1Password)
 Note: Port 22 is IP-restricted — whitelist your IP in Elestio dashboard first
 
+## Runtime Database
+
+EspoCRM sits on a MySQL / MariaDB-compatible database. The Elestio Docker runtime uses the database container/service `app-mysql-1`, and the active database name is `espocrm`.
+
+Do not commit the database password or other live secrets to this repo. Keep those in 1Password, Elestio settings, or local `.env` files only.
+
 ## CRM vs MCP Endpoints
 
 Use separate URLs for EspoCRM and Hermes/OpenClaw MCP connectivity.
@@ -25,14 +31,9 @@ Do not point Hermes MCP clients at the CRM homepage/API URL directly. This works
 
 ### MCP Bridge Source of Truth
 
-To avoid deployment confusion, use these paths intentionally:
+The MCP bridge runs as the `espo-mcp` Docker sidecar in the Hermes Compose stack. Source lives in `hermes-mcp-bridge/`. Set:
 
-- `hermes-mcp-bridge/` - canonical, standalone Railway deployment target.
-- `docker/hermes-workspace/mcp-bridge/` - legacy Hermes Workspace dashboard proxy path (deprecated for Railway MCP endpoint deployment).
-
-For current Hermes HTTP MCP server configuration, deploy `hermes-mcp-bridge/` and set:
-
-- `MCP_URL=https://<your-domain>/mcp`
+- `MCP_URL=https://<espo-mcp-domain>/mcp`
 
 ## Service Webhooks
 Set these in EspoCRM config to enable outbound service-task webhooks:

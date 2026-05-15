@@ -1,0 +1,6 @@
+[
+    {"name": "category"},
+    {"name": "account"},
+    {"name": "createdAt"},
+    {"name": "createdBy"}
+]

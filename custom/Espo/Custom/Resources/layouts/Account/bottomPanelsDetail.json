@@ -1,11 +1,11 @@
 {
     "stream": {
         "sticked": false,
-        "index": 0,
+        "index": 1,
         "tab": 0
     },
     "clientNotes": {
-        "index": 1,
+        "index": 0,
         "tab": 0,
         "label": "Client Notes"
     },
