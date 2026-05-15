@@ -13,8 +13,8 @@ class CallbackNext14 implements Filter
 
         $queryBuilder->where([
             'status' => 'Nurture',
-            'callback_date>=' => $today,
-            'callback_date<=' => $in14Days,
+            'callbackDate>=' => $today,
+            'callbackDate<=' => $in14Days,
         ]);
     }
 }

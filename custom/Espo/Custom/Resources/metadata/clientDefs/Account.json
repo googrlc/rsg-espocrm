@@ -1,5 +1,4 @@
 {
-    "streamPanelView": "custom:views/stream/panel-read-only",
     "statusField": "account_type",
     "recordViews": {
         "detail": "custom:views/account/record/detail"

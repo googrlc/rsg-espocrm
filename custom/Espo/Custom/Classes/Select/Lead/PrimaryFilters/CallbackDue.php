@@ -12,7 +12,7 @@ class CallbackDue implements Filter
 
         $queryBuilder->where([
             'status' => 'Nurture',
-            'callback_date<=' => $today,
+            'callbackDate<=' => $today,
         ]);
     }
 }

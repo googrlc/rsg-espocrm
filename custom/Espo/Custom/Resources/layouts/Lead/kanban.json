@@ -12,7 +12,7 @@
         "name": "phoneNumber"
     },
     {
-        "name": "estimated_premium"
+        "name": "estimatedPremium"
     },
     {
         "name": "priority"
@@ -21,16 +21,16 @@
         "name": "source"
     },
     {
-        "name": "insurance_interest"
+        "name": "insuranceInterest"
     },
     {
         "name": "status"
     },
     {
-        "name": "x_date"
+        "name": "xDate"
     },
     {
-        "name": "callback_date"
+        "name": "callbackDate"
     },
     {
         "name": "assignedUser"

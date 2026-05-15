@@ -1,5 +1,4 @@
 {
-    "streamPanelView": "custom:views/stream/panel-read-only",
     "filterList": [
         {
             "name": "actual",
@@ -59,11 +58,11 @@
                                 },
                                 {
                                     "type": "isNotEmpty",
-                                    "attribute": "date_of_birth"
+                                    "attribute": "dateOfBirth"
                                 },
                                 {
                                     "type": "isTrue",
-                                    "attribute": "medicare_eligible"
+                                    "attribute": "medicareEligible"
                                 },
                                 {
                                     "type": "in",

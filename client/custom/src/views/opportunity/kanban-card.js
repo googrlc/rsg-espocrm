@@ -70,8 +70,8 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
             }
 
             // Deal value
-            const estimatedPremium = this.model.get('estimated_premium');
-            const estimatedPremiumCurrency = this.model.get('estimated_premiumCurrency') || 'USD';
+            const estimatedPremium = this.model.get('estimatedPremium');
+            const estimatedPremiumCurrency = this.model.get('estimatedPremiumCurrency') || 'USD';
             let formattedValue = '';
             if (estimatedPremium || estimatedPremium === 0) {
                 formattedValue = this.getHelper().formatCurrency(estimatedPremium, estimatedPremiumCurrency);
@@ -82,10 +82,10 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
             const accountName = this.model.get('accountName') || account;
 
             // Line of Business
-            const lineOfBusiness = this.model.get('line_of_business');
+            const lineOfBusiness = this.model.get('lineOfBusiness');
             
             // Business Type
-            const businessType = this.model.get('business_type');
+            const businessType = this.model.get('businessType');
 
             // High value card conditional formatting
             let cardClass = '';
