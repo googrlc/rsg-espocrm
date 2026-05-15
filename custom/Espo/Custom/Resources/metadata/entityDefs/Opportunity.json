@@ -442,7 +442,7 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "line_of_business",
+                        "attribute": "lineOfBusiness",
                         "value": "Medicare"
                     }
                 ]
@@ -455,7 +455,7 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "line_of_business",
+                        "attribute": "lineOfBusiness",
                         "value": "Medicare"
                     }
                 ]
@@ -470,7 +470,7 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "line_of_business",
+                        "attribute": "lineOfBusiness",
                         "value": "Medicare"
                     }
                 ]
@@ -483,7 +483,7 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "line_of_business",
+                        "attribute": "lineOfBusiness",
                         "value": "Medicare"
                     }
                 ]
@@ -496,7 +496,7 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "line_of_business",
+                        "attribute": "lineOfBusiness",
                         "value": "Medicare"
                     }
                 ]
@@ -516,7 +516,7 @@
                 "conditionGroup": [
                     {
                         "type": "equals",
-                        "attribute": "line_of_business",
+                        "attribute": "lineOfBusiness",
                         "value": "Life"
                     }
                 ]
@@ -705,17 +705,17 @@
                         "value": [
                             {
                                 "type": "equals",
-                                "attribute": "line_of_business",
+                                "attribute": "lineOfBusiness",
                                 "value": "Health"
                             },
                             {
                                 "type": "equals",
-                                "attribute": "line_of_business",
+                                "attribute": "lineOfBusiness",
                                 "value": "Medicare"
                             },
                             {
                                 "type": "equals",
-                                "attribute": "line_of_business",
+                                "attribute": "lineOfBusiness",
                                 "value": "Group Benefits"
                             }
                         ]
@@ -1108,7 +1108,7 @@
     },
     "dynamicLogic": {
         "fields": {
-            "written_premium": {
+            "writtenPremium": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1119,7 +1119,7 @@
                     ]
                 }
             },
-            "commission_rate": {
+            "commissionRate": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1130,7 +1130,7 @@
                     ]
                 }
             },
-            "estimated_commission": {
+            "estimatedCommission": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1141,7 +1141,7 @@
                     ]
                 }
             },
-            "bind_date": {
+            "bindDate": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1152,7 +1152,7 @@
                     ]
                 }
             },
-            "effective_date": {
+            "effectiveDate": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1163,7 +1163,7 @@
                     ]
                 }
             },
-            "policy_number": {
+            "policyNumber": {
                 "visible": {
                     "conditionGroup": [
                         {
@@ -1177,7 +1177,7 @@
         }
     },
     "formula": {
-        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Markets Out / Shopping',\n    entity\\setAttribute('probability', 45)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimated_premium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimated_premiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
+        "beforeSaveScript": "\n$stage = entity\\attribute('stage');\n\nifThen(\n    $stage == 'Discovery',\n    entity\\setAttribute('probability', 10)\n);\nifThen(\n    $stage == 'Quoting',\n    entity\\setAttribute('probability', 30)\n);\nifThen(\n    $stage == 'Markets Out / Shopping',\n    entity\\setAttribute('probability', 45)\n);\nifThen(\n    $stage == 'Proposal Presented',\n    entity\\setAttribute('probability', 60)\n);\nifThen(\n    $stage == 'Negotiation',\n    entity\\setAttribute('probability', 80)\n);\nifThen(\n    $stage == 'Closed Won',\n    entity\\setAttribute('probability', 100)\n);\nifThen(\n    $stage == 'Closed Lost',\n    entity\\setAttribute('probability', 0)\n);\n\n$estPremium = entity\\attribute('estimatedPremium');\nifThen(\n    $estPremium != null,\n    entity\\setAttribute('amount', $estPremium)\n);\nifThen(\n    $estPremium == null,\n    entity\\setAttribute('amount', 0)\n);\n\n$estCurrency = entity\\attribute('estimatedPremiumCurrency');\nifThen(\n    $estCurrency != null,\n    entity\\setAttribute('amountCurrency', $estCurrency)\n);\nifThen(\n    $estCurrency == null,\n    entity\\setAttribute('amountCurrency', 'USD')\n);\n"
     },
     "kanbanStatusIgnoreList": [
         "Closed Won",
