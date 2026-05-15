@@ -106,11 +106,11 @@ class CommissionLedgerManager
             return;
         }
 
-        $commissionType = $this->mapOpportunityCommissionType((string) ($opportunity->get('businessType') ?? ''));
-        $effectiveDate = (string) ($opportunity->get('effectiveDate') ?? $policy->get('effective_date') ?? '');
+        $commissionType = $this->mapOpportunityCommissionType((string) ($opportunity->get('business_type') ?? ''));
+        $effectiveDate = (string) ($opportunity->get('effective_date') ?? $policy->get('effective_date') ?? '');
         $key = $this->buildLedgerKey($policyId, $commissionType, $effectiveDate, 'opportunity', $opportunityId);
-        $rate = $this->normalizeRateOrNull($opportunity->get('commissionRate') ?? $policy->get('commission_rate'));
-        $premium = (float) ($opportunity->get('writtenPremium') ?? $policy->get('premium_amount') ?? 0);
+        $rate = $this->normalizeRateOrNull($opportunity->get('commission_rate') ?? $policy->get('commission_rate'));
+        $premium = (float) ($opportunity->get('written_premium') ?? $policy->get('premium_amount') ?? 0);
 
         $this->upsertByKey($key, [
             'name' => $this->buildCommissionName($opportunity->get('accountName'), $commissionType),
@@ -128,7 +128,7 @@ class CommissionLedgerManager
             'assignedUserName' => $opportunity->get('assignedUserName') ?: $policy->get('assignedUserName'),
             'producer' => $opportunity->get('assignedUserName') ?: $policy->get('assignedUserName'),
             'carrier' => $opportunity->get('carrier') ?: $policy->get('carrier'),
-            'lineOfBusiness' => $this->normalizeLineOfBusiness($opportunity->get('lineOfBusiness') ?: $policy->get('line_of_business')),
+            'lineOfBusiness' => $this->normalizeLineOfBusiness($opportunity->get('line_of_business') ?: $policy->get('line_of_business')),
             'writtenPremium' => $premium,
             'commissionRate' => $rate,
             'estimatedCommission' => $this->calculateEstimatedCommission($premium, $rate),
@@ -179,12 +179,12 @@ class CommissionLedgerManager
 
     private function resolvePolicyIdForOpportunity(Entity $opportunity): string
     {
-        $policyId = trim((string) ($opportunity->get('policyStubId') ?? ''));
+        $policyId = trim((string) ($opportunity->get('policy_stub_id') ?? ''));
         if ($policyId !== '') {
             return $policyId;
         }
 
-        $policyNumber = trim((string) ($opportunity->get('policyNumber') ?? ''));
+        $policyNumber = trim((string) ($opportunity->get('policy_number') ?? ''));
         $accountId = trim((string) ($opportunity->get('accountId') ?? ''));
         if ($policyNumber === '' || $accountId === '') {
             return '';

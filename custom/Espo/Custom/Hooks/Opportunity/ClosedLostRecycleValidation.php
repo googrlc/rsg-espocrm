@@ -12,13 +12,13 @@ class ClosedLostRecycleValidation implements BeforeSave
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
         $stage = (string) ($entity->get('stage') ?? '');
-        $recycleToLead = (bool) ($entity->get('recycleToLead') ?? false);
+        $recycleToLead = (bool) ($entity->get('recycle_to_lead') ?? false);
 
         if ($stage !== 'Closed Lost' || !$recycleToLead) {
             return;
         }
 
-        $xDate = trim((string) ($entity->get('xDate') ?? ''));
+        $xDate = trim((string) ($entity->get('x_date') ?? ''));
         if ($xDate === '') {
             throw new BadRequest(
                 'Renewal X-Date is required when recycling a Closed Lost opportunity to Lead nurture.'

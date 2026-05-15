@@ -1,22 +1,27 @@
 {
     "fields": {
-        "insuranceInterest": "Insurance Interest",
-        "currentlyInsured": "Currently Insured?",
-        "currentCarrier": "Current Carrier",
-        "estimatedPremium": "Estimated Premium",
-        "medicareEligible": "Medicare Eligible",
+        "insurance_interest": "Insurance Interest",
+        "currently_insured": "Currently Insured?",
+        "current_carrier": "Current Carrier",
+        "estimated_premium": "Estimated Premium",
+        "medicare_eligible": "Medicare Eligible",
         "priority": "Priority",
-        "aiSummary": "AI Summary",
-        "intelPackRun": "Intel Pack Run (AI)",
-        "xDate": "Renewal X-Date",
-        "callbackDate": "Callback Date",
-        "sourceOpportunity": "Source Opportunity"
+        "intel_ai_summary": "AI Summary",
+        "intel_pack_run": "Intel Pack Run (AI)",
+        "x_date": "Renewal X-Date",
+        "callback_date": "Callback Date",
+        "sourceOpportunity": "Source Opportunity",
+        "date_of_birth": "Date of Birth",
+        "medicare_part_a_date": "Medicare Part A Date",
+        "medicare_part_b_date": "Medicare Part B Date",
+        "current_medicare_plan": "Current Medicare Plan",
+        "t65_alert_sent": "T65 Alert Sent"
     },
     "tooltips": {
-        "aiSummary": "Pre-call intel from Manus prospect intelligence pack",
-        "intelPackRun": "Checked when Manus prospect-intelligence-pack has run for this lead",
-        "xDate": "Expiration date of current policy — used for nurture loop automation",
-        "callbackDate": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior).",
+        "intel_ai_summary": "Pre-call intel from Manus prospect intelligence pack",
+        "intel_pack_run": "Checked when Manus prospect-intelligence-pack has run for this lead",
+        "x_date": "Expiration date of current policy \u2014 used for nurture loop automation",
+        "callback_date": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior).",
         "sourceOpportunity": "Closed Lost opportunity this nurture lead came from."
     },
     "options": {

@@ -316,8 +316,8 @@ function buildProducerTemplate(): array
                             ['name' => 'closeDate', 'soft' => true],
                         ],
                         [
-                            ['name' => 'estimatedPremium'],
-                            ['name' => 'lineOfBusiness'],
+                            ['name' => 'estimated_premium'],
+                            ['name' => 'line_of_business'],
                         ],
                     ],
                 ],

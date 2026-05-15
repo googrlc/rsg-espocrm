@@ -2,39 +2,151 @@
   {
     "label": "Overview",
     "rows": [
-      [{"name": "name"}, {"name": "accountName"}],
-      [{"name": "emailAddress"}, {"name": "phoneNumber"}],
-      [{"name": "title"}, {"name": "website"}],
-      [{"name": "address"}, false]
+      [
+        {
+          "name": "name"
+        },
+        {
+          "name": "accountName"
+        }
+      ],
+      [
+        {
+          "name": "emailAddress"
+        },
+        {
+          "name": "phoneNumber"
+        }
+      ],
+      [
+        {
+          "name": "title"
+        },
+        {
+          "name": "website"
+        }
+      ],
+      [
+        {
+          "name": "address"
+        },
+        false
+      ]
     ]
   },
   {
     "label": "Details",
     "rows": [
-      [{"name": "status"}, {"name": "source"}],
-      [{"name": "opportunityAmount"}, {"name": "campaign"}],
-      [{"name": "industry"}, {"name": "assignedUser"}],
-      [{"name": "description", "fullWidth": true}]
+      [
+        {
+          "name": "status"
+        },
+        {
+          "name": "source"
+        }
+      ],
+      [
+        {
+          "name": "opportunityAmount"
+        },
+        {
+          "name": "campaign"
+        }
+      ],
+      [
+        {
+          "name": "industry"
+        },
+        {
+          "name": "assignedUser"
+        }
+      ],
+      [
+        {
+          "name": "description",
+          "fullWidth": true
+        }
+      ]
     ]
   },
   {
     "label": "Insurance",
     "rows": [
-      [{"name": "insuranceInterest"}, {"name": "priority"}],
-      [{"name": "currentlyInsured"}, {"name": "currentCarrier"}],
-      [{"name": "estimatedPremium"}, {"name": "intelPackRun"}],
-      [{"name": "xDate"}, {"name": "callbackDate"}],
-      [{"name": "sourceOpportunity"}, false],
-      [{"name": "aiSummary", "fullWidth": true}]
+      [
+        {
+          "name": "insurance_interest"
+        },
+        {
+          "name": "priority"
+        }
+      ],
+      [
+        {
+          "name": "currently_insured"
+        },
+        {
+          "name": "current_carrier"
+        }
+      ],
+      [
+        {
+          "name": "estimated_premium"
+        },
+        {
+          "name": "intel_pack_run"
+        }
+      ],
+      [
+        {
+          "name": "x_date"
+        },
+        {
+          "name": "callback_date"
+        }
+      ],
+      [
+        {
+          "name": "sourceOpportunity"
+        },
+        false
+      ],
+      [
+        {
+          "name": "intel_ai_summary",
+          "fullWidth": true
+        }
+      ]
     ]
   },
   {
     "label": "Medicare / Age Intelligence",
     "name": "medicare",
     "rows": [
-      [{"name": "dateOfBirth"}, {"name": "medicareEligible"}],
-      [{"name": "medicarePartADate"}, {"name": "medicarePartBDate"}],
-      [{"name": "currentMedicarePlan"}, {"name": "t65AlertSent", "readOnly": true}]
+      [
+        {
+          "name": "date_of_birth"
+        },
+        {
+          "name": "medicare_eligible"
+        }
+      ],
+      [
+        {
+          "name": "medicare_part_a_date"
+        },
+        {
+          "name": "medicare_part_b_date"
+        }
+      ],
+      [
+        {
+          "name": "current_medicare_plan"
+        },
+        {
+          "name": "t65_alert_sent",
+          "readOnly": true
+        }
+      ]
     ]
   }
 ]
