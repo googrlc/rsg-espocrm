@@ -1,8 +1,4 @@
-/**
- * Enhanced Kanban Card View for Opportunity Entity
- * Adds: account name, deal value, priority, business type, stage progress
- */
-Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], function (Dep) {
+Espo.define('custom:views/opportunity/kanban-card', ['custom:views/core/kanban-card'], function (Dep) {
 
     return Dep.extend({
 
@@ -10,30 +6,12 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
 
         data: function () {
             const data = Dep.prototype.data.call(this);
-
-            // Calculate stagnation days
-            const modifiedAt = this.model.get('modifiedAt');
-            let stagnationDays = 0;
-            if (modifiedAt) {
-                const now = new Date();
-                const modified = new Date(modifiedAt);
-                stagnationDays = Math.floor((now - modified) / (1000 * 60 * 60 * 24));
-            }
-
-            // Priority styling
-            const priority = this.model.get('priority');
-            let priorityClass = '';
-            let priorityLabel = '';
-            if (priority === 'Hot') {
-                priorityClass = 'priority-hot';
-                priorityLabel = 'HOT';
-            } else if (priority === 'Warm') {
-                priorityClass = 'priority-warm';
-                priorityLabel = 'WARM';
-            } else if (priority === 'Cold') {
-                priorityClass = 'priority-cold';
-                priorityLabel = 'COLD';
-            }
+            const stagnationDays = this.buildStagnationDays();
+            const { priorityClass, priorityLabel } = this.buildPriority();
+            const ownerInitials = this.buildOwnerInitials();
+            const estimatedPremium = this.model.get('estimatedPremium');
+            const formattedValue = this.buildFormattedValue('estimatedPremium', 'estimatedPremiumCurrency');
+            const { cardClass, stagnationClass } = this.buildCardClasses(estimatedPremium, stagnationDays);
 
             // Close date color coding
             const closeDate = this.model.get('closeDate');
@@ -43,7 +21,7 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
                 const now = new Date();
                 const due = new Date(closeDate);
                 const diffDays = Math.floor((due - now) / (1000 * 60 * 60 * 24));
-                
+
                 if (diffDays < 0) {
                     dueDateClass = 'due-date-overdue';
                     dueDateLabel = `Overdue (${Math.abs(diffDays)}d)`;
@@ -57,78 +35,21 @@ Espo.define('custom:views/opportunity/kanban-card', ['views/record/kanban'], fun
                 }
             }
 
-            // Owner avatar initials
-            const assignedUserName = this.model.get('assignedUserName');
-            let ownerInitials = '??';
-            if (assignedUserName) {
-                const nameParts = assignedUserName.trim().split(/\s+/).filter(Boolean);
-                if (nameParts.length >= 2) {
-                    ownerInitials = (nameParts[0][0] + nameParts[nameParts.length - 1][0]).toUpperCase();
-                } else if (nameParts.length === 1) {
-                    ownerInitials = nameParts[0].substring(0, 2).toUpperCase();
-                }
-            }
-
-            // Deal value
-            const estimatedPremium = this.model.get('estimatedPremium');
-            const estimatedPremiumCurrency = this.model.get('estimatedPremiumCurrency') || 'USD';
-            let formattedValue = '';
-            if (estimatedPremium || estimatedPremium === 0) {
-                formattedValue = this.getHelper().formatCurrency(estimatedPremium, estimatedPremiumCurrency);
-            }
-
-            // Account name
-            const account = this.model.get('account');
-            const accountName = this.model.get('accountName') || account;
-
-            // Line of Business
-            const lineOfBusiness = this.model.get('lineOfBusiness');
-            
-            // Business Type
-            const businessType = this.model.get('businessType');
-
-            // High value card conditional formatting
-            let cardClass = '';
-            if (estimatedPremium && estimatedPremium >= 5000) {
-                cardClass = 'high-value';
-            }
-
-            // Stagnation conditional formatting
-            if (stagnationDays > 14) {
-                cardClass += ' critical-stagnant';
-            } else if (stagnationDays > 7) {
-                cardClass += ' stagnant';
-            }
-
-            // Stagnation timer styling
-            let stagnationClass = '';
-            if (stagnationDays > 14) {
-                stagnationClass = 'stagnation-critical';
-            } else if (stagnationDays > 7) {
-                stagnationClass = 'stagnation-warning';
-            }
-
             return Object.assign({}, data, {
                 priorityClass: priorityClass,
                 priorityLabel: priorityLabel,
                 dueDateClass: dueDateClass,
                 dueDateLabel: dueDateLabel,
                 ownerInitials: ownerInitials,
-                assignedUserName: assignedUserName,
-                lineOfBusiness: lineOfBusiness,
-                businessType: businessType,
+                assignedUserName: this.model.get('assignedUserName'),
+                lineOfBusiness: this.model.get('lineOfBusiness'),
+                businessType: this.model.get('businessType'),
                 formattedValue: formattedValue,
-                accountName: accountName,
+                accountName: this.model.get('accountName') || this.model.get('account'),
                 cardClass: cardClass,
                 stagnationDays: stagnationDays,
                 stagnationClass: stagnationClass
             });
-        },
-
-        getActionMap: function () {
-            return {
-                'select': this.model.id
-            };
         }
     });
 });

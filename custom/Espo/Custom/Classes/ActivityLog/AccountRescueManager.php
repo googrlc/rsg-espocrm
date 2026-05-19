@@ -2,17 +2,11 @@
 
 namespace Espo\Custom\Classes\ActivityLog;
 
-use DateInterval;
 use DateTimeImmutable;
 use Espo\ORM\Entity;
-use Espo\ORM\EntityManager;
 
-class AccountRescueManager
+class AccountRescueManager extends BaseTriageManager
 {
-    public function __construct(
-        private EntityManager $entityManager
-    ) {}
-
     public function createTaskFromActivity(Entity $activityLog): void
     {
         $accountId = $activityLog->get('accountId');
@@ -67,7 +61,7 @@ class AccountRescueManager
             'parentType' => $parentType,
             'parentId' => $parentId,
             'parentName' => $parentName,
-            'dateEnd' => $this->calculateDueDate((int) $rule['slaDays']),
+            'dateEnd' => $this->addBusinessDays(new DateTimeImmutable('today'), (int) $rule['slaDays'])->format('Y-m-d'),
             'sourceActivityLogId' => $activityLog->getId(),
             'automationKey' => $rule['automationKey'],
         ]);
@@ -113,51 +107,6 @@ class AccountRescueManager
             'urgency' => $premiumChangePct >= 25.0 ? 'Urgent' : 'High',
             'slaDays' => $premiumChangePct >= 25.0 ? 0 : 1,
             'premiumChangePct' => round($premiumChangePct, 2),
-        ];
-    }
-
-    private function resolveOwnership(Entity $activityLog, ?Entity $policy, ?Entity $account): array
-    {
-        $assignedUserId = $activityLog->get('assignedUserId');
-        $assignedUserName = $activityLog->get('assignedUserName');
-        if (!$assignedUserId && $policy) {
-            $assignedUserId = $policy->get('assignedUserId');
-            $assignedUserName = $policy->get('assignedUserName');
-        }
-
-        if (!$assignedUserId && $account) {
-            $assignedUserId = $account->get('assignedUserId');
-            $assignedUserName = $account->get('assignedUserName');
-        }
-
-        return [$assignedUserId, $assignedUserName];
-    }
-
-    private function resolveParent(Entity $activityLog, ?Entity $policy): array
-    {
-        if ($activityLog->get('policyId')) {
-            return [
-                'Policy',
-                $activityLog->get('policyId'),
-                $activityLog->get('policyName') ?: ($policy?->get('name') ?? ''),
-                'Policy',
-            ];
-        }
-
-        if ($activityLog->get('contactId')) {
-            return [
-                'Contact',
-                $activityLog->get('contactId'),
-                $activityLog->get('contactName'),
-                'Contact',
-            ];
-        }
-
-        return [
-            'Account',
-            $activityLog->get('accountId'),
-            $activityLog->get('accountName'),
-            'Account',
         ];
     }
 
@@ -271,32 +220,5 @@ class AccountRescueManager
         }
 
         return $delta >= 500 ? 15.0 : 0.0;
-    }
-
-    private function calculateDueDate(int $businessDays): string
-    {
-        $date = new DateTimeImmutable('today');
-        if ($businessDays === 0) {
-            return $this->shiftWeekendToMonday($date)->format('Y-m-d');
-        }
-
-        $addedDays = 0;
-        while ($addedDays < $businessDays) {
-            $date = $date->add(new DateInterval('P1D'));
-            if ((int) $date->format('N') < 6) {
-                $addedDays++;
-            }
-        }
-
-        return $date->format('Y-m-d');
-    }
-
-    private function shiftWeekendToMonday(DateTimeImmutable $date): DateTimeImmutable
-    {
-        while ((int) $date->format('N') > 5) {
-            $date = $date->add(new DateInterval('P1D'));
-        }
-
-        return $date;
     }
 }

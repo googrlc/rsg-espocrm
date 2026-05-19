@@ -1,4 +1,4 @@
-Espo.define('custom:views/policy/kanban-card', ['views/record/kanban'], function (Dep) {
+Espo.define('custom:views/policy/kanban-card', ['custom:views/core/kanban-card-countdown'], function (Dep) {
 
     return Dep.extend({
 
@@ -6,7 +6,11 @@ Espo.define('custom:views/policy/kanban-card', ['views/record/kanban'], function
 
         data: function () {
             const data = Dep.prototype.data.call(this);
-            const countdown = this.buildCountdown(this.model.get('effective_date'), 'Until Active');
+            const countdown = this.buildCountdown(this.model.get('effective_date'), {
+                suffix: 'Until Active',
+                overdueLabel: 'Days Active',
+                todayLabel: 'Active Today'
+            });
 
             return Object.assign({}, data, {
                 cardSubtitle: this.model.get('carrier'),
@@ -14,37 +18,6 @@ Espo.define('custom:views/policy/kanban-card', ['views/record/kanban'], function
                 countdownClass: countdown.className,
                 countdownLabel: countdown.label
             });
-        },
-
-        buildCountdown: function (dateValue, suffix) {
-            if (!dateValue) {
-                return { className: '', label: '' };
-            }
-
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            const target = new Date(dateValue);
-            target.setHours(0, 0, 0, 0);
-
-            const diffDays = Math.floor((target - today) / 86400000);
-            let className = 'countdown-upcoming';
-            let label = '';
-
-            if (diffDays < 0) {
-                className = 'countdown-overdue';
-                label = `${Math.abs(diffDays)} Days Active`;
-            } else if (diffDays === 0) {
-                className = 'countdown-today';
-                label = 'Active Today';
-            } else {
-                if (diffDays <= 14) {
-                    className = 'countdown-soon';
-                }
-                label = `${diffDays} Days ${suffix}`;
-            }
-
-            return { className, label };
         }
     });
 });

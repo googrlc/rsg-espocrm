@@ -2,18 +2,12 @@
 
 namespace Espo\Custom\Classes\ActivityLog;
 
-use DateInterval;
 use DateTimeImmutable;
 use Espo\ORM\Entity;
-use Espo\ORM\EntityManager;
 
-class ServiceTriageManager
+class ServiceTriageManager extends BaseTriageManager
 {
     private const AUTOMATION_KEY = 'activitylog:service-triage';
-
-    public function __construct(
-        private EntityManager $entityManager
-    ) {}
 
     public function createTaskFromActivity(Entity $activityLog): void
     {
@@ -50,6 +44,9 @@ class ServiceTriageManager
         [$assignedUserId, $assignedUserName] = $this->resolveOwnership($activityLog, $policy, $account);
         [$parentType, $parentId, $parentName, $taskSource] = $this->resolveParent($activityLog, $policy);
 
+        $baseDateRaw = (string) ($activityLog->get('dateTime') ?: gmdate('Y-m-d H:i:s'));
+        $baseDate = new DateTimeImmutable(substr(str_replace('T', ' ', $baseDateRaw), 0, 19));
+
         $task = $this->entityManager->getNewEntity('Task');
         $task->set([
             'name' => $followUpTask,
@@ -70,7 +67,7 @@ class ServiceTriageManager
             'parentType' => $parentType,
             'parentId' => $parentId,
             'parentName' => $parentName,
-            'dateEnd' => $this->calculateDueDate($activityLog, $slaDays),
+            'dateEnd' => $this->addBusinessDays($baseDate, $slaDays)->format('Y-m-d'),
             'sourceActivityLogId' => $activityLog->getId(),
             'automationKey' => self::AUTOMATION_KEY,
         ]);
@@ -130,51 +127,6 @@ class ServiceTriageManager
         return ['Client Service', 'Normal', 2];
     }
 
-    private function resolveOwnership(Entity $activityLog, ?Entity $policy, ?Entity $account): array
-    {
-        $assignedUserId = $activityLog->get('assignedUserId');
-        $assignedUserName = $activityLog->get('assignedUserName');
-        if (!$assignedUserId && $policy) {
-            $assignedUserId = $policy->get('assignedUserId');
-            $assignedUserName = $policy->get('assignedUserName');
-        }
-
-        if (!$assignedUserId && $account) {
-            $assignedUserId = $account->get('assignedUserId');
-            $assignedUserName = $account->get('assignedUserName');
-        }
-
-        return [$assignedUserId, $assignedUserName];
-    }
-
-    private function resolveParent(Entity $activityLog, ?Entity $policy): array
-    {
-        if ($activityLog->get('policyId')) {
-            return [
-                'Policy',
-                $activityLog->get('policyId'),
-                $activityLog->get('policyName') ?: ($policy?->get('name') ?? ''),
-                'Policy',
-            ];
-        }
-
-        if ($activityLog->get('contactId')) {
-            return [
-                'Contact',
-                $activityLog->get('contactId'),
-                $activityLog->get('contactName'),
-                'Contact',
-            ];
-        }
-
-        return [
-            'Account',
-            $activityLog->get('accountId'),
-            $activityLog->get('accountName'),
-            'Account',
-        ];
-    }
-
     private function buildTriageSummary(Entity $activityLog): string
     {
         $parts = array_filter([
@@ -228,37 +180,5 @@ class ServiceTriageManager
         }
 
         return implode("\n", $lines);
-    }
-
-    private function calculateDueDate(Entity $activityLog, int $businessDays): string
-    {
-        $baseDateRaw = (string) ($activityLog->get('dateTime') ?: gmdate('Y-m-d H:i:s'));
-        $baseDate = new DateTimeImmutable(substr(str_replace('T', ' ', $baseDateRaw), 0, 19));
-
-        if ($businessDays === 0) {
-            return $this->shiftWeekendToMonday($baseDate)->format('Y-m-d');
-        }
-
-        $date = $baseDate;
-        $addedDays = 0;
-
-        while ($addedDays < $businessDays) {
-            $date = $date->add(new DateInterval('P1D'));
-
-            if ((int) $date->format('N') < 6) {
-                $addedDays++;
-            }
-        }
-
-        return $date->format('Y-m-d');
-    }
-
-    private function shiftWeekendToMonday(DateTimeImmutable $date): DateTimeImmutable
-    {
-        while ((int) $date->format('N') > 5) {
-            $date = $date->add(new DateInterval('P1D'));
-        }
-
-        return $date;
     }
 }
