@@ -24,6 +24,23 @@
             },
             "tooltipText": "Auto-set from source trigger"
         },
+        "postingSource": {
+            "type": "enum",
+            "options": [
+                "",
+                "Manual",
+                "AMS Download"
+            ],
+            "default": "Manual",
+            "isCustom": true,
+            "readOnly": true,
+            "displayAsLabel": true,
+            "style": {
+                "Manual": "warning",
+                "AMS Download": "success"
+            },
+            "tooltipText": "Manual = agent posts payment received; AMS Download = carrier statement flows via NowCerts → Supabase → auto-post"
+        },
         "status": {
             "type": "enum",
             "options": [
@@ -161,6 +178,7 @@
             ],
             "default": "Pending",
             "isCustom": true,
+            "readOnly": true,
             "displayAsLabel": true,
             "style": {
                 "Pending": "warning",
@@ -173,6 +191,7 @@
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "External ledger transaction ID written back after successful sync"
         },
         "ledgerSyncedAt": {
@@ -183,12 +202,14 @@
         "ledgerSyncError": {
             "type": "text",
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "Latest external ledger sync error message"
         },
         "ledgerPayloadHash": {
             "type": "varchar",
             "maxLength": 128,
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "Idempotency hash of the outbound ledger payload"
         },
         "ledgerKey": {

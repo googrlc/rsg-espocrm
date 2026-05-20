@@ -206,6 +206,7 @@
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "NowCerts transaction ID — dedup key for n8n sync"
         },
         "source": {

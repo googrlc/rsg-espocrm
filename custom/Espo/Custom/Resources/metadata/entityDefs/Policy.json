@@ -20,6 +20,7 @@
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "NowCerts/Momentum AMS policy databaseId \u2014 primary dedup key for sync. NEVER change this value once set."
         },
         "carrier": {
@@ -31,6 +32,7 @@
             "type": "varchar",
             "maxLength": 500,
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "Original NowCerts / AMS line-of-business string before normalization."
         },
         "line_of_business": {
@@ -167,6 +169,7 @@
         "momentum_last_synced": {
             "type": "datetime",
             "isCustom": true,
+            "readOnly": true,
             "dbName": "momentumLastSynced"
         },
         "sync_status": {
@@ -180,6 +183,7 @@
             ],
             "default": "Pending",
             "isCustom": true,
+            "readOnly": true,
             "displayAsLabel": true,
             "style": {
                 "Synced": "success",
@@ -213,6 +217,7 @@
             ],
             "default": "Unlocked",
             "isCustom": true,
+            "readOnly": true,
             "displayAsLabel": true,
             "style": {
                 "Unlocked": "success",
@@ -225,12 +230,14 @@
         "amsLockReason": {
             "type": "text",
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "Reason for current AMS lock state, including rejection detail when present."
         },
         "insuredMomentumId": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true,
+            "readOnly": true,
             "tooltipText": "insuredDatabaseId from Momentum \u2014 used to resolve Account/Contact relation during sync"
         },
         "carrierAccount": {
