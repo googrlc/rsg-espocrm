@@ -233,7 +233,12 @@ class ServiceTriageManager
     private function calculateDueDate(Entity $activityLog, int $businessDays): string
     {
         $baseDateRaw = (string) ($activityLog->get('dateTime') ?: gmdate('Y-m-d H:i:s'));
-        $baseDate = new DateTimeImmutable(substr(str_replace('T', ' ', $baseDateRaw), 0, 19));
+
+        try {
+            $baseDate = new DateTimeImmutable(substr(str_replace('T', ' ', $baseDateRaw), 0, 19));
+        } catch (\Throwable) {
+            $baseDate = new DateTimeImmutable();
+        }
 
         if ($businessDays === 0) {
             return $this->shiftWeekendToMonday($baseDate)->format('Y-m-d');
