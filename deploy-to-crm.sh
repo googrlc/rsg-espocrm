@@ -3,13 +3,9 @@
 
 set -e
 
-HOST="root@rrespocrm-rsg-u69864.vm.elestio.app"
-SSH_KEY="$HOME/.ssh/rsg_crm_deploy"
-if [[ ! -f "$SSH_KEY" ]]; then
-    SSH_KEY="$HOME/.ssh/elestio_espocrm"
-fi
+HOST="espocrm-ts"
 REMOTE_APP_PATH="/opt/app/espocrm"
-SSH_OPTS=(-i "$SSH_KEY" -o BatchMode=yes -o StrictHostKeyChecking=accept-new)
+SSH_OPTS=(-o BatchMode=yes -o StrictHostKeyChecking=accept-new)
 DRY_RUN=0
 RSYNC_FLAGS=(-avz)
 
@@ -43,11 +39,6 @@ while [[ $# -gt 0 ]]; do
 done
 
 echo "Deploying to CRM server..."
-
-if [[ ! -f "$SSH_KEY" ]]; then
-    echo "SSH key not found: $SSH_KEY" >&2
-    exit 1
-fi
 
 echo "Running preflight checks..."
 ssh "${SSH_OPTS[@]}" "$HOST" "
