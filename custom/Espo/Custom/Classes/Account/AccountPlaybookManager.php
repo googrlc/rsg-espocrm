@@ -325,8 +325,6 @@ class AccountPlaybookManager
         return implode("\n", array_filter($lines));
     }
 
-<<<<<<< HEAD
-=======
     private function normalizeMultiEnum(mixed $value): array
     {
         if (!is_array($value)) {
@@ -358,5 +356,4 @@ class AccountPlaybookManager
             return null;
         }
     }
->>>>>>> 913a4073e0c378c10b306149f0fb012889357cd7
 }

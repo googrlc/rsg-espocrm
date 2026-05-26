@@ -595,6 +595,13 @@ class AccountHealthManager
             return null;
         }
     }
+
+    private function toDateTime(string $value): ?DateTimeImmutable
+    {
+        if ($value === '') {
+            return null;
+        }
+
         try {
             return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 19));
         } catch (\Throwable) {
