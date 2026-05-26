@@ -1,7 +1,11 @@
 # RSG EspoCRM — Agent Training Prompt & CRM Profile
 
-> Paste this document as the **System Prompt** (or "Profile") when configuring a
-> Hermes agent that will interact with the RSG EspoCRM instance via MCP tools.
+> **Modular version available:** The authoritative CRM training profile has been
+> split into focused modules in [`hermes-training/espocrm/`](../hermes-training/espocrm/README.md).
+> Load only the modules your task needs to reduce token usage.
+> This file is the monolithic paste-into-system-prompt version — kept for
+> backwards compatibility with manual Hermes configuration flows.
+
 > It defines object semantics, field meanings, dropdown values, and the safety
 > rules the agent must follow at all times.
 

@@ -308,8 +308,13 @@ class AccountPlaybookManager
             return false;
         }
 
+        try {
+            $target = new DateTimeImmutable($dateValue);
+        } catch (\Throwable) {
+            return false;
+        }
+
         $today = new DateTimeImmutable('today');
-        $target = new DateTimeImmutable($dateValue);
         $daysUntil = (int) $today->diff($target)->format('%r%a');
 
         return $daysUntil >= 0 && $daysUntil <= $days;
@@ -320,4 +325,38 @@ class AccountPlaybookManager
         return implode("\n", array_filter($lines));
     }
 
+<<<<<<< HEAD
+=======
+    private function normalizeMultiEnum(mixed $value): array
+    {
+        if (!is_array($value)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            fn ($item) => trim((string) $item),
+            $value
+        )));
+    }
+
+    private function extractCarrierValues(string $value): array
+    {
+        $parts = preg_split('/[;,|]+/', $value) ?: [];
+
+        return array_values(array_filter(array_map('trim', $parts)));
+    }
+
+    private function toDate(string $value): ?DateTimeImmutable
+    {
+        if ($value === '') {
+            return null;
+        }
+
+        try {
+            return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 10));
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+>>>>>>> 913a4073e0c378c10b306149f0fb012889357cd7
 }

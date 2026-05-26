@@ -298,7 +298,11 @@ class RenewalOrchestrator
             return null;
         }
 
-        $expiration = new DateTimeImmutable($expirationDate);
+        $expiration = $this->tryParseDate($expirationDate);
+        if (!$expiration) {
+            return null;
+        }
+
         $target = $expiration->sub(new DateInterval('P45D'));
         $today = new DateTimeImmutable('today');
 
@@ -401,10 +405,27 @@ class RenewalOrchestrator
             return null;
         }
 
+        $expiration = $this->tryParseDate($expirationDate);
+        if (!$expiration) {
+            return null;
+        }
+
         $today = new DateTimeImmutable('today');
-        $expiration = new DateTimeImmutable($expirationDate);
 
         return (int) $today->diff($expiration)->format('%r%a');
+    }
+
+    private function tryParseDate(string $value): ?DateTimeImmutable
+    {
+        if ($value === '') {
+            return null;
+        }
+
+        try {
+            return new DateTimeImmutable($value);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     private function calculateUrgency(string $expirationDate): ?string

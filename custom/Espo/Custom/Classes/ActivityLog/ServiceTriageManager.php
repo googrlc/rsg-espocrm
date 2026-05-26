@@ -2,6 +2,7 @@
 
 namespace Espo\Custom\Classes\ActivityLog;
 
+use DateInterval;
 use DateTimeImmutable;
 use Espo\ORM\Entity;
 
@@ -180,5 +181,41 @@ class ServiceTriageManager extends BaseTriageManager
         }
 
         return implode("\n", $lines);
+    }
+    private function calculateDueDate(Entity $activityLog, int $businessDays): string
+    {
+        $baseDateRaw = (string) ($activityLog->get('dateTime') ?: gmdate('Y-m-d H:i:s'));
+
+        try {
+            $baseDate = new DateTimeImmutable(substr(str_replace('T', ' ', $baseDateRaw), 0, 19));
+        } catch (\Throwable) {
+            $baseDate = new DateTimeImmutable();
+        }
+
+        if ($businessDays === 0) {
+            return $this->shiftWeekendToMonday($baseDate)->format('Y-m-d');
+        }
+
+        $date = $baseDate;
+        $addedDays = 0;
+
+        while ($addedDays < $businessDays) {
+            $date = $date->add(new DateInterval('P1D'));
+
+            if ((int) $date->format('N') < 6) {
+                $addedDays++;
+            }
+        }
+
+        return $date->format('Y-m-d');
+    }
+
+    private function shiftWeekendToMonday(DateTimeImmutable $date): DateTimeImmutable
+    {
+        while ((int) $date->format('N') > 5) {
+            $date = $date->add(new DateInterval('P1D'));
+        }
+
+        return $date;
     }
 }

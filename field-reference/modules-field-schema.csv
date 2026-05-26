@@ -1,0 +1,834 @@
+module,source,field_name,espo_type,db_type,api_payload,options_or_link_target,constraints,use_case
+Account,live metadata,name,varchar,,string,,required; maxLength=249; audited,Short free-text identifier or label
+Account,live metadata,website,url,,string (URL),,,Hyperlink to external resource
+Account,live metadata,emailAddress,email,,emailAddress (primary) + emailAddressData[] for multiple,,PII,Email contact info
+Account,live metadata,phoneNumber,phone,,phoneNumber (primary) + phoneNumberData[] for multiple,,,Phone contact info
+Account,live metadata,type,enum,,string (one of options),Commercial Lines | Personal Lines | Group Benefits | Prospect,read-only,Pick-list / status
+Account,live metadata,industry,enum,,string (one of options),Advertising | Aerospace | Agriculture | Apparel & Accessories | Architecture | Automotive | Banking | Biotechnology | Building Materials & Equipment | Chemical | Computer | Construction | ... (52 total),,Pick-list / status
+Account,live metadata,sicCode,varchar,,string,,maxLength=20; custom field,Short free-text identifier or label
+Account,live metadata,contactRole,varchar,,string,,not stored (computed); maxLength=100,Short free-text identifier or label
+Account,live metadata,contactIsInactive,bool,,boolean,,not stored (computed); default=False,Flag / checkbox
+Account,live metadata,billingAddress,address,,"billingAddressStreet, billingAddressCity, billingAddressState, billingAddressPostalCode, billingAddressCountry, billingAddressMap",,,Postal address
+Account,live metadata,billingAddressStreet,text,varchar,string (multi-line),,maxLength=255,"Notes, descriptions, multi-line content"
+Account,live metadata,billingAddressCity,varchar,,string,,maxLength=100,Short free-text identifier or label
+Account,live metadata,billingAddressState,varchar,,string,,maxLength=100,Short free-text identifier or label
+Account,live metadata,billingAddressCountry,varchar,,string,,maxLength=100,Short free-text identifier or label
+Account,live metadata,billingAddressPostalCode,varchar,,string,,maxLength=40,Short free-text identifier or label
+Account,live metadata,shippingAddress,address,,"shippingAddressStreet, shippingAddressCity, shippingAddressState, shippingAddressPostalCode, shippingAddressCountry, shippingAddressMap",,,Postal address
+Account,live metadata,shippingAddressStreet,text,varchar,string (multi-line),,maxLength=255,"Notes, descriptions, multi-line content"
+Account,live metadata,shippingAddressCity,varchar,,string,,maxLength=100,Short free-text identifier or label
+Account,live metadata,shippingAddressState,varchar,,string,,maxLength=100,Short free-text identifier or label
+Account,live metadata,shippingAddressCountry,varchar,,string,,maxLength=100,Short free-text identifier or label
+Account,live metadata,shippingAddressPostalCode,varchar,,string,,maxLength=40,Short free-text identifier or label
+Account,live metadata,description,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Account,live metadata,campaign,link,,"campaignId (string), campaignName (string, read-only mirror)",belongsTo -> Campaign,,FK to a single related record
+Account,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Account,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Account,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Account,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Account,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Account,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Account,live metadata,targetLists,linkMultiple,,"targetListsIds (array), targetListsNames (object map)",hasMany -> TargetList,,M:N relation
+Account,live metadata,targetList,link,,"targetListId (string), targetListName (string, read-only mirror)",,not stored (computed),FK to a single related record
+Account,live metadata,originalLead,linkOne,,see Espo docs,,read-only,Custom field — refer to layout/docs
+Account,live metadata,targetListIsOptedOut,bool,,boolean,,read-only; not stored (computed),Flag / checkbox
+Account,live metadata,momentumClientId,varchar,,string,,maxLength=255; custom field,NowCerts/Momentum AMS insured database_id — dedup key
+Account,live metadata,fein,varchar,,string,,maxLength=20; custom field,Federal Employer Identification Number — commercial accounts only
+Account,live metadata,csrName,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Account,live metadata,momentumLastSynced,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Account,live metadata,policies,linkMultiple,,"policiesIds (array), policiesNames (object map)",hasMany -> Policy,custom field,M:N relation
+Account,live metadata,commissions,linkMultiple,,"commissionsIds (array), commissionsNames (object map)",hasMany -> Commission,custom field,M:N relation
+Account,live metadata,renewals,linkMultiple,,"renewalsIds (array), renewalsNames (object map)",hasMany -> Renewal,custom field,M:N relation
+Account,live metadata,accountType,enum,,string (one of options),Prospect | Commercial Lines | Personal Lines | Group Benefits | Medicare | Life Insurance,audited; custom field,Pick-list / status
+Account,live metadata,lob,multiEnum,,array of strings,Commercial Auto | GL | Workers Comp | Cargo | Home | Auto | Life | Medicare | BOP | Umbrella | Professional Liability | Builders Risk | ... (13 total),custom field,Multi-select tags
+Account,live metadata,xDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,estimatedPremium,currency,,"estimatedPremium (number), estimatedPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,annualPremium,currency,,"annualPremium (number), annualPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,renewalDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,carrier,varchar,,string,,maxLength=100; custom field,Short free-text identifier or label
+Account,live metadata,accountStatus,enum,,string (one of options),Active | Urgent | Renewing | At Risk | Inactive,custom field; default='Active',Pick-list / status
+Account,live metadata,stage,enum,,string (one of options),New | Qualified | Proposal | Negotiation | Closed Won | Closed Lost,custom field,Pick-list / status
+Account,live metadata,intelRun,bool,,boolean,,custom field; default=False,Whether an intel pack has been run on this account
+Account,live metadata,intelRunDate,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Account,live metadata,intelRunBy,varchar,,string,,maxLength=100; custom field,Short free-text identifier or label
+Account,live metadata,intelSourcesHit,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,intelConfidence,enum,,string (one of options),High | Medium | Low,custom field,Pick-list / status
+Account,live metadata,intelAiSummary,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelPainPoints,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelCrossSell,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelGrowthIndicator,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,insightSignal,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,insightObjection,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,insightOpener,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,insightRelationship,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelLegalName,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelDba,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelNaics,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelSic,varchar,,string,,maxLength=20; custom field,Short free-text identifier or label
+Account,live metadata,intelEntityType,enum,,string (one of options),LLC | Corp | Sole Prop | Partnership | Other,custom field,Pick-list / status
+Account,live metadata,intelYearsInBusiness,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,intelEmployeeCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,intelAnnualRevenueEst,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelWebsite,url,,string (URL),,custom field,Hyperlink to external resource
+Account,live metadata,intelLinkedinUrl,url,,string (URL),,custom field,Hyperlink to external resource
+Account,live metadata,intelBbbRating,varchar,,string,,maxLength=10; custom field,Short free-text identifier or label
+Account,live metadata,intelBbbAccredited,bool,,boolean,,custom field,Flag / checkbox
+Account,live metadata,intelBbbComplaints,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,intelFleetSize,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,intelOperatingRadius,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelCargoType,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelOwnerOperators,bool,,boolean,,custom field,Flag / checkbox
+Account,live metadata,intelDotIncidents,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,intelOshaViolations,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelUnderwritingFlag,text,,string (multi-line),,custom field,Underwriting risk flags — may trigger declination or surplus lines
+Account,live metadata,intelWebsiteNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelNewsNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelLinkedinNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelBbbNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelSignalNews,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,intelSignalLinkedin,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,businessEntity,enum,,string (one of options),Sole Proprietor | LLC | Corporation | S-Corp | Partnership | Non-Profit | Other,custom field,Pick-list / status
+Account,live metadata,annualRevenue,currency,,"annualRevenue (number), annualRevenueCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,numberOfEmployees,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,assessmentDate,datetime,,string (ISO 8601 UTC),,custom field,When Viktor last ran a full intelligence assessment on this account
+Account,live metadata,intelPackRun,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,estimatedRevenue,currency,,"estimatedRevenue (number), estimatedRevenueCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,employeeCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,yearsInBusiness,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,riskScore,int,,integer,,custom field,AI-generated risk score from Viktor assessment
+Account,live metadata,coverageGaps,text,,string (multi-line),,custom field,AI-identified coverage gaps from Viktor assessment
+Account,live metadata,keyFindings,text,,string (multi-line),,custom field,Full narrative intel written by Viktor
+Account,live metadata,linkedinUrl,url,,string (URL),,custom field,Hyperlink to external resource
+Account,live metadata,websiteUrl,url,,string (URL),,custom field,Hyperlink to external resource
+Account,live metadata,bbbRating,varchar,,string,,maxLength=10; custom field,Short free-text identifier or label
+Account,live metadata,intelSources,text,,string (multi-line),,custom field,"Comma-separated list of sources checked: LinkedIn, BBB, News, Website"
+Account,live metadata,accountScore,int,,integer,,read-only; min=0; max=100; custom field; default=0,"Auto-calculated from policy count, premium, LOB diversity, tenure, and active ratio"
+Account,live metadata,scoreBreakdown,text,,string (multi-line),,read-only; custom field,JSON breakdown of score components
+Account,live metadata,googleDriveFolderUrl,url,,string (URL),,custom field,Hyperlink to external resource
+Account,live metadata,retentionRisk,enum,,string (one of options),Low | Medium | High,custom field,Pick-list / status
+Account,live metadata,linkedTasks,linkMultiple,,"linkedTasksIds (array), linkedTasksNames (object map)",hasMany -> Task,custom field,M:N relation
+Account,live metadata,clientSince,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,referralSource,enum,,string (one of options),Referral | Google | Social Media | Cold Outreach | Walk-in | NowCerts Import | Other,custom field,Pick-list / status
+Account,live metadata,referralName,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,preferredContact,enum,,string (one of options),Phone | Email | Text,custom field,Pick-list / status
+Account,live metadata,bestTimeToCall,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,doNotContact,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,communicationNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,primaryFirstName,varchar,,string,,required; maxLength=100; custom field,Short free-text identifier or label
+Account,live metadata,primaryLastName,varchar,,string,,maxLength=100; custom field,Short free-text identifier or label
+Account,live metadata,primaryDob,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,primaryGender,enum,,string (one of options),Male | Female | Other | Prefer not to say,custom field,Pick-list / status
+Account,live metadata,primaryOccupation,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,primaryPhone,phone,,primaryPhone (primary) + phoneNumberData[] for multiple,,custom field,Phone contact info
+Account,live metadata,primaryEmail,email,,primaryEmail (primary) + emailAddressData[] for multiple,,custom field,Email contact info
+Account,live metadata,spouseFirstName,varchar,,string,,maxLength=100; custom field,Short free-text identifier or label
+Account,live metadata,spouseLastName,varchar,,string,,maxLength=100; custom field,Short free-text identifier or label
+Account,live metadata,spouseDob,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,spouseOccupation,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,dependentsCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,dependentAges,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,propertyAddress,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,propertyCity,varchar,,string,,maxLength=50; custom field,Short free-text identifier or label
+Account,live metadata,propertyState,varchar,,string,,maxLength=5; custom field; default='GA',Short free-text identifier or label
+Account,live metadata,propertyZip,varchar,,string,,maxLength=10; custom field,Short free-text identifier or label
+Account,live metadata,mailingAddressSame,bool,,boolean,,custom field; default=True,Flag / checkbox
+Account,live metadata,mailingAddress,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,residenceType,enum,,string (one of options),Owned | Rented | Condo | Mobile Home | Other,custom field,Pick-list / status
+Account,live metadata,yearsAtAddress,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,vehicleCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,vehicle1Year,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,vehicle1Make,varchar,,string,,maxLength=30; custom field,Short free-text identifier or label
+Account,live metadata,vehicle1Model,varchar,,string,,maxLength=30; custom field,Short free-text identifier or label
+Account,live metadata,vehicle1Vin,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,vehicle1Use,enum,,string (one of options),Commute | Pleasure | Business | Rideshare,custom field,Pick-list / status
+Account,live metadata,vehicle1AnnualMiles,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,vehicle1Ownership,enum,,string (one of options),Owned | Financed | Leased,custom field,Pick-list / status
+Account,live metadata,vehicle2Year,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,vehicle2Make,varchar,,string,,maxLength=30; custom field,Short free-text identifier or label
+Account,live metadata,vehicle2Model,varchar,,string,,maxLength=30; custom field,Short free-text identifier or label
+Account,live metadata,vehicle2Vin,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,vehicle2Use,enum,,string (one of options),Commute | Pleasure | Business | Rideshare,custom field,Pick-list / status
+Account,live metadata,vehicle2AnnualMiles,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,vehicle2Ownership,enum,,string (one of options),Owned | Financed | Leased,custom field,Pick-list / status
+Account,live metadata,vehicleAdditionalNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,youthfulDriverFlag,bool,,boolean,,custom field; default=False,Calculated by n8n — true if any dependent age 16-25
+Account,live metadata,rideshareDriverFlag,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,driverCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,driver1Name,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,driver1Dob,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,driver1LicenseState,varchar,,string,,maxLength=5; custom field,Short free-text identifier or label
+Account,live metadata,driver1Violations,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,driver1Accidents,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,driver2Name,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,driver2Dob,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,driver2LicenseState,varchar,,string,,maxLength=5; custom field,Short free-text identifier or label
+Account,live metadata,driver2Violations,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,driver2Accidents,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,driverAdditionalNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,mvrFlag,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,propertyCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,homeYearBuilt,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,homeConstruction,enum,,string (one of options),Frame | Masonry | Mixed | Log | Other,custom field,Pick-list / status
+Account,live metadata,homeSquareFootage,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,homeDwellingValue,currency,,"homeDwellingValue (number), homeDwellingValueCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,homePurchaseYear,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,homeRoofYear,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,homeRoofMaterial,enum,,string (one of options),Asphalt Shingle | Metal | Tile | Wood Shake | Other,custom field,Pick-list / status
+Account,live metadata,homeSecuritySystem,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,homeAlarmMonitored,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,homeTrampoline,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,homePool,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,homeDog,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,homeDogBreed,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,rentalPropertyFlag,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,rentalPropertyCount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,rentalPropertyNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyAutoActive,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyAutoCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyAutoNumber,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyAutoPremium,currency,,"policyAutoPremium (number), policyAutoPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyAutoEffective,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyAutoExpiration,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyAutoBiLimits,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyAutoCompCollision,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyAutoDeductible,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyAutoUmUim,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyHomeActive,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyHomeCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyHomeNumber,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyHomePremium,currency,,"policyHomePremium (number), policyHomePremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyHomeEffective,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyHomeExpiration,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyHomeDwellingLimit,currency,,"policyHomeDwellingLimit (number), policyHomeDwellingLimitCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyHomeDeductible,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyHomeWindHailDed,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyRenterActive,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyRenterCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyRenterPremium,currency,,"policyRenterPremium (number), policyRenterPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyRenterExpiration,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyUmbrellaActive,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyUmbrellaCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyUmbrellaLimit,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyUmbrellaPremium,currency,,"policyUmbrellaPremium (number), policyUmbrellaPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyUmbrellaExpiration,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyLifeActive,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyLifeCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyLifeType,enum,,string (one of options),Term | Whole | Universal | Final Expense,custom field,Pick-list / status
+Account,live metadata,policyLifeFaceValue,currency,,"policyLifeFaceValue (number), policyLifeFaceValueCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyLifePremium,currency,,"policyLifePremium (number), policyLifePremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyLifeExpiration,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyMedicareActive,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,policyMedicareCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyMedicarePlanType,enum,,string (one of options),Medicare Advantage | Medicare Supplement | PDP,custom field,Pick-list / status
+Account,live metadata,policyMedicarePlanName,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,policyMedicarePremium,currency,,"policyMedicarePremium (number), policyMedicarePremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,policyMedicareEffective,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,policyMedicareAepFlag,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,totalAnnualPremium,currency,,"totalAnnualPremium (number), totalAnnualPremiumCurrency (string ISO code)",,read-only; custom field,Calculated by n8n — sum of all active policy premiums
+Account,live metadata,policyCountActive,int,,integer,,read-only; custom field,Calculated by n8n — count of active policies
+Account,live metadata,gapUmbrella,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapUmbrellaReason,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,gapLife,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapLifeReason,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,gapLifeNeedEst,currency,,"gapLifeNeedEst (number), gapLifeNeedEstCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,gapRenters,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapAutoUm,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapMedicare,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapMedicareEligible,date,,string (YYYY-MM-DD),,custom field,Calculated from primary DOB — 65th birthday
+Account,live metadata,gapLandlord,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapRideshare,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapFinalExpense,bool,,boolean,,custom field,Calculated by n8n
+Account,live metadata,gapCount,int,,integer,,read-only; custom field,Calculated by n8n — total true gap flags
+Account,live metadata,scoreTotal,int,,integer,,read-only; min=0; max=100; custom field,0-100 score calculated by n8n
+Account,live metadata,scoreTier,enum,,string (one of options),Strong | Good | At Risk | Critical,read-only; custom field,Pick-list / status
+Account,live metadata,scoreBundleDepth,int,,integer,,min=0; max=20; custom field,Numeric counter / quantity
+Account,live metadata,scorePaymentHistory,int,,integer,,min=0; max=20; custom field,Numeric counter / quantity
+Account,live metadata,scoreYearsRetained,int,,integer,,min=0; max=20; custom field,Numeric counter / quantity
+Account,live metadata,scoreClaimsActivity,int,,integer,,min=0; max=20; custom field,Numeric counter / quantity
+Account,live metadata,scoreLastContact,int,,integer,,min=0; max=20; custom field,Numeric counter / quantity
+Account,live metadata,scoreLastCalculated,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Account,live metadata,scoreChangeDirection,enum,,string (one of options),Up | Down | Flat,custom field,Pick-list / status
+Account,live metadata,scoreChangeAmount,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,scoreAlertSent,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,nextRenewalDate,date,,string (YYYY-MM-DD),,custom field,Calculated by n8n — earliest policy expiration
+Account,live metadata,nextRenewalLob,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,nextRenewalCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,daysToRenewal,int,,integer,,read-only; custom field,Calculated daily by n8n
+Account,live metadata,renewalOutreachStage,enum,,string (one of options),Not Started | Day 60 Sent | Day 30 Sent | Day 14 Sent | Confirmed | Shopped | Lost,custom field,Pick-list / status
+Account,live metadata,renewalQuoteReceived,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,renewalQuoteAmount,currency,,"renewalQuoteAmount (number), renewalQuoteAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,renewalQuoteCarrier,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,renewalQuoteDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,renewalDecision,enum,,string (one of options),Renewing | Re-marketed | Lost — Price | Lost — Service | Lost — Carrier | Non-renewed by Carrier,custom field,Pick-list / status
+Account,live metadata,renewalDecisionNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,premiumChangeAmount,currency,,"premiumChangeAmount (number), premiumChangeAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,premiumChangePct,float,,number,,custom field,Decimal numeric value
+Account,live metadata,rateIncreaseFlag,bool,,boolean,,custom field; default=False,Auto-set by n8n when premiumChangePct > 15%
+Account,live metadata,claimsCountLifetime,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,claimsCount3yr,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,claimsOpen,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,lastClaimDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,lastClaimLob,enum,,string (one of options),Auto | Home | Umbrella | Life | Medicare | Renters | Other,custom field,Pick-list / status
+Account,live metadata,lastClaimType,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,lastClaimStatus,enum,,string (one of options),Open | Closed | Subrogation,custom field,Pick-list / status
+Account,live metadata,claimsNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,lastContactDate,date,,string (YYYY-MM-DD),,custom field,Auto-updated when RsgActivity logged
+Account,live metadata,lastContactType,enum,,string (one of options),Call | Email | Text | In Person,custom field,Pick-list / status
+Account,live metadata,lastContactBy,link,,"lastContactById (string), lastContactByName (string, read-only mirror)",belongsTo -> User,custom field,FK to a single related record
+Account,live metadata,lastContactOutcome,enum,,string (one of options),Reached | Voicemail | No Answer | Email Opened | Unresponsive,custom field,Pick-list / status
+Account,live metadata,outreachAttemptsCurrent,int,,integer,,custom field,Reset each renewal cycle by n8n
+Account,live metadata,npsScore,int,,integer,,custom field,Numeric counter / quantity
+Account,live metadata,npsDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,referralsGiven,int,,integer,,custom field; default=0,Numeric counter / quantity
+Account,live metadata,totalActivePremium,currency,,"totalActivePremium (number), totalActivePremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,activePolicyCount,int,,integer,,min=0; custom field,Numeric counter / quantity
+Account,live metadata,nextXDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,nextXDateLob,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Account,live metadata,intelPackLastRun,datetime,,string (ISO 8601 UTC),,read-only; custom field,Timestamp
+Account,live metadata,aiAssessment,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,cYearBusinessEst,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,dateOfBirth,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,gender,enum,,string (one of options),Male | Female | Other | Prefer not to say,custom field,Pick-list / status
+Account,live metadata,maritalStatus,enum,,string (one of options),Single | Married | Divorced | Widowed | Separated,custom field,Pick-list / status
+Account,live metadata,gbEligibleEmployees,int,,integer,,custom field,Total number of eligible employees in the group
+Account,live metadata,gbParticipatingEmployees,int,,integer,,custom field,Number of employees currently participating
+Account,live metadata,gbCensusReceived,bool,,boolean,,custom field; default=False,Flag / checkbox
+Account,live metadata,gbCensusDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,gbMedicalCarrier,varchar,,string,,maxLength=150; custom field,Short free-text identifier or label
+Account,live metadata,gbMedicalPlanType,enum,,string (one of options),HMO | PPO | EPO | HDHP | POS | HRA | Indemnity,custom field,Pick-list / status
+Account,live metadata,gbMedicalRenewalDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Account,live metadata,gbMedicalMonthlyPremium,currency,,"gbMedicalMonthlyPremium (number), gbMedicalMonthlyPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,gbEmployerContribution,varchar,,string,,maxLength=50; custom field,e.g. 75% EE / 50% Dep
+Account,live metadata,gbDentalCarrier,varchar,,string,,maxLength=150; custom field,Short free-text identifier or label
+Account,live metadata,gbDentalMonthlyPremium,currency,,"gbDentalMonthlyPremium (number), gbDentalMonthlyPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,gbVisionCarrier,varchar,,string,,maxLength=150; custom field,Short free-text identifier or label
+Account,live metadata,gbVisionMonthlyPremium,currency,,"gbVisionMonthlyPremium (number), gbVisionMonthlyPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Account,live metadata,gbLifeAdCarrier,varchar,,string,,maxLength=150; custom field,Group Life & AD&D carrier
+Account,live metadata,gbLifeBenefitAmount,currency,,"gbLifeBenefitAmount (number), gbLifeBenefitAmountCurrency (string ISO code)",,custom field,Basic life benefit amount per employee
+Account,live metadata,gbStdCarrier,varchar,,string,,maxLength=150; custom field,Short-Term Disability carrier
+Account,live metadata,gbLtdCarrier,varchar,,string,,maxLength=150; custom field,Long-Term Disability carrier
+Account,live metadata,gbVoluntaryBenefits,text,,string (multi-line),,custom field,"Aflac, voluntary life, accident, critical illness, etc."
+Account,live metadata,gbNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Account,live metadata,emailAddressIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,emailAddressIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,phoneNumberIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,phoneNumberIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,billingAddressMap,map,,lat/lng pair,,read-only; not stored (computed),Geographic point
+Account,live metadata,shippingAddressMap,map,,lat/lng pair,,read-only; not stored (computed),Geographic point
+Account,live metadata,estimatedPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,estimatedPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,annualPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,annualPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,annualRevenueCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,annualRevenueConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,estimatedRevenueCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,estimatedRevenueConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,primaryPhoneIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,primaryPhoneIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,primaryEmailIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,primaryEmailIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Account,live metadata,homeDwellingValueCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,homeDwellingValueConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyAutoPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyAutoPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyHomePremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyHomePremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyHomeDwellingLimitCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyHomeDwellingLimitConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyRenterPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyRenterPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyUmbrellaPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyUmbrellaPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyLifeFaceValueCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyLifeFaceValueConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyLifePremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyLifePremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,policyMedicarePremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,policyMedicarePremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,totalAnnualPremiumCurrency,enum,,string (one of options),,read-only; maxLength=3,Pick-list / status
+Account,live metadata,totalAnnualPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,gapLifeNeedEstCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,gapLifeNeedEstConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,renewalQuoteAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,renewalQuoteAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,premiumChangeAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,premiumChangeAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,totalActivePremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,totalActivePremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,gbMedicalMonthlyPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,gbMedicalMonthlyPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,gbDentalMonthlyPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,gbDentalMonthlyPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,gbVisionMonthlyPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,gbVisionMonthlyPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,gbLifeBenefitAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Account,live metadata,gbLifeBenefitAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Account,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Contact,live metadata,name,personName,,"nameSalutation, nameFirst, nameMiddle, nameLast (server also returns combined 'name')",,PII,Person's full name
+Contact,live metadata,salutationName,enum,,string (one of options),Mr. | Ms. | Mrs. | Dr.,,Pick-list / status
+Contact,live metadata,firstName,varchar,,string,,maxLength=100,Short free-text identifier or label
+Contact,live metadata,lastName,varchar,,string,,required; maxLength=100,Short free-text identifier or label
+Contact,live metadata,accountAnyId,varchar,,string,,not stored (computed),Short free-text identifier or label
+Contact,live metadata,title,varchar,,string,,not stored (computed); maxLength=100,Short free-text identifier or label
+Contact,live metadata,description,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Contact,live metadata,emailAddress,email,,emailAddress (primary) + emailAddressData[] for multiple,,PII,Email contact info
+Contact,live metadata,phoneNumber,phone,,phoneNumber (primary) + phoneNumberData[] for multiple,,PII,Phone contact info
+Contact,live metadata,doNotCall,bool,,boolean,,,Flag / checkbox
+Contact,live metadata,address,address,,"addressStreet, addressCity, addressState, addressPostalCode, addressCountry, addressMap",,PII,Postal address
+Contact,live metadata,addressStreet,text,varchar,string (multi-line),,maxLength=255,"Notes, descriptions, multi-line content"
+Contact,live metadata,addressCity,varchar,,string,,maxLength=100,Short free-text identifier or label
+Contact,live metadata,addressState,varchar,,string,,maxLength=100,Short free-text identifier or label
+Contact,live metadata,addressCountry,varchar,,string,,maxLength=100,Short free-text identifier or label
+Contact,live metadata,addressPostalCode,varchar,,string,,maxLength=40,Short free-text identifier or label
+Contact,live metadata,account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,,FK to a single related record
+Contact,live metadata,accounts,linkMultiple,,"accountsIds (array), accountsNames (object map)",hasMany -> Account,custom field,M:N relation
+Contact,live metadata,accountRole,varchar,,string,,not stored (computed),Short free-text identifier or label
+Contact,live metadata,accountIsInactive,bool,,boolean,,not stored (computed),Flag / checkbox
+Contact,live metadata,accountType,foreign,,read-only mirror of related field,"via link 'account', field 'type'",read-only,Denormalized lookup from a linked entity
+Contact,live metadata,opportunityRole,enum,,string (one of options),Decision Maker | Evaluator | Influencer,not stored (computed),Pick-list / status
+Contact,live metadata,acceptanceStatus,varchar,,string,,not stored (computed),Short free-text identifier or label
+Contact,live metadata,acceptanceStatusMeetings,enum,,string (one of options),,not stored (computed),Pick-list / status
+Contact,live metadata,acceptanceStatusCalls,enum,,string (one of options),,not stored (computed),Pick-list / status
+Contact,live metadata,campaign,link,,"campaignId (string), campaignName (string, read-only mirror)",belongsTo -> Campaign,,FK to a single related record
+Contact,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Contact,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Contact,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Contact,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Contact,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Contact,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Contact,live metadata,targetLists,linkMultiple,,"targetListsIds (array), targetListsNames (object map)",hasMany -> TargetList,,M:N relation
+Contact,live metadata,targetList,link,,"targetListId (string), targetListName (string, read-only mirror)",,not stored (computed),FK to a single related record
+Contact,live metadata,portalUser,linkOne,,see Espo docs,,read-only; not stored (computed),Custom field — refer to layout/docs
+Contact,live metadata,hasPortalUser,bool,,boolean,,read-only; not stored (computed),Flag / checkbox
+Contact,live metadata,originalLead,linkOne,,see Espo docs,,read-only,Custom field — refer to layout/docs
+Contact,live metadata,targetListIsOptedOut,bool,,boolean,,read-only; not stored (computed),Flag / checkbox
+Contact,live metadata,originalEmail,link,,"originalEmailId (string), originalEmailName (string, read-only mirror)",,not stored (computed),FK to a single related record
+Contact,live metadata,dateOfBirth,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Contact,live metadata,momentumClientId,varchar,,string,,maxLength=255; custom field,NowCerts/Momentum AMS insured database_id — used as sync dedup key
+Contact,live metadata,csrName,varchar,,string,,maxLength=255; custom field,Assigned CSR from Momentum AMS (csrName field)
+Contact,live metadata,clientType,enum,,string (one of options),Personal | Commercial,custom field,Pick-list / status
+Contact,live metadata,householdRole,enum,,string (one of options),Primary | Spouse | Dependent | Co-insured,custom field,Pick-list / status
+Contact,live metadata,policies,linkMultiple,,"policiesIds (array), policiesNames (object map)",hasMany -> Policy,custom field,M:N relation
+Contact,live metadata,commissions,linkMultiple,,"commissionsIds (array), commissionsNames (object map)",hasMany -> Commission,custom field,M:N relation
+Contact,live metadata,renewals,linkMultiple,,"renewalsIds (array), renewalsNames (object map)",hasMany -> Renewal,custom field,M:N relation
+Contact,live metadata,contactDriveFolderUrl,url,,string (URL),,custom field,Optional override — contact-specific Google Drive folder URL
+Contact,live metadata,medicareEligible,bool,,boolean,,custom field; default=False,Flag / checkbox
+Contact,live metadata,medicarePartB,bool,,boolean,,custom field; default=False,Flag / checkbox
+Contact,live metadata,medicarePlanType,enum,,string (one of options),Supplement | Advantage | Part D,custom field,Pick-list / status
+Contact,live metadata,medicareCarrier,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Contact,live metadata,irmaApplies,bool,,boolean,,custom field; default=False,Income-Related Monthly Adjustment Amount applies
+Contact,live metadata,aepSepDate,date,,string (YYYY-MM-DD),,custom field,Annual Enrollment Period or Special Enrollment Period date
+Contact,live metadata,lifeCoverageInForce,bool,,boolean,,custom field; default=False,Flag / checkbox
+Contact,live metadata,lifeFaceAmount,currency,,"lifeFaceAmount (number), lifeFaceAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Contact,live metadata,lifePolicyType,enum,,string (one of options),Term | Whole | Universal,custom field,Pick-list / status
+Contact,live metadata,lifeHealthClass,enum,,string (one of options),Preferred Plus | Preferred | Standard Plus | Standard | Substandard,custom field,Pick-list / status
+Contact,live metadata,lifeAnnualPremium,currency,,"lifeAnnualPremium (number), lifeAnnualPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Contact,live metadata,lifeBeneficiaryOnFile,bool,,boolean,,custom field; default=False,Flag / checkbox
+Contact,live metadata,lifeReviewDate,date,,string (YYYY-MM-DD),,custom field,Last date life insurance review was completed
+Contact,live metadata,activityLogs,linkMultiple,,"activityLogsIds (array), activityLogsNames (object map)",hasMany -> ActivityLog,custom field,M:N relation
+Contact,live metadata,middleName,varchar,,string,,maxLength=100,Short free-text identifier or label
+Contact,live metadata,emailAddressIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Contact,live metadata,emailAddressIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Contact,live metadata,phoneNumberIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Contact,live metadata,phoneNumberIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Contact,live metadata,addressMap,map,,lat/lng pair,,read-only; not stored (computed),Geographic point
+Contact,live metadata,lifeFaceAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Contact,live metadata,lifeFaceAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Contact,live metadata,lifeAnnualPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Contact,live metadata,lifeAnnualPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Contact,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Opportunity,live metadata,name,varchar,,string,,required,Short free-text identifier or label
+Opportunity,live metadata,amount,currency,,"amount (number), amountCurrency (string ISO code)",,read-only; min=0; audited,Auto-populated from Est. Premium. Do not edit directly.
+Opportunity,live metadata,amountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,amountWeightedConverted,float,,number,,read-only; not stored (computed),Decimal numeric value
+Opportunity,live metadata,account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,audited,FK to a single related record
+Opportunity,live metadata,contacts,linkMultiple,,"contactsIds (array), contactsNames (object map)",hasMany -> Contact,,M:N relation
+Opportunity,live metadata,contact,link,,"contactId (string), contactName (string, read-only mirror)",belongsTo -> Contact,,FK to a single related record
+Opportunity,live metadata,stage,enum,,string (one of options),Prospect | Qualify | Quote | Proposal | Negotiate | Won - Bound | Lost | Renewal Notice Sent | Markets Out / Shopping | Quoted | Presented to Client | Bound / Renewed | ... (13 total),audited; default='Prospect',Pick-list / status
+Opportunity,live metadata,lastStage,enum,,string (one of options),,,Pick-list / status
+Opportunity,live metadata,probability,int,,integer,,min=0; max=100; audited,Numeric counter / quantity
+Opportunity,live metadata,leadSource,enum,,string (one of options),,audited,Pick-list / status
+Opportunity,live metadata,closeDate,date,,string (YYYY-MM-DD),,required; audited,Calendar date
+Opportunity,live metadata,description,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,campaign,link,,"campaignId (string), campaignName (string, read-only mirror)",belongsTo -> Campaign,audited,FK to a single related record
+Opportunity,live metadata,originalLead,linkOne,,see Espo docs,,read-only,Custom field — refer to layout/docs
+Opportunity,live metadata,contactRole,enum,,string (one of options),,not stored (computed),Pick-list / status
+Opportunity,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Opportunity,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Opportunity,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Opportunity,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Opportunity,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Opportunity,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Opportunity,live metadata,lineOfBusiness,enum,,string (one of options),Commercial Auto | General Liability | Workers Comp | Commercial Property | BOP | Professional Liability | Umbrella | Builders Risk | Inland Marine | Personal Auto | Homeowners | Renters | ... (24 total),required; audited; custom field,Line of Business — locked after first save. Create a new Opportunity to change LOB.
+Opportunity,live metadata,carrier,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Opportunity,live metadata,currentCarrier,varchar,,string,,maxLength=255; custom field,Incumbent carrier name
+Opportunity,live metadata,targetCarrier,varchar,,string,,maxLength=255; custom field,Carrier being quoted
+Opportunity,live metadata,businessType,enum,,string (one of options),New Business | Renewal | Rewrite,custom field,Pick-list / status
+Opportunity,live metadata,writtenPremium,currency,,"writtenPremium (number), writtenPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,estimatedPremium,currency,,"estimatedPremium (number), estimatedPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,commissionRate,float,,number,,custom field,Decimal numeric value
+Opportunity,live metadata,estimatedCommission,currency,,"estimatedCommission (number), estimatedCommissionCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,bindDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Opportunity,live metadata,effectiveDate,date,,string (YYYY-MM-DD),,custom field,Policy effective date — entered at bind
+Opportunity,live metadata,policyNumber,varchar,,string,,maxLength=100; custom field,Enter after bind
+Opportunity,live metadata,priority,enum,,string (one of options),Hot | Warm | Cold,custom field,Pick-list / status
+Opportunity,live metadata,fein,varchar,,string,,maxLength=20; custom field,Enter if Account not yet created
+Opportunity,live metadata,lostReason,enum,,string (one of options),Price | Coverage | Service | Competitor Stole | Business Closed | Carrier Non-Renewed | Client Moved | Unknown | N/A,custom field,Pick-list / status
+Opportunity,live metadata,aiSummary,text,,string (multi-line),,custom field,2-3 sentence brief from Manus intel — pre-call context
+Opportunity,live metadata,lastContactMethod,enum,,string (one of options),Phone | Email | Text | No Response,custom field,Pick-list / status
+Opportunity,live metadata,aggregatePageId,varchar,,string,,maxLength=255; custom field,Legacy Notion sync field
+Opportunity,live metadata,policies,linkMultiple,,"policiesIds (array), policiesNames (object map)",hasMany -> Policy,custom field,M:N relation
+Opportunity,live metadata,commissions,linkMultiple,,"commissionsIds (array), commissionsNames (object map)",hasMany -> Commission,custom field,M:N relation
+Opportunity,live metadata,policyStubId,varchar,,string,,read-only; maxLength=50; custom field,ID of the auto-created Policy stub when Won-Bound
+Opportunity,live metadata,policyStubStatus,enum,,string (one of options),Pending Sync | Synced,read-only; custom field,Pick-list / status
+Opportunity,live metadata,caBusType,enum,,string (one of options),Trucking | Contractor | Fleet | Delivery | Other,custom field,Commercial Auto — business type
+Opportunity,live metadata,caVehicleCount,int,,integer,,custom field,Total scheduled vehicles
+Opportunity,live metadata,caDriverCount,int,,integer,,custom field,Total listed drivers
+Opportunity,live metadata,caRadius,enum,,string (one of options),Local <50mi | Intermediate 50-200mi | Long haul 200+mi,custom field,Pick-list / status
+Opportunity,live metadata,caDotNumber,varchar,,string,,maxLength=20; custom field,Federal DOT number
+Opportunity,live metadata,caMcNumber,varchar,,string,,maxLength=20; custom field,Motor Carrier number
+Opportunity,live metadata,caCommodity,varchar,,string,,maxLength=255; custom field,Primary cargo type
+Opportunity,live metadata,caCurrentPolicyNum,varchar,,string,,maxLength=100; custom field,Incumbent policy number
+Opportunity,live metadata,caCurrentExpiration,date,,string (YYYY-MM-DD),,custom field,Incumbent expiration date
+Opportunity,live metadata,glClassCode,varchar,,string,,maxLength=20; custom field,ISO class code
+Opportunity,live metadata,glOperationsDesc,text,,string (multi-line),,custom field,What does the business do
+Opportunity,live metadata,glAnnualPayroll,currency,,"glAnnualPayroll (number), glAnnualPayrollCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,glAnnualRevenue,currency,,"glAnnualRevenue (number), glAnnualRevenueCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,glSubcontractorsUsed,bool,,boolean,,custom field; default=False,Affects rating
+Opportunity,live metadata,wcClassCode,varchar,,string,,maxLength=20; custom field,NCCI class code
+Opportunity,live metadata,wcAnnualPayroll,currency,,"wcAnnualPayroll (number), wcAnnualPayrollCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,wcExperienceMod,float,,number,,custom field,Current experience modification factor (X-Mod)
+Opportunity,live metadata,wcEmployeeCount,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,umbrellaLimit,enum,,string (one of options),$1M | $2M | $5M | $10M,custom field,Pick-list / status
+Opportunity,live metadata,paCurrentPremium,currency,,"paCurrentPremium (number), paCurrentPremiumCurrency (string ISO code)",,custom field,What they pay now
+Opportunity,live metadata,paCurrentExpiration,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Opportunity,live metadata,paPriorClaims,enum,,string (one of options),None | 1 | 2+,custom field,Prior claims in last 3 years
+Opportunity,live metadata,medPlanType,enum,,string (one of options),Advantage | Supplement | Part D,custom field,Pick-list / status
+Opportunity,live metadata,medCurrentCarrier,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Opportunity,live metadata,medCurrentPlan,varchar,,string,,maxLength=255; custom field,Plan name or letter
+Opportunity,live metadata,medAepSepDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Opportunity,live metadata,medIrmaaApplies,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,lifeCoverageType,enum,,string (one of options),Term | Whole | Universal | IUL,custom field,Pick-list / status
+Opportunity,live metadata,lifeFaceAmountRequested,currency,,"lifeFaceAmountRequested (number), lifeFaceAmountRequestedCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,lifeTermLength,enum,,string (one of options),10yr | 15yr | 20yr | 30yr,custom field,Only applicable for Term life
+Opportunity,live metadata,lifeHealthClassTarget,enum,,string (one of options),Preferred Plus | Preferred | Standard | Rated,custom field,Pick-list / status
+Opportunity,live metadata,lifeTobaccoUser,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,propYearBuilt,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,propSquareFootage,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,propConstructionType,enum,,string (one of options),Frame | Masonry | Mixed,custom field,Pick-list / status
+Opportunity,live metadata,propCurrentCarrier,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Opportunity,live metadata,propCurrentPremium,currency,,"propCurrentPremium (number), propCurrentPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,propAddress,address,,"propAddressStreet, propAddressCity, propAddressState, propAddressPostalCode, propAddressCountry, propAddressMap",,custom field,Insured property location
+Opportunity,live metadata,autoVehicleCount,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,autoDriverCount,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,autoYoungestDriverAge,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,autoPriorAccidents,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,autoPriorViolations,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,autoCurrentCarrierYears,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,autoGarageState,varchar,,string,,maxLength=50; custom field,Short free-text identifier or label
+Opportunity,live metadata,autoUseType,enum,,string (one of options),Personal | Business | Commercial | Rideshare | Mixed,custom field,Pick-list / status
+Opportunity,live metadata,autoSR22Required,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,autoTotalVehicleValue,currency,,"autoTotalVehicleValue (number), autoTotalVehicleValueCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,autoAssessmentNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,autoAssessmentDate,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Opportunity,live metadata,healthDateOfBirth,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Opportunity,live metadata,healthGender,enum,,string (one of options),Male | Female | Other,custom field,Pick-list / status
+Opportunity,live metadata,healthTobaccoUse,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,healthHeightInches,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,healthWeightLbs,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,healthPreExistingConditions,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,healthMedications,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,healthFaceAmount,currency,,"healthFaceAmount (number), healthFaceAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,healthCoverageType,enum,,string (one of options),Term | Whole Life | Universal Life | Final Expense | Medicare Supplement | Medicare Advantage | Group | Individual | Other,custom field,Pick-list / status
+Opportunity,live metadata,healthBeneficiaryName,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Opportunity,live metadata,healthRiskClass,enum,,string (one of options),Preferred Plus | Preferred | Standard Plus | Standard | Substandard | Declined | Pending,custom field,Pick-list / status
+Opportunity,live metadata,healthAssessmentNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,healthAssessmentDate,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Opportunity,live metadata,propRoofType,enum,,string (one of options),Asphalt Shingle | Metal | Tile | Flat | Slate | Other,custom field,Pick-list / status
+Opportunity,live metadata,propRoofAge,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,propReplacementCost,currency,,"propReplacementCost (number), propReplacementCostCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Opportunity,live metadata,propPriorClaims,int,,integer,,custom field,Numeric counter / quantity
+Opportunity,live metadata,propOccupancy,enum,,string (one of options),Owner Occupied | Tenant Occupied | Seasonal | Vacant | Commercial,custom field,Pick-list / status
+Opportunity,live metadata,propProtectionClass,varchar,,string,,maxLength=10; custom field,Short free-text identifier or label
+Opportunity,live metadata,propFloodZone,varchar,,string,,maxLength=20; custom field,Short free-text identifier or label
+Opportunity,live metadata,propAssessmentNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,propAssessmentDate,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Opportunity,live metadata,cClientEmail,email,,cClientEmail (primary) + emailAddressData[] for multiple,,custom field,Email contact info
+Opportunity,live metadata,cRenewalDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Opportunity,live metadata,lossRunsRequested,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,commissionLogged,bool,,boolean,,custom field; default=False,Auto-set by n8n when commission ledger entry created
+Opportunity,live metadata,onboardingSent,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,emailSequenceStarted,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,skipEmailSequence,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,chkQuoteSubmitted,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,chkProposalSent,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,chkSignedAppReceived,bool,,boolean,,custom field; default=False,Flag / checkbox
+Opportunity,live metadata,chkBound,bool,,boolean,,custom field; default=False,Bind order sent
+Opportunity,live metadata,chkUnderlyingLinked,bool,,boolean,,custom field; default=False,Umbrella — underlying opps/policies linked
+Opportunity,live metadata,chkUnderlyingConfirmed,bool,,boolean,,custom field; default=False,Umbrella — underlying limits confirmed
+Opportunity,live metadata,chkMvrsPulled,bool,,boolean,,custom field; default=False,Personal Auto — MVRs pulled
+Opportunity,live metadata,chkDecPageDelivered,bool,,boolean,,custom field; default=False,Personal Lines — dec page delivered to client
+Opportunity,live metadata,chkScopeOfAppt,bool,,boolean,,custom field; default=False,Medicare — Scope of Appointment completed
+Opportunity,live metadata,chkPlanPresented,bool,,boolean,,custom field; default=False,Medicare — plan options presented
+Opportunity,live metadata,chkAppSubmitted,bool,,boolean,,custom field; default=False,Medicare — application submitted
+Opportunity,live metadata,chkCmsConfirmation,bool,,boolean,,custom field; default=False,Medicare — CMS confirmation received
+Opportunity,live metadata,chkWelcomeLetter,bool,,boolean,,custom field; default=False,Medicare — welcome letter delivered
+Opportunity,live metadata,amountCurrency,enum,,string (one of options),,read-only; maxLength=3,Pick-list / status
+Opportunity,live metadata,writtenPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,writtenPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,estimatedPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,estimatedPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,estimatedCommissionCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,estimatedCommissionConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,glAnnualPayrollCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,glAnnualPayrollConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,glAnnualRevenueCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,glAnnualRevenueConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,wcAnnualPayrollCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,wcAnnualPayrollConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,paCurrentPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,paCurrentPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,lifeFaceAmountRequestedCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,lifeFaceAmountRequestedConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,propCurrentPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,propCurrentPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,propAddressStreet,text,varchar,string (multi-line),,maxLength=255,"Notes, descriptions, multi-line content"
+Opportunity,live metadata,propAddressCity,varchar,,string,,maxLength=100,Short free-text identifier or label
+Opportunity,live metadata,propAddressState,varchar,,string,,maxLength=100,Short free-text identifier or label
+Opportunity,live metadata,propAddressCountry,varchar,,string,,maxLength=100,Short free-text identifier or label
+Opportunity,live metadata,propAddressPostalCode,varchar,,string,,maxLength=40,Short free-text identifier or label
+Opportunity,live metadata,propAddressMap,map,,lat/lng pair,,read-only; not stored (computed),Geographic point
+Opportunity,live metadata,autoTotalVehicleValueCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,autoTotalVehicleValueConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,healthFaceAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,healthFaceAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,propReplacementCostCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Opportunity,live metadata,propReplacementCostConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Opportunity,live metadata,cClientEmailIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Opportunity,live metadata,cClientEmailIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Opportunity,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Task,live metadata,name,varchar,,string,,required,Short free-text identifier or label
+Task,live metadata,status,enum,,string (one of options),Inbox | In Progress | Waiting on Client | Waiting on Carrier | Completed | Cancelled,audited; default='Inbox',Pick-list / status
+Task,live metadata,priority,enum,,string (one of options),Low | Normal | High | Urgent,audited; default='Normal',Pick-list / status
+Task,live metadata,dateStart,datetimeOptional,,string (date or datetime),,,Timestamp where time component is optional
+Task,live metadata,dateEnd,datetimeOptional,,string (date or datetime),,audited,Timestamp where time component is optional
+Task,live metadata,dateStartDate,date,,string (YYYY-MM-DD),,,Calendar date
+Task,live metadata,dateEndDate,date,,string (YYYY-MM-DD),,,Calendar date
+Task,live metadata,dateCompleted,datetime,,string (ISO 8601 UTC),,read-only,Timestamp
+Task,live metadata,isOverdue,bool,,boolean,,read-only; not stored (computed),Flag / checkbox
+Task,live metadata,reminders,jsonArray,,JSON array,,not stored (computed),Structured array payload
+Task,live metadata,description,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Task,live metadata,parent,linkParent,,"parentId, parentType, parentName",belongsToParent,,Polymorphic FK (parent of many possible types)
+Task,live metadata,account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,read-only,FK to a single related record
+Task,live metadata,contact,link,,"contactId (string), contactName (string, read-only mirror)",belongsTo -> Contact,read-only,FK to a single related record
+Task,live metadata,originalEmail,link,,"originalEmailId (string), originalEmailName (string, read-only mirror)",,not stored (computed),FK to a single related record
+Task,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Task,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Task,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Task,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Task,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,required,System-managed audit/ownership field
+Task,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Task,live metadata,attachments,attachmentMultiple,,Field+'Ids' (array),,,Multiple file attachments
+Task,live metadata,taskType,enum,,string (one of options),Client Service | Policy Change | Renewal | New Business | Follow Up | Onboarding | Claims | Commission | Admin | Other,audited,Pick-list / status
+Task,live metadata,syncSource,enum,,string (one of options),Manual | Gmail | Slack | Momentum | n8n | Viktor,,Pick-list / status
+Task,live metadata,urgency,enum,,string (one of options),Urgent | High | Normal | Low,default='Normal',Pick-list / status
+Task,live metadata,triageSummary,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Task,live metadata,triageReason,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Task,live metadata,taskSource,enum,,string (one of options),Account | Contact | Policy,custom field,Where this task was created from — enables Account rollup
+Task,live metadata,linkedAccount,link,,"linkedAccountId (string), linkedAccountName (string, read-only mirror)",belongsTo -> Account,custom field,Parent account — all tasks roll up to this account
+Task,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Quote,planned (not yet on live server),name,varchar,,string,,maxLength=255,Optional display title for this quote entry.
+Quote,planned (not yet on live server),quoteNumber,varchar,,string,,required; maxLength=100; audited; custom field,Short free-text identifier or label
+Quote,planned (not yet on live server),carrier,varchar,,string,,required; maxLength=255; custom field,Short free-text identifier or label
+Quote,planned (not yet on live server),premium,currency,,"premium (number), premiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Quote,planned (not yet on live server),status,enum,,string (one of options),Draft | Received | Presented | Bound | Declined,required; custom field; default='Draft',Pick-list / status
+Quote,planned (not yet on live server),effectiveDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Quote,planned (not yet on live server),expirationDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Quote,planned (not yet on live server),lineOfBusiness,enum,,string (one of options),Commercial Auto | Transportation / Trucking | General Liability | Workers Comp | Commercial Property | BOP | Professional Liability | Umbrella | Other,custom field,Pick-list / status
+Quote,planned (not yet on live server),opportunity,link,,"opportunityId (string), opportunityName (string, read-only mirror)",belongsTo -> Opportunity,required,FK to a single related record
+Quote,planned (not yet on live server),account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,,FK to a single related record
+Quote,planned (not yet on live server),notes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Lead,live metadata,name,personName,,"nameSalutation, nameFirst, nameMiddle, nameLast (server also returns combined 'name')",,PII,Person's full name
+Lead,live metadata,salutationName,enum,,string (one of options),Mr. | Ms. | Mrs. | Dr.,,Pick-list / status
+Lead,live metadata,firstName,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,lastName,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,title,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,status,enum,,string (one of options),New | Assigned | In Process | Converted | Recycled | Dead,audited; default='New',Pick-list / status
+Lead,live metadata,source,enum,,string (one of options),Call | Email | Existing Customer | Partner | Public Relations | Web Site | Campaign | Other,,Pick-list / status
+Lead,live metadata,industry,enum,,string (one of options),,,Pick-list / status
+Lead,live metadata,opportunityAmount,currency,,"opportunityAmount (number), opportunityAmountCurrency (string ISO code)",,min=0; audited,Monetary amount with currency code
+Lead,live metadata,opportunityAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Lead,live metadata,website,url,,string (URL),,,Hyperlink to external resource
+Lead,live metadata,address,address,,"addressStreet, addressCity, addressState, addressPostalCode, addressCountry, addressMap",,PII,Postal address
+Lead,live metadata,addressStreet,text,varchar,string (multi-line),,maxLength=255,"Notes, descriptions, multi-line content"
+Lead,live metadata,addressCity,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,addressState,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,addressCountry,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,addressPostalCode,varchar,,string,,maxLength=40,Short free-text identifier or label
+Lead,live metadata,emailAddress,email,,emailAddress (primary) + emailAddressData[] for multiple,,PII,Email contact info
+Lead,live metadata,phoneNumber,phone,,phoneNumber (primary) + phoneNumberData[] for multiple,,PII,Phone contact info
+Lead,live metadata,doNotCall,bool,,boolean,,audited,Flag / checkbox
+Lead,live metadata,description,text,,string (multi-line),,,"Notes, descriptions, multi-line content"
+Lead,live metadata,convertedAt,datetime,,string (ISO 8601 UTC),,read-only,Timestamp
+Lead,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Lead,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Lead,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Lead,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Lead,live metadata,accountName,varchar,,string,,,Short free-text identifier or label
+Lead,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Lead,live metadata,acceptanceStatus,varchar,,string,,not stored (computed),Short free-text identifier or label
+Lead,live metadata,acceptanceStatusMeetings,enum,,string (one of options),,not stored (computed),Pick-list / status
+Lead,live metadata,acceptanceStatusCalls,enum,,string (one of options),,not stored (computed),Pick-list / status
+Lead,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Lead,live metadata,campaign,link,,"campaignId (string), campaignName (string, read-only mirror)",belongsTo -> Campaign,,FK to a single related record
+Lead,live metadata,createdAccount,link,,"createdAccountId (string), createdAccountName (string, read-only mirror)",belongsTo -> Account,,FK to a single related record
+Lead,live metadata,createdContact,link,,"createdContactId (string), createdContactName (string, read-only mirror)",belongsTo -> Contact,,FK to a single related record
+Lead,live metadata,createdOpportunity,link,,"createdOpportunityId (string), createdOpportunityName (string, read-only mirror)",belongsTo -> Opportunity,,FK to a single related record
+Lead,live metadata,targetLists,linkMultiple,,"targetListsIds (array), targetListsNames (object map)",hasMany -> TargetList,,M:N relation
+Lead,live metadata,targetList,link,,"targetListId (string), targetListName (string, read-only mirror)",,not stored (computed),FK to a single related record
+Lead,live metadata,targetListIsOptedOut,bool,,boolean,,read-only; not stored (computed),Flag / checkbox
+Lead,live metadata,originalEmail,link,,"originalEmailId (string), originalEmailName (string, read-only mirror)",,not stored (computed),FK to a single related record
+Lead,live metadata,insuranceInterest,enum,,string (one of options),Commercial Auto | General Liability | Workers Comp | Commercial Property | BOP | Personal Auto | Homeowners | Life | Health | Medicare | Group Benefits | Inland Marine | ... (14 total),custom field,Pick-list / status
+Lead,live metadata,currentlyInsured,bool,,boolean,,custom field; default=False,Flag / checkbox
+Lead,live metadata,currentCarrier,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Lead,live metadata,estimatedPremium,currency,,"estimatedPremium (number), estimatedPremiumCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Lead,live metadata,priority,enum,,string (one of options),Hot | Warm | Cold,custom field,Pick-list / status
+Lead,live metadata,aiSummary,text,,string (multi-line),,custom field,Pre-call intel from Manus prospect intelligence pack
+Lead,live metadata,intelPackRun,bool,,boolean,,custom field; default=False,Checked when Manus prospect-intelligence-pack has run for this lead
+Lead,live metadata,dateOfBirth,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Lead,live metadata,medicareEligible,bool,,boolean,,custom field; default=False,Flag / checkbox
+Lead,live metadata,medicarePartADate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Lead,live metadata,medicarePartBDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Lead,live metadata,currentMedicarePlan,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Lead,live metadata,t65AlertSent,bool,,boolean,,read-only; custom field; default=False,Flag / checkbox
+Lead,live metadata,middleName,varchar,,string,,maxLength=100,Short free-text identifier or label
+Lead,live metadata,opportunityAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Lead,live metadata,addressMap,map,,lat/lng pair,,read-only; not stored (computed),Geographic point
+Lead,live metadata,emailAddressIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Lead,live metadata,emailAddressIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Lead,live metadata,phoneNumberIsOptedOut,bool,,boolean,,not stored (computed),Flag / checkbox
+Lead,live metadata,phoneNumberIsInvalid,bool,,boolean,,not stored (computed),Flag / checkbox
+Lead,live metadata,estimatedPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Lead,live metadata,estimatedPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Lead,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Policy,live metadata,name,varchar,,string,,required; maxLength=100,Policy number — used as record name/title
+Policy,live metadata,momentumPolicyId,varchar,,string,,maxLength=255; custom field,NowCerts/Momentum AMS policy databaseId — primary dedup key for sync. NEVER change this value once set.
+Policy,live metadata,carrier,varchar,,string,,maxLength=255; custom field,Short free-text identifier or label
+Policy,live metadata,lineOfBusiness,varchar,,string,,maxLength=500; custom field,Raw string from Momentum — may contain multiple LOBs comma-separated
+Policy,live metadata,status,enum,,string (one of options),Active | Up for Renewal | Renewing | Renewed | Expired | Cancelled | Flat Cancel | Pending Cancel | Non-Renewed | Lapsed,custom field; default='Active',Pick-list / status
+Policy,live metadata,effectiveDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Policy,live metadata,expirationDate,date,,string (YYYY-MM-DD),,custom field,Renewal trigger date — used by renewal pipeline automation
+Policy,live metadata,premiumAmount,currency,,"premiumAmount (number), premiumAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Policy,live metadata,commissionRate,float,,number,,custom field,Decimal numeric value
+Policy,live metadata,commissionAmount,currency,,"commissionAmount (number), commissionAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Policy,live metadata,coverageAmount,currency,,"coverageAmount (number), coverageAmountCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Policy,live metadata,deductible,currency,,"deductible (number), deductibleCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Policy,live metadata,agencyFee,currency,,"agencyFee (number), agencyFeeCurrency (string ISO code)",,custom field,Monetary amount with currency code
+Policy,live metadata,businessType,enum,,string (one of options),New Business | Renewal | Rewrite,custom field,Pick-list / status
+Policy,live metadata,policyNotes,text,,string (multi-line),,custom field,"Notes, descriptions, multi-line content"
+Policy,live metadata,momentumLastSynced,datetime,,string (ISO 8601 UTC),,custom field,Timestamp
+Policy,live metadata,syncStatus,enum,,string (one of options),Synced | Pending | Error | Skipped,custom field; default='Pending',Pick-list / status
+Policy,live metadata,insuredMomentumId,varchar,,string,,maxLength=255; custom field,insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync
+Policy,live metadata,account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,,FK to a single related record
+Policy,live metadata,contact,link,,"contactId (string), contactName (string, read-only mirror)",belongsTo -> Contact,,FK to a single related record
+Policy,live metadata,opportunities,linkMultiple,,"opportunitiesIds (array), opportunitiesNames (object map)",hasMany -> Opportunity,,M:N relation
+Policy,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Policy,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Policy,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Policy,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Policy,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Policy,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Policy,live metadata,premiumAtRisk,currency,,"premiumAtRisk (number), premiumAtRiskCurrency (string ISO code)",,custom field,Annual premium value at risk if policy lapses — used by renewal outreach automation
+Policy,live metadata,urgency,enum,,string (one of options),Low | Medium | High | Critical,custom field,Auto-calculated by n8n renewal workflow based on days to expiration
+Policy,live metadata,lastContactMethod,enum,,string (one of options),Phone | Email | Text | No Response,custom field,Set by renewal outreach automation after each email send
+Policy,live metadata,lastContactDate,date,,string (YYYY-MM-DD),,custom field,Set by renewal outreach automation after each contact attempt
+Policy,live metadata,commissions,linkMultiple,,"commissionsIds (array), commissionsNames (object map)",hasMany -> Commission,custom field,M:N relation
+Policy,live metadata,emailSequenceStarted,bool,,boolean,,custom field; default=False,Set to true by renewal outreach automation after first email sent
+Policy,live metadata,renewals,linkMultiple,,"renewalsIds (array), renewalsNames (object map)",hasMany -> Renewal,custom field,Renewal pipeline records for this expiring policy
+Policy,live metadata,renewedFrom,linkMultiple,,"renewedFromIds (array), renewedFromNames (object map)",hasMany -> Renewal,custom field,Renewal records where this is the new/renewed policy
+Policy,live metadata,activityLogs,linkMultiple,,"activityLogsIds (array), activityLogsNames (object map)",hasMany -> ActivityLog,custom field,M:N relation
+Policy,live metadata,premiumAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Policy,live metadata,premiumAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Policy,live metadata,commissionAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Policy,live metadata,commissionAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Policy,live metadata,coverageAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Policy,live metadata,coverageAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Policy,live metadata,deductibleCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Policy,live metadata,deductibleConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Policy,live metadata,agencyFeeCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Policy,live metadata,agencyFeeConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Policy,live metadata,premiumAtRiskCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Policy,live metadata,premiumAtRiskConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Policy,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Renewal,live metadata,name,varchar,,string,,required; maxLength=255,Auto-generated: {Account} - {LOB} Renewal
+Renewal,live metadata,stage,enum,,string (one of options),Identified | Outreach Sent | Quote Requested | Proposal Sent | Negotiating | Renewed - Won | Lost,audited; custom field; default='Identified',Pick-list / status
+Renewal,live metadata,policy,link,,"policyId (string), policyName (string, read-only mirror)",belongsTo -> Policy,required,The expiring policy being renewed
+Renewal,live metadata,newPolicy,link,,"newPolicyId (string), newPolicyName (string, read-only mirror)",belongsTo -> Policy,,The renewed policy record once bound
+Renewal,live metadata,account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,required,FK to a single related record
+Renewal,live metadata,contact,link,,"contactId (string), contactName (string, read-only mirror)",belongsTo -> Contact,,FK to a single related record
+Renewal,live metadata,expirationDate,date,,string (YYYY-MM-DD),,audited; custom field,Auto-populated from linked Policy expirationDate
+Renewal,live metadata,renewalEffectiveDate,date,,string (YYYY-MM-DD),,custom field,New policy effective date (usually = expirationDate)
+Renewal,live metadata,currentPremium,currency,,"currentPremium (number), currentPremiumCurrency (string ISO code)",,custom field,Auto-populated from linked Policy premiumAmount
+Renewal,live metadata,renewalPremium,currency,,"renewalPremium (number), renewalPremiumCurrency (string ISO code)",,custom field,Manually entered when quote is received — blank until then
+Renewal,live metadata,premiumChange,float,,number,,read-only; custom field,Auto-calculated: ((renewal - current) / current) * 100 — premium delta %
+Renewal,live metadata,lineOfBusiness,enum,,string (one of options),Commercial Auto | General Liability | Workers Comp | Commercial Property | BOP | Professional Liability | Umbrella | Builders Risk | Inland Marine | Personal Auto | Homeowners | Renters | ... (24 total),read-only; custom field,Auto-populated from linked Policy — not editable
+Renewal,live metadata,carrier,varchar,,string,,maxLength=255; custom field,Auto-populated from linked Policy
+Renewal,live metadata,urgency,enum,,string (one of options),Critical | High | Medium | Low,custom field,"Auto-calculated: Critical <30 days, High 30-60, Medium 60-90, Low 90+. Manual override respected."
+Renewal,live metadata,lastContactMethod,enum,,string (one of options),Email | Call | Text | In person,custom field,Updated when activity is logged
+Renewal,live metadata,lastContactDate,date,,string (YYYY-MM-DD),,custom field,Updated when activity is logged
+Renewal,live metadata,lostReason,enum,,string (one of options),Price | Coverage | Unresponsive | Moved carrier | Other,custom field,Required when stage = Lost
+Renewal,live metadata,renewalNotes,text,,string (multi-line),,custom field,Free text notes for this renewal cycle
+Renewal,live metadata,commissionRate,float,,number,,custom field,Renewal commission rate %
+Renewal,live metadata,expectedCommission,currency,,"expectedCommission (number), expectedCommissionCurrency (string ISO code)",,custom field,renewalPremium * commissionRate
+Renewal,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Renewal,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Renewal,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Renewal,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Renewal,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Renewal,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Renewal,live metadata,tasks,linkMultiple,,"tasksIds (array), tasksNames (object map)",hasChildren -> Task,custom field,M:N relation
+Renewal,live metadata,commissions,linkMultiple,,"commissionsIds (array), commissionsNames (object map)",hasMany -> Commission,custom field,M:N relation
+Renewal,live metadata,currentPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Renewal,live metadata,currentPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Renewal,live metadata,renewalPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Renewal,live metadata,renewalPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Renewal,live metadata,expectedCommissionCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Renewal,live metadata,expectedCommissionConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Renewal,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Commission,live metadata,name,varchar,,string,,required; maxLength=255,Auto-generated: {ClientName} — {LOB} — {EffectiveDate}
+Commission,live metadata,commissionType,enum,,string (one of options),New Business | Renewal,required; custom field,Auto-set from source trigger
+Commission,live metadata,status,enum,,string (one of options),Estimated | Posted | Overdue,required; custom field; default='Estimated',Pick-list / status
+Commission,live metadata,producer,varchar,,string,,maxLength=255; custom field,Auto-populated from source record Assigned User — Lamar / Gretchen
+Commission,live metadata,lineOfBusiness,enum,,string (one of options),Commercial Auto | General Liability | Workers Comp | Commercial Property | BOP | Professional Liability | Umbrella | Personal Auto | Homeowners | Renters | Condo | Life | ... (16 total),custom field,Auto-populated from Policy LOB
+Commission,live metadata,carrier,varchar,,string,,maxLength=255; custom field,Auto-populated from Policy carrier
+Commission,live metadata,writtenPremium,currency,,"writtenPremium (number), writtenPremiumCurrency (string ISO code)",,custom field,Auto-populated from Policy premiumAmount or Renewal renewalPremium
+Commission,live metadata,commissionRate,float,,number,,custom field,Auto-populated from Policy commissionRate — flagged if missing
+Commission,live metadata,estimatedCommission,currency,,"estimatedCommission (number), estimatedCommissionCurrency (string ISO code)",,read-only; custom field,Auto-calculated: writtenPremium x commissionRate — $0 and flagged if rate missing
+Commission,live metadata,postedAmount,currency,,"postedAmount (number), postedAmountCurrency (string ISO code)",,custom field,Manually entered when carrier payment received
+Commission,live metadata,varianceAmount,currency,,"varianceAmount (number), varianceAmountCurrency (string ISO code)",,read-only; custom field,Auto-calculated: postedAmount - estimatedCommission
+Commission,live metadata,variancePercent,float,,number,,read-only; custom field,Auto-calculated: variance / estimatedCommission — flags large discrepancies
+Commission,live metadata,expectedPaymentDate,date,,string (YYYY-MM-DD),,custom field,Manually entered or defaulted to 30 days after effective date
+Commission,live metadata,paymentReceivedDate,date,,string (YYYY-MM-DD),,custom field,Entered when marking as Posted
+Commission,live metadata,overdueFlag,bool,,boolean,,read-only; custom field; default=False,Auto-set when status = Estimated AND expected payment date > 30 days past
+Commission,live metadata,commissionNotes,text,,string (multi-line),,custom field,"Carrier adjustments, disputes, explanations"
+Commission,live metadata,effectiveDate,date,,string (YYYY-MM-DD),,custom field,Calendar date
+Commission,live metadata,policy,link,,"policyId (string), policyName (string, read-only mirror)",belongsTo -> Policy,required,FK to a single related record
+Commission,live metadata,opportunity,link,,"opportunityId (string), opportunityName (string, read-only mirror)",belongsTo -> Opportunity,,Auto-populated when source = Opportunity Won
+Commission,live metadata,renewal,link,,"renewalId (string), renewalName (string, read-only mirror)",belongsTo -> Renewal,,Auto-populated when source = Renewal Won
+Commission,live metadata,contact,link,,"contactId (string), contactName (string, read-only mirror)",belongsTo -> Contact,,FK to a single related record
+Commission,live metadata,account,link,,"accountId (string), accountName (string, read-only mirror)",belongsTo -> Account,required,FK to a single related record
+Commission,live metadata,assignedUser,link,,"assignedUserId (string), assignedUserName (string, read-only mirror)",belongsTo -> User,,System-managed audit/ownership field
+Commission,live metadata,teams,linkMultiple,,"teamsIds (array), teamsNames (object map)",hasMany -> Team,,System-managed audit/ownership field
+Commission,live metadata,createdAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Commission,live metadata,modifiedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field
+Commission,live metadata,createdBy,link,,"createdById (string), createdByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Commission,live metadata,modifiedBy,link,,"modifiedById (string), modifiedByName (string, read-only mirror)",belongsTo -> User,read-only,System-managed audit/ownership field
+Commission,live metadata,writtenPremiumCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Commission,live metadata,writtenPremiumConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Commission,live metadata,estimatedCommissionCurrency,enum,,string (one of options),,read-only; maxLength=3,Pick-list / status
+Commission,live metadata,estimatedCommissionConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Commission,live metadata,postedAmountCurrency,enum,,string (one of options),,maxLength=3,Pick-list / status
+Commission,live metadata,postedAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Commission,live metadata,varianceAmountCurrency,enum,,string (one of options),,read-only; maxLength=3,Pick-list / status
+Commission,live metadata,varianceAmountConverted,currencyConverted,,"number (read-only, base currency)",,read-only,Converted-to-base-currency mirror
+Commission,live metadata,streamUpdatedAt,datetime,,string (ISO 8601 UTC),,read-only,System-managed audit/ownership field

@@ -93,7 +93,7 @@ Set these config keys to enable outbound account enrichment payloads from CRM:
 
 Set these in EspoCRM `data/config.php` to sync new attachments to n8n/Drive:
 
-- `attachmentDriveSyncWebhookUrl` — n8n webhook URL (for this setup: `https://n8n-n8fq.srv1624160.hstgr.cloud/webhook/espo-attachment-drive-sync`)
+- `attachmentDriveSyncWebhookUrl` — n8n webhook URL for the attachment-to-Drive sync
 - `attachmentDriveSyncWebhookSecret` — optional shared secret sent as `X-Attachment-Sync-Secret`
 
 When an `Attachment` is created (or finishes uploading), Espo sends:

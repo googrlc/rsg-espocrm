@@ -120,7 +120,12 @@ class DeriveLedgerFields implements BeforeSave
             return false;
         }
 
-        $expected = new DateTimeImmutable($expectedPaymentDate);
+        try {
+            $expected = new DateTimeImmutable($expectedPaymentDate);
+        } catch (\Throwable) {
+            return false;
+        }
+
         $graceBoundary = $expected->add(new DateInterval('P30D'));
 
         return $graceBoundary < $today;
