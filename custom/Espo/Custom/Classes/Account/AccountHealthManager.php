@@ -590,7 +590,11 @@ class AccountHealthManager
             return null;
         }
 
-        return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 10));
+        try {
+            return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 10));
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     private function toDateTime(string $value): ?DateTimeImmutable
@@ -599,6 +603,10 @@ class AccountHealthManager
             return null;
         }
 
-        return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 19));
+        try {
+            return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 19));
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

@@ -307,8 +307,13 @@ class AccountPlaybookManager
             return false;
         }
 
+        try {
+            $target = new DateTimeImmutable($dateValue);
+        } catch (\Throwable) {
+            return false;
+        }
+
         $today = new DateTimeImmutable('today');
-        $target = new DateTimeImmutable($dateValue);
         $daysUntil = (int) $today->diff($target)->format('%r%a');
 
         return $daysUntil >= 0 && $daysUntil <= $days;
@@ -344,6 +349,10 @@ class AccountPlaybookManager
             return null;
         }
 
-        return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 10));
+        try {
+            return new DateTimeImmutable(substr(str_replace('T', ' ', $value), 0, 10));
+        } catch (\Throwable) {
+            return null;
+        }
     }
 }

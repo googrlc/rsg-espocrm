@@ -181,7 +181,7 @@ class PolicyAccountSync
         foreach ($policyList as $policy) {
             $status = (string) ($policy->get('status') ?? '');
             $expirationDateRaw = $policy->get('expiration_date');
-            $expirationDate = $expirationDateRaw ? new DateTimeImmutable($expirationDateRaw) : null;
+            $expirationDate = $this->tryParseDate($expirationDateRaw);
 
             if (in_array($status, self::ACTIVE_STATUSES, true)) {
                 $totalPremium += (float) ($policy->get('premium_amount') ?? 0);
@@ -240,10 +240,27 @@ class PolicyAccountSync
             return null;
         }
 
+        $date = $this->tryParseDate($expirationDate);
+        if (!$date) {
+            return null;
+        }
+
         $today = new DateTimeImmutable('today');
-        $date = new DateTimeImmutable($expirationDate);
 
         return (int) $today->diff($date)->format('%r%a');
+    }
+
+    private function tryParseDate(mixed $value): ?DateTimeImmutable
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+
+        try {
+            return new DateTimeImmutable((string) $value);
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     private function normalizeRate(mixed $rate): float

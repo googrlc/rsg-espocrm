@@ -29,7 +29,11 @@ class DeriveProfile implements BeforeSave
         }
 
         $createdAt = $entity->get('createdAt') ?: $entity->getFetched('createdAt');
-        $createdYear = $createdAt ? (new DateTimeImmutable($createdAt))->format('Y') : (new DateTimeImmutable())->format('Y');
+        try {
+            $createdYear = $createdAt ? (new DateTimeImmutable($createdAt))->format('Y') : (new DateTimeImmutable())->format('Y');
+        } catch (\Throwable) {
+            $createdYear = (new DateTimeImmutable())->format('Y');
+        }
 
         $derivedDescription = "Active Policies: {$activePolicyCount}\nClient Since: {$createdYear}";
         $existingDescription = trim((string) ($entity->get('description') ?? ''));
@@ -40,10 +44,14 @@ class DeriveProfile implements BeforeSave
 
         $dateOfBirth = $entity->get('dateOfBirth');
         if ($dateOfBirth) {
-            $birthday65 = (new DateTimeImmutable($dateOfBirth))->modify('+65 years');
-            $today = new DateTimeImmutable('today');
-            $daysUntil65 = (int) $today->diff($birthday65)->format('%r%a');
-            $entity->set('daysUntil65', $daysUntil65);
+            try {
+                $birthday65 = (new DateTimeImmutable($dateOfBirth))->modify('+65 years');
+                $today = new DateTimeImmutable('today');
+                $daysUntil65 = (int) $today->diff($birthday65)->format('%r%a');
+                $entity->set('daysUntil65', $daysUntil65);
+            } catch (\Throwable) {
+                $entity->set('daysUntil65', null);
+            }
         } else {
             $entity->set('daysUntil65', null);
         }

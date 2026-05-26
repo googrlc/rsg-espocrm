@@ -229,9 +229,13 @@ class CommissionLedgerManager
             return null;
         }
 
-        return (new DateTimeImmutable($effectiveDate))
-            ->add(new DateInterval('P30D'))
-            ->format('Y-m-d');
+        try {
+            return (new DateTimeImmutable($effectiveDate))
+                ->add(new DateInterval('P30D'))
+                ->format('Y-m-d');
+        } catch (\Throwable) {
+            return null;
+        }
     }
 
     private function calculateEstimatedCommission(float $premium, ?float $rate): float
