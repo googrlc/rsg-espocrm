@@ -1,0 +1,5 @@
+{
+    "checkDropdownHealth": {
+        "className": "Espo\\Custom\\Core\\Console\\Commands\\CheckDropdownHealth"
+    }
+}
