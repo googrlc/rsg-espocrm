@@ -5,21 +5,18 @@ namespace Espo\Modules\RsgCore\Classes\Policy;
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\Custom\Classes\Account\AccountNameResolution;
+use Espo\Custom\Classes\Policy\PolicyHealthManager;
+use Espo\Custom\Classes\Policy\PolicyStatusSets;
 use Espo\Custom\Classes\Renewal\RenewalLeadWindows;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
 class PolicyAccountSync
 {
-    private const ACTIVE_STATUSES = [
-        'Active',
-        'Up for Renewal',
-        'Renewing',
-        'Renewed',
-    ];
 
     public function __construct(
-        private EntityManager $entityManager
+        private EntityManager $entityManager,
+        private PolicyHealthManager $policyHealthManager
     ) {}
 
     public function applyDerivedFields(Entity $policy): void
@@ -90,12 +87,14 @@ class PolicyAccountSync
 
         $policy->set(
             'premiumAtRisk',
-            in_array($status, self::ACTIVE_STATUSES, true) ? $premiumAmount : 0.0
+            in_array($status, PolicyStatusSets::ACTIVE, true) ? $premiumAmount : 0.0
         );
 
         if ($policyNumber !== '') {
             $policy->set('carrierPortalUrl', 'https://carrier-portal.com/policy/' . rawurlencode((string) $policyNumber));
         }
+
+        $this->policyHealthManager->applyToPolicy($policy);
     }
 
     /**
@@ -183,7 +182,7 @@ class PolicyAccountSync
             $expirationDateRaw = $policy->get('expiration_date');
             $expirationDate = $this->tryParseDate($expirationDateRaw);
 
-            if (in_array($status, self::ACTIVE_STATUSES, true)) {
+            if (in_array($status, PolicyStatusSets::ACTIVE, true)) {
                 $totalPremium += (float) ($policy->get('premium_amount') ?? 0);
                 $activePolicyCount++;
 
@@ -219,7 +218,7 @@ class PolicyAccountSync
             ->getRDBRepository('Policy')
             ->where([
                 'carrierAccountId' => $carrierAccountId,
-                'status' => self::ACTIVE_STATUSES,
+                'status' => PolicyStatusSets::ACTIVE,
             ])
             ->find();
 

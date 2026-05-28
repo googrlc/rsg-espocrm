@@ -4,6 +4,7 @@ namespace Espo\Custom\Classes\Account;
 
 use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
+use Espo\Custom\Classes\Policy\PolicyStatusSets;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -16,26 +17,6 @@ class AccountHealthManager
      * skip the redundant recomputation.
      */
     public const SKIP_HEALTH_SNAPSHOT_OPTION = 'skipHealthSnapshot';
-
-    private const ACTIVE_POLICY_STATUSES = [
-        'Active',
-        'Up for Renewal',
-        'Renewing',
-        'Renewed',
-    ];
-
-    private const RENEWAL_POLICY_STATUSES = [
-        'Up for Renewal',
-        'Renewing',
-    ];
-
-    private const CANCELLATION_POLICY_STATUSES = [
-        'Pending Cancel',
-        'Cancelled',
-        'Flat Cancel',
-        'Non-Renewed',
-        'Lapsed',
-    ];
 
     private const FINAL_RENEWAL_STAGES = [
         'Renewed - Won',
@@ -160,13 +141,52 @@ class AccountHealthManager
         $account->set('next_renewal_lob', $policySignals['nextRenewalLob']);
         $account->set('next_renewal_carrier', $policySignals['nextRenewalCarrier']);
         $account->set('days_to_renewal', $policySignals['daysToRenewal']);
-        $account->set('account_status', $this->determineAccountStatus(
-            $policySignals,
-            $activitySignals,
-            $taskSignals,
-            $scoreTotal,
-            $rateIncreasePct
-        ));
+        $account->set('account_status', $this->rollupPolicyHealth($policyList));
+    }
+
+    private function rollupPolicyHealth(iterable $policyList): string
+    {
+        $priority = [
+            'Urgent' => 5,
+            'At Risk' => 4,
+            'Renewing' => 3,
+            'Active' => 2,
+            'Expired' => 1,
+        ];
+
+        $worst = null;
+        $worstRank = -1;
+        $seenAny = false;
+
+        foreach ($policyList as $policy) {
+            $seenAny = true;
+            $health = trim((string) ($policy->get('policy_health') ?? ''));
+            if ($health === '' || !isset($priority[$health])) {
+                continue;
+            }
+
+            if ($priority[$health] > $worstRank) {
+                $worstRank = $priority[$health];
+                $worst = $health;
+            }
+        }
+
+        if (!$seenAny) {
+            return 'Inactive';
+        }
+
+        if ($worst === null) {
+            return 'Active';
+        }
+
+        return match ($worst) {
+            'Expired' => 'Inactive',
+            'Active' => 'Active',
+            'Renewing' => 'Renewing',
+            'At Risk' => 'At Risk',
+            'Urgent' => 'Urgent',
+            default => 'Active',
+        };
     }
 
     private function analyzePolicies(Entity $account, iterable $policyList, iterable $renewalList, DateTimeImmutable $today): array
@@ -188,7 +208,7 @@ class AccountHealthManager
             $line = $this->normalizeLine((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
             $carrier = trim((string) ($policy->get('carrier') ?? ''));
 
-            if (in_array($status, self::ACTIVE_POLICY_STATUSES, true)) {
+            if (in_array($status, PolicyStatusSets::ACTIVE, true)) {
                 $activePolicyCount++;
 
                 if ($line !== '') {
@@ -212,11 +232,11 @@ class AccountHealthManager
                 }
             }
 
-            if (in_array($status, self::RENEWAL_POLICY_STATUSES, true)) {
+            if (in_array($status, PolicyStatusSets::RENEWING, true)) {
                 $hasRenewingMotion = true;
             }
 
-            if (in_array($status, self::CANCELLATION_POLICY_STATUSES, true)) {
+            if (in_array($status, PolicyStatusSets::TERMINAL, true)) {
                 $hasCancellationStatus = true;
             }
         }
@@ -372,57 +392,6 @@ class AccountHealthManager
             'overdueUrgentCount' => $overdueUrgentCount,
             'openRescueCount' => $openRescueCount,
         ];
-    }
-
-    private function determineAccountStatus(
-        array $policySignals,
-        array $activitySignals,
-        array $taskSignals,
-        int $scoreTotal,
-        float $rateIncreasePct
-    ): string {
-        if (
-            $policySignals['hasCancellationStatus'] ||
-            $activitySignals['hasRecentCancellationSignal'] ||
-            $taskSignals['openUrgentCount'] > 0 ||
-            $taskSignals['overdueUrgentCount'] > 0 ||
-            $taskSignals['openRescueCount'] > 0 ||
-            $policySignals['hasUrgentRenewal'] ||
-            $rateIncreasePct >= 25.0
-        ) {
-            return 'Urgent';
-        }
-
-        if ($policySignals['hasRenewingMotion']) {
-            return 'Renewing';
-        }
-
-        if (
-            $policySignals['activePolicyCount'] === 0 &&
-            $taskSignals['openCount'] === 0 &&
-            (
-                $activitySignals['daysSinceMeaningfulActivity'] === null ||
-                $activitySignals['daysSinceMeaningfulActivity'] > 180
-            )
-        ) {
-            return 'Inactive';
-        }
-
-        if (
-            $policySignals['activePolicyCount'] === 0 ||
-            $activitySignals['hasRecentCoverageReduction'] ||
-            $rateIncreasePct >= 15.0 ||
-            $taskSignals['overdueCount'] > 0 ||
-            $scoreTotal < 65 ||
-            (
-                $activitySignals['daysSinceMeaningfulActivity'] !== null &&
-                $activitySignals['daysSinceMeaningfulActivity'] > 90
-            )
-        ) {
-            return 'At Risk';
-        }
-
-        return 'Active';
     }
 
     private function scoreBundleDepth(int $coverageDepth, int $gapCount): int

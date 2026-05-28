@@ -273,6 +273,29 @@
                 "EXPIRED": "danger"
             }
         },
+        "policy_health": {
+            "type": "enum",
+            "options": [
+                "",
+                "Active",
+                "Renewing",
+                "At Risk",
+                "Urgent",
+                "Expired"
+            ],
+            "default": "Active",
+            "isCustom": true,
+            "readOnly": true,
+            "displayAsLabel": true,
+            "style": {
+                "Active": "success",
+                "Renewing": "warning",
+                "At Risk": "warning",
+                "Urgent": "danger",
+                "Expired": "default"
+            },
+            "tooltipText": "Computed per-policy health: Urgent (<=15d / cancellation) > At Risk (>=15% rate spike / coverage drop / billing) > Renewing (status Up for Renewal / Renewing) > Expired (status Expired / Cancelled / Lapsed) > Active."
+        },
         "urgencyIcon": {
             "type": "varchar",
             "maxLength": 8,

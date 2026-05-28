@@ -1,7 +1,8 @@
 [
-    {"name": "urgencyIcon"},
+    {"name": "policy_health"},
     {"name": "line_of_business"},
     {"name": "carrier"},
     {"name": "premium_amount"},
-    {"name": "expiration_date"}
+    {"name": "expiration_date"},
+    {"name": "daysRemaining"}
 ]

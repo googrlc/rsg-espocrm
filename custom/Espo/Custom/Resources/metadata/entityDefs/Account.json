@@ -210,6 +210,51 @@
                 "Inactive": "default"
             }
         },
+        "cConstructionSpecialty": {
+            "type": "enum",
+            "options": [
+                "General Contractor",
+                "Site Preparation / Demolition",
+                "Excavation & Grading",
+                "Earthwork & Soil Stabilization",
+                "Concrete",
+                "Masonry",
+                "Structural Steel / Iron Work",
+                "Carpentry / Framing",
+                "Welding & Fabrication",
+                "Roofing",
+                "Waterproofing & Dampproofing",
+                "Siding & Cladding",
+                "Windows & Glazing / Curtain Wall",
+                "EIFS / Stucco",
+                "Drywall / Framing",
+                "Insulation",
+                "Flooring",
+                "Painting & Coatings",
+                "Ceilings",
+                "Millwork & Casework / Cabinetry",
+                "Doors, Frames & Hardware",
+                "Plumbing",
+                "HVAC",
+                "Electrical",
+                "Fire Protection / Sprinkler Systems",
+                "Controls & Building Automation",
+                "Landscaping / Hardscaping",
+                "Asphalt Paving",
+                "Concrete Paving",
+                "Fencing",
+                "Signage",
+                "Security Systems",
+                "Audio/Visual & Low Voltage",
+                "Elevators & Lifts",
+                "Swimming Pools & Fountains",
+                "Solar / Renewable Energy",
+                "Environmental Remediation"
+            ],
+            "default": "General Contractor",
+            "maxLength": 100,
+            "isCustom": true
+        },
         "stage": {
             "type": "enum",
             "options": [
@@ -886,6 +931,47 @@
         "score_last_calculated": {
             "type": "datetime",
             "isCustom": true
+        },
+        "clv_current": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Backward-looking CLV: annualCommission × tenureYears × grossMargin. What the relationship has been worth to date."
+        },
+        "clv_projected": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Forward-looking CLV from existing book: annualCommission × margin × (retention / (1 + discount − retention)). Excludes cross-sell."
+        },
+        "clv_with_cross_sell": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "clv_projected + (gapCount × upliftPerGap × tier multiplier). Includes expected revenue from filling LOB gaps."
+        },
+        "clv_annual_commission": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Sum of commissionAmount across active policies that fed the CLV computation."
+        },
+        "clv_tenure_years": {
+            "type": "float",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Years between today and the oldest active policy's effective_date."
+        },
+        "clv_retention_rate_applied": {
+            "type": "float",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Retention rate used in the projection, looked up from score_tier via config clvRetentionByTier."
+        },
+        "clv_last_calculated": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true
         },
         "score_change_direction": {
             "type": "enum",

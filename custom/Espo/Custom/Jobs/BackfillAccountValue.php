@@ -3,46 +3,40 @@
 namespace Espo\Custom\Jobs;
 
 use Espo\Core\Job\JobDataLess;
-use Espo\Custom\Classes\Account\AccountHealthManager;
 use Espo\Custom\Classes\Account\AccountValueManager;
 use Espo\ORM\EntityManager;
 
 /**
- * Daily refresh of every account's health scoring (scoreTotal, scoreTier,
- * scoreBundleDepth, etc.) via AccountHealthManager, then CLV via
- * AccountValueManager. Hooks already keep these current on relevant saves;
- * this job is the safety net for accounts that did not see a write during
- * the day. CLV runs after health so it can read the freshly-computed
- * score_tier for its retention lookup.
+ * One-off backfill: populates all CLV fields on every account via
+ * AccountValueManager::refreshByAccountId. Uses the existing SILENT +
+ * SKIP_VALUE_SNAPSHOT_OPTION save pattern so no cascading hooks fire.
  */
-class RecalculateAccountScores implements JobDataLess
+class BackfillAccountValue implements JobDataLess
 {
     public function __construct(
         private EntityManager $entityManager,
-        private AccountHealthManager $accountHealthManager,
         private AccountValueManager $accountValueManager
     ) {}
 
     public function run(): void
     {
-        $count = 0;
-
         $pdo = $this->entityManager->getPDO();
         $stmt = $pdo->query('SELECT id FROM account WHERE deleted = 0');
         if ($stmt === false) {
+            $GLOBALS['log']->warning('BackfillAccountValue: SELECT failed.');
             return;
         }
 
+        $count = 0;
         foreach ($stmt->fetchAll(\PDO::FETCH_COLUMN) as $accountId) {
             $accountId = (string) $accountId;
             if ($accountId === '') {
                 continue;
             }
-            $this->accountHealthManager->refreshByAccountId($accountId);
             $this->accountValueManager->refreshByAccountId($accountId);
             $count++;
         }
 
-        $GLOBALS['log']->info('RecalculateAccountScores: refreshed ' . $count . ' accounts.');
+        $GLOBALS['log']->info('BackfillAccountValue: refreshed ' . $count . ' accounts.');
     }
 }

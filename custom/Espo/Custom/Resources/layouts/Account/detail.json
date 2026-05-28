@@ -33,6 +33,29 @@
     {
         "rows": [
             [
+                {"name": "clv_projected"},
+                {"name": "clv_with_cross_sell"}
+            ],
+            [
+                {"name": "clv_current"},
+                {"name": "clv_annual_commission"}
+            ],
+            [
+                {"name": "clv_tenure_years"},
+                {"name": "clv_retention_rate_applied"}
+            ],
+            [
+                {"name": "clv_last_calculated"},
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "clientValue",
+        "label": "Client Lifetime Value"
+    },
+    {
+        "rows": [
+            [
                 {
                     "name": "name"
                 },
