@@ -33,19 +33,33 @@
     {
         "rows": [
             [
-                {"name": "clv_projected"},
-                {"name": "clv_with_cross_sell"}
+                {
+                    "name": "clv_projected"
+                },
+                {
+                    "name": "clv_with_cross_sell"
+                }
             ],
             [
-                {"name": "clv_current"},
-                {"name": "clv_annual_commission"}
+                {
+                    "name": "clv_current"
+                },
+                {
+                    "name": "clv_annual_commission"
+                }
             ],
             [
-                {"name": "clv_tenure_years"},
-                {"name": "clv_retention_rate_applied"}
+                {
+                    "name": "clv_tenure_years"
+                },
+                {
+                    "name": "clv_retention_rate_applied"
+                }
             ],
             [
-                {"name": "clv_last_calculated"},
+                {
+                    "name": "clv_last_calculated"
+                },
                 false
             ]
         ],
@@ -268,9 +282,7 @@
                 }
             ],
             [
-                {
-                    "name": "businessEntity"
-                },
+                false,
                 {
                     "name": "cYearBusinessEst"
                 }
@@ -279,29 +291,11 @@
                 {
                     "name": "years_in_business"
                 },
-                {
-                    "name": "annual_revenue"
-                }
-            ],
-            [
-                {
-                    "name": "employee_count"
-                },
-                {
-                    "name": "fein"
-                }
+                false
             ],
             [
                 {
                     "name": "industry"
-                },
-                {
-                    "name": "sic_code"
-                }
-            ],
-            [
-                {
-                    "name": "intel_naics"
                 },
                 false
             ]
@@ -605,14 +599,6 @@
         "rows": [
             [
                 {
-                    "name": "gapUmbrella"
-                },
-                {
-                    "name": "gapLife"
-                }
-            ],
-            [
-                {
                     "name": "gapUmbrellaReason"
                 },
                 {
@@ -623,9 +609,7 @@
                 {
                     "name": "gapLifeNeedEst"
                 },
-                {
-                    "name": "gapAutoUm"
-                }
+                false
             ],
             [
                 {
@@ -641,11 +625,6 @@
                 },
                 {
                     "name": "gapRideshare"
-                }
-            ],
-            [
-                {
-                    "name": "coverage_gaps"
                 }
             ]
         ],

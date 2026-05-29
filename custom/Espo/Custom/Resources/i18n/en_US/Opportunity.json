@@ -156,5 +156,12 @@
         "onlyMy": "Only My",
         "newBusiness": "New Business Only",
         "stalled": "Stalled Only"
+    },
+    "links": {
+        "opportunityVehicles": "Vehicles",
+        "opportunityDrivers": "Drivers",
+        "quotes": "Quotes",
+        "commissions": "Commissions",
+        "policies": "Policies"
     }
 }

@@ -21,7 +21,10 @@
         "lifeAnnualPremium": "Annual Premium",
         "lifeBeneficiaryOnFile": "Beneficiary On File",
         "lifeReviewDate": "Life Review Date",
-        "underwrittenPolicies": "Underwritten Policies"
+        "underwrittenPolicies": "Underwritten Policies",
+        "dateOfBirth": "Date of Birth",
+        "householdRole": "Household Role",
+        "clientType": "Client Type"
     },
     "options": {
         "contactType": {

@@ -29,6 +29,15 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
                 data.isLost = LOST_STAGES.indexOf(current) !== -1;
             }
 
+            if (this.mode === 'list' || this.mode === 'listLink') {
+                var styleMap = this.model.getFieldParam(this.name, 'style') || {};
+                data.style = styleMap[current] || 'default';
+                if (!data.translatedValue && current) {
+                    var translatedOptions = this.translatedOptions || {};
+                    data.translatedValue = translatedOptions[current] || current;
+                }
+            }
+
             return data;
         },
 

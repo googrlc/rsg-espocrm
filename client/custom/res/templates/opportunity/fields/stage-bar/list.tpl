@@ -1,1 +1,1 @@
-{{translatedValue}}
+{{#if translatedValue}}<span class="label label-{{style}}">{{translatedValue}}</span>{{/if}}
