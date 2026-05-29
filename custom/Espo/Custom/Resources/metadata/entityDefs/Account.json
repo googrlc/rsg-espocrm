@@ -29,12 +29,11 @@
             "type": "datetime",
             "isCustom": true
         },
-        "agentOfRecordDate": {
+        "agent_of_record_date": {
             "type": "date",
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Date RSG became Agent of Record \u2014 synced from NowCerts",
-            "dbName": "agent_of_record_date"
+            "tooltipText": "Date RSG became Agent of Record \u2014 synced from NowCerts"
         },
         "policies": {
             "type": "linkMultiple",
@@ -87,10 +86,9 @@
                 "MGA": "warning"
             }
         },
-        "agentOfAgencyCode": {
+        "agent_of_agency_code": {
             "type": "text",
             "isCustom": true,
-            "dbName": "agent_of_agency_code",
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
@@ -279,29 +277,25 @@
                 "Closed Lost": "danger"
             }
         },
-        "intelRun": {
+        "intel_run": {
             "type": "bool",
             "default": false,
             "isCustom": true,
-            "tooltipText": "Whether an intel pack has been run on this account",
-            "dbName": "intel_run"
+            "tooltipText": "Whether an intel pack has been run on this account"
         },
-        "intelRunDate": {
+        "intel_run_date": {
             "type": "datetime",
-            "isCustom": true,
-            "dbName": "intel_run_date"
+            "isCustom": true
         },
-        "intelRunBy": {
+        "intel_run_by": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_run_by"
+            "isCustom": true
         },
-        "intelSourcesHit": {
+        "intel_sources_hit": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "intel_sources_hit"
+            "isCustom": true
         },
-        "confidence": {
+        "intel_confidence": {
             "type": "enum",
             "options": [
                 "",
@@ -315,70 +309,57 @@
                 "High": "success",
                 "Medium": "warning",
                 "Low": "danger"
-            },
-            "dbName": "intel_confidence"
+            }
         },
-        "aiSummary": {
+        "intel_ai_summary": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_ai_summary"
+            "isCustom": true
         },
-        "painPoints": {
+        "intel_pain_points": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_pain_points"
+            "isCustom": true
         },
-        "crossSellOpportunities": {
+        "intel_cross_sell": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_cross_sell"
+            "isCustom": true
         },
-        "growthIndicator": {
+        "intel_growth_indicator": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_growth_indicator"
+            "isCustom": true
         },
-        "insightSignal": {
+        "insight_signal": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "insight_signal"
+            "isCustom": true
         },
-        "insightObjection": {
+        "insight_objection": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "insight_objection"
+            "isCustom": true
         },
-        "insightOpener": {
+        "insight_opener": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "insight_opener"
+            "isCustom": true
         },
-        "insightRelationship": {
+        "insight_relationship": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "insight_relationship"
+            "isCustom": true
         },
-        "legalName": {
+        "intel_legal_name": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_legal_name"
+            "isCustom": true
         },
-        "dba": {
+        "intel_dba": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_dba"
+            "isCustom": true
         },
-        "naics": {
+        "intel_naics": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_naics"
+            "isCustom": true
         },
-        "sic": {
+        "intel_sic": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_sic"
+            "isCustom": true
         },
-        "entityType": {
+        "intel_entity_type": {
             "type": "enum",
             "options": [
                 "",
@@ -388,122 +369,99 @@
                 "Partnership",
                 "Other"
             ],
-            "isCustom": true,
-            "dbName": "intel_entity_type"
+            "isCustom": true
         },
-        "discoveredYearsInBusiness": {
+        "intel_years_in_business": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "intel_years_in_business"
+            "isCustom": true
         },
-        "discoveredEmployeeCount": {
+        "intel_employee_count": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "intel_employee_count"
+            "isCustom": true
         },
-        "discoveredAnnualRevenue": {
+        "intel_annual_revenue_est": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_annual_revenue_est"
+            "isCustom": true
         },
-        "website": {
+        "intel_website": {
             "type": "url",
-            "isCustom": true,
-            "dbName": "intel_website"
+            "isCustom": true
         },
-        "linkedinUrl": {
+        "intel_linkedin_url": {
             "type": "url",
-            "isCustom": true,
-            "dbName": "intel_linkedin_url"
+            "isCustom": true
         },
-        "bbbRating": {
+        "intel_bbb_rating": {
             "type": "varchar",
             "maxLength": 10,
-            "isCustom": true,
-            "dbName": "intel_bbb_rating"
+            "isCustom": true
         },
-        "bbbAccredited": {
+        "intel_bbb_accredited": {
             "type": "bool",
-            "isCustom": true,
-            "dbName": "intel_bbb_accredited"
+            "isCustom": true
         },
-        "bbbComplaints": {
+        "intel_bbb_complaints": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "intel_bbb_complaints"
+            "isCustom": true
         },
-        "fleetSize": {
+        "intel_fleet_size": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "intel_fleet_size"
+            "isCustom": true
         },
-        "operatingRadius": {
+        "intel_operating_radius": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_operating_radius"
+            "isCustom": true
         },
-        "cargoType": {
+        "intel_cargo_type": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_cargo_type"
+            "isCustom": true
         },
-        "ownerOperators": {
+        "intel_owner_operators": {
             "type": "bool",
-            "isCustom": true,
-            "dbName": "intel_owner_operators"
+            "isCustom": true
         },
-        "dotIncidents": {
+        "intel_dot_incidents": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "intel_dot_incidents"
+            "isCustom": true
         },
-        "oshaViolations": {
+        "intel_osha_violations": {
+            "type": "text",
+            "isCustom": true
+        },
+        "intel_underwriting_flag": {
             "type": "text",
             "isCustom": true,
-            "dbName": "intel_osha_violations"
+            "tooltipText": "Underwriting risk flags \u2014 may trigger declination or surplus lines"
         },
-        "underwritingFlag": {
+        "intel_website_notes": {
             "type": "text",
-            "isCustom": true,
-            "tooltipText": "Underwriting risk flags \u2014 may trigger declination or surplus lines",
-            "dbName": "intel_underwriting_flag"
+            "isCustom": true
         },
-        "websiteNotes": {
+        "intel_news_notes": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_website_notes"
+            "isCustom": true
         },
-        "newsNotes": {
+        "intel_linkedin_notes": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_news_notes"
+            "isCustom": true
         },
-        "linkedinNotes": {
+        "intel_bbb_notes": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_linkedin_notes"
+            "isCustom": true
         },
-        "bbbNotes": {
+        "intel_signal_news": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_bbb_notes"
+            "isCustom": true
         },
-        "signalNews": {
+        "intel_signal_linkedin": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_signal_news"
+            "isCustom": true
         },
-        "signalLinkedin": {
+        "sic_code": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "intel_signal_linkedin"
+            "isCustom": true
         },
-        "sicCode": {
-            "type": "text",
-            "isCustom": true,
-            "dbName": "sic_code"
-        },
-        "typeOfBusiness": {
+        "businessEntity": {
             "type": "enum",
             "options": [
                 "",
@@ -516,7 +474,6 @@
                 "Other"
             ],
             "isCustom": true,
-            "dbName": "businessEntity",
             "style": {
                 "": null,
                 "Sole Proprietor": null,
@@ -528,10 +485,9 @@
                 "Other": null
             }
         },
-        "annualRevenue": {
+        "annual_revenue": {
             "type": "currency",
-            "isCustom": true,
-            "dbName": "annual_revenue"
+            "isCustom": true
         },
         "numberOfEmployees": {
             "type": "int",
@@ -566,26 +522,23 @@
             "minuteStep": 30,
             "tooltip": true
         },
-        "intelPackRun": {
+        "intel_pack_run": {
             "type": "bool",
             "label": "Intel Pack Run",
             "default": false,
-            "isCustom": true,
-            "dbName": "intel_pack_run"
+            "isCustom": true
         },
         "estimated_revenue": {
             "type": "currency",
             "isCustom": true
         },
-        "employeeCount": {
+        "employee_count": {
             "type": "int",
-            "isCustom": true,
-            "dbName": "employee_count"
+            "isCustom": true
         },
-        "yearsInBusiness": {
+        "years_in_business": {
             "type": "int",
             "isCustom": true,
-            "dbName": "years_in_business",
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
@@ -612,32 +565,25 @@
             "isCustom": true,
             "tooltipText": "Full narrative intel written by Viktor"
         },
-        "oldLinkedinUrl": {
+        "linkedin_url": {
             "type": "url",
-            "isCustom": true,
-            "dbName": "linkedin_url",
-            "layoutDetailDisabled": true,
-            "layoutListDisabled": true
+            "isCustom": true
         },
-        "oldWebsiteUrl": {
+        "websiteUrl": {
             "type": "url",
             "isCustom": true,
             "layoutDetailDisabled": true,
             "layoutListDisabled": true
         },
-        "oldBbbRating": {
+        "bbb_rating": {
             "type": "text",
             "isCustom": true,
-            "dbName": "bbb_rating",
-            "options": [],
-            "layoutDetailDisabled": true,
-            "layoutListDisabled": true
+            "options": []
         },
-        "intelSources": {
+        "intel_sources": {
             "type": "text",
             "isCustom": true,
-            "tooltipText": "Comma-separated list of sources checked: LinkedIn, BBB, News, Website",
-            "dbName": "intel_sources"
+            "tooltipText": "Comma-separated list of sources checked: LinkedIn, BBB, News, Website"
         },
         "account_score": {
             "type": "int",
@@ -677,11 +623,10 @@
                 "High": "danger"
             }
         },
-        "createDate": {
+        "client_since": {
             "notNull": false,
             "type": "date",
-            "isCustom": true,
-            "dbName": "client_since"
+            "isCustom": true
         },
         "referral_source": {
             "type": "enum",
@@ -697,10 +642,9 @@
             ],
             "isCustom": true
         },
-        "referralSourceCompanyName": {
+        "referral_name": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "referral_name"
+            "isCustom": true
         },
         "preferred_contact": {
             "type": "enum",
@@ -721,10 +665,9 @@
             "default": false,
             "isCustom": true
         },
-        "personNotes": {
+        "communication_notes": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "communication_notes"
+            "isCustom": true
         },
         "clientNotes": {
             "type": "linkMultiple",
@@ -1340,12 +1283,11 @@
             "label": "Next X-Date LOB",
             "isCustom": true
         },
-        "intelPackLastRun": {
+        "intel_pack_last_run": {
             "type": "datetime",
             "label": "Intel Pack Last Run",
             "readOnly": true,
-            "isCustom": true,
-            "dbName": "intel_pack_last_run"
+            "isCustom": true
         },
         "ai_assessment": {
             "type": "text",
@@ -1353,12 +1295,11 @@
             "rowsMin": 4,
             "isCustom": true
         },
-        "yearBusinessStarted": {
+        "cYearBusinessEst": {
             "type": "text",
             "rowsMin": 2,
             "cutHeight": 200,
-            "isCustom": true,
-            "dbName": "cYearBusinessEst"
+            "isCustom": true
         },
         "dateOfBirth": {
             "type": "date",

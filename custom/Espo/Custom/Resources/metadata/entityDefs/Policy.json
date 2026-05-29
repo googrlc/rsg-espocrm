@@ -9,13 +9,12 @@
             "layoutMassUpdateDisabled": true,
             "textFilterDisabled": true
         },
-        "policyNumber": {
+        "policy_number": {
             "type": "varchar",
             "maxLength": 100,
             "required": false,
             "isCustom": true,
-            "tooltipText": "Policy number \u2014 primary identifier for this policy record",
-            "dbName": "policy_number"
+            "tooltipText": "Policy number \u2014 primary identifier for this policy record"
         },
         "momentumPolicyId": {
             "type": "varchar",
@@ -24,25 +23,24 @@
             "readOnly": true,
             "tooltipText": "NowCerts/Momentum AMS policy databaseId \u2014 primary dedup key for sync. NEVER change this value once set."
         },
-        "carrierName": {
+        "carrier": {
             "type": "varchar",
             "maxLength": 255,
-            "isCustom": true,
-            "dbName": "carrier"
+            "isCustom": true
         },
-        "lineOfBusinessRaw": {
+        "line_of_business_raw": {
             "type": "varchar",
             "maxLength": 500,
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Original NowCerts / AMS line-of-business string before normalization.",
-            "dbName": "line_of_business_raw"
+            "tooltipText": "Original NowCerts / AMS line-of-business string before normalization."
         },
-        "lineOfBusiness": {
+        "line_of_business": {
             "type": "varchar",
             "maxLength": 500,
             "isCustom": true,
-            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass)."
+            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass).",
+            "dbName": "lineOfBusiness"
         },
         "status": {
             "type": "enum",
@@ -85,56 +83,62 @@
                 "Pending Cancel"
             ]
         },
-        "effectiveDate": {
-            "type": "date",
-            "isCustom": true
-        },
-        "expirationDate": {
+        "effective_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation"
+            "dbName": "effectiveDate"
         },
-        "premium": {
+        "expiration_date": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation",
+            "dbName": "expirationDate"
+        },
+        "premium_amount": {
             "type": "currency",
             "isCustom": true,
             "dbName": "premiumAmount"
         },
-        "commissionRate": {
+        "commission_rate": {
             "type": "float",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "commissionRate"
         },
         "commissionAmount": {
             "type": "currency",
             "isCustom": true,
             "readOnly": true
         },
-        "coverageAmount": {
+        "coverage_amount": {
             "type": "currency",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "coverageAmount"
         },
         "deductible": {
             "type": "currency",
             "isCustom": true
         },
-        "agencyFee": {
+        "agency_fee": {
             "type": "currency",
-            "isCustom": true
+            "isCustom": true,
+            "dbName": "agencyFee"
         },
-        "businessType": {
+        "business_type": {
             "type": "varchar",
             "maxLength": 100,
-            "isCustom": true
-        },
-        "policyNotes": {
-            "type": "text",
-            "isCustom": true
-        },
-        "bindDate": {
-            "type": "date",
             "isCustom": true,
-            "dbName": "bind_date"
+            "dbName": "businessType"
         },
-        "billingType": {
+        "policy_notes": {
+            "type": "text",
+            "isCustom": true,
+            "dbName": "policyNotes"
+        },
+        "bind_date": {
+            "type": "date",
+            "isCustom": true
+        },
+        "billing_type": {
             "type": "enum",
             "options": [
                 "",
@@ -143,29 +147,24 @@
                 "Direct Bill 100",
                 "Agency Bill 100"
             ],
-            "isCustom": true,
-            "dbName": "billing_type"
+            "isCustom": true
         },
-        "policyTerm": {
+        "policy_term": {
             "type": "int",
             "isCustom": true,
-            "tooltipText": "Policy term in months (6 or 12)",
-            "dbName": "policy_term"
+            "tooltipText": "Policy term in months (6 or 12)"
         },
-        "cancellationDate": {
+        "cancellation_date": {
             "type": "date",
-            "isCustom": true,
-            "dbName": "cancellation_date"
+            "isCustom": true
         },
-        "cancellationReason": {
+        "cancellation_reason": {
             "type": "text",
-            "isCustom": true,
-            "dbName": "cancellation_reason"
+            "isCustom": true
         },
-        "reinstatementDate": {
+        "reinstatement_date": {
             "type": "date",
-            "isCustom": true,
-            "dbName": "reinstatement_date"
+            "isCustom": true
         },
         "momentum_last_synced": {
             "type": "datetime",
@@ -426,7 +425,7 @@
         }
     },
     "formula": {
-        "beforeSaveScript": "\n$premium = entity\\attribute('premium');\nifThen(\n    $premium == null,\n    $premium = 0\n);\n\n$commissionRate = entity\\attribute('commissionRate');\nifThen(\n    $commissionRate == null,\n    $commissionRate = 0.10\n);\nifThen(\n    $commissionRate == '',\n    $commissionRate = 0.10\n);\nifThen(\n    $commissionRate > 1,\n    $commissionRate = $commissionRate / 100\n);\n\nentity\\setAttribute(\n    'commissionAmount',\n    number\\round($premium * $commissionRate, 2)\n);\n\n$status = entity\\attribute('status');\n$premiumAtRiskCalc = 0;\nifThen(\n    $status == 'Active',\n    $premiumAtRiskCalc = $premium\n);\nifThen(\n    $status == 'Up for Renewal',\n    $premiumAtRiskCalc = $premium\n);\nifThen(\n    $status == 'Renewing',\n    $premiumAtRiskCalc = $premium\n);\nifThen(\n    $status == 'Renewed',\n    $premiumAtRiskCalc = $premium\n);\n\nentity\\setAttribute('premiumAtRisk', $premiumAtRiskCalc);\n"
+        "beforeSaveScript": "\n$premium_amount = entity\\attribute('premium_amount');\nifThen(\n    $premium_amount == null,\n    $premium_amount = 0\n);\n\n$commission_rate = entity\\attribute('commission_rate');\nifThen(\n    $commission_rate == null,\n    $commission_rate = 0.10\n);\nifThen(\n    $commission_rate == '',\n    $commission_rate = 0.10\n);\nifThen(\n    $commission_rate > 1,\n    $commission_rate = $commission_rate / 100\n);\n\nentity\\setAttribute(\n    'commissionAmount',\n    number\\round($premium_amount * $commission_rate, 2)\n);\n\n$status = entity\\attribute('status');\n$premiumAtRiskCalc = 0;\nifThen(\n    $status == 'Active',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Up for Renewal',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Renewing',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Renewed',\n    $premiumAtRiskCalc = $premium_amount\n);\n\nentity\\setAttribute('premiumAtRisk', $premiumAtRiskCalc);\n"
     },
     "links": {
         "account": {
@@ -504,21 +503,21 @@
         }
     },
     "collection": {
-        "orderBy": "policyNumber",
+        "orderBy": "policy_number",
         "order": "asc",
         "textFilterFields": [
-            "carrierName",
+            "carrier",
             "momentumPolicyId"
         ],
         "sortByList": [
-            "policyNumber",
+            "policy_number",
             "createdAt",
             "modifiedAt",
-            "effectiveDate",
-            "expirationDate",
-            "carrierName",
+            "effective_date",
+            "expiration_date",
+            "carrier",
             "status",
-            "lineOfBusiness"
+            "line_of_business"
         ]
     },
     "indexes": {
