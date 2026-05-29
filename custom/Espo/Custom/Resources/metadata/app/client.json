@@ -1,6 +1,9 @@
 {
-  "cssList": [],
+  "cssList": [
+    "client/custom/css/momentum.css"
+  ],
   "scriptList": [
-    "client/custom/src/selectize-fix.js"
+    "client/custom/src/selectize-fix.js",
+    "client/custom/src/task-user-colors.js"
   ]
 }

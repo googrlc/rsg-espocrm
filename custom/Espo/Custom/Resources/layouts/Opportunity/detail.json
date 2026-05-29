@@ -27,6 +27,14 @@
             ],
             [
                 {
+                    "name": "closeDate"
+                },
+                {
+                    "name": "amount"
+                }
+            ],
+            [
+                {
                     "name": "leadSource"
                 },
                 {
@@ -966,7 +974,7 @@
         ],
         "style": "default",
         "name": "processIntake",
-        "label": "Process — Intake",
+        "label": "Process \u2014 Intake",
         "tabBreak": true,
         "tabLabel": "Workflow"
     },
@@ -999,7 +1007,7 @@
         ],
         "style": "default",
         "name": "processMarketing",
-        "label": "Process — Marketing"
+        "label": "Process \u2014 Marketing"
     },
     {
         "rows": [
@@ -1036,7 +1044,7 @@
         ],
         "style": "default",
         "name": "processOnboarding",
-        "label": "Process — Onboarding"
+        "label": "Process \u2014 Onboarding"
     },
     {
         "rows": [

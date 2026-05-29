@@ -156,7 +156,8 @@
     "carrier_code": "Carrier Code",
     "total_carrier_premium": "Total Carrier Premium",
     "nps_date": "Net Promoter Score Date",
-    "nps_score": "Net Promoter Score"
+    "nps_score": "Net Promoter Score",
+    "linkedin_url": "LinkedIn URL"
   },
   "links": {
     "linkedTasks": "Account Tasks",

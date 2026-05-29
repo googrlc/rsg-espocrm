@@ -1,0 +1,10 @@
+{
+    "controller": "custom:controllers/quote",
+    "recordViews": {
+        "detail": "custom:views/quote/record/detail",
+        "edit": "custom:views/quote/record/edit"
+    },
+    "kanbanViewMode": true,
+    "color": "#3b82f6",
+    "iconClass": "fas fa-file-invoice-dollar"
+}

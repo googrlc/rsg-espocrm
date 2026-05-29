@@ -1,0 +1,30 @@
+[
+    {
+        "label": "Quote",
+        "rows": [
+            [
+                {"name": "opportunity"},
+                {"name": "account"}
+            ],
+            [
+                {"name": "quoteNumber"},
+                {"name": "carrier"}
+            ],
+            [
+                {"name": "premium"},
+                {"name": "status"}
+            ],
+            [
+                {"name": "effectiveDate"},
+                {"name": "expirationDate"}
+            ],
+            [
+                {"name": "lineOfBusiness"},
+                false
+            ],
+            [
+                {"name": "notes", "fullWidth": true}
+            ]
+        ]
+    }
+]
