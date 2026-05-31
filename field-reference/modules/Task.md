@@ -85,7 +85,6 @@
   - `Slack`
   - `Momentum`
   - `n8n`
-  - `Viktor`
   - `Hermes`
 
 ### `taskSource` — Source

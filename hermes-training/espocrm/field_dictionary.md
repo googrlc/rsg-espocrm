@@ -298,7 +298,7 @@ Per-LOB shortcut fields: `policyAutoActive`, `policyAutoCarrier`, `policyAutoPre
 | Field name | Label | Notes |
 |---|---|---|
 | `taskSource` | Source | `Account`, `Contact`, `Opportunity`, `Policy` |
-| `syncSource` | Sync Source | `Manual`, `Gmail`, `Slack`, `Momentum`, `n8n`, `Viktor`, `Hermes` |
+| `syncSource` | Sync Source | `Manual`, `Gmail`, `Slack`, `Momentum`, `n8n`, `Hermes` |
 | `triageReason` | Triage Reason | Text explaining why task was escalated |
 | `triageSummary` | Triage Summary | AI-generated summary of triage |
 | `dateCompleted` | Date Completed | Set automatically when status → `Completed` |

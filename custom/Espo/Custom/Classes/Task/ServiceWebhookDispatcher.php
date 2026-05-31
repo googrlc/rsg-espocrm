@@ -23,6 +23,7 @@ class ServiceWebhookDispatcher
         'Onboarding',
         'Admin',
         'Other',
+        'Renewal',
     ];
 
     public function __construct(
