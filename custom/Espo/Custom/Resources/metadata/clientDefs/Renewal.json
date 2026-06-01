@@ -49,60 +49,84 @@
             "lost_reason": {
                 "required": {
                     "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Lost"
-                        }
+                        { "type": "equals", "attribute": "stage", "value": "Lost" }
                     ]
                 },
                 "visible": {
                     "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Lost"
-                        }
+                        { "type": "equals", "attribute": "stage", "value": "Lost" }
                     ]
                 }
             },
             "newPolicy": {
                 "visible": {
                     "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "stage",
-                            "value": "Renewed - Won"
-                        }
+                        { "type": "equals", "attribute": "stage", "value": "Renewed - Won" }
                     ]
                 }
             },
             "renewal_premium": {
+                "required": {
+                    "conditionGroup": [
+                        { "type": "notEquals", "attribute": "stage", "value": "Identified" }
+                    ]
+                },
                 "visible": {
                     "conditionGroup": [
                         {
                             "type": "or",
                             "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "stage",
-                                    "value": "Quote Requested"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "stage",
-                                    "value": "Proposal Sent"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "stage",
-                                    "value": "Negotiating"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "stage",
-                                    "value": "Renewed - Won"
-                                }
+                                { "type": "equals", "attribute": "stage", "value": "Quote Requested" },
+                                { "type": "equals", "attribute": "stage", "value": "Proposal Sent" },
+                                { "type": "equals", "attribute": "stage", "value": "Negotiating" },
+                                { "type": "equals", "attribute": "stage", "value": "Renewed - Won" }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "renewal_reviewed": {
+                "required": {
+                    "conditionGroup": [
+                        { "type": "notEquals", "attribute": "stage", "value": "Identified" }
+                    ]
+                }
+            },
+            "account_confirmed": {
+                "required": {
+                    "conditionGroup": [
+                        { "type": "notEquals", "attribute": "stage", "value": "Identified" }
+                    ]
+                }
+            },
+            "renewal_email_sent": {
+                "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                { "type": "equals", "attribute": "stage", "value": "Outreach Sent" },
+                                { "type": "equals", "attribute": "stage", "value": "Renewed - Won" }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "ams_updated": {
+                "required": {
+                    "conditionGroup": [
+                        { "type": "equals", "attribute": "stage", "value": "Renewed - Won" }
+                    ]
+                }
+            },
+            "renewal_notes": {
+                "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                { "type": "equals", "attribute": "stage", "value": "Renewed - Won" },
+                                { "type": "equals", "attribute": "stage", "value": "Lost" }
                             ]
                         }
                     ]

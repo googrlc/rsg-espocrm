@@ -180,6 +180,34 @@
             "tooltipText": "Free text notes for this renewal cycle",
             "dbName": "renewalNotes"
         },
+        "renewal_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Renewal declaration pulled & reviewed",
+            "dbName": "renewalReviewed"
+        },
+        "account_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Account details confirmed (units / drivers)",
+            "dbName": "accountConfirmed"
+        },
+        "renewal_email_sent": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Renewal email sent to client",
+            "dbName": "renewalEmailSent"
+        },
+        "ams_updated": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS (NowCerts) updated",
+            "dbName": "amsUpdated"
+        },
         "commission_rate": {
             "type": "float",
             "isCustom": true,

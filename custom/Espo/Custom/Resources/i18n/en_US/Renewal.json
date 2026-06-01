@@ -40,7 +40,11 @@
         "lost_reason": "Lost Reason",
         "renewal_notes": "Renewal Notes",
         "tasks": "Tasks",
-        "commissions": "Commissions"
+        "commissions": "Commissions",
+        "renewal_reviewed": "Renewal declaration pulled & reviewed",
+        "account_confirmed": "Account details confirmed (units / drivers)",
+        "renewal_email_sent": "Renewal email sent to client",
+        "ams_updated": "AMS (NowCerts) updated"
     },
     "links": {
         "policy": "Expiring Policy",

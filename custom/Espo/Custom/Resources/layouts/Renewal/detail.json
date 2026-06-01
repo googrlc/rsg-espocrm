@@ -26,6 +26,14 @@
     ]
   },
   {
+    "label": "Worksheet — complete these",
+    "name": "worksheet",
+    "rows": [
+      [{"name": "renewal_reviewed"}, {"name": "account_confirmed"}],
+      [{"name": "renewal_email_sent"}, {"name": "ams_updated"}]
+    ]
+  },
+  {
     "label": "Outreach",
     "name": "outreach",
     "rows": [
