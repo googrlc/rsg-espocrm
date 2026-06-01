@@ -1,0 +1,20 @@
+{
+    "default": {
+        "index": 0
+    },
+    "_delimiter_": {
+        "index": 1
+    },
+    "priorCoverage": {
+        "index": 2
+    },
+    "activities": {
+        "index": 3
+    },
+    "history": {
+        "index": 4
+    },
+    "tasks": {
+        "index": 5
+    }
+}
