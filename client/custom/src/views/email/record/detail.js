@@ -6,12 +6,23 @@ define('custom:views/email/record/detail', ['views/email/record/detail'], functi
             'click [data-action="createTaskFromEmail"]': function (e) {
                 e.preventDefault();
                 this.actionCreateTaskFromEmail();
+            },
+            'click [data-action="createContactFromEmail"]': function (e) {
+                e.preventDefault();
+                this.actionCreateContactFromEmail();
             }
         }),
 
         afterRender: function () {
             Dep.prototype.afterRender.call(this);
             this.addCreateTaskButton();
+
+            // Wrapped so a failure here can never block the email from rendering.
+            try {
+                this.addCreateContactButton();
+            } catch (e) {
+                console.error('createContactFromEmail button failed', e);
+            }
         },
 
         addCreateTaskButton: function () {
@@ -30,6 +41,105 @@ define('custom:views/email/record/detail', ['views/email/record/detail'], functi
                     '<span class="fas fa-tasks"></span> Create Task' +
                 '</button>'
             );
+        },
+
+        addCreateContactButton: function () {
+            if (this.$el.find('[data-action="createContactFromEmail"]').length) {
+                return;
+            }
+
+            if (!this.getAcl().checkScope('Contact', 'create')) {
+                return;
+            }
+
+            const $container = this.$el.find('.detail-button-container, .button-container').first();
+
+            if (!$container.length) {
+                return;
+            }
+
+            $container.append(
+                '<button type="button" class="btn btn-default btn-sm" data-action="createContactFromEmail">' +
+                    '<span class="fas fa-user-plus"></span> Create Contact' +
+                '</button>'
+            );
+        },
+
+        actionCreateContactFromEmail: function () {
+            const from = this.parseFrom();
+            const name = this.splitName(from.name);
+
+            Espo.Ui.notify(this.translate('pleaseWait', 'messages'));
+
+            this.createView('quickCreate', 'views/modals/edit', {
+                scope: 'Contact',
+                attributes: {
+                    emailAddress: from.address,
+                    firstName: name.first,
+                    lastName: name.last
+                }
+            }, function (view) {
+                view.render();
+                Espo.Ui.notify(false);
+
+                this.listenToOnce(view, 'after:save', function (model) {
+                    Espo.Ui.success(this.translate('Created'));
+                    this.linkEmailToContact(model);
+                }, this);
+            }.bind(this));
+        },
+
+        linkEmailToContact: function (model) {
+            // Only set the email's parent if it has none — never clobber an existing link.
+            if (this.model.get('parentId')) {
+                return;
+            }
+
+            this.model.save({
+                parentType: 'Contact',
+                parentId: model.id,
+                parentName: model.get('name')
+            }, { patch: true });
+        },
+
+        parseFrom: function () {
+            const address = (this.model.get('from') || '').trim();
+            let name = '';
+
+            const nameHash = this.model.get('nameHash') || {};
+
+            if (address && nameHash[address]) {
+                name = nameHash[address];
+            }
+
+            if (!name) {
+                const fromString = this.model.get('fromString') || '';
+                const match = fromString.match(/^\s*"?([^"<]*?)"?\s*(?:<[^>]*>)?\s*$/);
+
+                if (match && match[1] && match[1].indexOf('@') === -1) {
+                    name = match[1].trim();
+                }
+            }
+
+            return { address: address, name: name };
+        },
+
+        splitName: function (name) {
+            name = (name || '').trim();
+
+            if (!name) {
+                return { first: '', last: '' };
+            }
+
+            const parts = name.split(/\s+/);
+
+            if (parts.length === 1) {
+                return { first: '', last: parts[0] };
+            }
+
+            const first = parts.shift();
+
+            return { first: first, last: parts.join(' ') };
         },
 
         actionCreateTaskFromEmail: function () {
