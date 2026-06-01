@@ -1,0 +1,13 @@
+[
+    {
+        "label": "",
+        "rows": [
+            [{"name": "name", "fullWidth": true}],
+            [{"name": "account", "fullWidth": true}],
+            [{"name": "lineOfBusiness"}, {"name": "stage"}],
+            [{"name": "closeDate"}, {"name": "amount"}],
+            [{"name": "contacts", "fullWidth": true}],
+            [{"name": "description", "fullWidth": true}]
+        ]
+    }
+]
