@@ -214,6 +214,12 @@ class RenewalOrchestrator
 
     private function shouldCreateInitialTask(Entity $policy, Entity $renewal): bool
     {
+        // DISABLED: Hermes owns renewal task creation — see docs/renewal-pipeline-ownership.md.
+        // Native task creation produced cardless, unassigned tasks that fought the Hermes
+        // sweep. EspoCRM still owns Renewal-record creation; the Hermes sweep creates the
+        // rich, Gretchen-assigned worksheet task.
+        return false;
+
         if (!$renewal->hasId()) {
             return false;
         }
