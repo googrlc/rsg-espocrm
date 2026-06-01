@@ -1,0 +1,36 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "account",
+        "width": 20
+    },
+    {
+        "name": "lineOfBusiness",
+        "width": 14
+    },
+    {
+        "name": "stage",
+        "width": 13
+    },
+    {
+        "name": "assignedUser",
+        "width": 12
+    },
+    {
+        "name": "createdAt",
+        "width": 12
+    },
+    {
+        "name": "closeDate",
+        "width": 9,
+        "hidden": true
+    },
+    {
+        "name": "amount",
+        "width": 10,
+        "align": "right"
+    }
+]

@@ -73,6 +73,7 @@
         "gbMedicalRenewalDate": "Group Benefits Medical Renewal Date",
         "gbEmployerContribution": "Group Benefits Employer Contribution",
         "stage": "Stage",
+        "closeDate": "Projected Close Date",
         "partAEffectiveDate": "Part A Effective Date",
         "partBEffectiveDate": "Part B Effective Date",
         "medicareHICN": "Medicare HICN",
@@ -133,6 +134,7 @@
         }
     },
     "tooltips": {
+        "closeDate": "Projected/target date you expect to bind. The actual outcome date is captured by Effective/Bind Date (won) or Renewal X-Date (lost).",
         "policyNumber": "Enter after bind",
         "fein": "Enter if Account not yet created",
         "commissionLogged": "Auto-set by n8n when commission ledger entry created",

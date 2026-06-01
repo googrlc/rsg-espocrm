@@ -1,0 +1,7 @@
+[
+    {"name": "name", "link": true},
+    {"name": "lineOfBusiness", "width": 20},
+    {"name": "stage", "width": 18},
+    {"name": "closeDate", "width": 16},
+    {"name": "amount", "align": "right", "width": 16}
+]
