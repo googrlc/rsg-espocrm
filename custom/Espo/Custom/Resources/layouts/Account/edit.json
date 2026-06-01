@@ -1,0 +1,60 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name",
+                    "fullWidth": true
+                },
+                false
+            ],
+            [
+                {
+                    "name": "account_type"
+                },
+                {
+                    "name": "account_status"
+                }
+            ],
+            [
+                {
+                    "name": "accountCategory"
+                },
+                {
+                    "name": "assignedUser"
+                }
+            ],
+            [
+                {
+                    "name": "phoneNumber"
+                },
+                {
+                    "name": "emailAddress"
+                }
+            ],
+            [
+                {
+                    "name": "billingAddress"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "website"
+                },
+                {
+                    "name": "industry"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "primary",
+        "label": "Account"
+    }
+]

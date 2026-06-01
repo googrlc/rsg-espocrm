@@ -1,0 +1,53 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                }
+            ],
+            [
+                {
+                    "name": "account_type"
+                },
+                {
+                    "name": "account_status"
+                }
+            ],
+            [
+                {
+                    "name": "website"
+                }
+            ],
+            [
+                {
+                    "name": "emailAddress"
+                }
+            ],
+            [
+                {
+                    "name": "phoneNumber"
+                }
+            ],
+            [
+                {
+                    "name": "billingAddressCity"
+                },
+                {
+                    "name": "billingAddressCountry"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ],
+            [
+                false,
+                false
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]
