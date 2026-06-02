@@ -79,6 +79,6 @@ class SendPolicyCorrectionWebhook implements AfterSave
             'sync_status' => 'Pending',
         ]);
 
-        $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true]);
+        $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true, SaveOption::SKIP_HOOKS => true]);
     }
 }

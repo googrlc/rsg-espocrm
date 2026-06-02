@@ -3,60 +3,6 @@
         "rows": [
             [
                 {
-                    "name": "account_status"
-                },
-                {
-                    "name": "total_active_premium"
-                }
-            ],
-            [
-                {
-                    "name": "score_tier"
-                },
-                {
-                    "name": "policyCountActive"
-                }
-            ],
-            [
-                {
-                    "name": "next_x_date"
-                },
-                {
-                    "name": "next_x_date_lob"
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "coverageOverview",
-        "label": "Coverage Overview"
-    },
-    {
-        "rows": [
-            [
-                {"name": "clv_projected"},
-                {"name": "clv_with_cross_sell"}
-            ],
-            [
-                {"name": "clv_current"},
-                {"name": "clv_annual_commission"}
-            ],
-            [
-                {"name": "clv_tenure_years"},
-                {"name": "clv_retention_rate_applied"}
-            ],
-            [
-                {"name": "clv_last_calculated"},
-                false
-            ]
-        ],
-        "style": "default",
-        "name": "clientValue",
-        "label": "Client Lifetime Value"
-    },
-    {
-        "rows": [
-            [
-                {
                     "name": "name"
                 },
                 {
@@ -89,6 +35,74 @@
         "style": "default",
         "name": "accountInfo",
         "label": "Client Snapshot"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "account_status"
+                },
+                {
+                    "name": "total_active_premium"
+                }
+            ],
+            [
+                {
+                    "name": "score_tier"
+                },
+                {
+                    "name": "policyCountActive"
+                }
+            ],
+            [
+                {
+                    "name": "next_x_date"
+                },
+                {
+                    "name": "next_x_date_lob"
+                }
+            ]
+        ],
+        "style": "default",
+        "name": "coverageOverview",
+        "label": "Coverage Overview"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "clv_projected"
+                },
+                {
+                    "name": "clv_with_cross_sell"
+                }
+            ],
+            [
+                {
+                    "name": "clv_current"
+                },
+                {
+                    "name": "clv_annual_commission"
+                }
+            ],
+            [
+                {
+                    "name": "clv_tenure_years"
+                },
+                {
+                    "name": "clv_retention_rate_applied"
+                }
+            ],
+            [
+                {
+                    "name": "clv_last_calculated"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "name": "clientValue",
+        "label": "Client Lifetime Value"
     },
     {
         "rows": [
@@ -563,48 +577,6 @@
         "rows": [
             [
                 {
-                    "name": "dependentsCount"
-                },
-                {
-                    "name": "dependentAges"
-                }
-            ],
-            [
-                {
-                    "name": "youthful_driver_flag"
-                },
-                {
-                    "name": "yearsAtAddress"
-                }
-            ],
-            [
-                {
-                    "name": "residenceType"
-                },
-                {
-                    "name": "mailingAddressSame"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Personal Lines"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "dependentsHousehold",
-        "customLabel": "Dependents & Household"
-    },
-    {
-        "rows": [
-            [
-                {
                     "name": "gapUmbrella"
                 },
                 {
@@ -642,6 +614,12 @@
                 {
                     "name": "gapRideshare"
                 }
+            ],
+            [
+                {
+                    "name": "mailingAddressSame"
+                },
+                false
             ],
             [
                 {
@@ -834,8 +812,7 @@
         "rows": [
             [
                 {
-                    "name": "general_notes",
-                    "fullWidth": true
+                    "name": "general_notes"
                 }
             ]
         ],
@@ -849,8 +826,7 @@
         "rows": [
             [
                 {
-                    "name": "what_you_have_today",
-                    "fullWidth": true
+                    "name": "what_you_have_today"
                 }
             ]
         ],

@@ -1,8 +1,10 @@
 <?php
 namespace Espo\Custom\Controllers;
 
+use Espo\Core\Acl;
 use Espo\Core\Api\Request;
 use Espo\Core\Exceptions\BadRequest;
+use Espo\Core\Exceptions\Forbidden;
 use Espo\ORM\Entity;
 
 class Account extends \Espo\Modules\Crm\Controllers\Account
@@ -15,11 +17,21 @@ class Account extends \Espo\Modules\Crm\Controllers\Account
             throw new BadRequest("Missing account ID.");
         }
 
+        // RunIntelPack mutates external state (fires a signed webhook) -> require Account edit access.
+        $acl = $this->getContainer()->getByClass(Acl::class);
+        if (!$acl->checkScope('Account', 'edit')) {
+            throw new Forbidden("No access to Account.");
+        }
+
         $entityManager = $this->getContainer()->getByClass(\Espo\ORM\EntityManager::class);
         $account = $entityManager->getEntityById('Account', $data->id);
 
         if (!$account) {
             throw new BadRequest("Account not found.");
+        }
+
+        if (!$acl->check($account, 'edit')) {
+            throw new Forbidden("No edit access to this Account.");
         }
 
         // Webhook URL + HMAC secret (sign raw JSON body; n8n verifies X-Intel-Pack-Signature)
@@ -92,11 +104,21 @@ class Account extends \Espo\Modules\Crm\Controllers\Account
             throw new BadRequest("Missing account ID.");
         }
 
+        // Reading commissions for an account -> require Account + Commission read access.
+        $acl = $this->getContainer()->getByClass(Acl::class);
+        if (!$acl->checkScope('Account', 'read') || !$acl->checkScope('Commission', 'read')) {
+            throw new Forbidden("No access.");
+        }
+
         $entityManager = $this->getContainer()->getByClass(\Espo\ORM\EntityManager::class);
         $account = $entityManager->getEntityById('Account', $data->id);
 
         if (!$account) {
             throw new BadRequest("Account not found.");
+        }
+
+        if (!$acl->check($account, 'read')) {
+            throw new Forbidden("No read access to this Account.");
         }
 
         $commissionList = $entityManager

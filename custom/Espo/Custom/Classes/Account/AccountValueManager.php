@@ -63,6 +63,7 @@ class AccountValueManager
         $this->entityManager->saveEntity($account, [
             SaveOption::SILENT => true,
             self::SKIP_VALUE_SNAPSHOT_OPTION => true,
+            \Espo\Custom\Classes\Account\AccountHealthManager::SKIP_HEALTH_SNAPSHOT_OPTION => true,
         ]);
     }
 

@@ -51,18 +51,17 @@ abstract class BaseWebhookDispatcher
             $headers[] = $this->getSecretHeaderName() . ': ' . $secret;
         }
 
-        $context = stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => implode("\r\n", $headers),
-                'content' => $body,
-                'timeout' => 5,
-                'ignore_errors' => true,
-            ],
-        ]);
+        $ch = curl_init($webhookUrl);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        $response = curl_exec($ch);
+        $statusCode = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
 
-        $response = @file_get_contents($webhookUrl, false, $context);
-        $statusCode = $this->extractStatusCode($http_response_header ?? []);
         $ok = $response !== false && $statusCode >= 200 && $statusCode < 300;
 
         return ['dispatched' => $ok, 'changes' => $changes];
@@ -76,6 +75,10 @@ abstract class BaseWebhookDispatcher
         $changes = [];
 
         foreach ($this->getWatchedFields() as $field) {
+            if (!$entity->hasAttribute($field)) {
+                continue;
+            }
+
             $oldValue = $this->normalizeValue($entity->getFetched($field));
             $newValue = $this->normalizeValue($entity->get($field));
 

@@ -1,6 +1,4 @@
 {
   "cssList": [],
-  "scriptList": [
-    "client/custom/src/selectize-fix.js"
-  ]
+  "scriptList": []
 }

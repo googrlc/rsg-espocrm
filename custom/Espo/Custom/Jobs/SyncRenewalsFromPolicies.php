@@ -21,6 +21,7 @@ class SyncRenewalsFromPolicies implements JobDataLess
     {
         $policies = $this->entityManager
             ->getRDBRepository('Policy')
+            ->sth()
             ->where([
                 'deleted' => false,
                 'OR' => [

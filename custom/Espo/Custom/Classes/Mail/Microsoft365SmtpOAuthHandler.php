@@ -30,6 +30,7 @@ class Microsoft365SmtpOAuthHandler implements Handler
         }
 
         return $params
+            ->withAuth(true)
             ->withAuthMechanism(SmtpParams::AUTH_MECHANISM_XOAUTH)
             ->withPassword($tokens->getAccessToken());
     }

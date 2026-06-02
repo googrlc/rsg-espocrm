@@ -29,6 +29,12 @@ class AttachmentDriveSyncDispatcher
             return;
         }
 
+        $size = (int) ($attachment->get('size') ?? 0);
+        $maxBytes = (int) ($this->config->get('attachmentDriveSyncMaxSize') ?? 20) * 1024 * 1024;
+        if ($maxBytes > 0 && $size > $maxBytes) {
+            return;
+        }
+
         $rawContents = @file_get_contents($binaryPath);
         if ($rawContents === false || $rawContents === '') {
             return;

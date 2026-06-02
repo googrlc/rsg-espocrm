@@ -17,15 +17,21 @@ html {
 /* Main content area */
 #content,
 .main-body-container,
-.container-fluid,
-.record {
+.container-fluid {
     overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Record container must NOT clip — EspoCRM 9.3 renders inline enum/dropdown
+   menus within .record; a clipping container hides them (the visible+auto trap). */
+.record {
+    overflow: visible;
     max-width: 100%;
 }
 
 /* All panels constrained (except those containing kanban boards) */
 .panel {
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
 }
 
@@ -34,8 +40,7 @@ html {
 }
 
 .panel-body {
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow: visible;
     max-width: 100%;
 }
 
@@ -181,13 +186,12 @@ html {
    ========================================================================== */
 
 .side .panel {
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
 }
 
 .side .panel-body {
-    overflow-x: hidden;
-    overflow-y: visible;
+    overflow: visible;
     word-break: break-word;
 }
 
@@ -202,7 +206,7 @@ html {
 }
 
 .modal-body .record {
-    overflow: hidden;
+    overflow: visible;
     max-width: 100%;
 }
 
@@ -782,7 +786,7 @@ html {
     color: #1a1a2e;
     line-height: 1.3;
 }
-.detail[data-scope="Account"] .panel[data-name="accountInfo"] .field[data-name="accountType"] .enum-value-container .label {
+.detail[data-scope="Account"] .panel[data-name="accountInfo"] .field[data-name="account_type"] .enum-value-container .label {
     font-size: 12px;
     padding: 4px 12px;
     border-radius: 20px;
@@ -1176,6 +1180,46 @@ html {
 .stage-step:hover:not(.stage-current):not(.stage-won):not(.stage-lost) {
     background: #e3f2fd;
     color: #1565c0;
+}
+
+.stage-current-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+    border-radius: 999px;
+    border: 1px solid #bfd0f6;
+    background: #eef4ff;
+    color: #174ea6;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.stage-current-display.stage-won {
+    border-color: #b8e2c2;
+    background: #ecf8ef;
+    color: #216e39;
+}
+
+.stage-current-display.stage-lost {
+    border-color: #f2b8b5;
+    background: #fdeceb;
+    color: #9f2d2d;
+}
+
+.stage-current-display.stage-pending {
+    border-color: #d7deee;
+    background: #f5f7fb;
+    color: #61708f;
+}
+
+.stage-current-probability {
+    border-left: 1px solid currentColor;
+    opacity: 0.82;
+    padding-left: 8px;
+    font-size: 12px;
 }
 
 /* ==========================================================================

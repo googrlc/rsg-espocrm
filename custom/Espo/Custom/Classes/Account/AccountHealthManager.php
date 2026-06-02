@@ -65,6 +65,7 @@ class AccountHealthManager
         $this->applyToAccount($account);
         $this->entityManager->saveEntity($account, [
             SaveOption::SILENT => true,
+            SaveOption::SKIP_HOOKS => true,
             self::SKIP_HEALTH_SNAPSHOT_OPTION => true,
         ]);
     }

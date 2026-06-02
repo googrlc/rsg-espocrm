@@ -24,7 +24,10 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
             var current = this.model.get(this.name);
 
             if (this.mode === 'detail') {
-                data.stages = this.getStagesData();
+                data.currentStage = current || '';
+                data.currentLabel = this.getLanguage().translateOption(current, this.name, this.model.entityType) || current || 'None';
+                data.currentProbability = (this.model.getFieldParam(this.name, 'probabilityMap') || {})[current];
+                data.stageClass = this.getStageClass(current);
                 data.isWon = WON_STAGES.indexOf(current) !== -1;
                 data.isLost = LOST_STAGES.indexOf(current) !== -1;
             }
@@ -32,63 +35,24 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
             return data;
         },
 
-        getStagesData: function () {
-            var currentStage = this.model.get(this.name);
+        getStageClass: function (stage) {
+            if (WON_STAGES.indexOf(stage) !== -1) {
+                return 'stage-won';
+            }
 
-            var stages = PIPELINE_STAGES;
+            if (LOST_STAGES.indexOf(stage) !== -1) {
+                return 'stage-lost';
+            }
 
-            var currentIndex = stages.indexOf(currentStage);
-            var probabilityMap = this.model.getFieldParam(this.name, 'probabilityMap') || {};
-            var result = [];
+            if (stage) {
+                return 'stage-current';
+            }
 
-            stages.forEach(function (stage, index) {
-                var isWon = WON_STAGES.indexOf(stage) !== -1;
-                var isLost = LOST_STAGES.indexOf(stage) !== -1;
-                var isTerminal = isWon || isLost;
-                var stageClass = 'stage-pending';
-
-                if (stage === currentStage) {
-                    if (isWon) {
-                        stageClass = 'stage-won';
-                    } else if (isLost) {
-                        stageClass = 'stage-lost';
-                    } else {
-                        stageClass = 'stage-current';
-                    }
-                } else if (isTerminal) {
-                    stageClass = 'stage-terminal';
-                } else if (WON_STAGES.indexOf(currentStage) !== -1 ||
-                           LOST_STAGES.indexOf(currentStage) !== -1) {
-                    stageClass = 'stage-completed';
-                } else if (index < currentIndex) {
-                    stageClass = 'stage-completed';
-                }
-
-                result.push({
-                    name: stage,
-                    label: stage,
-                    stageClass: stageClass,
-                    probability: probabilityMap[stage] || 0,
-                    isCurrent: stage === currentStage,
-                    isTerminal: isTerminal
-                });
-            }, this);
-
-            return result;
+            return 'stage-pending';
         },
 
         afterRender: function () {
             EnumFieldView.prototype.afterRender.call(this);
-
-            if (this.mode === 'detail') {
-                this.$el.find('.stage-step').on('click', function (e) {
-                    var stage = $(e.currentTarget).data('stage');
-                    if (stage) {
-                        this.model.set(this.name, stage);
-                        this.model.save({patch: true});
-                    }
-                }.bind(this));
-            }
         }
     });
 });

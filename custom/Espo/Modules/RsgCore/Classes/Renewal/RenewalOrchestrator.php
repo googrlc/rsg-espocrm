@@ -23,77 +23,95 @@ class RenewalOrchestrator
         'Lost',
     ];
 
+    /**
+     * In-request re-entrancy guard, keyed by '<entityType>:<id>'.
+     * Prevents a single user save from re-entering the same record's sync.
+     *
+     * @var array<string, true>
+     */
+    private static array $inProgress = [];
+
     public function __construct(
         private EntityManager $entityManager
     ) {}
 
     public function syncFromPolicy(Entity $policy): void
     {
-        if (!$this->shouldSyncRenewalFromPolicy($policy)) {
+        $guardKey = $policy->getEntityType() . ':' . (string) $policy->getId();
+        if (isset(self::$inProgress[$guardKey])) {
             return;
         }
+        self::$inProgress[$guardKey] = true;
 
-        $existingRenewal = $this->findRenewalByPolicyId((string) $policy->getId());
-        if ($existingRenewal === null && !$this->isWithinRenewalCreationWindow($policy)) {
-            return;
-        }
+        try {
+            if (!$this->shouldSyncRenewalFromPolicy($policy)) {
+                return;
+            }
 
-        $renewal = $existingRenewal ?? $this->entityManager->getNewEntity('Renewal');
-        $originalExpirationDate = (string) ($renewal->get('expiration_date') ?? '');
-        $originalUrgency = (string) ($renewal->get('urgency') ?? '');
-        $renewalIsNew = !$renewal->hasId();
-        $hasChanges = false;
+            $existingRenewal = $this->findRenewalByPolicyId((string) $policy->getId());
+            if ($existingRenewal === null && !$this->isWithinRenewalCreationWindow($policy)) {
+                return;
+            }
 
-        $expirationDate = (string) ($policy->get('expiration_date') ?? '');
-        $lobSourceRaw = trim((string) ($policy->get('line_of_business_raw') ?? ''));
-        if ($lobSourceRaw === '') {
-            $lobSourceRaw = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
-        }
-        $normalizedLineOfBusiness = $this->normalizeLineOfBusiness($lobSourceRaw);
-        $resolvedAccountName = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
-        $renewalAccountName = $resolvedAccountName !== ''
-            ? $resolvedAccountName
-            : trim((string) ($policy->get('accountName') ?? ''));
+            $renewal = $existingRenewal ?? $this->entityManager->getNewEntity('Renewal');
+            $originalExpirationDate = (string) ($renewal->get('expiration_date') ?? '');
+            $originalUrgency = (string) ($renewal->get('urgency') ?? '');
+            $renewalIsNew = !$renewal->hasId();
+            $hasChanges = false;
 
-        $hasChanges = $this->setIfChanged($renewal, 'name', $this->buildRenewalName(
-            $resolvedAccountName,
-            $normalizedLineOfBusiness
-        )) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'policyId', $policy->getId()) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'policyName', $policy->get('name')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'accountId', $policy->get('accountId')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'accountName', $renewalAccountName) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'contactId', $policy->get('contactId')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'contactName', $policy->get('contactName')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'assignedUserId', $policy->get('assignedUserId')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'assignedUserName', $policy->get('assignedUserName')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'teamsIds', $policy->get('teamsIds') ?? []) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'expiration_date', $expirationDate) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'current_premium', $policy->get('premium_amount')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'line_of_business', $normalizedLineOfBusiness) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'carrier', $policy->get('carrier')) || $hasChanges;
-        $hasChanges = $this->setIfChanged($renewal, 'commission_rate', $this->normalizeRate($policy->get('commission_rate'))) || $hasChanges;
+            $expirationDate = (string) ($policy->get('expiration_date') ?? '');
+            $lobSourceRaw = trim((string) ($policy->get('line_of_business_raw') ?? ''));
+            if ($lobSourceRaw === '') {
+                $lobSourceRaw = trim((string) ($policy->get('line_of_business') ?? $policy->get('business_type') ?? ''));
+            }
+            $normalizedLineOfBusiness = $this->normalizeLineOfBusiness($lobSourceRaw);
+            $resolvedAccountName = AccountNameResolution::resolveForPolicy($this->entityManager, $policy);
+            $renewalAccountName = $resolvedAccountName !== ''
+                ? $resolvedAccountName
+                : trim((string) ($policy->get('accountName') ?? ''));
 
-        if ($this->shouldSyncRenewalEffectiveDate($renewal, $originalExpirationDate, $expirationDate)) {
-            $hasChanges = $this->setIfChanged($renewal, 'renewal_effective_date', $expirationDate) || $hasChanges;
-        }
+            $hasChanges = $this->setIfChanged($renewal, 'name', $this->buildRenewalName(
+                $resolvedAccountName,
+                $normalizedLineOfBusiness
+            )) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'policyId', $policy->getId()) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'policyName', $policy->get('name')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'accountId', $policy->get('accountId')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'accountName', $renewalAccountName) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'contactId', $policy->get('contactId')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'contactName', $policy->get('contactName')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'assignedUserId', $policy->get('assignedUserId')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'assignedUserName', $policy->get('assignedUserName')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'teamsIds', $policy->get('teamsIds') ?? []) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'expiration_date', $expirationDate) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'current_premium', $policy->get('premium_amount')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'line_of_business', $normalizedLineOfBusiness) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'carrier', $policy->get('carrier')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'commission_rate', $this->normalizeRate($policy->get('commission_rate'))) || $hasChanges;
 
-        $computedUrgency = $this->calculateUrgency($expirationDate);
-        if ($this->shouldSyncRenewalUrgency($originalUrgency, $originalExpirationDate) && $computedUrgency !== null) {
-            $hasChanges = $this->setIfChanged($renewal, 'urgency', $computedUrgency) || $hasChanges;
-        }
+            if ($this->shouldSyncRenewalEffectiveDate($renewal, $originalExpirationDate, $expirationDate)) {
+                $hasChanges = $this->setIfChanged($renewal, 'renewal_effective_date', $expirationDate) || $hasChanges;
+            }
 
-        if ((string) ($renewal->get('stage') ?? '') === '') {
-            $renewal->set('stage', 'Identified');
-            $hasChanges = true;
-        }
+            $computedUrgency = $this->calculateUrgency($expirationDate);
+            if ($this->shouldSyncRenewalUrgency($originalUrgency, $originalExpirationDate) && $computedUrgency !== null) {
+                $hasChanges = $this->setIfChanged($renewal, 'urgency', $computedUrgency) || $hasChanges;
+            }
 
-        if ($renewalIsNew || $hasChanges) {
-            $this->entityManager->saveEntity($renewal, [SaveOption::SILENT => true]);
-        }
+            if ((string) ($renewal->get('stage') ?? '') === '') {
+                $renewal->set('stage', 'Identified');
+                $hasChanges = true;
+            }
 
-        if ($this->shouldCreateInitialTask($policy, $renewal)) {
-            $this->createInitialTaskIfMissing($policy, $renewal);
+            if ($renewalIsNew || $hasChanges) {
+                $this->entityManager->saveEntity($renewal, [SaveOption::SILENT => true]);
+            }
+
+            if ($this->shouldCreateInitialTask($policy, $renewal)) {
+                $this->createInitialTaskIfMissing($policy, $renewal);
+            }
+        } finally {
+            unset(self::$inProgress[$guardKey]);
         }
     }
 
@@ -165,27 +183,37 @@ class RenewalOrchestrator
 
     public function syncPolicyFromRenewal(Entity $renewal): void
     {
-        $policyId = $renewal->get('policyId');
-        if (!$policyId) {
+        $guardKey = $renewal->getEntityType() . ':' . (string) $renewal->getId();
+        if (isset(self::$inProgress[$guardKey])) {
             return;
         }
+        self::$inProgress[$guardKey] = true;
 
-        $policy = $this->entityManager->getEntityById('Policy', $policyId);
-        if (!$policy) {
-            return;
+        try {
+            $policyId = $renewal->get('policyId');
+            if (!$policyId) {
+                return;
+            }
+
+            $policy = $this->entityManager->getEntityById('Policy', $policyId);
+            if (!$policy) {
+                return;
+            }
+
+            $targetStatus = $this->mapRenewalStageToPolicyStatus(
+                $policy,
+                (string) ($renewal->get('stage') ?? '')
+            );
+
+            if ($targetStatus === null || $targetStatus === (string) ($policy->get('status') ?? '')) {
+                return;
+            }
+
+            $policy->set('status', $targetStatus);
+            $this->entityManager->saveEntity($policy, [SaveOption::SILENT => true]);
+        } finally {
+            unset(self::$inProgress[$guardKey]);
         }
-
-        $targetStatus = $this->mapRenewalStageToPolicyStatus(
-            $policy,
-            (string) ($renewal->get('stage') ?? '')
-        );
-
-        if ($targetStatus === null || $targetStatus === (string) ($policy->get('status') ?? '')) {
-            return;
-        }
-
-        $policy->set('status', $targetStatus);
-        $this->entityManager->saveEntity($policy, [SaveOption::SILENT => true]);
     }
 
     private function shouldSyncRenewalFromPolicy(Entity $policy): bool

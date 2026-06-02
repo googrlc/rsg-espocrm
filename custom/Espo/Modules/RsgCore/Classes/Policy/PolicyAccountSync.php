@@ -204,7 +204,7 @@ class PolicyAccountSync
         $account->set('next_renewal_carrier', $nextExpirationCarrier);
         $account->set('days_to_renewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
 
-        $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
+        $this->entityManager->saveEntity($account, [SaveOption::SILENT => true, SaveOption::SKIP_HOOKS => true]);
     }
 
     public function refreshCarrierPremiumById(string $carrierAccountId): void
@@ -230,7 +230,7 @@ class PolicyAccountSync
 
         $account->set('total_carrier_premium', round($totalCarrierPremium, 2));
 
-        $this->entityManager->saveEntity($account, [SaveOption::SILENT => true]);
+        $this->entityManager->saveEntity($account, [SaveOption::SILENT => true, SaveOption::SKIP_HOOKS => true]);
     }
 
     private function calculateDaysRemaining(?string $expirationDate): ?int

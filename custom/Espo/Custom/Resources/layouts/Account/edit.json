@@ -17,9 +17,7 @@
                 }
             ],
             [
-                {
-                    "name": "accountCategory"
-                },
+                false,
                 {
                     "name": "assignedUser"
                 }

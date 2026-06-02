@@ -16,6 +16,10 @@ class ValidateCarrierUnderwriter implements BeforeSave
 
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
+        if ($entity->hasId() && !$entity->isAttributeChanged('carrierAccountId') && !$entity->isAttributeChanged('underwriterId')) {
+            return;
+        }
+
         $carrierAccountId = trim((string) ($entity->get('carrierAccountId') ?? ''));
         $underwriterId = trim((string) ($entity->get('underwriterId') ?? ''));
 

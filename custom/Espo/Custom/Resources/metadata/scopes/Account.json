@@ -1,0 +1,14 @@
+{
+    "statusField": "account_type",
+    "stream": true,
+    "disabled": false,
+    "kanbanStatusIgnoreList": null,
+    "stars": true,
+    "preserveAuditLog": true,
+    "duplicateCheckFieldList": [
+        "name",
+        "emailAddress"
+    ],
+    "collaborators": false,
+    "assignedUsers": true
+}

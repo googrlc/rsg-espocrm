@@ -56,7 +56,7 @@ class EmailAutoLink implements AfterSave
                     $entity->set('parentId', $account->getId());
                     $entity->set('parentType', 'Account');
                 }
-                $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true]);
+                $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true, SaveOption::SKIP_HOOKS => true]);
                 return;
             }
 
@@ -81,7 +81,7 @@ class EmailAutoLink implements AfterSave
                     $entity->set('parentId', $contact->getId());
                     $entity->set('parentType', 'Contact');
                 }
-                $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true]);
+                $this->entityManager->saveEntity($entity, [SaveOption::SILENT => true, SaveOption::SKIP_HOOKS => true]);
                 return;
             }
         }

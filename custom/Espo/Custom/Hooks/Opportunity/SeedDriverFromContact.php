@@ -3,6 +3,7 @@
 namespace Espo\Custom\Hooks\Opportunity;
 
 use Espo\Core\Hook\Hook\AfterSave;
+use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 use Espo\ORM\Repository\Option\SaveOptions;
@@ -71,7 +72,7 @@ class SeedDriverFromContact implements AfterSave
             'lineOfBusiness' => $lineOfBusiness,
         ]);
 
-        $this->entityManager->saveEntity($driver, [SaveOptions::SILENT => true]);
+        $this->entityManager->saveEntity($driver, [SaveOption::SILENT => true]);
     }
 
     private function resolveExpectedDriverCount(Entity $opportunity): int
