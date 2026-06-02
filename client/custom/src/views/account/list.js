@@ -313,7 +313,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
           }
         }
       }
-      $container.find('.rsg-row').on('click', function () { var id = $(this).data('id'); try { sessionStorage.setItem('rsg-nav-list', JSON.stringify(rows.map(function (r) { return r.id; }))); sessionStorage.setItem('rsg-nav-tab', tabId); } catch(e) {} self.getRouter().navigate('#Account/view/' + id, { trigger: true }); });
+      $container.find('.rsg-row').on('click', function (e) { if ($(e.target).closest('.rsg-td-cb, .rsg-row-cb').length) return; var id = $(this).data('id'); try { sessionStorage.setItem('rsg-nav-list', JSON.stringify(rows.map(function (r) { return r.id; }))); sessionStorage.setItem('rsg-nav-tab', tabId); } catch(e) {} self.getRouter().navigate('#Account/view/' + id, { trigger: true }); });
     },
     _tdClass: function (type) { return type === 'link' ? 'rsg-td-name' : type === 'currency' ? 'rsg-td-num' : 'rsg-td-dim'; },
     _renderCell: function (r, col) { var v = r[col.key]; if (col.type === 'link') return '<a class="rsg-link" href="#Account/view/' + r.id + '" onclick="event.stopPropagation()">' + this._esc(v || '—') + '</a>'; if (col.type === 'badge') return this._badge(v); if (col.type === 'currency') return v ? this._formatCurrency(v) : '—'; if (col.type === 'date') return v ? this._formatDate(v) : '—'; if (col.type === 'lob') return v ? (Array.isArray(v) ? v.join(', ') : String(v)) : '—'; return this._esc(v || '—'); },
