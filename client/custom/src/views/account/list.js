@@ -53,7 +53,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
   _exports.default = Dep.extend({
     template: 'custom:account/list',
     setup: function () {
-      this.scope = 'Account'; this.activeTab = 'all'; this.searchQuery = {}; this.sortState = {}; this.cachedData = {}; this.cachedQuery = {}; this.selectedIds = {}; this.bulkStatus = 'Active'; this.bulkType = 'Commercial Lines';
+      this.scope = 'Account'; this.activeTab = 'all'; this.searchQuery = {}; this.sortState = {}; this.cachedData = {}; this.cachedQuery = {}; this.selectedIds = {}; this.bulkStatus = 'Active'; this.bulkType = 'Commercial Lines'; this.bulkAssignedId = ''; this.userOptions = [];
       this.accountStatusOptions = ['Active', 'Urgent', 'Renewing', 'At Risk', 'Inactive'];
       this.accountTypeOptions = ['Prospect', 'Commercial Lines', 'Personal Lines', 'Group Benefits', 'Medicare', 'Life Insurance', 'Carrier', 'MGA'];
       this.primaryTypes = ['Commercial Lines', 'Personal Lines', 'Prospect'];
@@ -92,7 +92,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       };
       this.counts = {};
     },
-    afterRender: function () { this._bindEvents(); this._loadTab(this.activeTab, true); },
+    afterRender: function () { this._bindEvents(); this._fetchUsers(); this._loadTab(this.activeTab, true); },
     _bindEvents: function () {
       var self = this;
       this.$el.on('click', '[data-tab]', function () { var tab = $(this).data('tab'); if (tab !== self.activeTab) { self.activeTab = tab; self.$el.find('[data-tab]').removeClass('rsg-tab-active'); $(this).addClass('rsg-tab-active'); self._loadTab(tab, true); } });
@@ -117,6 +117,8 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       this.$el.on('change', '#rsg-bulk-type', function () { self.bulkType = $(this).val(); });
       this.$el.on('click', '#rsg-apply-status', function () { self._applyBulkField('account_status', self.bulkStatus, self.accountStatusOptions, 'status'); });
       this.$el.on('click', '#rsg-apply-type', function () { self._applyBulkField('account_type', self.bulkType, self.accountTypeOptions, 'type'); });
+      this.$el.on('change', '#rsg-bulk-assigned', function () { self.bulkAssignedId = $(this).val(); });
+      this.$el.on('click', '#rsg-apply-assigned', function () { self._applyBulkField('assignedUserId', self.bulkAssignedId, self.userOptions.map(function (u) { return u.id; }), 'assigned user'); });
     },
     _updateSelectionBar: function () { var selected = this.selectedIds[this.activeTab] || {}, count = Object.keys(selected).length, $bar = this.$el.find('#rsg-selection-bar'); if (count > 0) { $bar.find('#rsg-selected-count').text(count + ' record' + (count !== 1 ? 's' : '') + ' selected'); $bar.show(); } else { $bar.hide(); } },
     _loadTab: function (tabId, fetchFresh, silent) {
@@ -230,7 +232,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       if (allowedValues.indexOf(value) === -1) return;
 
       this.bulkUpdating = true;
-      this.$el.find('#rsg-apply-status, #rsg-apply-type, #rsg-clear-selection, #rsg-bulk-status, #rsg-bulk-type').prop('disabled', true);
+      this.$el.find('#rsg-apply-status, #rsg-apply-type, #rsg-apply-assigned, #rsg-clear-selection, #rsg-bulk-status, #rsg-bulk-type, #rsg-bulk-assigned').prop('disabled', true);
       this.$el.find('#rsg-selected-count').text('Updating ' + label + ' for ' + ids.length + ' record' + (ids.length !== 1 ? 's' : '') + '...');
 
       Promise.all(ids.map(function (id) {
@@ -242,7 +244,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
         self._loadTab(self.activeTab, true);
       }).catch(function (xhr) {
         self.bulkUpdating = false;
-        self.$el.find('#rsg-apply-status, #rsg-apply-type, #rsg-clear-selection, #rsg-bulk-status, #rsg-bulk-type').prop('disabled', false);
+        self.$el.find('#rsg-apply-status, #rsg-apply-type, #rsg-apply-assigned, #rsg-clear-selection, #rsg-bulk-status, #rsg-bulk-type, #rsg-bulk-assigned').prop('disabled', false);
         self.$el.find('#rsg-selected-count').text('Bulk update failed: API error ' + (xhr && xhr.status ? xhr.status : 'unknown'));
       });
     },
@@ -260,6 +262,19 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
         data: JSON.stringify(payload),
         contentType: 'application/json'
       });
+    },
+    _fetchUsers: function () {
+      var self = this;
+      Espo.Ajax.getRequest('User', {
+        select: 'id,name', maxSize: 100, orderBy: 'name',
+        where: [
+          { type: 'isTrue', attribute: 'isActive' },
+          { type: 'notIn', attribute: 'type', value: ['api', 'system', 'portal'] }
+        ]
+      }).then(function (data) {
+        self.userOptions = (data.list || []).map(function (u) { return { id: u.id, name: u.name }; });
+        if (self.cachedData[self.activeTab]) self._renderTable(self.activeTab);
+      }).catch(function () {});
     },
     _updateCount: function (tabId) { this.$el.find('[data-tab-count="' + tabId + '"]').text(this.counts[tabId] || ''); },
     _showTableLoading: function (tabId) { this.$el.find('#rsg-table-container').html('<div class="rsg-state-msg"><span class="rsg-spinner"></span> Loading ' + this.tabDefs[tabId].label + '…</div>'); },
@@ -288,7 +303,13 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       this.accountStatusOptions.forEach(function (status) { html += '<option value="' + self._esc(status) + '"' + (status === self.bulkStatus ? ' selected' : '') + '>' + self._esc(status) + '</option>'; });
       html += '</select><button id="rsg-apply-status" class="rsg-sel-btn rsg-sel-btn-primary">Apply Status</button><label class="rsg-bulk-label" for="rsg-bulk-type">Type</label><select id="rsg-bulk-type" class="rsg-status-select">';
       this.accountTypeOptions.forEach(function (type) { html += '<option value="' + self._esc(type) + '"' + (type === self.bulkType ? ' selected' : '') + '>' + self._esc(type) + '</option>'; });
-      html += '</select><button id="rsg-apply-type" class="rsg-sel-btn rsg-sel-btn-primary">Apply Type</button><button id="rsg-clear-selection" class="rsg-sel-btn">&#x2715; Clear</button></div></div>';
+      html += '</select><button id="rsg-apply-type" class="rsg-sel-btn rsg-sel-btn-primary">Apply Type</button>';
+      if (this.userOptions && this.userOptions.length) {
+        html += '<label class="rsg-bulk-label" for="rsg-bulk-assigned">Assigned</label><select id="rsg-bulk-assigned" class="rsg-status-select"><option value="">— Select user —</option>';
+        this.userOptions.forEach(function (u) { html += '<option value="' + self._esc(u.id) + '"' + (u.id === self.bulkAssignedId ? ' selected' : '') + '>' + self._esc(u.name) + '</option>'; });
+        html += '</select><button id="rsg-apply-assigned" class="rsg-sel-btn rsg-sel-btn-primary">Apply Assigned</button>';
+      }
+      html += '<button id="rsg-clear-selection" class="rsg-sel-btn">&#x2715; Clear</button></div></div>';
       html += '<div class="rsg-toolbar"><div class="rsg-search-wrap"><span class="rsg-search-icon fas fa-magnifying-glass"></span><input id="rsg-search" type="text" placeholder="Filter ' + def.label.toLowerCase() + '…" value="' + this._esc(this.searchQuery[tabId] || '') + '" /></div><span class="rsg-count-note">' + rows.length + ' of ' + total + '</span></div>';
       var allChecked = rows.length > 0 && rows.every(function (r) { return !!selected[r.id]; });
       var someChecked = !allChecked && rows.some(function (r) { return !!selected[r.id]; });
