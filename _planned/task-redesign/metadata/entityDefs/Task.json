@@ -109,7 +109,11 @@
         },
         "confirm1Status": {
             "type": "enum",
-            "options": ["Pending", "Confirmed", "Needs Follow-up"],
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
             "default": "Pending",
             "style": {
                 "Pending": "default",
@@ -133,7 +137,11 @@
         },
         "confirm2Status": {
             "type": "enum",
-            "options": ["Pending", "Confirmed", "Needs Follow-up"],
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
             "default": "Pending",
             "style": {
                 "Pending": "default",
@@ -156,7 +164,11 @@
         },
         "confirm3Status": {
             "type": "enum",
-            "options": ["Pending", "Confirmed", "Needs Follow-up"],
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
             "default": "Pending",
             "style": {
                 "Pending": "default",
@@ -179,7 +191,11 @@
         },
         "confirm4Status": {
             "type": "enum",
-            "options": ["Pending", "Confirmed", "Needs Follow-up"],
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
             "default": "Pending",
             "style": {
                 "Pending": "default",
@@ -207,6 +223,17 @@
             "type": "wysiwyg",
             "isCustom": true,
             "tooltipText": "Notes from the task creator / manager. Editable by the creator or a manager; read-only for the assignee."
+        },
+        "account": {
+            "type": "link",
+            "readOnly": false
+        },
+        "contact": {
+            "type": "link",
+            "readOnly": false
+        },
+        "policy": {
+            "type": "link"
         }
     },
     "links": {

@@ -342,6 +342,17 @@
             "type": "wysiwyg",
             "isCustom": true,
             "tooltipText": "Notes from the task creator / manager. Editable by the creator or a manager; read-only for the assignee."
+        },
+        "account": {
+            "type": "link",
+            "readOnly": false
+        },
+        "contact": {
+            "type": "link",
+            "readOnly": false
+        },
+        "policy": {
+            "type": "link"
         }
     },
     "links": {
