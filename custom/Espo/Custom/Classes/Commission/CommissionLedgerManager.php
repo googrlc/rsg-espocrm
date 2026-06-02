@@ -273,7 +273,7 @@ class CommissionLedgerManager
     private function normalizeRateOrNull(mixed $rate): ?float
     {
         if ($rate === null || $rate === '') {
-            return null;
+            return 0.10; // house default commission rate when none is set (unified across managers)
         }
 
         $numericRate = (float) $rate;

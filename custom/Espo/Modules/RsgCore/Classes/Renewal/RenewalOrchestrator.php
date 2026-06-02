@@ -425,7 +425,7 @@ class RenewalOrchestrator
     private function normalizeRate(mixed $rate): float
     {
         if ($rate === null || $rate === '') {
-            return 0.12;
+            return 0.10; // house default commission rate when none is set (unified across managers)
         }
 
         $numericRate = (float) $rate;
