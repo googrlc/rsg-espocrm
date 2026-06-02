@@ -1,0 +1,77 @@
+[
+    {
+        "label": "Task Details",
+        "name": "taskDetails",
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "taskType"
+                },
+                {
+                    "name": "priority"
+                }
+            ],
+            [
+                {
+                    "name": "urgency"
+                },
+                {
+                    "name": "assignedUser"
+                }
+            ],
+            [
+                {
+                    "name": "dateEnd",
+                    "customLabel": "Date Due"
+                },
+                {
+                    "name": "taskSource",
+                    "customLabel": "Source"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Policy & Insured Info",
+        "name": "policyInsuredInfo",
+        "rows": [
+            [
+                {
+                    "name": "account",
+                    "customLabel": "Insured"
+                },
+                {
+                    "name": "policy"
+                }
+            ],
+            [
+                {
+                    "name": "policyNumber"
+                },
+                {
+                    "name": "carrier"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Additional Notes",
+        "name": "additionalNotes",
+        "rows": [
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
+]

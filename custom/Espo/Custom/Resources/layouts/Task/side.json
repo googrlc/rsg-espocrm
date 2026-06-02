@@ -1,0 +1,53 @@
+[
+    {
+        "label": "Assignment",
+        "name": "assignment",
+        "rows": [
+            [
+                {
+                    "name": "assignedUser"
+                }
+            ],
+            [
+                {
+                    "name": "dateEnd",
+                    "customLabel": "Date Due"
+                }
+            ],
+            [
+                {
+                    "name": "contact"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Record Dates",
+        "name": "recordDates",
+        "rows": [
+            [
+                {
+                    "name": "dateStart"
+                }
+            ],
+            [
+                {
+                    "name": "dateCompleted",
+                    "customLabel": "Completed"
+                }
+            ],
+            [
+                {
+                    "name": "createdAt",
+                    "customLabel": "Created"
+                }
+            ],
+            [
+                {
+                    "name": "modifiedAt",
+                    "customLabel": "Modified"
+                }
+            ]
+        ]
+    }
+]

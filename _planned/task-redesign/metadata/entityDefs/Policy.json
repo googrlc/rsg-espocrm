@@ -1,0 +1,10 @@
+{
+    "links": {
+        "tasks": {
+            "type": "hasMany",
+            "entity": "Task",
+            "foreign": "policy",
+            "isCustom": true
+        }
+    }
+}
