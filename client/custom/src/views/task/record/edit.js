@@ -5,6 +5,25 @@ define('custom:views/task/record/edit', ['views/record/edit'], function (Dep) {
         setup: function () {
             this.applyEmailDefaults();
             Dep.prototype.setup.call(this);
+            this.listenTo(this.model, 'change:policyId', function (m, v, o) {
+                if (o && o.fromPolicyAutofill) { return; }
+                this.fillFromPolicy();
+            });
+        },
+
+        fillFromPolicy: function () {
+            var pid = this.model.get('policyId');
+            if (!pid) { return; }
+            var self = this;
+            Espo.Ajax.getRequest('Policy/' + pid).then(function (p) {
+                self.model.set({
+                    policyType: p.line_of_business || p.line_of_business_raw || p.business_type || '',
+                    policyNumber: p.policy_number || '',
+                    carrier: p.carrier || '',
+                    policyEffectiveDate: p.effective_date || null,
+                    policyExpirationDate: p.expiration_date || null
+                }, { fromPolicyAutofill: true });
+            });
         },
 
         afterRender: function () {
