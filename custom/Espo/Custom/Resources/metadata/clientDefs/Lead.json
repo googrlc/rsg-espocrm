@@ -1,4 +1,14 @@
 {
+    "relationshipPanels": {
+        "tasks": {
+            "orderBy": "dateEnd",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "label": "Tasks",
+            "rowActionList": ["complete"]
+        }
+    },
     "filterList": [
         {
             "name": "actual",

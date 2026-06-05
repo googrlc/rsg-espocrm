@@ -1,5 +1,20 @@
 {
     "fields": {
+        "documents": {
+            "type": "attachmentMultiple",
+            "isCustom": true,
+            "tooltipText": "Quotes, applications, loss runs and other files. Drag-and-drop to attach."
+        },
+        "documentLinks": {
+            "type": "text",
+            "isCustom": true,
+            "layoutListDisabled": true,
+            "layoutDetailDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "layoutFiltersDisabled": true,
+            "textFilterDisabled": true,
+            "tooltipText": "Web links (HTML proposals, benefits guides, etc.) for this account. Managed via the Document Links side panel; stored as JSON."
+        },
         "momentum_client_id": {
             "type": "text",
             "isCustom": true,

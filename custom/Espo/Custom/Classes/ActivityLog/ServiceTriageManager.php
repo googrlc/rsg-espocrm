@@ -68,7 +68,8 @@ class ServiceTriageManager extends BaseTriageManager
             'parentType' => $parentType,
             'parentId' => $parentId,
             'parentName' => $parentName,
-            'dateEnd' => $this->addBusinessDays($baseDate, $slaDays)->format('Y-m-d'),
+            'dateEnd' => null,
+            'dateEndDate' => $this->addBusinessDays($baseDate, $slaDays)->format('Y-m-d'),
             'sourceActivityLogId' => $activityLog->getId(),
             'automationKey' => self::AUTOMATION_KEY,
         ]);

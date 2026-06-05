@@ -1,0 +1,69 @@
+[
+    {
+        "label": "Quote",
+        "rows": [
+            [
+                {
+                    "name": "opportunity"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "quoteNumber"
+                },
+                {
+                    "name": "carrier"
+                }
+            ],
+            [
+                {
+                    "name": "carrierAccount"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "premium"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "effectiveDate"
+                },
+                {
+                    "name": "expirationDate"
+                }
+            ],
+            [
+                {
+                    "name": "lineOfBusiness"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "notes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Documents",
+        "name": "documentsPanel",
+        "rows": [
+            [
+                {
+                    "name": "documents",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
+]

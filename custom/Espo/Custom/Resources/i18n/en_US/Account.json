@@ -1,9 +1,11 @@
 {
   "labels": {
     "Commercial Policies": "Commercial Policies",
-    "Tasks \u2014 All Related": "Tasks \u2014 All Related"
+    "Tasks \u2014 All Related": "Tasks \u2014 All Related",
+    "Request COI": "Request COI"
   },
   "fields": {
+    "documents": "Documents",
     "linkedTasks": "Account Tasks",
     "lob": "Line of Business",
     "x_date": "Renewal X-Date",

@@ -1,5 +1,10 @@
 {
     "fields": {
+        "documents": {
+            "type": "attachmentMultiple",
+            "isCustom": true,
+            "tooltipText": "Quotes, applications, loss runs and other files. Drag-and-drop to attach."
+        },
         "insuranceInterest": {
             "type": "enum",
             "options": [

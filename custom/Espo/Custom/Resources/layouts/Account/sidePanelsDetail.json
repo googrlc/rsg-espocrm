@@ -8,10 +8,13 @@
     "googleDrive": {
         "index": 1
     },
-    "recordInfo": {
+    "documentLinks": {
         "index": 2
     },
-    "internalIds": {
+    "recordInfo": {
         "index": 3
+    },
+    "internalIds": {
+        "index": 4
     }
 }

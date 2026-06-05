@@ -6,6 +6,23 @@
     "views": {
         "list": "custom:views/account/list"
     },
+    "menu": {
+        "detail": {
+            "buttons": [
+                "__APPEND__",
+                {
+                    "name": "requestCoi",
+                    "label": "Request COI",
+                    "style": "default",
+                    "iconClass": "fas fa-certificate",
+                    "acl": "create",
+                    "aclScope": "Task",
+                    "handler": "custom:handlers/account-request-coi",
+                    "actionFunction": "requestCoi"
+                }
+            ]
+        }
+    },
     "sidePanels": {
         "detail": [
             {
@@ -21,16 +38,22 @@
                 "order": 2
             },
             {
+                "name": "documentLinks",
+                "label": "Document Links",
+                "view": "custom:views/account/record/panels/document-links",
+                "order": 3
+            },
+            {
                 "name": "internalIds",
                 "label": "Internal IDs",
                 "view": "custom:views/account/record/panels/internal-ids",
-                "order": 3
+                "order": 4
             },
             {
                 "name": "recordInfo",
                 "label": "Record Info",
                 "view": "custom:views/account/record/panels/record-info",
-                "order": 4
+                "order": 5
             }
         ]
     },
@@ -64,6 +87,27 @@
                 {"name": "estimatedCommission"},
                 {"name": "postedAmount"},
                 {"name": "paymentReceivedDate"}
+            ]
+        },
+        "tasks": {
+            "orderBy": "dateEnd",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "order": 3,
+            "label": "Tasks",
+            "createAttributeMap": {
+                "id": "accountId",
+                "name": "accountName"
+            },
+            "rowActionList": ["complete"],
+            "layout": [
+                {"name": "name", "link": true},
+                {"name": "status"},
+                {"name": "taskType"},
+                {"name": "dateEnd"},
+                {"name": "assignedUser"},
+                {"name": "priority"}
             ]
         }
     }

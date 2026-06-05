@@ -1,0 +1,134 @@
+{
+    "fields": {
+        "documents": {
+            "type": "attachmentMultiple",
+            "isCustom": true,
+            "tooltipText": "Quote letters, proposals, applications and other files. Drag-and-drop to attach."
+        },
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": false,
+            "tooltipText": "Optional display title for this quote entry."
+        },
+        "quoteNumber": {
+            "type": "varchar",
+            "maxLength": 100,
+            "required": true,
+            "isCustom": true,
+            "audited": true
+        },
+        "carrier": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": true,
+            "isCustom": true,
+            "tooltipText": "Legacy carrier name (text). Kept for backwards-compat; carrierAccount link is the new source of truth."
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link). Populate alongside carrier text; will fully replace varchar in a future deprecation pass."
+        },
+        "premium": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "status": {
+            "type": "enum",
+            "options": [
+                "",
+                "Draft",
+                "Received",
+                "Presented",
+                "Bound",
+                "Declined"
+            ],
+            "default": "Draft",
+            "required": true,
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Draft": "info",
+                "Received": "primary",
+                "Presented": "warning",
+                "Bound": "success",
+                "Declined": "danger"
+            }
+        },
+        "effectiveDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "expirationDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "lineOfBusiness": {
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial Auto",
+                "Transportation / Trucking",
+                "General Liability",
+                "Workers Comp",
+                "Commercial Property",
+                "BOP",
+                "Professional Liability",
+                "Umbrella",
+                "Other"
+            ],
+            "isCustom": true
+        },
+        "opportunity": {
+            "type": "link",
+            "required": true
+        },
+        "account": {
+            "type": "link"
+        },
+        "notes": {
+            "type": "text",
+            "isCustom": true
+        }
+    },
+    "links": {
+        "opportunity": {
+            "type": "belongsTo",
+            "entity": "Opportunity",
+            "foreign": "quotes",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "foreign": "quotes",
+            "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "opportunity",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "quoteNumber",
+            "carrier"
+        ],
+        "sortByList": [
+            "effectiveDate",
+            "expirationDate",
+            "quoteNumber",
+            "carrier",
+            "premium",
+            "status"
+        ],
+        "fullTextSearch": true,
+        "countDisabled": false
+    },
+    "optimisticConcurrencyControl": true
+}

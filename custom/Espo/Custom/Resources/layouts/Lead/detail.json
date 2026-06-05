@@ -148,5 +148,17 @@
                 }
             ]
         ]
+    },
+    {
+        "label": "Documents",
+        "name": "documentsPanel",
+        "rows": [
+            [
+                {
+                    "name": "documents",
+                    "fullWidth": true
+                }
+            ]
+        ]
     }
 ]

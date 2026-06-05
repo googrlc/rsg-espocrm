@@ -6,6 +6,16 @@
 
 define("custom:views/account/record/panels/internal-ids", ["view"], function (Dep) {
 
+    // ===================================================================
+    // NowCerts insured / certificate deep-link template.
+    // {id} is replaced with the Account's NowCerts insured database_id
+    // (Account.momentum_client_id).
+    //
+    // {id} = Account.momentum_client_id (NowCerts insured database_id, a GUID).
+    // Lands on the insured's certificate/forms page.
+    // ===================================================================
+    var NOWCERTS_INSURED_URL = "https://www6.nowcerts.com/AMSINS/Insureds/Details/{id}/PdfForms";
+
     return Dep.extend({
 
         templateContent: `
@@ -14,7 +24,13 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
                     <span class="rsg-internal-label">NowCerts ID</span>
                     <span class="rsg-internal-value">
                         {{#if momentumClientId}}
+                            {{#if nowCertsUrl}}
+                            <a href="{{nowCertsUrl}}" target="_blank" rel="noopener noreferrer" title="Open in NowCerts">
+                                <code>{{momentumClientId}}</code> &nearr;
+                            </a>
+                            {{else}}
                             <code>{{momentumClientId}}</code>
+                            {{/if}}
                         {{else}}
                             <span class="text-muted">&mdash;</span>
                         {{/if}}
@@ -111,11 +127,20 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
 
             return {
                 momentumClientId: this.model.get("momentum_client_id"),
+                nowCertsUrl: this.buildNowCertsUrl(this.model.get("momentum_client_id")),
                 momentumLastSyncedFormatted: this.formatDate(momentumLastSynced),
                 googleDriveFolderUrl: this.model.get("google_drive_folder_url"),
                 intelPackRun: this.model.get("intel_pack_run"),
                 intelPackLastRunFormatted: this.formatDate(intelPackLastRun)
             };
+        },
+
+        buildNowCertsUrl: function (insuredId) {
+            if (!insuredId) {
+                return null;
+            }
+
+            return NOWCERTS_INSURED_URL.replace("{id}", encodeURIComponent(insuredId));
         },
 
         formatDate: function (val) {

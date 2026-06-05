@@ -12,20 +12,6 @@
     ]
   },
   {
-    "label": "Medicare & Life",
-    "name": "medicareLife",
-    "isCollapsed": false,
-    "rows": [
-      [{"name": "medicareEligible"}, {"name": "medicarePartB"}],
-      [{"name": "medicarePlanType"}, {"name": "medicareCarrier"}],
-      [{"name": "irmaApplies"}, {"name": "aepSepDate"}],
-      [{"name": "lifeCoverageInForce"}, {"name": "lifeFaceAmount"}],
-      [{"name": "lifePolicyType"}, {"name": "lifeHealthClass"}],
-      [{"name": "lifeBeneficiaryOnFile"}, {"name": "lifeAnnualPremium"}],
-      [{"name": "lifeReviewDate"}, false]
-    ]
-  },
-  {
     "label": "Details",
     "name": "details",
     "rows": [

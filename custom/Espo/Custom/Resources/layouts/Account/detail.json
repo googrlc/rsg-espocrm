@@ -838,6 +838,12 @@
         "rows": [
             [
                 {
+                    "name": "documents",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
                     "name": "momentum_client_id"
                 },
                 {

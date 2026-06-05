@@ -56,7 +56,8 @@
             "createButton": true,
             "selectButton": true,
             "order": 2,
-            "label": "Tasks"
+            "label": "Tasks",
+            "rowActionList": ["complete"]
         },
         "cases": {
             "orderBy": "createdAt",

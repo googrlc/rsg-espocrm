@@ -190,7 +190,8 @@ class AccountPlaybookManager
             'triageSummary' => $playbook['name'],
             'triageReason' => $playbook['reason'],
             'description' => $playbook['description'],
-            'dateEnd' => $this->calculateDueDate((int) $playbook['dueDays']),
+            'dateEnd' => null,
+            'dateEndDate' => $this->calculateDueDate((int) $playbook['dueDays']),
             'automationKey' => $playbook['automationKey'],
         ]);
 

@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------------------
+# Protect CRM-managed layout files for Opportunity / Contact / Account.
+#
+# These layouts are edited directly in the EspoCRM Admin Layout Manager on the
+# live server, so the local working copy is the source of truth. On any 3-way
+# merge of these files, keep OUR (local/CRM) version and discard the incoming
+# (repo) version.
+#
+# REQUIRED per clone (not stored in the repo): enable the "ours" merge driver:
+#     git config merge.ours.driver true
+# ---------------------------------------------------------------------------
+
+custom/Espo/Custom/Resources/layouts/Opportunity/**   merge=ours
+custom/Espo/Custom/Resources/layouts/Contact/**       merge=ours
+custom/Espo/Custom/Resources/layouts/Account/**       merge=ours
+
+custom/Espo/Custom/Resources/metadata/clientDefs/Opportunity.json   merge=ours
+custom/Espo/Custom/Resources/metadata/clientDefs/Contact.json       merge=ours
+custom/Espo/Custom/Resources/metadata/clientDefs/Account.json       merge=ours

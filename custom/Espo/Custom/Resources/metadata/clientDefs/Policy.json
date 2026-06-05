@@ -257,6 +257,14 @@
             "createButton": true,
             "selectButton": true,
             "order": 2
+        },
+        "tasks": {
+            "orderBy": "dateEnd",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "label": "Tasks",
+            "rowActionList": ["complete"]
         }
     }
 }

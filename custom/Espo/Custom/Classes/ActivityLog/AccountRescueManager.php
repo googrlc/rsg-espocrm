@@ -61,7 +61,8 @@ class AccountRescueManager extends BaseTriageManager
             'parentType' => $parentType,
             'parentId' => $parentId,
             'parentName' => $parentName,
-            'dateEnd' => $this->addBusinessDays(new DateTimeImmutable('today'), (int) $rule['slaDays'])->format('Y-m-d'),
+            'dateEnd' => null,
+            'dateEndDate' => $this->addBusinessDays(new DateTimeImmutable('today'), (int) $rule['slaDays'])->format('Y-m-d'),
             'sourceActivityLogId' => $activityLog->getId(),
             'automationKey' => $rule['automationKey'],
         ]);

@@ -74,6 +74,12 @@
                 {
                     "name": "description"
                 }
+            ],
+            [
+                {
+                    "name": "documents",
+                    "fullWidth": true
+                }
             ]
         ],
         "style": "default",
@@ -205,7 +211,7 @@
         "rows": [
             [
                 {
-                    "name": "wcClassCode"
+                    "name": "wcLocationAddress"
                 },
                 {
                     "name": "wcExperienceMod"
@@ -213,10 +219,16 @@
             ],
             [
                 {
-                    "name": "wcAnnualPayroll"
+                    "name": "wcMultipleLocations"
                 },
                 {
-                    "name": "wcEmployeeCount"
+                    "name": "wcMultiStateLocations"
+                }
+            ],
+            [
+                {
+                    "name": "wcExposureRows",
+                    "fullWidth": true
                 }
             ]
         ],
@@ -724,6 +736,14 @@
         "rows": [
             [
                 {
+                    "name": "medicareEligible"
+                },
+                {
+                    "name": "medicarePartB"
+                }
+            ],
+            [
+                {
                     "name": "medPlanType"
                 },
                 {
@@ -753,7 +773,15 @@
         "rows": [
             [
                 {
+                    "name": "lifeCoverageInForce"
+                },
+                {
                     "name": "lifeCoverageType"
+                }
+            ],
+            [
+                {
+                    "name": "lifeFaceAmount"
                 },
                 {
                     "name": "lifeFaceAmountRequested"
@@ -761,7 +789,7 @@
             ],
             [
                 {
-                    "name": "lifeTermLength"
+                    "name": "lifeHealthClass"
                 },
                 {
                     "name": "lifeHealthClassTarget"
@@ -769,7 +797,23 @@
             ],
             [
                 {
+                    "name": "lifeBeneficiaryOnFile"
+                },
+                {
                     "name": "lifeTobaccoUser"
+                }
+            ],
+            [
+                {
+                    "name": "lifeAnnualPremium"
+                },
+                {
+                    "name": "lifeReviewDate"
+                }
+            ],
+            [
+                {
+                    "name": "lifeTermLength"
                 },
                 false
             ]

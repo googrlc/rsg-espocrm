@@ -1,5 +1,10 @@
 {
     "fields": {
+        "documents": {
+            "type": "attachmentMultiple",
+            "isCustom": true,
+            "tooltipText": "Quotes, applications, dec pages and other files. Drag-and-drop to attach."
+        },
         "stage": {
             "type": "enum",
             "options": [
@@ -7,6 +12,7 @@
                 "Discovery",
                 "Quoting",
                 "Markets Out / Shopping",
+                "Quotes Complete",
                 "Proposal Presented",
                 "Negotiation",
                 "Closed Won",
@@ -21,6 +27,7 @@
                 "Discovery": 10,
                 "Quoting": 30,
                 "Markets Out / Shopping": 45,
+                "Quotes Complete": 55,
                 "Proposal Presented": 60,
                 "Negotiation": 80,
                 "Closed Won": 100,
@@ -30,6 +37,7 @@
                 "Discovery": "primary",
                 "Quoting": "primary",
                 "Markets Out / Shopping": "warning",
+                "Quotes Complete": "warning",
                 "Proposal Presented": "warning",
                 "Negotiation": "warning",
                 "Closed Won": "success",
@@ -46,6 +54,7 @@
                 "Discovery",
                 "Quoting",
                 "Markets Out / Shopping",
+                "Quotes Complete",
                 "Proposal Presented",
                 "Negotiation",
                 "Closed Won",
@@ -374,6 +383,36 @@
             "type": "int",
             "isCustom": true
         },
+        "wcLocationAddress": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "Primary location for this exposure (e.g. Smyrna, GA 30082)."
+        },
+        "wcMultipleLocations": {
+            "type": "bool",
+            "isCustom": true
+        },
+        "wcMultiStateLocations": {
+            "type": "bool",
+            "isCustom": true
+        },
+        "wcExposureRows": {
+            "type": "text",
+            "isCustom": true,
+            "view": "custom:views/opportunity/fields/wc-exposure",
+            "tooltipText": "Class-code exposure lines (Class Code, Description, FTE, PTE, Payroll). Stored as JSON.",
+            "textFilterDisabled": true,
+            "dynamicLogicRequired": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lineOfBusiness",
+                        "value": "Workers Comp"
+                    }
+                ]
+            }
+        },
         "umbrellaLimit": {
             "type": "enum",
             "options": [
@@ -431,6 +470,16 @@
             "isCustom": true
         },
         "medIrmaaApplies": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
+        },
+        "medicareEligible": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
+        },
+        "medicarePartB": {
             "type": "bool",
             "isCustom": true,
             "default": false
@@ -553,6 +602,41 @@
             "type": "bool",
             "isCustom": true,
             "default": false
+        },
+        "lifeCoverageInForce": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
+        },
+        "lifeFaceAmount": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "lifeHealthClass": {
+            "type": "enum",
+            "options": [
+                "",
+                "Preferred Plus",
+                "Preferred",
+                "Standard Plus",
+                "Standard",
+                "Substandard"
+            ],
+            "isCustom": true
+        },
+        "lifeBeneficiaryOnFile": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false
+        },
+        "lifeAnnualPremium": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "lifeReviewDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Last date life insurance review was completed"
         },
         "propYearBuilt": {
             "type": "int",

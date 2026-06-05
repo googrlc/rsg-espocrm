@@ -1,5 +1,6 @@
 {
     "fields": {
+        "documents": "Documents",
         "insuranceInterest": "Insurance Interest",
         "currentlyInsured": "Currently Insured?",
         "currentCarrier": "Current Carrier",

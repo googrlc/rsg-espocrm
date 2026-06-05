@@ -1,6 +1,16 @@
 {
     "colors": [],
     "iconClass": "fas fa-money-bill-wave",
+    "relationshipPanels": {
+        "tasks": {
+            "orderBy": "dateEnd",
+            "orderDirection": "asc",
+            "createButton": true,
+            "selectButton": true,
+            "label": "Tasks",
+            "rowActionList": ["complete"]
+        }
+    },
     "recordViews": {
         "detail": "custom:views/opportunity/record/detail-view"
     },

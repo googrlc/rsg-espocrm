@@ -4,6 +4,7 @@ define('custom:views/opportunity/fields/stage-bar', ['views/fields/enum'], funct
         'Discovery',
         'Quoting',
         'Markets Out / Shopping',
+        'Quotes Complete',
         'Proposal Presented',
         'Negotiation',
         'Closed Won',

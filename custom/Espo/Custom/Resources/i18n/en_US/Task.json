@@ -23,5 +23,12 @@
     },
     "links": {
         "account": "Account"
+    },
+    "labels": {
+        "Complete Task": "Complete Task",
+        "Complete": "Complete"
+    },
+    "messages": {
+        "Task completed": "Task marked as completed."
     }
 }

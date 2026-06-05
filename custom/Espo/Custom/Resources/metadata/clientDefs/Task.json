@@ -6,6 +6,45 @@
         "detail": "custom:views/task/record/detail-view",
         "edit": "custom:views/task/record/edit"
     },
+    "menu": {
+        "detail": {
+            "buttons": [
+                "__APPEND__",
+                {
+                    "name": "completeTask",
+                    "label": "Complete Task",
+                    "style": "success",
+                    "iconClass": "fas fa-check",
+                    "acl": "edit",
+                    "handler": "custom:handlers/task-complete-handler",
+                    "actionFunction": "completeTask",
+                    "checkVisibilityFunction": "isCompleteTaskVisible"
+                }
+            ]
+        }
+    },
+    "modalDetailActionList": [
+        "__APPEND__",
+        {
+            "name": "completeTask",
+            "label": "Complete Task",
+            "style": "success",
+            "iconClass": "fas fa-check",
+            "acl": "edit",
+            "handler": "custom:handlers/task-complete-handler",
+            "actionFunction": "completeTask",
+            "checkVisibilityFunction": "isCompleteTaskVisible"
+        }
+    ],
+    "rowActionList": ["complete"],
+    "rowActionDefs": {
+        "complete": {
+            "handler": "custom:handlers/task-complete-row-action",
+            "label": "Complete",
+            "groupIndex": 0,
+            "acl": "edit"
+        }
+    },
     "filterList": [
         "actual",
         { "name": "completed", "style": "success" },
