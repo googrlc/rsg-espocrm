@@ -1,6 +1,7 @@
 {
     "fields": {
         "dateOfBirth": {
+            "notNull": false,
             "type": "date",
             "isCustom": true
         },
@@ -23,9 +24,18 @@
             "options": [
                 "",
                 "Personal",
-                "Commercial"
+                "Commercial",
+                "Employee Benefits",
+                "Supplemental"
             ],
-            "isCustom": true
+            "isCustom": true,
+            "style": {
+                "": null,
+                "Personal": null,
+                "Commercial": null,
+                "Employee Benefits": null,
+                "Supplemental": null
+            }
         },
         "contactType": {
             "type": "enum",
@@ -35,17 +45,33 @@
                 "Prospect",
                 "Spouse",
                 "Dependent",
-                "Business Owner"
+                "Business Owner",
+                "Underwriter",
+                "Marketing Rep",
+                "Owner",
+                "CFO",
+                "CEO",
+                "VP",
+                "Employee"
             ],
             "isCustom": true,
             "displayAsLabel": true,
             "style": {
+                "": null,
                 "Client": "success",
                 "Prospect": "info",
                 "Spouse": "primary",
                 "Dependent": "warning",
-                "Business Owner": "default"
-            }
+                "Business Owner": "default",
+                "Underwriter": null,
+                "Marketing Rep": null,
+                "Owner": null,
+                "CFO": null,
+                "CEO": null,
+                "VP": null,
+                "Employee": null
+            },
+            "isSorted": true
         },
         "daysUntil65": {
             "type": "int",

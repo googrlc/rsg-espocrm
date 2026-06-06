@@ -4,7 +4,10 @@
         "csrName": "Customer Service Representative Name",
         "momentumClientId": "Momentum Client ID",
         "daysUntil65": "Days Until 65",
-        "contactDriveFolderUrl": "Drive Folder URL"
+        "contactDriveFolderUrl": "Drive Folder URL",
+        "clientType": "Client Type",
+        "title": "Contact Title",
+        "dateOfBirth": "Date of Birth"
     },
     "options": {
         "contactType": {
@@ -13,7 +16,21 @@
             "Prospect": "Prospect",
             "Spouse": "Spouse",
             "Dependent": "Dependent",
-            "Business Owner": "Business Owner"
+            "Business Owner": "Business Owner",
+            "Underwriter": "Underwriter",
+            "Marketing Rep": "Marketing Rep",
+            "Owner": "Owner",
+            "CFO": "CFO",
+            "CEO": "CEO",
+            "VP": "VP",
+            "Employee": "Employee"
+        },
+        "clientType": {
+            "": "",
+            "Personal": "Personal",
+            "Commercial": "Commercial",
+            "Employee Benefits": "Employee Benefits",
+            "Supplemental": "Supplemental"
         }
     },
     "labels": {
