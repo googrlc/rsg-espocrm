@@ -1,0 +1,404 @@
+Module,"Field Name","Field Type",Label,"Label Source",Required,"Read Only",Custom,"Linked Entity","DB Table","DB Column(s)","DB Column Type(s)","Options / Definition Details"
+Account,account_score,int,"Account Score",i18n:fields,,yes,yes,,account,account_score,int,"min=0; max=100; default=0"
+Account,account_status,enum,"Account Health",i18n:fields,,,yes,,account,account_status,varchar(255),"options=[|Active|Urgent|Renewing|At Risk|Inactive]; default=Active"
+Account,account_type,enum,"Account Type",i18n:fields,,,yes,,account,account_type,varchar(255),"options=[|Prospect|Commercial Lines|Personal Lines|Group Benefits|Medicare|Life Insurance|Carrier|MGA]; audited=true"
+Account,activePolicyCount,int,"[OLD] Active Policy Count",i18n:fields,,,yes,,account,active_policy_count,int,min=0
+Account,agent_of_agency_code,text,"Agent and Agency Code",i18n:fields,,,yes,,account,agent_of_agency_code,mediumtext,
+Account,agent_of_record_date,date,"Agent of Record Date",i18n:fields,,yes,yes,,account,agent_of_record_date,date,
+Account,ai_assessment,text,"AI Assessment",i18n:fields,,,yes,,account,ai_assessment,mediumtext,
+Account,annualPremiumConverted,currencyConverted,"Annual Premium Converted",i18n:fields,,yes,,,account,"(not stored)",,
+Account,annualPremiumCurrency,enum,"Annual Premium Currency",i18n:fields,,,,,account,annual_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,annualRevenueConverted,currencyConverted,"Annual Revenue Converted",i18n:fields,,yes,,,account,"(not stored)",,
+Account,annualRevenueCurrency,enum,"Annual Revenue Currency",i18n:fields,,,,,account,annual_revenue_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,annual_premium,currency,"Annual Premium",i18n:fields,,,yes,,account,annual_premium|annual_premium_currency,double|varchar(3),
+Account,annual_revenue,currency,"Annual Revenue",i18n:fields,,,yes,,account,annual_revenue|annual_revenue_currency,double|varchar(3),
+Account,assessment_date,datetime,"Assessment Date",i18n:fields,,,yes,,account,assessment_date,datetime,
+Account,assignedUser,link,"Assigned User",i18n:fields,,,,User,account,assigned_user_id,varchar(17),view=views/fields/assigned-user
+Account,bbb_rating,text,"Better Business Bureau Rating",i18n:fields,,,yes,,account,bbb_rating,mediumtext,
+Account,best_time_to_call,text,"Best Time to Call",i18n:fields,,,yes,,account,best_time_to_call,mediumtext,
+Account,billingAddress,address,"Billing Address",i18n:fields,,,,,account,billing_address_street|billing_address_city|billing_address_state|billing_address_country|billing_address_postal_code,varchar(255)|varchar(100)|varchar(100)|varchar(100)|varchar(40),
+Account,billingAddressCity,varchar,City,i18n:fields,,,,,account,billing_address_city,varchar(100),"maxLength=100; view=views/fields/address-city; pattern=$noBadCharacters"
+Account,billingAddressCountry,varchar,Country,i18n:fields,,,,,account,billing_address_country,varchar(100),"maxLength=100; view=views/fields/address-country; pattern=$noBadCharacters"
+Account,billingAddressMap,map,Map,i18n:fields,,yes,,,account,"(not stored)",,notStorable=true
+Account,billingAddressPostalCode,varchar,"Postal Code",i18n:fields,,,,,account,billing_address_postal_code,varchar(40),"maxLength=40; pattern=$noBadCharacters"
+Account,billingAddressState,varchar,State,i18n:fields,,,,,account,billing_address_state,varchar(100),"maxLength=100; view=views/fields/address-state; pattern=$noBadCharacters"
+Account,billingAddressStreet,text,Street,i18n:fields,,,,,account,billing_address_street,varchar(255),maxLength=255
+Account,businessEntity,enum,"Business Entity",i18n:fields,,,yes,,account,business_entity,varchar(255),"options=[|Sole Proprietor|LLC|Corporation|S-Corp|Partnership|Non-Profit|Other]"
+Account,cConstructionSpecialty,enum,"Construction Specialty",i18n:fields,,,yes,,account,c_construction_specialty,varchar(100),"options=[General Contractor|Site Preparation / Demolition|Excavation & Grading|Earthwork & Soil Stabilization|Concrete|Masonry|Structural Steel / Iron Work|Carpentry / Framing|Welding & Fabrication|Roofing|Waterproofing & Dampproofing|Siding & Cladding|Windows & Glazing / Curtain Wall|EIFS / Stucco|Drywall / Framing|Insulation|Flooring|Painting & Coatings|Ceilings|Millwork & Casework / Cabinetry|Doors, Frames & Hardware|Plumbing|HVAC|Electrical|Fire Protection / Sprinkler Systems|Controls & Building Automation|Landscaping / Hardscaping|Asphalt Paving|Concrete Paving|Fencing|Signage|Security Systems|Audio/Visual & Low Voltage|Elevators & Lifts|Swimming Pools & Fountains|Solar / Renewable Energy|Environmental Remediation]; maxLength=100; default=General Contractor"
+Account,cYearBusinessEst,text,"Calendar Year Business Established",i18n:fields,,,yes,,account,c_year_business_est,mediumtext,
+Account,campaign,link,Campaign,i18n:fields,,,,Campaign,account,campaign_id,varchar(17),
+Account,carrier,text,Carrier,i18n:fields,,,yes,,account,carrier,mediumtext,
+Account,carrierPolicies,linkMultiple,"Carrier Policies",i18n:links,,,yes,Policy,account,"(not stored)",,
+Account,carrier_code,text,"Carrier Code",i18n:fields,,,yes,,account,carrier_code,mediumtext,
+Account,claims_count_3yr,int,"Claims Count (Three Year)",i18n:fields,,,yes,,account,claims_count_3yr,int,
+Account,claims_count_lifetime,int,"Claims Count Lifetime",auto,,,yes,,account,claims_count_lifetime,int,
+Account,claims_notes,text,"Claims Notes",i18n:fields,,,yes,,account,claims_notes,mediumtext,
+Account,claims_open,int,"Open Claims",i18n:fields,,,yes,,account,claims_open,int,
+Account,clientNotes,linkMultiple,"Client Notes",i18n:links,,,yes,ClientNote,account,"(not stored)",,
+Account,client_since,date,"Client Since",i18n:fields,,,yes,,account,client_since,date,
+Account,clvAnnualCommissionConverted,currencyConverted,"Clv Annual Commission Converted",auto,,yes,,,account,"(not stored)",,
+Account,clvAnnualCommissionCurrency,enum,"Clv Annual Commission Currency",auto,,yes,,,account,clv_annual_commission_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,clvCurrentConverted,currencyConverted,"Clv Current Converted",auto,,yes,,,account,"(not stored)",,
+Account,clvCurrentCurrency,enum,"Clv Current Currency",auto,,yes,,,account,clv_current_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,clvProjectedConverted,currencyConverted,"Clv Projected Converted",auto,,yes,,,account,"(not stored)",,
+Account,clvProjectedCurrency,enum,"Clv Projected Currency",auto,,yes,,,account,clv_projected_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,clvWithCrossSellConverted,currencyConverted,"Clv With Cross Sell Converted",auto,,yes,,,account,"(not stored)",,
+Account,clvWithCrossSellCurrency,enum,"Clv With Cross Sell Currency",auto,,yes,,,account,clv_with_cross_sell_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,clv_annual_commission,currency,"Annual Commission",i18n:fields,,yes,yes,,account,clv_annual_commission|clv_annual_commission_currency,double|varchar(3),
+Account,clv_current,currency,"CLV (To Date)",i18n:fields,,yes,yes,,account,clv_current|clv_current_currency,double|varchar(3),
+Account,clv_last_calculated,datetime,"CLV Last Calculated",i18n:fields,,yes,yes,,account,clv_last_calculated,datetime,
+Account,clv_projected,currency,"CLV (Projected)",i18n:fields,,yes,yes,,account,clv_projected|clv_projected_currency,double|varchar(3),
+Account,clv_retention_rate_applied,float,"Retention Rate Used",i18n:fields,,yes,yes,,account,clv_retention_rate_applied,double,
+Account,clv_tenure_years,float,"Tenure (Years)",i18n:fields,,yes,yes,,account,clv_tenure_years,double,
+Account,clv_with_cross_sell,currency,"CLV (with Cross-Sell)",i18n:fields,,yes,yes,,account,clv_with_cross_sell|clv_with_cross_sell_currency,double|varchar(3),
+Account,commissions,linkMultiple,Commissions,i18n:fields,,,yes,Commission,account,"(not stored)",,
+Account,communication_notes,text,"Communication Notes",i18n:fields,,,yes,,account,communication_notes,mediumtext,
+Account,contactIsInactive,bool,Inactive,i18n:fields,,,,,account,"(not stored)",,notStorable=true
+Account,contactRole,varchar,Title,i18n:fields,,,,,account,"(not stored)",,"maxLength=100; pattern=$noBadCharacters; notStorable=true"
+Account,coverage_gaps,text,"Coverage Gaps",i18n:fields,,,yes,,account,coverage_gaps,mediumtext,
+Account,createdAt,datetime,"Created At",i18n:fields,,yes,,,account,created_at,datetime,
+Account,createdBy,link,"Created By",i18n:fields,,yes,,User,account,created_by_id,varchar(17),view=views/fields/user
+Account,csrName,text,"Customer Service Representative Name",i18n:fields,,,yes,,account,csr_name,mediumtext,
+Account,dateOfBirth,date,"Date Of Birth",auto,,,yes,,account,date_of_birth,date,
+Account,days_to_renewal,int,"Days to Next Renewal",i18n:fields,,yes,yes,,account,days_to_renewal,int,
+Account,description,text,Description,i18n:fields,,,,,account,description,mediumtext,
+Account,do_not_contact,bool,"Do Not Contact",auto,,,yes,,account,do_not_contact,tinyint(1),
+Account,documentLinks,text,"Document Links",auto,,,yes,,account,document_links,mediumtext,
+Account,documents,attachmentMultiple,Documents,i18n:fields,,,yes,,account,"(not stored)",,
+Account,downloadsStatements,bool,"Downloads Statements",auto,,,yes,,account,downloads_statements,tinyint(1),
+Account,emailAddress,email,Email,i18n:fields,,,,,account,"(not stored)",,
+Account,emailAddressIsInvalid,bool,"Email Address is Invalid",i18n:fields,,,,,account,"(not stored)",,notStorable=true
+Account,emailAddressIsOptedOut,bool,"Email Address is Opted-Out",i18n:fields,,,,,account,"(not stored)",,notStorable=true
+Account,employee_count,int,"Employee Count",i18n:fields,,,yes,,account,employee_count,int,
+Account,estimatedPremiumConverted,currencyConverted,"Estimated Premium Converted",i18n:fields,,yes,,,account,"(not stored)",,
+Account,estimatedPremiumCurrency,enum,"Estimated Premium Currency",auto,,,,,account,estimated_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,estimatedRevenueConverted,currencyConverted,"Estimated Revenue Converted",i18n:fields,,yes,,,account,"(not stored)",,
+Account,estimatedRevenueCurrency,enum,"Estimated Revenue Currency",auto,,,,,account,estimated_revenue_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,estimated_premium,currency,"Estimated Premium",i18n:fields,,,yes,,account,estimated_premium|estimated_premium_currency,double|varchar(3),
+Account,estimated_revenue,currency,"Estimated Revenue",i18n:fields,,,yes,,account,estimated_revenue|estimated_revenue_currency,double|varchar(3),
+Account,fein,varchar,"Federal Employer Identification Number",i18n:fields,,,yes,,account,fein,varchar(20),maxLength=20
+Account,gapAutoUm,bool,"Coverage Gap: Automobile Uninsured and Underinsured Motorist",i18n:fields,,,yes,,account,gap_auto_um,tinyint(1),
+Account,gapCount,int,"Coverage Gap Count",i18n:fields,,yes,yes,,account,gap_count,int,
+Account,gapFinalExpense,bool,"Gap Final Expense",auto,,,yes,,account,gap_final_expense,tinyint(1),
+Account,gapLandlord,bool,"Gap Landlord",auto,,,yes,,account,gap_landlord,tinyint(1),
+Account,gapLife,bool,"Coverage Gap: Life",i18n:fields,,,yes,,account,gap_life,tinyint(1),
+Account,gapLifeNeedEst,currency,"Life Coverage Need Estimate",i18n:fields,,,yes,,account,gap_life_need_est|gap_life_need_est_currency,double|varchar(3),
+Account,gapLifeNeedEstConverted,currencyConverted,"Gap Life Need Est Converted",auto,,yes,,,account,"(not stored)",,
+Account,gapLifeNeedEstCurrency,enum,"Gap Life Need Est Currency",auto,,,,,account,gap_life_need_est_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,gapLifeReason,text,"Life Coverage Gap Reason",i18n:fields,,,yes,,account,gap_life_reason,mediumtext,
+Account,gapMedicare,bool,"Coverage Gap: Medicare",i18n:fields,,,yes,,account,gap_medicare,tinyint(1),
+Account,gapMedicareEligible,date,"Medicare Eligible",i18n:fields,,,yes,,account,gap_medicare_eligible,date,
+Account,gapRenters,bool,"Coverage Gap: Renters",i18n:fields,,,yes,,account,gap_renters,tinyint(1),
+Account,gapRideshare,bool,"Coverage Gap: Rideshare",i18n:fields,,,yes,,account,gap_rideshare,tinyint(1),
+Account,gapUmbrella,bool,"Coverage Gap: Umbrella",i18n:fields,,,yes,,account,gap_umbrella,tinyint(1),
+Account,gapUmbrellaReason,text,"Umbrella Coverage Gap Reason",i18n:fields,,,yes,,account,gap_umbrella_reason,mediumtext,
+Account,gbCensusDate,date,"Group Benefits Census Date",i18n:fields,,,yes,,account,gb_census_date,date,
+Account,gbCensusReceived,bool,"Group Benefits Census Received",i18n:fields,,,yes,,account,gb_census_received,tinyint(1),
+Account,gbDentalCarrier,text,"Group Benefits Dental Carrier",i18n:fields,,,yes,,account,gb_dental_carrier,mediumtext,
+Account,gbDentalMonthlyPremium,currency,"Group Benefits Dental Monthly Premium",i18n:fields,,,yes,,account,gb_dental_monthly_premium|gb_dental_monthly_premium_currency,double|varchar(3),
+Account,gbDentalMonthlyPremiumConverted,currencyConverted,"Gb Dental Monthly Premium Converted",auto,,yes,,,account,"(not stored)",,
+Account,gbDentalMonthlyPremiumCurrency,enum,"Gb Dental Monthly Premium Currency",auto,,,,,account,gb_dental_monthly_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,gbEligibleEmployees,int,"Group Benefits Eligible Employees",i18n:fields,,,yes,,account,gb_eligible_employees,int,
+Account,gbEmployerContribution,text,"Group Benefits Employer Contribution",i18n:fields,,,yes,,account,gb_employer_contribution,mediumtext,
+Account,gbLifeAdCarrier,text,"Group Benefits Life and Accidental Death and Dismemberment Carrier",i18n:fields,,,yes,,account,gb_life_ad_carrier,mediumtext,
+Account,gbLifeBenefitAmount,currency,"Group Benefits Life Benefit Amount",i18n:fields,,,yes,,account,gb_life_benefit_amount|gb_life_benefit_amount_currency,double|varchar(3),
+Account,gbLifeBenefitAmountConverted,currencyConverted,"Gb Life Benefit Amount Converted",auto,,yes,,,account,"(not stored)",,
+Account,gbLifeBenefitAmountCurrency,enum,"Gb Life Benefit Amount Currency",auto,,,,,account,gb_life_benefit_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,gbLtdCarrier,text,"Group Benefits Long-Term Disability Carrier",i18n:fields,,,yes,,account,gb_ltd_carrier,mediumtext,
+Account,gbMedicalCarrier,text,"Group Benefits Medical Carrier",i18n:fields,,,yes,,account,gb_medical_carrier,mediumtext,
+Account,gbMedicalMonthlyPremium,currency,"Group Benefits Medical Monthly Premium",i18n:fields,,,yes,,account,gb_medical_monthly_premium|gb_medical_monthly_premium_currency,double|varchar(3),
+Account,gbMedicalMonthlyPremiumConverted,currencyConverted,"Gb Medical Monthly Premium Converted",auto,,yes,,,account,"(not stored)",,
+Account,gbMedicalMonthlyPremiumCurrency,enum,"Gb Medical Monthly Premium Currency",auto,,,,,account,gb_medical_monthly_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,gbMedicalPlanType,enum,"Group Benefits Medical Plan Type",i18n:fields,,,yes,,account,gb_medical_plan_type,varchar(255),options=[|HMO|PPO|EPO|HDHP|POS|HRA|Indemnity]
+Account,gbMedicalRenewalDate,date,"Group Benefits Medical Renewal Date",i18n:fields,,,yes,,account,gb_medical_renewal_date,date,
+Account,gbNotes,text,"Group Benefits Notes",i18n:fields,,,yes,,account,gb_notes,mediumtext,
+Account,gbParticipatingEmployees,int,"Group Benefits Participating Employees",i18n:fields,,,yes,,account,gb_participating_employees,int,
+Account,gbStdCarrier,text,"Group Benefits Short-Term Disability Carrier",i18n:fields,,,yes,,account,gb_std_carrier,mediumtext,
+Account,gbVisionCarrier,text,"Group Benefits Vision Carrier",i18n:fields,,,yes,,account,gb_vision_carrier,mediumtext,
+Account,gbVisionMonthlyPremium,currency,"Group Benefits Vision Monthly Premium",i18n:fields,,,yes,,account,gb_vision_monthly_premium|gb_vision_monthly_premium_currency,double|varchar(3),
+Account,gbVisionMonthlyPremiumConverted,currencyConverted,"Gb Vision Monthly Premium Converted",auto,,yes,,,account,"(not stored)",,
+Account,gbVisionMonthlyPremiumCurrency,enum,"Gb Vision Monthly Premium Currency",auto,,,,,account,gb_vision_monthly_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,gbVoluntaryBenefits,text,"Voluntary Benefits",i18n:fields,,,yes,,account,gb_voluntary_benefits,mediumtext,
+Account,gender,enum,Gender,auto,,,yes,,account,gender,varchar(255),"options=[|Male|Female|Other|Prefer not to say]"
+Account,general_notes,text,"General Notes & Requests",i18n:fields,,,yes,,account,general_notes,longtext,
+Account,google_drive_folder_url,url,"Google Drive Folder Link",i18n:fields,,,yes,,account,google_drive_folder_url,varchar(255),
+Account,industry,enum,Industry,i18n:fields,,,,,account,industry,varchar(255),"options=[|Advertising|Aerospace|Agriculture|Apparel & Accessories|Architecture|Automotive|Banking|Biotechnology|Building Materials & Equipment|Chemical|Computer|Construction|Consulting|Creative|Culture|Defense|Education|Electric Power|Electronics|Energy|Entertainment & Leisure|Finance|Food & Beverage|Grocery|Healthcare|Hospitality|Insurance|Landscaping Services / Tree Care|Legal|Manufacturing|Marketing|Mass Media|Mining|Music|Petroleum|Publishing|Real Estate|Retail|Service|Shipping|Software|Sports|Support|Technology|Telecommunications|Television|Testing, Inspection & Certification|Transportation|Travel|Venture Capital|Water|Wholesale]"
+Account,insight_objection,text,Objection,i18n:fields,,,yes,,account,insight_objection,mediumtext,
+Account,insight_opener,text,Opener,i18n:fields,,,yes,,account,insight_opener,mediumtext,
+Account,insight_relationship,text,"RSG Relationship",i18n:fields,,,yes,,account,insight_relationship,mediumtext,
+Account,insight_signal,text,Signal,i18n:fields,,,yes,,account,insight_signal,mediumtext,
+Account,intel_ai_summary,text,"Assessment Summary (AI)",i18n:fields,,,yes,,account,intel_ai_summary,mediumtext,
+Account,intel_annual_revenue_est,text,"Annual Revenue Estimate (AI)",i18n:fields,,,yes,,account,intel_annual_revenue_est,mediumtext,
+Account,intel_bbb_accredited,bool,"Better Business Bureau Accredited (AI)",i18n:fields,,,yes,,account,intel_bbb_accredited,tinyint(1),
+Account,intel_bbb_complaints,int,"Open Better Business Bureau Complaints (AI)",i18n:fields,,,yes,,account,intel_bbb_complaints,int,
+Account,intel_bbb_notes,text,"Better Business Bureau Notes (AI)",i18n:fields,,,yes,,account,intel_bbb_notes,mediumtext,
+Account,intel_bbb_rating,varchar,"Better Business Bureau Rating (AI)",i18n:fields,,,yes,,account,intel_bbb_rating,varchar(10),maxLength=10
+Account,intel_cargo_type,text,"Cargo Type (AI)",i18n:fields,,,yes,,account,intel_cargo_type,mediumtext,
+Account,intel_confidence,enum,"Confidence (AI)",i18n:fields,,,yes,,account,intel_confidence,varchar(255),options=[|High|Medium|Low]
+Account,intel_cross_sell,text,"Cross-Sell Opportunities (AI)",i18n:fields,,,yes,,account,intel_cross_sell,mediumtext,
+Account,intel_dba,text,"Doing Business As (AI)",i18n:fields,,,yes,,account,intel_dba,mediumtext,
+Account,intel_dot_incidents,int,"Department of Transportation Incidents (AI)",i18n:fields,,,yes,,account,intel_dot_incidents,int,
+Account,intel_employee_count,int,"Employee Count (AI)",i18n:fields,,,yes,,account,intel_employee_count,int,
+Account,intel_entity_type,enum,"Entity Type (AI)",i18n:fields,,,yes,,account,intel_entity_type,varchar(255),"options=[|LLC|Corp|Sole Prop|Partnership|Other]"
+Account,intel_fleet_size,int,"Fleet Size (AI)",i18n:fields,,,yes,,account,intel_fleet_size,int,
+Account,intel_growth_indicator,text,"Growth Indicator (AI)",i18n:fields,,,yes,,account,intel_growth_indicator,mediumtext,
+Account,intel_legal_name,text,"Legal Name (AI)",i18n:fields,,,yes,,account,intel_legal_name,mediumtext,
+Account,intel_linkedin_notes,text,"LinkedIn Notes (AI)",i18n:fields,,,yes,,account,intel_linkedin_notes,mediumtext,
+Account,intel_linkedin_url,url,"LinkedIn URL (AI)",i18n:fields,,,yes,,account,intel_linkedin_url,varchar(255),
+Account,intel_naics,text,"North American Industry Classification System Code (AI)",i18n:fields,,,yes,,account,intel_naics,mediumtext,
+Account,intel_news_notes,text,"News Notes (AI)",i18n:fields,,,yes,,account,intel_news_notes,mediumtext,
+Account,intel_operating_radius,text,"Operating Radius (AI)",i18n:fields,,,yes,,account,intel_operating_radius,mediumtext,
+Account,intel_osha_violations,text,"Occupational Safety and Health Administration Violations (AI)",i18n:fields,,,yes,,account,intel_osha_violations,mediumtext,
+Account,intel_owner_operators,bool,"Owner Operators on Payroll (AI)",i18n:fields,,,yes,,account,intel_owner_operators,tinyint(1),
+Account,intel_pack_last_run,datetime,"Intel Pack Last Run (AI)",i18n:fields,,yes,yes,,account,intel_pack_last_run,datetime,
+Account,intel_pack_run,bool,"Intel Pack Run (AI)",i18n:fields,,,yes,,account,intel_pack_run,tinyint(1),
+Account,intel_pain_points,text,"Pain Points (AI)",i18n:fields,,,yes,,account,intel_pain_points,mediumtext,
+Account,intel_run,bool,"Intel Run (AI)",i18n:fields,,,yes,,account,intel_run,tinyint(1),
+Account,intel_run_by,text,"Run By (AI)",i18n:fields,,,yes,,account,intel_run_by,mediumtext,
+Account,intel_run_date,datetime,"Last Run (AI)",i18n:fields,,,yes,,account,intel_run_date,datetime,
+Account,intel_sic,text,"Standard Industrial Classification Code (AI)",i18n:fields,,,yes,,account,intel_sic,mediumtext,
+Account,intel_signal_linkedin,text,"LinkedIn Signal (AI)",i18n:fields,,,yes,,account,intel_signal_linkedin,mediumtext,
+Account,intel_signal_news,text,"News Signal (AI)",i18n:fields,,,yes,,account,intel_signal_news,mediumtext,
+Account,intel_sources,text,"Intel Sources",auto,,,yes,,account,intel_sources,mediumtext,
+Account,intel_sources_hit,int,"Sources Hit (AI)",i18n:fields,,,yes,,account,intel_sources_hit,int,
+Account,intel_underwriting_flag,text,"Underwriting Flag (AI)",i18n:fields,,,yes,,account,intel_underwriting_flag,mediumtext,
+Account,intel_website,url,"Website (AI)",i18n:fields,,,yes,,account,intel_website,varchar(255),
+Account,intel_website_notes,text,"Website Notes (AI)",i18n:fields,,,yes,,account,intel_website_notes,mediumtext,
+Account,intel_years_in_business,int,"Years in Business (AI)",i18n:fields,,,yes,,account,intel_years_in_business,int,
+Account,key_findings,text,"Key Findings",i18n:fields,,,yes,,account,key_findings,mediumtext,
+Account,lastContactBy,link,"Last Contact By",auto,,,yes,User,account,last_contact_by_id,varchar(17),
+Account,last_claim_date,date,"Last Claim Date",i18n:fields,,,yes,,account,last_claim_date,date,
+Account,last_claim_lob,enum,"Last Claim Lob",auto,,,yes,,account,last_claim_lob,varchar(255),options=[|Auto|Home|Umbrella|Life|Medicare|Renters|Other]
+Account,last_claim_status,enum,"Last Claim Status",auto,,,yes,,account,last_claim_status,varchar(255),options=[|Open|Closed|Subrogation]
+Account,last_claim_type,text,"Last Claim Type",i18n:fields,,,yes,,account,last_claim_type,mediumtext,
+Account,last_contact_date,date,"Last Contact Date",i18n:fields,,,yes,,account,last_contact_date,date,
+Account,last_contact_outcome,enum,"Last Contact Outcome",auto,,,yes,,account,last_contact_outcome,varchar(255),"options=[|Reached|Voicemail|No Answer|Email Opened|Unresponsive]"
+Account,last_contact_type,enum,"Last Contact Type",auto,,,yes,,account,last_contact_type,varchar(255),"options=[|Call|Email|Text|In Person]"
+Account,linkedin_url,url,"Linkedin Url",auto,,,yes,,account,linkedin_url,varchar(255),
+Account,lob,multiEnum,"Line of Business",i18n:fields,,,yes,,account,lob,mediumtext,"options=[Commercial Auto|GL|Workers Comp|Cargo|Home|Auto|Life|Medicare|BOP|Umbrella|Professional Liability|Builders Risk|Transportation]"
+Account,mailingAddress,text,"Mailing Address",auto,,,yes,,account,mailing_address,mediumtext,
+Account,mailingAddressSame,bool,"Mailing Address Same",i18n:fields,,,yes,,account,mailing_address_same,tinyint(1),default=true
+Account,maritalStatus,enum,"Marital Status",auto,,,yes,,account,marital_status,varchar(255),options=[|Single|Married|Divorced|Widowed|Separated]
+Account,modifiedAt,datetime,"Modified At",i18n:fields,,yes,,,account,modified_at,datetime,
+Account,modifiedBy,link,"Modified By",i18n:fields,,yes,,User,account,modified_by_id,varchar(17),view=views/fields/user
+Account,momentum_client_id,text,"Momentum Client ID",i18n:fields,,yes,yes,,account,momentum_client_id,mediumtext,
+Account,momentum_last_synced,datetime,"Momentum Last Synced",i18n:fields,,,yes,,account,momentum_last_synced,datetime,
+Account,name,varchar,Name,i18n:fields,yes,,,,account,name,varchar(249),"maxLength=249; pattern=$noBadCharacters; audited=true"
+Account,next_renewal_carrier,text,"Next Renewal Carrier",auto,,,yes,,account,next_renewal_carrier,mediumtext,
+Account,next_renewal_date,date,"Next Renewal Date",auto,,,yes,,account,next_renewal_date,date,
+Account,next_renewal_lob,text,"Next Renewal Lob",auto,,,yes,,account,next_renewal_lob,mediumtext,
+Account,next_x_date,date,"Next Renewal X-Date",i18n:fields,,,yes,,account,next_x_date,date,
+Account,next_x_date_lob,text,"Next Renewal X-Date Line of Business",i18n:fields,,,yes,,account,next_x_date_lob,mediumtext,
+Account,nps_date,date,"Net Promoter Score Date",i18n:fields,,,yes,,account,nps_date,date,
+Account,nps_score,int,"Net Promoter Score",i18n:fields,,,yes,,account,nps_score,int,
+Account,numberOfEmployees,int,"[OLD] Number of Employees",i18n:fields,,,yes,,account,number_of_employees,int,
+Account,originalLead,linkOne,"Original Lead",i18n:fields,,yes,,Lead,account,"(not stored)",,view=views/fields/link-one
+Account,outreach_attempts_current,int,"Outreach Attempts Current",auto,,,yes,,account,outreach_attempts_current,int,
+Account,phoneNumber,phone,Phone,i18n:fields,,,,,account,"(not stored)",,
+Account,phoneNumberIsInvalid,bool,"Phone Number is Invalid",i18n:fields,,,,,account,"(not stored)",,notStorable=true
+Account,phoneNumberIsOptedOut,bool,"Phone Number is Opted-Out",i18n:fields,,,,,account,"(not stored)",,notStorable=true
+Account,policies,linkMultiple,Policies,auto,,,yes,Policy,account,"(not stored)",,
+Account,policyCountActive,int,"Active Policies",i18n:fields,,yes,yes,,account,policy_count_active,int,
+Account,preferred_contact,enum,"Preferred Contact",auto,,,yes,,account,preferred_contact,varchar(255),options=[|Phone|Email|Text]
+Account,premiumChangeAmountConverted,currencyConverted,"Premium Change Amount Converted",auto,,yes,,,account,"(not stored)",,
+Account,premiumChangeAmountCurrency,enum,"Premium Change Amount Currency",auto,,,,,account,premium_change_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,premium_change_amount,currency,"Premium Change Amount",auto,,,yes,,account,premium_change_amount|premium_change_amount_currency,double|varchar(3),
+Account,premium_change_pct,float,"Premium Change Pct",auto,,,yes,,account,premium_change_pct,double,
+Account,primaryDob,date,"Primary Dob",auto,,,yes,,account,primary_dob,date,
+Account,primaryEmail,email,"Primary Email",auto,,,yes,,account,"(not stored)",,
+Account,primaryEmailIsInvalid,bool,"Primary Email Is Invalid",auto,,,,,account,"(not stored)",,notStorable=true
+Account,primaryEmailIsOptedOut,bool,"Primary Email Is Opted Out",auto,,,,,account,"(not stored)",,notStorable=true
+Account,primaryFirstName,varchar,"Primary First Name",auto,,,yes,,account,primary_first_name,varchar(100),maxLength=100
+Account,primaryGender,enum,"Primary Gender",auto,,,yes,,account,primary_gender,varchar(255),"options=[|Male|Female|Other|Prefer not to say]"
+Account,primaryLastName,varchar,"Primary Last Name",auto,,,yes,,account,primary_last_name,varchar(100),maxLength=100
+Account,primaryOccupation,text,"Primary Occupation",auto,,,yes,,account,primary_occupation,mediumtext,
+Account,primaryPhone,phone,"Primary Phone",auto,,,yes,,account,"(not stored)",,
+Account,primaryPhoneIsInvalid,bool,"Primary Phone Is Invalid",auto,,,,,account,"(not stored)",,notStorable=true
+Account,primaryPhoneIsOptedOut,bool,"Primary Phone Is Opted Out",auto,,,,,account,"(not stored)",,notStorable=true
+Account,property_address,text,"Property Address",auto,,,yes,,account,property_address,mediumtext,
+Account,property_city,varchar,"Property City",auto,,,yes,,account,property_city,varchar(50),maxLength=50
+Account,property_state,varchar,"Property State",auto,,,yes,,account,property_state,varchar(5),"maxLength=5; default=GA"
+Account,property_zip,varchar,"Property Zip",auto,,,yes,,account,property_zip,varchar(10),maxLength=10
+Account,rate_increase_flag,bool,"Rate Increase Flag",auto,,,yes,,account,rate_increase_flag,tinyint(1),
+Account,referral_name,text,"Referral Name",auto,,,yes,,account,referral_name,mediumtext,
+Account,referral_source,enum,"Referral Source",auto,,,yes,,account,referral_source,varchar(255),"options=[|Referral|Google|Social Media|Cold Outreach|Walk-in|NowCerts Import|Other]"
+Account,referralsGiven,int,"Referrals Given",auto,,,yes,,account,referrals_given,int,default=0
+Account,renewalQuoteAmountConverted,currencyConverted,"Renewal Quote Amount Converted",auto,,yes,,,account,"(not stored)",,
+Account,renewalQuoteAmountCurrency,enum,"Renewal Quote Amount Currency",auto,,,,,account,renewal_quote_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,renewal_date,date,"Renewal Date",i18n:fields,,,yes,,account,renewal_date,date,
+Account,renewal_decision,enum,"Renewal Decision",auto,,,yes,,account,renewal_decision,varchar(255),"options=[|Renewing|Re-marketed|Lost — Price|Lost — Service|Lost — Carrier|Non-renewed by Carrier]"
+Account,renewal_decision_notes,text,"Renewal Decision Notes",auto,,,yes,,account,renewal_decision_notes,mediumtext,
+Account,renewal_outreach_stage,enum,"Renewal Outreach Stage",auto,,,yes,,account,renewal_outreach_stage,varchar(255),"options=[|Not Started|Day 60 Sent|Day 30 Sent|Day 14 Sent|Confirmed|Shopped|Lost]"
+Account,renewal_quote_amount,currency,"Renewal Quote Amount",auto,,,yes,,account,renewal_quote_amount|renewal_quote_amount_currency,double|varchar(3),
+Account,renewal_quote_carrier,text,"Renewal Quote Carrier",auto,,,yes,,account,renewal_quote_carrier,mediumtext,
+Account,renewal_quote_date,date,"Renewal Quote Date",auto,,,yes,,account,renewal_quote_date,date,
+Account,renewal_quote_received,bool,"Renewal Quote Received",auto,,,yes,,account,renewal_quote_received,tinyint(1),
+Account,renewals,linkMultiple,Renewals,auto,,,yes,Renewal,account,"(not stored)",,
+Account,retention_risk,enum,"Retention Risk",i18n:fields,,,yes,,account,retention_risk,varchar(255),options=[|Low|Medium|High]
+Account,risk_score,int,"Risk Score",i18n:fields,,,yes,,account,risk_score,int,
+Account,score_alert_sent,bool,"Score Alert Sent",auto,,,yes,,account,score_alert_sent,tinyint(1),
+Account,score_breakdown,text,"Score Breakdown",auto,,yes,yes,,account,score_breakdown,mediumtext,
+Account,score_bundle_depth,int,"Score Bundle Depth",auto,,,yes,,account,score_bundle_depth,int,"min=0; max=20"
+Account,score_change_amount,int,"Score Change Amount",auto,,,yes,,account,score_change_amount,int,
+Account,score_change_direction,enum,"Score Change Direction",auto,,,yes,,account,score_change_direction,varchar(255),options=[|Up|Down|Flat]
+Account,score_claims_activity,int,"Score Claims Activity",auto,,,yes,,account,score_claims_activity,int,"min=0; max=20"
+Account,score_last_calculated,datetime,"Score Last Calculated",auto,,,yes,,account,score_last_calculated,datetime,
+Account,score_last_contact,int,"Score Last Contact",auto,,,yes,,account,score_last_contact,int,"min=0; max=20"
+Account,score_payment_history,int,"Score Payment History",auto,,,yes,,account,score_payment_history,int,"min=0; max=20"
+Account,score_tier,enum,"Client Tier",i18n:fields,,yes,yes,,account,score_tier,varchar(255),"options=[|Strong|Good|At Risk|Critical]"
+Account,score_total,int,"Score Total",auto,,yes,yes,,account,score_total,int,"min=0; max=100"
+Account,score_years_retained,int,"Score Years Retained",auto,,,yes,,account,score_years_retained,int,"min=0; max=20"
+Account,shippingAddress,address,"Shipping Address",i18n:fields,,,,,account,shipping_address_street|shipping_address_city|shipping_address_state|shipping_address_country|shipping_address_postal_code,varchar(255)|varchar(100)|varchar(100)|varchar(100)|varchar(40),view=crm:views/account/fields/shipping-address
+Account,shippingAddressCity,varchar,"City (Shipping)",i18n:fields,,,,,account,shipping_address_city,varchar(100),"maxLength=100; view=views/fields/address-city; pattern=$noBadCharacters"
+Account,shippingAddressCountry,varchar,"Country (Shipping)",i18n:fields,,,,,account,shipping_address_country,varchar(100),"maxLength=100; view=views/fields/address-country; pattern=$noBadCharacters"
+Account,shippingAddressMap,map,"Map (Shipping)",i18n:fields,,yes,,,account,"(not stored)",,notStorable=true
+Account,shippingAddressPostalCode,varchar,"Postal Code (Shipping)",i18n:fields,,,,,account,shipping_address_postal_code,varchar(40),"maxLength=40; pattern=$noBadCharacters"
+Account,shippingAddressState,varchar,"State (Shipping)",i18n:fields,,,,,account,shipping_address_state,varchar(100),"maxLength=100; view=views/fields/address-state; pattern=$noBadCharacters"
+Account,shippingAddressStreet,text,"Street (Shipping)",i18n:fields,,,,,account,shipping_address_street,varchar(255),maxLength=255
+Account,sicCode,varchar,"Sic Code",i18n:fields,,,,,account,sic_code,varchar(40),"maxLength=40; pattern=$noBadCharacters"
+Account,sic_code,text,"Standard Industrial Classification Code",i18n:fields,,,yes,,account,sic_code,varchar(40),
+Account,stage,enum,Stage,i18n:fields,,,yes,,account,stage,varchar(255),"options=[|New|Qualified|Proposal|Negotiation|Closed Won|Closed Lost]"
+Account,streamUpdatedAt,datetime,"Stream Updated At",i18n:fields,,yes,,,account,stream_updated_at,datetime,
+Account,targetList,link,"Target List",i18n:fields,,,,,account,"(not stored)",,notStorable=true
+Account,targetListIsOptedOut,bool,"Is Opted Out (Target List)",i18n:fields,,yes,,,account,"(not stored)",,notStorable=true
+Account,targetLists,linkMultiple,"Target Lists",i18n:fields,,,,TargetList,account,"(not stored)",,
+Account,teams,linkMultiple,Teams,i18n:fields,,,,Team,account,"(not stored)",,view=views/fields/teams
+Account,totalActivePremiumConverted,currencyConverted,"Total Active Premium Converted",auto,,yes,,,account,"(not stored)",,
+Account,totalActivePremiumCurrency,enum,"Total Active Premium Currency",auto,,,,,account,total_active_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,totalAnnualPremium,currency,"[OLD] Total Annual Premium",i18n:fields,,yes,yes,,account,total_annual_premium|total_annual_premium_currency,double|varchar(3),
+Account,totalAnnualPremiumConverted,currencyConverted,"Total Annual Premium Converted",auto,,yes,,,account,"(not stored)",,
+Account,totalAnnualPremiumCurrency,enum,"Total Annual Premium Currency",auto,,yes,,,account,total_annual_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,totalCarrierPremiumConverted,currencyConverted,"Total Carrier Premium Converted",auto,,yes,,,account,"(not stored)",,
+Account,totalCarrierPremiumCurrency,enum,"Total Carrier Premium Currency",auto,,yes,,,account,total_carrier_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Account,total_active_premium,currency,"Total Portfolio Premium",i18n:fields,,,yes,,account,total_active_premium|total_active_premium_currency,double|varchar(3),
+Account,total_carrier_premium,currency,"Total Carrier Premium",i18n:fields,,yes,yes,,account,total_carrier_premium|total_carrier_premium_currency,double|varchar(3),
+Account,type,enum,Type,i18n:fields,,yes,,,account,type,varchar(255),"options=[|Commercial Lines|Personal Lines|Group Benefits|Prospect]"
+Account,website,url,Website,i18n:fields,,,,,account,website,varchar(255),
+Account,websiteUrl,url,"[OLD] Website URL",i18n:fields,,,yes,,account,website_url,varchar(255),
+Account,what_you_have_today,text,"What You Have Today",i18n:fields,,,yes,,account,what_you_have_today,longtext,
+Account,x_date,date,"Renewal X-Date",i18n:fields,,,yes,,account,x_date,date,
+Account,years_in_business,int,"Years in Business",i18n:fields,,,yes,,account,years_in_business,int,
+Contact,acceptanceStatus,varchar,"Acceptance Status",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,acceptanceStatusCalls,enum,"Acceptance Status (Calls)",i18n:fields,,,,,contact,"(not stored)",,"view=crm:views/lead/fields/acceptance-status; notStorable=true"
+Contact,acceptanceStatusMeetings,enum,"Acceptance Status (Meetings)",i18n:fields,,,,,contact,"(not stored)",,"view=crm:views/lead/fields/acceptance-status; notStorable=true"
+Contact,account,link,Account,i18n:fields,,,,Account,contact,account_id,varchar(17),view=crm:views/contact/fields/account
+Contact,accountAnyId,varchar,"Account Any Id",auto,,,,,contact,"(not stored)",,notStorable=true
+Contact,accountIsInactive,bool,"Account Inactive",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,accountRole,varchar,Title,i18n:fields,,,,,contact,"(not stored)",,"view=crm:views/contact/fields/account-role; notStorable=true"
+Contact,accountType,foreign,"Account Type",i18n:fields,,yes,,,contact,"(not stored)",,view=views/fields/foreign-enum
+Contact,accounts,linkMultiple,Accounts,i18n:fields,,,yes,Account,contact,"(not stored)",,view=crm:views/contact/fields/accounts
+Contact,activityLogs,linkMultiple,"Activity Logs",auto,,,yes,ActivityLog,contact,"(not stored)",,
+Contact,address,address,Address,i18n:fields,,,,,contact,address_street|address_city|address_state|address_country|address_postal_code,varchar(255)|varchar(100)|varchar(100)|varchar(100)|varchar(40),
+Contact,addressCity,varchar,City,i18n:fields,,,,,contact,address_city,varchar(100),"maxLength=100; view=views/fields/address-city; pattern=$noBadCharacters"
+Contact,addressCountry,varchar,Country,i18n:fields,,,,,contact,address_country,varchar(100),"maxLength=100; view=views/fields/address-country; pattern=$noBadCharacters"
+Contact,addressMap,map,Map,i18n:fields,,yes,,,contact,"(not stored)",,notStorable=true
+Contact,addressPostalCode,varchar,"Postal Code",i18n:fields,,,,,contact,address_postal_code,varchar(40),"maxLength=40; pattern=$noBadCharacters"
+Contact,addressState,varchar,State,i18n:fields,,,,,contact,address_state,varchar(100),"maxLength=100; view=views/fields/address-state; pattern=$noBadCharacters"
+Contact,addressStreet,text,Street,i18n:fields,,,,,contact,address_street,varchar(255),maxLength=255
+Contact,assignedUser,link,"Assigned User",i18n:fields,,,,User,contact,assigned_user_id,varchar(17),view=views/fields/assigned-user
+Contact,campaign,link,Campaign,i18n:fields,,,,Campaign,contact,campaign_id,varchar(17),
+Contact,clientType,enum,"Client Type",i18n:fields,,,yes,,contact,client_type,varchar(255),"options=[|Personal|Commercial|Employee Benefits|Supplemental]"
+Contact,contactDriveFolderUrl,url,"Drive Folder URL",i18n:fields,,,yes,,contact,contact_drive_folder_url,varchar(255),
+Contact,contactType,enum,"Contact Type",i18n:fields,,,yes,,contact,contact_type,varchar(255),"options=[|Client|Prospect|Spouse|Dependent|Business Owner|Underwriter|Marketing Rep|Owner|CFO|CEO|VP|Employee]"
+Contact,createdAt,datetime,"Created At",i18n:fields,,yes,,,contact,created_at,datetime,
+Contact,createdBy,link,"Created By",i18n:fields,,yes,,User,contact,created_by_id,varchar(17),view=views/fields/user
+Contact,csrName,varchar,"Customer Service Representative Name",i18n:fields,,yes,yes,,contact,csr_name,varchar(255),maxLength=255
+Contact,dateOfBirth,date,"Date of Birth",i18n:fields,,,yes,,contact,date_of_birth,date,
+Contact,daysUntil65,int,"Days Until 65",i18n:fields,,yes,yes,,contact,days_until65,int,
+Contact,description,text,Description,i18n:fields,,,,,contact,description,mediumtext,
+Contact,doNotCall,bool,"Do Not Call",i18n:fields,,,,,contact,do_not_call,tinyint(1),
+Contact,emailAddress,email,Email,i18n:fields,,,,,contact,"(not stored)",,
+Contact,emailAddressIsInvalid,bool,"Email Address is Invalid",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,emailAddressIsOptedOut,bool,"Email Address is Opted-Out",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,firstName,varchar,"First Name",i18n:fields,,,,,contact,first_name,varchar(100),"maxLength=100; pattern=$noBadCharacters"
+Contact,hasPortalUser,bool,"Has Portal User",i18n:fields,,yes,,,contact,"(not stored)",,notStorable=true
+Contact,lastName,varchar,"Last Name",i18n:fields,yes,,,,contact,last_name,varchar(100),"maxLength=100; pattern=$noBadCharacters"
+Contact,middleName,varchar,"Middle Name",i18n:fields,,,,,contact,middle_name,varchar(100),"maxLength=100; pattern=$noBadCharacters"
+Contact,modifiedAt,datetime,"Modified At",i18n:fields,,yes,,,contact,modified_at,datetime,
+Contact,modifiedBy,link,"Modified By",i18n:fields,,yes,,User,contact,modified_by_id,varchar(17),view=views/fields/user
+Contact,momentumClientId,varchar,"Momentum Client ID",i18n:fields,,yes,yes,,contact,momentum_client_id,varchar(255),maxLength=255
+Contact,name,personName,Name,i18n:fields,,,,,contact,"(not stored)",,
+Contact,opportunityRole,enum,"Opportunity Role",i18n:fields,,,,,contact,"(not stored)",,"options=[|Decision Maker|Evaluator|Influencer]; view=crm:views/contact/fields/opportunity-role; notStorable=true"
+Contact,originalEmail,link,"Original Email",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,originalLead,linkOne,"Original Lead",i18n:fields,,yes,,Lead,contact,"(not stored)",,view=views/fields/link-one
+Contact,phoneNumber,phone,Phone,i18n:fields,,,,,contact,"(not stored)",,
+Contact,phoneNumberIsInvalid,bool,"Phone Number is Invalid",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,phoneNumberIsOptedOut,bool,"Phone Number is Opted-Out",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,portalUser,linkOne,"Portal User",i18n:fields,,yes,,User,contact,"(not stored)",,"view=views/fields/link-one; notStorable=true"
+Contact,salutationName,enum,Salutation,i18n:fields,,,,,contact,salutation_name,varchar(255),options=[|Mr.|Ms.|Mrs.|Dr.]
+Contact,streamUpdatedAt,datetime,"Stream Updated At",i18n:fields,,yes,,,contact,stream_updated_at,datetime,
+Contact,targetList,link,"Target List",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
+Contact,targetListIsOptedOut,bool,"Is Opted Out (Target List)",i18n:fields,,yes,,,contact,"(not stored)",,notStorable=true
+Contact,targetLists,linkMultiple,"Target Lists",i18n:fields,,,,TargetList,contact,"(not stored)",,
+Contact,teams,linkMultiple,Teams,i18n:fields,,,,Team,contact,"(not stored)",,view=views/fields/teams
+Contact,title,varchar,"Contact Title",i18n:fields,,,,,contact,"(not stored)",,"maxLength=100; view=crm:views/contact/fields/title; notStorable=true"
+Policy,acceptedByAmsAt,datetime,"AMS Accepted At",i18n:fields,,yes,yes,,policy,accepted_by_ams_at,datetime,
+Policy,acceptedByAmsBy,varchar,"AMS Accepted By",i18n:fields,,yes,yes,,policy,accepted_by_ams_by,varchar(100),maxLength=100
+Policy,account,link,Account,i18n:links,,,,Account,policy,account_id,varchar(17),
+Policy,activityLogs,linkMultiple,"Activity Logs",auto,,,yes,ActivityLog,policy,"(not stored)",,
+Policy,agencyFeeConverted,currencyConverted,"Agency Fee Converted",auto,,yes,,,policy,"(not stored)",,
+Policy,agencyFeeCurrency,enum,"Agency Fee Currency",auto,,,,,policy,agency_fee_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Policy,agency_fee,currency,"Agency Fee",i18n:fields,,,yes,,policy,agency_fee|agency_fee_currency,double|varchar(3),
+Policy,amsLockReason,text,"AMS Lock Reason",i18n:fields,,yes,yes,,policy,ams_lock_reason,mediumtext,
+Policy,amsLockState,enum,"AMS Lock State",i18n:fields,,yes,yes,,policy,ams_lock_state,varchar(255),"options=[|Unlocked|Pending AMS|Locked by AMS|Rejected by AMS]; default=Unlocked"
+Policy,assignedUser,link,"Assigned User",i18n:fields,,,,User,policy,assigned_user_id,varchar(17),
+Policy,billing_type,enum,"Billing Type",i18n:fields,,,yes,,policy,billing_type,varchar(255),"options=[|Direct Bill|Agency Bill|Direct Bill 100|Agency Bill 100]"
+Policy,bind_date,date,"Bind Date",i18n:fields,,,yes,,policy,bind_date,date,
+Policy,business_type,varchar,"Business Type",i18n:fields,,,yes,,policy,business_type,varchar(255),maxLength=100
+Policy,cancellation_date,date,"Cancellation Date",i18n:fields,,,yes,,policy,cancellation_date,date,
+Policy,cancellation_reason,text,"Cancellation Reason",i18n:fields,,,yes,,policy,cancellation_reason,mediumtext,
+Policy,carrier,varchar,Carrier,i18n:fields,,,yes,,policy,carrier,varchar(255),maxLength=255
+Policy,carrierAccount,link,"Carrier Account",i18n:fields,,,,Account,policy,carrier_account_id,varchar(17),
+Policy,carrierPortalUrl,url,"Carrier Portal",i18n:fields,,yes,yes,,policy,carrier_portal_url,varchar(255),
+Policy,commissionAmount,currency,"Commission Amount",i18n:fields,,yes,yes,,policy,commission_amount|commission_amount_currency,double|varchar(3),
+Policy,commissionAmountConverted,currencyConverted,"Commission Amount Converted",auto,,yes,,,policy,"(not stored)",,
+Policy,commissionAmountCurrency,enum,"Commission Amount Currency",auto,,yes,,,policy,commission_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Policy,commission_rate,float,"Commission Rate (Percent)",i18n:fields,,,yes,,policy,commission_rate,double,
+Policy,commissions,linkMultiple,Commissions,auto,,,yes,Commission,policy,"(not stored)",,
+Policy,contact,link,Contact,i18n:links,,,,Contact,policy,contact_id,varchar(17),
+Policy,coverageAmountConverted,currencyConverted,"Coverage Amount Converted",auto,,yes,,,policy,"(not stored)",,
+Policy,coverageAmountCurrency,enum,"Coverage Amount Currency",auto,,,,,policy,coverage_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Policy,coverage_amount,currency,"Coverage Amount",i18n:fields,,,yes,,policy,coverage_amount|coverage_amount_currency,double|varchar(3),
+Policy,createdAt,datetime,"Created At",i18n:fields,,yes,,,policy,created_at,datetime,
+Policy,createdBy,link,"Created By",i18n:fields,,yes,,User,policy,created_by_id,varchar(17),
+Policy,daysRemaining,int,"Days to Expiration",i18n:fields,,yes,yes,,policy,days_remaining,int,
+Policy,deductible,currency,Deductible,i18n:fields,,,yes,,policy,deductible|deductible_currency,double|varchar(3),
+Policy,deductibleConverted,currencyConverted,"Deductible Converted",auto,,yes,,,policy,"(not stored)",,
+Policy,deductibleCurrency,enum,"Deductible Currency",auto,,,,,policy,deductible_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Policy,effective_date,date,"Effective Date",i18n:fields,,,yes,,policy,effective_date,date,
+Policy,email_sequence_started,bool,"Email Sequence Started",i18n:fields,,,yes,,policy,email_sequence_started,tinyint(1),
+Policy,expiration_date,date,"Expiration Date",i18n:fields,,,yes,,policy,expiration_date,date,
+Policy,insuredMomentumId,varchar,"NowCerts Insured ID",i18n:fields,,yes,yes,,policy,insured_momentum_id,varchar(255),maxLength=255
+Policy,last_contact_date,date,"Last Contact Date",i18n:fields,,,yes,,policy,last_contact_date,date,
+Policy,last_contact_method,enum,"Last Contact Method",i18n:fields,,,yes,,policy,last_contact_method,varchar(255),"options=[|Phone|Email|Text|No Response]"
+Policy,line_of_business,varchar,"Line of Business",i18n:fields,,,yes,,policy,line_of_business,varchar(500),maxLength=500
+Policy,line_of_business_raw,varchar,"Line of Business (original)",i18n:fields,,yes,yes,,policy,line_of_business_raw,varchar(500),maxLength=500
+Policy,modifiedAt,datetime,"Modified At",i18n:fields,,yes,,,policy,modified_at,datetime,
+Policy,modifiedBy,link,"Modified By",i18n:fields,,yes,,User,policy,modified_by_id,varchar(17),
+Policy,momentumPolicyId,varchar,"NowCerts Policy ID",i18n:fields,,yes,yes,,policy,momentum_policy_id,varchar(255),maxLength=255
+Policy,momentum_last_synced,datetime,"Momentum Last Synced",i18n:fields,,yes,yes,,policy,momentum_last_synced,datetime,
+Policy,name,varchar,Name,i18n:fields,,,,,policy,name,varchar(100),maxLength=100
+Policy,opportunities,linkMultiple,Opportunities,i18n:links,,,,Opportunity,policy,"(not stored)",,
+Policy,policy_health,enum,"Policy Health",i18n:fields,,yes,yes,,policy,policy_health,varchar(255),"options=[|Active|Renewing|At Risk|Urgent|Expired]; default=Active"
+Policy,policy_notes,text,"Policy Notes",i18n:fields,,,yes,,policy,policy_notes,mediumtext,
+Policy,policy_number,varchar,"Policy Number",i18n:fields,,,yes,,policy,policy_number,varchar(100),maxLength=100
+Policy,policy_term,int,"Policy Term (months)",i18n:fields,,,yes,,policy,policy_term,int,
+Policy,premiumAmountConverted,currencyConverted,"Premium Amount Converted",auto,,yes,,,policy,"(not stored)",,
+Policy,premiumAmountCurrency,enum,"Premium Amount Currency",auto,,,,,policy,premium_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Policy,premiumAtRisk,currency,"Premium at Risk",i18n:fields,,,yes,,policy,premium_at_risk|premium_at_risk_currency,double|varchar(3),
+Policy,premiumAtRiskConverted,currencyConverted,"Premium At Risk Converted",auto,,yes,,,policy,"(not stored)",,
+Policy,premiumAtRiskCurrency,enum,"Premium At Risk Currency",auto,,,,,policy,premium_at_risk_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Policy,premium_amount,currency,"Premium Amount",i18n:fields,,,yes,,policy,premium_amount|premium_amount_currency,double|varchar(3),
+Policy,propertyAddress,text,"Property Address",i18n:fields,,,yes,,policy,property_address,mediumtext,
+Policy,reinstatement_date,date,"Reinstatement Date",i18n:fields,,,yes,,policy,reinstatement_date,date,
+Policy,renewals,linkMultiple,Renewals,auto,,,yes,Renewal,policy,"(not stored)",,
+Policy,renewedFrom,linkMultiple,"Renewed From",auto,,,yes,Renewal,policy,"(not stored)",,
+Policy,status,enum,Status,i18n:fields,,,yes,,policy,status,varchar(255),"options=[|Active|Up for Renewal|Renewing|Renewed|Expired|Cancelled|Flat Cancel|Pending Cancel|Non-Renewed|Lapsed]; default=Active; audited=true"
+Policy,statusLabel,enum,"Status Badge",i18n:fields,,yes,yes,,policy,status_label,varchar(255),"options=[|ACTIVE|UNKNOWN|RENEWAL WINDOW|CRITICAL RENEWAL|EXPIRED]"
+Policy,streamUpdatedAt,datetime,"Stream Updated At",i18n:fields,,yes,,,policy,stream_updated_at,datetime,
+Policy,sync_status,enum,"Sync Status",i18n:fields,,yes,yes,,policy,sync_status,varchar(255),"options=[|Synced|Pending|Error|Skipped]; default=Pending"
+Policy,teams,linkMultiple,Teams,i18n:fields,,,,Team,policy,"(not stored)",,
+Policy,underwriter,link,Underwriter,i18n:fields,,,yes,Contact,policy,underwriter_id,varchar(17),
+Policy,urgency,enum,Urgency,i18n:fields,,,yes,,policy,urgency,varchar(255),options=[|Low|Medium|High|Critical]
+Policy,urgencyIcon,varchar,Urgency,i18n:fields,,yes,yes,,policy,urgency_icon,varchar(8),maxLength=8
+Policy,vin,varchar,VIN,i18n:fields,,,yes,,policy,vin,varchar(100),maxLength=100
