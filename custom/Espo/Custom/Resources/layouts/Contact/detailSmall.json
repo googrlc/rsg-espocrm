@@ -16,25 +16,26 @@
             ],
             [
                 {
-                    "name": "phoneNumber"
+                    "name": "emailAddress"
                 },
                 {
-                    "name": "emailAddress"
+                    "name": "phoneNumber"
+                }
+            ],
+            [
+                {
+                    "name": "description"
                 }
             ]
         ],
         "style": "default",
-        "name": "contactHeader",
-        "label": "Relationship Snapshot"
+        "label": ""
     },
     {
         "rows": [
             [
                 {
-                    "name": "accountType"
-                },
-                {
-                    "name": "hasPortalUser"
+                    "name": "address"
                 }
             ],
             [
@@ -49,6 +50,14 @@
                 {
                     "name": "momentumClientId"
                 },
+                {
+                    "name": "campaign"
+                }
+            ],
+            [
+                {
+                    "name": "accountType"
+                },
                 false
             ]
         ],
@@ -61,18 +70,8 @@
                 },
                 {
                     "type": "equals",
-                    "attribute": "contactType",
-                    "value": "Dependent"
-                },
-                {
-                    "type": "equals",
-                    "attribute": "contactType",
-                    "value": "Spouse"
-                },
-                {
-                    "type": "equals",
-                    "attribute": "contactType",
-                    "value": "Employee"
+                    "attribute": "accountType",
+                    "value": "Personal Lines"
                 }
             ]
         },
@@ -80,7 +79,7 @@
         "tabBreak": false,
         "hidden": false,
         "noteText": null,
-        "name": "details",
+        "noteStyle": "info",
         "customLabel": "Details"
     }
 ]

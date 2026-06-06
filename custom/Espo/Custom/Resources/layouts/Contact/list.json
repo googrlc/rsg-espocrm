@@ -1,21 +1,16 @@
 [
     {
         "name": "name",
-        "link": true,
-        "width": 18
+        "width": 18,
+        "link": true
     },
     {
-        "name": "accountName",
-        "link": true,
-        "width": 14
+        "name": "title",
+        "width": 16
     },
     {
         "name": "contactType",
         "width": 10
-    },
-    {
-        "name": "clientType",
-        "width": 9
     },
     {
         "name": "emailAddress",
@@ -24,17 +19,5 @@
     {
         "name": "phoneNumber",
         "width": 11
-    },
-    {
-        "name": "dateOfBirth",
-        "width": 9
-    },
-    {
-        "name": "daysUntil65",
-        "width": 8
-    },
-    {
-        "name": "createdAt",
-        "width": 9
     }
 ]
