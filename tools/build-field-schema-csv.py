@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
-"""Generate a single CSV summarizing field definitions for the requested EspoCRM
-modules (Account, Contact, Opportunity, Task, Quote) for reference use.
+"""DEPRECATED — superseded by tools/build-crm-field-inventory.py.
 
-Source: metadata/full-metadata.json (live server snapshot) plus the planned
-Quote entity at _planned/metadata/entityDefs/Quote.json (Quote is not live).
+This generator reads metadata/full-metadata.json, which is a STALE camelCase
+snapshot (e.g. `accountStatus`, 365 Account fields) that no longer matches the
+live server (snake_case `account_status`, 279 Account fields). Its db_type column
+is metadata-derived, not the real DB schema.
+
+Use instead: exports/crm_fields_account_contact_policy.csv (built from a live
+read-only pull with real DB column types). The only modules this old report still
+covers that the new one does not yet: Lead, Opportunity, Renewal.
+
+Original purpose: summarize field definitions for EspoCRM modules for reference.
+Source: metadata/full-metadata.json plus _planned/metadata/entityDefs/Quote.json.
 """
 
 import csv
@@ -13,7 +21,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 META = ROOT / "metadata" / "full-metadata.json"
 PLANNED_QUOTE = ROOT / "_planned" / "metadata" / "entityDefs" / "Quote.json"
-OUT = ROOT / "field-reference" / "modules-field-schema.csv"
+OUT = ROOT / "field-reference" / "modules-field-schema.deprecated.csv"
 
 ENTITIES = [
     "Account",

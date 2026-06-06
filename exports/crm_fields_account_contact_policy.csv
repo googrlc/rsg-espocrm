@@ -278,6 +278,51 @@ Account,websiteUrl,url,"[OLD] Website URL",i18n:fields,,,yes,,account,website_ur
 Account,what_you_have_today,text,"What You Have Today",i18n:fields,,,yes,,account,what_you_have_today,longtext,
 Account,x_date,date,"Renewal X-Date",i18n:fields,,,yes,,account,x_date,date,
 Account,years_in_business,int,"Years in Business",i18n:fields,,,yes,,account,years_in_business,int,
+Commission,account,link,Account,i18n:links,yes,,,Account,commission,account_id,varchar(17),
+Commission,assignedUser,link,"Assigned User",i18n:fields,,,,User,commission,assigned_user_id,varchar(17),
+Commission,carrier,varchar,Carrier,i18n:fields,,,yes,,commission,carrier,varchar(255),maxLength=255
+Commission,commissionNotes,text,"Commission Notes",auto,,,yes,,commission,commission_notes,mediumtext,
+Commission,commissionRate,float,"Commission Rate (Percent)",i18n:fields,,,yes,,commission,commission_rate,double,
+Commission,commissionType,enum,"Commission Type",auto,yes,,yes,,commission,commission_type,varchar(255),"options=[|New Business|Renewal|Endorsement]"
+Commission,contact,link,Contact,i18n:links,,,,Contact,commission,contact_id,varchar(17),
+Commission,createdAt,datetime,"Created At",i18n:fields,,yes,,,commission,created_at,datetime,
+Commission,createdBy,link,"Created By",i18n:fields,,yes,,User,commission,created_by_id,varchar(17),
+Commission,effectiveDate,date,"Effective Date",i18n:fields,,,yes,,commission,effective_date,date,
+Commission,estimatedCommission,currency,"Estimated Commission",i18n:fields,,yes,yes,,commission,estimated_commission|estimated_commission_currency,double|varchar(3),
+Commission,estimatedCommissionConverted,currencyConverted,"Estimated Commission Converted",auto,,yes,,,commission,"(not stored)",,
+Commission,estimatedCommissionCurrency,enum,"Estimated Commission Currency",auto,,yes,,,commission,estimated_commission_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Commission,expectedPaymentDate,date,"Expected Payment Date",auto,,,yes,,commission,expected_payment_date,date,
+Commission,ledgerExternalId,varchar,"Ledger External ID",i18n:fields,,yes,yes,,commission,ledger_external_id,varchar(255),maxLength=255
+Commission,ledgerKey,varchar,"Ledger Key",i18n:fields,,yes,yes,,commission,ledger_key,varchar(255),maxLength=255
+Commission,ledgerPayloadHash,varchar,"Ledger Payload Hash",i18n:fields,,yes,yes,,commission,ledger_payload_hash,varchar(128),maxLength=128
+Commission,ledgerSyncError,text,"Ledger Sync Error",i18n:fields,,yes,yes,,commission,ledger_sync_error,mediumtext,
+Commission,ledgerSyncStatus,enum,"Ledger Sync Status",i18n:fields,,yes,yes,,commission,ledger_sync_status,varchar(255),"options=[|Pending|Synced|Error]; default=Pending"
+Commission,ledgerSyncedAt,datetime,"Ledger Synced At",i18n:fields,,yes,yes,,commission,ledger_synced_at,datetime,
+Commission,lineOfBusiness,enum,"Line of Business",i18n:fields,,,yes,,commission,line_of_business,varchar(255),"options=[|Commercial Auto|General Liability|Workers Comp|Commercial Property|BOP|Professional Liability|Umbrella|Personal Auto|Homeowners|Renters|Condo|Life|Health|Medicare|Group Benefits|Other]"
+Commission,modifiedAt,datetime,"Modified At",i18n:fields,,yes,,,commission,modified_at,datetime,
+Commission,modifiedBy,link,"Modified By",i18n:fields,,yes,,User,commission,modified_by_id,varchar(17),
+Commission,name,varchar,Name,i18n:fields,yes,,,,commission,name,varchar(255),maxLength=255
+Commission,opportunity,link,Opportunity,i18n:links,,,,Opportunity,commission,opportunity_id,varchar(17),
+Commission,overdueFlag,bool,"Overdue Flag",auto,,yes,yes,,commission,overdue_flag,tinyint(1),
+Commission,paymentReceivedDate,date,"Payment Received Date",auto,,,yes,,commission,payment_received_date,date,
+Commission,policy,link,Policy,auto,yes,,,Policy,commission,policy_id,varchar(17),
+Commission,postedAmount,currency,"Posted Amount",auto,,,yes,,commission,posted_amount|posted_amount_currency,double|varchar(3),
+Commission,postedAmountConverted,currencyConverted,"Posted Amount Converted",auto,,yes,,,commission,"(not stored)",,
+Commission,postedAmountCurrency,enum,"Posted Amount Currency",auto,,,,,commission,posted_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Commission,postingSource,enum,"Posting Source",auto,,yes,yes,,commission,posting_source,varchar(255),"options=[|Manual|AMS Download]; default=Manual"
+Commission,producer,varchar,Producer,auto,,,yes,,commission,producer,varchar(255),maxLength=255
+Commission,reconciliationStatus,enum,"Reconciliation Status",i18n:fields,,,yes,,commission,reconciliation_status,varchar(255),"options=[|Unreconciled|Reconciled|Disputed]; default=Unreconciled"
+Commission,renewal,link,Renewal,auto,,,,Renewal,commission,renewal_id,varchar(17),
+Commission,status,enum,Status,auto,yes,,yes,,commission,status,varchar(255),"options=[|Estimated|Posted|Overdue]; default=Estimated"
+Commission,streamUpdatedAt,datetime,"Stream Updated At",i18n:fields,,yes,,,commission,stream_updated_at,datetime,
+Commission,teams,linkMultiple,Teams,i18n:fields,,,,Team,commission,"(not stored)",,
+Commission,varianceAmount,currency,"Variance Amount",auto,,yes,yes,,commission,variance_amount|variance_amount_currency,double|varchar(3),
+Commission,varianceAmountConverted,currencyConverted,"Variance Amount Converted",auto,,yes,,,commission,"(not stored)",,
+Commission,varianceAmountCurrency,enum,"Variance Amount Currency",auto,,yes,,,commission,variance_amount_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Commission,variancePercent,float,"Variance Percent",auto,,yes,yes,,commission,variance_percent,double,
+Commission,writtenPremium,currency,"Written Premium",i18n:fields,,,yes,,commission,written_premium|written_premium_currency,double|varchar(3),
+Commission,writtenPremiumConverted,currencyConverted,"Written Premium Converted",auto,,yes,,,commission,"(not stored)",,
+Commission,writtenPremiumCurrency,enum,"Written Premium Currency",auto,,,,,commission,written_premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
 Contact,acceptanceStatus,varchar,"Acceptance Status",i18n:fields,,,,,contact,"(not stored)",,notStorable=true
 Contact,acceptanceStatusCalls,enum,"Acceptance Status (Calls)",i18n:fields,,,,,contact,"(not stored)",,"view=crm:views/lead/fields/acceptance-status; notStorable=true"
 Contact,acceptanceStatusMeetings,enum,"Acceptance Status (Meetings)",i18n:fields,,,,,contact,"(not stored)",,"view=crm:views/lead/fields/acceptance-status; notStorable=true"
@@ -402,3 +447,80 @@ Policy,underwriter,link,Underwriter,i18n:fields,,,yes,Contact,policy,underwriter
 Policy,urgency,enum,Urgency,i18n:fields,,,yes,,policy,urgency,varchar(255),options=[|Low|Medium|High|Critical]
 Policy,urgencyIcon,varchar,Urgency,i18n:fields,,yes,yes,,policy,urgency_icon,varchar(8),maxLength=8
 Policy,vin,varchar,VIN,i18n:fields,,,yes,,policy,vin,varchar(100),maxLength=100
+Quote,account,link,Account,i18n:fields,,,,Account,quote,account_id,varchar(17),
+Quote,carrier,varchar,Carrier,i18n:fields,yes,,yes,,quote,carrier,varchar(255),maxLength=255
+Quote,carrierAccount,link,"Carrier Account",auto,,,yes,Account,quote,carrier_account_id,varchar(17),
+Quote,documents,attachmentMultiple,Documents,i18n:fields,,,yes,,quote,"(not stored)",,
+Quote,effectiveDate,date,"Effective Date",i18n:fields,,,yes,,quote,effective_date,date,
+Quote,expirationDate,date,"Expiration Date",i18n:fields,,,yes,,quote,expiration_date,date,
+Quote,lineOfBusiness,enum,"Line of Business",i18n:fields,,,yes,,quote,line_of_business,varchar(255),"options=[|Commercial Auto|Transportation / Trucking|General Liability|Workers Comp|Commercial Property|BOP|Professional Liability|Umbrella|Other]"
+Quote,name,varchar,Name,i18n:fields,,,,,quote,name,varchar(255),maxLength=255
+Quote,notes,text,Notes,i18n:fields,,,yes,,quote,notes,mediumtext,
+Quote,opportunity,link,Opportunity,i18n:fields,yes,,,Opportunity,quote,opportunity_id,varchar(17),
+Quote,premium,currency,"Premium Amount",i18n:fields,,,yes,,quote,premium|premium_currency,double|varchar(3),
+Quote,premiumConverted,currencyConverted,"Premium Converted",auto,,yes,,,quote,"(not stored)",,
+Quote,premiumCurrency,enum,"Premium Currency",auto,,,,,quote,premium_currency,varchar(3),"maxLength=3; view=views/fields/currency-list"
+Quote,quoteNumber,varchar,"Quote Number",i18n:fields,yes,,yes,,quote,quote_number,varchar(100),"maxLength=100; audited=true"
+Quote,status,enum,Status,i18n:fields,yes,,yes,,quote,status,varchar(255),"options=[|Draft|Received|Presented|Bound|Declined]; default=Draft"
+Quote,streamUpdatedAt,datetime,"Stream Updated At",i18n:fields,,yes,,,quote,stream_updated_at,datetime,
+Task,account,link,Account,i18n:fields,,,,Account,task,account_id,varchar(17),
+Task,assignedUser,link,"Assigned User",i18n:fields,yes,,,User,task,assigned_user_id,varchar(17),view=custom:views/task/fields/assigned-user
+Task,attachments,attachmentMultiple,Attachments,i18n:fields,,,,,task,"(not stored)",,
+Task,automationKey,varchar,"Automation Key",auto,,yes,yes,,task,automation_key,varchar(100),maxLength=100
+Task,carrier,varchar,Carrier,auto,,,yes,,task,carrier,varchar(150),maxLength=150
+Task,confirm1Label,varchar,"Confirm1 Label",auto,,,yes,,task,confirm1_label,varchar(200),maxLength=200
+Task,confirm1Note,text,"Confirm1 Note",auto,,,yes,,task,confirm1_note,mediumtext,
+Task,confirm1Status,enum,"Confirm1 Status",auto,,,yes,,task,confirm1_status,varchar(255),"options=[Pending|Confirmed|Needs Follow-up]; default=Pending; audited=true"
+Task,confirm2Label,varchar,"Confirm2 Label",auto,,,yes,,task,confirm2_label,varchar(200),maxLength=200
+Task,confirm2Note,text,"Confirm2 Note",auto,,,yes,,task,confirm2_note,mediumtext,
+Task,confirm2Status,enum,"Confirm2 Status",auto,,,yes,,task,confirm2_status,varchar(255),"options=[Pending|Confirmed|Needs Follow-up]; default=Pending; audited=true"
+Task,confirm3Label,varchar,"Confirm3 Label",auto,,,yes,,task,confirm3_label,varchar(200),maxLength=200
+Task,confirm3Note,text,"Confirm3 Note",auto,,,yes,,task,confirm3_note,mediumtext,
+Task,confirm3Status,enum,"Confirm3 Status",auto,,,yes,,task,confirm3_status,varchar(255),"options=[Pending|Confirmed|Needs Follow-up]; default=Pending; audited=true"
+Task,confirm4Label,varchar,"Confirm4 Label",auto,,,yes,,task,confirm4_label,varchar(200),maxLength=200
+Task,confirm4Note,text,"Confirm4 Note",auto,,,yes,,task,confirm4_note,mediumtext,
+Task,confirm4Status,enum,"Confirm4 Status",auto,,,yes,,task,confirm4_status,varchar(255),"options=[Pending|Confirmed|Needs Follow-up]; default=Pending; audited=true"
+Task,confirmationProgress,varchar,"Confirmation Progress",auto,,yes,yes,,task,confirmation_progress,varchar(16),maxLength=16
+Task,contact,link,Contact,i18n:fields,,,,Contact,task,contact_id,varchar(17),
+Task,createdAt,datetime,"Created At",i18n:fields,,yes,,,task,created_at,datetime,
+Task,createdBy,link,"Created By",i18n:fields,,yes,,User,task,created_by_id,varchar(17),view=views/fields/user
+Task,dateCompleted,datetime,"Date Completed",i18n:fields,,yes,,,task,date_completed,datetime,
+Task,dateEnd,datetimeOptional,"Date Due",i18n:fields,,,,,task,date_end|date_end_date,datetime|date,"view=crm:views/task/fields/date-end; audited=true"
+Task,dateEndDate,date,"Date End (all day)",i18n:fields,,,,,task,date_end_date,date,
+Task,dateStart,datetimeOptional,"Start Date",i18n:fields,,yes,,,task,date_start|date_start_date,datetime|date,
+Task,dateStartDate,date,"Date Start (all day)",i18n:fields,,yes,,,task,date_start_date,date,
+Task,description,text,Description,i18n:fields,,,,,task,description,mediumtext,
+Task,isOverdue,bool,"Is Overdue",i18n:fields,,yes,,,task,"(not stored)",,"view=crm:views/task/fields/is-overdue; notStorable=true"
+Task,managerNotes,wysiwyg,"Manager Notes",auto,,,yes,,task,manager_notes,mediumtext,
+Task,modifiedAt,datetime,"Modified At",i18n:fields,,yes,,,task,modified_at,datetime,
+Task,modifiedBy,link,"Modified By",i18n:fields,,yes,,User,task,modified_by_id,varchar(17),view=views/fields/user
+Task,momentumLastSynced,datetime,"Momentum Last Synced",i18n:fields,,,yes,,task,momentum_last_synced,datetime,
+Task,momentumTaskId,varchar,"NowCerts Task ID",i18n:fields,,yes,yes,,task,momentum_task_id,varchar(255),maxLength=255
+Task,name,varchar,Name,i18n:fields,yes,,,,task,name,varchar(255),pattern=$noBadCharacters
+Task,originalEmail,link,"Original Email",i18n:fields,,,,,task,"(not stored)",,notStorable=true
+Task,parent,linkParent,Parent,i18n:fields,,,,"Account,Contact,Lead,Opportunity,Case,Policy,Renewal",task,parent_id|parent_type,varchar(17)|varchar(100),
+Task,policies,linkMultiple,Policies,i18n:fields,,,yes,Policy,task,"(not stored)",,view=custom:views/task/fields/policies
+Task,policy,link,Policy,auto,,,,Policy,task,policy_id,varchar(17),
+Task,policyEffectiveDate,date,"Policy Effective Date",auto,,,yes,,task,policy_effective_date,date,
+Task,policyExpirationDate,date,"Policy Expiration Date",auto,,,yes,,task,policy_expiration_date,date,
+Task,policyNumber,varchar,"Policy Number",auto,,,yes,,task,policy_number,varchar(100),maxLength=100
+Task,policyType,varchar,"Policy Type",auto,,,yes,,task,policy_type,varchar(100),maxLength=100
+Task,priority,enum,Priority,i18n:fields,,,,,task,priority,varchar(255),"options=[Low|Normal|High|Urgent]; default=Normal; audited=true"
+Task,refAccessCode,varchar,"Ref Access Code",auto,,,yes,,task,ref_access_code,varchar(100),maxLength=100
+Task,refLink,url,"Ref Link",auto,,,yes,,task,ref_link,varchar(255),
+Task,refLink2,url,"Ref Link2",auto,,,yes,,task,ref_link2,varchar(255),
+Task,refNotes,text,"Ref Notes",auto,,,yes,,task,ref_notes,mediumtext,
+Task,refNumber,varchar,"Ref Number",auto,,,yes,,task,ref_number,varchar(100),maxLength=100
+Task,refNumber2,varchar,"Ref Number2",auto,,,yes,,task,ref_number2,varchar(100),maxLength=100
+Task,refSupportContact,varchar,"Ref Support Contact",auto,,,yes,,task,ref_support_contact,varchar(150),maxLength=150
+Task,reminders,jsonArray,Reminders,i18n:fields,,,,,task,"(not stored)",,"view=crm:views/meeting/fields/reminders; notStorable=true"
+Task,sourceActivityLogId,varchar,"Source Activity Log Id",auto,,yes,yes,,task,source_activity_log_id,varchar(24),maxLength=24
+Task,status,enum,Status,i18n:fields,,,,,task,status,varchar(255),"options=[Inbox|In Progress|Waiting on Client|Waiting on Carrier|Completed|Cancelled]; default=Inbox; audited=true"
+Task,streamUpdatedAt,datetime,"Stream Updated At",i18n:fields,,yes,,,task,stream_updated_at,datetime,
+Task,syncSource,enum,"Sync Source",i18n:fields,,,,,task,sync_source,varchar(255),options=[Manual|Email|API|Slack|Momentum|n8n|Hermes]
+Task,taskSource,enum,Source,i18n:fields,,,yes,,task,task_source,varchar(255),options=[|Account|Contact|Opportunity|Policy]
+Task,taskType,enum,"Task Type",i18n:fields,,,,,task,task_type,varchar(255),"options=[Client Service|Policy Change|Renewal|New Business|Follow Up|Onboarding|Claims|Commission|Underwriting Request|Underwriter Follow-up|Agency Admin|Admin|Other]; audited=true"
+Task,teams,linkMultiple,Teams,i18n:fields,,,,Team,task,"(not stored)",,view=views/fields/teams
+Task,triageReason,text,"Triage Reason",i18n:fields,,,,,task,triage_reason,mediumtext,
+Task,triageSummary,text,"Triage Summary",i18n:fields,,,,,task,triage_summary,mediumtext,
+Task,urgency,enum,Urgency,i18n:fields,,,,,task,urgency,varchar(255),"options=[Urgent|High|Normal|Low]; default=Normal"
