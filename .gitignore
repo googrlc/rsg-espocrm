@@ -10,3 +10,4 @@ secrets.json
 .hermes/
 __pycache__/
 *.pyc
+backups/
