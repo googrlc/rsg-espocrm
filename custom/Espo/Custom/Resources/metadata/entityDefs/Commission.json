@@ -287,7 +287,6 @@
         "contact": {
             "type": "belongsTo",
             "entity": "Contact",
-            "foreign": "commissions",
             "isCustom": true
         },
         "account": {

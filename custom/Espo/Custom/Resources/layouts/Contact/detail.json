@@ -1,23 +1,68 @@
 [
-  {
-    "label": "Relationship Snapshot",
-    "name": "contactHeader",
-    "rows": [
-      [{"name": "name"}, {"name": "account"}],
-      [{"name": "contactType"}, {"name": "relationshipToAccount"}],
-      [{"name": "dateOfBirth"}, {"name": "daysUntil65"}],
-      [{"name": "emailAddress"}, {"name": "phoneNumber"}],
-      [{"name": "originalLeadSource"}, {"name": "title"}],
-      [{"name": "address"}, false]
-    ]
-  },
-  {
-    "label": "Details",
-    "name": "details",
-    "rows": [
-      [{"name": "clientType"}, {"name": "householdRole"}],
-      [{"name": "momentumClientId"}, {"name": "csrName"}],
-      [{"name": "description", "fullWidth": true}]
-    ]
-  }
+    {
+        "label": "Relationship Snapshot",
+        "name": "contactHeader",
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "contactType"
+                }
+            ],
+            [
+                {
+                    "name": "dateOfBirth"
+                },
+                {
+                    "name": "daysUntil65"
+                }
+            ],
+            [
+                {
+                    "name": "emailAddress"
+                },
+                {
+                    "name": "phoneNumber"
+                }
+            ],
+            [
+                {
+                    "name": "address"
+                },
+                false
+            ]
+        ]
+    },
+    {
+        "label": "Details",
+        "name": "details",
+        "rows": [
+            [
+                {
+                    "name": "clientType"
+                }
+            ],
+            [
+                {
+                    "name": "momentumClientId"
+                },
+                {
+                    "name": "csrName"
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
 ]

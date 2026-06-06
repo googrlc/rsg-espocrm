@@ -3,25 +3,8 @@
         "contactType": "Contact Type",
         "csrName": "Customer Service Representative Name",
         "momentumClientId": "Momentum Client ID",
-        "contactRole": "Contact Role",
-        "relationshipToAccount": "Relationship to Account",
-        "originalLeadSource": "Original Lead Source",
         "daysUntil65": "Days Until 65",
-        "contactDriveFolderUrl": "Drive Folder URL",
-        "medicareEligible": "Medicare Eligible",
-        "medicarePartB": "Medicare Part B",
-        "medicarePlanType": "Plan Type",
-        "medicareCarrier": "Medicare Carrier",
-        "irmaApplies": "IRMAA Applies",
-        "aepSepDate": "AEP/SEP Date",
-        "lifeCoverageInForce": "Coverage In Force",
-        "lifeFaceAmount": "Face Amount",
-        "lifePolicyType": "Policy Type",
-        "lifeHealthClass": "Health Class",
-        "lifeAnnualPremium": "Annual Premium",
-        "lifeBeneficiaryOnFile": "Beneficiary On File",
-        "lifeReviewDate": "Life Review Date",
-        "underwrittenPolicies": "Underwritten Policies"
+        "contactDriveFolderUrl": "Drive Folder URL"
     },
     "options": {
         "contactType": {
@@ -31,16 +14,6 @@
             "Spouse": "Spouse",
             "Dependent": "Dependent",
             "Business Owner": "Business Owner"
-        },
-        "relationshipToAccount": {
-            "": "",
-            "Head of Household": "Head of Household",
-            "Secondary": "Secondary",
-            "Employee": "Employee"
-        },
-        "contactRole": {
-            "": "",
-            "Underwriter": "Underwriter"
         }
     },
     "labels": {

@@ -443,13 +443,11 @@
         "underwriter": {
             "type": "belongsTo",
             "entity": "Contact",
-            "foreign": "underwrittenPolicies",
             "isCustom": true
         },
         "contact": {
             "type": "belongsTo",
             "entity": "Contact",
-            "foreign": "policies",
             "isCustom": true
         },
         "opportunities": {

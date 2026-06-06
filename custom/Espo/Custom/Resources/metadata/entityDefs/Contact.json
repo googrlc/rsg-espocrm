@@ -9,7 +9,7 @@
             "maxLength": 255,
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "NowCerts/Momentum AMS insured database_id \u2014 used as sync dedup key"
+            "tooltipText": "NowCerts/Momentum AMS insured database_id — used as sync dedup key"
         },
         "csrName": {
             "type": "varchar",
@@ -47,171 +47,15 @@
                 "Business Owner": "default"
             }
         },
-        "contactRole": {
-            "type": "enum",
-            "options": [
-                "",
-                "Underwriter"
-            ],
-            "isCustom": true,
-            "displayAsLabel": true,
-            "style": {
-                "Underwriter": "danger"
-            }
-        },
-        "householdRole": {
-            "type": "enum",
-            "options": [
-                "",
-                "Primary",
-                "Spouse",
-                "Dependent",
-                "Co-insured"
-            ],
-            "isCustom": true,
-            "style": {
-                "Primary": "primary",
-                "Spouse": "success",
-                "Dependent": "info",
-                "Co-insured": "warning"
-            }
-        },
-        "relationshipToAccount": {
-            "type": "enum",
-            "options": [
-                "",
-                "Head of Household",
-                "Secondary",
-                "Employee"
-            ],
-            "isCustom": true,
-            "displayAsLabel": true,
-            "style": {
-                "Head of Household": "primary",
-                "Secondary": "info",
-                "Employee": "default"
-            }
-        },
-        "originalLeadSource": {
-            "type": "varchar",
-            "maxLength": 255,
-            "isCustom": true,
-            "readOnly": true
-        },
         "daysUntil65": {
             "type": "int",
             "isCustom": true,
             "readOnly": true
         },
-        "policies": {
-            "type": "linkMultiple",
-            "isCustom": true,
-            "layoutDetailDisabled": true,
-            "noLoad": true
-        },
-        "underwrittenPolicies": {
-            "type": "linkMultiple",
-            "isCustom": true,
-            "layoutDetailDisabled": true,
-            "noLoad": true
-        },
-        "commissions": {
-            "type": "linkMultiple",
-            "isCustom": true,
-            "layoutDetailDisabled": true,
-            "noLoad": true
-        },
-        "renewals": {
-            "type": "linkMultiple",
-            "isCustom": true,
-            "layoutDetailDisabled": true,
-            "noLoad": true
-        },
         "contactDriveFolderUrl": {
             "type": "url",
             "isCustom": true,
-            "tooltipText": "Optional override \u2014 contact-specific Google Drive folder URL"
-        },
-        "medicareEligible": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false
-        },
-        "medicarePartB": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false
-        },
-        "medicarePlanType": {
-            "type": "enum",
-            "options": [
-                "",
-                "Supplement",
-                "Advantage",
-                "Part D"
-            ],
-            "isCustom": true
-        },
-        "medicareCarrier": {
-            "type": "varchar",
-            "maxLength": 255,
-            "isCustom": true
-        },
-        "irmaApplies": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Income-Related Monthly Adjustment Amount applies"
-        },
-        "aepSepDate": {
-            "type": "date",
-            "isCustom": true,
-            "tooltipText": "Annual Enrollment Period or Special Enrollment Period date"
-        },
-        "lifeCoverageInForce": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false
-        },
-        "lifeFaceAmount": {
-            "type": "currency",
-            "isCustom": true
-        },
-        "lifePolicyType": {
-            "type": "enum",
-            "options": [
-                "",
-                "Term",
-                "Whole",
-                "Universal"
-            ],
-            "isCustom": true
-        },
-        "lifeHealthClass": {
-            "type": "enum",
-            "options": [
-                "",
-                "Preferred Plus",
-                "Preferred",
-                "Standard Plus",
-                "Standard",
-                "Substandard"
-            ],
-            "isCustom": true
-        },
-        "lifeAnnualPremium": {
-            "type": "currency",
-            "isCustom": true
-        },
-        "lifeBeneficiaryOnFile": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false
-        },
-        "lifeReviewDate": {
-            "type": "date",
-            "isCustom": true,
-            "tooltipText": "Last date life insurance review was completed"
+            "tooltipText": "Optional override — contact-specific Google Drive folder URL"
         },
         "activityLogs": {
             "type": "linkMultiple",
@@ -231,30 +75,6 @@
         }
     },
     "links": {
-        "policies": {
-            "type": "hasMany",
-            "entity": "Policy",
-            "foreign": "contact",
-            "isCustom": true
-        },
-        "underwrittenPolicies": {
-            "type": "hasMany",
-            "entity": "Policy",
-            "foreign": "underwriter",
-            "isCustom": true
-        },
-        "commissions": {
-            "type": "hasMany",
-            "entity": "Commission",
-            "foreign": "contact",
-            "isCustom": true
-        },
-        "renewals": {
-            "type": "hasMany",
-            "entity": "Renewal",
-            "foreign": "contact",
-            "isCustom": true
-        },
         "activityLogs": {
             "type": "hasMany",
             "entity": "ActivityLog",
@@ -282,8 +102,6 @@
             "name",
             "accountName",
             "contactType",
-            "householdRole",
-            "relationshipToAccount",
             "clientType",
             "emailAddress",
             "dateOfBirth",

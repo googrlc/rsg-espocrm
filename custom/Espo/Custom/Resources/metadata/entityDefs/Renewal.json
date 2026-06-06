@@ -277,7 +277,6 @@
         "contact": {
             "type": "belongsTo",
             "entity": "Contact",
-            "foreign": "renewals",
             "isCustom": true
         },
         "assignedUser": {

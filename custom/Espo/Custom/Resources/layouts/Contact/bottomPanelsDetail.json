@@ -1,10 +1,4 @@
 {
-    "policies": {
-        "index": 10
-    },
-    "commissions": {
-        "index": 11
-    },
     "accounts": {
         "index": 12
     },
