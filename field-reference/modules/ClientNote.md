@@ -1,10 +1,10 @@
-# Client Note
+# ClientNote
 
 **Entity name:** `ClientNote`  
-**Plural label:** Client Notes  
+**Plural label:** ClientNote  
 **Type:** Custom entity (module: `Custom`)  
-**Field count:** 9  
-**Link count:** 4  
+**Field count:** 8  
+**Link count:** 3  
 
 **API endpoints**
 
@@ -20,7 +20,6 @@
 |---|---|---|---|---|---|
 | `account` | Account | link | yes | — | required |
 | `category` | Category | enum | yes | `General Note` | required, custom |
-| `collaborators` | collaborators | linkMultiple |  | — | — |
 | `content` | Note | text | yes | — | required, custom |
 | `createdAt` | Date | datetime |  | — | read-only |
 | `createdBy` | Added By | link |  | — | read-only |
@@ -44,10 +43,9 @@
 | API name | Label | Type | Target entity | Foreign link | Notes |
 |---|---|---|---|---|---|
 | `account` | Account | belongsTo | `Account` | `clientNotes` | custom |
-| `collaborators` | collaborators | hasMany | `User` | `—` | relation `entityCollaborator` |
 | `createdBy` | createdBy | belongsTo | `User` | `—` | — |
 | `modifiedBy` | modifiedBy | belongsTo | `User` | `—` | — |
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

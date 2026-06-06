@@ -3,8 +3,8 @@
 **Entity name:** `Quote`  
 **Plural label:** Quote  
 **Type:** Custom entity (module: `Custom`)  
-**Field count:** 14  
-**Link count:** 2  
+**Field count:** 16  
+**Link count:** 3  
 
 **API endpoints**
 
@@ -20,6 +20,8 @@
 |---|---|---|---|---|---|
 | `account` | Account | link |  | — | — |
 | `carrier` | Carrier | varchar | yes | — | required, max 255, custom |
+| `carrierAccount` | carrierAccount | link |  | — | custom |
+| `documents` | Documents | attachmentMultiple |  | — | custom |
 | `effectiveDate` | Effective Date | date |  | — | custom |
 | `expirationDate` | Expiration Date | date |  | — | custom |
 | `lineOfBusiness` | Line of Business | enum |  | — | custom |
@@ -67,8 +69,9 @@
 | API name | Label | Type | Target entity | Foreign link | Notes |
 |---|---|---|---|---|---|
 | `account` | account | belongsTo | `Account` | `quotes` | custom |
+| `carrierAccount` | carrierAccount | belongsTo | `Account` | `—` | custom |
 | `opportunity` | opportunity | belongsTo | `Opportunity` | `quotes` | custom |
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

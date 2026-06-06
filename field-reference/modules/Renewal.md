@@ -3,7 +3,7 @@
 **Entity name:** `Renewal`  
 **Plural label:** Renewals  
 **Type:** Custom entity (module: `Custom`)  
-**Field count:** 35  
+**Field count:** 39  
 **Link count:** 10  
 
 **API endpoints**
@@ -19,6 +19,8 @@
 | API name | Label | Type | Required | Default | Constraints |
 |---|---|---|---|---|---|
 | `account` | Account | link | yes | — | required |
+| `account_confirmed` | Account details confirmed (units / drivers) | bool |  | false | custom |
+| `ams_updated` | AMS (NowCerts) updated | bool |  | false | custom |
 | `assignedUser` | assignedUser | link |  | — | — |
 | `carrier` | Carrier | varchar |  | — | max 255, custom |
 | `commission_rate` | Commission Rate (Percent) | float |  | — | custom |
@@ -46,8 +48,10 @@
 | `renewalPremiumConverted` | renewalPremiumConverted | currencyConverted |  | — | read-only |
 | `renewalPremiumCurrency` | renewalPremiumCurrency | enum |  | — | max 3 |
 | `renewal_effective_date` | Renewal Effective Date | date |  | — | custom |
+| `renewal_email_sent` | Renewal email sent to client | bool |  | false | custom |
 | `renewal_notes` | Renewal Notes | text |  | — | custom |
 | `renewal_premium` | Renewal Premium | currency |  | — | custom |
+| `renewal_reviewed` | Renewal declaration pulled & reviewed | bool |  | false | custom |
 | `stage` | Stage | enum |  | `Identified` | custom |
 | `streamUpdatedAt` | streamUpdatedAt | datetime |  | — | read-only |
 | `tasks` | Tasks | linkMultiple |  | — | custom |
@@ -138,7 +142,7 @@
 | `account` | Account | belongsTo | `Account` | `renewals` | custom |
 | `assignedUser` | assignedUser | belongsTo | `User` | `—` | — |
 | `commissions` | Commissions | hasMany | `Commission` | `renewal` | custom |
-| `contact` | Contact | belongsTo | `Contact` | `renewals` | custom |
+| `contact` | Contact | belongsTo | `Contact` | `—` | custom |
 | `createdBy` | createdBy | belongsTo | `User` | `—` | — |
 | `modifiedBy` | modifiedBy | belongsTo | `User` | `—` | — |
 | `newPolicy` | Renewed Policy | belongsTo | `Policy` | `renewedFrom` | custom |
@@ -148,4 +152,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

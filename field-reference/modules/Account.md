@@ -3,8 +3,8 @@
 **Entity name:** `Account`  
 **Plural label:** Accounts  
 **Type:** Core entity (module: `Crm`)  
-**Field count:** 262  
-**Link count:** 30  
+**Field count:** 279  
+**Link count:** 29  
 
 **API endpoints**
 
@@ -18,9 +18,8 @@
 
 | API name | Label | Type | Required | Default | Constraints |
 |---|---|---|---|---|---|
-| `accountCategory` | accountCategory | enum |  | — | custom |
 | `account_score` | Account Score | int |  | 0 | read-only, min 0, max 100, custom |
-| `account_status` | Policy Health | enum |  | `Active` | custom |
+| `account_status` | Account Health | enum |  | `Active` | custom |
 | `account_type` | Account Type | enum |  | — | custom |
 | `activePolicyCount` | [OLD] Active Policy Count | int |  | — | min 0, custom |
 | `agent_of_agency_code` | Agent and Agency Code | text |  | — | custom |
@@ -44,17 +43,33 @@
 | `billingAddressState` | billingAddressState | varchar |  | — | max 100, pattern |
 | `billingAddressStreet` | billingAddressStreet | text |  | — | max 255 |
 | `businessEntity` | Business Entity | enum |  | — | custom |
+| `cConstructionSpecialty` | Construction Specialty | enum |  | `General Contractor` | max 100, custom |
 | `cYearBusinessEst` | Calendar Year Business Established | text |  | — | custom |
 | `campaign` | Campaign | link |  | — | — |
 | `carrier` | Carrier | text |  | — | custom |
-| `carrierPolicies` | carrierPolicies | linkMultiple |  | — | custom |
+| `carrierPolicies` | Carrier Policies | linkMultiple |  | — | custom |
 | `carrier_code` | Carrier Code | text |  | — | custom |
 | `claims_count_3yr` | Claims Count (Three Year) | int |  | — | custom |
 | `claims_count_lifetime` | claims_count_lifetime | int |  | — | custom |
 | `claims_notes` | Claims Notes | text |  | — | custom |
 | `claims_open` | Open Claims | int |  | — | custom |
-| `clientNotes` | clientNotes | linkMultiple |  | — | custom |
+| `clientNotes` | Client Notes | linkMultiple |  | — | custom |
 | `client_since` | Client Since | date |  | — | custom |
+| `clvAnnualCommissionConverted` | clvAnnualCommissionConverted | currencyConverted |  | — | read-only |
+| `clvAnnualCommissionCurrency` | clvAnnualCommissionCurrency | enum |  | — | read-only, max 3 |
+| `clvCurrentConverted` | clvCurrentConverted | currencyConverted |  | — | read-only |
+| `clvCurrentCurrency` | clvCurrentCurrency | enum |  | — | read-only, max 3 |
+| `clvProjectedConverted` | clvProjectedConverted | currencyConverted |  | — | read-only |
+| `clvProjectedCurrency` | clvProjectedCurrency | enum |  | — | read-only, max 3 |
+| `clvWithCrossSellConverted` | clvWithCrossSellConverted | currencyConverted |  | — | read-only |
+| `clvWithCrossSellCurrency` | clvWithCrossSellCurrency | enum |  | — | read-only, max 3 |
+| `clv_annual_commission` | Annual Commission | currency |  | — | read-only, custom |
+| `clv_current` | CLV (To Date) | currency |  | — | read-only, custom |
+| `clv_last_calculated` | CLV Last Calculated | datetime |  | — | read-only, custom |
+| `clv_projected` | CLV (Projected) | currency |  | — | read-only, custom |
+| `clv_retention_rate_applied` | Retention Rate Used | float |  | — | read-only, custom |
+| `clv_tenure_years` | Tenure (Years) | float |  | — | read-only, custom |
+| `clv_with_cross_sell` | CLV (with Cross-Sell) | currency |  | — | read-only, custom |
 | `commissions` | Commissions | linkMultiple |  | — | custom |
 | `communication_notes` | Communication Notes | text |  | — | custom |
 | `contactIsInactive` | Inactive | bool |  | false | — |
@@ -64,9 +79,11 @@
 | `createdBy` | createdBy | link |  | — | read-only |
 | `csrName` | Customer Service Representative Name | text |  | — | custom |
 | `dateOfBirth` | dateOfBirth | date |  | — | custom |
-| `days_to_renewal` | Days to Renewal | int |  | — | read-only, custom |
+| `days_to_renewal` | Days to Next Renewal | int |  | — | read-only, custom |
 | `description` | Description | text |  | — | — |
 | `do_not_contact` | do_not_contact | bool |  | false | custom |
+| `documentLinks` | documentLinks | text |  | — | custom |
+| `documents` | Documents | attachmentMultiple |  | — | custom |
 | `downloadsStatements` | downloadsStatements | bool |  | false | custom |
 | `emailAddress` | Email | email |  | — | — |
 | `emailAddressIsInvalid` | emailAddressIsInvalid | bool |  | — | — |
@@ -283,17 +300,7 @@
 
 ## Allowed values (enum / multi-enum / array / checklist)
 
-### `accountCategory` — accountCategory
-
-- Type: `enum`
-- Options:
-  - `""` _(empty)_
-  - `Personal`
-  - `Commercial`
-  - `Carrier`
-  - `MGA`
-
-### `account_status` — Policy Health
+### `account_status` — Account Health
 
 - Type: `enum`
 - Default: `Active`
@@ -331,6 +338,49 @@
   - `Partnership`
   - `Non-Profit`
   - `Other`
+
+### `cConstructionSpecialty` — Construction Specialty
+
+- Type: `enum`
+- Default: `General Contractor`
+- Options:
+  - `General Contractor`
+  - `Site Preparation / Demolition`
+  - `Excavation & Grading`
+  - `Earthwork & Soil Stabilization`
+  - `Concrete`
+  - `Masonry`
+  - `Structural Steel / Iron Work`
+  - `Carpentry / Framing`
+  - `Welding & Fabrication`
+  - `Roofing`
+  - `Waterproofing & Dampproofing`
+  - `Siding & Cladding`
+  - `Windows & Glazing / Curtain Wall`
+  - `EIFS / Stucco`
+  - `Drywall / Framing`
+  - `Insulation`
+  - `Flooring`
+  - `Painting & Coatings`
+  - `Ceilings`
+  - `Millwork & Casework / Cabinetry`
+  - `Doors, Frames & Hardware`
+  - `Plumbing`
+  - `HVAC`
+  - `Electrical`
+  - `Fire Protection / Sprinkler Systems`
+  - `Controls & Building Automation`
+  - `Landscaping / Hardscaping`
+  - `Asphalt Paving`
+  - `Concrete Paving`
+  - `Fencing`
+  - `Signage`
+  - `Security Systems`
+  - `Audio/Visual & Low Voltage`
+  - `Elevators & Lifts`
+  - `Swimming Pools & Fountains`
+  - `Solar / Renewable Energy`
+  - `Environmental Remediation`
 
 ### `gbMedicalPlanType` — Group Benefits Medical Plan Type
 
@@ -640,7 +690,6 @@
 | `originalLead` | Original Lead | hasOne | `Lead` | `createdAccount` | — |
 | `policies` | policies | hasMany | `Policy` | `account` | custom |
 | `portalUsers` | Portal Users | hasMany | `User` | `accounts` | — |
-| `quotes` | quotes | hasMany | `Quote` | `account` | custom |
 | `renewals` | renewals | hasMany | `Renewal` | `account` | custom |
 | `targetLists` | Target Lists | hasMany | `TargetList` | `accounts` | — |
 | `tasks` | tasks | hasChildren | `Task` | `parent` | — |
@@ -653,4 +702,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

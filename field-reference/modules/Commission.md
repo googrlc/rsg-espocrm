@@ -142,7 +142,7 @@
 |---|---|---|---|---|---|
 | `account` | account | belongsTo | `Account` | `commissions` | custom |
 | `assignedUser` | assignedUser | belongsTo | `User` | `—` | — |
-| `contact` | contact | belongsTo | `Contact` | `commissions` | custom |
+| `contact` | contact | belongsTo | `Contact` | `—` | custom |
 | `createdBy` | createdBy | belongsTo | `User` | `—` | — |
 | `modifiedBy` | modifiedBy | belongsTo | `User` | `—` | — |
 | `opportunity` | opportunity | belongsTo | `Opportunity` | `commissions` | custom |
@@ -152,4 +152,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

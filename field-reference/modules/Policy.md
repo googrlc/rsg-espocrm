@@ -3,8 +3,8 @@
 **Entity name:** `Policy`  
 **Plural label:** Policies  
 **Type:** Custom entity (module: `Custom`)  
-**Field count:** 69  
-**Link count:** 13  
+**Field count:** 70  
+**Link count:** 15  
 
 **API endpoints**
 
@@ -47,7 +47,7 @@
 | `coverage_amount` | Coverage Amount | currency |  | — | custom |
 | `createdAt` | createdAt | datetime |  | — | read-only |
 | `createdBy` | createdBy | link |  | — | read-only |
-| `daysRemaining` | Days Remaining | int |  | — | read-only, custom |
+| `daysRemaining` | Days to Expiration | int |  | — | read-only, custom |
 | `deductible` | Deductible | currency |  | — | custom |
 | `deductibleConverted` | deductibleConverted | currencyConverted |  | — | read-only |
 | `deductibleCurrency` | deductibleCurrency | enum |  | — | max 3 |
@@ -65,6 +65,7 @@
 | `momentum_last_synced` | Momentum Last Synced | datetime |  | — | read-only, custom |
 | `name` | name | varchar |  | — | max 100 |
 | `opportunities` | opportunities | linkMultiple |  | — | — |
+| `policy_health` | Policy Health | enum |  | `Active` | read-only, custom |
 | `policy_notes` | Policy Notes | text |  | — | custom |
 | `policy_number` | Policy Number | varchar |  | — | max 100, custom |
 | `policy_term` | Policy Term (months) | int |  | — | custom |
@@ -120,6 +121,18 @@
   - `Email`
   - `Text`
   - `No Response`
+
+### `policy_health` — Policy Health
+
+- Type: `enum`
+- Default: `Active`
+- Options:
+  - `""` _(empty)_
+  - `Active`
+  - `Renewing`
+  - `At Risk`
+  - `Urgent`
+  - `Expired`
 
 ### `status` — Status
 
@@ -178,16 +191,18 @@
 | `activityLogs` | activityLogs | hasMany | `ActivityLog` | `policy` | custom |
 | `assignedUser` | assignedUser | belongsTo | `User` | `—` | — |
 | `carrierAccount` | carrierAccount | belongsTo | `Account` | `carrierPolicies` | custom |
+| `coiTasks` | coiTasks | hasMany | `Task` | `policies` | custom, relation `taskPolicy` |
 | `commissions` | commissions | hasMany | `Commission` | `policy` | custom |
-| `contact` | contact | belongsTo | `Contact` | `policies` | custom |
+| `contact` | contact | belongsTo | `Contact` | `—` | custom |
 | `createdBy` | createdBy | belongsTo | `User` | `—` | — |
 | `modifiedBy` | modifiedBy | belongsTo | `User` | `—` | — |
 | `opportunities` | opportunities | hasMany | `Opportunity` | `policies` | custom, relation `policyOpportunity` |
 | `renewals` | renewals | hasMany | `Renewal` | `policy` | custom |
 | `renewedFrom` | renewedFrom | hasMany | `Renewal` | `newPolicy` | custom |
+| `tasks` | tasks | hasMany | `Task` | `policy` | custom |
 | `teams` | teams | hasMany | `Team` | `—` | relation `entityTeam` |
-| `underwriter` | underwriter | belongsTo | `Contact` | `underwrittenPolicies` | custom |
+| `underwriter` | underwriter | belongsTo | `Contact` | `—` | custom |
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

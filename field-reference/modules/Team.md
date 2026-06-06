@@ -4,7 +4,7 @@
 **Plural label:** Teams  
 **Type:** Core entity  
 **Field count:** 9  
-**Link count:** 6  
+**Link count:** 7  
 
 **API endpoints**
 
@@ -33,6 +33,7 @@
 | API name | Label | Type | Target entity | Foreign link | Notes |
 |---|---|---|---|---|---|
 | `groupEmailFolders` | Group Email Folders | hasMany | `GroupEmailFolder` | `teams` | — |
+| `inboundEmails` | Group Email Accounts | hasMany | `InboundEmail` | `teams` | — |
 | `layoutSet` | Layout Set | belongsTo | `LayoutSet` | `teams` | — |
 | `notes` | Notes | hasMany | `Note` | `teams` | — |
 | `roles` | Roles | hasMany | `Role` | `teams` | — |
@@ -41,4 +42,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

@@ -25,8 +25,8 @@
 | `modifiedBy` | modifiedBy | link |  | — | read-only |
 | `name` | name | varchar | yes | — | required |
 | `teams` | teams | linkMultiple |  | — | read-only |
-| `timeRanges` | Workday Schedule | jsonArray | yes | `[["9:00", "17:00"]]` | required |
-| `timeZone` | Time Zone | enum |  | "" | — |
+| `timeRanges` | Workday Schedule | jsonArray | yes | `[['9:00', '17:00']]` | required |
+| `timeZone` | Time Zone | enum |  | — | — |
 | `weekday0` | Sun | bool |  | false | — |
 | `weekday0TimeRanges` | Sun Schedule | jsonArray |  | — | — |
 | `weekday1` | Mon | bool |  | true | — |
@@ -53,4 +53,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

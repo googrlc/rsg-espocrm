@@ -3,7 +3,7 @@
 **Entity name:** `Opportunity`  
 **Plural label:** Opportunities  
 **Type:** Core entity (module: `Crm`)  
-**Field count:** 197  
+**Field count:** 214  
 **Link count:** 20  
 
 **API endpoints**
@@ -76,7 +76,7 @@
 | `chkUnderlyingConfirmed` | chkUnderlyingConfirmed | bool |  | false | custom |
 | `chkUnderlyingLinked` | chkUnderlyingLinked | bool |  | false | custom |
 | `chkWelcomeLetter` | chkWelcomeLetter | bool |  | false | custom |
-| `closeDate` | Close Date | date | yes | — | required |
+| `closeDate` | Projected Close Date | date | yes | — | required |
 | `commissionLogged` | Commission Logged | bool |  | false | custom |
 | `commissionRate` | Commission Rate (Percent) | float |  | — | custom |
 | `commissions` | commissions | linkMultiple |  | — | custom |
@@ -87,6 +87,7 @@
 | `createdBy` | createdBy | link |  | — | read-only |
 | `currentCarrier` | Current Carrier | varchar |  | — | max 255, custom |
 | `description` | Description | text |  | — | — |
+| `documents` | Documents | attachmentMultiple |  | — | custom |
 | `drInformation` | Doctor Information | text |  | — | custom |
 | `driverDetails` | Driver Details | text |  | — | custom |
 | `effectiveDate` | Effective Date | date |  | — | custom |
@@ -132,22 +133,34 @@
 | `lastContactMethod` | Last Contact Method | enum |  | — | custom |
 | `lastStage` | Last Stage | enum |  | — | — |
 | `leadSource` | Lead Source | enum |  | — | custom |
+| `lifeAnnualPremium` | Life Annual Premium | currency |  | — | custom |
+| `lifeAnnualPremiumConverted` | lifeAnnualPremiumConverted | currencyConverted |  | — | read-only |
+| `lifeAnnualPremiumCurrency` | lifeAnnualPremiumCurrency | enum |  | — | max 3 |
+| `lifeBeneficiaryOnFile` | Life Beneficiary On File | bool |  | false | custom |
+| `lifeCoverageInForce` | Life Coverage In Force | bool |  | false | custom |
 | `lifeCoverageType` | Life Coverage Type | enum |  | — | custom |
-| `lifeFaceAmountRequested` | lifeFaceAmountRequested | currency |  | — | custom |
+| `lifeFaceAmount` | Life Face Amount (In Force) | currency |  | — | custom |
+| `lifeFaceAmountConverted` | lifeFaceAmountConverted | currencyConverted |  | — | read-only |
+| `lifeFaceAmountCurrency` | lifeFaceAmountCurrency | enum |  | — | max 3 |
+| `lifeFaceAmountRequested` | Life Face Amount (Requested) | currency |  | — | custom |
 | `lifeFaceAmountRequestedConverted` | lifeFaceAmountRequestedConverted | currencyConverted |  | — | read-only |
 | `lifeFaceAmountRequestedCurrency` | lifeFaceAmountRequestedCurrency | enum |  | — | max 3 |
-| `lifeHealthClassTarget` | lifeHealthClassTarget | enum |  | — | custom |
-| `lifeTermLength` | lifeTermLength | enum |  | — | custom |
-| `lifeTobaccoUser` | lifeTobaccoUser | bool |  | false | custom |
+| `lifeHealthClass` | Life Health Class (Current) | enum |  | — | custom |
+| `lifeHealthClassTarget` | Life Health Class (Target) | enum |  | — | custom |
+| `lifeReviewDate` | Life Review Date | date |  | — | custom |
+| `lifeTermLength` | Life Term Length | enum |  | — | custom |
+| `lifeTobaccoUser` | Life Tobacco User | bool |  | false | custom |
 | `lineOfBusiness` | Line of Business | enum | yes | — | required, custom |
 | `lossRunsRequested` | Loss Runs Requested | bool |  | false | custom |
 | `lostReason` | Lost Reason | enum |  | — | custom |
 | `medAepSepDate` | AEP/SEP Date | date |  | — | custom |
-| `medCurrentCarrier` | Current Medicare Carrier | varchar |  | — | max 255, custom |
-| `medCurrentPlan` | Current Plan | varchar |  | — | max 255, custom |
+| `medCurrentCarrier` | Medicare Carrier | varchar |  | — | max 255, custom |
+| `medCurrentPlan` | Medicare Plan Name | varchar |  | — | max 255, custom |
 | `medIrmaaApplies` | IRMAA Applies | bool |  | false | custom |
 | `medPlanType` | Medicare Plan Type | enum |  | — | custom |
+| `medicareEligible` | Medicare Eligible | bool |  | false | custom |
 | `medicareHICN` | Medicare HICN | varchar |  | — | max 50, custom |
+| `medicarePartB` | Medicare Part B | bool |  | false | custom |
 | `modifiedAt` | modifiedAt | datetime |  | — | read-only |
 | `modifiedBy` | modifiedBy | link |  | — | read-only |
 | `name` | Name | varchar | yes | — | required, pattern |
@@ -205,12 +218,16 @@
 | `teams` | teams | linkMultiple |  | — | — |
 | `umbrellaLimit` | umbrellaLimit | enum |  | — | custom |
 | `vehicleDetails` | Vehicle Details | text |  | — | custom |
-| `wcAnnualPayroll` | wcAnnualPayroll | currency |  | — | custom |
+| `wcAnnualPayroll` | Annual Payroll | currency |  | — | custom |
 | `wcAnnualPayrollConverted` | wcAnnualPayrollConverted | currencyConverted |  | — | read-only |
 | `wcAnnualPayrollCurrency` | wcAnnualPayrollCurrency | enum |  | — | max 3 |
-| `wcClassCode` | wcClassCode | varchar |  | — | max 20, custom |
-| `wcEmployeeCount` | wcEmployeeCount | int |  | — | custom |
-| `wcExperienceMod` | wcExperienceMod | float |  | — | custom |
+| `wcClassCode` | Class Code | varchar |  | — | max 20, custom |
+| `wcEmployeeCount` | Employee Count | int |  | — | custom |
+| `wcExperienceMod` | Experience Mod | float |  | — | custom |
+| `wcExposureRows` | Class Code Exposure | text |  | — | custom |
+| `wcLocationAddress` | Location Address | varchar |  | — | max 255, custom |
+| `wcMultiStateLocations` | Multi-state Locations | bool |  | — | custom |
+| `wcMultipleLocations` | Multiple Locations | bool |  | — | custom |
 | `writtenPremium` | Written Premium | currency |  | — | custom |
 | `writtenPremiumConverted` | writtenPremiumConverted | currencyConverted |  | — | read-only |
 | `writtenPremiumCurrency` | writtenPremiumCurrency | enum |  | — | max 3 |
@@ -353,7 +370,18 @@
   - `Universal`
   - `IUL`
 
-### `lifeHealthClassTarget` — lifeHealthClassTarget
+### `lifeHealthClass` — Life Health Class (Current)
+
+- Type: `enum`
+- Options:
+  - `""` _(empty)_
+  - `Preferred Plus`
+  - `Preferred`
+  - `Standard Plus`
+  - `Standard`
+  - `Substandard`
+
+### `lifeHealthClassTarget` — Life Health Class (Target)
 
 - Type: `enum`
 - Options:
@@ -363,7 +391,7 @@
   - `Standard`
   - `Rated`
 
-### `lifeTermLength` — lifeTermLength
+### `lifeTermLength` — Life Term Length
 
 - Type: `enum`
 - Options:
@@ -495,6 +523,7 @@
   - `Discovery`
   - `Quoting`
   - `Markets Out / Shopping`
+  - `Quotes Complete`
   - `Proposal Presented`
   - `Negotiation`
   - `Closed Won`
@@ -541,4 +570,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

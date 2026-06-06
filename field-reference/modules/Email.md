@@ -3,8 +3,8 @@
 **Entity name:** `Email`  
 **Plural label:** Emails  
 **Type:** Core entity  
-**Field count:** 76  
-**Link count:** 21  
+**Field count:** 77  
+**Link count:** 22  
 
 **API endpoints**
 
@@ -35,7 +35,7 @@
 | `createdEvent` | Created Event | linkParent |  | — | read-only |
 | `dateSent` | Date Sent | datetime |  | — | — |
 | `deliveryDate` | Delivery Date | datetime |  | — | read-only |
-| `emailAccounts` | emailAccounts | linkMultiple |  | — | read-only |
+| `emailAccounts` | Personal Accounts | linkMultiple |  | — | read-only |
 | `emailAddress` | Email Address | varchar |  | — | — |
 | `folder` | Folder | link |  | — | read-only |
 | `folderId` | Folder Id | varchar |  | — | read-only |
@@ -56,6 +56,7 @@
 | `idHash` | idHash | jsonObject |  | — | read-only |
 | `inArchive` | In Archive | bool |  | false | read-only |
 | `inTrash` | In Trash | bool |  | false | read-only |
+| `inboundEmails` | Group Accounts | linkMultiple |  | — | read-only |
 | `isAutoReply` | Is Auto-Reply | bool |  | — | read-only |
 | `isBeingImported` | isBeingImported | bool |  | — | read-only |
 | `isHtml` | HTML | bool |  | true | — |
@@ -128,9 +129,10 @@
 | `ccEmailAddresses` | CC Email Addresses | hasMany | `EmailAddress` | `—` | relation `emailEmailAddress` |
 | `createdBy` | createdBy | belongsTo | `User` | `—` | — |
 | `createdEvent` | Created Event | belongsToParent | `—` | `—` | — |
-| `emailAccounts` | emailAccounts | hasMany | `EmailAccount` | `emails` | — |
+| `emailAccounts` | Personal Accounts | hasMany | `EmailAccount` | `emails` | — |
 | `fromEmailAddress` | From Email Address | belongsTo | `EmailAddress` | `—` | — |
 | `groupFolder` | Group Folder | belongsTo | `GroupEmailFolder` | `emails` | — |
+| `inboundEmails` | Group Accounts | hasMany | `InboundEmail` | `emails` | — |
 | `modifiedBy` | modifiedBy | belongsTo | `User` | `—` | — |
 | `parent` | parent | belongsToParent | `emails` | `emails` | — |
 | `replied` | Replied | belongsTo | `Email` | `replies` | — |
@@ -144,4 +146,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

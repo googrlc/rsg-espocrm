@@ -98,6 +98,8 @@ ssh-add -l   # check loaded keys
 
 #### API Deploy (layouts + metadata only, no SSH needed)
 
+> ⚠️ The hardcoded `API_KEY` below is frequently **stale (returns 401)** — verify or rotate it before relying on the API. For read-only work, use the cache-pull method in the next section instead (no key needed).
+
 ```bash
 API_KEY="e5df7c321b47427d24046bab814dbb58"
 CRM_URL="https://rrespocrm-rsg-u69864.vm.elestio.app"
@@ -114,10 +116,29 @@ curl -X PUT "$CRM_URL/api/v1/Metadata/entityDefs/Account" \
 ```
 > CSS, JS, and PHP files must still be deployed via SSH (`deploy-to-crm.sh`).
 
+#### Read-only metadata / DB review (no API key needed)
+
+When the API key is stale, pull straight from the live container caches over Tailscale (`ssh espocrm-ts`). Containers: `app-espocrm-1` (app, docroot `/var/www/html`), `app-mysql-1` (DB `espocrm`), `app-espocrm-daemon-1`, `app-espocrm-websocket-1`.
+
+Merged, already-resolved data lives in the cache (rebuilt on every `rebuild`):
+
+- `data/cache/application/metadata.php` — merged metadata (`entityDefs`, `scopes`, `clientDefs`, …); **current, snake_case** field names (the committed `metadata/full-metadata.json` can lag)
+- `data/cache/application/languages/en_US.php` — merged i18n (entity scopes + a `Global` scope holding common/address-subfield labels)
+- `data/cache/application/ormMetadata.php` — ORM attribute→column map
+
+Dump any of them as JSON:
+
+```bash
+ssh espocrm-ts "docker exec -u www-data app-espocrm-1 \
+  php -r 'echo json_encode((include \"/var/www/html/data/cache/application/metadata.php\")[\"entityDefs\"][\"Account\"]);'"
+```
+
+Real DB column types come from MySQL — **credentials live in `data/config-internal.php`**, not `config.php` (merge both). The field-inventory report (`exports/crm_fields_*.csv`) and the per-module Field Guide (`field-reference/modules/`) are regenerated from such a pull via `tools/build-crm-field-inventory.py` and `tools/build-module-docs.py` (inputs vendored under `metadata/live-pull/`).
+
 ### Important Notes
 
 - No `package.json`, `composer.json`, or `requirements.txt` exists — no package manager is needed.
 - Python scripts in `tools/` use only stdlib (json, pathlib, importlib) — no pip install required.
 - The JavaScript files use EspoCRM's AMD `define()` pattern; they are not CommonJS/ESM modules.
-- JSON files under `entity-defs/` and `metadata/` are API dumps for reference, not deployed files.
+- JSON files under `entity-defs/`, `metadata/`, and `metadata/live-pull/` are read-only metadata dumps for reference/report generation, not deployed files.
 - The `n8n/` directory contains workflow JSON exports; they are imported into n8n's UI, not executed locally.

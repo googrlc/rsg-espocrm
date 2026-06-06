@@ -42,7 +42,7 @@
 | `status` | Status | enum |  | `Planned` | — |
 | `streamUpdatedAt` | streamUpdatedAt | datetime |  | — | read-only |
 | `teams` | teams | linkMultiple |  | — | — |
-| `uid` | uid | varchar |  | — | read-only, max 255 |
+| `uid` | UID | varchar |  | — | read-only, max 255 |
 | `users` | Users | linkMultiple |  | — | — |
 
 ## Allowed values (enum / multi-enum / array / checklist)
@@ -81,4 +81,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

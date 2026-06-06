@@ -3,8 +3,8 @@
 **Entity name:** `User`  
 **Plural label:** Users  
 **Type:** Core entity  
-**Field count:** 54  
-**Link count:** 16  
+**Field count:** 57  
+**Link count:** 19  
 
 **API endpoints**
 
@@ -23,16 +23,17 @@
 | `acceptanceStatusMeetings` | Acceptance Status (Meetings) | enum |  | — | — |
 | `account` | Account (Primary) | link |  | — | read-only |
 | `accounts` | Accounts | linkMultiple |  | — | — |
-| `apiKey` | apiKey | varchar |  | — | read-only, max 100 |
-| `auth2FA` | auth2FA | foreign |  | — | read-only |
+| `apiKey` | API Key | varchar |  | — | read-only, max 100 |
+| `auth2FA` | 2FA | foreign |  | — | read-only |
 | `authLogRecordId` | authLogRecordId | varchar |  | — | — |
-| `authMethod` | authMethod | enum |  | — | max 24 |
+| `authMethod` | Authentication Method | enum |  | — | max 24 |
 | `authTokenId` | authTokenId | varchar |  | — | — |
 | `avatar` | Avatar | image |  | — | — |
 | `avatarColor` | Avatar Color | colorpicker |  | — | — |
 | `contact` | Contact | link |  | — | — |
 | `createdAt` | createdAt | datetime |  | — | read-only |
 | `createdBy` | createdBy | link |  | — | read-only |
+| `dashboardTemplate` | Dashboard Template | link |  | — | — |
 | `defaultTeam` | Default Team | link |  | — | — |
 | `deleteId` | deleteId | varchar |  | `0` | read-only, not-null, max 17 |
 | `emailAddress` | Email | email |  | — | — |
@@ -46,6 +47,7 @@
 | `isActive` | Is Active | bool |  | true | — |
 | `lastAccess` | Last Access | datetime |  | — | read-only |
 | `lastName` | lastName | varchar | yes | — | required, max 100, pattern |
+| `layoutSet` | Layout Set | link |  | — | — |
 | `middleName` | middleName | varchar |  | — | max 100, pattern |
 | `modifiedAt` | modifiedAt | datetime |  | — | read-only |
 | `name` | Name | personName |  | — | — |
@@ -61,21 +63,22 @@
 | `recordAccessLevels` | recordAccessLevels | jsonObject |  | — | read-only |
 | `roles` | Roles | linkMultiple |  | — | — |
 | `salutationName` | salutationName | enum |  | — | — |
-| `secretKey` | secretKey | varchar |  | — | read-only, max 100 |
+| `secretKey` | Secret Key | varchar |  | — | read-only, max 100 |
 | `sendAccessInfo` | Send Email with Access Info to User | bool |  | — | — |
 | `targetListIsOptedOut` | targetListIsOptedOut | bool |  | — | read-only |
 | `teamRole` | Position | varchar |  | — | — |
-| `teams` | teams | linkMultiple |  | — | — |
+| `teams` | Teams | linkMultiple |  | — | — |
 | `title` | Title | varchar |  | — | max 100, pattern |
 | `token` | token | varchar |  | — | — |
 | `type` | Type | enum |  | `regular` | max 24 |
+| `userData` | User Data | linkOne |  | — | — |
 | `userEmailAddressList` | userEmailAddressList | array |  | — | read-only |
 | `userName` | User Name | varchar | yes | — | required, max 50 |
 | `workingTimeCalendar` | Working Time Calendar | link |  | — | — |
 
 ## Allowed values (enum / multi-enum / array / checklist)
 
-### `authMethod` — authMethod
+### `authMethod` — Authentication Method
 
 - Type: `enum`
 - Options:
@@ -122,8 +125,10 @@
 | `calls` | calls | hasMany | `Call` | `users` | — |
 | `contact` | Contact | belongsTo | `Contact` | `portalUser` | — |
 | `createdBy` | createdBy | belongsTo | `User` | `—` | — |
+| `dashboardTemplate` | Dashboard Template | belongsTo | `DashboardTemplate` | `—` | — |
 | `defaultTeam` | Default Team | belongsTo | `Team` | `—` | — |
 | `emails` | emails | hasMany | `Email` | `users` | — |
+| `layoutSet` | Layout Set | belongsTo | `LayoutSet` | `—` | no-join |
 | `meetings` | meetings | hasMany | `Meeting` | `users` | — |
 | `notes` | Notes | hasMany | `Note` | `users` | — |
 | `portalRoles` | Portal Roles | hasMany | `PortalRole` | `users` | — |
@@ -132,9 +137,10 @@
 | `targetLists` | Target Lists | hasMany | `TargetList` | `users` | — |
 | `tasks` | Tasks | hasMany | `Task` | `assignedUser` | — |
 | `teams` | Teams | hasMany | `Team` | `users` | — |
+| `userData` | User Data | hasOne | `UserData` | `user` | — |
 | `workingTimeCalendar` | Working Time Calendar | belongsTo | `WorkingTimeCalendar` | `—` | no-join |
 | `workingTimeRanges` | Working Time Exceptions | hasMany | `WorkingTimeRange` | `users` | — |
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._

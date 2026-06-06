@@ -1,6 +1,6 @@
 # EspoCRM Field Guide
 
-Per-module field reference for the RSG EspoCRM instance, generated from the live `/Metadata` API.
+Per-module field reference for the RSG EspoCRM instance, generated from live `/Metadata`.
 
 ## Instance
 
@@ -13,35 +13,35 @@ Per-module field reference for the RSG EspoCRM instance, generated from the live
 
 | Module | Label | Fields | Links | Type |
 |---|---|---|---|---|
-| [Account](Account.md) | Account | 262 | 30 | Core |
+| [Account](Account.md) | Account | 279 | 29 | Core |
 | [ActivityLog](ActivityLog.md) | ActivityLog | 33 | 7 | Custom |
 | [Call](Call.md) | Call | 22 | 9 | Core |
 | [Campaign](Campaign.md) | Campaign | 38 | 17 | Core |
 | [Case](Case.md) | Case | 21 | 14 | Core |
-| [ClientNote](ClientNote.md) | Client Note | 9 | 4 | Custom (no nav tab) |
+| [ClientNote](ClientNote.md) | ClientNote | 8 | 3 | Custom (no nav tab) |
 | [Commission](Commission.md) | Commission | 45 | 9 | Custom |
-| [Contact](Contact.md) | Contact | 80 | 26 | Core |
+| [Contact](Contact.md) | Contact | 54 | 22 | Core |
 | [CurrencyRecord](CurrencyRecord.md) | Currency Record | 8 | 1 | Core |
 | [Document](Document.md) | Document | 15 | 9 | Core |
-| [Email](Email.md) | Email | 76 | 21 | Core |
+| [Email](Email.md) | Email | 77 | 22 | Core |
 | [EmailTemplate](EmailTemplate.md) | Email Template | 15 | 6 | Core |
 | [Import](Import.md) | Import | 11 | 2 | Core |
 | [KnowledgeBaseArticle](KnowledgeBaseArticle.md) | Knowledge Base Article | 19 | 7 | Core |
-| [Lead](Lead.md) | Lead | 66 | 17 | Core |
+| [Lead](Lead.md) | Lead | 67 | 17 | Core |
 | [Meeting](Meeting.md) | Meeting | 26 | 9 | Core |
-| [Opportunity](Opportunity.md) | Opportunity | 197 | 20 | Core |
-| [Policy](Policy.md) | Policy | 69 | 13 | Custom |
-| [Quote](Quote.md) | Quote | 14 | 2 | Custom (no nav tab) |
-| [Renewal](Renewal.md) | Renewal | 35 | 10 | Custom |
+| [Opportunity](Opportunity.md) | Opportunity | 214 | 20 | Core |
+| [Policy](Policy.md) | Policy | 70 | 15 | Custom |
+| [Quote](Quote.md) | Quote | 16 | 3 | Custom |
+| [Renewal](Renewal.md) | Renewal | 39 | 10 | Custom |
 | [TargetList](TargetList.md) | Target List | 16 | 13 | Core |
-| [Task](Task.md) | Task | 33 | 8 | Core |
-| [Team](Team.md) | Team | 9 | 6 | Core |
+| [Task](Task.md) | Task | 61 | 10 | Core |
+| [Team](Team.md) | Team | 9 | 7 | Core |
 | [Template](Template.md) | PDF Template | 29 | 3 | Core |
-| [User](User.md) | User | 54 | 16 | Core |
+| [User](User.md) | User | 57 | 19 | Core |
 | [WorkingTimeCalendar](WorkingTimeCalendar.md) | Working Time Calendar | 23 | 4 | Core |
 
 ## How this was generated
 
-Source: live `GET /api/v1/Metadata` (keys: `entityDefs`, `scopes`, `clientDefs`) plus `GET /api/v1/I18n?locale=en_US` for labels.
+Source: a read-only live metadata pull (`metadata.php` cache, equivalent to `GET /api/v1/Metadata` keys `entityDefs`/`scopes`) plus the merged `en_US` i18n for labels. Regenerate with `tools/build-module-docs.py`.
 
-_Last generated: 2026-05-26_
+_Last generated: 2026-06-06_

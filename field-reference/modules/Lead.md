@@ -3,7 +3,7 @@
 **Entity name:** `Lead`  
 **Plural label:** Leads  
 **Type:** Core entity (module: `Crm`)  
-**Field count:** 66  
+**Field count:** 67  
 **Link count:** 17  
 
 **API endpoints**
@@ -45,6 +45,7 @@
 | `dateOfBirth` | Date of Birth | date |  | — | custom |
 | `description` | Description | text |  | — | — |
 | `doNotCall` | Do Not Call | bool |  | — | — |
+| `documents` | Documents | attachmentMultiple |  | — | custom |
 | `emailAddress` | Email | email |  | — | — |
 | `emailAddressIsInvalid` | emailAddressIsInvalid | bool |  | — | — |
 | `emailAddressIsOptedOut` | emailAddressIsOptedOut | bool |  | — | — |
@@ -183,4 +184,4 @@
 
 ---
 
-_Generated 2026-05-26 from `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`._
+_Generated 2026-06-06 from a read-only live metadata pull (`metadata.php` cache, equivalent to `GET https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Metadata`)._
