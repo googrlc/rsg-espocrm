@@ -19,10 +19,13 @@
         "syncSource": "Sync Source",
         "urgency": "Urgency",
         "triageSummary": "Triage Summary",
-        "triageReason": "Triage Reason"
+        "triageReason": "Triage Reason",
+        "policies": "Policies",
+        "dateStart": "Start Date"
     },
     "links": {
-        "account": "Account"
+        "account": "Account",
+        "policies": "Policies"
     },
     "labels": {
         "Complete Task": "Complete Task",

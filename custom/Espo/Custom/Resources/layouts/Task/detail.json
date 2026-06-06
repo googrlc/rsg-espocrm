@@ -16,6 +16,10 @@
                 { "name": "taskSource", "customLabel": "Source" }
             ],
             [
+                { "name": "dateEnd", "customLabel": "Date Due" },
+                { "name": "dateStart", "customLabel": "Started" }
+            ],
+            [
                 { "name": "syncSource" },
                 { "name": "confirmationProgress" }
             ]
@@ -30,16 +34,15 @@
                 { "name": "contact" }
             ],
             [
-                { "name": "policy" },
-                { "name": "policyType" }
+                { "name": "policies", "fullWidth": true }
             ],
             [
-                { "name": "policyNumber" },
-                { "name": "carrier" }
+                { "name": "policyType" },
+                { "name": "policyEffectiveDate" }
             ],
             [
-                { "name": "policyEffectiveDate" },
-                { "name": "policyExpirationDate" }
+                { "name": "policyExpirationDate" },
+                false
             ]
         ]
     },

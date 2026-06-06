@@ -504,6 +504,13 @@
             "entity": "Task",
             "foreign": "policy",
             "isCustom": true
+        },
+        "coiTasks": {
+            "type": "hasMany",
+            "entity": "Task",
+            "relationName": "taskPolicy",
+            "foreign": "policies",
+            "isCustom": true
         }
     },
     "collection": {

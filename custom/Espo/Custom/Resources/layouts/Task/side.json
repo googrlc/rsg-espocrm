@@ -10,12 +10,6 @@
             ],
             [
                 {
-                    "name": "dateEnd",
-                    "customLabel": "Date Due"
-                }
-            ],
-            [
-                {
                     "name": "contact"
                 }
             ]
@@ -25,11 +19,6 @@
         "label": "Record Dates",
         "name": "recordDates",
         "rows": [
-            [
-                {
-                    "name": "dateStart"
-                }
-            ],
             [
                 {
                     "name": "dateCompleted",

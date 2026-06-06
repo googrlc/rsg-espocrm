@@ -353,6 +353,17 @@
         },
         "policy": {
             "type": "link"
+        },
+        "policies": {
+            "type": "linkMultiple",
+            "view": "custom:views/task/fields/policies",
+            "tooltipText": "Policies this task concerns (1–5). For a COI, the picker is limited to the selected Insured's policies.",
+            "isCustom": true
+        },
+        "dateStart": {
+            "type": "datetimeOptional",
+            "readOnly": true,
+            "tooltipText": "When work started. Set automatically when the status first becomes \"In Progress\" — never entered by hand."
         }
     },
     "links": {
@@ -360,6 +371,13 @@
             "type": "belongsTo",
             "entity": "Policy",
             "foreign": "tasks",
+            "isCustom": true
+        },
+        "policies": {
+            "type": "hasMany",
+            "entity": "Policy",
+            "relationName": "taskPolicy",
+            "foreign": "coiTasks",
             "isCustom": true
         }
     },

@@ -2,6 +2,7 @@
 
 namespace Espo\Custom\Hooks\Task;
 
+use Espo\Core\Exceptions\BadRequest;
 use Espo\Core\Hook\Hook\BeforeSave;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
@@ -27,6 +28,9 @@ class ApplyCoiDefaults implements BeforeSave
 {
     private const COI_TYPE = 'COI Requested';
 
+    /** A COI request covers between 1 and this many policies. */
+    private const MAX_POLICIES = 5;
+
     /** Resolved at runtime by username so a changed user id can't break it. */
     private const GRETCHEN_USERNAME = 'gretchcoates';
 
@@ -50,6 +54,8 @@ class ApplyCoiDefaults implements BeforeSave
             return;
         }
 
+        $this->validatePolicyCount($entity);
+
         if ($entity->isNew()) {
             $this->applyNewTaskDefaults($entity);
         }
@@ -65,6 +71,27 @@ class ApplyCoiDefaults implements BeforeSave
 
         if (trim((string) ($entity->get('name') ?? '')) === '') {
             $entity->set('name', 'COI Request — ' . ($accountName !== '' ? $accountName : '[Client]'));
+        }
+    }
+
+    /**
+     * Enforce the COI 1–5 policy rule. The `policies` ids are only present on
+     * the entity when that field is part of the save, so on an unrelated edit
+     * of an existing task (ids not loaded) we skip the lower bound and never
+     * block. New COI tasks must carry at least one policy; the upper bound is
+     * always enforced as a safety net behind the client-side cap.
+     */
+    private function validatePolicyCount(Entity $entity): void
+    {
+        $ids = $entity->get('policiesIds');
+        $count = is_array($ids) ? count($ids) : 0;
+
+        if ($count > self::MAX_POLICIES) {
+            throw new BadRequest('A COI request can reference at most ' . self::MAX_POLICIES . ' policies.');
+        }
+
+        if ($entity->isNew() && $count < 1) {
+            throw new BadRequest('Select at least one policy for the COI request.');
         }
     }
 

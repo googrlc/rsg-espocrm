@@ -49,15 +49,7 @@
                     "customLabel": "Insured"
                 },
                 {
-                    "name": "policy"
-                }
-            ],
-            [
-                {
-                    "name": "policyNumber"
-                },
-                {
-                    "name": "carrier"
+                    "name": "policies"
                 }
             ]
         ]
