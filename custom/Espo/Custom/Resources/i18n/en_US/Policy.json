@@ -3,6 +3,8 @@
         "policy_number": "Policy Number",
         "line_of_business_raw": "Line of Business (original)",
         "line_of_business": "Line of Business",
+        "additionalInsuredOnFile": "Additional Insured On File",
+        "waiverOfSubOnFile": "Waiver of Subrogation On File",
         "status": "Status",
         "effective_date": "Effective Date",
         "expiration_date": "Expiration Date",

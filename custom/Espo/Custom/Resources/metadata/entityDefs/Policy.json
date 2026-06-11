@@ -403,6 +403,18 @@
             "tooltipText": "Set to true by renewal outreach automation after first email sent",
             "dbName": "emailSequenceStarted"
         },
+        "additionalInsuredOnFile": {
+            "type": "bool",
+            "default": false,
+            "isCustom": true,
+            "tooltipText": "Endorsement on file: this policy names additional insureds. Drives the ACORD 25 Additional Insured checkbox when a certificate of insurance is generated."
+        },
+        "waiverOfSubOnFile": {
+            "type": "bool",
+            "default": false,
+            "isCustom": true,
+            "tooltipText": "Endorsement on file: this policy carries a waiver of subrogation. Drives the ACORD 25 Waiver of Subrogation checkbox when a certificate of insurance is generated."
+        },
         "renewals": {
             "type": "linkMultiple",
             "isCustom": true,
