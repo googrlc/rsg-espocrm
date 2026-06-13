@@ -371,7 +371,8 @@ def _run_propose_crm_change(arguments: dict[str, Any]) -> str:
         "rationale": arguments.get("rationale"),
         "confidence": arguments.get("confidence"),
         "source": arguments.get("source"),
-        "proposed_by": arguments.get("proposedBy", "hermes"),
+        # LLM-agnostic: any agent (claude / hermes / other) labels itself here.
+        "proposed_by": arguments.get("proposedBy", "agent"),
     }
     data, err = _supabase_request("POST", "crm_change_proposals", body=row)
     if err:
