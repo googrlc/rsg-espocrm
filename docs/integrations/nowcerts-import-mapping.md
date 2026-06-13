@@ -243,7 +243,7 @@ function applyLockFilter(payload, amsLockState) {
    ↓
 [HTTP: GET Policy where momentumPolicyId=X]
    ↓
-[IF found]──→[IF amsLockState in (Pending AMS, Rejected by AMS)]──→[Slack alert + skip]
+[IF found]──→[IF amsLockState in (Pending AMS, Rejected by AMS)]──→[alert + skip]
    │                                                          │
    │                                                          └──→[Function: applyLockFilter] ──→ [HTTP PUT]
    │

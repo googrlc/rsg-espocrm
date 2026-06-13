@@ -106,8 +106,8 @@ after:  Client Service, Policy Change, Renewal, New Business, Follow Up, Onboard
 
 **`syncSource` — Gmail→Email, +API:**
 ```
-before: Manual, Gmail, Slack, Momentum, n8n, Hermes
-after:  Manual, Email, API, Slack, Momentum, n8n, Hermes
+before: Manual, Gmail, Momentum, n8n, Hermes
+after:  Manual, Email, API, Momentum, n8n, Hermes
 ```
 Migration note: existing rows storing `Gmail` should be data-migrated to `Email` (one-time UPDATE in the deploy plan). `API` is new.
 

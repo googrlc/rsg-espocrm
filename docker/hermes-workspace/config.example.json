@@ -1,0 +1,38 @@
+{
+  "model": {
+    "default": "REPLACE_WITH_MODEL_ID",
+    "provider": "REPLACE_WITH_PROVIDER"
+  },
+  "mcp_servers": {
+    "rsg-espocrm": {
+      "transport": "streamable-http",
+      "url": "${MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${API_SERVER_KEY}"
+      },
+      "enabled": true
+    },
+    "nowcerts": {
+      "transport": "streamable-http",
+      "url": "${NOWCERTS_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${NOWCERTS_MCP_TOKEN}"
+      },
+      "enabled": true
+    },
+    "supabase": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--read-only",
+        "--project-ref=${SUPABASE_PROJECT_REF}"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+      },
+      "enabled": true
+    }
+  }
+}

@@ -31,7 +31,7 @@ Do not point Hermes MCP clients at the CRM homepage/API URL directly. This works
 
 ### MCP Bridge Source of Truth
 
-The MCP bridge runs as the `espo-mcp` Docker sidecar in the Hermes Compose stack. Source lives in `hermes-mcp-bridge/`. Set:
+The MCP bridge runs as the `espo-mcp` Docker sidecar in the Hermes Compose stack. Source lives in `mcp_bridge/`. Set:
 
 - `MCP_URL=https://<espo-mcp-domain>/mcp`
 

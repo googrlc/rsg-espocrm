@@ -139,7 +139,7 @@ Actionable to-do item. Most task types fire outbound webhooks on status changes 
 
 **taskType** (Enum): `Client Service` · `Policy Change` · `Renewal` · `New Business` · `Follow Up` · `Onboarding` · `Claims` · `Commission` · `Admin` · `Other`
 
-**syncSource** (Enum): `Manual` · `Gmail` · `Slack` · `Momentum` · `n8n` · `Hermes`
+**syncSource** (Enum): `Manual` · `Gmail` · `Momentum` · `n8n` · `Hermes`
 
 > Status changes on most task types send real client-facing notifications. Update one at a time with user confirmation. See `guardrails.md` §Task webhooks.
 

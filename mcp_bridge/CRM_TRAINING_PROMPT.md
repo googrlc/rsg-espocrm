@@ -327,7 +327,7 @@ triggering client-notification workflows.
 | `priority` | Priority | `Low`, `Normal`, `High`, `Urgent` |
 | `taskType` | Task Type | `Client Service`, `Policy Change`, `Renewal`, `New Business`, `Follow Up`, `Onboarding`, `Claims`, `Commission`, `Admin`, `Other` |
 | `taskSource` | Source | `Account`, `Contact`, `Policy` |
-| `syncSource` | Sync Source | `Manual`, `Gmail`, `Slack`, `Momentum`, `n8n`, `Hermes` — origin of the task |
+| `syncSource` | Sync Source | `Manual`, `Gmail`, `Momentum`, `n8n`, `Hermes` — origin of the task |
 | `dateEnd` | Date Due | Due date/time (SLA reference — alias `slaDueDate` in webhook payloads) |
 | `dateCompleted` | Date Completed | Set automatically when status → `Completed` |
 | `isOverdue` | Is Overdue | Boolean; computed |

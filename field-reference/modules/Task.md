@@ -147,7 +147,6 @@
   - `Manual`
   - `Email`
   - `API`
-  - `Slack`
   - `Momentum`
   - `n8n`
   - `Hermes`
