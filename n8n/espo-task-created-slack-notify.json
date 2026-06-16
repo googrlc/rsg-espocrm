@@ -1,0 +1,239 @@
+{
+  "name": "EspoCRM Task Created → Slack Notify",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "espo-task-created",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-in",
+      "name": "EspoCRM Webhook (Task.create)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 304],
+      "webhookId": "espo-task-created"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "name": "taskId",
+              "value": "={{ $json.id || $json.body?.id || '' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "normalize",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [464, 304]
+    },
+    {
+      "parameters": {
+        "url": "=https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Task/{{ $json.taskId }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "select",
+              "value": "id,name,status,priority,dateEnd,assignedUserId,assignedUserName,parentId,parentType,parentName"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "get-task",
+      "name": "Get Task (authoritative)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [688, 304],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_ESPOCRM_API_CREDENTIAL_ID",
+          "name": "Espocrm_api"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT slack_user_id FROM public.slack_user_map WHERE espo_user_id = $1 LIMIT 1;",
+        "options": {
+          "queryReplacement": "={{ $json.assignedUserId }}"
+        }
+      },
+      "id": "lookup-slack",
+      "name": "Lookup Owner Slack ID",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [912, 304],
+      "credentials": {
+        "postgres": {
+          "id": "REPLACE_SUPABASE_POSTGRES_CREDENTIAL_ID",
+          "name": "Supabase Postgres"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const task = $('Get Task (authoritative)').first().json;\nconst slackLookup = $input.first().json;\n\nconst slackUserId = slackLookup.slack_user_id || null;\n// DM the assigned user if mapped; otherwise post to the ops channel\nconst channel = slackUserId || '#rsg-crm-tasks';\n\nconst priorityMap = { Urgent: '\\ud83d\\udd34', High: '\\ud83d\\udfe0', Normal: '\\ud83d\\udfe1', Low: '\\u26aa' };\nconst priorityEmoji = priorityMap[task.priority] || '\\ud83d\\udfe1';\n\nconst dueText = task.dateEnd\n  ? `<!date^${Math.floor(new Date(task.dateEnd).getTime() / 1000)}^{date_short}|${task.dateEnd}>`\n  : '_Not set_';\n\nconst parentText = task.parentName\n  ? `${task.parentType}: ${task.parentName}`\n  : '_None_';\n\nconst assigneeText = slackUserId\n  ? `<@${slackUserId}>`\n  : (task.assignedUserName || '_Unassigned_');\n\nconst text = `${priorityEmoji} New Task: ${task.name}`;\n\nconst blocks = [\n  {\n    type: 'header',\n    text: { type: 'plain_text', text: '\\ud83d\\udccb New Task Assigned', emoji: true }\n  },\n  {\n    type: 'section',\n    fields: [\n      { type: 'mrkdwn', text: `*Task:*\\n${task.name}` },\n      { type: 'mrkdwn', text: `*Status:*\\n${task.status}` },\n      { type: 'mrkdwn', text: `*Priority:*\\n${priorityEmoji} ${task.priority}` },\n      { type: 'mrkdwn', text: `*Due:*\\n${dueText}` }\n    ]\n  },\n  {\n    type: 'section',\n    fields: [\n      { type: 'mrkdwn', text: `*Assigned To:*\\n${assigneeText}` },\n      { type: 'mrkdwn', text: `*Related:*\\n${parentText}` }\n    ]\n  },\n  {\n    type: 'actions',\n    elements: [\n      {\n        type: 'button',\n        text: { type: 'plain_text', text: '\\u2705 Acknowledge', emoji: true },\n        style: 'primary',\n        action_id: 'task_acknowledge',\n        value: JSON.stringify({ taskId: task.id, assignedUserId: task.assignedUserId })\n      },\n      {\n        type: 'button',\n        text: { type: 'plain_text', text: '\\ud83d\\udd17 Open in CRM', emoji: true },\n        url: `https://rrespocrm-rsg-u69864.vm.elestio.app/#Task/view/${task.id}`\n      }\n    ]\n  }\n];\n\nreturn [{ json: { channel, text, blocks, taskId: task.id, assignedUserId: task.assignedUserId } }];"
+      },
+      "id": "build-blocks",
+      "name": "Build Block Kit",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1120, 304]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://slack.com/api/chat.postMessage",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ channel: $json.channel, text: $json.text, blocks: $json.blocks }) }}",
+        "options": {}
+      },
+      "id": "slack-post",
+      "name": "Slack chat.postMessage",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1344, 304],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "REPLACE_SLACK_BOT_CREDENTIAL_ID",
+          "name": "Slack_bot_token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.task_notify_audit (task_id, espo_user_id, slack_channel, slack_ts, event, payload) VALUES ($1, $2, $3, $4, 'notified', $5::jsonb);",
+        "options": {
+          "queryReplacement": "={{ $('Build Block Kit').first().json.taskId }},={{ $('Build Block Kit').first().json.assignedUserId }},={{ $json.channel }},={{ $json.ts }},={{ JSON.stringify($json) }}"
+        }
+      },
+      "id": "audit",
+      "name": "Audit: notified",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [1568, 304],
+      "credentials": {
+        "postgres": {
+          "id": "REPLACE_SUPABASE_POSTGRES_CREDENTIAL_ID",
+          "name": "Supabase Postgres"
+        }
+      },
+      "continueOnFail": true
+    }
+  ],
+  "pinData": {
+    "EspoCRM Webhook (Task.create)": [
+      {
+        "json": {
+          "id": "test-task-001",
+          "name": "Follow up on renewal quote – Acme Corp",
+          "status": "Not Started",
+          "priority": "High",
+          "assignedUserId": "test-user-001"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "EspoCRM Webhook (Task.create)": {
+      "main": [
+        [
+          {
+            "node": "Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Payload": {
+      "main": [
+        [
+          {
+            "node": "Get Task (authoritative)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Task (authoritative)": {
+      "main": [
+        [
+          {
+            "node": "Lookup Owner Slack ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Owner Slack ID": {
+      "main": [
+        [
+          {
+            "node": "Build Block Kit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Block Kit": {
+      "main": [
+        [
+          {
+            "node": "Slack chat.postMessage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Slack chat.postMessage": {
+      "main": [
+        [
+          {
+            "node": "Audit: notified",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": []
+}
