@@ -168,11 +168,19 @@ class AttachmentDriveSyncDispatcher
             return '';
         }
 
-        if (preg_match('#/folders/([^/?]+)#', $trimmed, $match) === 1) {
-            return trim((string) $match[1]);
+        // Only extract a folder ID from Google Drive URLs.
+        if (strpos($trimmed, 'drive.google.com') !== false || strpos($trimmed, 'docs.google.com') !== false) {
+            if (preg_match('#/folders/([^/?]+)#', $trimmed, $match) === 1) {
+                return trim((string) $match[1]);
+            }
         }
 
-        return ltrim($trimmed, '/');
+        // Bare folder ID (not a full URL).
+        if (preg_match('/^[A-Za-z0-9_-]{10,}$/', $trimmed)) {
+            return $trimmed;
+        }
+
+        return '';
     }
 
     private function normalizeFileName(string $name): string
