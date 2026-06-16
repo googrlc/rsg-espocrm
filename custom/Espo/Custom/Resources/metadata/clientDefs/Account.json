@@ -33,7 +33,7 @@
             },
             {
                 "name": "googleDrive",
-                "label": "Google Drive",
+                "label": "Client Documents",
                 "view": "custom:views/account/record/panels/google-drive",
                 "order": 2
             },
