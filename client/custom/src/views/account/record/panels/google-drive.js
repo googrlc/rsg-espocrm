@@ -1,7 +1,7 @@
 /************************************************************************
- * RSG Google Drive Sidebar Panel
- * Shows the client Google Drive folder link with quick-open button.
- * Allows inline paste of a Drive URL directly from the side panel.
+ * RSG Client Documents Sidebar Panel
+ * Shows the client document folder link (Nextcloud, Google Drive, etc.)
+ * with quick-open button. Allows inline paste of any URL.
  ************************************************************************/
 
 define("custom:views/account/record/panels/google-drive", ["view"], function (Dep) {
@@ -14,16 +14,9 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
                     <div class="rsg-gdrive-link-row">
                         <a href="{{driveUrl}}" target="_blank" rel="noopener noreferrer" class="rsg-gdrive-link">
                             <span class="rsg-gdrive-icon">
-                                <svg width="18" height="18" viewBox="0 0 87.3 78" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6.6 66.85l3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3L28.2 48.5H0c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
-                                    <path d="M43.65 25L29.2 0c-1.35.8-2.5 1.9-3.3 3.3L1.2 44c-.8 1.4-1.2 2.95-1.2 4.5h28.2z" fill="#00ac47"/>
-                                    <path d="M73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75L86.1 57c.8-1.4 1.2-2.95 1.2-4.5H59.1l5.9 11.75z" fill="#ea4335"/>
-                                    <path d="M43.65 25L58.1 0H29.2z" fill="#00832d"/>
-                                    <path d="M59.1 48.5H28.2L13.75 76.8h58.95z" fill="#2684fc"/>
-                                    <path d="M73.4 24.5l-14.45-25c-1.35-.8-2.9-1.25-4.5-1.25H32.9c-1.6 0-3.15.45-4.5 1.25L43.65 25H59.1l14.3 23.5H87.3c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
-                                </svg>
+                                <span class="fas fa-folder-open" style="font-size:18px;color:#5f6368;"></span>
                             </span>
-                            <span class="rsg-gdrive-text">Open Drive Folder</span>
+                            <span class="rsg-gdrive-text">Open Client Documents</span>
                             <span class="rsg-gdrive-arrow">&nearr;</span>
                         </a>
                     </div>
@@ -35,7 +28,7 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
                         <div class="rsg-gdrive-input-wrap">
                             <input type="text"
                                 class="form-control input-sm rsg-gdrive-url-input"
-                                placeholder="Paste Google Drive folder URL"
+                                placeholder="Paste document folder URL"
                                 data-name="driveUrlInput">
                             <button class="btn btn-primary btn-xs-text rsg-gdrive-save-btn"
                                 data-action="saveDriveUrl">Link</button>
@@ -46,7 +39,7 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
                 <div class="rsg-gdrive-edit-wrap hidden">
                     <input type="text"
                         class="form-control input-sm rsg-gdrive-url-input"
-                        placeholder="Paste Google Drive folder URL"
+                        placeholder="Paste document folder URL"
                         data-name="driveUrlEditInput">
                     <div class="rsg-gdrive-edit-actions">
                         <button class="btn btn-primary btn-xs-text" data-action="saveDriveUrl">Save</button>
@@ -129,38 +122,18 @@ define("custom:views/account/record/panels/google-drive", ["view"], function (De
 
             if (!url) return;
 
-            var folderUrl = url;
-            var folderId = this.extractFolderId(url);
-
-            if (!folderId && url.indexOf("drive.google.com") === -1 && url.indexOf("docs.google.com") === -1) {
-                Espo.Ui.warning("Please paste a valid Google Drive folder URL or folder ID.");
+            if (!/^https?:\/\//i.test(url)) {
+                Espo.Ui.warning("Please paste a valid URL (starting with http:// or https://).");
                 return;
             }
 
-            if (folderId) {
-                folderUrl = "https://drive.google.com/drive/u/0/folders/" + encodeURIComponent(folderId);
-            }
+            this.model.set("google_drive_folder_url", url);
 
-            this.model.set("google_drive_folder_url", folderUrl);
-
-            this.model.save({google_drive_folder_url: folderUrl}, {patch: true}).then(
+            this.model.save({google_drive_folder_url: url}, {patch: true}).then(
                 function () {
-                    Espo.Ui.success("Drive folder linked.");
+                    Espo.Ui.success("Document folder linked.");
                 }.bind(this)
             );
-        },
-
-        extractFolderId: function (value) {
-            var match = value.match(/\/folders\/([^/?#]+)/);
-            if (match && match[1]) {
-                return match[1];
-            }
-
-            if (/^[A-Za-z0-9_-]{10,}$/.test(value)) {
-                return value;
-            }
-
-            return null;
         }
     });
 });

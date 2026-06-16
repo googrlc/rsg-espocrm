@@ -12,24 +12,21 @@ class DeriveDriveLink implements BeforeSave
     {
         $folderUrl = trim((string) ($entity->get('google_drive_folder_url') ?? ''));
 
-        if ($folderUrl !== '' && strpos($folderUrl, 'drive.google.com') === false) {
-            $folderId = $this->extractFolderId($folderUrl);
-            if ($folderId !== '') {
-                $entity->set('google_drive_folder_url', 'https://drive.google.com/drive/u/0/folders/' . rawurlencode($folderId));
-            }
-        }
-    }
-
-    private function extractFolderId(string $value): string
-    {
-        if (preg_match('~/folders/([^/?#]+)~', $value, $matches)) {
-            return $matches[1];
+        if ($folderUrl === '') {
+            return;
         }
 
-        if (preg_match('/^[A-Za-z0-9_-]{10,}$/', $value)) {
-            return $value;
+        // If it's already a full URL (any provider), leave it as-is.
+        if (preg_match('#^https?://#i', $folderUrl)) {
+            return;
         }
 
-        return '';
+        // Bare folder ID — normalize to a Google Drive URL.
+        if (preg_match('/^[A-Za-z0-9_-]{10,}$/', $folderUrl)) {
+            $entity->set(
+                'google_drive_folder_url',
+                'https://drive.google.com/drive/u/0/folders/' . rawurlencode($folderUrl)
+            );
+        }
     }
 }
