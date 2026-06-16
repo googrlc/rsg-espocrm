@@ -2,6 +2,15 @@
   "name": "Slack Acknowledge → EspoCRM Write-back",
   "nodes": [
     {
+      "id": "slack-webhook",
+      "name": "Slack Interactivity Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        304
+      ],
+      "webhookId": "slack-task-ack",
       "parameters": {
         "httpMethod": "POST",
         "path": "slack-task-ack",
@@ -9,60 +18,79 @@
         "options": {
           "rawBody": true
         }
-      },
-      "id": "slack-webhook",
-      "name": "Slack Interactivity Webhook",
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2,
-      "position": [240, 304],
-      "webhookId": "slack-task-ack"
+      }
     },
     {
-      "parameters": {
-        "jsCode": "const crypto = require('crypto');\nconst item = $input.first();\nconst rawBody = item.json.body || '';\nconst headers = item.json.headers || {};\n\n// -- Slack request signing verification --\nconst signingSecret = $env.SLACK_SIGNING_SECRET || '';\nif (signingSecret) {\n  const ts = headers['x-slack-request-timestamp'] || '';\n  const sig = headers['x-slack-signature'] || '';\n  const basestring = `v0:${ts}:${rawBody}`;\n  const expected = 'v0=' + crypto.createHmac('sha256', signingSecret)\n    .update(basestring).digest('hex');\n  if (sig && !crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(sig))) {\n    throw new Error('Slack signature verification failed');\n  }\n}\n\n// -- Parse Slack interactive payload (URL-encoded form) --\nconst params = new URLSearchParams(rawBody);\nconst payload = JSON.parse(params.get('payload') || '{}');\n\nconst action = (payload.actions || [])[0] || {};\nlet actionValue = {};\ntry { actionValue = JSON.parse(action.value || '{}'); } catch (_) {}\nconst user = payload.user || {};\n\nreturn [{\n  json: {\n    taskId: actionValue.taskId || '',\n    assignedUserId: actionValue.assignedUserId || '',\n    slackUserId: user.id || '',\n    slackUserName: user.username || user.name || '',\n    actionId: action.action_id || '',\n    responseUrl: payload.response_url || '',\n    triggerId: payload.trigger_id || ''\n  }\n}];"
-      },
-      "id": "verify-parse",
+      "id": "verify",
       "name": "Verify Signature & Parse",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [464, 304]
+      "position": [
+        460,
+        304
+      ],
+      "parameters": {
+        "jsCode": "const crypto = require('crypto');\nconst { URLSearchParams } = require('url');\nconst item = $input.first();\nconst headers = item.json.headers || {};\n\nlet rawBody = '';\nif (typeof item.json.body === 'string') {\n  rawBody = item.json.body;\n} else if (item.binary && item.binary.data && item.binary.data.data) {\n  rawBody = Buffer.from(item.binary.data.data, 'base64').toString('utf8');\n} else if (item.json.rawBody) {\n  rawBody = typeof item.json.rawBody === 'string' ? item.json.rawBody : Buffer.from(item.json.rawBody).toString('utf8');\n} else if (item.json.body && typeof item.json.body === 'object') {\n  rawBody = new URLSearchParams(item.json.body).toString();\n}\n\nconst signingSecret = $env.SLACK_SIGNING_SECRET || '';\nif (signingSecret) {\n  const ts = headers['x-slack-request-timestamp'] || '';\n  const sig = headers['x-slack-signature'] || '';\n  if (!ts || !sig) throw new Error('Missing Slack signature headers');\n  if (Math.abs(Math.floor(Date.now()/1000) - Number(ts)) > 300) throw new Error('Stale Slack request');\n  const expected = 'v0=' + crypto.createHmac('sha256', signingSecret).update('v0:' + ts + ':' + rawBody).digest('hex');\n  const a = Buffer.from(expected);\n  const b = Buffer.from(sig);\n  if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) throw new Error('Bad Slack signature');\n}\n\nconst params = new URLSearchParams(rawBody);\nconst payload = JSON.parse(params.get('payload') || '{}');\nconst action = (payload.actions || [])[0] || {};\nlet actionValue = {};\ntry { actionValue = JSON.parse(action.value || '{}'); } catch (e) {}\nconst user = payload.user || {};\n\nreturn [{ json: {\n  taskId: actionValue.taskId || '',\n  assignedUserId: actionValue.assignedUserId || '',\n  slackUserId: user.id || '',\n  slackUserName: user.username || user.name || '',\n  actionId: action.action_id || '',\n  responseUrl: payload.response_url || ''\n} }];"
+      }
     },
     {
+      "id": "resp200",
+      "name": "Respond 200 (ack to Slack)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        680,
+        304
+      ],
       "parameters": {
         "respondWith": "text",
         "responseBody": "",
         "options": {
           "responseCode": 200
         }
-      },
-      "id": "ack-200",
-      "name": "Respond 200 (ack to Slack)",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
-      "position": [688, 304]
+      }
     },
     {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT espo_user_id FROM public.slack_user_map WHERE slack_user_id = $1 LIMIT 1;",
-        "options": {
-          "queryReplacement": "={{ $('Verify Signature & Parse').first().json.slackUserId }}"
-        }
-      },
-      "id": "map-back",
+      "id": "map",
       "name": "Map Slack→Espo User",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
-      "position": [912, 304],
+      "position": [
+        900,
+        304
+      ],
       "credentials": {
         "postgres": {
-          "id": "REPLACE_SUPABASE_POSTGRES_CREDENTIAL_ID",
+          "id": "tikI01sEGK9a9mw7",
           "name": "Supabase Postgres"
         }
       },
-      "continueOnFail": true
+      "continueOnFail": true,
+      "alwaysOutputData": true,
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT (SELECT espo_user_id FROM public.slack_user_map WHERE slack_user_id = $1 LIMIT 1) AS espo_user_id;",
+        "options": {
+          "queryReplacement": "={{ $('Verify Signature & Parse').first().json.slackUserId }}"
+        }
+      }
     },
     {
+      "id": "espo-put",
+      "name": "EspoCRM: mark In Progress",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        304
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "5umRt1PwLHjs3TTZ",
+          "name": "Espocrm_api (X-Api-Key write)"
+        }
+      },
+      "continueOnFail": true,
       "parameters": {
         "method": "PUT",
         "url": "=https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Task/{{ $('Verify Signature & Parse').first().json.taskId }}",
@@ -72,30 +100,31 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ status: 'In Progress' }) }}",
         "options": {}
-      },
-      "id": "espo-write",
-      "name": "EspoCRM: mark In Progress",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1120, 304],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "REPLACE_ESPOCRM_API_CREDENTIAL_ID",
-          "name": "Espocrm_api"
-        }
       }
     },
     {
-      "parameters": {
-        "jsCode": "const parsed = $('Verify Signature & Parse').first().json;\nconst espoResult = $input.first().json;\n\nconst success = !!espoResult.id;\nconst statusEmoji = success ? '\\u2705' : '\\u26a0\\ufe0f';\nconst statusLabel = success\n  ? 'Acknowledged & In Progress'\n  : 'Acknowledged (CRM update pending)';\nconst ts = Math.floor(Date.now() / 1000);\n\nconst blocks = [\n  {\n    type: 'section',\n    text: {\n      type: 'mrkdwn',\n      text: `${statusEmoji} *${statusLabel}*\\n_Acknowledged by <@${parsed.slackUserId}> <!date^${ts}^{date_short_pretty} at {time}|just now>_`\n    }\n  },\n  {\n    type: 'actions',\n    elements: [\n      {\n        type: 'button',\n        text: { type: 'plain_text', text: '\\ud83d\\udd17 Open in CRM', emoji: true },\n        url: `https://rrespocrm-rsg-u69864.vm.elestio.app/#Task/view/${parsed.taskId}`\n      }\n    ]\n  }\n];\n\nreturn [{\n  json: {\n    response_url: parsed.responseUrl,\n    text: `${statusEmoji} ${statusLabel}`,\n    blocks\n  }\n}];"
-      },
-      "id": "build-update",
+      "id": "build-upd",
       "name": "Build Updated Message",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1344, 304]
+      "position": [
+        1340,
+        304
+      ],
+      "parameters": {
+        "jsCode": "const parsed = $('Verify Signature & Parse').first().json;\nconst espoResult = $input.first() ? ($input.first().json || {}) : {};\nconst success = !!espoResult.id;\nconst emoji = success ? '✅' : '⚠️';\nconst label = success ? 'Acknowledged — In Progress' : 'Acknowledged (CRM update pending)';\nconst ts = Math.floor(Date.now()/1000);\nconst blocks = [\n  { type: 'section', text: { type: 'mrkdwn', text: emoji + ' *' + label + '*\\n_Acknowledged by <@' + parsed.slackUserId + '> <!date^' + ts + '^{date_short_pretty} at {time}|just now>_' } },\n  { type: 'actions', elements: [\n    { type: 'button', text: { type: 'plain_text', text: '🔗 Open in CRM', emoji: true }, url: 'https://rrespocrm-rsg-u69864.vm.elestio.app/#Task/view/' + parsed.taskId }\n  ]}\n];\nreturn [{ json: { response_url: parsed.responseUrl, text: emoji + ' ' + label, blocks: blocks } }];"
+      }
     },
     {
+      "id": "slack-upd",
+      "name": "Slack: update message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1560,
+        304
+      ],
+      "continueOnFail": true,
       "parameters": {
         "method": "POST",
         "url": "={{ $json.response_url }}",
@@ -103,36 +132,33 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ replace_original: true, text: $json.text, blocks: $json.blocks }) }}",
         "options": {}
-      },
-      "id": "slack-update",
-      "name": "Slack: update message",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1568, 304]
+      }
     },
     {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "INSERT INTO public.task_notify_audit (task_id, espo_user_id, slack_user_id, event, payload) VALUES ($1, $2, $3, 'acknowledged', $4::jsonb);",
-        "options": {
-          "queryReplacement": "={{ $('Verify Signature & Parse').first().json.taskId }},={{ ($('Map Slack→Espo User').first().json || {}).espo_user_id || null }},={{ $('Verify Signature & Parse').first().json.slackUserId }},={{ JSON.stringify($('Verify Signature & Parse').first().json) }}"
-        }
-      },
       "id": "audit-ack",
       "name": "Audit: acknowledged",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
-      "position": [1792, 304],
+      "position": [
+        1780,
+        304
+      ],
       "credentials": {
         "postgres": {
-          "id": "REPLACE_SUPABASE_POSTGRES_CREDENTIAL_ID",
+          "id": "tikI01sEGK9a9mw7",
           "name": "Supabase Postgres"
         }
       },
-      "continueOnFail": true
+      "continueOnFail": true,
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.task_notify_audit (task_id, espo_user_id, slack_user_id, event, payload) VALUES ($1, $2, $3, 'acknowledged', $4::jsonb);",
+        "options": {
+          "queryReplacement": "={{ [ $('Verify Signature & Parse').first().json.taskId, ($('Map Slack→Espo User').first().json ? ($('Map Slack→Espo User').first().json.espo_user_id || '') : ''), $('Verify Signature & Parse').first().json.slackUserId, JSON.stringify($('Verify Signature & Parse').first().json) ] }}"
+        }
+      }
     }
   ],
-  "pinData": {},
   "connections": {
     "Slack Interactivity Webhook": {
       "main": [
@@ -212,12 +238,10 @@
       ]
     }
   },
-  "active": false,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
-  "meta": {
-    "templateCredsSetupCompleted": false
-  },
-  "tags": []
+  "active": false,
+  "pinData": {}
 }

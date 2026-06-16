@@ -2,98 +2,88 @@
   "name": "EspoCRM Task Created → Slack Notify",
   "nodes": [
     {
+      "id": "webhook-in",
+      "name": "EspoCRM Service Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        240,
+        304
+      ],
+      "webhookId": "espo-task-created",
       "parameters": {
         "httpMethod": "POST",
         "path": "espo-task-created",
         "responseMode": "onReceived",
         "options": {}
-      },
-      "id": "webhook-in",
-      "name": "EspoCRM Webhook (Task.create)",
-      "type": "n8n-nodes-base.webhook",
+      }
+    },
+    {
+      "id": "validate",
+      "name": "Validate & Parse Service Event",
+      "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [240, 304],
-      "webhookId": "espo-task-created"
+      "position": [
+        460,
+        304
+      ],
+      "parameters": {
+        "jsCode": "const item = $input.first();\nconst headers = item.json.headers || {};\nconst body = item.json.body || {};\n\nconst expected = $env.SERVICE_WEBHOOK_SECRET || '';\nconst got = headers['x-service-webhook-secret'] || '';\nif (expected && got !== expected) {\n  throw new Error('Invalid X-Service-Webhook-Secret');\n}\n\nconst t = body.task || {};\nconst taskId = t.id || body.taskId || '';\nif (!taskId) { throw new Error('No task.id in service webhook payload'); }\n\nreturn [{ json: {\n  eventType: body.eventType || '',\n  taskId: taskId,\n  name: t.name || '(untitled task)',\n  status: t.status || '',\n  previousStatus: t.previousStatus || '',\n  priority: t.urgency || t.priority || 'Normal',\n  assignedUserId: t.assignedUserId || '',\n  assignedUserName: t.assignedUserName || '',\n  dateDue: t.dateDue || t.slaDueDate || '',\n  parentType: t.parentType || '',\n  parentName: t.parentName || '',\n  accountName: t.accountName || '',\n  contactName: t.contactName || '',\n  taskType: t.taskType || ''\n} }];"
+      }
     },
     {
-      "parameters": {
-        "assignments": {
-          "assignments": [
-            {
-              "name": "taskId",
-              "value": "={{ $json.id || $json.body?.id || '' }}",
-              "type": "string"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "normalize",
-      "name": "Normalize Payload",
-      "type": "n8n-nodes-base.set",
-      "typeVersion": 3.4,
-      "position": [464, 304]
-    },
-    {
-      "parameters": {
-        "url": "=https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1/Task/{{ $json.taskId }}",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendQuery": true,
-        "queryParameters": {
-          "parameters": [
-            {
-              "name": "select",
-              "value": "id,name,status,priority,dateEnd,assignedUserId,assignedUserName,parentId,parentType,parentName"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "get-task",
-      "name": "Get Task (authoritative)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [688, 304],
+      "id": "lookup",
+      "name": "Lookup Owner Slack ID",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        680,
+        304
+      ],
       "credentials": {
-        "httpHeaderAuth": {
-          "id": "REPLACE_ESPOCRM_API_CREDENTIAL_ID",
-          "name": "Espocrm_api"
+        "postgres": {
+          "id": "tikI01sEGK9a9mw7",
+          "name": "Supabase Postgres"
+        }
+      },
+      "continueOnFail": true,
+      "alwaysOutputData": true,
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT (SELECT slack_user_id FROM public.slack_user_map WHERE espo_user_id = $1 LIMIT 1) AS slack_user_id;",
+        "options": {
+          "queryReplacement": "={{ $json.assignedUserId || '' }}"
         }
       }
     },
     {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "SELECT slack_user_id FROM public.slack_user_map WHERE espo_user_id = $1 LIMIT 1;",
-        "options": {
-          "queryReplacement": "={{ $json.assignedUserId }}"
-        }
-      },
-      "id": "lookup-slack",
-      "name": "Lookup Owner Slack ID",
-      "type": "n8n-nodes-base.postgres",
-      "typeVersion": 2.5,
-      "position": [912, 304],
-      "credentials": {
-        "postgres": {
-          "id": "REPLACE_SUPABASE_POSTGRES_CREDENTIAL_ID",
-          "name": "Supabase Postgres"
-        }
-      },
-      "continueOnFail": true
-    },
-    {
-      "parameters": {
-        "jsCode": "const task = $('Get Task (authoritative)').first().json;\nconst slackLookup = $input.first().json;\n\nconst slackUserId = slackLookup.slack_user_id || null;\n// DM the assigned user if mapped; otherwise post to the ops channel\nconst channel = slackUserId || '#rsg-crm-tasks';\n\nconst priorityMap = { Urgent: '\\ud83d\\udd34', High: '\\ud83d\\udfe0', Normal: '\\ud83d\\udfe1', Low: '\\u26aa' };\nconst priorityEmoji = priorityMap[task.priority] || '\\ud83d\\udfe1';\n\nconst dueText = task.dateEnd\n  ? `<!date^${Math.floor(new Date(task.dateEnd).getTime() / 1000)}^{date_short}|${task.dateEnd}>`\n  : '_Not set_';\n\nconst parentText = task.parentName\n  ? `${task.parentType}: ${task.parentName}`\n  : '_None_';\n\nconst assigneeText = slackUserId\n  ? `<@${slackUserId}>`\n  : (task.assignedUserName || '_Unassigned_');\n\nconst text = `${priorityEmoji} New Task: ${task.name}`;\n\nconst blocks = [\n  {\n    type: 'header',\n    text: { type: 'plain_text', text: '\\ud83d\\udccb New Task Assigned', emoji: true }\n  },\n  {\n    type: 'section',\n    fields: [\n      { type: 'mrkdwn', text: `*Task:*\\n${task.name}` },\n      { type: 'mrkdwn', text: `*Status:*\\n${task.status}` },\n      { type: 'mrkdwn', text: `*Priority:*\\n${priorityEmoji} ${task.priority}` },\n      { type: 'mrkdwn', text: `*Due:*\\n${dueText}` }\n    ]\n  },\n  {\n    type: 'section',\n    fields: [\n      { type: 'mrkdwn', text: `*Assigned To:*\\n${assigneeText}` },\n      { type: 'mrkdwn', text: `*Related:*\\n${parentText}` }\n    ]\n  },\n  {\n    type: 'actions',\n    elements: [\n      {\n        type: 'button',\n        text: { type: 'plain_text', text: '\\u2705 Acknowledge', emoji: true },\n        style: 'primary',\n        action_id: 'task_acknowledge',\n        value: JSON.stringify({ taskId: task.id, assignedUserId: task.assignedUserId })\n      },\n      {\n        type: 'button',\n        text: { type: 'plain_text', text: '\\ud83d\\udd17 Open in CRM', emoji: true },\n        url: `https://rrespocrm-rsg-u69864.vm.elestio.app/#Task/view/${task.id}`\n      }\n    ]\n  }\n];\n\nreturn [{ json: { channel, text, blocks, taskId: task.id, assignedUserId: task.assignedUserId } }];"
-      },
-      "id": "build-blocks",
+      "id": "build",
       "name": "Build Block Kit",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1120, 304]
+      "position": [
+        900,
+        304
+      ],
+      "parameters": {
+        "jsCode": "const ev = $('Validate & Parse Service Event').first().json;\nconst lk = $input.first() ? ($input.first().json || {}) : {};\nconst slackUserId = lk.slack_user_id || null;\nconst fallback = $env.TASK_NOTIFY_FALLBACK_CHANNEL || 'C0AUP125PRU';\nconst channel = slackUserId || fallback;\n\nconst metaMap = {\n  'service.task_started': { emoji: '🔵', title: 'Task In Progress' },\n  'service.request_to_client': { emoji: '⏳', title: 'Waiting on Client' },\n  'service.task_completed': { emoji: '✅', title: 'Task Completed' }\n};\nconst meta = metaMap[ev.eventType] || { emoji: '📋', title: 'Task Update' };\nconst prMap = { Urgent: '🔴', High: '🟠', Normal: '🟡', Low: '⚪' };\nconst pe = prMap[ev.priority] || '🟡';\n\nlet due = '_Not set_';\nif (ev.dateDue) {\n  const ms = Date.parse(ev.dateDue.length <= 10 ? ev.dateDue + 'T00:00:00Z' : ev.dateDue);\n  due = isNaN(ms) ? ev.dateDue : ('<!date^' + Math.floor(ms/1000) + '^{date_short}|' + ev.dateDue + '>');\n}\nconst related = ev.accountName || ev.contactName || (ev.parentName ? (ev.parentType + ': ' + ev.parentName) : '_None_');\nconst assignee = slackUserId ? ('<@' + slackUserId + '>') : (ev.assignedUserName || '_Unassigned_');\nconst text = meta.emoji + ' ' + meta.title + ': ' + ev.name;\n\nconst blocks = [\n  { type: 'header', text: { type: 'plain_text', text: meta.emoji + ' ' + meta.title, emoji: true } },\n  { type: 'section', fields: [\n    { type: 'mrkdwn', text: '*Task:*\\n' + ev.name },\n    { type: 'mrkdwn', text: '*Status:*\\n' + (ev.status || meta.title) },\n    { type: 'mrkdwn', text: '*Priority:*\\n' + pe + ' ' + ev.priority },\n    { type: 'mrkdwn', text: '*Due:*\\n' + due }\n  ]},\n  { type: 'section', fields: [\n    { type: 'mrkdwn', text: '*Assigned To:*\\n' + assignee },\n    { type: 'mrkdwn', text: '*Related:*\\n' + related }\n  ]},\n  { type: 'actions', elements: [\n    { type: 'button', text: { type: 'plain_text', text: '✅ Acknowledge', emoji: true }, style: 'primary', action_id: 'task_acknowledge', value: JSON.stringify({ taskId: ev.taskId, assignedUserId: ev.assignedUserId }) },\n    { type: 'button', text: { type: 'plain_text', text: '🔗 Open in CRM', emoji: true }, url: 'https://rrespocrm-rsg-u69864.vm.elestio.app/#Task/view/' + ev.taskId }\n  ]}\n];\nreturn [{ json: { channel: channel, text: text, blocks: blocks, taskId: ev.taskId, assignedUserId: ev.assignedUserId } }];"
+      }
     },
     {
+      "id": "slackpost",
+      "name": "Slack chat.postMessage",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        304
+      ],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "OeM6evf9MMppmh7d",
+          "name": "Slack_bot_token (agency_assistant)"
+        }
+      },
       "parameters": {
         "method": "POST",
         "url": "https://slack.com/api/chat.postMessage",
@@ -112,78 +102,46 @@
         "specifyBody": "json",
         "jsonBody": "={{ JSON.stringify({ channel: $json.channel, text: $json.text, blocks: $json.blocks }) }}",
         "options": {}
-      },
-      "id": "slack-post",
-      "name": "Slack chat.postMessage",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [1344, 304],
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "REPLACE_SLACK_BOT_CREDENTIAL_ID",
-          "name": "Slack_bot_token"
-        }
       }
     },
     {
-      "parameters": {
-        "operation": "executeQuery",
-        "query": "INSERT INTO public.task_notify_audit (task_id, espo_user_id, slack_channel, slack_ts, event, payload) VALUES ($1, $2, $3, $4, 'notified', $5::jsonb);",
-        "options": {
-          "queryReplacement": "={{ $('Build Block Kit').first().json.taskId }},={{ $('Build Block Kit').first().json.assignedUserId }},={{ $json.channel }},={{ $json.ts }},={{ JSON.stringify($json) }}"
-        }
-      },
       "id": "audit",
       "name": "Audit: notified",
       "type": "n8n-nodes-base.postgres",
       "typeVersion": 2.5,
-      "position": [1568, 304],
+      "position": [
+        1340,
+        304
+      ],
       "credentials": {
         "postgres": {
-          "id": "REPLACE_SUPABASE_POSTGRES_CREDENTIAL_ID",
+          "id": "tikI01sEGK9a9mw7",
           "name": "Supabase Postgres"
         }
       },
-      "continueOnFail": true
-    }
-  ],
-  "pinData": {
-    "EspoCRM Webhook (Task.create)": [
-      {
-        "json": {
-          "id": "test-task-001",
-          "name": "Follow up on renewal quote – Acme Corp",
-          "status": "Not Started",
-          "priority": "High",
-          "assignedUserId": "test-user-001"
+      "continueOnFail": true,
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO public.task_notify_audit (task_id, espo_user_id, slack_channel, slack_ts, event, payload) VALUES ($1, $2, $3, $4, 'notified', $5::jsonb);",
+        "options": {
+          "queryReplacement": "={{ [ $('Build Block Kit').first().json.taskId, $('Build Block Kit').first().json.assignedUserId, ($json.channel || $('Build Block Kit').first().json.channel), ($json.ts || ''), JSON.stringify($json) ] }}"
         }
       }
-    ]
-  },
+    }
+  ],
   "connections": {
-    "EspoCRM Webhook (Task.create)": {
+    "EspoCRM Service Webhook": {
       "main": [
         [
           {
-            "node": "Normalize Payload",
+            "node": "Validate & Parse Service Event",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Normalize Payload": {
-      "main": [
-        [
-          {
-            "node": "Get Task (authoritative)",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Task (authoritative)": {
+    "Validate & Parse Service Event": {
       "main": [
         [
           {
@@ -228,12 +186,10 @@
       ]
     }
   },
-  "active": false,
   "settings": {
-    "executionOrder": "v1"
+    "executionOrder": "v1",
+    "binaryMode": "separate"
   },
-  "meta": {
-    "templateCredsSetupCompleted": false
-  },
-  "tags": []
+  "active": false,
+  "pinData": {}
 }
