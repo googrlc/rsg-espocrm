@@ -329,11 +329,11 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
       if (newTableWrap && tableScrollTop) newTableWrap.scrollTop = tableScrollTop;
       if (someChecked) $container.find('#rsg-select-all').prop('indeterminate', true);
       searchEl = $container.find('#rsg-search').get(0);
-      if (searchEl && query) {
+      if (searchEl && wasFocused) {
         searchEl.focus();
-        if (wasFocused && searchEl.setSelectionRange && searchStart !== null && searchEnd !== null) {
+        if (searchEl.setSelectionRange && searchStart !== null && searchEnd !== null) {
           searchEl.setSelectionRange(searchStart, searchEnd);
-        } else if (searchEl.setSelectionRange) {
+        } else if (query && searchEl.setSelectionRange) {
           var len = searchEl.value.length;
           searchEl.setSelectionRange(len, len);
         }
