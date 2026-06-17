@@ -14,15 +14,6 @@ define("custom:views/account/record/detail-view", ["crm:views/account/detail"], 
                 aclScope: "Task"
             });
 
-            this.addMenuItem("buttons", {
-                name: "createActivity",
-                label: "+ Activity",
-                action: "createActivity",
-                style: "default",
-                acl: "create",
-                aclScope: "ActivityLog"
-            });
-
             if (this.model.get("account_type") === "Prospect") {
                 this.addRunIntelPackButton();
             }
@@ -63,30 +54,6 @@ define("custom:views/account/record/detail-view", ["crm:views/account/detail"], 
                         var tasksPanelView = tasksPanel.getView("tasks");
                         if (tasksPanelView) {
                             tasksPanelView.actionRefresh();
-                        }
-                    }
-                }, this);
-            });
-        },
-
-        actionCreateActivity: function () {
-            var accountId = this.model.get("id");
-            var accountName = this.model.get("name");
-
-            this.createView("activityModal", "views/modals/edit", {
-                scope: "ActivityLog",
-                attributes: {
-                    accountId: accountId,
-                    accountName: accountName
-                }
-            }, function (view) {
-                view.render();
-                this.listenToOnce(view, "after:save", function () {
-                    var bottom = this.getView("record") ? this.getView("record").getView("bottom") : null;
-                    if (bottom) {
-                        var activityPanel = bottom.getView("activityLogs");
-                        if (activityPanel) {
-                            activityPanel.actionRefresh();
                         }
                     }
                 }, this);

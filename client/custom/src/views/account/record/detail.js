@@ -48,18 +48,69 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
                 aclScope: "Task",
                 action: "createTask"
             });
+
+            this.addButton({
+                name: "createActivity",
+                label: "+ Activity",
+                style: "default",
+                acl: "create",
+                aclScope: "ActivityLog",
+                action: "createActivity"
+            });
         },
 
         actionCreateTask: function () {
+            var self = this;
+
             this.createView("createTaskModal", "custom:views/task/record/create-modal", {
                 scope: "Task",
+                sourceType: "Account",
                 accountId: this.model.id,
                 accountName: this.model.get("name"),
                 parentType: "Account",
                 parentId: this.model.id,
-                parentName: this.model.get("name")
+                parentName: this.model.get("name"),
+                contextLabel: "Account-level task — " + this.model.get("name")
             }, function (view) {
                 view.render();
+
+                self.listenToOnce(view, "after:save", function () {
+                    var bottomView = self.getView("bottom");
+
+                    if (bottomView) {
+                        var tasksPanel = bottomView.getView("tasks");
+
+                        if (tasksPanel) {
+                            tasksPanel.actionRefresh();
+                        }
+                    }
+                });
+            });
+        },
+
+        actionCreateActivity: function () {
+            var self = this;
+
+            this.createView("createActivityModal", "views/modals/edit", {
+                scope: "ActivityLog",
+                attributes: {
+                    accountId: this.model.id,
+                    accountName: this.model.get("name")
+                }
+            }, function (view) {
+                view.render();
+
+                self.listenToOnce(view, "after:save", function () {
+                    var bottomView = self.getView("bottom");
+
+                    if (bottomView) {
+                        var activityPanel = bottomView.getView("activityLogs");
+
+                        if (activityPanel) {
+                            activityPanel.actionRefresh();
+                        }
+                    }
+                });
             });
         },
 
