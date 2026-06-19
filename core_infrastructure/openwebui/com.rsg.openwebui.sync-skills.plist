@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.rsg.openwebui.sync-skills</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>/Users/lamarcoates/Documents/GitHub/rsg-espocrm/core_infrastructure/openwebui/sync_skills.py</string>
+        <string>--update</string>
+    </array>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>SKILLS_DIRS</key>
+        <string>/Users/lamarcoates/Documents/GitHub/rsg-obsidian-vault/AI_Knowledge/Skills</string>
+        <key>EXCLUDE</key>
+        <string>HEARTBEAT,OpenClaw-Build-Context,openclaw-architect-SKILL</string>
+    </dict>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>2</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>/tmp/rsg-sync-skills.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/rsg-sync-skills.log</string>
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>
