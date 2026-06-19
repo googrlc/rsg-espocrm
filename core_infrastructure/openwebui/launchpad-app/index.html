@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f1419" />
+<title>RSG Agency Launchpad</title>
+<style>
+  :root{--bg:#0f1419;--card:#161c24;--card2:#1b232d;--line:#26313d;--text:#e6edf3;--muted:#8b97a3;--accent:#3ba776;--gold:#d29922;--red:#e5484d}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+  body{max-width:760px;margin:0 auto;padding:env(safe-area-inset-top) 12px calc(env(safe-area-inset-bottom) + 24px)}
+  header{position:sticky;top:0;background:linear-gradient(var(--bg) 80%,transparent);z-index:5;padding:12px 2px 8px}
+  .bar{display:flex;gap:8px;align-items:center}
+  h1{font-size:18px;margin:0;flex:1}
+  .agent{font-size:12px;color:var(--muted)}
+  .btn{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 12px;font-size:14px;cursor:pointer}
+  .btn:active{transform:scale(.97)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#04130d;font-weight:600}
+  .btn.sm{padding:6px 9px;font-size:12px}
+  .search{width:100%;margin-top:8px;padding:11px 12px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:var(--text);font-size:15px;outline:none}
+  .search:focus{border-color:#3a4756}
+  h2{font-size:11px;text-transform:uppercase;letter-spacing:1.1px;color:var(--muted);margin:16px 4px 7px;font-weight:600;display:flex;justify-content:space-between}
+  .grid{display:grid;grid-template-columns:1fr;gap:8px}
+  @media(min-width:540px){.grid{grid-template-columns:1fr 1fr}}
+  a.tile{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 11px;text-decoration:none;color:var(--text);min-height:52px}
+  a.tile:hover{border-color:#3a4756;background:var(--card2)}
+  .fav{cursor:pointer;flex:0 0 auto;width:22px;height:22px;color:var(--muted)}
+  .fav.on{color:var(--gold)}
+  .t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+  .t b{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .t span{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .acts{flex:0 0 auto;display:flex;gap:4px}
+  .acts button{background:transparent;border:0;color:var(--muted);cursor:pointer;font-size:14px;padding:2px 4px;border-radius:6px}
+  .acts button:hover{color:var(--text);background:#0b1016}
+  .acts button.del:hover{color:var(--red)}
+  .empty{color:var(--muted);font-size:13px;padding:14px;text-align:center}
+  .hide{display:none}
+  /* gate + modal */
+  .overlay{position:fixed;inset:0;background:#0b0e12e6;display:flex;align-items:center;justify-content:center;padding:20px;z-index:20}
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;max-width:340px;width:100%}
+  .panel h3{margin:0 0 4px;font-size:17px}
+  .panel p{margin:0 0 14px;color:var(--muted);font-size:13px}
+  .panel input,.panel select{width:100%;padding:11px 12px;background:#0b1016;border:1px solid var(--line);border-radius:9px;color:var(--text);font-size:15px;outline:none;margin-bottom:9px}
+  .panel input:focus,.panel select:focus{border-color:#3a4756}
+  .panel .btn{width:100%;margin-top:4px}
+  .agents{display:flex;gap:8px;margin-top:6px}
+  .agents .btn{flex:1}
+  .err{color:var(--red);font-size:12px;margin:6px 0 0;min-height:14px}
+  footer{margin-top:20px;color:var(--muted);font-size:11px;text-align:center}
+  .pill{font-size:10px;background:#0b1016;border:1px solid var(--line);border-radius:99px;padding:1px 7px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="gate" class="overlay">
+  <div class="panel">
+    <h3>RSG Agency Launchpad</h3>
+    <p>Enter the agency passphrase.</p>
+    <input id="pw" type="password" placeholder="Passphrase" autocomplete="off" />
+    <button class="btn primary" onclick="enterPass()">Enter</button>
+    <div class="err" id="perr"></div>
+  </div>
+</div>
+
+<div id="agentpick" class="overlay hide">
+  <div class="panel">
+    <h3>Who's using this?</h3>
+    <p>Pick your name — favorites are saved per agent.</p>
+    <div class="agents">
+      <button class="btn" onclick="setAgent('Lamar')">Lamar</button>
+      <button class="btn" onclick="setAgent('Gretchen')">Gretchen</button>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="hide">
+  <header>
+    <div class="bar">
+      <h1>RSG Launchpad</h1>
+      <span class="agent" id="aglbl"></span>
+      <button class="btn sm" onclick="switchAgent()">Switch</button>
+      <button class="btn primary sm" onclick="openAdd()">+ Add</button>
+    </div>
+    <input id="q" class="search" placeholder="Search links…" autocomplete="off" oninput="render()" />
+  </header>
+  <div id="lists"></div>
+  <footer>RSG · agency launchpad · per-agent favorites</footer>
+</div>
+
+<!-- edit/add modal -->
+<div id="modal" class="overlay hide">
+  <div class="panel">
+    <h3 id="mtitle">Add link</h3>
+    <input id="mname" placeholder="Name (e.g. Chubb)" />
+    <input id="murl" placeholder="URL (https://…)" />
+    <input id="mcat" placeholder="Category (Carriers, MGA, GA…)" list="catdl" />
+    <datalist id="catdl"></datalist>
+    <div class="bar" style="gap:8px">
+      <button class="btn" onclick="closeModal()">Cancel</button>
+      <button class="btn primary" id="msave" onclick="saveLink()">Save</button>
+    </div>
+    <div class="err" id="merr"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ===== CONFIG (edit passphrase here; anon key is public-safe with RLS) =====
+const CONFIG = {
+  SUPABASE_URL: "https://wibscqhkvpijzqbhjphg.supabase.co",
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndpYnNjcWhrdnBpanpxYmhqcGhnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxNDU5MjYsImV4cCI6MjA4OTcyMTkyNn0.tP_Z2LvJtVIJt42YLcHY_jXZs_hG_ceXELiAB0SWQUQ",
+  PASSPHRASE: "rsg-launch",          // <-- change me (1Password), then redeploy
+  CAT_ORDER: ["Favorites","Carriers","MGA","GA","Utilities","Banking/Finance","AMS/Agency Mgmt","Tools","Other"],
+};
+const sb = supabase.createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
+let AGENT = localStorage.getItem("rsg_agent") || "";
+let LINKS = [], FAVS = new Set();
+const $ = id => document.getElementById(id);
+const host = u => { try { return new URL(u).host; } catch { return u; } };
+
+function enterPass(){
+  if ($("pw").value === CONFIG.PASSPHRASE){
+    sessionStorage.setItem("rsg_auth","1"); $("gate").classList.add("hide"); afterAuth();
+  } else { $("perr").textContent = "Wrong passphrase"; }
+}
+$("pw").addEventListener("keydown", e => { if (e.key==="Enter") enterPass(); });
+function afterAuth(){
+  if (!AGENT){ $("agentpick").classList.remove("hide"); return; }
+  $("app").classList.remove("hide"); $("aglbl").textContent = AGENT; load();
+}
+function setAgent(a){ AGENT=a; localStorage.setItem("rsg_agent",a); $("agentpick").classList.add("hide"); afterAuth(); }
+function switchAgent(){ localStorage.removeItem("rsg_agent"); AGENT=""; location.reload(); }
+
+async function load(){
+  const [l, f] = await Promise.all([
+    sb.from("agency_links").select("*").order("category").order("name"),
+    sb.from("agency_link_favorites").select("link_id").eq("agent_id", AGENT),
+  ]);
+  if (l.error) { $("lists").innerHTML = '<div class="empty">Load failed: '+l.error.message+'</div>'; return; }
+  LINKS = l.data || [];
+  FAVS = new Set((f.data||[]).map(x => x.link_id));
+  // category datalist
+  $("catdl").innerHTML = [...new Set(LINKS.map(x=>x.category))].map(c=>`<option value="${c}">`).join("");
+  render();
+}
+function esc(s){ return (s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function render(){
+  const q = $("q").value.trim().toLowerCase();
+  const filtered = LINKS.filter(l => !q || (l.name+" "+host(l.url)+" "+l.category).toLowerCase().includes(q));
+  // group
+  const groups = {};
+  const favLinks = [];
+  for (const l of filtered){
+    if (FAVS.has(l.id)) favLinks.push(l);
+    (groups[l.category] = groups[l.category] || []).push(l);
+  }
+  const order = [...CONFIG.CAT_ORDER];
+  for (const k of Object.keys(groups)) if (!order.includes(k)) order.push(k);
+  let html = "";
+  if (q === "" && favLinks.length){
+    html += section("Favorites", favLinks);
+  }
+  for (const cat of order){
+    const arr = groups[cat]; if (!arr || !arr.length) continue;
+    if (q==="" && cat==="Favorites") continue;
+    html += section(cat, arr);
+  }
+  if (!filtered.length) html += '<div class="empty">No links. Tap + Add to create one.</div>';
+  $("lists").innerHTML = html;
+}
+function section(cat, arr){
+  const tiles = arr.map(tile).join("");
+  return `<h2><span>${esc(cat)}</span><span class="pill">${arr.length}</span></h2><div class="grid">${tiles}</div>`;
+}
+function tile(l){
+  const on = FAVS.has(l.id);
+  return `<a class="tile" href="${esc(l.url)}" target="_blank" rel="noopener">
+    <span class="fav ${on?'on':''}" onclick="event.preventDefault();toggleFav('${l.id}',this)">${on?'★':'☆'}</span>
+    <span class="t"><b>${esc(l.name)}</b><span>${esc(host(l.url))}</span></span>
+    <span class="acts">
+      <button title="Edit" onclick="event.preventDefault();openEdit('${l.id}')">✎</button>
+      <button class="del" title="Delete" onclick="event.preventDefault();delLink('${l.id}','${esc(l.name)}')">✕</button>
+    </span></a>`;
+}
+async function toggleFav(id, el){
+  if (FAVS.has(id)){
+    const r = await sb.from("agency_link_favorites").delete().eq("agent_id",AGENT).eq("link_id",id);
+    if (!r.error){ FAVS.delete(id); }
+  } else {
+    const r = await sb.from("agency_link_favorites").insert({agent_id:AGENT, link_id:id});
+    if (!r.error){ FAVS.add(id); }
+  }
+  render();
+}
+async function delLink(id, name){
+  if (!confirm(`Delete "${name}"? This removes it for everyone.`)) return;
+  const r = await sb.from("agency_links").delete().eq("id",id);
+  if (r.error){ alert(r.error.message); return; }
+  LINKS = LINKS.filter(l=>l.id!==id); FAVS.delete(id); render();
+}
+let EDIT_ID = null;
+function openAdd(){ EDIT_ID=null; $("mtitle").textContent="Add link"; $("mname").value=""; $("murl").value=""; $("mcat").value=""; $("merr").textContent=""; $("modal").classList.remove("hide"); $("mname").focus(); }
+function openEdit(id){
+  const l = LINKS.find(x=>x.id===id); if(!l) return;
+  EDIT_ID=id; $("mtitle").textContent="Edit link"; $("mname").value=l.name; $("murl").value=l.url; $("mcat").value=l.category; $("merr").textContent=""; $("modal").classList.remove("hide");
+}
+function closeModal(){ $("modal").classList.add("hide"); }
+async function saveLink(){
+  const name = $("mname").value.trim(), url = $("murl").value.trim(), cat = $("mcat").value.trim()||"Other";
+  if (!name || !url){ $("merr").textContent="Name and URL are required"; return; }
+  let u = url; if (!/^https?:\/\//.test(u)) u = "https://"+u;
+  try { new URL(u); } catch { $("merr").textContent="Invalid URL"; return; }
+  if (EDIT_ID){
+    const r = await sb.from("agency_links").update({name,url:u,category:cat}).eq("id",EDIT_ID);
+    if (r.error){ $("merr").textContent=r.error.message; return; }
+  } else {
+    const r = await sb.from("agency_links").insert({name,url:u,category:cat,created_by:AGENT});
+    if (r.error){ $("merr").textContent=r.error.message; return; }
+  }
+  closeModal(); load();
+}
+
+// boot
+if (sessionStorage.getItem("rsg_auth")==="1"){ $("gate").classList.add("hide"); afterAuth(); }
+</script>
+</body>
+</html>
