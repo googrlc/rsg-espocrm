@@ -24,7 +24,7 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
                 dueDateClass: dueDate.className,
                 assignedUserName: assignedUserName,
                 cardClass: dueDate.cardClass,
-                canComplete: ['Completed', 'Cancelled'].indexOf(this.model.get('status')) === -1
+                canComplete: ['Completed', 'Cancelled', 'Archived'].indexOf(this.model.get('status')) === -1
             });
         },
 
@@ -200,7 +200,7 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
                 return;
             }
 
-            if (['Completed', 'Cancelled'].indexOf(this.model.get('status')) !== -1) {
+            if (['Completed', 'Cancelled', 'Archived'].indexOf(this.model.get('status')) !== -1) {
                 return;
             }
 

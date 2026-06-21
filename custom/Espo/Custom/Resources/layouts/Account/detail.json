@@ -135,30 +135,6 @@
         "label": "Carrier Details"
     },
     {
-        "rows": [],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Contacts",
-        "name": "contactsAnchor",
-        "label": "Contacts"
-    },
-    {
-        "rows": [],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Policies",
-        "name": "policiesAnchor",
-        "label": "Policies"
-    },
-    {
-        "rows": [],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Activity",
-        "name": "activityAnchor",
-        "label": "Activity"
-    },
-    {
         "rows": [
             [
                 {
@@ -214,7 +190,7 @@
         },
         "style": "default",
         "tabBreak": true,
-        "tabLabel": "Business Profile",
+        "tabLabel": "Profile",
         "hidden": false,
         "name": "opportunitiesTab",
         "customLabel": "Business Details"
@@ -630,15 +606,354 @@
         "dynamicLogicVisible": {
             "conditionGroup": [
                 {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Personal Lines"
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Personal Lines"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Medicare"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Life Insurance"
+                        }
+                    ]
                 }
             ]
         },
         "style": "default",
         "name": "coverageGapsPl",
         "customLabel": "Coverage Gaps & Cross-Sell"
+    },
+    {
+        "name": "householdProfile",
+        "customLabel": "Household Members",
+        "style": "default",
+        "tabBreak": false,
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Personal Lines"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Medicare"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Life Insurance"
+                        }
+                    ]
+                }
+            ]
+        },
+        "rows": [
+            [
+                {
+                    "name": "primaryFirstName"
+                },
+                {
+                    "name": "primaryLastName"
+                }
+            ],
+            [
+                {
+                    "name": "primaryDob"
+                },
+                {
+                    "name": "primaryGender"
+                }
+            ],
+            [
+                {
+                    "name": "primaryOccupation"
+                },
+                {
+                    "name": "maritalStatus"
+                }
+            ],
+            [
+                {
+                    "name": "primaryPhone"
+                },
+                {
+                    "name": "primaryEmail"
+                }
+            ],
+            [
+                {
+                    "name": "coInsuredFirstName"
+                },
+                {
+                    "name": "coInsuredLastName"
+                }
+            ],
+            [
+                {
+                    "name": "coInsuredDob"
+                },
+                {
+                    "name": "coInsuredOccupation"
+                }
+            ],
+            [
+                {
+                    "name": "householdMembers",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "dependentsCount"
+                },
+                {
+                    "name": "dependentAges"
+                }
+            ]
+        ]
+    },
+    {
+        "name": "householdResidence",
+        "customLabel": "Residence",
+        "style": "default",
+        "tabBreak": false,
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Personal Lines"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Medicare"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Life Insurance"
+                        }
+                    ]
+                }
+            ]
+        },
+        "rows": [
+            [
+                {
+                    "name": "property_address",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "property_city"
+                },
+                {
+                    "name": "property_state"
+                }
+            ],
+            [
+                {
+                    "name": "property_zip"
+                },
+                {
+                    "name": "ownOrRent"
+                }
+            ],
+            [
+                {
+                    "name": "residenceType"
+                },
+                {
+                    "name": "yearBuilt"
+                }
+            ],
+            [
+                {
+                    "name": "yearsAtAddress"
+                },
+                {
+                    "name": "dwellingSqFt"
+                }
+            ],
+            [
+                {
+                    "name": "mailingAddressSame"
+                },
+                {
+                    "name": "mailingAddress"
+                }
+            ]
+        ]
+    },
+    {
+        "name": "householdVehiclesDrivers",
+        "customLabel": "Vehicles & Drivers",
+        "style": "default",
+        "tabBreak": false,
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Personal Lines"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Medicare"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Life Insurance"
+                        }
+                    ]
+                }
+            ]
+        },
+        "rows": [
+            [
+                {
+                    "name": "vehiclesCount"
+                },
+                {
+                    "name": "driversCount"
+                }
+            ],
+            [
+                {
+                    "name": "youthfulDriverFlag"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "vehicleAdditionalNotes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    },
+    {
+        "name": "householdFinancial",
+        "customLabel": "Financial & Retention",
+        "style": "default",
+        "tabBreak": false,
+        "dynamicLogicVisible": {
+            "conditionGroup": [
+                {
+                    "type": "or",
+                    "value": [
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Personal Lines"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Medicare"
+                        },
+                        {
+                            "type": "equals",
+                            "attribute": "account_type",
+                            "value": "Life Insurance"
+                        }
+                    ]
+                }
+            ]
+        },
+        "rows": [
+            [
+                {
+                    "name": "householdIncomeBand"
+                },
+                {
+                    "name": "priorCarrier"
+                }
+            ],
+            [
+                {
+                    "name": "priorPremium"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "existingPersonalPolicies",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "retention_risk"
+                },
+                {
+                    "name": "risk_score"
+                }
+            ],
+            [
+                {
+                    "name": "claims_count_3yr"
+                },
+                {
+                    "name": "claims_open"
+                }
+            ],
+            [
+                {
+                    "name": "last_claim_date"
+                },
+                {
+                    "name": "nps_score"
+                }
+            ]
+        ]
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Contacts",
+        "name": "contactsAnchor",
+        "label": "Contacts"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Policies",
+        "name": "policiesAnchor",
+        "label": "Policies"
+    },
+    {
+        "rows": [],
+        "style": "default",
+        "tabBreak": true,
+        "tabLabel": "Activity",
+        "name": "activityAnchor",
+        "label": "Activity"
     },
     {
         "rows": [

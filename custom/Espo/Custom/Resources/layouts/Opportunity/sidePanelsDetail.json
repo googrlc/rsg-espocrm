@@ -1,8 +1,11 @@
 {
-    "default": {
+    "_delimiter_": {
+        "disabled": true
+    },
+    "recordInfo": {
         "index": 0
     },
-    "_delimiter_": {
+    "tasksWidget": {
         "index": 1
     },
     "priorCoverage": {
@@ -16,5 +19,8 @@
     },
     "tasks": {
         "index": 5
+    },
+    "default": {
+        "disabled": true
     }
 }

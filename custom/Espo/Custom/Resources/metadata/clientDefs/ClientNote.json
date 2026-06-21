@@ -4,5 +4,15 @@
     "iconClass": "fas fa-sticky-note",
     "boolFilterList": [
         "onlyMy"
-    ]
+    ],
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/common/record/panels/record-info",
+                "order": 1
+            }
+        ]
+    }
 }

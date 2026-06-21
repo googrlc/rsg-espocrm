@@ -44,6 +44,16 @@
         "commercialLines",
         "personalLines"
     ],
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/common/record/panels/record-info",
+                "order": 1
+            }
+        ]
+    },
     "dynamicLogic": {
         "fields": {
             "lost_reason": {

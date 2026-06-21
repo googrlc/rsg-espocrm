@@ -1,53 +1,46 @@
-<div class="kanban-card {{cardClass}}" data-id="{{id}}">
-    {{! Card Header - Deal Name with Priority Badge }}
-    <div class="card-header">
-        {{#if priorityLabel}}
-        <span class="priority-badge {{priorityClass}}">{{priorityLabel}}</span>
-        {{/if}}
-        <h4 class="card-title">{{name}}</h4>
+<div class="kanban-card opportunity-kanban-card {{cardClass}}" data-id="{{id}}" title="{{name}}">
+    <div class="opportunity-card-topline">
+        <div class="opportunity-card-metric">
+            <span class="opportunity-card-label">Premium</span>
+            <strong class="opportunity-card-premium">{{#if formattedValue}}{{formattedValue}}{{else}}None{{/if}}</strong>
+        </div>
+        <span class="opportunity-card-arrow" aria-hidden="true">↗️</span>
     </div>
 
-    {{! Card Body - Account & Value }}
-    <div class="card-body">
-        {{#if accountName}}
-        <div class="contact-name">{{accountName}}</div>
-        {{/if}}
-        
-        {{#if formattedValue}}
-        <div class="deal-value">{{formattedValue}}</div>
-        {{/if}}
-    </div>
-
-    {{! Strategic Tags }}
-    <div class="card-tags">
+    <div class="opportunity-card-fields">
         {{#if lineOfBusiness}}
-        <span class="tag tag-category">{{lineOfBusiness}}</span>
+        <div class="opportunity-card-field">
+            <span class="opportunity-card-label">LOB</span>
+            <span class="opportunity-card-value">{{lineOfBusiness}}</span>
+        </div>
         {{/if}}
-        
+
         {{#if businessType}}
-        <span class="tag tag-source">{{businessType}}</span>
+        <div class="opportunity-card-field">
+            <span class="opportunity-card-label">Deal</span>
+            <span class="opportunity-card-value">{{businessType}}</span>
+        </div>
         {{/if}}
-    </div>
 
-    {{! Card Footer - Close Date & Owner }}
-    <div class="card-footer">
+        {{#if ownerDisplay}}
+        <div class="opportunity-card-field">
+            <span class="opportunity-card-label">Owner</span>
+            <span class="opportunity-card-value" title="{{assignedUserName}}">{{ownerDisplay}}</span>
+        </div>
+        {{/if}}
+
         {{#if dueDateLabel}}
-        <div class="due-date {{dueDateClass}}">
-            📅 {{dueDateLabel}}
+        <div class="opportunity-card-field">
+            <span class="opportunity-card-label">Close</span>
+            <span class="opportunity-card-value {{dueDateClass}}">{{dueDateLabel}}</span>
         </div>
         {{/if}}
-        
-        <div class="owner-avatar" title="{{assignedUserName}}">
-            {{ownerInitials}}
-        </div>
     </div>
 
-    {{! Health Indicators }}
-    <div class="health-indicators">
-        {{#if stagnationDays}}
-        <div class="stagnation-timer {{stagnationClass}}">
-            ⏱️ {{stagnationDays}}d in stage
-        </div>
-        {{/if}}
+    {{#if stagnationDays}}
+    <div class="opportunity-card-stage-age {{stagnationClass}}">
+        <span class="opportunity-card-label">Stage age</span>
+        <span>{{stagnationDays}}d</span>
     </div>
+    {{/if}}
 </div>

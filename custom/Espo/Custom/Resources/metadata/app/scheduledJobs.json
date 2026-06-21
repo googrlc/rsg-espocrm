@@ -8,5 +8,10 @@
         "name": "Sync Renewals From Policies",
         "isSystem": true,
         "scheduling": "0 6 * * *"
+    },
+    "ArchiveCompletedTasks": {
+        "name": "Archive Completed Tasks (7+ days)",
+        "isSystem": true,
+        "scheduling": "0 3 * * *"
     }
 }

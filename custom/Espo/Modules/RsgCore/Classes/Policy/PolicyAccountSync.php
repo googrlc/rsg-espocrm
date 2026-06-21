@@ -62,7 +62,7 @@ class PolicyAccountSync
         $policy->set('statusLabel', $statusLabel);
         $policy->set('urgencyIcon', $urgencyIcon);
 
-        if ($daysRemaining === null) {
+        if ($daysRemaining === null || $daysRemaining <= 0) {
             $policy->set('urgency', null);
         } elseif ($daysRemaining <= 30) {
             $policy->set('urgency', 'Critical');
@@ -76,18 +76,31 @@ class PolicyAccountSync
 
         $premiumAmount = (float) ($policy->get('premium_amount') ?? 0);
         $normalizedRate = $this->normalizeRate($policy->get('commission_rate'));
-        $policy->set('commissionAmount', round($premiumAmount * $normalizedRate, 2));
+        // No stored rate -> do not fabricate an amount from an assumed default.
+        $policy->set(
+            'commissionAmount',
+            $normalizedRate === null ? null : round($premiumAmount * $normalizedRate, 2)
+        );
 
         $status = (string) ($policy->get('status') ?? '');
         $renewalLeadDays = RenewalLeadWindows::leadDaysForPolicy($policy);
-        if ($status === 'Active' && $daysRemaining !== null && $daysRemaining <= $renewalLeadDays) {
+        if ($daysRemaining !== null && $daysRemaining <= 0) {
+            // Expiration date has passed: resolve to a single terminal state instead of
+            // letting a negative day count flow into renewal-urgency logic. 'Renewed' is a
+            // completed renewal, not a lapse, so it is excluded from the auto-expire set.
+            if (in_array($status, PolicyStatusSets::LAPSE_ON_EXPIRY, true)) {
+                $status = 'Expired';
+                $policy->set('status', $status);
+            }
+        } elseif ($status === 'Active' && $daysRemaining !== null && $daysRemaining <= $renewalLeadDays) {
             $status = 'Up for Renewal';
             $policy->set('status', $status);
         }
 
+        $isExpired = $daysRemaining !== null && $daysRemaining <= 0;
         $policy->set(
             'premiumAtRisk',
-            in_array($status, PolicyStatusSets::ACTIVE, true) ? $premiumAmount : 0.0
+            (in_array($status, PolicyStatusSets::ACTIVE, true) && !$isExpired) ? $premiumAmount : 0.0
         );
 
         if ($policyNumber !== '') {
@@ -131,8 +144,14 @@ class PolicyAccountSync
 
         return match ($line) {
             'GL' => 'General Liability',
-            'Auto' => 'Personal Auto',
+            'Auto', 'PersonalAuto' => 'Personal Auto',
             'Home' => 'Homeowners',
+            'renters' => 'Renters',
+            'work comp' => 'Workers Compensation',
+            'Life insurance' => 'Life',
+            'Builders risk / Home Construction' => 'Builders Risk',
+            'Cyber/Network Liability' => 'Cyber Liability',
+            // 'personal lines' is a category, not a specific LOB — left unmapped on purpose.
             default => $line,
         };
     }
@@ -262,10 +281,10 @@ class PolicyAccountSync
         }
     }
 
-    private function normalizeRate(mixed $rate): float
+    private function normalizeRate(mixed $rate): ?float
     {
         if ($rate === null || $rate === '') {
-            return 0.10;
+            return null;
         }
 
         $numericRate = (float) $rate;

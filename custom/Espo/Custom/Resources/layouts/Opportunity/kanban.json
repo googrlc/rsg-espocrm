@@ -3,25 +3,13 @@
         "name": "name"
     },
     {
-        "name": "account"
-    },
-    {
-        "name": "estimatedPremium"
-    },
-    {
-        "name": "priority"
-    },
-    {
         "name": "lineOfBusiness"
     },
     {
-        "name": "businessType"
-    },
-    {
-        "name": "stage"
-    },
-    {
         "name": "closeDate"
+    },
+    {
+        "name": "estimatedPremium"
     },
     {
         "name": "assignedUser"

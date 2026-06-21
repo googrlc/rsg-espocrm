@@ -10,15 +10,11 @@
     "label": "Policy Info",
     "rows": [
       [{"name": "policy_number"}, {"name": "status"}],
-      [{"name": "policy_health"}, {"name": "statusLabel"}],
-      [{"name": "carrierAccount"}, {"name": "underwriter"}],
-      [{"name": "line_of_business"}, {"name": "line_of_business_raw"}],
-      [{"name": "business_type"}, false],
-      [{"name": "assignedUser"}, false],
-      [{"name": "daysRemaining"}, {"name": "carrierPortalUrl"}]
+      [{"name": "line_of_business"}, {"name": "business_type"}]
     ]
   },
   {
+    "name": "financial",
     "label": "Financial",
     "rows": [
       [{"name": "commission_rate"}, {"name": "commissionAmount"}],
@@ -27,6 +23,7 @@
     ]
   },
   {
+    "name": "renewalTracking",
     "label": "Renewal Tracking",
     "rows": [
       [{"name": "urgency"}, {"name": "premiumAtRisk"}],
@@ -48,11 +45,11 @@
     ]
   },
   {
-    "label": "NowCerts Sync",
+    "name": "syncAdmin",
+    "label": "Sync/Admin",
     "style": "side",
     "rows": [
-      [{"name": "momentumPolicyId"}, {"name": "insuredMomentumId"}],
-      [{"name": "momentum_last_synced"}, {"name": "sync_status"}],
+      [{"name": "line_of_business_raw"}, false],
       [{"name": "acceptedByAmsAt"}, {"name": "acceptedByAmsBy"}],
       [{"name": "amsLockState"}, {"name": "amsLockReason"}]
     ]

@@ -125,7 +125,20 @@
         "wcMultipleLocations": "Multiple Locations",
         "wcMultiStateLocations": "Multi-state Locations",
         "wcExposureRows": "Class Code Exposure",
-        "documents": "Documents"
+        "documents": "Documents",
+        "chkQuoteSubmitted": "Quote Submitted",
+        "chkProposalSent": "Proposal Sent",
+        "chkSignedAppReceived": "Signed App Received",
+        "chkBound": "Bound",
+        "chkUnderlyingLinked": "Underlying Linked",
+        "chkUnderlyingConfirmed": "Underlying Confirmed",
+        "chkMvrsPulled": "MVRs Pulled",
+        "chkDecPageDelivered": "Dec Page Delivered",
+        "chkScopeOfAppt": "Scope of Appointment",
+        "chkPlanPresented": "Plan Presented",
+        "chkAppSubmitted": "Application Submitted",
+        "chkCmsConfirmation": "CMS Confirmation",
+        "chkWelcomeLetter": "Welcome Letter"
     },
     "options": {
         "stage": {
@@ -169,7 +182,8 @@
         "propAssessmentNotes": "AI-generated property assessment notes from Viktor or Manus",
         "autoAssessmentNotes": "AI-generated driver and vehicle risk assessment",
         "healthAssessmentNotes": "AI-generated health risk assessment notes",
-        "quoteNumber": "Carrier-provided quote reference number for this opportunity."
+        "quoteNumber": "Carrier-provided quote reference number for this opportunity.",
+        "name": "Format: Client name– LOB – Type (e.g. Jarah Group – WC. For duplicates add a tag (e.g. – Fleet)."
     },
     "presetFilters": {
         "open": "Open Pipeline",

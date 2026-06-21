@@ -1,0 +1,20 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "recordInfo": {
+        "index": 0
+    },
+    "internalIds": {
+        "index": 1
+    },
+    "activities": {
+        "index": 2
+    },
+    "history": {
+        "index": 3
+    },
+    "default": {
+        "disabled": true
+    }
+}

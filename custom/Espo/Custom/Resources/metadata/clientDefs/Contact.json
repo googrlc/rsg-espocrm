@@ -19,13 +19,25 @@
     "sidePanels": {
         "detail": [
             {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/common/record/panels/record-info",
+                "order": 1
+            },
+            {
+                "name": "internalIds",
+                "label": "Internal IDs",
+                "view": "custom:views/common/record/panels/internal-ids",
+                "order": 2
+            },
+            {
                 "name": "activities",
                 "label": "Activities",
                 "view": "crm:views/record/panels/activities",
                 "aclScope": "Activities",
                 "orderBy": "dateStart",
                 "orderDirection": "desc",
-                "order": 1
+                "order": 3
             },
             {
                 "name": "history",
@@ -34,7 +46,7 @@
                 "aclScope": "Activities",
                 "orderBy": "dateStart",
                 "orderDirection": "desc",
-                "order": 2
+                "order": 4
             }
         ]
     },
@@ -50,7 +62,8 @@
             "order": 2,
             "label": "Tasks",
             "rowActionList": [
-                "complete"
+                "complete",
+                "archive"
             ]
         },
         "cases": {
@@ -62,6 +75,5 @@
             "label": "Cases"
         }
     },
-    "kanbanViewMode": true,
     "statusField": "clientType"
 }

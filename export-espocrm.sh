@@ -2,7 +2,7 @@
 # RSG EspoCRM Auto-Export Script
 # Exports metadata via API + syncs custom PHP files via Tailscale SSH
 
-ESPO_KEY=$(op item get 2clmog73qj45np6a5tswavfaza --fields claude_api 2>/dev/null)
+ESPO_KEY=$(op read "op://rsg_infrastructure/ESPOCRM_API_KEY/text" --no-newline 2>/dev/null)
 BASE="https://rrespocrm-rsg-u69864.vm.elestio.app/api/v1"
 ESPO_SSH="espocrm-ts"
 REPO="/Users/lamarcoates/espocrm-workspace"

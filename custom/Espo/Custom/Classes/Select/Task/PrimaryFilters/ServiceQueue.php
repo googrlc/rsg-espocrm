@@ -9,7 +9,7 @@ class ServiceQueue implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'status!=' => ['Completed', 'Cancelled'],
+            'status!=' => ['Completed', 'Cancelled', 'Archived'],
             'taskType' => [
                 'Client Service',
                 'Policy Change',

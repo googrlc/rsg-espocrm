@@ -34,6 +34,16 @@ class EnforceAmsPolicyLock implements BeforeSave
 
     public function beforeSave(Entity $entity, SaveOptions $options): void
     {
+        // ---------------------------------------------------------------------
+        // TEMPORARILY DISABLED 2026-06-17 for CRM data cleanup.
+        // The AMS policy-number / core-field lock is bypassed so the team can
+        // correct AMS-linked policies directly in the CRM. RE-ENABLE by deleting
+        // this early-return block (the original enforcement below is untouched).
+        // NOTE: NowCerts remains authoritative for carrier-download lines, so
+        // CRM edits to those fields may be overwritten by the next AMS sync.
+        // ---------------------------------------------------------------------
+        return;
+
         if ($entity->isNew()) {
             return;
         }

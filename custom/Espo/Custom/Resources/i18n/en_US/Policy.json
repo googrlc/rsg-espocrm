@@ -28,7 +28,7 @@
         "daysRemaining": "Days to Expiration",
         "statusLabel": "Status Badge",
         "policy_health": "Policy Health",
-        "urgencyIcon": "Urgency",
+        "urgencyIcon": "Urgency Icon",
         "carrierPortalUrl": "Carrier Portal",
         "cancellation_reason": "Cancellation Reason",
         "vin": "VIN",

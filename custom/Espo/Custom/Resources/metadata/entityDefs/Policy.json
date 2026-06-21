@@ -14,7 +14,9 @@
             "maxLength": 100,
             "required": false,
             "isCustom": true,
-            "tooltipText": "Policy number — primary identifier for this policy record"
+            "tooltipText": "Policy number — primary identifier for this policy record",
+            "options": [],
+            "tooltip": true
         },
         "momentumPolicyId": {
             "type": "varchar",
@@ -423,9 +425,6 @@
             "layoutDetailDisabled": true,
             "noLoad": true
         }
-    },
-    "formula": {
-        "beforeSaveScript": "\n$premium_amount = entity\\attribute('premium_amount');\nifThen(\n    $premium_amount == null,\n    $premium_amount = 0\n);\n\n$commission_rate = entity\\attribute('commission_rate');\nifThen(\n    $commission_rate == null,\n    $commission_rate = 0.10\n);\nifThen(\n    $commission_rate == '',\n    $commission_rate = 0.10\n);\nifThen(\n    $commission_rate > 1,\n    $commission_rate = $commission_rate / 100\n);\n\nentity\\setAttribute(\n    'commissionAmount',\n    number\\round($premium_amount * $commission_rate, 2)\n);\n\n$status = entity\\attribute('status');\n$premiumAtRiskCalc = 0;\nifThen(\n    $status == 'Active',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Up for Renewal',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Renewing',\n    $premiumAtRiskCalc = $premium_amount\n);\nifThen(\n    $status == 'Renewed',\n    $premiumAtRiskCalc = $premium_amount\n);\n\nentity\\setAttribute('premiumAtRisk', $premiumAtRiskCalc);\n"
     },
     "links": {
         "account": {

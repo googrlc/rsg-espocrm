@@ -1,4 +1,20 @@
 {
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/common/record/panels/record-info",
+                "order": 1
+            },
+            {
+                "name": "internalIds",
+                "label": "Internal IDs",
+                "view": "custom:views/common/record/panels/internal-ids",
+                "order": 2
+            }
+        ]
+    },
     "relationshipPanels": {
         "tasks": {
             "orderBy": "dateEnd",

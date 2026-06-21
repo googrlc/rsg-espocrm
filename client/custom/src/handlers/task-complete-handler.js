@@ -18,7 +18,7 @@ define('custom:handlers/task-complete-handler', ['action-handler'], function (De
         isCompleteTaskVisible: function () {
             var status = this.view.model.get('status');
 
-            return ['Completed', 'Cancelled'].indexOf(status) === -1;
+            return ['Completed', 'Cancelled', 'Archived'].indexOf(status) === -1;
         },
 
         completeTask: function () {

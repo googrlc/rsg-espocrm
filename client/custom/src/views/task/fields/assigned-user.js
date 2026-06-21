@@ -1,8 +1,13 @@
 define('custom:views/task/fields/assigned-user', ['views/fields/link'], function (Dep) {
 
-    // Allowed task owners, resolved by username so no user id is hardcoded.
-    // Keep in sync with Hooks/Task/NormalizeAssignmentAndAccount::ALLOWED_USERNAMES.
-    var ALLOWED_USERNAMES = ['gretchcoates', 'lamarcoates'];
+    // Allowed task owners. Use display names as the business rule and usernames
+    // as aliases for older saved code paths.
+    var ALLOWED_NAMES = ['Gretchen Coates', 'Lamar Coates'];
+    var ALLOWED_USERNAME_ALIASES = [
+        'gretchcoates',
+        'lamarcoates',
+        'lamar@risk-solutionsgroup.com'
+    ];
 
     // Cached across all field instances on the page (one lookup per session).
     var allowedUsersPromise = null;
@@ -11,14 +16,18 @@ define('custom:views/task/fields/assigned-user', ['views/fields/link'], function
         if (!allowedUsersPromise) {
             allowedUsersPromise = Espo.Ajax.getRequest('User', {
                 select: 'id,name,userName',
-                where: [
-                    { type: 'in', attribute: 'userName', value: ALLOWED_USERNAMES }
-                ],
-                maxSize: 10
+                maxSize: 200
             }).then(function (response) {
                 var map = {};
 
                 (response.list || []).forEach(function (user) {
+                    if (
+                        ALLOWED_NAMES.indexOf(user.name) === -1 &&
+                        ALLOWED_USERNAME_ALIASES.indexOf(user.userName) === -1
+                    ) {
+                        return;
+                    }
+
                     map[user.id] = user.name;
                 });
 

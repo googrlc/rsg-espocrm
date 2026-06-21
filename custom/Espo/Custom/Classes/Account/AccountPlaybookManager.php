@@ -164,7 +164,7 @@ class AccountPlaybookManager
             ->where([
                 'accountId' => $account->getId(),
                 'automationKey' => $playbook['automationKey'],
-                'status!=' => ['Completed', 'Cancelled'],
+                'status!=' => ['Completed', 'Cancelled', 'Archived'],
             ])
             ->findOne();
 

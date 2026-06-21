@@ -28,31 +28,34 @@
         "detail": [
             {
                 "name": "daysRemaining",
-                "label": "Days Remaining",
+                "label": "Policy Status",
                 "view": "custom:views/policy/record/panels/days-remaining",
                 "order": 1,
                 "sticked": true
             },
             {
-                "name": "carrierDetails",
-                "label": "Carrier Details",
-                "view": "custom:views/policy/record/panels/carrier-details",
-                "order": 2
-            },
-            {
                 "name": "quickLinks",
                 "label": "Quick Links",
                 "view": "custom:views/policy/record/panels/quick-links",
+                "order": 2
+            },
+            {
+                "name": "carrierDetails",
+                "label": "Carrier Details",
+                "view": "custom:views/policy/record/panels/carrier-details",
                 "order": 3
             },
             {
-                "name": "activities",
-                "label": "Activities",
-                "view": "crm:views/record/panels/activities",
-                "aclScope": "Activities",
-                "orderBy": "dateStart",
-                "orderDirection": "desc",
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/common/record/panels/record-info",
                 "order": 4
+            },
+            {
+                "name": "internalIds",
+                "label": "Internal IDs",
+                "view": "custom:views/common/record/panels/internal-ids",
+                "order": 5
             }
         ]
     },
@@ -233,6 +236,126 @@
                     ]
                 },
                 "required": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "carrierAccountId"
+                        }
+                    ]
+                }
+            },
+            "business_type": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "business_type"
+                        }
+                    ]
+                }
+            },
+            "assignedUser": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "assignedUserId"
+                        }
+                    ]
+                }
+            },
+            "teams": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "teamsIds"
+                        }
+                    ]
+                }
+            },
+            "commission_rate": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "commission_rate"
+                        }
+                    ]
+                }
+            },
+            "commissionAmount": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "commissionAmount"
+                        }
+                    ]
+                }
+            },
+            "coverage_amount": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "coverage_amount"
+                        }
+                    ]
+                }
+            },
+            "deductible": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "deductible"
+                        }
+                    ]
+                }
+            },
+            "agency_fee": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "isNotEmpty",
+                            "attribute": "agency_fee"
+                        }
+                    ]
+                }
+            }
+        },
+        "panels": {
+            "financial": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                {"type": "isNotEmpty", "attribute": "commission_rate"},
+                                {"type": "isNotEmpty", "attribute": "commissionAmount"},
+                                {"type": "isNotEmpty", "attribute": "coverage_amount"},
+                                {"type": "isNotEmpty", "attribute": "deductible"},
+                                {"type": "isNotEmpty", "attribute": "agency_fee"}
+                            ]
+                        }
+                    ]
+                }
+            },
+            "renewalTracking": {
+                "visible": {
+                    "conditionGroup": [
+                        {"type": "notEquals", "attribute": "status", "value": "Expired"},
+                        {"type": "notEquals", "attribute": "status", "value": "Cancelled"},
+                        {"type": "notEquals", "attribute": "status", "value": "Flat Cancel"},
+                        {"type": "notEquals", "attribute": "status", "value": "Pending Cancel"},
+                        {"type": "notEquals", "attribute": "status", "value": "Non-Renewed"},
+                        {"type": "notEquals", "attribute": "status", "value": "Lapsed"}
+                    ]
+                }
+            },
+            "carrierDetails": {
+                "visible": {
                     "conditionGroup": [
                         {
                             "type": "isNotEmpty",

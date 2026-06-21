@@ -1,0 +1,24 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "daysRemaining": {
+        "sticked": true,
+        "index": 0
+    },
+    "quickLinks": {
+        "index": 1
+    },
+    "carrierDetails": {
+        "index": 2
+    },
+    "recordInfo": {
+        "index": 3
+    },
+    "internalIds": {
+        "index": 4
+    },
+    "default": {
+        "disabled": true
+    }
+}

@@ -9,7 +9,6 @@
     "menu": {
         "detail": {
             "buttons": [
-                "__APPEND__",
                 {
                     "name": "completeTask",
                     "label": "Complete Task",
@@ -19,12 +18,21 @@
                     "handler": "custom:handlers/task-complete-handler",
                     "actionFunction": "completeTask",
                     "checkVisibilityFunction": "isCompleteTaskVisible"
+                },
+                {
+                    "name": "archiveTask",
+                    "label": "Archive",
+                    "style": "default",
+                    "iconClass": "fas fa-box-archive",
+                    "acl": "edit",
+                    "handler": "custom:handlers/task-archive-handler",
+                    "actionFunction": "archiveTask",
+                    "checkVisibilityFunction": "isArchiveTaskVisible"
                 }
             ]
         }
     },
     "modalDetailActionList": [
-        "__APPEND__",
         {
             "name": "completeTask",
             "label": "Complete Task",
@@ -34,16 +42,48 @@
             "handler": "custom:handlers/task-complete-handler",
             "actionFunction": "completeTask",
             "checkVisibilityFunction": "isCompleteTaskVisible"
+        },
+        {
+            "name": "archiveTask",
+            "label": "Archive",
+            "style": "default",
+            "iconClass": "fas fa-box-archive",
+            "acl": "edit",
+            "handler": "custom:handlers/task-archive-handler",
+            "actionFunction": "archiveTask",
+            "checkVisibilityFunction": "isArchiveTaskVisible"
         }
     ],
-    "rowActionList": ["complete"],
+    "rowActionList": ["complete", "archive"],
     "rowActionDefs": {
         "complete": {
             "handler": "custom:handlers/task-complete-row-action",
             "label": "Complete",
             "groupIndex": 0,
             "acl": "edit"
+        },
+        "archive": {
+            "handler": "custom:handlers/task-archive-row-action",
+            "label": "Archive",
+            "groupIndex": 0,
+            "acl": "edit"
         }
+    },
+    "sidePanels": {
+        "detail": [
+            {
+                "name": "recordInfo",
+                "label": "Record Info",
+                "view": "custom:views/common/record/panels/record-info",
+                "order": 1
+            },
+            {
+                "name": "internalIds",
+                "label": "Internal IDs",
+                "view": "custom:views/common/record/panels/internal-ids",
+                "order": 2
+            }
+        ]
     },
     "filterList": [
         "actual",

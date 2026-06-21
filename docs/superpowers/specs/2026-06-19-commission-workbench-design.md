@@ -57,6 +57,100 @@ Each section should render the same dense sortable ledger table with columns:
 - Producer
 - Actions
 
+## UI Elements
+
+The workbench should use these visible elements on the `#Commission` page.
+
+### Header Bar
+
+- Page title: `Commission Workbench`
+- Subtitle: `Review, reconcile, and clear commission records`
+- Primary button: `Create Commission`
+- Secondary button: `Refresh`
+- Optional small timestamp: `Last refreshed: {time}`
+
+### Summary Tiles
+
+- `Unreconciled`
+  - Count
+  - Estimated commission total
+  - Visual style: amber
+- `Reconciled`
+  - Count
+  - Posted amount total
+  - Visual style: green
+- `Disputed`
+  - Count
+  - Variance total
+  - Visual style: red
+- `Needs Attention`
+  - Count of overdue, ledger error, or high variance rows
+  - Visual style: red or amber depending on severity
+
+### Status Tabs
+
+- `Unreconciled`
+- `Reconciled`
+- `Disputed`
+- `All`
+
+The active tab should be visually clear. Tab labels should include counts when available, for example `Unreconciled (42)`.
+
+### Toolbar
+
+- Search input for account, policy, carrier, and producer
+- Sort control or clickable column headers
+- Filter dropdown for `status`: `Estimated`, `Posted`, `Overdue`
+- Filter dropdown for `commissionType`: `New Business`, `Renewal`, `Endorsement`
+- Filter dropdown for `ledgerSyncStatus`: `Pending`, `Synced`, `Error`
+- Clear filters button
+
+### Ledger Table
+
+- Select checkbox column, reserved for future bulk actions but disabled or hidden in the first release
+- Account link
+- Policy link
+- Type badge
+- Carrier text
+- Effective Date
+- Expected Payment Date
+- Estimated Commission
+- Posted Amount
+- Variance
+- Status badge
+- Ledger Sync badge
+- Producer
+- Row actions
+
+### Row Actions
+
+- `Open`
+  - Opens the full Commission record
+- `Mark Reconciled`
+  - Sets `reconciliationStatus` to `Reconciled`
+- `Mark Unreconciled`
+  - Sets `reconciliationStatus` to `Unreconciled`
+- `Mark Disputed`
+  - Sets `reconciliationStatus` to `Disputed`
+
+Actions should appear as compact buttons or a small row action menu so the table stays dense.
+
+### Row Visual States
+
+- Unreconciled rows: amber left rail or amber badge
+- Reconciled rows: green left rail or green badge
+- Disputed rows: red left rail or red badge
+- Overdue rows: red date text for `expectedPaymentDate`
+- Ledger error rows: red `Ledger Sync` badge
+- High variance rows: red or amber variance text
+
+### Empty, Loading, And Error States
+
+- Loading state: compact spinner with `Loading commissions`
+- Empty tab state: `No {status} commissions found`
+- Fetch error state: `Could not load commissions` with a `Retry` button
+- Quick action error state: inline row message or toast that says the record was not updated
+
 ## Sorting And Filtering
 
 Rows should be sortable client-side after each API fetch for common review fields:

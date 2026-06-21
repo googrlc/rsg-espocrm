@@ -22,7 +22,7 @@ define('custom:handlers/task-complete-row-action', [], function () {
         }
 
         isAvailable(model) {
-            return ['Completed', 'Cancelled'].indexOf(model.get('status')) === -1;
+            return ['Completed', 'Cancelled', 'Archived'].indexOf(model.get('status')) === -1;
         }
 
         process(model) {

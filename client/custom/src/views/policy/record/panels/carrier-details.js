@@ -12,10 +12,16 @@ define("custom:views/policy/record/panels/carrier-details", ["view"], function (
                         {{#if carrierAccountId}}
                             <a href="#Account/view/{{carrierAccountId}}">{{carrierAccountName}}</a>
                         {{else}}
-                            <span class="text-muted">Not linked</span>
+                            <span class="text-muted">None</span>
                         {{/if}}
                     </div>
                 </div>
+                {{#if underwriter}}
+                    <div class="rsg-policy-row">
+                        <div class="rsg-policy-label">Underwriter</div>
+                        <div class="rsg-policy-value">{{underwriter}}</div>
+                    </div>
+                {{/if}}
             </div>
             <style>
                 .rsg-policy-row + .rsg-policy-row { margin-top: 10px; }
@@ -34,13 +40,14 @@ define("custom:views/policy/record/panels/carrier-details", ["view"], function (
             return {
                 carrier: this.model.get("carrier") || "Not set",
                 carrierAccountId: this.model.get("carrierAccountId"),
-                carrierAccountName: this.model.get("carrierAccountName") || "Linked carrier"
+                carrierAccountName: this.model.get("carrierAccountName") || "Linked carrier",
+                underwriter: this.model.get("underwriter")
             };
         },
 
         setup: function () {
             Dep.prototype.setup.call(this);
-            this.listenTo(this.model, "change:carrier change:carrierAccountId change:carrierAccountName", this.reRender, this);
+            this.listenTo(this.model, "change:carrier change:carrierAccountId change:carrierAccountName change:underwriter", this.reRender, this);
         }
     });
 });

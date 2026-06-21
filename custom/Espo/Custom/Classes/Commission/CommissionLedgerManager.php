@@ -273,12 +273,17 @@ class CommissionLedgerManager
     private function normalizeRateOrNull(mixed $rate): ?float
     {
         if ($rate === null || $rate === '') {
-            return 0.10; // house default commission rate when none is set (unified across managers)
+            return null; // do not fabricate a rate when none is set (unified with PolicyAccountSync::normalizeRate)
         }
 
+        // Normalize whole-percent entries (e.g. 10, 11.5) to a fraction, then clamp to a
+        // sane [0,1] band so a stray percent/garbage value can never compute ~100x high.
         $numericRate = (float) $rate;
+        if ($numericRate > 1) {
+            $numericRate = $numericRate / 100;
+        }
 
-        return $numericRate > 1 ? $numericRate / 100 : $numericRate;
+        return max(0.0, min(1.0, $numericRate));
     }
 
     private function normalizeLineOfBusiness(mixed $value): string

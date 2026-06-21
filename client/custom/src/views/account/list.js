@@ -95,7 +95,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
     afterRender: function () { this._bindEvents(); this._fetchUsers(); this._loadTab(this.activeTab, true); },
     _bindEvents: function () {
       var self = this;
-      this.$el.on('click', '[data-tab]', function () { var tab = $(this).data('tab'); if (tab !== self.activeTab) { self.activeTab = tab; self.$el.find('[data-tab]').removeClass('rsg-tab-active'); $(this).addClass('rsg-tab-active'); self._loadTab(tab, true); } });
+      this.$el.on('click', '[data-tab]', function () { var tab = $(this).data('tab'); if (!self.tabDefs[tab]) return; if (tab !== self.activeTab) { self.activeTab = tab; self.$el.find('[data-tab]').removeClass('rsg-tab-active'); $(this).addClass('rsg-tab-active'); self._loadTab(tab, true); } });
       this.$el.on('input', '#rsg-search', function () {
         var tab = self.activeTab;
         self.searchQuery[tab] = $(this).val();
@@ -123,6 +123,7 @@ define('custom:views/account/list', ['exports', 'views/list'], function (_export
     _updateSelectionBar: function () { var selected = this.selectedIds[this.activeTab] || {}, count = Object.keys(selected).length, $bar = this.$el.find('#rsg-selection-bar'); if (count > 0) { $bar.find('#rsg-selected-count').text(count + ' record' + (count !== 1 ? 's' : '') + ' selected'); $bar.show(); } else { $bar.hide(); } },
     _loadTab: function (tabId, fetchFresh, silent) {
       var self = this, def = this.tabDefs[tabId], query = (this.searchQuery[tabId] || '').trim();
+      if (!def) return;
       var requestKey = tabId + ':' + query;
       this.activeRequestKey = requestKey;
 

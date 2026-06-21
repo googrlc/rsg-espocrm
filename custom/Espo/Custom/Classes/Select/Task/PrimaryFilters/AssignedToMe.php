@@ -18,7 +18,7 @@ class AssignedToMe implements Filter
     {
         $queryBuilder->where([
             'assignedUserId' => $this->user->getId(),
-            'status!=' => ['Completed', 'Cancelled'],
+            'status!=' => ['Completed', 'Cancelled', 'Archived'],
         ]);
     }
 }

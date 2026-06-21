@@ -155,7 +155,22 @@
     "carrier_code": "Carrier Code",
     "total_carrier_premium": "Total Carrier Premium",
     "nps_date": "Net Promoter Score Date",
-    "nps_score": "Net Promoter Score"
+    "nps_score": "Net Promoter Score",
+    "coInsuredFirstName": "Co-Insured First Name",
+    "coInsuredLastName": "Co-Insured Last Name",
+    "coInsuredDob": "Co-Insured Date of Birth",
+    "coInsuredOccupation": "Co-Insured Occupation",
+    "householdMembers": "Household Members",
+    "ownOrRent": "Own or Rent",
+    "yearBuilt": "Year Built",
+    "dwellingSqFt": "Dwelling Square Footage",
+    "vehiclesCount": "Number of Vehicles",
+    "driversCount": "Number of Drivers",
+    "youthfulDriverFlag": "Youthful Driver in Household",
+    "householdIncomeBand": "Household Income Band",
+    "existingPersonalPolicies": "Existing Personal Policies",
+    "priorCarrier": "Prior Carrier",
+    "priorPremium": "Prior Premium"
   },
   "links": {
     "linkedTasks": "Account Tasks",

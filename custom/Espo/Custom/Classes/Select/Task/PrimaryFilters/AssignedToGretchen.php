@@ -16,7 +16,7 @@ class AssignedToGretchen implements Filter
 
     public function apply(SelectBuilder $queryBuilder): void
     {
-        // Find Gretchen's user by name
+        // Find Gretchen's user by username, then durable display name.
         $gretchen = $this->entityManager
             ->getRDBRepository('User')
             ->where(['userName' => 'gretchcoates'])
@@ -25,19 +25,19 @@ class AssignedToGretchen implements Filter
         if ($gretchen) {
             $queryBuilder->where([
                 'assignedUserId' => $gretchen->getId(),
-                'status!=' => ['Completed', 'Cancelled'],
+                'status!=' => ['Completed', 'Cancelled', 'Archived'],
             ]);
         } else {
-            // Fallback: find by first name
+            // Fallback: find by exact display name.
             $gretchen = $this->entityManager
                 ->getRDBRepository('User')
-                ->where(['firstName' => 'Gretchen'])
+                ->where(['name' => 'Gretchen Coates'])
                 ->findOne();
 
             if ($gretchen) {
                 $queryBuilder->where([
                     'assignedUserId' => $gretchen->getId(),
-                    'status!=' => ['Completed', 'Cancelled'],
+                    'status!=' => ['Completed', 'Cancelled', 'Archived'],
                 ]);
             }
         }

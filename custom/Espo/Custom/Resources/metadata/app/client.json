@@ -1,4 +1,6 @@
 {
-  "cssList": [],
+  "cssList": [
+    "client/custom/css/rsg-kanban.css"
+  ],
   "scriptList": []
 }

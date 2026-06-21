@@ -22,7 +22,7 @@ class AssignedToGretchen implements Filter
         if (!$gretchen) {
             $gretchen = $this->entityManager
                 ->getRDBRepository('User')
-                ->where(['firstName' => 'Gretchen'])
+                ->where(['name' => 'Gretchen Coates'])
                 ->findOne();
         }
 

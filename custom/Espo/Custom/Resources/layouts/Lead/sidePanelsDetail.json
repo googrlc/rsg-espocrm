@@ -1,0 +1,14 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "recordInfo": {
+        "index": 0
+    },
+    "internalIds": {
+        "index": 1
+    },
+    "default": {
+        "disabled": true
+    }
+}

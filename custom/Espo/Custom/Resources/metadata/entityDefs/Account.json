@@ -1720,6 +1720,102 @@
         "teams": {
             "type": "linkMultiple",
             "disabled": true
+        },
+        "coInsuredFirstName": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "coInsuredLastName": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "coInsuredDob": {
+            "type": "date",
+            "isCustom": true
+        },
+        "coInsuredOccupation": {
+            "type": "varchar",
+            "maxLength": 150,
+            "isCustom": true
+        },
+        "householdMembers": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Named household members beyond the primary/co-insured (free text)."
+        },
+        "dependentsCount": {
+            "type": "int",
+            "isCustom": true
+        },
+        "dependentAges": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "tooltipText": "Comma-separated dependent ages, e.g. 6, 9, 14."
+        },
+        "ownOrRent": {
+            "type": "enum",
+            "options": ["", "Own", "Rent"],
+            "isCustom": true
+        },
+        "residenceType": {
+            "type": "enum",
+            "options": ["", "Single Family", "Condo", "Townhome", "Manufactured / Mobile", "Multi-Family", "Other"],
+            "isCustom": true
+        },
+        "yearBuilt": {
+            "type": "int",
+            "isCustom": true,
+            "min": 1800,
+            "max": 2100
+        },
+        "yearsAtAddress": {
+            "type": "int",
+            "isCustom": true
+        },
+        "dwellingSqFt": {
+            "type": "int",
+            "isCustom": true
+        },
+        "vehiclesCount": {
+            "type": "int",
+            "isCustom": true
+        },
+        "driversCount": {
+            "type": "int",
+            "isCustom": true
+        },
+        "youthfulDriverFlag": {
+            "type": "bool",
+            "default": false,
+            "isCustom": true,
+            "tooltipText": "Household includes a driver under 25."
+        },
+        "vehicleAdditionalNotes": {
+            "type": "text",
+            "isCustom": true
+        },
+        "householdIncomeBand": {
+            "type": "enum",
+            "options": ["", "Under $50k", "$50k-$100k", "$100k-$150k", "$150k-$250k", "$250k+"],
+            "isCustom": true,
+            "tooltipText": "Income band, not an exact figure."
+        },
+        "existingPersonalPolicies": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Personal lines policies in force (Home, Auto, Umbrella, Life, etc.)."
+        },
+        "priorCarrier": {
+            "type": "varchar",
+            "maxLength": 150,
+            "isCustom": true
+        },
+        "priorPremium": {
+            "type": "currency",
+            "isCustom": true
         }
     },
     "links": {

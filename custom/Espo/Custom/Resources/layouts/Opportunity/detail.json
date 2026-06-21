@@ -60,9 +60,7 @@
                 {
                     "name": "estimatedPremium"
                 },
-                {
-                    "name": "cRenewalDate"
-                }
+                false
             ],
             [
                 {

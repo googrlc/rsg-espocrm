@@ -1,0 +1,158 @@
+/* RSG compact native Kanban cards. */
+.list-kanban .group-column-list > .item > .panel {
+    position: relative !important;
+    margin: 0 0 7px !important;
+    border: 1px solid #d8dee8 !important;
+    border-left: 3px solid #8fa1b8 !important;
+    border-radius: 7px !important;
+    background: #ffffff !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06) !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease !important;
+}
+
+.list-kanban .group-column-list > .item > .panel:hover {
+    transform: translateY(-1px) !important;
+    border-color: #aab5c5 !important;
+    box-shadow: 0 4px 10px rgba(15, 23, 42, 0.11) !important;
+}
+
+.list-kanban .group-column-list > .item > .panel > .panel-body {
+    position: relative !important;
+    padding: 9px 34px 9px 11px !important;
+}
+
+.list-kanban .group-column-list > .item > .panel > .panel-body::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    color: #788397;
+    font-size: 11px;
+    line-height: 1;
+    opacity: 0.72;
+}
+
+.list-kanban .group-column-list .form-group:has(.field[data-name="assignedUser"]) {
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    z-index: 2 !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+}
+
+.list-kanban .group-column-list .list-row-buttons {
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.list-kanban .group-column-list > .item > .panel:hover .list-row-buttons,
+.list-kanban .group-column-list > .item > .panel:focus-within .list-row-buttons {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.list-kanban .group-column-list .form-group {
+    margin: 0 0 5px !important;
+    min-width: 0 !important;
+}
+
+.list-kanban .group-column-list .form-group:last-child {
+    margin-bottom: 0 !important;
+}
+
+.list-kanban .group-column-list .field[data-name] {
+    display: block !important;
+    min-width: 0 !important;
+    color: #2b3445 !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.list-kanban .group-column-list .field[data-name]::before {
+    display: block !important;
+    margin-bottom: 1px !important;
+    color: #7b8492 !important;
+    font-size: 9px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.07em !important;
+    line-height: 1.1 !important;
+    text-transform: uppercase !important;
+}
+
+.list-kanban .group-column-list .field[data-name="estimatedPremium"] {
+    margin-top: 7px !important;
+    margin-bottom: 0 !important;
+    padding-top: 6px !important;
+    border-top: 1px solid #edf1f6 !important;
+    color: #172033 !important;
+    font-size: 15px !important;
+    font-weight: 750 !important;
+    line-height: 1.15 !important;
+}
+
+.list-kanban .group-column-list .field[data-name="estimatedPremium"]::before {
+    content: "Premium";
+}
+
+.list-kanban .group-column-list .field[data-name="name"] {
+    margin-bottom: 6px !important;
+    padding-right: 2px !important;
+    color: #172033 !important;
+    font-size: 12.5px !important;
+    font-weight: 750 !important;
+}
+
+.list-kanban .group-column-list .field[data-name="name"] a {
+    color: #172033 !important;
+    font-weight: 750 !important;
+    text-decoration: none !important;
+}
+
+.list-kanban .group-column-list .field[data-name="name"]::before {
+    content: "Opportunity";
+}
+
+.list-kanban .group-column-list .field[data-name="lineOfBusiness"]::before {
+    content: "LOB";
+}
+
+.list-kanban .group-column-list .field[data-name="businessType"]::before {
+    content: "Deal";
+}
+
+.list-kanban .group-column-list .field[data-name="closeDate"]::before {
+    content: "Projected close";
+}
+
+.list-kanban .group-column-list .field[data-name="assignedUser"] {
+    width: 18px !important;
+    height: 18px !important;
+    overflow: visible !important;
+}
+
+.list-kanban .group-column-list .field[data-name="assignedUser"]::before {
+    display: none !important;
+    content: "";
+}
+
+.list-kanban .group-column-list .field[data-name="assignedUser"] .avatar {
+    display: block !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 999px !important;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.18) !important;
+}
+
+.list-kanban .group-column-list .field[data-name="assignedUser"] a {
+    display: none !important;
+}

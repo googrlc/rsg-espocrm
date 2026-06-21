@@ -36,11 +36,15 @@ define("custom:views/policy/record/panels/days-remaining", ["view"], function (D
             var days = this.model.get("daysRemaining");
             var statusLabel = this.model.get("statusLabel") || "ACTIVE";
             var badgeClass = "good";
+            var daysValue = days;
 
             if (days === null || typeof days === "undefined") {
-                days = "--";
+                daysValue = "--";
             } else if (days <= 0) {
+                // Expired: show a terminal label, never a raw negative countdown.
                 badgeClass = "danger";
+                daysValue = "Expired";
+                statusLabel = days < 0 ? (-days) + " days ago" : "today";
             } else if (days <= 30) {
                 badgeClass = "warn";
             } else if (days <= 60) {
@@ -48,7 +52,7 @@ define("custom:views/policy/record/panels/days-remaining", ["view"], function (D
             }
 
             return {
-                daysValue: days,
+                daysValue: daysValue,
                 statusLabel: statusLabel,
                 badgeClass: badgeClass
             };

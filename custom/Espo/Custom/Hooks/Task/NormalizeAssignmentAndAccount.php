@@ -11,10 +11,15 @@ use Espo\ORM\Repository\Option\SaveOptions;
 class NormalizeAssignmentAndAccount implements BeforeSave
 {
     /**
-     * Users allowed to own a task, matched by username so a changed user id
-     * never breaks assignment. Keep in sync with the assigned-user field view.
+     * Users allowed to own a task. Accept display names as the durable business
+     * rule, with usernames as aliases for older saved code paths.
      */
-    private const ALLOWED_USERNAMES = ['gretchcoates', 'lamarcoates'];
+    private const ALLOWED_USER_NAMES = ['Gretchen Coates', 'Lamar Coates'];
+    private const ALLOWED_USERNAME_ALIASES = [
+        'gretchcoates',
+        'lamarcoates',
+        'lamar@risk-solutionsgroup.com',
+    ];
 
     public function __construct(
         private EntityManager $entityManager
@@ -36,13 +41,21 @@ class NormalizeAssignmentAndAccount implements BeforeSave
 
         $user = $this->entityManager->getEntityById('User', $assignedUserId);
         $userName = $user ? (string) $user->get('userName') : '';
+        $name = $user ? (string) $user->get('name') : '';
 
-        if (!in_array($userName, self::ALLOWED_USERNAMES, true)) {
+        if (!$this->isAllowedOwner($name, $userName)) {
             throw new BadRequest('Assigned To must be Gretchen Coates or Lamar Coates.');
         }
 
-        // $user is guaranteed non-null here (its username matched the allow list).
+        // $user is guaranteed non-null here (its name or username matched the allow list).
         $entity->set('assignedUserName', $user->get('name'));
+    }
+
+    private function isAllowedOwner(string $name, string $userName): bool
+    {
+        return
+            in_array($name, self::ALLOWED_USER_NAMES, true) ||
+            in_array($userName, self::ALLOWED_USERNAME_ALIASES, true);
     }
 
     private function normalizeAccount(Entity $entity): void

@@ -11,3 +11,6 @@ secrets.json
 __pycache__/
 *.pyc
 backups/
+
+# personal launchpad (generated from 1Password export - do not commit)
+core_infrastructure/openwebui/launchpad/index.html

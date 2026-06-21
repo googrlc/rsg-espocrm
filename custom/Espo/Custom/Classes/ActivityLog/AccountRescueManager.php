@@ -24,7 +24,7 @@ class AccountRescueManager extends BaseTriageManager
             ->where([
                 'sourceActivityLogId' => $activityLog->getId(),
                 'automationKey' => $rule['automationKey'],
-                'status!=' => ['Completed', 'Cancelled'],
+                'status!=' => ['Completed', 'Cancelled', 'Archived'],
             ])
             ->findOne();
 

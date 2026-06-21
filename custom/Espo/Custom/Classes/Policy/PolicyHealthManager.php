@@ -52,7 +52,10 @@ class PolicyHealthManager
         $daysRemaining = $policy->get('daysRemaining');
         $daysRemaining = is_numeric($daysRemaining) ? (int) $daysRemaining : null;
 
-        if (in_array($status, self::EXPIRED_STATUSES, true)) {
+        if (
+            in_array($status, self::EXPIRED_STATUSES, true) ||
+            ($daysRemaining !== null && $daysRemaining <= 0)
+        ) {
             return 'Expired';
         }
 

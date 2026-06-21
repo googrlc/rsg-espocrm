@@ -6,12 +6,16 @@
         "Waiting on Carrier"
     ],
     "historyStatusList": [
-        "Completed"
+        "Completed",
+        "Archived"
     ],
     "completedStatusList": [
         "Completed"
     ],
     "canceledStatusList": [
         "Cancelled"
+    ],
+    "kanbanStatusIgnoreList": [
+        "Archived"
     ]
 }

@@ -8,7 +8,8 @@
                 "Waiting on Client",
                 "Waiting on Carrier",
                 "Completed",
-                "Cancelled"
+                "Cancelled",
+                "Archived"
             ],
             "style": {
                 "Inbox": "info",
@@ -16,7 +17,8 @@
                 "Waiting on Client": "warning",
                 "Waiting on Carrier": "warning",
                 "Completed": "success",
-                "Cancelled": "default"
+                "Cancelled": "default",
+                "Archived": "default"
             },
             "default": "Inbox",
             "displayAsLabel": true,
@@ -24,7 +26,8 @@
             "audited": true,
             "notActualOptions": [
                 "Completed",
-                "Cancelled"
+                "Cancelled",
+                "Archived"
             ],
             "customizationOptionsReferenceDisabled": true
         },
@@ -54,6 +57,7 @@
                 "Manual",
                 "Email",
                 "API",
+                "Slack",
                 "Momentum",
                 "n8n",
                 "Hermes"

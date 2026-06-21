@@ -16,5 +16,8 @@
     },
     "internalIds": {
         "index": 4
+    },
+    "default": {
+        "disabled": true
     }
 }

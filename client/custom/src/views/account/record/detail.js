@@ -4,10 +4,10 @@
  *
  * Tab map (0-indexed, must match detail.json tabBreak order):
  *   0 = Overview          (stream)
- *   1 = Contacts          (contacts)
- *   2 = Policies          (policies, renewals)
- *   3 = Activity          (activityLogs, emails, meetings, calls, tasks)
- *   4 = Business Profile  (opportunities) — conditional: CL/GB only
+ *   1 = Profile           (opportunities) — Business panels (CL/GB) OR Household panels (PL/Medicare/Life); hidden for Prospect/Carrier/MGA
+ *   2 = Contacts          (contacts)
+ *   3 = Policies          (policies, renewals)
+ *   4 = Activity          (activityLogs, emails, meetings, calls, tasks)
  *   5 = Group Benefits    — conditional: GB only
  *   6 = Internal          (cases, commissions)
  ************************************************************************/
@@ -20,21 +20,21 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
         bottomPanelTabMap: {
             "stream":        0,
             "clientNotes":   0,
-            "contacts":      1,
-            "policies":      2,
-            "renewals":      2,
-            "activityLogs":  3,
-            "emails":        3,
-            "meetings":      3,
-            "calls":         3,
-            "tasks":         3,
-            "opportunities": 4,
+            "opportunities": 1,
+            "contacts":      2,
+            "policies":      3,
+            "renewals":      3,
+            "activityLogs":  4,
+            "emails":        4,
+            "meetings":      4,
+            "calls":         4,
+            "tasks":         4,
             "cases":         6,
             "commissions":   6,
         },
 
-        // Tab indices for conditional visibility
-        BUSINESS_PROFILE_TAB: 4,
+        // Tab indices for conditional visibility (must match detail.json tabBreak order)
+        PROFILE_TAB: 1,
         GROUP_BENEFITS_TAB: 5,
 
         setup: function () {
@@ -48,18 +48,69 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
                 aclScope: "Task",
                 action: "createTask"
             });
+
+            this.addButton({
+                name: "createActivity",
+                label: "+ Activity",
+                style: "default",
+                acl: "create",
+                aclScope: "ActivityLog",
+                action: "createActivity"
+            });
         },
 
         actionCreateTask: function () {
+            var self = this;
+
             this.createView("createTaskModal", "custom:views/task/record/create-modal", {
                 scope: "Task",
+                sourceType: "Account",
                 accountId: this.model.id,
                 accountName: this.model.get("name"),
                 parentType: "Account",
                 parentId: this.model.id,
-                parentName: this.model.get("name")
+                parentName: this.model.get("name"),
+                contextLabel: "Account-level task — " + this.model.get("name")
             }, function (view) {
                 view.render();
+
+                self.listenToOnce(view, "after:save", function () {
+                    var bottomView = self.getView("bottom");
+
+                    if (bottomView) {
+                        var tasksPanel = bottomView.getView("tasks");
+
+                        if (tasksPanel) {
+                            tasksPanel.actionRefresh();
+                        }
+                    }
+                });
+            });
+        },
+
+        actionCreateActivity: function () {
+            var self = this;
+
+            this.createView("createActivityModal", "views/modals/edit", {
+                scope: "ActivityLog",
+                attributes: {
+                    accountId: this.model.id,
+                    accountName: this.model.get("name")
+                }
+            }, function (view) {
+                view.render();
+
+                self.listenToOnce(view, "after:save", function () {
+                    var bottomView = self.getView("bottom");
+
+                    if (bottomView) {
+                        var activityPanel = bottomView.getView("activityLogs");
+
+                        if (activityPanel) {
+                            activityPanel.actionRefresh();
+                        }
+                    }
+                });
             });
         },
 
@@ -96,13 +147,15 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
         },
 
         /**
-         * Hide/show Business Profile (tab 4) and Group Benefits (tab 5)
-         * based on account_type field value.
+         * Show/hide the single "Profile" tab (slot 1) and the Group Benefits tab (slot 5)
+         * based on account_type. The Profile tab holds BOTH the business panels (gated
+         * CL/GB) and the household panels (gated PL/Medicare/Life) — only the matching set
+         * renders via per-panel dynamicLogicVisible, so here we just show/hide the whole tab.
          *
-         * Commercial Lines → show Business Profile, hide Group Benefits
-         * Group Benefits → show both Business Profile and Group Benefits
-         * Personal Lines → show Business Profile (PL panels use dynamicLogicVisible)
-         * All others (Prospect, etc.) → hide both
+         *   Commercial Lines / Group Benefits → Profile shows business panels
+         *   Personal Lines / Medicare / Life Insurance → Profile shows household panels
+         *   Group Benefits → also shows the dedicated Group Benefits tab
+         *   Prospect / Carrier / MGA / (empty) → Profile hidden (no panels match)
          */
         syncConditionalTabs: function () {
             var type = this.model.get("account_type") || "";
@@ -113,20 +166,20 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
             var $allTabs = $tabContainer.find("> li");
             if (!$allTabs.length) return;
 
-            var $businessTab = $allTabs.eq(this.BUSINESS_PROFILE_TAB);
+            var $profileTab = $allTabs.eq(this.PROFILE_TAB);
             var $gbTab = $allTabs.eq(this.GROUP_BENEFITS_TAB);
 
-            if (type === "Commercial Lines") {
-                $businessTab.removeClass("tab-hidden");
-                $gbTab.addClass("tab-hidden");
-            } else if (type === "Group Benefits") {
-                $businessTab.removeClass("tab-hidden");
-                $gbTab.removeClass("tab-hidden");
-            } else if (type === "Personal Lines") {
-                $businessTab.removeClass("tab-hidden");
-                $gbTab.addClass("tab-hidden");
+            var profileTypes = ["Commercial Lines", "Group Benefits", "Personal Lines", "Medicare", "Life Insurance"];
+
+            if (profileTypes.indexOf(type) !== -1) {
+                $profileTab.removeClass("tab-hidden");
             } else {
-                $businessTab.addClass("tab-hidden");
+                $profileTab.addClass("tab-hidden");
+            }
+
+            if (type === "Group Benefits") {
+                $gbTab.removeClass("tab-hidden");
+            } else {
                 $gbTab.addClass("tab-hidden");
             }
         },

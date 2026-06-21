@@ -31,8 +31,9 @@ class ApplyCoiDefaults implements BeforeSave
     /** A COI request covers between 1 and this many policies. */
     private const MAX_POLICIES = 5;
 
-    /** Resolved at runtime by username so a changed user id can't break it. */
-    private const GRETCHEN_USERNAME = 'gretchcoates';
+    /** Resolved at runtime so a changed user id or login username can't break it. */
+    private const GRETCHEN_NAME = 'Gretchen Coates';
+    private const GRETCHEN_USERNAME_ALIASES = ['gretchcoates'];
 
     /**
      * NowCerts insured / certificate deep-link template.
@@ -138,9 +139,20 @@ class ApplyCoiDefaults implements BeforeSave
 
     private function resolveGretchen(): ?Entity
     {
+        foreach (self::GRETCHEN_USERNAME_ALIASES as $userName) {
+            $user = $this->entityManager
+                ->getRDBRepository('User')
+                ->where(['userName' => $userName])
+                ->findOne();
+
+            if ($user) {
+                return $user;
+            }
+        }
+
         return $this->entityManager
             ->getRDBRepository('User')
-            ->where(['userName' => self::GRETCHEN_USERNAME])
+            ->where(['name' => self::GRETCHEN_NAME])
             ->findOne();
     }
 

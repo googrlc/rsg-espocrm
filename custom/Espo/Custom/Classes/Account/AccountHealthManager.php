@@ -84,7 +84,7 @@ class AccountHealthManager
                 ->getRDBRepository('Task')
                 ->where([
                     'accountId' => $accountId,
-                    'status!=' => ['Completed', 'Cancelled'],
+                    'status!=' => ['Completed', 'Cancelled', 'Archived'],
                 ])
                 ->find()
             : [];
