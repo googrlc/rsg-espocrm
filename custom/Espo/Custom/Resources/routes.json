@@ -3,5 +3,10 @@
         "route": "/GlobalSearch",
         "method": "get",
         "actionClassName": "Espo\\Custom\\Api\\GetGlobalSearch"
+    },
+    {
+        "route": "/Account/:id/nextcloudDocs",
+        "method": "get",
+        "actionClassName": "Espo\\Custom\\Api\\GetNextcloudDocs"
     }
 ]

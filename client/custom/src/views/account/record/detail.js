@@ -57,6 +57,47 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
                 aclScope: "ActivityLog",
                 action: "createActivity"
             });
+
+            this.addButton({
+                name: "createCrossSell",
+                label: "Cross-Sell",
+                style: "primary",
+                acl: "create",
+                aclScope: "Opportunity",
+                action: "createCrossSell"
+            });
+        },
+
+        actionCreateCrossSell: function () {
+            var self = this;
+            var accountName = this.model.get("name");
+
+            this.createView("createOppModal", "views/modals/edit", {
+                scope: "Opportunity",
+                attributes: {
+                    name: "Cross-Sell - " + accountName,
+                    accountId: this.model.id,
+                    accountName: accountName,
+                    businessType: "Cross-Sell",
+                    leadSource: "Existing Customer",
+                    priority: "Warm",
+                    stage: "Discovery"
+                }
+            }, function (view) {
+                view.render();
+
+                self.listenToOnce(view, "after:save", function () {
+                    var bottomView = self.getView("bottom");
+
+                    if (bottomView) {
+                        var oppPanel = bottomView.getView("opportunities");
+
+                        if (oppPanel) {
+                            oppPanel.actionRefresh();
+                        }
+                    }
+                });
+            });
         },
 
         actionCreateTask: function () {
@@ -182,6 +223,29 @@ define("custom:views/account/record/detail", ["views/record/detail"], function (
             } else {
                 $gbTab.addClass("tab-hidden");
             }
+
+            // Hide customer-focused side panels for Carrier / MGA / Vendor
+            this.syncSidePanelsForType(type);
+        },
+
+        syncSidePanelsForType: function (type) {
+            var carrierTypes = ["Carrier", "MGA", "Vendor/Partner"];
+            var isCarrier = carrierTypes.indexOf(type) !== -1;
+            var hiddenSidePanels = ["commissionSummary", "nextcloudDocs", "documentLinks"];
+
+            var sideView = this.getView("side");
+            if (!sideView || !sideView.$el) return;
+
+            hiddenSidePanels.forEach(function (name) {
+                var $panel = sideView.$el.find('[data-name="' + name + '"]');
+                if ($panel.length) {
+                    if (isCarrier) {
+                        $panel.addClass("hidden");
+                    } else {
+                        $panel.removeClass("hidden");
+                    }
+                }
+            });
         },
 
         /**

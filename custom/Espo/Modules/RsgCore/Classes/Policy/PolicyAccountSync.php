@@ -42,6 +42,8 @@ class PolicyAccountSync
             $policy->set('carrier', $policy->get('carrierAccountName'));
         }
 
+        $this->applyCarrierFromSync($policy);
+
         $daysRemaining = $this->calculateDaysRemaining($policy->get('expiration_date'));
         $policy->set('daysRemaining', $daysRemaining);
 
@@ -156,6 +158,92 @@ class PolicyAccountSync
         };
     }
 
+    /**
+     * Carrier brand normalization + MGA rollup.
+     *
+     * The AMS (NowCerts) stores the legal writing-company name per policy
+     * (e.g. "Progressive Mountain Ins Co"). We preserve that verbatim in
+     * carrier_raw for dec-page accuracy and fold writing-company variants
+     * into a canonical brand in carrier (e.g. "Progressive Insurance") for
+     * rollup/reporting. mga captures the wholesaler/parent so premium can be
+     * grouped at the MGA level (e.g. Colony + Concert under one MGA).
+     *
+     * Map keys are compared case-insensitively to absorb AMS casing noise.
+     * Unmapped strings pass through unchanged (brand == raw).
+     */
+    private const CARRIER_BRAND_MAP = [
+        'PROGRESSIVE' => 'Progressive Insurance',
+        'PROGRESSIVE MOUNTAIN INS CO' => 'Progressive Insurance',
+        'PROGRESSIVE FREEDOM INS CO' => 'Progressive Insurance',
+        'SAFECO INS CO OF OR' => 'Safeco',
+        'SAFECO INS CO OF IN' => 'Safeco',
+        'SAFECO INS CO OF IL' => 'Safeco',
+        'SAFECO INS CO OF AMER' => 'Safeco',
+        'COLONY INS CO' => 'Colony',
+        'COLONY SPECIALTY INSURANCE COMPANY' => 'Colony',
+        'CONCERT INSURANCE COMPANY' => 'Concert',
+        'STATE AUTOMOBILE MUT INS CO' => 'State Auto',
+        'STATE AUTO' => 'State Auto',
+        'NEXT INS US CO' => 'Next Insurance',
+        'NEXT INSURANCE' => 'Next Insurance',
+        'ILLINOIS MUT LIFE INS CO' => 'Illinois Mutual',
+        'ILLINOIS MUTUAL LIFE' => 'Illinois Mutual',
+        'LIBERTY MUTUAL' => 'Liberty Mutual',
+        'LIBERTY MUTUAL COMMERCIAL' => 'Liberty Mutual',
+        "LLOYD'S OF LONDON" => "Lloyd's of London",
+        "LLOYD'S LONDON" => "Lloyd's of London",
+    ];
+
+    /** Brand -> MGA. Unknown brands return null so a manual mga value is preserved. */
+    private const BRAND_MGA_MAP = [
+        'Progressive Insurance' => 'Direct',
+    ];
+
+    private function applyCarrierFromSync(Entity $policy): void
+    {
+        $rawCandidate = trim((string) ($policy->get('carrier_raw') ?? ''));
+        if ($rawCandidate === '') {
+            // A linked carrier account (if any) is the structured source of truth.
+            $rawCandidate = trim((string) ($policy->get('carrierAccountName') ?? ''));
+        }
+        if ($rawCandidate === '') {
+            $rawCandidate = trim((string) ($policy->get('carrier') ?? ''));
+        }
+
+        if ($rawCandidate !== '') {
+            $policy->set('carrier_raw', $rawCandidate);
+        }
+
+        $normalized = $this->normalizeCarrierValue($rawCandidate !== '' ? $rawCandidate : null);
+        if ($normalized !== '') {
+            $policy->set('carrier', $normalized);
+        }
+
+        $mga = $this->mgaForBrand($normalized);
+        if ($mga !== null) {
+            $policy->set('mga', $mga);
+        }
+    }
+
+    private function normalizeCarrierValue(?string $value): string
+    {
+        $line = trim((string) $value);
+        if ($line === '') {
+            return '';
+        }
+
+        return self::CARRIER_BRAND_MAP[strtoupper($line)] ?? $line;
+    }
+
+    private function mgaForBrand(string $brand): ?string
+    {
+        if ($brand === '') {
+            return null;
+        }
+
+        return self::BRAND_MGA_MAP[$brand] ?? null;
+    }
+
     public function refreshAccountMetricsByPolicy(Entity $policy): void
     {
         $accountIds = array_filter(array_unique([
@@ -215,11 +303,8 @@ class PolicyAccountSync
 
         $account->set('total_active_premium', round($totalPremium, 2));
         $account->set('activePolicyCount', $activePolicyCount);
-        $account->set('policyCountActive', $activePolicyCount);
         $account->set('next_x_date', $nextExpiration?->format('Y-m-d'));
         $account->set('next_x_date_lob', $nextExpirationLob);
-        $account->set('next_renewal_date', $nextExpiration?->format('Y-m-d'));
-        $account->set('next_renewal_lob', $nextExpirationLob);
         $account->set('next_renewal_carrier', $nextExpirationCarrier);
         $account->set('days_to_renewal', $nextExpiration ? (int) $today->diff($nextExpiration)->format('%r%a') : null);
 

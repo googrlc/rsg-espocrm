@@ -8,6 +8,11 @@
     "internalIds": {
         "index": 1
     },
+    "policyInsuredInfo": {
+        "view": "custom:views/task/record/panels/policy-insured-info",
+        "label": "Policy & Insured Info",
+        "index": 2
+    },
     "default": {
         "disabled": true
     }

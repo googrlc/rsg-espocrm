@@ -1,57 +1,169 @@
 [
-  {
-    "label": "Overview",
-    "rows": [
-      [{"name": "premium_amount"}, {"name": "carrier"}],
-      [{"name": "effective_date"}, {"name": "expiration_date"}]
-    ]
-  },
-  {
-    "label": "Policy Info",
-    "rows": [
-      [{"name": "policy_number"}, {"name": "status"}],
-      [{"name": "line_of_business"}, {"name": "business_type"}]
-    ]
-  },
-  {
-    "name": "financial",
-    "label": "Financial",
-    "rows": [
-      [{"name": "commission_rate"}, {"name": "commissionAmount"}],
-      [{"name": "coverage_amount"}, {"name": "deductible"}],
-      [{"name": "agency_fee"}, false]
-    ]
-  },
-  {
-    "name": "renewalTracking",
-    "label": "Renewal Tracking",
-    "rows": [
-      [{"name": "urgency"}, {"name": "premiumAtRisk"}],
-      [{"name": "last_contact_method"}, {"name": "last_contact_date"}],
-      [{"name": "cancellation_reason", "fullWidth": true}],
-      [{"name": "vin"}, {"name": "propertyAddress"}]
-    ]
-  },
-  {
-    "label": "Relationships",
-    "rows": [
-      [{"name": "account"}, {"name": "contact"}]
-    ]
-  },
-  {
-    "label": "Notes",
-    "rows": [
-      [{"name": "policy_notes", "fullWidth": true}]
-    ]
-  },
-  {
-    "name": "syncAdmin",
-    "label": "Sync/Admin",
-    "style": "side",
-    "rows": [
-      [{"name": "line_of_business_raw"}, false],
-      [{"name": "acceptedByAmsAt"}, {"name": "acceptedByAmsBy"}],
-      [{"name": "amsLockState"}, {"name": "amsLockReason"}]
-    ]
-  }
+ {
+  "label": "Overview",
+  "rows": [
+   [
+    {
+     "name": "premium_amount"
+    },
+    {
+     "name": "carrier"
+    }
+   ],
+   [
+    {
+     "name": "carrier_raw"
+    },
+    {
+     "name": "mga"
+    }
+   ],
+   [
+    {
+     "name": "effective_date"
+    },
+    {
+     "name": "expiration_date"
+    }
+   ]
+  ]
+ },
+ {
+  "label": "Policy Info",
+  "rows": [
+   [
+    {
+     "name": "policy_number"
+    },
+    {
+     "name": "status"
+    }
+   ],
+   [
+    {
+     "name": "line_of_business"
+    },
+    {
+     "name": "business_type"
+    }
+   ],
+   [
+    {
+     "name": "cancellation_reason",
+     "fullWidth": true
+    }
+   ]
+  ]
+ },
+ {
+  "name": "financial",
+  "label": "Financial",
+  "rows": [
+   [
+    {
+     "name": "commission_rate"
+    },
+    {
+     "name": "commissionAmount"
+    }
+   ],
+   [
+    {
+     "name": "coverage_amount"
+    },
+    {
+     "name": "deductible"
+    }
+   ],
+   [
+    {
+     "name": "agency_fee"
+    },
+    false
+   ]
+  ]
+ },
+ {
+  "name": "renewalTracking",
+  "label": "Renewal Tracking",
+  "rows": [
+   [
+    {
+     "name": "urgency"
+    },
+    {
+     "name": "premiumAtRisk"
+    }
+   ],
+   [
+    {
+     "name": "last_contact_method"
+    },
+    {
+     "name": "last_contact_date"
+    }
+   ],
+   [
+    {
+     "name": "vin"
+    },
+    {
+     "name": "propertyAddress"
+    }
+   ]
+  ]
+ },
+ {
+  "label": "Relationships",
+  "rows": [
+   [
+    {
+     "name": "account"
+    },
+    {
+     "name": "contact"
+    }
+   ]
+  ]
+ },
+ {
+  "label": "Notes",
+  "rows": [
+   [
+    {
+     "name": "policy_notes",
+     "fullWidth": true
+    }
+   ]
+  ]
+ },
+ {
+  "name": "syncAdmin",
+  "label": "Sync/Admin",
+  "style": "side",
+  "rows": [
+   [
+    {
+     "name": "line_of_business_raw"
+    },
+    false
+   ],
+   [
+    {
+     "name": "acceptedByAmsAt"
+    },
+    {
+     "name": "acceptedByAmsBy"
+    }
+   ],
+   [
+    {
+     "name": "amsLockState"
+    },
+    {
+     "name": "amsLockReason"
+    }
+   ]
+  ]
+ }
 ]

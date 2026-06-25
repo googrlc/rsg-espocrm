@@ -1,1178 +1,1252 @@
 [
-    {
-        "rows": [
-            [
-                {
-                    "name": "name"
-                },
-                {
-                    "name": "account_type"
-                }
-            ],
-            [
-                {
-                    "name": "assignedUser"
-                },
-                {
-                    "name": "last_contact_date"
-                }
-            ],
-            [
-                {
-                    "name": "phoneNumber"
-                },
-                {
-                    "name": "emailAddress"
-                }
-            ],
-            [
-                {
-                    "name": "billingAddress"
-                },
-                false
-            ]
-        ],
-        "style": "default",
-        "name": "accountInfo",
-        "label": "Client Snapshot"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "account_status"
-                },
-                {
-                    "name": "total_active_premium"
-                }
-            ],
-            [
-                {
-                    "name": "score_tier"
-                },
-                {
-                    "name": "policyCountActive"
-                }
-            ],
-            [
-                {
-                    "name": "next_x_date"
-                },
-                {
-                    "name": "next_x_date_lob"
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "coverageOverview",
-        "label": "Coverage Overview"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "clv_projected"
-                },
-                {
-                    "name": "clv_with_cross_sell"
-                }
-            ],
-            [
-                {
-                    "name": "clv_current"
-                },
-                {
-                    "name": "clv_annual_commission"
-                }
-            ],
-            [
-                {
-                    "name": "clv_tenure_years"
-                },
-                {
-                    "name": "clv_retention_rate_applied"
-                }
-            ],
-            [
-                {
-                    "name": "clv_last_calculated"
-                },
-                false
-            ]
-        ],
-        "style": "default",
-        "name": "clientValue",
-        "label": "Client Lifetime Value"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "agent_of_agency_code"
-                },
-                {
-                    "name": "carrier_code"
-                }
-            ],
-            [
-                {
-                    "name": "total_carrier_premium"
-                },
-                false
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Carrier"
-                }
-            ]
+  {
+    "rows": [
+      [
+        {
+          "name": "name"
         },
-        "style": "default",
-        "name": "carrierDetails",
-        "label": "Carrier Details"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "intel_years_in_business"
-                },
-                {
-                    "name": "website"
-                }
-            ],
-            [
-                {
-                    "name": "businessEntity"
-                },
-                {
-                    "name": "sic_code"
-                }
-            ],
-            [
-                {
-                    "name": "intel_naics"
-                },
-                {
-                    "name": "annual_revenue"
-                }
-            ],
-            [
-                {
-                    "name": "employee_count"
-                },
-                {
-                    "name": "fein"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
+        {
+          "name": "account_type"
+        }
+      ],
+      [
+        {
+          "name": "assignedUser"
         },
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Profile",
-        "hidden": false,
-        "name": "opportunitiesTab",
-        "customLabel": "Business Details"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "ai_assessment"
-                }
-            ],
-            [
-                {
-                    "name": "intel_confidence"
-                },
-                false
-            ],
-            [
-                {
-                    "name": "intel_underwriting_flag"
-                },
-                {
-                    "name": "assessment_date"
-                }
-            ],
-            [
-                {
-                    "name": "key_findings"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
+        {
+          "name": "last_contact_date"
+        }
+      ],
+      [
+        {
+          "name": "phoneNumber"
         },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "ai_assessment",
-        "customLabel": "AI Account Assessment"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "intel_legal_name"
-                },
-                {
-                    "name": "intel_dba"
-                }
-            ],
-            [
-                {
-                    "name": "businessEntity"
-                },
-                {
-                    "name": "cYearBusinessEst"
-                }
-            ],
-            [
-                {
-                    "name": "years_in_business"
-                },
-                {
-                    "name": "annual_revenue"
-                }
-            ],
-            [
-                {
-                    "name": "employee_count"
-                },
-                {
-                    "name": "fein"
-                }
-            ],
-            [
-                {
-                    "name": "industry"
-                },
-                {
-                    "name": "sic_code"
-                }
-            ],
-            [
-                {
-                    "name": "intel_naics"
-                },
-                false
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
+        {
+          "name": "emailAddress"
+        }
+      ],
+      [
+        {
+          "name": "billingAddress"
         },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "businessIdentity",
-        "customLabel": "Business Identity"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "bbb_rating"
-                },
-                {
-                    "name": "intel_bbb_accredited"
-                }
-            ],
-            [
-                {
-                    "name": "intel_bbb_complaints"
-                },
-                {
-                    "name": "intel_growth_indicator"
-                }
-            ],
-            [
-                {
-                    "name": "intel_bbb_notes"
-                }
-            ],
-            [
-                {
-                    "name": "linkedin_url"
-                },
-                {
-                    "name": "intel_linkedin_notes"
-                }
-            ],
-            [
-                {
-                    "name": "intel_news_notes"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "bbbReputation",
-        "customLabel": "BBB & Reputation"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "intel_fleet_size"
-                },
-                {
-                    "name": "intel_operating_radius"
-                }
-            ],
-            [
-                {
-                    "name": "intel_cargo_type"
-                },
-                {
-                    "name": "intel_owner_operators"
-                }
-            ],
-            [
-                {
-                    "name": "intel_dot_incidents"
-                },
-                {
-                    "name": "intel_osha_violations"
-                }
-            ],
-            [
-                {
-                    "name": "intel_pain_points"
-                }
-            ],
-            [
-                {
-                    "name": "intel_cross_sell"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "fleetOperations",
-        "customLabel": "Fleet & Operations"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "claims_count_3yr"
-                },
-                {
-                    "name": "claims_open"
-                }
-            ],
-            [
-                {
-                    "name": "last_claim_date"
-                },
-                {
-                    "name": "last_claim_type"
-                }
-            ],
-            [
-                {
-                    "name": "risk_score"
-                },
-                {
-                    "name": "retention_risk"
-                }
-            ],
-            [
-                {
-                    "name": "claims_notes"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "name": "riskUnderwriting",
-        "customLabel": "Risk & Underwriting Signals"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gapUmbrella"
-                },
-                {
-                    "name": "gapLife"
-                }
-            ],
-            [
-                {
-                    "name": "gapAutoUm"
-                },
-                {
-                    "name": "gapCount"
-                }
-            ],
-            [
-                {
-                    "name": "coverage_gaps"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Commercial Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Group Benefits"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "coverageGapsCl",
-        "customLabel": "Coverage Gaps & Cross-Sell"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gapUmbrella"
-                },
-                {
-                    "name": "gapLife"
-                }
-            ],
-            [
-                {
-                    "name": "gapUmbrellaReason"
-                },
-                {
-                    "name": "gapLifeReason"
-                }
-            ],
-            [
-                {
-                    "name": "gapLifeNeedEst"
-                },
-                {
-                    "name": "gapAutoUm"
-                }
-            ],
-            [
-                {
-                    "name": "gapMedicare"
-                },
-                {
-                    "name": "gapMedicareEligible"
-                }
-            ],
-            [
-                {
-                    "name": "gapRenters"
-                },
-                {
-                    "name": "gapRideshare"
-                }
-            ],
-            [
-                {
-                    "name": "mailingAddressSame"
-                },
-                false
-            ],
-            [
-                {
-                    "name": "coverage_gaps"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Personal Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Medicare"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Life Insurance"
-                        }
-                    ]
-                }
-            ]
-        },
-        "style": "default",
-        "name": "coverageGapsPl",
-        "customLabel": "Coverage Gaps & Cross-Sell"
-    },
-    {
-        "name": "householdProfile",
-        "customLabel": "Household Members",
-        "style": "default",
-        "tabBreak": false,
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Personal Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Medicare"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Life Insurance"
-                        }
-                    ]
-                }
-            ]
-        },
-        "rows": [
-            [
-                {
-                    "name": "primaryFirstName"
-                },
-                {
-                    "name": "primaryLastName"
-                }
-            ],
-            [
-                {
-                    "name": "primaryDob"
-                },
-                {
-                    "name": "primaryGender"
-                }
-            ],
-            [
-                {
-                    "name": "primaryOccupation"
-                },
-                {
-                    "name": "maritalStatus"
-                }
-            ],
-            [
-                {
-                    "name": "primaryPhone"
-                },
-                {
-                    "name": "primaryEmail"
-                }
-            ],
-            [
-                {
-                    "name": "coInsuredFirstName"
-                },
-                {
-                    "name": "coInsuredLastName"
-                }
-            ],
-            [
-                {
-                    "name": "coInsuredDob"
-                },
-                {
-                    "name": "coInsuredOccupation"
-                }
-            ],
-            [
-                {
-                    "name": "householdMembers",
-                    "fullWidth": true
-                }
-            ],
-            [
-                {
-                    "name": "dependentsCount"
-                },
-                {
-                    "name": "dependentAges"
-                }
-            ]
-        ]
-    },
-    {
-        "name": "householdResidence",
-        "customLabel": "Residence",
-        "style": "default",
-        "tabBreak": false,
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Personal Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Medicare"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Life Insurance"
-                        }
-                    ]
-                }
-            ]
-        },
-        "rows": [
-            [
-                {
-                    "name": "property_address",
-                    "fullWidth": true
-                }
-            ],
-            [
-                {
-                    "name": "property_city"
-                },
-                {
-                    "name": "property_state"
-                }
-            ],
-            [
-                {
-                    "name": "property_zip"
-                },
-                {
-                    "name": "ownOrRent"
-                }
-            ],
-            [
-                {
-                    "name": "residenceType"
-                },
-                {
-                    "name": "yearBuilt"
-                }
-            ],
-            [
-                {
-                    "name": "yearsAtAddress"
-                },
-                {
-                    "name": "dwellingSqFt"
-                }
-            ],
-            [
-                {
-                    "name": "mailingAddressSame"
-                },
-                {
-                    "name": "mailingAddress"
-                }
-            ]
-        ]
-    },
-    {
-        "name": "householdVehiclesDrivers",
-        "customLabel": "Vehicles & Drivers",
-        "style": "default",
-        "tabBreak": false,
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Personal Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Medicare"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Life Insurance"
-                        }
-                    ]
-                }
-            ]
-        },
-        "rows": [
-            [
-                {
-                    "name": "vehiclesCount"
-                },
-                {
-                    "name": "driversCount"
-                }
-            ],
-            [
-                {
-                    "name": "youthfulDriverFlag"
-                },
-                false
-            ],
-            [
-                {
-                    "name": "vehicleAdditionalNotes",
-                    "fullWidth": true
-                }
-            ]
-        ]
-    },
-    {
-        "name": "householdFinancial",
-        "customLabel": "Financial & Retention",
-        "style": "default",
-        "tabBreak": false,
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "or",
-                    "value": [
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Personal Lines"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Medicare"
-                        },
-                        {
-                            "type": "equals",
-                            "attribute": "account_type",
-                            "value": "Life Insurance"
-                        }
-                    ]
-                }
-            ]
-        },
-        "rows": [
-            [
-                {
-                    "name": "householdIncomeBand"
-                },
-                {
-                    "name": "priorCarrier"
-                }
-            ],
-            [
-                {
-                    "name": "priorPremium"
-                },
-                false
-            ],
-            [
-                {
-                    "name": "existingPersonalPolicies",
-                    "fullWidth": true
-                }
-            ],
-            [
-                {
-                    "name": "retention_risk"
-                },
-                {
-                    "name": "risk_score"
-                }
-            ],
-            [
-                {
-                    "name": "claims_count_3yr"
-                },
-                {
-                    "name": "claims_open"
-                }
-            ],
-            [
-                {
-                    "name": "last_claim_date"
-                },
-                {
-                    "name": "nps_score"
-                }
-            ]
-        ]
-    },
-    {
-        "rows": [],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Contacts",
-        "name": "contactsAnchor",
-        "label": "Contacts"
-    },
-    {
-        "rows": [],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Policies",
-        "name": "policiesAnchor",
-        "label": "Policies"
-    },
-    {
-        "rows": [],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Activity",
-        "name": "activityAnchor",
-        "label": "Activity"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbEligibleEmployees"
-                },
-                {
-                    "name": "gbParticipatingEmployees"
-                }
-            ],
-            [
-                {
-                    "name": "gbCensusReceived"
-                },
-                {
-                    "name": "gbCensusDate"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Group Benefits",
-        "name": "gbCensus",
-        "customLabel": "Group Census"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbMedicalCarrier"
-                },
-                {
-                    "name": "gbMedicalPlanType"
-                }
-            ],
-            [
-                {
-                    "name": "gbMedicalRenewalDate"
-                },
-                {
-                    "name": "gbMedicalMonthlyPremium"
-                }
-            ],
-            [
-                {
-                    "name": "gbEmployerContribution"
-                },
-                false
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "gbMedical",
-        "customLabel": "Medical"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbDentalCarrier"
-                },
-                {
-                    "name": "gbDentalMonthlyPremium"
-                }
-            ],
-            [
-                {
-                    "name": "gbVisionCarrier"
-                },
-                {
-                    "name": "gbVisionMonthlyPremium"
-                }
-            ],
-            [
-                {
-                    "name": "gbLifeAdCarrier"
-                },
-                {
-                    "name": "gbLifeBenefitAmount"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "gbAncillary",
-        "customLabel": "Dental, Vision & Life"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbStdCarrier"
-                },
-                {
-                    "name": "gbLtdCarrier"
-                }
-            ],
-            [
-                {
-                    "name": "gbVoluntaryBenefits"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "tabBreak": false,
-        "hidden": false,
-        "name": "gbDisabilityVoluntary",
-        "customLabel": "Disability & Voluntary"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "gbNotes"
-                }
-            ]
-        ],
-        "dynamicLogicVisible": {
-            "conditionGroup": [
-                {
-                    "type": "equals",
-                    "attribute": "account_type",
-                    "value": "Group Benefits"
-                }
-            ]
-        },
-        "style": "default",
-        "name": "gbNotesPanel",
-        "customLabel": "Group Benefits Notes"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "general_notes"
-                }
-            ]
-        ],
-        "style": "default",
-        "tabBreak": true,
-        "tabLabel": "Internal",
-        "name": "generalNotesPanel",
-        "label": "General Notes & Requests"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "what_you_have_today"
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "whatYouHaveTodayPanel",
-        "label": "What You Have Today"
-    },
-    {
-        "rows": [
-            [
-                {
-                    "name": "documents",
-                    "fullWidth": true
-                }
-            ],
-            [
-                {
-                    "name": "momentum_client_id"
-                },
-                {
-                    "name": "momentum_last_synced"
-                }
-            ],
-            [
-                {
-                    "name": "google_drive_folder_url"
-                }
-            ]
-        ],
-        "style": "default",
-        "name": "detailsInternal",
-        "label": "External Documents"
+        false
+      ]
+    ],
+    "style": "default",
+    "name": "accountInfo",
+    "label": "Client Snapshot",
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "notIn",
+          "attribute": "account_type",
+          "value": [
+            "Carrier",
+            "MGA",
+            "Vendor/Partner"
+          ]
+        }
+      ]
     }
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "account_status"
+        },
+        {
+          "name": "total_active_premium"
+        }
+      ],
+      [
+        {
+          "name": "score_tier"
+        },
+        {
+          "name": "activePolicyCount"
+        }
+      ],
+      [
+        {
+          "name": "next_x_date"
+        },
+        {
+          "name": "next_x_date_lob"
+        }
+      ]
+    ],
+    "style": "default",
+    "name": "coverageOverview",
+    "label": "Coverage Overview",
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "notIn",
+          "attribute": "account_type",
+          "value": [
+            "Carrier",
+            "MGA",
+            "Vendor/Partner"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "clv_projected"
+        },
+        false
+      ],
+      [
+        {
+          "name": "clv_current"
+        },
+        {
+          "name": "clv_annual_commission"
+        }
+      ],
+      [
+        {
+          "name": "clv_tenure_years"
+        },
+        {
+          "name": "clv_retention_rate_applied"
+        }
+      ],
+      [
+        {
+          "name": "clv_last_calculated"
+        },
+        false
+      ]
+    ],
+    "style": "default",
+    "name": "clientValue",
+    "label": "Client Lifetime Value",
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "notIn",
+          "attribute": "account_type",
+          "value": [
+            "Carrier",
+            "MGA",
+            "Vendor/Partner"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "agent_of_agency_code"
+        },
+        {
+          "name": "carrier_code"
+        }
+      ],
+      [
+        {
+          "name": "total_carrier_premium"
+        },
+        false
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "equals",
+          "attribute": "account_type",
+          "value": "Carrier"
+        }
+      ]
+    },
+    "style": "default",
+    "name": "carrierDetails",
+    "label": "Carrier Details"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "intel_years_in_business"
+        },
+        {
+          "name": "website"
+        }
+      ],
+      [
+        {
+          "name": "businessEntity"
+        },
+        {
+          "name": "sic_code"
+        }
+      ],
+      [
+        {
+          "name": "intel_naics"
+        },
+        {
+          "name": "annual_revenue"
+        }
+      ],
+      [
+        {
+          "name": "employee_count"
+        },
+        {
+          "name": "fein"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": true,
+    "tabLabel": "Profile",
+    "hidden": false,
+    "name": "opportunitiesTab",
+    "customLabel": "Business Details"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "ai_assessment"
+        }
+      ],
+      [
+        {
+          "name": "intel_confidence"
+        },
+        false
+      ],
+      [
+        {
+          "name": "intel_underwriting_flag"
+        },
+        {
+          "name": "assessment_date"
+        }
+      ],
+      [
+        {
+          "name": "key_findings"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "ai_assessment",
+    "customLabel": "AI Account Assessment"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "intel_legal_name"
+        },
+        {
+          "name": "intel_dba"
+        }
+      ],
+      [
+        {
+          "name": "businessEntity"
+        },
+        {
+          "name": "cYearBusinessEst"
+        }
+      ],
+      [
+        {
+          "name": "years_in_business"
+        },
+        {
+          "name": "annual_revenue"
+        }
+      ],
+      [
+        {
+          "name": "employee_count"
+        },
+        {
+          "name": "fein"
+        }
+      ],
+      [
+        {
+          "name": "industry"
+        },
+        {
+          "name": "sic_code"
+        }
+      ],
+      [
+        {
+          "name": "intel_naics"
+        },
+        false
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "businessIdentity",
+    "customLabel": "Business Identity"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "bbb_rating"
+        },
+        {
+          "name": "intel_bbb_accredited"
+        }
+      ],
+      [
+        {
+          "name": "intel_bbb_complaints"
+        },
+        {
+          "name": "intel_growth_indicator"
+        }
+      ],
+      [
+        {
+          "name": "intel_bbb_notes"
+        }
+      ],
+      [
+        {
+          "name": "linkedin_url"
+        },
+        {
+          "name": "intel_linkedin_notes"
+        }
+      ],
+      [
+        {
+          "name": "intel_news_notes"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "bbbReputation",
+    "customLabel": "BBB & Reputation"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "intel_fleet_size"
+        },
+        {
+          "name": "intel_operating_radius"
+        }
+      ],
+      [
+        {
+          "name": "intel_cargo_type"
+        },
+        {
+          "name": "intel_owner_operators"
+        }
+      ],
+      [
+        {
+          "name": "intel_dot_incidents"
+        },
+        {
+          "name": "intel_osha_violations"
+        }
+      ],
+      [
+        {
+          "name": "intel_pain_points"
+        }
+      ],
+      [
+        {
+          "name": "intel_cross_sell"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "fleetOperations",
+    "customLabel": "Fleet & Operations"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "claims_count_3yr"
+        },
+        {
+          "name": "claims_open"
+        }
+      ],
+      [
+        {
+          "name": "last_claim_date"
+        },
+        {
+          "name": "last_claim_type"
+        }
+      ],
+      [
+        {
+          "name": "risk_score"
+        },
+        {
+          "name": "retention_risk"
+        }
+      ],
+      [
+        {
+          "name": "claims_notes"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "name": "riskUnderwriting",
+    "customLabel": "Risk & Underwriting Signals"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gapUmbrella"
+        },
+        {
+          "name": "gapLife"
+        }
+      ],
+      [
+        {
+          "name": "gapAutoUm"
+        },
+        {
+          "name": "gapCount"
+        }
+      ],
+      [
+        {
+          "name": "coverage_gaps"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Commercial Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Group Benefits"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "coverageGapsCl",
+    "customLabel": "Coverage Gaps & Cross-Sell"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gapUmbrella"
+        },
+        {
+          "name": "gapLife"
+        }
+      ],
+      [
+        {
+          "name": "gapUmbrellaReason"
+        },
+        {
+          "name": "gapLifeReason"
+        }
+      ],
+      [
+        {
+          "name": "gapLifeNeedEst"
+        },
+        {
+          "name": "gapAutoUm"
+        }
+      ],
+      [
+        {
+          "name": "gapMedicare"
+        },
+        {
+          "name": "gapMedicareEligible"
+        }
+      ],
+      [
+        {
+          "name": "gapRenters"
+        },
+        {
+          "name": "gapRideshare"
+        }
+      ],
+      [
+        {
+          "name": "mailingAddressSame"
+        },
+        false
+      ],
+      [
+        {
+          "name": "coverage_gaps"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Personal Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Medicare"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Life Insurance"
+            }
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "name": "coverageGapsPl",
+    "customLabel": "Coverage Gaps & Cross-Sell"
+  },
+  {
+    "name": "householdProfile",
+    "customLabel": "Household Members",
+    "style": "default",
+    "tabBreak": false,
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Personal Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Medicare"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Life Insurance"
+            }
+          ]
+        }
+      ]
+    },
+    "rows": [
+      [
+        {
+          "name": "primaryFirstName"
+        },
+        {
+          "name": "primaryLastName"
+        }
+      ],
+      [
+        {
+          "name": "primaryDob"
+        },
+        {
+          "name": "primaryGender"
+        }
+      ],
+      [
+        {
+          "name": "primaryOccupation"
+        },
+        {
+          "name": "maritalStatus"
+        }
+      ],
+      [
+        {
+          "name": "primaryPhone"
+        },
+        {
+          "name": "primaryEmail"
+        }
+      ],
+      [
+        {
+          "name": "coInsuredFirstName"
+        },
+        {
+          "name": "coInsuredLastName"
+        }
+      ],
+      [
+        {
+          "name": "coInsuredDob"
+        },
+        {
+          "name": "coInsuredOccupation"
+        }
+      ],
+      [
+        {
+          "name": "householdMembers",
+          "fullWidth": true
+        }
+      ],
+      [
+        {
+          "name": "dependentsCount"
+        },
+        {
+          "name": "dependentAges"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "householdResidence",
+    "customLabel": "Residence",
+    "style": "default",
+    "tabBreak": false,
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Personal Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Medicare"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Life Insurance"
+            }
+          ]
+        }
+      ]
+    },
+    "rows": [
+      [
+        {
+          "name": "property_address",
+          "fullWidth": true
+        }
+      ],
+      [
+        {
+          "name": "property_city"
+        },
+        {
+          "name": "property_state"
+        }
+      ],
+      [
+        {
+          "name": "property_zip"
+        },
+        {
+          "name": "ownOrRent"
+        }
+      ],
+      [
+        {
+          "name": "residenceType"
+        },
+        {
+          "name": "yearBuilt"
+        }
+      ],
+      [
+        {
+          "name": "yearsAtAddress"
+        },
+        {
+          "name": "dwellingSqFt"
+        }
+      ],
+      [
+        {
+          "name": "mailingAddressSame"
+        },
+        {
+          "name": "mailingAddress"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "householdVehiclesDrivers",
+    "customLabel": "Vehicles & Drivers",
+    "style": "default",
+    "tabBreak": false,
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Personal Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Medicare"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Life Insurance"
+            }
+          ]
+        }
+      ]
+    },
+    "rows": [
+      [
+        {
+          "name": "vehiclesCount"
+        },
+        {
+          "name": "driversCount"
+        }
+      ],
+      [
+        {
+          "name": "youthfulDriverFlag"
+        },
+        false
+      ],
+      [
+        {
+          "name": "vehicleAdditionalNotes",
+          "fullWidth": true
+        }
+      ]
+    ]
+  },
+  {
+    "name": "householdFinancial",
+    "customLabel": "Financial & Retention",
+    "style": "default",
+    "tabBreak": false,
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "or",
+          "value": [
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Personal Lines"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Medicare"
+            },
+            {
+              "type": "equals",
+              "attribute": "account_type",
+              "value": "Life Insurance"
+            }
+          ]
+        }
+      ]
+    },
+    "rows": [
+      [
+        {
+          "name": "householdIncomeBand"
+        },
+        {
+          "name": "priorCarrier"
+        }
+      ],
+      [
+        {
+          "name": "priorPremium"
+        },
+        false
+      ],
+      [
+        {
+          "name": "existingPersonalPolicies",
+          "fullWidth": true
+        }
+      ],
+      [
+        {
+          "name": "retention_risk"
+        },
+        {
+          "name": "risk_score"
+        }
+      ],
+      [
+        {
+          "name": "claims_count_3yr"
+        },
+        {
+          "name": "claims_open"
+        }
+      ],
+      [
+        {
+          "name": "last_claim_date"
+        },
+        {
+          "name": "nps_score"
+        }
+      ]
+    ]
+  },
+  {
+    "rows": [],
+    "style": "default",
+    "tabBreak": true,
+    "tabLabel": "Contacts",
+    "name": "contactsAnchor",
+    "label": "Contacts"
+  },
+  {
+    "rows": [],
+    "style": "default",
+    "tabBreak": true,
+    "tabLabel": "Policies",
+    "name": "policiesAnchor",
+    "label": "Policies"
+  },
+  {
+    "rows": [],
+    "style": "default",
+    "tabBreak": true,
+    "tabLabel": "Activity",
+    "name": "activityAnchor",
+    "label": "Activity"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gbEligibleEmployees"
+        },
+        {
+          "name": "gbParticipatingEmployees"
+        }
+      ],
+      [
+        {
+          "name": "gbCensusReceived"
+        },
+        {
+          "name": "gbCensusDate"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "equals",
+          "attribute": "account_type",
+          "value": "Group Benefits"
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": true,
+    "tabLabel": "Group Benefits",
+    "name": "gbCensus",
+    "customLabel": "Group Census"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gbMedicalCarrier"
+        },
+        {
+          "name": "gbMedicalPlanType"
+        }
+      ],
+      [
+        {
+          "name": "gbMedicalRenewalDate"
+        },
+        {
+          "name": "gbMedicalMonthlyPremium"
+        }
+      ],
+      [
+        {
+          "name": "gbEmployerContribution"
+        },
+        false
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "equals",
+          "attribute": "account_type",
+          "value": "Group Benefits"
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "gbMedical",
+    "customLabel": "Medical"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gbDentalCarrier"
+        },
+        {
+          "name": "gbDentalMonthlyPremium"
+        }
+      ],
+      [
+        {
+          "name": "gbVisionCarrier"
+        },
+        {
+          "name": "gbVisionMonthlyPremium"
+        }
+      ],
+      [
+        {
+          "name": "gbLifeAdCarrier"
+        },
+        {
+          "name": "gbLifeBenefitAmount"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "equals",
+          "attribute": "account_type",
+          "value": "Group Benefits"
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "gbAncillary",
+    "customLabel": "Dental, Vision & Life"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gbStdCarrier"
+        },
+        {
+          "name": "gbLtdCarrier"
+        }
+      ],
+      [
+        {
+          "name": "gbVoluntaryBenefits"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "equals",
+          "attribute": "account_type",
+          "value": "Group Benefits"
+        }
+      ]
+    },
+    "style": "default",
+    "tabBreak": false,
+    "hidden": false,
+    "name": "gbDisabilityVoluntary",
+    "customLabel": "Disability & Voluntary"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "gbNotes"
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "equals",
+          "attribute": "account_type",
+          "value": "Group Benefits"
+        }
+      ]
+    },
+    "style": "default",
+    "name": "gbNotesPanel",
+    "customLabel": "Group Benefits Notes"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "general_notes"
+        }
+      ]
+    ],
+    "style": "default",
+    "tabBreak": true,
+    "tabLabel": "Internal",
+    "name": "generalNotesPanel",
+    "label": "General Notes & Requests"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "what_you_have_today"
+        }
+      ]
+    ],
+    "style": "default",
+    "name": "whatYouHaveTodayPanel",
+    "label": "What You Have Today"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "carrier_subtype"
+        },
+        {
+          "name": "producer_code"
+        }
+      ],
+      [
+        {
+          "name": "carrier_portal_link"
+        },
+        {
+          "name": "source_folder"
+        }
+      ],
+      [
+        {
+          "name": "lines_appetite",
+          "fullWidth": true
+        }
+      ]
+    ],
+    "dynamicLogicVisible": {
+      "conditionGroup": [
+        {
+          "type": "in",
+          "attribute": "account_type",
+          "value": [
+            "Carrier",
+            "MGA",
+            "Vendor/Partner"
+          ]
+        }
+      ]
+    },
+    "style": "default",
+    "name": "carrierProfile",
+    "customLabel": "Carrier / MGA Profile"
+  },
+  {
+    "rows": [
+      [
+        {
+          "name": "documents",
+          "fullWidth": true
+        }
+      ],
+      [
+        {
+          "name": "momentum_client_id"
+        },
+        {
+          "name": "momentum_last_synced"
+        }
+      ]
+    ],
+    "style": "default",
+    "name": "detailsInternal",
+    "label": "External Documents"
+  }
 ]

@@ -138,8 +138,8 @@ class AccountHealthManager
         $account->set('score_change_direction', $this->resolveChangeDirection($scoreChangeAmount));
         $account->set('score_change_amount', abs($scoreChangeAmount));
         $account->set('rate_increase_flag', $rateIncreaseFlag);
-        $account->set('next_renewal_date', $policySignals['nextRenewalDate']);
-        $account->set('next_renewal_lob', $policySignals['nextRenewalLob']);
+        $account->set('next_x_date', $policySignals['nextRenewalDate']);
+        $account->set('next_x_date_lob', $policySignals['nextRenewalLob']);
         $account->set('next_renewal_carrier', $policySignals['nextRenewalCarrier']);
         $account->set('days_to_renewal', $policySignals['daysToRenewal']);
         $account->set('account_status', $this->rollupPolicyHealth($policyList));

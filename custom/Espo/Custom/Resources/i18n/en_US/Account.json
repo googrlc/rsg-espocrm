@@ -68,7 +68,7 @@
     "cYearBusinessEst": "Calendar Year Business Established",
     "account_type": "Account Type",
     "account_score": "Account Score",
-    "activePolicyCount": "[OLD] Active Policy Count",
+    "activePolicyCount": "Active Policies",
     "policyCountActive": "Active Policies",
     "ai_assessment": "AI Assessment",
     "annualPremiumConverted": "Annual Premium Converted",
@@ -127,7 +127,6 @@
     "key_findings": "Key Findings",
     "momentum_client_id": "Momentum Client ID",
     "momentum_last_synced": "Momentum Last Synced",
-    "google_drive_folder_url": "Google Drive Folder Link",
     "sic_code": "Standard Industrial Classification Code",
     "risk_score": "Risk Score",
     "retention_risk": "Retention Risk",
@@ -170,7 +169,13 @@
     "householdIncomeBand": "Household Income Band",
     "existingPersonalPolicies": "Existing Personal Policies",
     "priorCarrier": "Prior Carrier",
-    "priorPremium": "Prior Premium"
+    "priorPremium": "Prior Premium",
+    "carrier_subtype": "Carrier Type",
+    "lines_appetite": "Lines / Appetite",
+    "carrier_portal_link": "Portal Link",
+    "producer_code": "Producer / Writing Code",
+    "source_folder": "Source Folder",
+    "nextcloud_folder_url": "Nextcloud Folder URL"
   },
   "links": {
     "linkedTasks": "Account Tasks",
@@ -218,7 +223,11 @@
       "Medicare": "Medicare",
       "Life Insurance": "Life Insurance",
       "Carrier": "Carrier",
-      "MGA": "Managing General Agent"
+      "MGA": "Managing General Agent",
+      "Vendor/Partner": "Vendor / Partner"
     }
+  },
+  "panels": {
+    "carrierProfile": "Carrier / MGA Profile"
   }
 }

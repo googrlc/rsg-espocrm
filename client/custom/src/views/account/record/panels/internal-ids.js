@@ -47,18 +47,6 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
                     </span>
                 </div>
                 <div class="rsg-internal-row">
-                    <span class="rsg-internal-label">Drive Folder</span>
-                    <span class="rsg-internal-value">
-                        {{#if googleDriveFolderUrl}}
-                            <a href="{{googleDriveFolderUrl}}" target="_blank" rel="noopener noreferrer" title="{{googleDriveFolderUrl}}">
-                                Linked &nearr;
-                            </a>
-                        {{else}}
-                            <span class="text-muted">&mdash;</span>
-                        {{/if}}
-                    </span>
-                </div>
-                <div class="rsg-internal-row">
                     <span class="rsg-internal-label">Intel Pack</span>
                     <span class="rsg-internal-value">
                         {{#if intelPackRun}}
@@ -129,7 +117,6 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
                 momentumClientId: this.model.get("momentum_client_id"),
                 nowCertsUrl: this.buildNowCertsUrl(this.model.get("momentum_client_id")),
                 momentumLastSyncedFormatted: this.formatDate(momentumLastSynced),
-                googleDriveFolderUrl: this.model.get("google_drive_folder_url"),
                 intelPackRun: this.model.get("intel_pack_run"),
                 intelPackLastRunFormatted: this.formatDate(intelPackLastRun)
             };
@@ -159,7 +146,7 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
         setup: function () {
             Dep.prototype.setup.call(this);
             this.listenTo(this.model,
-                "change:momentum_client_id change:momentum_last_synced change:google_drive_folder_url change:intel_pack_run change:intel_pack_last_run",
+                "change:momentum_client_id change:momentum_last_synced change:intel_pack_run change:intel_pack_last_run",
                 this.reRender, this
             );
         }

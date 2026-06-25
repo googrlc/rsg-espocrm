@@ -1,14 +1,37 @@
 [
-  {"name": "policy_number", "width": 10, "link": true},
-  {"name": "account", "width": 10, "link": true},
-  {"name": "contact", "width": 10, "link": true},
-  {"name": "line_of_business", "width": 10},
-  {"name": "carrier", "width": 10},
-  {"name": "premium_amount", "width": 8},
-  {"name": "expiration_date", "width": 8},
-  {"name": "daysRemaining", "width": 6},
-  {"name": "status", "width": 8},
-  {"name": "policy_health", "width": 8},
-  {"name": "sync_status", "width": 8},
-  {"name": "assignedUser", "width": 8}
+    {
+        "name": "policy_number",
+        "width": 10,
+        "link": true
+    },
+    {
+        "name": "account",
+        "width": 20,
+        "link": true
+    },
+    {
+        "name": "line_of_business",
+        "width": 15
+    },
+    {
+        "name": "carrier",
+        "width": 13
+    },
+    {
+        "name": "premium_amount",
+        "width": 11,
+        "align": "right"
+    },
+    {
+        "name": "status",
+        "width": 10
+    },
+    {
+        "name": "expiration_date",
+        "width": 12
+    },
+    {
+        "name": "daysRemaining",
+        "width": 9
+    }
 ]

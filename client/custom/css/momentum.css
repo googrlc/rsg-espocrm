@@ -1677,3 +1677,72 @@ html {
 .pac-container {
     z-index: 11000;
 }
+
+/* ── Task Kanban Card: Assignee color coding ── */
+.task-card__assignee-strip {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 3px 0 0 3px;
+    background: #d7deee;
+}
+
+.task-assignee--gretchen .task-card__assignee-strip {
+    background: #7c3aed !important;
+}
+.task-assignee--gretchen {
+    border-left-color: #7c3aed !important;
+}
+
+.task-assignee--lamar .task-card__assignee-strip {
+    background: #2563eb !important;
+}
+.task-assignee--lamar {
+    border-left-color: #2563eb !important;
+}
+
+.task-assignee--general .task-card__assignee-strip {
+    background: #64748b !important;
+}
+.task-assignee--general {
+    border-left-color: #64748b !important;
+}
+
+.task-assignee--unassigned .task-card__assignee-strip {
+    background: #d7deee !important;
+}
+
+/* Assignee initials badge in header */
+.task-card__assignee-badge {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: #fff;
+    background: #94a3b8;
+    margin-left: auto;
+}
+
+.task-assignee--gretchen .task-card__assignee-badge {
+    background: #7c3aed;
+}
+.task-assignee--lamar .task-card__assignee-badge {
+    background: #2563eb;
+}
+.task-assignee--general .task-card__assignee-badge {
+    background: #64748b;
+}
+
+/* Header needs flex for badge alignment */
+.task-kanban-card .task-card__header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}

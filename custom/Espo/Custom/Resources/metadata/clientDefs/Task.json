@@ -1,134 +1,260 @@
 {
-    "kanbanViewMode": true,
-    "statusField": "status",
-    "kanbanCardView": "custom:views/task/kanban-card",
-    "recordViews": {
-        "detail": "custom:views/task/record/detail-view",
-        "edit": "custom:views/task/record/edit"
+  "kanbanViewMode": true,
+  "statusField": "status",
+  "kanbanCardView": "custom:views/task/kanban-card",
+  "recordViews": {
+    "detail": "custom:views/task/record/detail-view",
+    "edit": "custom:views/task/record/edit"
+  },
+  "menu": {
+    "detail": {
+      "buttons": [
+        {
+          "name": "completeTask",
+          "label": "Complete Task",
+          "style": "success",
+          "iconClass": "fas fa-check",
+          "acl": "edit",
+          "handler": "custom:handlers/task-complete-handler",
+          "actionFunction": "completeTask",
+          "checkVisibilityFunction": "isCompleteTaskVisible"
+        },
+        {
+          "name": "archiveTask",
+          "label": "Archive",
+          "style": "default",
+          "iconClass": "fas fa-box-archive",
+          "acl": "edit",
+          "handler": "custom:handlers/task-archive-handler",
+          "actionFunction": "archiveTask",
+          "checkVisibilityFunction": "isArchiveTaskVisible"
+        }
+      ]
+    }
+  },
+  "modalDetailActionList": [
+    {
+      "name": "completeTask",
+      "label": "Complete Task",
+      "style": "success",
+      "iconClass": "fas fa-check",
+      "acl": "edit",
+      "handler": "custom:handlers/task-complete-handler",
+      "actionFunction": "completeTask",
+      "checkVisibilityFunction": "isCompleteTaskVisible"
     },
-    "menu": {
-        "detail": {
-            "buttons": [
+    {
+      "name": "archiveTask",
+      "label": "Archive",
+      "style": "default",
+      "iconClass": "fas fa-box-archive",
+      "acl": "edit",
+      "handler": "custom:handlers/task-archive-handler",
+      "actionFunction": "archiveTask",
+      "checkVisibilityFunction": "isArchiveTaskVisible"
+    }
+  ],
+  "rowActionList": [
+    "complete",
+    "archive"
+  ],
+  "rowActionDefs": {
+    "complete": {
+      "handler": "custom:handlers/task-complete-row-action",
+      "label": "Complete",
+      "groupIndex": 0,
+      "acl": "edit"
+    },
+    "archive": {
+      "handler": "custom:handlers/task-archive-row-action",
+      "label": "Archive",
+      "groupIndex": 0,
+      "acl": "edit"
+    }
+  },
+  "sidePanels": {
+    "detail": [
+      {
+        "name": "recordInfo",
+        "label": "Record Info",
+        "view": "custom:views/common/record/panels/record-info",
+        "order": 1
+      },
+      {
+        "name": "internalIds",
+        "label": "Internal IDs",
+        "view": "custom:views/common/record/panels/internal-ids",
+        "order": 2
+      }
+    ]
+  },
+  "filterList": [
+    "actual",
+    {
+      "name": "completed",
+      "style": "success"
+    },
+    {
+      "name": "todays"
+    },
+    {
+      "name": "overdue",
+      "style": "danger"
+    },
+    {
+      "name": "assignedToMe"
+    },
+    {
+      "name": "assignedToGretchen"
+    },
+    {
+      "name": "serviceQueue"
+    },
+    {
+      "name": "waitingOnClient"
+    },
+    {
+      "name": "waitingOnCarrier"
+    }
+  ],
+  "dynamicLogic": {
+    "fields": {
+      "managerNotes": {
+        "readOnly": {
+          "conditionGroup": [
+            {
+              "type": "and",
+              "value": [
                 {
-                    "name": "completeTask",
-                    "label": "Complete Task",
-                    "style": "success",
-                    "iconClass": "fas fa-check",
-                    "acl": "edit",
-                    "handler": "custom:handlers/task-complete-handler",
-                    "actionFunction": "completeTask",
-                    "checkVisibilityFunction": "isCompleteTaskVisible"
+                  "type": "isNotEmpty",
+                  "attribute": "assignedUserId"
                 },
                 {
-                    "name": "archiveTask",
-                    "label": "Archive",
-                    "style": "default",
-                    "iconClass": "fas fa-box-archive",
-                    "acl": "edit",
-                    "handler": "custom:handlers/task-archive-handler",
-                    "actionFunction": "archiveTask",
-                    "checkVisibilityFunction": "isArchiveTaskVisible"
+                  "type": "notEquals",
+                  "attribute": "createdById",
+                  "value": "$user.id"
                 }
-            ]
-        }
-    },
-    "modalDetailActionList": [
-        {
-            "name": "completeTask",
-            "label": "Complete Task",
-            "style": "success",
-            "iconClass": "fas fa-check",
-            "acl": "edit",
-            "handler": "custom:handlers/task-complete-handler",
-            "actionFunction": "completeTask",
-            "checkVisibilityFunction": "isCompleteTaskVisible"
-        },
-        {
-            "name": "archiveTask",
-            "label": "Archive",
-            "style": "default",
-            "iconClass": "fas fa-box-archive",
-            "acl": "edit",
-            "handler": "custom:handlers/task-archive-handler",
-            "actionFunction": "archiveTask",
-            "checkVisibilityFunction": "isArchiveTaskVisible"
-        }
-    ],
-    "rowActionList": ["complete", "archive"],
-    "rowActionDefs": {
-        "complete": {
-            "handler": "custom:handlers/task-complete-row-action",
-            "label": "Complete",
-            "groupIndex": 0,
-            "acl": "edit"
-        },
-        "archive": {
-            "handler": "custom:handlers/task-archive-row-action",
-            "label": "Archive",
-            "groupIndex": 0,
-            "acl": "edit"
-        }
-    },
-    "sidePanels": {
-        "detail": [
-            {
-                "name": "recordInfo",
-                "label": "Record Info",
-                "view": "custom:views/common/record/panels/record-info",
-                "order": 1
-            },
-            {
-                "name": "internalIds",
-                "label": "Internal IDs",
-                "view": "custom:views/common/record/panels/internal-ids",
-                "order": 2
+              ]
             }
-        ]
-    },
-    "filterList": [
-        "actual",
-        { "name": "completed", "style": "success" },
-        { "name": "todays" },
-        { "name": "overdue", "style": "danger" },
-        { "name": "assignedToMe" },
-        { "name": "assignedToGretchen" },
-        { "name": "serviceQueue" },
-        { "name": "waitingOnClient" },
-        { "name": "waitingOnCarrier" }
-    ],
-    "dynamicLogic": {
-        "fields": {
-            "managerNotes": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "and",
-                            "value": [
-                                { "type": "isNotEmpty", "attribute": "assignedUserId" },
-                                { "type": "notEquals", "attribute": "createdById", "value": "$user.id" }
-                            ]
-                        }
-                    ]
-                }
-            },
-            "confirm2Label": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm1Label" } ] } },
-            "confirm2Status": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm1Label" } ] } },
-            "confirm2Note": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm1Label" } ] } },
-            "confirm3Label": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm2Label" } ] } },
-            "confirm3Status": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm2Label" } ] } },
-            "confirm3Note": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm2Label" } ] } },
-            "confirm4Label": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm3Label" } ] } },
-            "confirm4Status": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm3Label" } ] } },
-            "confirm4Note": { "visible": { "conditionGroup": [ { "type": "isNotEmpty", "attribute": "confirm3Label" } ] } }
-        },
-        "panels": {
-            "sourceEmail": {
-                "visible": {
-                    "conditionGroup": [
-                        { "type": "isNotEmpty", "attribute": "originalEmailId" }
-                    ]
-                }
-            }
+          ]
         }
+      },
+      "confirm2Label": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm1Label"
+            }
+          ]
+        }
+      },
+      "confirm2Status": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm1Label"
+            }
+          ]
+        }
+      },
+      "confirm2Note": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm1Label"
+            }
+          ]
+        }
+      },
+      "confirm3Label": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm2Label"
+            }
+          ]
+        }
+      },
+      "confirm3Status": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm2Label"
+            }
+          ]
+        }
+      },
+      "confirm3Note": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm2Label"
+            }
+          ]
+        }
+      },
+      "confirm4Label": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm3Label"
+            }
+          ]
+        }
+      },
+      "confirm4Status": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm3Label"
+            }
+          ]
+        }
+      },
+      "confirm4Note": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "confirm3Label"
+            }
+          ]
+        }
+      }
+    },
+    "panels": {
+      "sourceEmail": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "isNotEmpty",
+              "attribute": "originalEmailId"
+            }
+          ]
+        }
+      },
+      "taskReferenceDetails": {
+        "visible": {
+          "conditionGroup": [
+            {
+              "type": "equals",
+              "attribute": "status",
+              "value": "Completed"
+            }
+          ]
+        }
+      }
     }
+  },
+  "defaultFilterData": {
+    "primary": "actual"
+  }
 }

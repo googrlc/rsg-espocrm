@@ -32,12 +32,6 @@
                 "order": 1
             },
             {
-                "name": "googleDrive",
-                "label": "Google Drive",
-                "view": "custom:views/account/record/panels/google-drive",
-                "order": 2
-            },
-            {
                 "name": "documentLinks",
                 "label": "Document Links",
                 "view": "custom:views/account/record/panels/document-links",
@@ -54,6 +48,12 @@
                 "label": "Record Info",
                 "view": "custom:views/common/record/panels/record-info",
                 "order": 5
+            },
+            {
+                "name": "nextcloudDocs",
+                "label": "Nextcloud Docs",
+                "view": "custom:views/account/record/panels/nextcloud-docs",
+                "order": 6
             }
         ]
     },

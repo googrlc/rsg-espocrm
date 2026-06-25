@@ -16,6 +16,8 @@
         "Cancelled"
     ],
     "kanbanStatusIgnoreList": [
+        "Completed",
+        "Cancelled",
         "Archived"
     ]
 }

@@ -14,11 +14,12 @@ class NormalizeAssignmentAndAccount implements BeforeSave
      * Users allowed to own a task. Accept display names as the durable business
      * rule, with usernames as aliases for older saved code paths.
      */
-    private const ALLOWED_USER_NAMES = ['Gretchen Coates', 'Lamar Coates'];
+    private const ALLOWED_USER_NAMES = ['Gretchen Coates', 'Lamar Coates', 'General Queue'];
     private const ALLOWED_USERNAME_ALIASES = [
         'gretchcoates',
         'lamarcoates',
         'lamar@risk-solutionsgroup.com',
+        'general',
     ];
 
     public function __construct(
@@ -44,7 +45,7 @@ class NormalizeAssignmentAndAccount implements BeforeSave
         $name = $user ? (string) $user->get('name') : '';
 
         if (!$this->isAllowedOwner($name, $userName)) {
-            throw new BadRequest('Assigned To must be Gretchen Coates or Lamar Coates.');
+            throw new BadRequest('Assigned To must be Gretchen Coates, Lamar Coates, or General Queue.');
         }
 
         // $user is guaranteed non-null here (its name or username matched the allow list).

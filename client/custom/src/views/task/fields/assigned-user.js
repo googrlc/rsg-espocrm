@@ -2,11 +2,12 @@ define('custom:views/task/fields/assigned-user', ['views/fields/link'], function
 
     // Allowed task owners. Use display names as the business rule and usernames
     // as aliases for older saved code paths.
-    var ALLOWED_NAMES = ['Gretchen Coates', 'Lamar Coates'];
+    var ALLOWED_NAMES = ['Gretchen Coates', 'Lamar Coates', 'General Queue'];
     var ALLOWED_USERNAME_ALIASES = [
         'gretchcoates',
         'lamarcoates',
-        'lamar@risk-solutionsgroup.com'
+        'lamar@risk-solutionsgroup.com',
+        'general'
     ];
 
     // Cached across all field instances on the page (one lookup per session).

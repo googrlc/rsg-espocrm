@@ -14,6 +14,21 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
             var priority = this.buildPriority(this.model.get('priority'));
             var assignedUserName = this.model.get('assignedUserName') || 'Unassigned';
 
+            var assigneeId = this.model.get('assignedUserId') || '';
+            var assigneeClass = 'task-assignee--unassigned';
+            var assigneeInitials = '?';
+
+            if (assigneeId === '69bdf81552aaa') {
+                assigneeClass = 'task-assignee--gretchen';
+                assigneeInitials = 'GC';
+            } else if (assigneeId === '69bdad92458da2204') {
+                assigneeClass = 'task-assignee--lamar';
+                assigneeInitials = 'LC';
+            } else if (assigneeId === '6a3ae3d951b79b796') {
+                assigneeClass = 'task-assignee--general';
+                assigneeInitials = 'GQ';
+            }
+
             return Object.assign({}, data, {
                 accountId: account.id,
                 accountName: account.name,
@@ -23,6 +38,8 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
                 dueDateLabel: dueDate.label,
                 dueDateClass: dueDate.className,
                 assignedUserName: assignedUserName,
+                assigneeClass: assigneeClass,
+                assigneeInitials: assigneeInitials,
                 cardClass: dueDate.cardClass,
                 canComplete: ['Completed', 'Cancelled', 'Archived'].indexOf(this.model.get('status')) === -1
             });
@@ -112,6 +129,18 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
             this.isExpanded = false;
             this.applyExpandedState(false, false);
 
+            // Click on the title opens the task directly (bypasses data-action delegation).
+            // Stop propagation on mousedown too so the kanban drag handler doesn't hijack the click.
+            this.$card.find('.task-card__title-link')
+                .on('mousedown.taskOpen touchstart.taskOpen', function (e) {
+                    e.stopPropagation();
+                })
+                .on('click.taskOpen', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.getRouter().navigate('#Task/view/' + this.model.id, {trigger: true});
+                }.bind(this));
+
             // Escape collapses an open card; keep drag from starting on the toggle.
             this.$card.on('keydown.taskCard', this.onCardKeyDown.bind(this));
             this.$toggleBtn.on('mousedown.taskCard touchstart.taskCard', function (e) {
@@ -127,6 +156,8 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
             if (this.$toggleBtn) {
                 this.$toggleBtn.off('.taskCard');
             }
+
+            this.$card.find('.task-card__title-link').off('.taskOpen');
 
             Dep.prototype.onRemove.call(this);
         },
@@ -178,11 +209,6 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
         },
 
         actionOpenTask: function () {
-            // Gated: full record is only reachable while the card is expanded.
-            if (!this.isExpanded) {
-                return;
-            }
-
             this.getRouter().navigate('#Task/view/' + this.model.id, {trigger: true});
         },
 

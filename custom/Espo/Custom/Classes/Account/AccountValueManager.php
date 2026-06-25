@@ -60,8 +60,13 @@ class AccountValueManager
         }
 
         $this->applyToAccount($account);
+        // SKIP_HOOKS mirrors AccountHealthManager::refreshByAccountId: the nightly
+        // recalc must be a pure computation + persist, not a re-trigger of side-effect
+        // hooks (SyncCrossSellPlaybooks creates tasks whose assignedUser validation
+        // would abort the whole run on any account owned by a non-Gretchen/Lamar user).
         $this->entityManager->saveEntity($account, [
             SaveOption::SILENT => true,
+            SaveOption::SKIP_HOOKS => true,
             self::SKIP_VALUE_SNAPSHOT_OPTION => true,
             \Espo\Custom\Classes\Account\AccountHealthManager::SKIP_HEALTH_SNAPSHOT_OPTION => true,
         ]);
@@ -81,18 +86,15 @@ class AccountValueManager
         $grossMargin = (float) ($this->config->get('clvGrossMargin') ?? self::DEFAULT_GROSS_MARGIN);
         $discountRate = (float) ($this->config->get('clvDiscountRate') ?? self::DEFAULT_DISCOUNT_RATE);
         $retentionRate = $this->getRetentionRate($account);
-        $crossSellUplift = $this->getCrossSellUplift($account);
 
         $clvCurrent = $this->computeCurrent($annualCommission, $tenureYears, $grossMargin);
         $clvProjected = $this->computeProjected($annualCommission, $grossMargin, $retentionRate, $discountRate);
-        $clvWithCrossSell = max(0.0, $clvProjected + $crossSellUplift);
 
         $account->set('clv_annual_commission', round($annualCommission, 2));
         $account->set('clv_tenure_years', round($tenureYears, 2));
         $account->set('clv_retention_rate_applied', round($retentionRate, 4));
         $account->set('clv_current', round($clvCurrent, 2));
         $account->set('clv_projected', round($clvProjected, 2));
-        $account->set('clv_with_cross_sell', round($clvWithCrossSell, 2));
         $account->set('clv_last_calculated', gmdate('Y-m-d H:i:s'));
     }
 

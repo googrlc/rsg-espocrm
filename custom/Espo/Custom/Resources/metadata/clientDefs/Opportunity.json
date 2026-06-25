@@ -8,7 +8,9 @@
             "createButton": true,
             "selectButton": true,
             "label": "Tasks",
-            "rowActionList": ["complete"]
+            "rowActionList": [
+                "complete"
+            ]
         }
     },
     "recordViews": {
@@ -755,5 +757,8 @@
                 "order": 5
             }
         ]
+    },
+    "defaultFilterData": {
+        "primary": "open"
     }
 }

@@ -1,393 +1,490 @@
 {
-    "controller": "controllers/record",
-    "colors": [],
-    "kanbanViewMode": true,
-    "statusField": "status",
-    "color": "#4a6fa5",
-    "iconClass": "fas fa-file-contract",
-    "filterList": [
-        {"name": "active", "style": "success"},
-        {"name": "expiringSoon", "style": "warning"},
-        {"name": "expired", "style": "danger"},
-        {"name": "commAuto"},
-        {"name": "genLiability"},
-        {"name": "medicare"},
-        {"name": "lifeInsurance"},
-        {"name": "personalLines"},
-        {"name": "workersComp"},
-        {"name": "renewalsDue", "style": "warning"}
-    ],
-    "boolFilterList": [
-        "onlyMy"
-    ],
-    "recordViews": {
-        "detail": "custom:views/policy/record/detail-view"
-    },
-    "kanbanCardView": "custom:views/policy/kanban-card",
-    "sidePanels": {
-        "detail": [
-            {
-                "name": "daysRemaining",
-                "label": "Policy Status",
-                "view": "custom:views/policy/record/panels/days-remaining",
-                "order": 1,
-                "sticked": true
-            },
-            {
-                "name": "quickLinks",
-                "label": "Quick Links",
-                "view": "custom:views/policy/record/panels/quick-links",
-                "order": 2
-            },
-            {
-                "name": "carrierDetails",
-                "label": "Carrier Details",
-                "view": "custom:views/policy/record/panels/carrier-details",
-                "order": 3
-            },
-            {
-                "name": "recordInfo",
-                "label": "Record Info",
-                "view": "custom:views/common/record/panels/record-info",
-                "order": 4
-            },
-            {
-                "name": "internalIds",
-                "label": "Internal IDs",
-                "view": "custom:views/common/record/panels/internal-ids",
-                "order": 5
-            }
-        ]
-    },
-    "dynamicLogic": {
-        "fields": {
-            "policy_number": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "status": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "carrier": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "line_of_business": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "effective_date": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "expiration_date": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "premium_amount": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "momentumPolicyId": {
-                "readOnly": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "amsLockState",
-                            "value": "Locked by AMS"
-                        }
-                    ]
-                }
-            },
-            "cancellation_reason": {
-                "required": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "status",
-                            "value": "Cancelled"
-                        }
-                    ]
-                },
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "equals",
-                            "attribute": "status",
-                            "value": "Cancelled"
-                        }
-                    ]
-                }
-            },
-            "vin": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "or",
-                            "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "business_type",
-                                    "value": "Auto"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "line_of_business",
-                                    "value": "Auto"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "line_of_business",
-                                    "value": "Personal Auto"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "line_of_business",
-                                    "value": "Commercial Auto"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
-            "propertyAddress": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "or",
-                            "value": [
-                                {
-                                    "type": "equals",
-                                    "attribute": "business_type",
-                                    "value": "Home"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "line_of_business",
-                                    "value": "Home"
-                                },
-                                {
-                                    "type": "equals",
-                                    "attribute": "line_of_business",
-                                    "value": "Homeowners"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
-            "underwriter": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "carrierAccountId"
-                        }
-                    ]
-                },
-                "required": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "carrierAccountId"
-                        }
-                    ]
-                }
-            },
-            "business_type": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "business_type"
-                        }
-                    ]
-                }
-            },
-            "assignedUser": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "assignedUserId"
-                        }
-                    ]
-                }
-            },
-            "teams": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "teamsIds"
-                        }
-                    ]
-                }
-            },
-            "commission_rate": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "commission_rate"
-                        }
-                    ]
-                }
-            },
-            "commissionAmount": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "commissionAmount"
-                        }
-                    ]
-                }
-            },
-            "coverage_amount": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "coverage_amount"
-                        }
-                    ]
-                }
-            },
-            "deductible": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "deductible"
-                        }
-                    ]
-                }
-            },
-            "agency_fee": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "agency_fee"
-                        }
-                    ]
-                }
-            }
-        },
-        "panels": {
-            "financial": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "or",
-                            "value": [
-                                {"type": "isNotEmpty", "attribute": "commission_rate"},
-                                {"type": "isNotEmpty", "attribute": "commissionAmount"},
-                                {"type": "isNotEmpty", "attribute": "coverage_amount"},
-                                {"type": "isNotEmpty", "attribute": "deductible"},
-                                {"type": "isNotEmpty", "attribute": "agency_fee"}
-                            ]
-                        }
-                    ]
-                }
-            },
-            "renewalTracking": {
-                "visible": {
-                    "conditionGroup": [
-                        {"type": "notEquals", "attribute": "status", "value": "Expired"},
-                        {"type": "notEquals", "attribute": "status", "value": "Cancelled"},
-                        {"type": "notEquals", "attribute": "status", "value": "Flat Cancel"},
-                        {"type": "notEquals", "attribute": "status", "value": "Pending Cancel"},
-                        {"type": "notEquals", "attribute": "status", "value": "Non-Renewed"},
-                        {"type": "notEquals", "attribute": "status", "value": "Lapsed"}
-                    ]
-                }
-            },
-            "carrierDetails": {
-                "visible": {
-                    "conditionGroup": [
-                        {
-                            "type": "isNotEmpty",
-                            "attribute": "carrierAccountId"
-                        }
-                    ]
-                }
-            }
-        }
-    },
-    "relationshipPanels": {
-        "activityLogs": {
-            "orderBy": "dateTime",
-            "orderDirection": "desc",
-            "createButton": true,
-            "order": 1,
-            "label": "Activity Log"
-        },
-        "renewals": {
-            "orderBy": "expiration_date",
-            "orderDirection": "asc",
-            "createButton": true,
-            "selectButton": true,
-            "order": 2
-        },
-        "tasks": {
-            "orderBy": "dateEnd",
-            "orderDirection": "asc",
-            "createButton": true,
-            "selectButton": true,
-            "label": "Tasks",
-            "rowActionList": ["complete"]
-        }
+ "controller": "controllers/record",
+ "colors": [],
+ "kanbanViewMode": true,
+ "statusField": "status",
+ "color": "#4a6fa5",
+ "iconClass": "fas fa-file-contract",
+ "filterList": [
+  {
+   "name": "active",
+   "style": "success"
+  },
+  {
+   "name": "expiringSoon",
+   "style": "warning"
+  },
+  {
+   "name": "expired",
+   "style": "danger"
+  },
+  {
+   "name": "commAuto"
+  },
+  {
+   "name": "genLiability"
+  },
+  {
+   "name": "medicare"
+  },
+  {
+   "name": "lifeInsurance"
+  },
+  {
+   "name": "personalLines"
+  },
+  {
+   "name": "workersComp"
+  },
+  {
+   "name": "renewalsDue",
+   "style": "warning"
+  }
+ ],
+ "boolFilterList": [
+  "onlyMy"
+ ],
+ "recordViews": {
+  "detail": "custom:views/policy/record/detail-view"
+ },
+ "kanbanCardView": "custom:views/policy/kanban-card",
+ "sidePanels": {
+  "detail": [
+   {
+    "name": "daysRemaining",
+    "label": "Policy Status",
+    "view": "custom:views/policy/record/panels/days-remaining",
+    "order": 1,
+    "sticked": true
+   },
+   {
+    "name": "quickLinks",
+    "label": "Quick Links",
+    "view": "custom:views/policy/record/panels/quick-links",
+    "order": 2
+   },
+   {
+    "name": "carrierDetails",
+    "label": "Carrier Details",
+    "view": "custom:views/policy/record/panels/carrier-details",
+    "order": 3
+   },
+   {
+    "name": "recordInfo",
+    "label": "Record Info",
+    "view": "custom:views/common/record/panels/record-info",
+    "order": 4
+   },
+   {
+    "name": "internalIds",
+    "label": "Internal IDs",
+    "view": "custom:views/common/record/panels/internal-ids",
+    "order": 5
+   }
+  ]
+ },
+ "dynamicLogic": {
+  "fields": {
+   "policy_number": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
     }
+   },
+   "status": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "carrier": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "line_of_business": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "effective_date": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "expiration_date": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "premium_amount": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "momentumPolicyId": {
+    "readOnly": {
+     "conditionGroup": [
+      {
+       "type": "equals",
+       "attribute": "amsLockState",
+       "value": "Locked by AMS"
+      }
+     ]
+    }
+   },
+   "cancellation_reason": {
+    "required": {
+     "conditionGroup": [
+      {
+       "type": "or",
+       "value": [
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Cancelled"
+        },
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Flat Cancel"
+        },
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Pending Cancel"
+        },
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Non-Renewed"
+        }
+       ]
+      }
+     ]
+    },
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "or",
+       "value": [
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Cancelled"
+        },
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Flat Cancel"
+        },
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Pending Cancel"
+        },
+        {
+         "type": "equals",
+         "attribute": "status",
+         "value": "Non-Renewed"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "vin": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "or",
+       "value": [
+        {
+         "type": "equals",
+         "attribute": "business_type",
+         "value": "Auto"
+        },
+        {
+         "type": "equals",
+         "attribute": "line_of_business",
+         "value": "Auto"
+        },
+        {
+         "type": "equals",
+         "attribute": "line_of_business",
+         "value": "Personal Auto"
+        },
+        {
+         "type": "equals",
+         "attribute": "line_of_business",
+         "value": "Commercial Auto"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "propertyAddress": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "or",
+       "value": [
+        {
+         "type": "equals",
+         "attribute": "business_type",
+         "value": "Home"
+        },
+        {
+         "type": "equals",
+         "attribute": "line_of_business",
+         "value": "Home"
+        },
+        {
+         "type": "equals",
+         "attribute": "line_of_business",
+         "value": "Homeowners"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "underwriter": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "carrierAccountId"
+      }
+     ]
+    }
+   },
+   "business_type": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "business_type"
+      }
+     ]
+    }
+   },
+   "assignedUser": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "assignedUserId"
+      }
+     ]
+    }
+   },
+   "teams": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "teamsIds"
+      }
+     ]
+    }
+   },
+   "commission_rate": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "commission_rate"
+      }
+     ]
+    }
+   },
+   "commissionAmount": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "commissionAmount"
+      }
+     ]
+    }
+   },
+   "coverage_amount": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "coverage_amount"
+      }
+     ]
+    }
+   },
+   "deductible": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "deductible"
+      }
+     ]
+    }
+   },
+   "agency_fee": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "agency_fee"
+      }
+     ]
+    }
+   }
+  },
+  "panels": {
+   "financial": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "or",
+       "value": [
+        {
+         "type": "isNotEmpty",
+         "attribute": "commission_rate"
+        },
+        {
+         "type": "isNotEmpty",
+         "attribute": "commissionAmount"
+        },
+        {
+         "type": "isNotEmpty",
+         "attribute": "coverage_amount"
+        },
+        {
+         "type": "isNotEmpty",
+         "attribute": "deductible"
+        },
+        {
+         "type": "isNotEmpty",
+         "attribute": "agency_fee"
+        }
+       ]
+      }
+     ]
+    }
+   },
+   "renewalTracking": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "notEquals",
+       "attribute": "status",
+       "value": "Expired"
+      },
+      {
+       "type": "notEquals",
+       "attribute": "status",
+       "value": "Cancelled"
+      },
+      {
+       "type": "notEquals",
+       "attribute": "status",
+       "value": "Flat Cancel"
+      },
+      {
+       "type": "notEquals",
+       "attribute": "status",
+       "value": "Pending Cancel"
+      },
+      {
+       "type": "notEquals",
+       "attribute": "status",
+       "value": "Non-Renewed"
+      },
+      {
+       "type": "notEquals",
+       "attribute": "status",
+       "value": "Lapsed"
+      }
+     ]
+    }
+   },
+   "carrierDetails": {
+    "visible": {
+     "conditionGroup": [
+      {
+       "type": "isNotEmpty",
+       "attribute": "carrierAccountId"
+      }
+     ]
+    }
+   }
+  }
+ },
+ "relationshipPanels": {
+  "activityLogs": {
+   "orderBy": "dateTime",
+   "orderDirection": "desc",
+   "createButton": true,
+   "order": 1,
+   "label": "Activity Log"
+  },
+  "renewals": {
+   "orderBy": "expiration_date",
+   "orderDirection": "asc",
+   "createButton": true,
+   "selectButton": true,
+   "order": 2
+  },
+  "tasks": {
+   "orderBy": "dateEnd",
+   "orderDirection": "asc",
+   "createButton": true,
+   "selectButton": true,
+   "label": "Tasks",
+   "rowActionList": [
+    "complete"
+   ]
+  }
+ }
 }

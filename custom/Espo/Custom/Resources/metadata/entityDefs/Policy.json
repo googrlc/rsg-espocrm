@@ -14,7 +14,7 @@
             "maxLength": 100,
             "required": false,
             "isCustom": true,
-            "tooltipText": "Policy number — primary identifier for this policy record",
+            "tooltipText": "Policy number \u2014 primary identifier for this policy record",
             "options": [],
             "tooltip": true
         },
@@ -23,12 +23,25 @@
             "maxLength": 255,
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "NowCerts/Momentum AMS policy databaseId — primary dedup key for sync. NEVER change this value once set."
+            "tooltipText": "NowCerts/Momentum AMS policy databaseId \u2014 primary dedup key for sync. NEVER change this value once set."
         },
         "carrier": {
             "type": "varchar",
             "maxLength": 255,
             "isCustom": true
+        },
+        "carrier_raw": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Legal writing-company name from NowCerts before brand normalization."
+        },
+        "mga": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "tooltipText": "MGA / wholesaler / parent for this carrier brand. Used for MGA-level premium rollup."
         },
         "line_of_business_raw": {
             "type": "varchar",
@@ -41,7 +54,7 @@
             "type": "varchar",
             "maxLength": 500,
             "isCustom": true,
-            "tooltipText": "Normalized line of business label (varchar — enum conversion is a separate pass).",
+            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass).",
             "dbName": "lineOfBusiness"
         },
         "status": {
@@ -93,7 +106,7 @@
         "expiration_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Renewal trigger date — used by renewal pipeline automation",
+            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation",
             "dbName": "expirationDate"
         },
         "premium_amount": {
@@ -240,7 +253,7 @@
             "maxLength": 255,
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync"
+            "tooltipText": "insuredDatabaseId from Momentum \u2014 used to resolve Account/Contact relation during sync"
         },
         "carrierAccount": {
             "type": "link"
@@ -352,7 +365,7 @@
         "premiumAtRisk": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Annual premium value at risk if policy lapses — used by renewal outreach automation"
+            "tooltipText": "Annual premium value at risk if policy lapses \u2014 used by renewal outreach automation"
         },
         "urgency": {
             "type": "enum",

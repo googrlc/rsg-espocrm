@@ -9,8 +9,19 @@ use stdClass;
 
 class Note extends \Espo\Controllers\Note
 {
+    /**
+     * Block manual stream posts, but allow notes created as part of
+     * task completion (parentType = Task) since those are a workflow need.
+     */
     public function postActionCreate(Request $request, Response $response): stdClass
     {
+        $data = $request->getParsedBody();
+        $parentType = $data->parentType ?? null;
+
+        if ($parentType === 'Task') {
+            return parent::postActionCreate($request, $response);
+        }
+
         throw new Forbidden('Native stream notes are read-only. Use Client Notes.');
     }
 

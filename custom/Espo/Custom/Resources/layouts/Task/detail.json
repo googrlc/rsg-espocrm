@@ -4,45 +4,47 @@
         "name": "taskDetails",
         "rows": [
             [
-                { "name": "name" },
-                { "name": "status" }
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "assignedUser"
+                }
             ],
             [
-                { "name": "taskType" },
-                { "name": "priority" }
+                {
+                    "name": "taskType"
+                },
+                {
+                    "name": "priority"
+                }
             ],
             [
-                { "name": "urgency" },
-                { "name": "taskSource", "customLabel": "Source" }
+                {
+                    "name": "urgency"
+                },
+                {
+                    "name": "taskSource",
+                    "customLabel": "Source"
+                }
             ],
             [
-                { "name": "dateEnd", "customLabel": "Date Due" },
-                { "name": "dateStart", "customLabel": "Started" }
+                {
+                    "name": "dateEnd",
+                    "customLabel": "Date Due"
+                },
+                {
+                    "name": "dateStart",
+                    "customLabel": "Started"
+                }
             ],
             [
-                { "name": "syncSource" },
-                { "name": "confirmationProgress" }
-            ]
-        ]
-    },
-    {
-        "label": "Policy & Insured Info",
-        "name": "policyInsuredInfo",
-        "rows": [
-            [
-                { "name": "account", "customLabel": "Insured" },
-                { "name": "contact" }
-            ],
-            [
-                { "name": "policies", "fullWidth": true }
-            ],
-            [
-                { "name": "policyType" },
-                { "name": "policyEffectiveDate" }
-            ],
-            [
-                { "name": "policyExpirationDate" },
-                false
+                {
+                    "name": "syncSource"
+                },
+                {
+                    "name": "confirmationProgress"
+                }
             ]
         ]
     },
@@ -51,54 +53,97 @@
         "name": "taskReferenceDetails",
         "rows": [
             [
-                { "name": "refLink" },
-                { "name": "refNumber" }
+                {
+                    "name": "refLink"
+                },
+                {
+                    "name": "refNumber"
+                }
             ],
             [
-                { "name": "refLink2" },
-                { "name": "refNumber2" }
+                {
+                    "name": "refLink2"
+                },
+                {
+                    "name": "refNumber2"
+                }
             ],
             [
-                { "name": "refAccessCode" },
-                { "name": "refSupportContact" }
+                {
+                    "name": "refAccessCode"
+                },
+                {
+                    "name": "refSupportContact"
+                }
             ],
             [
-                { "name": "refNotes", "fullWidth": true }
+                {
+                    "name": "refNotes",
+                    "fullWidth": true
+                }
             ]
         ]
     },
     {
-        "label": "Action Required — Confirmation Checklist",
+        "label": "Action Required \u2014 Confirmation Checklist",
         "name": "confirmationChecklist",
         "style": "success",
         "rows": [
             [
-                { "name": "confirm1Label" },
-                { "name": "confirm1Status" }
+                {
+                    "name": "confirm1Label"
+                },
+                {
+                    "name": "confirm1Status"
+                }
             ],
             [
-                { "name": "confirm1Note", "fullWidth": true }
+                {
+                    "name": "confirm1Note",
+                    "fullWidth": true
+                }
             ],
             [
-                { "name": "confirm2Label" },
-                { "name": "confirm2Status" }
+                {
+                    "name": "confirm2Label"
+                },
+                {
+                    "name": "confirm2Status"
+                }
             ],
             [
-                { "name": "confirm2Note", "fullWidth": true }
+                {
+                    "name": "confirm2Note",
+                    "fullWidth": true
+                }
             ],
             [
-                { "name": "confirm3Label" },
-                { "name": "confirm3Status" }
+                {
+                    "name": "confirm3Label"
+                },
+                {
+                    "name": "confirm3Status"
+                }
             ],
             [
-                { "name": "confirm3Note", "fullWidth": true }
+                {
+                    "name": "confirm3Note",
+                    "fullWidth": true
+                }
             ],
             [
-                { "name": "confirm4Label" },
-                { "name": "confirm4Status" }
+                {
+                    "name": "confirm4Label"
+                },
+                {
+                    "name": "confirm4Status"
+                }
             ],
             [
-                { "name": "confirm4Note", "fullWidth": true }
+                {
+                    "name": "confirm4Note",
+                    "fullWidth": true
+                }
             ]
         ]
     },
@@ -107,10 +152,16 @@
         "name": "triageInfo",
         "rows": [
             [
-                { "name": "triageSummary", "fullWidth": true }
+                {
+                    "name": "triageSummary",
+                    "fullWidth": true
+                }
             ],
             [
-                { "name": "triageReason", "fullWidth": true }
+                {
+                    "name": "triageReason",
+                    "fullWidth": true
+                }
             ]
         ]
     },
@@ -120,7 +171,10 @@
         "style": "info",
         "rows": [
             [
-                { "name": "managerNotes", "fullWidth": true }
+                {
+                    "name": "managerNotes",
+                    "fullWidth": true
+                }
             ]
         ]
     },
@@ -130,7 +184,10 @@
         "isCollapsed": true,
         "rows": [
             [
-                { "name": "originalEmail", "fullWidth": true }
+                {
+                    "name": "originalEmail",
+                    "fullWidth": true
+                }
             ]
         ]
     },
@@ -139,7 +196,10 @@
         "name": "additionalNotes",
         "rows": [
             [
-                { "name": "description", "fullWidth": true }
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
             ]
         ]
     }

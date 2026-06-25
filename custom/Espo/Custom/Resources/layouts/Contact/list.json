@@ -1,23 +1,23 @@
 [
     {
         "name": "name",
-        "width": 18,
+        "width": 24,
         "link": true
     },
     {
         "name": "title",
-        "width": 16
+        "width": 20
     },
     {
         "name": "contactType",
-        "width": 10
+        "width": 14
     },
     {
         "name": "emailAddress",
-        "width": 16
+        "width": 24
     },
     {
         "name": "phoneNumber",
-        "width": 11
+        "width": 18
     }
 ]
