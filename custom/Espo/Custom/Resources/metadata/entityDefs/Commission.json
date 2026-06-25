@@ -88,24 +88,37 @@
             "options": [
                 "",
                 "Commercial Auto",
+                "Transportation / Trucking",
                 "General Liability",
                 "Workers Comp",
                 "Commercial Property",
                 "BOP",
                 "Professional Liability",
                 "Umbrella",
+                "Builders Risk",
+                "Inland Marine",
                 "Personal Auto",
                 "Homeowners",
                 "Renters",
                 "Condo",
+                "Dwelling Fire",
+                "Motorcycle",
+                "Boat",
+                "RV",
                 "Life",
                 "Health",
                 "Medicare",
                 "Group Benefits",
-                "Other"
+                "Garagekeepers",
+                "Commercial Package",
+                "Other",
+                "Commercial Umbrella",
+                "Personal Umbrella",
+                "Cyber Liability"
             ],
             "isCustom": true,
-            "tooltipText": "Auto-populated from Policy LOB"
+            "tooltipText": "Auto-populated from Policy LOB",
+            "isSorted": true
         },
         "carrier": {
             "type": "varchar",
@@ -263,6 +276,11 @@
         "modifiedBy": {
             "type": "link",
             "readOnly": true
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link). Auto-populated from linked Policy."
         }
     },
     "links": {
@@ -312,6 +330,11 @@
         "modifiedBy": {
             "type": "belongsTo",
             "entity": "User"
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
         }
     },
     "collection": {

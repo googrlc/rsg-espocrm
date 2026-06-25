@@ -16,7 +16,8 @@
         "medicarePartADate": "Medicare Part A Date",
         "medicarePartBDate": "Medicare Part B Date",
         "currentMedicarePlan": "Current Medicare Plan",
-        "t65AlertSent": "T65 Alert Sent"
+        "t65AlertSent": "T65 Alert Sent",
+        "currentCarrierAccount": "Current Carrier"
     },
     "tooltips": {
         "aiSummary": "Pre-call intel from Manus prospect intelligence pack",

@@ -1,423 +1,433 @@
 {
-  "fields": {
-    "status": {
-      "type": "enum",
-      "options": [
-        "Inbox",
-        "In Progress",
-        "Waiting on Client",
-        "Waiting on Carrier",
-        "Completed",
-        "Cancelled",
-        "Archived"
-      ],
-      "style": {
-        "Inbox": "info",
-        "In Progress": "primary",
-        "Waiting on Client": "warning",
-        "Waiting on Carrier": "warning",
-        "Completed": "success",
-        "Cancelled": "default",
-        "Archived": "default"
-      },
-      "default": "Inbox",
-      "displayAsLabel": true,
-      "labelType": "state",
-      "audited": true,
-      "notActualOptions": [
-        "Completed",
-        "Cancelled",
-        "Archived"
-      ],
-      "customizationOptionsReferenceDisabled": true
+    "fields": {
+        "status": {
+            "type": "enum",
+            "options": [
+                "Inbox",
+                "In Progress",
+                "Waiting on Client",
+                "Waiting on Carrier",
+                "Completed",
+                "Cancelled",
+                "Archived"
+            ],
+            "style": {
+                "Inbox": "info",
+                "In Progress": "primary",
+                "Waiting on Client": "warning",
+                "Waiting on Carrier": "warning",
+                "Completed": "success",
+                "Cancelled": "default",
+                "Archived": "default"
+            },
+            "default": "Inbox",
+            "displayAsLabel": true,
+            "labelType": "state",
+            "audited": true,
+            "notActualOptions": [
+                "Completed",
+                "Cancelled",
+                "Archived"
+            ],
+            "customizationOptionsReferenceDisabled": true
+        },
+        "taskType": {
+            "type": "enum",
+            "options": [
+                "Client Service",
+                "Policy Change",
+                "Renewal",
+                "New Business",
+                "Follow Up",
+                "Onboarding",
+                "Claims",
+                "Commission",
+                "Underwriting Request",
+                "Underwriter Follow-up",
+                "Agency Admin",
+                "Admin",
+                "Other"
+            ],
+            "displayAsLabel": true,
+            "audited": true
+        },
+        "syncSource": {
+            "type": "enum",
+            "options": [
+                "",
+                "Manual",
+                "Email",
+                "API",
+                "Slack",
+                "Momentum",
+                "n8n",
+                "Hermes"
+            ],
+            "displayAsLabel": true
+        },
+        "urgency": {
+            "type": "enum",
+            "options": [
+                "Urgent",
+                "High",
+                "Normal",
+                "Low"
+            ],
+            "default": "Normal",
+            "displayAsLabel": true,
+            "style": {
+                "Urgent": "danger",
+                "High": "warning",
+                "Normal": "default",
+                "Low": "info"
+            }
+        },
+        "triageSummary": {
+            "type": "text",
+            "rowsMin": 2,
+            "cutHeight": 80
+        },
+        "triageReason": {
+            "type": "text",
+            "rowsMin": 2,
+            "cutHeight": 80
+        },
+        "momentumTaskId": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "NowCerts task database_id — dedup key for bi-directional sync"
+        },
+        "momentumLastSynced": {
+            "type": "datetime",
+            "isCustom": true
+        },
+        "sourceActivityLogId": {
+            "type": "varchar",
+            "maxLength": 24,
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "readOnly": true,
+            "tooltipText": "Source ActivityLog ID for manual service triage deduplication"
+        },
+        "automationKey": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "readOnly": true,
+            "tooltipText": "Automation key for deduping generated tasks"
+        },
+        "taskSource": {
+            "type": "enum",
+            "options": [
+                "",
+                "Account",
+                "Contact",
+                "Opportunity",
+                "Policy"
+            ],
+            "isCustom": true,
+            "displayAsLabel": true,
+            "style": {
+                "Account": "warning",
+                "Contact": "success",
+                "Opportunity": "primary",
+                "Policy": "info"
+            },
+            "tooltipText": "Where this task was created from — enables Account rollup"
+        },
+        "assignedUser": {
+            "view": "custom:views/task/fields/assigned-user"
+        },
+        "parent": {
+            "entityList": [
+                "Account",
+                "Contact",
+                "Lead",
+                "Opportunity",
+                "Case",
+                "Policy",
+                "Renewal"
+            ]
+        },
+        "policyType": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "tooltipText": "Line of business / policy type. Auto-populated from the linked Policy where possible."
+        },
+        "policyNumber": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "tooltipText": "Policy number this task concerns. Auto-populated from the linked Policy where possible."
+        },
+        "carrier": {
+            "type": "varchar",
+            "maxLength": 150,
+            "isCustom": true,
+            "tooltipText": "Carrier for the policy. Auto-populated from the linked Policy where possible."
+        },
+        "policyEffectiveDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Policy period start. Auto-populated from the linked Policy where possible."
+        },
+        "policyExpirationDate": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Policy period end. Auto-populated from the linked Policy where possible."
+        },
+        "refLink": {
+            "type": "url",
+            "isCustom": true,
+            "tooltipText": "Primary external link / portal needed to act on this task (e.g. carrier or audit portal)."
+        },
+        "refLink2": {
+            "type": "url",
+            "isCustom": true,
+            "tooltipText": "Secondary external link, if any."
+        },
+        "refNumber": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "tooltipText": "Primary reference / assignment / claim number."
+        },
+        "refNumber2": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "tooltipText": "Secondary reference number, if any."
+        },
+        "refAccessCode": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "tooltipText": "Access code / PIN / credential needed to complete the task."
+        },
+        "refSupportContact": {
+            "type": "varchar",
+            "maxLength": 150,
+            "isCustom": true,
+            "tooltipText": "Support contact or vendor email for this task."
+        },
+        "refNotes": {
+            "type": "text",
+            "rowsMin": 2,
+            "isCustom": true,
+            "tooltipText": "Any other structured reference data needed to act on the task."
+        },
+        "confirm1Label": {
+            "type": "varchar",
+            "maxLength": 200,
+            "isCustom": true,
+            "tooltipText": "Confirmation item 1 — the action that must be confirmed."
+        },
+        "confirm1Status": {
+            "type": "enum",
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
+            "default": "Pending",
+            "style": {
+                "Pending": "default",
+                "Confirmed": "success",
+                "Needs Follow-up": "warning"
+            },
+            "displayAsLabel": true,
+            "audited": true,
+            "isCustom": true
+        },
+        "confirm1Note": {
+            "type": "text",
+            "rowsMin": 1,
+            "isCustom": true,
+            "tooltipText": "How / when / by whom item 1 was confirmed."
+        },
+        "confirm2Label": {
+            "type": "varchar",
+            "maxLength": 200,
+            "isCustom": true
+        },
+        "confirm2Status": {
+            "type": "enum",
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
+            "default": "Pending",
+            "style": {
+                "Pending": "default",
+                "Confirmed": "success",
+                "Needs Follow-up": "warning"
+            },
+            "displayAsLabel": true,
+            "audited": true,
+            "isCustom": true
+        },
+        "confirm2Note": {
+            "type": "text",
+            "rowsMin": 1,
+            "isCustom": true
+        },
+        "confirm3Label": {
+            "type": "varchar",
+            "maxLength": 200,
+            "isCustom": true
+        },
+        "confirm3Status": {
+            "type": "enum",
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
+            "default": "Pending",
+            "style": {
+                "Pending": "default",
+                "Confirmed": "success",
+                "Needs Follow-up": "warning"
+            },
+            "displayAsLabel": true,
+            "audited": true,
+            "isCustom": true
+        },
+        "confirm3Note": {
+            "type": "text",
+            "rowsMin": 1,
+            "isCustom": true
+        },
+        "confirm4Label": {
+            "type": "varchar",
+            "maxLength": 200,
+            "isCustom": true
+        },
+        "confirm4Status": {
+            "type": "enum",
+            "options": [
+                "Pending",
+                "Confirmed",
+                "Needs Follow-up"
+            ],
+            "default": "Pending",
+            "style": {
+                "Pending": "default",
+                "Confirmed": "success",
+                "Needs Follow-up": "warning"
+            },
+            "displayAsLabel": true,
+            "audited": true,
+            "isCustom": true
+        },
+        "confirm4Note": {
+            "type": "text",
+            "rowsMin": 1,
+            "isCustom": true
+        },
+        "confirmationProgress": {
+            "type": "varchar",
+            "maxLength": 16,
+            "isCustom": true,
+            "readOnly": true,
+            "layoutMassUpdateDisabled": true,
+            "tooltipText": "Confirmation checklist progress (e.g. \"1/2\"). Maintained automatically by a hook."
+        },
+        "managerNotes": {
+            "type": "wysiwyg",
+            "isCustom": true,
+            "tooltipText": "Notes from the task creator / manager. Editable by the creator or a manager; read-only for the assignee."
+        },
+        "account": {
+            "type": "link",
+            "readOnly": false
+        },
+        "contact": {
+            "type": "link",
+            "readOnly": false
+        },
+        "policy": {
+            "type": "link"
+        },
+        "policies": {
+            "type": "linkMultiple",
+            "view": "custom:views/task/fields/policies",
+            "tooltipText": "Policies this task concerns (1–5). For a COI, the picker is limited to the selected Insured's policies.",
+            "isCustom": true
+        },
+        "dateStart": {
+            "type": "datetimeOptional",
+            "readOnly": true,
+            "tooltipText": "When work started. Set automatically when the status first becomes \"In Progress\" — never entered by hand."
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link). Auto-populated from linked Policy where possible."
+        }
     },
-    "taskType": {
-      "type": "enum",
-      "options": [
-        "Client Service",
-        "Policy Change",
-        "Renewal",
-        "New Business",
-        "Follow Up",
-        "Onboarding",
-        "Claims",
-        "Commission",
-        "Underwriting Request",
-        "Underwriter Follow-up",
-        "Agency Admin",
-        "Admin",
-        "Other"
-      ],
-      "displayAsLabel": true,
-      "audited": true
+    "links": {
+        "policy": {
+            "type": "belongsTo",
+            "entity": "Policy",
+            "foreign": "tasks",
+            "isCustom": true
+        },
+        "policies": {
+            "type": "hasMany",
+            "entity": "Policy",
+            "relationName": "taskPolicy",
+            "foreign": "coiTasks",
+            "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        }
     },
-    "syncSource": {
-      "type": "enum",
-      "options": [
-        "",
-        "Manual",
-        "Email",
-        "API",
-        "Slack",
-        "Momentum",
-        "n8n",
-        "Hermes"
-      ],
-      "displayAsLabel": true
+    "collection": {
+        "orderBy": "dateEnd",
+        "order": "asc",
+        "textFilterFields": [
+            "name",
+            "description"
+        ],
+        "sortByList": [
+            "name",
+            "dateEnd",
+            "createdAt",
+            "modifiedAt",
+            "status",
+            "priority",
+            "assignedUserName"
+        ]
     },
-    "urgency": {
-      "type": "enum",
-      "options": [
-        "Urgent",
-        "High",
-        "Normal",
-        "Low"
-      ],
-      "default": "Normal",
-      "displayAsLabel": true,
-      "style": {
-        "Urgent": "danger",
-        "High": "warning",
-        "Normal": "default",
-        "Low": "info"
-      }
-    },
-    "triageSummary": {
-      "type": "text",
-      "rowsMin": 2,
-      "cutHeight": 80
-    },
-    "triageReason": {
-      "type": "text",
-      "rowsMin": 2,
-      "cutHeight": 80
-    },
-    "momentumTaskId": {
-      "type": "varchar",
-      "maxLength": 255,
-      "isCustom": true,
-      "readOnly": true,
-      "tooltipText": "NowCerts task database_id \u2014 dedup key for bi-directional sync"
-    },
-    "momentumLastSynced": {
-      "type": "datetime",
-      "isCustom": true
-    },
-    "sourceActivityLogId": {
-      "type": "varchar",
-      "maxLength": 24,
-      "isCustom": true,
-      "layoutDetailDisabled": true,
-      "layoutListDisabled": true,
-      "layoutMassUpdateDisabled": true,
-      "readOnly": true,
-      "tooltipText": "Source ActivityLog ID for manual service triage deduplication"
-    },
-    "automationKey": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true,
-      "layoutDetailDisabled": true,
-      "layoutListDisabled": true,
-      "layoutMassUpdateDisabled": true,
-      "readOnly": true,
-      "tooltipText": "Automation key for deduping generated tasks"
-    },
-    "taskSource": {
-      "type": "enum",
-      "options": [
-        "",
-        "Account",
-        "Contact",
-        "Opportunity",
-        "Policy"
-      ],
-      "isCustom": true,
-      "displayAsLabel": true,
-      "style": {
-        "Account": "warning",
-        "Contact": "success",
-        "Opportunity": "primary",
-        "Policy": "info"
-      },
-      "tooltipText": "Where this task was created from \u2014 enables Account rollup"
-    },
-    "assignedUser": {
-      "view": "custom:views/task/fields/assigned-user"
-    },
-    "parent": {
-      "entityList": [
-        "Account",
-        "Contact",
-        "Lead",
-        "Opportunity",
-        "Case",
-        "Policy",
-        "Renewal"
-      ]
-    },
-    "policyType": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true,
-      "tooltipText": "Line of business / policy type. Auto-populated from the linked Policy where possible."
-    },
-    "policyNumber": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true,
-      "tooltipText": "Policy number this task concerns. Auto-populated from the linked Policy where possible."
-    },
-    "carrier": {
-      "type": "varchar",
-      "maxLength": 150,
-      "isCustom": true,
-      "tooltipText": "Carrier for the policy. Auto-populated from the linked Policy where possible."
-    },
-    "policyEffectiveDate": {
-      "type": "date",
-      "isCustom": true,
-      "tooltipText": "Policy period start. Auto-populated from the linked Policy where possible."
-    },
-    "policyExpirationDate": {
-      "type": "date",
-      "isCustom": true,
-      "tooltipText": "Policy period end. Auto-populated from the linked Policy where possible."
-    },
-    "refLink": {
-      "type": "url",
-      "isCustom": true,
-      "tooltipText": "Primary external link / portal needed to act on this task (e.g. carrier or audit portal)."
-    },
-    "refLink2": {
-      "type": "url",
-      "isCustom": true,
-      "tooltipText": "Secondary external link, if any."
-    },
-    "refNumber": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true,
-      "tooltipText": "Primary reference / assignment / claim number."
-    },
-    "refNumber2": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true,
-      "tooltipText": "Secondary reference number, if any."
-    },
-    "refAccessCode": {
-      "type": "varchar",
-      "maxLength": 100,
-      "isCustom": true,
-      "tooltipText": "Access code / PIN / credential needed to complete the task."
-    },
-    "refSupportContact": {
-      "type": "varchar",
-      "maxLength": 150,
-      "isCustom": true,
-      "tooltipText": "Support contact or vendor email for this task."
-    },
-    "refNotes": {
-      "type": "text",
-      "rowsMin": 2,
-      "isCustom": true,
-      "tooltipText": "Any other structured reference data needed to act on the task."
-    },
-    "confirm1Label": {
-      "type": "varchar",
-      "maxLength": 200,
-      "isCustom": true,
-      "tooltipText": "Confirmation item 1 \u2014 the action that must be confirmed."
-    },
-    "confirm1Status": {
-      "type": "enum",
-      "options": [
-        "Pending",
-        "Confirmed",
-        "Needs Follow-up"
-      ],
-      "default": "Pending",
-      "style": {
-        "Pending": "default",
-        "Confirmed": "success",
-        "Needs Follow-up": "warning"
-      },
-      "displayAsLabel": true,
-      "audited": true,
-      "isCustom": true
-    },
-    "confirm1Note": {
-      "type": "text",
-      "rowsMin": 1,
-      "isCustom": true,
-      "tooltipText": "How / when / by whom item 1 was confirmed."
-    },
-    "confirm2Label": {
-      "type": "varchar",
-      "maxLength": 200,
-      "isCustom": true
-    },
-    "confirm2Status": {
-      "type": "enum",
-      "options": [
-        "Pending",
-        "Confirmed",
-        "Needs Follow-up"
-      ],
-      "default": "Pending",
-      "style": {
-        "Pending": "default",
-        "Confirmed": "success",
-        "Needs Follow-up": "warning"
-      },
-      "displayAsLabel": true,
-      "audited": true,
-      "isCustom": true
-    },
-    "confirm2Note": {
-      "type": "text",
-      "rowsMin": 1,
-      "isCustom": true
-    },
-    "confirm3Label": {
-      "type": "varchar",
-      "maxLength": 200,
-      "isCustom": true
-    },
-    "confirm3Status": {
-      "type": "enum",
-      "options": [
-        "Pending",
-        "Confirmed",
-        "Needs Follow-up"
-      ],
-      "default": "Pending",
-      "style": {
-        "Pending": "default",
-        "Confirmed": "success",
-        "Needs Follow-up": "warning"
-      },
-      "displayAsLabel": true,
-      "audited": true,
-      "isCustom": true
-    },
-    "confirm3Note": {
-      "type": "text",
-      "rowsMin": 1,
-      "isCustom": true
-    },
-    "confirm4Label": {
-      "type": "varchar",
-      "maxLength": 200,
-      "isCustom": true
-    },
-    "confirm4Status": {
-      "type": "enum",
-      "options": [
-        "Pending",
-        "Confirmed",
-        "Needs Follow-up"
-      ],
-      "default": "Pending",
-      "style": {
-        "Pending": "default",
-        "Confirmed": "success",
-        "Needs Follow-up": "warning"
-      },
-      "displayAsLabel": true,
-      "audited": true,
-      "isCustom": true
-    },
-    "confirm4Note": {
-      "type": "text",
-      "rowsMin": 1,
-      "isCustom": true
-    },
-    "confirmationProgress": {
-      "type": "varchar",
-      "maxLength": 16,
-      "isCustom": true,
-      "readOnly": true,
-      "layoutMassUpdateDisabled": true,
-      "tooltipText": "Confirmation checklist progress (e.g. \"1/2\"). Maintained automatically by a hook."
-    },
-    "managerNotes": {
-      "type": "wysiwyg",
-      "isCustom": true,
-      "tooltipText": "Notes from the task creator / manager. Editable by the creator or a manager; read-only for the assignee."
-    },
-    "account": {
-      "type": "link",
-      "readOnly": false
-    },
-    "contact": {
-      "type": "link",
-      "readOnly": false
-    },
-    "policy": {
-      "type": "link"
-    },
-    "policies": {
-      "type": "linkMultiple",
-      "view": "custom:views/task/fields/policies",
-      "tooltipText": "Policies this task concerns (1\u20135). For a COI, the picker is limited to the selected Insured's policies.",
-      "isCustom": true
-    },
-    "dateStart": {
-      "type": "datetimeOptional",
-      "readOnly": true,
-      "tooltipText": "When work started. Set automatically when the status first becomes \"In Progress\" \u2014 never entered by hand."
+    "indexes": {
+        "momentumTaskId": {
+            "columns": [
+                "momentumTaskId"
+            ],
+            "unique": true
+        },
+        "sourceActivityLogId": {
+            "columns": [
+                "sourceActivityLogId"
+            ]
+        },
+        "automationKey": {
+            "columns": [
+                "automationKey"
+            ]
+        }
     }
-  },
-  "links": {
-    "policy": {
-      "type": "belongsTo",
-      "entity": "Policy",
-      "foreign": "tasks",
-      "isCustom": true
-    },
-    "policies": {
-      "type": "hasMany",
-      "entity": "Policy",
-      "relationName": "taskPolicy",
-      "foreign": "coiTasks",
-      "isCustom": true
-    }
-  },
-  "collection": {
-    "orderBy": "dateEnd",
-    "order": "asc",
-    "textFilterFields": [
-      "name",
-      "description"
-    ],
-    "sortByList": [
-      "name",
-      "dateEnd",
-      "createdAt",
-      "modifiedAt",
-      "status",
-      "priority",
-      "assignedUserName"
-    ]
-  },
-  "indexes": {
-    "momentumTaskId": {
-      "columns": [
-        "momentumTaskId"
-      ],
-      "unique": true
-    },
-    "sourceActivityLogId": {
-      "columns": [
-        "sourceActivityLogId"
-      ]
-    },
-    "automationKey": {
-      "columns": [
-        "automationKey"
-      ]
-    }
-  }
 }

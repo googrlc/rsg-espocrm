@@ -50,7 +50,7 @@
         "rows": [
             [
                 {
-                    "name": "currentCarrier"
+                    "name": "currentCarrierAccount"
                 },
                 {
                     "name": "targetCarrier"
@@ -1105,7 +1105,7 @@
         ],
         "style": "default",
         "name": "processIntake",
-        "label": "Process \u2014 Intake",
+        "label": "Process — Intake",
         "tabBreak": true,
         "tabLabel": "Workflow"
     },
@@ -1138,7 +1138,7 @@
         ],
         "style": "default",
         "name": "processMarketing",
-        "label": "Process \u2014 Marketing"
+        "label": "Process — Marketing"
     },
     {
         "rows": [
@@ -1175,7 +1175,7 @@
         ],
         "style": "default",
         "name": "processOnboarding",
-        "label": "Process \u2014 Onboarding"
+        "label": "Process — Onboarding"
     },
     {
         "rows": [

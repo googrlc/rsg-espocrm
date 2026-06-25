@@ -21,7 +21,8 @@
         "triageSummary": "Triage Summary",
         "triageReason": "Triage Reason",
         "policies": "Policies",
-        "dateStart": "Start Date"
+        "dateStart": "Start Date",
+        "carrierAccount": "Carrier Account"
     },
     "links": {
         "account": "Account",

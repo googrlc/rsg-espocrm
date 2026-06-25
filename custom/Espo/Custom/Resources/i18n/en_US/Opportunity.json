@@ -167,7 +167,9 @@
         "glYearEstablished": "Year Business Established",
         "glYearsInBusiness": "Years in Business",
         "propRoofYearInstalled": "Roof Year Installed",
-        "propRoofAgeCalc": "Roof Age (calculated)"
+        "propRoofAgeCalc": "Roof Age (calculated)",
+        "carrierAccount": "Carrier Account",
+        "currentCarrierAccount": "Current Carrier"
     },
     "options": {
         "stage": {
@@ -230,17 +232,17 @@
         "policyNumber": "Enter after bind",
         "fein": "Enter if Account not yet created",
         "commissionLogged": "Auto-set by n8n when commission ledger entry created",
-        "aiSummary": "2-3 sentence brief from Manus intel \u2014 pre-call context",
+        "aiSummary": "2-3 sentence brief from Manus intel — pre-call context",
         "recycleToLead": "Enable to recycle this closed-lost opportunity into Lead nurture.",
         "xDate": "Customer renewal date used for callback timing.",
         "callbackDate": "Auto-calculated callback date (Commercial: 90 days prior; Personal: 30 days prior).",
         "recycledLead": "Lead record created for nurture follow-up.",
-        "aggregatePageId": "Legacy Notion sync field \u2014 can be deprecated after full EspoCRM migration",
+        "aggregatePageId": "Legacy Notion sync field — can be deprecated after full EspoCRM migration",
         "propAssessmentNotes": "AI-generated property assessment notes from Viktor or Manus",
         "autoAssessmentNotes": "AI-generated driver and vehicle risk assessment",
         "healthAssessmentNotes": "AI-generated health risk assessment notes",
         "quoteNumber": "Carrier-provided quote reference number for this opportunity.",
-        "name": "Format: Client name\u2013 LOB \u2013 Type (e.g. Jarah Group \u2013 WC. For duplicates add a tag (e.g. \u2013 Fleet)."
+        "name": "Format: Client name– LOB – Type (e.g. Jarah Group – WC. For duplicates add a tag (e.g. – Fleet)."
     },
     "presetFilters": {
         "open": "Open Pipeline",

@@ -44,7 +44,8 @@
         "last_contact_date": "Last Contact Date",
         "email_sequence_started": "Email Sequence Started",
         "carrier_raw": "Carrier (Legal Writing Co)",
-        "mga": "MGA / Wholesaler"
+        "mga": "MGA / Wholesaler",
+        "mgaAccount": "MGA / Wholesaler Account"
     },
     "presetFilters": {
         "active": "Active",

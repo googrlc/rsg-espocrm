@@ -160,12 +160,22 @@
                 "Other"
             ],
             "isCustom": true
+        },
+        "currentCarrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Current/Incumbent Carrier Account (relationship link)."
         }
     },
     "links": {
         "sourceOpportunity": {
             "type": "belongsTo",
             "entity": "Opportunity",
+            "isCustom": true
+        },
+        "currentCarrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
             "isCustom": true
         }
     },

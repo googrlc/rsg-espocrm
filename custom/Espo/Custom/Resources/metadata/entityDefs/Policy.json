@@ -14,7 +14,7 @@
             "maxLength": 100,
             "required": false,
             "isCustom": true,
-            "tooltipText": "Policy number \u2014 primary identifier for this policy record",
+            "tooltipText": "Policy number — primary identifier for this policy record",
             "options": [],
             "tooltip": true
         },
@@ -23,7 +23,7 @@
             "maxLength": 255,
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "NowCerts/Momentum AMS policy databaseId \u2014 primary dedup key for sync. NEVER change this value once set."
+            "tooltipText": "NowCerts/Momentum AMS policy databaseId — primary dedup key for sync. NEVER change this value once set."
         },
         "carrier": {
             "type": "varchar",
@@ -51,11 +51,42 @@
             "tooltipText": "Original NowCerts / AMS line-of-business string before normalization."
         },
         "line_of_business": {
-            "type": "varchar",
-            "maxLength": 500,
+            "type": "enum",
+            "options": [
+                "",
+                "Commercial Auto",
+                "Transportation / Trucking",
+                "General Liability",
+                "Workers Comp",
+                "Commercial Property",
+                "BOP",
+                "Professional Liability",
+                "Umbrella",
+                "Builders Risk",
+                "Inland Marine",
+                "Personal Auto",
+                "Homeowners",
+                "Renters",
+                "Condo",
+                "Dwelling Fire",
+                "Motorcycle",
+                "Boat",
+                "RV",
+                "Life",
+                "Health",
+                "Medicare",
+                "Group Benefits",
+                "Garagekeepers",
+                "Commercial Package",
+                "Other",
+                "Commercial Umbrella",
+                "Personal Umbrella",
+                "Cyber Liability"
+            ],
             "isCustom": true,
-            "tooltipText": "Normalized line of business label (varchar \u2014 enum conversion is a separate pass).",
-            "dbName": "lineOfBusiness"
+            "isSorted": true,
+            "dbName": "lineOfBusiness",
+            "tooltipText": "Normalized line of business (dropdown)."
         },
         "status": {
             "type": "enum",
@@ -106,7 +137,7 @@
         "expiration_date": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Renewal trigger date \u2014 used by renewal pipeline automation",
+            "tooltipText": "Renewal trigger date — used by renewal pipeline automation",
             "dbName": "expirationDate"
         },
         "premium_amount": {
@@ -253,7 +284,7 @@
             "maxLength": 255,
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "insuredDatabaseId from Momentum \u2014 used to resolve Account/Contact relation during sync"
+            "tooltipText": "insuredDatabaseId from Momentum — used to resolve Account/Contact relation during sync"
         },
         "carrierAccount": {
             "type": "link"
@@ -365,7 +396,7 @@
         "premiumAtRisk": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Annual premium value at risk if policy lapses \u2014 used by renewal outreach automation"
+            "tooltipText": "Annual premium value at risk if policy lapses — used by renewal outreach automation"
         },
         "urgency": {
             "type": "enum",
@@ -437,6 +468,11 @@
             "isCustom": true,
             "layoutDetailDisabled": true,
             "noLoad": true
+        },
+        "mgaAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "MGA / Wholesaler Account (relationship link)."
         }
     },
     "links": {
@@ -522,6 +558,11 @@
             "entity": "Task",
             "relationName": "taskPolicy",
             "foreign": "policies",
+            "isCustom": true
+        },
+        "mgaAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
             "isCustom": true
         }
     },

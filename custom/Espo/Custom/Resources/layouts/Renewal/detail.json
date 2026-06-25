@@ -1,64 +1,157 @@
 [
-  {
-    "label": "Pipeline",
-    "name": "pipeline",
-    "rows": [
-      [{"name": "stage", "fullWidth": true}],
-      [{"name": "urgency"}, {"name": "expiration_date"}]
-    ]
-  },
-  {
-    "label": "Overview",
-    "name": "overview",
-    "rows": [
-      [{"name": "account"}, {"name": "contact"}],
-      [{"name": "policy"}, {"name": "line_of_business"}],
-      [{"name": "carrier"}, {"name": "assignedUser"}]
-    ]
-  },
-  {
-    "label": "Premium",
-    "name": "premium",
-    "rows": [
-      [{"name": "current_premium"}, {"name": "renewal_premium"}],
-      [{"name": "premium_change"}, false],
-      [{"name": "commission_rate"}, {"name": "expected_commission"}]
-    ]
-  },
-  {
-    "label": "Worksheet — complete these",
-    "name": "worksheet",
-    "rows": [
-      [{"name": "renewal_reviewed"}, {"name": "account_confirmed"}],
-      [{"name": "renewal_email_sent"}, {"name": "ams_updated"}]
-    ]
-  },
-  {
-    "label": "Outreach",
-    "name": "outreach",
-    "rows": [
-      [{"name": "last_contact_method"}, {"name": "last_contact_date"}],
-      [{"name": "renewal_effective_date"}, false]
-    ]
-  },
-  {
-    "label": "Lost Details",
-    "name": "lostDetails",
-    "rows": [
-      [{"name": "lost_reason"}, false]
-    ]
-  },
-  {
-    "label": "Won Details",
-    "name": "wonDetails",
-    "rows": [
-      [{"name": "newPolicy"}, false]
-    ]
-  },
-  {
-    "label": "Notes",
-    "rows": [
-      [{"name": "renewal_notes", "fullWidth": true}]
-    ]
-  }
+    {
+        "label": "Pipeline",
+        "name": "pipeline",
+        "rows": [
+            [
+                {
+                    "name": "stage",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "urgency"
+                },
+                {
+                    "name": "expiration_date"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Overview",
+        "name": "overview",
+        "rows": [
+            [
+                {
+                    "name": "account"
+                },
+                {
+                    "name": "contact"
+                }
+            ],
+            [
+                {
+                    "name": "policy"
+                },
+                {
+                    "name": "line_of_business"
+                }
+            ],
+            [
+                {
+                    "name": "carrierAccount"
+                },
+                {
+                    "name": "assignedUser"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Premium",
+        "name": "premium",
+        "rows": [
+            [
+                {
+                    "name": "current_premium"
+                },
+                {
+                    "name": "renewal_premium"
+                }
+            ],
+            [
+                {
+                    "name": "premium_change"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "commission_rate"
+                },
+                {
+                    "name": "expected_commission"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Worksheet — complete these",
+        "name": "worksheet",
+        "rows": [
+            [
+                {
+                    "name": "renewal_reviewed"
+                },
+                {
+                    "name": "account_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "renewal_email_sent"
+                },
+                {
+                    "name": "ams_updated"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Outreach",
+        "name": "outreach",
+        "rows": [
+            [
+                {
+                    "name": "last_contact_method"
+                },
+                {
+                    "name": "last_contact_date"
+                }
+            ],
+            [
+                {
+                    "name": "renewal_effective_date"
+                },
+                false
+            ]
+        ]
+    },
+    {
+        "label": "Lost Details",
+        "name": "lostDetails",
+        "rows": [
+            [
+                {
+                    "name": "lost_reason"
+                },
+                false
+            ]
+        ]
+    },
+    {
+        "label": "Won Details",
+        "name": "wonDetails",
+        "rows": [
+            [
+                {
+                    "name": "newPolicy"
+                },
+                false
+            ]
+        ]
+    },
+    {
+        "label": "Notes",
+        "rows": [
+            [
+                {
+                    "name": "renewal_notes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
 ]

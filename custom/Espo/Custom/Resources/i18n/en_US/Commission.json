@@ -30,7 +30,8 @@
         "ledgerSyncError": "Ledger Sync Error",
         "ledgerPayloadHash": "Ledger Payload Hash",
         "ledgerKey": "Ledger Key",
-        "writtenPremium": "Written Premium"
+        "writtenPremium": "Written Premium",
+        "carrierAccount": "Carrier Account"
     },
     "options": {
         "commissionType": {

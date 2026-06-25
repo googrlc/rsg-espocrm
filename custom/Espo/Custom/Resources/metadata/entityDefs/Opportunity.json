@@ -96,7 +96,7 @@
             "isCustom": true,
             "required": true,
             "audited": true,
-            "tooltipText": "Line of Business \u2014 locked after first save. Create a new Opportunity to change LOB.",
+            "tooltipText": "Line of Business — locked after first save. Create a new Opportunity to change LOB.",
             "style": {
                 "": null,
                 "Commercial Auto": null,
@@ -168,7 +168,7 @@
             "type": "currency",
             "isCustom": true,
             "defaultCurrency": "USD",
-            "tooltipText": "Estimated annual premium \u2014 update as quotes come in"
+            "tooltipText": "Estimated annual premium — update as quotes come in"
         },
         "commissionRate": {
             "type": "float",
@@ -185,7 +185,7 @@
         "effectiveDate": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Policy effective date \u2014 entered at bind"
+            "tooltipText": "Policy effective date — entered at bind"
         },
         "policyNumber": {
             "type": "varchar",
@@ -256,7 +256,7 @@
         "aiSummary": {
             "type": "text",
             "isCustom": true,
-            "tooltipText": "2-3 sentence brief from Manus intel \u2014 pre-call context"
+            "tooltipText": "2-3 sentence brief from Manus intel — pre-call context"
         },
         "lastContactMethod": {
             "type": "enum",
@@ -325,7 +325,7 @@
                 "Other"
             ],
             "isCustom": true,
-            "tooltipText": "Commercial Auto \u2014 business type"
+            "tooltipText": "Commercial Auto — business type"
         },
         "caVehicleCount": {
             "type": "int",
@@ -551,7 +551,7 @@
             "type": "varchar",
             "maxLength": 50,
             "isCustom": true,
-            "tooltipText": "Medicare HICN \u2014 sensitive, will be purged. Source of truth is NowCerts.",
+            "tooltipText": "Medicare HICN — sensitive, will be purged. Source of truth is NowCerts.",
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
@@ -1033,55 +1033,55 @@
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Umbrella \u2014 underlying opps/policies linked"
+            "tooltipText": "Umbrella — underlying opps/policies linked"
         },
         "chkUnderlyingConfirmed": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Umbrella \u2014 underlying limits confirmed"
+            "tooltipText": "Umbrella — underlying limits confirmed"
         },
         "chkMvrsPulled": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Personal Auto \u2014 MVRs pulled"
+            "tooltipText": "Personal Auto — MVRs pulled"
         },
         "chkDecPageDelivered": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Personal Lines \u2014 dec page delivered to client"
+            "tooltipText": "Personal Lines — dec page delivered to client"
         },
         "chkScopeOfAppt": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare \u2014 Scope of Appointment completed"
+            "tooltipText": "Medicare — Scope of Appointment completed"
         },
         "chkPlanPresented": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare \u2014 plan options presented"
+            "tooltipText": "Medicare — plan options presented"
         },
         "chkAppSubmitted": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare \u2014 application submitted"
+            "tooltipText": "Medicare — application submitted"
         },
         "chkCmsConfirmation": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare \u2014 CMS confirmation received"
+            "tooltipText": "Medicare — CMS confirmation received"
         },
         "chkWelcomeLetter": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare \u2014 welcome letter delivered"
+            "tooltipText": "Medicare — welcome letter delivered"
         },
         "amount": {
             "type": "currency",
@@ -1274,7 +1274,7 @@
             "type": "date",
             "isCustom": true,
             "audited": true,
-            "tooltipText": "Primary driver's date of birth \u2014 used to calculate age."
+            "tooltipText": "Primary driver's date of birth — used to calculate age."
         },
         "caAge": {
             "type": "int",
@@ -1326,7 +1326,7 @@
             "type": "int",
             "isCustom": true,
             "audited": true,
-            "tooltipText": "Year the business was established \u2014 used to calculate years in business."
+            "tooltipText": "Year the business was established — used to calculate years in business."
         },
         "glYearsInBusiness": {
             "type": "int",
@@ -1378,7 +1378,7 @@
             "type": "int",
             "isCustom": true,
             "audited": true,
-            "tooltipText": "Year the roof was installed or replaced \u2014 used to calculate roof age."
+            "tooltipText": "Year the roof was installed or replaced — used to calculate roof age."
         },
         "propRoofAgeCalc": {
             "type": "int",
@@ -1425,6 +1425,11 @@
                     }
                 }
             }
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link)."
         }
     },
     "links": {
@@ -1462,6 +1467,11 @@
             "type": "hasMany",
             "entity": "OpportunityVehicle",
             "foreign": "opportunity",
+            "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
             "isCustom": true
         }
     },

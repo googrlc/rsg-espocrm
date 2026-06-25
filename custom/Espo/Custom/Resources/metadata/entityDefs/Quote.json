@@ -76,9 +76,29 @@
                 "BOP",
                 "Professional Liability",
                 "Umbrella",
-                "Other"
+                "Builders Risk",
+                "Inland Marine",
+                "Personal Auto",
+                "Homeowners",
+                "Renters",
+                "Condo",
+                "Dwelling Fire",
+                "Motorcycle",
+                "Boat",
+                "RV",
+                "Life",
+                "Health",
+                "Medicare",
+                "Group Benefits",
+                "Garagekeepers",
+                "Commercial Package",
+                "Other",
+                "Commercial Umbrella",
+                "Personal Umbrella",
+                "Cyber Liability"
             ],
-            "isCustom": true
+            "isCustom": true,
+            "isSorted": true
         },
         "opportunity": {
             "type": "link",

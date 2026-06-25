@@ -87,6 +87,7 @@ class RenewalOrchestrator
             $hasChanges = $this->setIfChanged($renewal, 'current_premium', $policy->get('premium_amount')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'line_of_business', $normalizedLineOfBusiness) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'carrier', $policy->get('carrier')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'carrierAccountId', $policy->get('carrierAccountId')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'commission_rate', $this->normalizeRate($policy->get('commission_rate'))) || $hasChanges;
 
             if ($this->shouldSyncRenewalEffectiveDate($renewal, $originalExpirationDate, $expirationDate)) {

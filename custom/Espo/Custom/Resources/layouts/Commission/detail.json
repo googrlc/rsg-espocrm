@@ -1,42 +1,141 @@
 [
-  {
-    "label": "Commission",
-    "rows": [
-      [{"name": "commissionType"}, {"name": "status"}],
-      [{"name": "reconciliationStatus"}, {"name": "ledgerSyncStatus"}],
-      [{"name": "account"}, {"name": "policy"}],
-      [{"name": "opportunity"}, {"name": "renewal"}],
-      [{"name": "lineOfBusiness"}, {"name": "carrier"}],
-      [{"name": "producer"}, {"name": "assignedUser"}]
-    ]
-  },
-  {
-    "label": "Financial",
-    "rows": [
-      [{"name": "writtenPremium"}, {"name": "commissionRate"}],
-      [{"name": "estimatedCommission"}, {"name": "postedAmount"}],
-      [{"name": "varianceAmount"}, {"name": "variancePercent"}]
-    ]
-  },
-  {
-    "label": "Dates",
-    "rows": [
-      [{"name": "effectiveDate"}, {"name": "expectedPaymentDate"}],
-      [{"name": "paymentReceivedDate"}, {"name": "ledgerSyncedAt"}]
-    ]
-  },
-  {
-    "label": "Ledger",
-    "rows": [
-      [{"name": "ledgerExternalId"}, {"name": "ledgerPayloadHash"}],
-      [{"name": "ledgerKey", "fullWidth": true}],
-      [{"name": "ledgerSyncError", "fullWidth": true}]
-    ]
-  },
-  {
-    "label": "Notes",
-    "rows": [
-      [{"name": "commissionNotes", "fullWidth": true}]
-    ]
-  }
+    {
+        "label": "Commission",
+        "rows": [
+            [
+                {
+                    "name": "commissionType"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "reconciliationStatus"
+                },
+                {
+                    "name": "ledgerSyncStatus"
+                }
+            ],
+            [
+                {
+                    "name": "account"
+                },
+                {
+                    "name": "policy"
+                }
+            ],
+            [
+                {
+                    "name": "opportunity"
+                },
+                {
+                    "name": "renewal"
+                }
+            ],
+            [
+                {
+                    "name": "lineOfBusiness"
+                },
+                {
+                    "name": "carrierAccount"
+                }
+            ],
+            [
+                {
+                    "name": "producer"
+                },
+                {
+                    "name": "assignedUser"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Financial",
+        "rows": [
+            [
+                {
+                    "name": "writtenPremium"
+                },
+                {
+                    "name": "commissionRate"
+                }
+            ],
+            [
+                {
+                    "name": "estimatedCommission"
+                },
+                {
+                    "name": "postedAmount"
+                }
+            ],
+            [
+                {
+                    "name": "varianceAmount"
+                },
+                {
+                    "name": "variancePercent"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Dates",
+        "rows": [
+            [
+                {
+                    "name": "effectiveDate"
+                },
+                {
+                    "name": "expectedPaymentDate"
+                }
+            ],
+            [
+                {
+                    "name": "paymentReceivedDate"
+                },
+                {
+                    "name": "ledgerSyncedAt"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Ledger",
+        "rows": [
+            [
+                {
+                    "name": "ledgerExternalId"
+                },
+                {
+                    "name": "ledgerPayloadHash"
+                }
+            ],
+            [
+                {
+                    "name": "ledgerKey",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "ledgerSyncError",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Notes",
+        "rows": [
+            [
+                {
+                    "name": "commissionNotes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
 ]

@@ -72,14 +72,14 @@
         "renewal_premium": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Manually entered when quote is received \u2014 blank until then",
+            "tooltipText": "Manually entered when quote is received — blank until then",
             "dbName": "renewalPremium"
         },
         "premium_change": {
             "type": "float",
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 \u2014 premium delta %",
+            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 — premium delta %",
             "dbName": "premiumChange"
         },
         "line_of_business": {
@@ -87,6 +87,7 @@
             "options": [
                 "",
                 "Commercial Auto",
+                "Transportation / Trucking",
                 "General Liability",
                 "Workers Comp",
                 "Commercial Property",
@@ -109,12 +110,16 @@
                 "Group Benefits",
                 "Garagekeepers",
                 "Commercial Package",
-                "Other"
+                "Other",
+                "Commercial Umbrella",
+                "Personal Umbrella",
+                "Cyber Liability"
             ],
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-populated from linked Policy \u2014 not editable",
-            "dbName": "lineOfBusiness"
+            "tooltipText": "Auto-populated from linked Policy — not editable",
+            "dbName": "lineOfBusiness",
+            "isSorted": true
         },
         "carrier": {
             "type": "varchar",
@@ -253,6 +258,11 @@
             "isCustom": true,
             "layoutDetailDisabled": true,
             "noLoad": true
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link). Auto-populated from linked Policy."
         }
     },
     "links": {
@@ -307,6 +317,11 @@
             "type": "hasMany",
             "entity": "Commission",
             "foreign": "renewal",
+            "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
             "isCustom": true
         }
     },

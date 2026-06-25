@@ -44,6 +44,7 @@ class PopulatePolicyFields implements BeforeSave
             )),
             'policyNumber' => trim((string) ($policy->get('policy_number') ?? '')),
             'carrier' => trim((string) ($policy->get('carrier') ?? '')),
+            'carrierAccountId' => $policy->get('carrierAccountId'),
             'policyEffectiveDate' => $policy->get('effective_date'),
             'policyExpirationDate' => $policy->get('expiration_date'),
         ];
