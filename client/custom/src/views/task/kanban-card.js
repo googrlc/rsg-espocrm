@@ -105,7 +105,7 @@ define('custom:views/task/kanban-card', ['views/record/kanban'], function (Dep) 
             }
 
             return {
-                label: due.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}),
+                label: due.toLocaleDateString('en-US', {month: '2-digit', day: '2-digit', year: 'numeric'}),
                 className: 'task-due-upcoming',
                 cardClass: ''
             };

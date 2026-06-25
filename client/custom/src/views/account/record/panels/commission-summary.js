@@ -276,8 +276,8 @@ define("custom:views/account/record/panels/commission-summary", ["view"], functi
             }
 
             return date.toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
+                month: "2-digit",
+                day: "2-digit",
                 year: "numeric"
             });
         },

@@ -299,7 +299,7 @@ define('custom:views/commission/list', ['exports', 'views/list'], function (_exp
     },
 
     _money: function (v) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 2 }).format(Number(v)); },
-    _date: function (v) { var d = new Date(v); return isNaN(d) ? v : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' }); },
+    _date: function (v) { var d = new Date(v); return isNaN(d) ? v : d.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' }); },
     _esc: function (s) { return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); },
     _toast: function (msg, kind) { var t = $('<div class="rsg-cw-toast rsg-cw-toast-' + (kind || 'info') + '">' + this._esc(msg) + '</div>').appendTo('body'); setTimeout(function () { t.fadeOut(300, function () { $(this).remove(); }); }, 3200); },
 

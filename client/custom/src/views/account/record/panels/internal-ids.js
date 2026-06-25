@@ -135,7 +135,7 @@ define("custom:views/account/record/panels/internal-ids", ["view"], function (De
             try {
                 var d = new Date(val);
                 return d.toLocaleDateString("en-US", {
-                    month: "short", day: "numeric", year: "numeric",
+                    month: "2-digit", day: "2-digit", year: "numeric",
                     hour: "numeric", minute: "2-digit"
                 });
             } catch (e) {

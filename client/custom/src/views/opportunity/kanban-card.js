@@ -71,7 +71,7 @@ Espo.define('custom:views/opportunity/kanban-card', ['custom:views/core/kanban-c
                 } else if (diffDays <= 7) {
                     dueDateLabel = `${diffDays}d`;
                 } else {
-                    dueDateLabel = due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    dueDateLabel = due.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' });
                 }
             }
 
