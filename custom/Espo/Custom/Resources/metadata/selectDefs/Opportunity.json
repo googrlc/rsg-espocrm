@@ -2,7 +2,8 @@
     "primaryFilterClassNameMap": {
         "open": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Open",
         "won": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Won",
-        "lost": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Lost"
+        "lost": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Lost",
+        "archived": "Espo\\Custom\\Classes\\Select\\Opportunity\\PrimaryFilters\\Archived"
     },
     "boolFilterClassNameMap": {
         "newBusiness": "Espo\\Custom\\Classes\\Select\\Opportunity\\BoolFilters\\NewBusiness",

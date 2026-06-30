@@ -20,7 +20,6 @@
             ],
             "default": "Discovery",
             "audited": true,
-            "view": "custom:views/opportunity/fields/stage-bar",
             "displayAsLabel": true,
             "labelType": "state",
             "probabilityMap": {
@@ -89,12 +88,48 @@
                 "Group Benefits",
                 "Garagekeepers",
                 "Commercial Package",
-                "Other"
+                "Other",
+                "Commercial Umbrella",
+                "Personal Umbrella",
+                "Cyber Liability"
             ],
             "isCustom": true,
             "required": true,
             "audited": true,
-            "tooltipText": "Line of Business — locked after first save. Create a new Opportunity to change LOB."
+            "tooltipText": "Line of Business \u2014 locked after first save. Create a new Opportunity to change LOB.",
+            "style": {
+                "": null,
+                "Commercial Auto": null,
+                "Transportation / Trucking": null,
+                "General Liability": null,
+                "Workers Comp": null,
+                "Commercial Property": null,
+                "BOP": null,
+                "Professional Liability": null,
+                "Umbrella": null,
+                "Builders Risk": null,
+                "Inland Marine": null,
+                "Personal Auto": null,
+                "Homeowners": null,
+                "Renters": null,
+                "Condo": null,
+                "Dwelling Fire": null,
+                "Motorcycle": null,
+                "Boat": null,
+                "RV": null,
+                "Life": null,
+                "Health": null,
+                "Medicare": null,
+                "Group Benefits": null,
+                "Garagekeepers": null,
+                "Commercial Package": null,
+                "Other": null,
+                "Commercial Umbrella": null,
+                "Personal Umbrella": null,
+                "Cyber Liability": null
+            },
+            "isSorted": true,
+            "tooltip": true
         },
         "carrier": {
             "type": "varchar",
@@ -119,7 +154,9 @@
                 "",
                 "New Business",
                 "Renewal",
-                "Rewrite"
+                "Rewrite",
+                "Cross-Sell",
+                "Endorsement"
             ],
             "isCustom": true
         },
@@ -131,7 +168,7 @@
             "type": "currency",
             "isCustom": true,
             "defaultCurrency": "USD",
-            "tooltipText": "Estimated annual premium — update as quotes come in"
+            "tooltipText": "Estimated annual premium \u2014 update as quotes come in"
         },
         "commissionRate": {
             "type": "float",
@@ -148,7 +185,7 @@
         "effectiveDate": {
             "type": "date",
             "isCustom": true,
-            "tooltipText": "Policy effective date — entered at bind"
+            "tooltipText": "Policy effective date \u2014 entered at bind"
         },
         "policyNumber": {
             "type": "varchar",
@@ -219,7 +256,7 @@
         "aiSummary": {
             "type": "text",
             "isCustom": true,
-            "tooltipText": "2-3 sentence brief from Manus intel — pre-call context"
+            "tooltipText": "2-3 sentence brief from Manus intel \u2014 pre-call context"
         },
         "lastContactMethod": {
             "type": "enum",
@@ -288,7 +325,7 @@
                 "Other"
             ],
             "isCustom": true,
-            "tooltipText": "Commercial Auto — business type"
+            "tooltipText": "Commercial Auto \u2014 business type"
         },
         "caVehicleCount": {
             "type": "int",
@@ -514,7 +551,7 @@
             "type": "varchar",
             "maxLength": 50,
             "isCustom": true,
-            "tooltipText": "Medicare HICN — sensitive, will be purged. Source of truth is NowCerts.",
+            "tooltipText": "Medicare HICN \u2014 sensitive, will be purged. Source of truth is NowCerts.",
             "dynamicLogicVisible": {
                 "conditionGroup": [
                     {
@@ -996,55 +1033,55 @@
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Umbrella — underlying opps/policies linked"
+            "tooltipText": "Umbrella \u2014 underlying opps/policies linked"
         },
         "chkUnderlyingConfirmed": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Umbrella — underlying limits confirmed"
+            "tooltipText": "Umbrella \u2014 underlying limits confirmed"
         },
         "chkMvrsPulled": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Personal Auto — MVRs pulled"
+            "tooltipText": "Personal Auto \u2014 MVRs pulled"
         },
         "chkDecPageDelivered": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Personal Lines — dec page delivered to client"
+            "tooltipText": "Personal Lines \u2014 dec page delivered to client"
         },
         "chkScopeOfAppt": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — Scope of Appointment completed"
+            "tooltipText": "Medicare \u2014 Scope of Appointment completed"
         },
         "chkPlanPresented": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — plan options presented"
+            "tooltipText": "Medicare \u2014 plan options presented"
         },
         "chkAppSubmitted": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — application submitted"
+            "tooltipText": "Medicare \u2014 application submitted"
         },
         "chkCmsConfirmation": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — CMS confirmation received"
+            "tooltipText": "Medicare \u2014 CMS confirmation received"
         },
         "chkWelcomeLetter": {
             "type": "bool",
             "isCustom": true,
             "default": false,
-            "tooltipText": "Medicare — welcome letter delivered"
+            "tooltipText": "Medicare \u2014 welcome letter delivered"
         },
         "amount": {
             "type": "currency",
@@ -1130,6 +1167,276 @@
             "isCustom": true,
             "layoutDetailDisabled": true,
             "noLoad": true
+        },
+        "medDateOfBirth": {
+            "type": "date",
+            "isCustom": true,
+            "audited": true
+        },
+        "medAge": {
+            "type": "int",
+            "notStorable": true,
+            "readOnly": true,
+            "isCustom": true,
+            "select": {
+                "select": "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())",
+                "where": {
+                    "=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())=": "{value}"
+                        }
+                    },
+                    "<": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())<": "{value}"
+                        }
+                    },
+                    ">": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())>": "{value}"
+                        }
+                    },
+                    "<=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())<=": "{value}"
+                        }
+                    },
+                    ">=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())>=": "{value}"
+                        }
+                    },
+                    "<>": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(medDateOfBirth, NOW:())!=": "{value}"
+                        }
+                    },
+                    "IS NULL": {
+                        "whereClause": {
+                            "IS_NULL:(medDateOfBirth)": true
+                        }
+                    }
+                }
+            }
+        },
+        "lifeDateOfBirth": {
+            "type": "date",
+            "isCustom": true,
+            "audited": true
+        },
+        "lifeAge": {
+            "type": "int",
+            "notStorable": true,
+            "readOnly": true,
+            "isCustom": true,
+            "select": {
+                "select": "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())",
+                "where": {
+                    "=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())=": "{value}"
+                        }
+                    },
+                    "<": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())<": "{value}"
+                        }
+                    },
+                    ">": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())>": "{value}"
+                        }
+                    },
+                    "<=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())<=": "{value}"
+                        }
+                    },
+                    ">=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())>=": "{value}"
+                        }
+                    },
+                    "<>": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(lifeDateOfBirth, NOW:())!=": "{value}"
+                        }
+                    },
+                    "IS NULL": {
+                        "whereClause": {
+                            "IS_NULL:(lifeDateOfBirth)": true
+                        }
+                    }
+                }
+            }
+        },
+        "caDateOfBirth": {
+            "type": "date",
+            "isCustom": true,
+            "audited": true,
+            "tooltipText": "Primary driver's date of birth \u2014 used to calculate age."
+        },
+        "caAge": {
+            "type": "int",
+            "notStorable": true,
+            "readOnly": true,
+            "isCustom": true,
+            "select": {
+                "select": "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())",
+                "where": {
+                    "=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())=": "{value}"
+                        }
+                    },
+                    "<": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())<": "{value}"
+                        }
+                    },
+                    ">": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())>": "{value}"
+                        }
+                    },
+                    "<=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())<=": "{value}"
+                        }
+                    },
+                    ">=": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())>=": "{value}"
+                        }
+                    },
+                    "<>": {
+                        "whereClause": {
+                            "TIMESTAMPDIFF_YEAR:(caDateOfBirth, NOW:())!=": "{value}"
+                        }
+                    },
+                    "IS NULL": {
+                        "whereClause": {
+                            "IS_NULL:(caDateOfBirth)": true
+                        }
+                    }
+                }
+            }
+        },
+        "glYearEstablished": {
+            "type": "int",
+            "isCustom": true,
+            "audited": true,
+            "tooltipText": "Year the business was established \u2014 used to calculate years in business."
+        },
+        "glYearsInBusiness": {
+            "type": "int",
+            "notStorable": true,
+            "readOnly": true,
+            "isCustom": true,
+            "select": {
+                "select": "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)",
+                "where": {
+                    "=": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)=": "{value}"
+                        }
+                    },
+                    "<": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)<": "{value}"
+                        }
+                    },
+                    ">": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)>": "{value}"
+                        }
+                    },
+                    "<=": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)<=": "{value}"
+                        }
+                    },
+                    ">=": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)>=": "{value}"
+                        }
+                    },
+                    "<>": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), glYearEstablished)!=": "{value}"
+                        }
+                    },
+                    "IS NULL": {
+                        "whereClause": {
+                            "IS_NULL:(glYearEstablished)": true
+                        }
+                    }
+                }
+            }
+        },
+        "propRoofYearInstalled": {
+            "type": "int",
+            "isCustom": true,
+            "audited": true,
+            "tooltipText": "Year the roof was installed or replaced \u2014 used to calculate roof age."
+        },
+        "propRoofAgeCalc": {
+            "type": "int",
+            "notStorable": true,
+            "readOnly": true,
+            "isCustom": true,
+            "select": {
+                "select": "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)",
+                "where": {
+                    "=": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)=": "{value}"
+                        }
+                    },
+                    "<": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)<": "{value}"
+                        }
+                    },
+                    ">": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)>": "{value}"
+                        }
+                    },
+                    "<=": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)<=": "{value}"
+                        }
+                    },
+                    ">=": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)>=": "{value}"
+                        }
+                    },
+                    "<>": {
+                        "whereClause": {
+                            "SUB:(YEAR_NUMBER:(NOW:()), propRoofYearInstalled)!=": "{value}"
+                        }
+                    },
+                    "IS NULL": {
+                        "whereClause": {
+                            "IS_NULL:(propRoofYearInstalled)": true
+                        }
+                    }
+                }
+            }
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link)."
+        },
+        "archived": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "audited": true,
+            "tooltipText": "Check to archive this opportunity. Archived deals are hidden from the active pipeline boards but remain in the system. Use the Archived filter to view them."
         }
     },
     "links": {
@@ -1167,6 +1474,11 @@
             "type": "hasMany",
             "entity": "OpportunityVehicle",
             "foreign": "opportunity",
+            "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
             "isCustom": true
         }
     },

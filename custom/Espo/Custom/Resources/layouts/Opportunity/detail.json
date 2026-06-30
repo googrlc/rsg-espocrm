@@ -50,7 +50,7 @@
         "rows": [
             [
                 {
-                    "name": "currentCarrier"
+                    "name": "currentCarrierAccount"
                 },
                 {
                     "name": "targetCarrier"
@@ -60,9 +60,7 @@
                 {
                     "name": "estimatedPremium"
                 },
-                {
-                    "name": "cRenewalDate"
-                }
+                false
             ],
             [
                 {
@@ -124,6 +122,14 @@
                 {
                     "name": "caCurrentExpiration"
                 }
+            ],
+            [
+                {
+                    "name": "caDateOfBirth"
+                },
+                {
+                    "name": "caAge"
+                }
             ]
         ],
         "style": "default",
@@ -169,6 +175,14 @@
                 {
                     "name": "caCurrentExpiration"
                 }
+            ],
+            [
+                {
+                    "name": "caDateOfBirth"
+                },
+                {
+                    "name": "caAge"
+                }
             ]
         ],
         "style": "default",
@@ -201,6 +215,14 @@
                     "name": "glSubcontractorsUsed"
                 },
                 false
+            ],
+            [
+                {
+                    "name": "glYearEstablished"
+                },
+                {
+                    "name": "glYearsInBusiness"
+                }
             ]
         ],
         "style": "default",
@@ -273,6 +295,9 @@
                 },
                 {
                     "name": "propRoofAge"
+                },
+                {
+                    "name": "propRoofAgeCalc"
                 }
             ],
             [
@@ -280,6 +305,14 @@
                     "name": "propPriorClaims"
                 },
                 false
+            ],
+            [
+                {
+                    "name": "propRoofYearInstalled"
+                },
+                {
+                    "name": "propRoofAgeCalc"
+                }
             ]
         ],
         "style": "default",
@@ -323,6 +356,9 @@
                 },
                 {
                     "name": "propRoofAge"
+                },
+                {
+                    "name": "propRoofAgeCalc"
                 }
             ],
             [
@@ -334,6 +370,14 @@
             [
                 {
                     "name": "glOperationsDesc"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofYearInstalled"
+                },
+                {
+                    "name": "propRoofAgeCalc"
                 }
             ]
         ],
@@ -378,6 +422,9 @@
                 },
                 {
                     "name": "propRoofAge"
+                },
+                {
+                    "name": "propRoofAgeCalc"
                 }
             ],
             [
@@ -389,6 +436,14 @@
             [
                 {
                     "name": "glOperationsDesc"
+                }
+            ],
+            [
+                {
+                    "name": "propRoofYearInstalled"
+                },
+                {
+                    "name": "propRoofAgeCalc"
                 }
             ]
         ],
@@ -543,6 +598,9 @@
                     "name": "propRoofAge"
                 },
                 {
+                    "name": "propRoofAgeCalc"
+                },
+                {
                     "name": "propCurrentPremium"
                 }
             ],
@@ -551,6 +609,14 @@
                     "name": "propPriorClaims"
                 },
                 false
+            ],
+            [
+                {
+                    "name": "propRoofYearInstalled"
+                },
+                {
+                    "name": "propRoofAgeCalc"
+                }
             ]
         ],
         "style": "default",
@@ -629,6 +695,9 @@
                     "name": "propRoofAge"
                 },
                 {
+                    "name": "propRoofAgeCalc"
+                },
+                {
                     "name": "propCurrentPremium"
                 }
             ],
@@ -637,6 +706,14 @@
                     "name": "propPriorClaims"
                 },
                 false
+            ],
+            [
+                {
+                    "name": "propRoofYearInstalled"
+                },
+                {
+                    "name": "propRoofAgeCalc"
+                }
             ]
         ],
         "style": "default",
@@ -736,6 +813,14 @@
         "rows": [
             [
                 {
+                    "name": "medDateOfBirth"
+                },
+                {
+                    "name": "medAge"
+                }
+            ],
+            [
+                {
                     "name": "medicareEligible"
                 },
                 {
@@ -771,6 +856,14 @@
     },
     {
         "rows": [
+            [
+                {
+                    "name": "lifeDateOfBirth"
+                },
+                {
+                    "name": "lifeAge"
+                }
+            ],
             [
                 {
                     "name": "lifeCoverageInForce"
@@ -1012,7 +1105,7 @@
         ],
         "style": "default",
         "name": "processIntake",
-        "label": "Process — Intake",
+        "label": "Process \u2014 Intake",
         "tabBreak": true,
         "tabLabel": "Workflow"
     },
@@ -1045,7 +1138,7 @@
         ],
         "style": "default",
         "name": "processMarketing",
-        "label": "Process — Marketing"
+        "label": "Process \u2014 Marketing"
     },
     {
         "rows": [
@@ -1082,10 +1175,16 @@
         ],
         "style": "default",
         "name": "processOnboarding",
-        "label": "Process — Onboarding"
+        "label": "Process \u2014 Onboarding"
     },
     {
         "rows": [
+            [
+                {
+                    "name": "archived"
+                },
+                false
+            ],
             [
                 {
                     "name": "aiSummary"

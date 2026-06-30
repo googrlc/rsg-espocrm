@@ -8,6 +8,9 @@ class Won implements Filter
 {
     public function apply(SelectBuilder $queryBuilder): void
     {
-        $queryBuilder->where(["stage" => ["Closed Won"]]);
+        $queryBuilder->where([
+            "stage" => ["Closed Won"],
+            "archived" => false,
+        ]);
     }
 }
