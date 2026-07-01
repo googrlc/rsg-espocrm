@@ -8,7 +8,9 @@
         "Homeowners": "Homeowners",
         "Commercial Auto": "Commercial Auto",
         "General Liability": "General Liability",
-        "Workers Comp": "Workers Comp"
+        "Workers Comp": "Workers Comp",
+        "Submit Worksheet": "Submit Worksheet",
+        "submitWorksheet": "Submit Worksheet"
     },
     "fields": {
         "name": "Name",

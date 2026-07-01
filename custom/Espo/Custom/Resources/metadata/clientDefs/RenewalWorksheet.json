@@ -1,0 +1,16 @@
+{
+  "detail": {
+    "buttons": [
+      {
+        "name": "submitWorksheet",
+        "label": "Submit Worksheet",
+        "style": "success",
+        "iconClass": "fas fa-paper-plane",
+        "acl": "edit",
+        "handler": "custom:handlers/renewal-worksheet-submit-handler",
+        "actionFunction": "submitWorksheet",
+        "checkVisibilityFunction": "isSubmitVisible"
+      }
+    ]
+  }
+}
