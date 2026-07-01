@@ -4,7 +4,7 @@
 -- expected_commission, expected_commission_currency, last_contact_method,
 -- last_contact_date, the 4 checkboxes, and the newPolicy/contact/teams/tasks
 -- relationships). EspoCRM Rebuild does NOT touch columns that have no field def,
--- so these 17 orphans survive the rebuild and must be dropped explicitly here.
+-- so these 16 orphans survive the rebuild and must be dropped explicitly here.
 --
 -- Idempotent + safe: only drops columns that still exist (MySQL 8 has no
 -- DROP COLUMN IF EXISTS, so this builds the ALTER dynamically from
@@ -21,8 +21,7 @@ WHERE TABLE_SCHEMA = DATABASE()
     'business_segment','commission_delta','competitive_quote_count','contact_attempts',
     'decision_date','email_sequence_started','loss_runs_pulled','lost_to_competitor',
     'new_business_commission_rate','new_carrier','outcome','outreach_start_date',
-    'premium_change_category','probability','remarketing_reason','retention_risk',
-    'stream_updated_at'
+    'premium_change_category','probability','remarketing_reason','retention_risk'
   );
 
 IF @cols IS NOT NULL THEN
