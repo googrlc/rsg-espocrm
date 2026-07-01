@@ -20,50 +20,56 @@
     },
     "fields": {
         "name": "Renewal Name",
-        "stage": "Stage",
+        "pipeline_stage": "Pipeline Stage",
+        "disposition": "Disposition",
         "policy": "Expiring Policy",
-        "newPolicy": "Renewed Policy",
         "account": "Account",
         "contact": "Contact",
         "expiration_date": "Expiration Date",
         "renewal_effective_date": "Renewal Effective Date",
         "current_premium": "Current Premium",
         "renewal_premium": "Renewal Premium",
-        "premium_change": "Premium Change (Percent)",
-        "commission_rate": "Commission Rate (Percent)",
-        "expected_commission": "Expected Commission",
+        "renewal_proposed_premium": "Proposed Premium",
+        "premium_change": "Premium Change (%)",
+        "carrier_premium_change": "Carrier Premium Change (%)",
         "urgency": "Urgency",
-        "last_contact_date": "Last Contact Date",
-        "last_contact_method": "Last Contact Method",
         "line_of_business": "Line of Business",
         "carrier": "Carrier",
-        "lost_reason": "Lost Reason",
-        "renewal_notes": "Renewal Notes",
+        "nc_policy_id": "NowCerts Policy ID",
+        "nc_renewal_id": "NowCerts Renewal ID",
+        "nc_premium": "NowCerts Premium",
+        "nc_last_sync_at": "NowCerts Last Sync",
+        "hermes_task_id": "Hermes Task ID",
+        "hermes_sweep_at": "Hermes Sweep At",
+        "loop_stage": "Loop Stage",
+        "loop_updated_at": "Loop Updated At",
         "tasks": "Tasks",
         "commissions": "Commissions",
-        "renewal_reviewed": "Renewal declaration pulled & reviewed",
-        "account_confirmed": "Account details confirmed (units / drivers)",
-        "renewal_email_sent": "Renewal email sent to client",
-        "ams_updated": "AMS (NowCerts) updated"
+        "worksheets": "Worksheets"
     },
     "links": {
         "policy": "Expiring Policy",
-        "newPolicy": "Renewed Policy",
         "account": "Account",
         "contact": "Contact",
         "tasks": "Tasks",
-        "commissions": "Commissions"
+        "commissions": "Commissions",
+        "worksheets": "Worksheets"
     },
     "options": {
-        "stage": {
+        "pipeline_stage": {
             "": "",
             "Identified": "Identified",
             "Outreach Sent": "Outreach Sent",
             "Quote Requested": "Quote Requested",
             "Proposal Sent": "Proposal Sent",
-            "Negotiating": "Negotiating",
-            "Renewed - Won": "Renewed - Won",
-            "Lost": "Lost"
+            "Negotiating": "Negotiating"
+        },
+        "disposition": {
+            "": "",
+            "renewed": "Renewed",
+            "rewritten": "Rewritten",
+            "lost": "Lost",
+            "dnr": "Do Not Renew"
         },
         "urgency": {
             "": "",
@@ -72,20 +78,12 @@
             "Medium": "Medium",
             "Low": "Low"
         },
-        "last_contact_method": {
+        "loop_stage": {
             "": "",
-            "Email": "Email",
-            "Call": "Call",
-            "Text": "Text",
-            "In person": "In person"
-        },
-        "lost_reason": {
-            "": "",
-            "Price": "Price",
-            "Coverage": "Coverage",
-            "Unresponsive": "Unresponsive",
-            "Moved carrier": "Moved carrier",
-            "Other": "Other"
+            "pending": "Pending",
+            "active": "Active",
+            "worksheet_sent": "Worksheet Sent",
+            "completed": "Completed"
         },
         "line_of_business": {
             "": "",

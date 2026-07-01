@@ -3,8 +3,9 @@
     "label": "Pipeline",
     "name": "pipeline",
     "rows": [
-      [{"name": "stage", "fullWidth": true}],
-      [{"name": "urgency"}, {"name": "expiration_date"}]
+      [{"name": "pipeline_stage", "fullWidth": true}],
+      [{"name": "urgency"}, {"name": "expiration_date"}],
+      [{"name": "disposition"}, false]
     ]
   },
   {
@@ -21,44 +22,38 @@
     "name": "premium",
     "rows": [
       [{"name": "current_premium"}, {"name": "renewal_premium"}],
-      [{"name": "premium_change"}, false],
-      [{"name": "commission_rate"}, {"name": "expected_commission"}]
+      [{"name": "renewal_proposed_premium"}, {"name": "carrier_premium_change"}],
+      [{"name": "premium_change"}, false]
     ]
   },
   {
-    "label": "Worksheet — complete these",
-    "name": "worksheet",
+    "label": "Dates",
+    "name": "dates",
     "rows": [
-      [{"name": "renewal_reviewed"}, {"name": "account_confirmed"}],
-      [{"name": "renewal_email_sent"}, {"name": "ams_updated"}]
-    ]
-  },
-  {
-    "label": "Outreach",
-    "name": "outreach",
-    "rows": [
-      [{"name": "last_contact_method"}, {"name": "last_contact_date"}],
       [{"name": "renewal_effective_date"}, false]
     ]
   },
   {
-    "label": "Lost Details",
-    "name": "lostDetails",
+    "label": "NowCerts",
+    "name": "nowcerts",
     "rows": [
-      [{"name": "lost_reason"}, false]
+      [{"name": "nc_policy_id"}, {"name": "nc_renewal_id"}],
+      [{"name": "nc_premium"}, {"name": "nc_last_sync_at"}]
     ]
   },
   {
-    "label": "Won Details",
-    "name": "wonDetails",
+    "label": "Loop Integration",
+    "name": "loop",
     "rows": [
-      [{"name": "newPolicy"}, false]
+      [{"name": "hermes_task_id"}, {"name": "loop_stage"}],
+      [{"name": "hermes_sweep_at"}, {"name": "loop_updated_at"}]
     ]
   },
   {
-    "label": "Notes",
+    "label": "Worksheets",
+    "name": "worksheets",
     "rows": [
-      [{"name": "renewal_notes", "fullWidth": true}]
+      [{"name": "worksheets", "fullWidth": true}]
     ]
   }
 ]

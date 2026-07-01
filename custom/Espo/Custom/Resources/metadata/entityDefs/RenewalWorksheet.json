@@ -1,0 +1,270 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": false,
+            "tooltipText": "Auto-generated: {Account} - {LOB} Worksheet"
+        },
+        "state": {
+            "type": "enum",
+            "options": [
+                "not_started",
+                "in_progress",
+                "completed"
+            ],
+            "default": "not_started",
+            "isCustom": true,
+            "audited": true,
+            "displayAsLabel": true,
+            "style": {
+                "not_started": "default",
+                "in_progress": "warning",
+                "completed": "success"
+            },
+            "tooltipText": "Worksheet lifecycle state — auto-progressed on first field edit; locked on completion"
+        },
+        "lob_variant": {
+            "type": "enum",
+            "options": [
+                "",
+                "commercial_auto",
+                "general_liability",
+                "workers_comp",
+                "commercial_property",
+                "bop",
+                "professional_liability",
+                "umbrella",
+                "personal_auto",
+                "homeowners",
+                "life_health",
+                "other"
+            ],
+            "isCustom": true,
+            "audited": true,
+            "tooltipText": "LOB discriminator — controls which fields are visible; locked once worksheet is in-progress",
+            "dbName": "lobVariant"
+        },
+        "completion_type": {
+            "type": "enum",
+            "options": [
+                "",
+                "contact_only",
+                "full_review"
+            ],
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "System field — derived by SubmitWorksheet action; contact_only = basic contact; full_review = all required fields present",
+            "dbName": "completionType"
+        },
+        "renewal": {
+            "type": "link",
+            "required": true,
+            "tooltipText": "The parent Renewal record"
+        },
+        "account": {
+            "type": "link",
+            "required": true
+        },
+        "contact": {
+            "type": "link"
+        },
+        "expiration_date": {
+            "type": "date",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Mirrored from parent Renewal",
+            "dbName": "expirationDate"
+        },
+        "line_of_business": {
+            "type": "varchar",
+            "maxLength": 100,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Mirrored from parent Renewal",
+            "dbName": "lineOfBusiness"
+        },
+        "carrier": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Mirrored from parent Renewal"
+        },
+        "current_premium": {
+            "type": "currency",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Mirrored from parent Renewal",
+            "dbName": "currentPremium"
+        },
+        "declaration_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Renewal declaration pulled and reviewed",
+            "dbName": "declarationReviewed"
+        },
+        "account_details_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Account details confirmed (units, drivers, exposures)",
+            "dbName": "accountDetailsConfirmed"
+        },
+        "renewal_email_sent": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Renewal email sent to client",
+            "dbName": "renewalEmailSent"
+        },
+        "ams_updated": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS (NowCerts) updated with renewal outcome",
+            "dbName": "amsUpdated"
+        },
+        "vehicles_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Vehicle schedule reviewed and confirmed (Commercial / Personal Auto)",
+            "dbName": "vehiclesReviewed"
+        },
+        "drivers_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Driver schedule reviewed and confirmed (Commercial / Personal Auto)",
+            "dbName": "driversReviewed"
+        },
+        "coverages_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Coverage limits reviewed and approved by client",
+            "dbName": "coveragesReviewed"
+        },
+        "payroll_updated": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Payroll / exposure data updated (Workers Comp)",
+            "dbName": "payrollUpdated"
+        },
+        "loss_runs_obtained": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Loss runs obtained from prior carrier",
+            "dbName": "lossRunsObtained"
+        },
+        "property_schedule_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Property schedule reviewed and confirmed (Commercial Property / BOP)",
+            "dbName": "propertyScheduleReviewed"
+        },
+        "contact_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Primary contact confirmed and reachable",
+            "dbName": "contactConfirmed"
+        },
+        "notes": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Free-text notes for this worksheet"
+        },
+        "submitted_at": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Timestamp when SubmitWorksheet was called",
+            "dbName": "submittedAt"
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        }
+    },
+    "links": {
+        "renewal": {
+            "type": "belongsTo",
+            "entity": "Renewal",
+            "foreign": "worksheets",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        },
+        "contact": {
+            "type": "belongsTo",
+            "entity": "Contact",
+            "isCustom": true
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "carrier"
+        ]
+    },
+    "indexes": {
+        "renewalId": {
+            "columns": [
+                "renewal_id"
+            ]
+        },
+        "state": {
+            "columns": [
+                "state"
+            ]
+        }
+    },
+    "statusField": "state"
+}

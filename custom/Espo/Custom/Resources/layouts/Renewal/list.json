@@ -5,7 +5,8 @@
     {"name": "current_premium", "width": 10},
     {"name": "renewal_premium", "width": 10},
     {"name": "premium_change", "width": 7},
-    {"name": "stage", "width": 10},
+    {"name": "pipeline_stage", "width": 10},
+    {"name": "disposition", "width": 10},
     {"name": "assignedUser", "width": 10, "link": true},
     {"name": "urgency", "width": 8}
 ]

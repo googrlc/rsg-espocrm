@@ -1,0 +1,94 @@
+{
+    "controller": "controllers/record",
+    "iconClass": "fas fa-clipboard-check",
+    "statusField": "state",
+    "dynamicLogic": {
+        "fields": {
+            "vehicles_reviewed": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                { "type": "equals", "attribute": "lob_variant", "value": "commercial_auto" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "personal_auto" }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "drivers_reviewed": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                { "type": "equals", "attribute": "lob_variant", "value": "commercial_auto" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "personal_auto" }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "payroll_updated": {
+                "visible": {
+                    "conditionGroup": [
+                        { "type": "equals", "attribute": "lob_variant", "value": "workers_comp" }
+                    ]
+                }
+            },
+            "loss_runs_obtained": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                { "type": "equals", "attribute": "lob_variant", "value": "commercial_auto" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "general_liability" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "workers_comp" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "commercial_property" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "bop" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "professional_liability" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "umbrella" }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "property_schedule_reviewed": {
+                "visible": {
+                    "conditionGroup": [
+                        {
+                            "type": "or",
+                            "value": [
+                                { "type": "equals", "attribute": "lob_variant", "value": "commercial_property" },
+                                { "type": "equals", "attribute": "lob_variant", "value": "bop" }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "lob_variant": {
+                "readOnly": {
+                    "conditionGroup": [
+                        { "type": "notEquals", "attribute": "state", "value": "not_started" }
+                    ]
+                }
+            },
+            "submitted_at": {
+                "visible": {
+                    "conditionGroup": [
+                        { "type": "equals", "attribute": "state", "value": "completed" }
+                    ]
+                }
+            },
+            "completion_type": {
+                "visible": {
+                    "conditionGroup": [
+                        { "type": "equals", "attribute": "state", "value": "completed" }
+                    ]
+                }
+            }
+        }
+    }
+}

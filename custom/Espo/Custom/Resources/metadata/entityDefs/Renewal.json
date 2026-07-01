@@ -6,7 +6,7 @@
             "required": false,
             "tooltipText": "Auto-generated: {Account} - {LOB} Renewal"
         },
-        "stage": {
+        "pipeline_stage": {
             "type": "enum",
             "options": [
                 "",
@@ -14,9 +14,7 @@
                 "Outreach Sent",
                 "Quote Requested",
                 "Proposal Sent",
-                "Negotiating",
-                "Renewed - Won",
-                "Lost"
+                "Negotiating"
             ],
             "default": "Identified",
             "audited": true,
@@ -28,20 +26,35 @@
                 "Outreach Sent": "primary",
                 "Quote Requested": "primary",
                 "Proposal Sent": "warning",
-                "Negotiating": "warning",
-                "Renewed - Won": "success",
-                "Lost": "danger"
+                "Negotiating": "warning"
             },
-            "customizationOptionsReferenceDisabled": true
+            "customizationOptionsReferenceDisabled": true,
+            "dbName": "pipelineStage"
+        },
+        "disposition": {
+            "type": "enum",
+            "options": [
+                "",
+                "renewed",
+                "rewritten",
+                "lost",
+                "dnr"
+            ],
+            "audited": true,
+            "displayAsLabel": true,
+            "isCustom": true,
+            "tooltipText": "Final outcome of this renewal cycle — set once, triggers commission and Hermes notifications",
+            "style": {
+                "renewed": "success",
+                "rewritten": "primary",
+                "lost": "danger",
+                "dnr": "warning"
+            }
         },
         "policy": {
             "type": "link",
             "required": true,
             "tooltipText": "The expiring policy being renewed"
-        },
-        "newPolicy": {
-            "type": "link",
-            "tooltipText": "The renewed policy record once bound"
         },
         "account": {
             "type": "link",
@@ -75,12 +88,25 @@
             "tooltipText": "Manually entered when quote is received \u2014 blank until then",
             "dbName": "renewalPremium"
         },
+        "renewal_proposed_premium": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Carrier-quoted proposed premium — used to compute carrier_premium_change before binding",
+            "dbName": "renewalProposedPremium"
+        },
         "premium_change": {
             "type": "float",
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 \u2014 premium delta %",
+            "tooltipText": "Auto-calculated: ((renewal_premium - current_premium) / current_premium) * 100",
             "dbName": "premiumChange"
+        },
+        "carrier_premium_change": {
+            "type": "float",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Auto-calculated: ((renewal_proposed_premium - current_premium) / current_premium) * 100",
+            "dbName": "carrierPremiumChange"
         },
         "line_of_business": {
             "type": "enum",
@@ -141,84 +167,71 @@
                 "Low": "default"
             }
         },
-        "last_contact_method": {
-            "type": "enum",
-            "options": [
-                "",
-                "Email",
-                "Call",
-                "Text",
-                "In person"
-            ],
+        "nc_policy_id": {
+            "type": "varchar",
+            "maxLength": 255,
             "isCustom": true,
-            "tooltipText": "Updated when activity is logged",
-            "dbName": "lastContactMethod"
+            "readOnly": true,
+            "tooltipText": "NowCerts policy ID mirror",
+            "dbName": "ncPolicyId"
         },
-        "last_contact_date": {
-            "type": "date",
+        "nc_renewal_id": {
+            "type": "varchar",
+            "maxLength": 255,
             "isCustom": true,
-            "tooltipText": "Updated when activity is logged",
-            "dbName": "lastContactDate"
+            "readOnly": true,
+            "tooltipText": "NowCerts renewal ID mirror",
+            "dbName": "ncRenewalId"
         },
-        "lost_reason": {
-            "type": "enum",
-            "options": [
-                "",
-                "Price",
-                "Coverage",
-                "Unresponsive",
-                "Moved carrier",
-                "Other"
-            ],
-            "isCustom": true,
-            "tooltipText": "Required when stage = Lost",
-            "dbName": "lostReason"
-        },
-        "renewal_notes": {
-            "type": "text",
-            "isCustom": true,
-            "tooltipText": "Free text notes for this renewal cycle",
-            "dbName": "renewalNotes"
-        },
-        "renewal_reviewed": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Renewal declaration pulled & reviewed",
-            "dbName": "renewalReviewed"
-        },
-        "account_confirmed": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Account details confirmed (units / drivers)",
-            "dbName": "accountConfirmed"
-        },
-        "renewal_email_sent": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Renewal email sent to client",
-            "dbName": "renewalEmailSent"
-        },
-        "ams_updated": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "AMS (NowCerts) updated",
-            "dbName": "amsUpdated"
-        },
-        "commission_rate": {
-            "type": "float",
-            "isCustom": true,
-            "tooltipText": "Renewal commission rate %",
-            "dbName": "commissionRate"
-        },
-        "expected_commission": {
+        "nc_premium": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "renewalPremium * commissionRate",
-            "dbName": "expectedCommission"
+            "readOnly": true,
+            "tooltipText": "NowCerts premium as of last sync",
+            "dbName": "ncPremium"
+        },
+        "nc_last_sync_at": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Timestamp of last NowCerts sync",
+            "dbName": "ncLastSyncAt"
+        },
+        "hermes_task_id": {
+            "type": "varchar",
+            "maxLength": 255,
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Hermes task ID linked to this renewal loop",
+            "dbName": "hermesTaskId"
+        },
+        "hermes_sweep_at": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Timestamp of last Hermes renewal sweep",
+            "dbName": "hermesSweepAt"
+        },
+        "loop_stage": {
+            "type": "enum",
+            "options": [
+                "",
+                "pending",
+                "active",
+                "worksheet_sent",
+                "completed"
+            ],
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Hermes loop stage — managed by Hermes, not EspoCRM",
+            "dbName": "loopStage"
+        },
+        "loop_updated_at": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Timestamp of last loop stage update from Hermes",
+            "dbName": "loopUpdatedAt"
         },
         "assignedUser": {
             "type": "link"
@@ -253,6 +266,12 @@
             "isCustom": true,
             "layoutDetailDisabled": true,
             "noLoad": true
+        },
+        "worksheets": {
+            "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "noLoad": true
         }
     },
     "links": {
@@ -260,12 +279,6 @@
             "type": "belongsTo",
             "entity": "Policy",
             "foreign": "renewals",
-            "isCustom": true
-        },
-        "newPolicy": {
-            "type": "belongsTo",
-            "entity": "Policy",
-            "foreign": "renewedFrom",
             "isCustom": true
         },
         "account": {
@@ -308,6 +321,12 @@
             "entity": "Commission",
             "foreign": "renewal",
             "isCustom": true
+        },
+        "worksheets": {
+            "type": "hasMany",
+            "entity": "RenewalWorksheet",
+            "foreign": "renewal",
+            "isCustom": true
         }
     },
     "collection": {
@@ -322,17 +341,22 @@
             "expiration_date",
             "createdAt",
             "modifiedAt",
-            "stage",
+            "pipeline_stage",
             "urgency",
             "current_premium",
             "carrier"
         ]
     },
     "indexes": {
-        "stageUrgency": {
+        "pipelineStageUrgency": {
             "columns": [
-                "stage",
+                "pipeline_stage",
                 "urgency"
+            ]
+        },
+        "disposition": {
+            "columns": [
+                "disposition"
             ]
         },
         "expiration_date": {
@@ -341,5 +365,5 @@
             ]
         }
     },
-    "statusField": "stage"
+    "statusField": "pipeline_stage"
 }
