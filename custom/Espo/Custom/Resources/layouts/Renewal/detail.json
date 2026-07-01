@@ -1,64 +1,162 @@
 [
-  {
-    "label": "Pipeline",
-    "name": "pipeline",
-    "rows": [
-      [{"name": "stage", "fullWidth": true}],
-      [{"name": "urgency"}, {"name": "expiration_date"}]
-    ]
-  },
-  {
-    "label": "Overview",
-    "name": "overview",
-    "rows": [
-      [{"name": "account"}, {"name": "contact"}],
-      [{"name": "policy"}, {"name": "line_of_business"}],
-      [{"name": "carrier"}, {"name": "assignedUser"}]
-    ]
-  },
-  {
-    "label": "Premium",
-    "name": "premium",
-    "rows": [
-      [{"name": "current_premium"}, {"name": "renewal_premium"}],
-      [{"name": "premium_change"}, false],
-      [{"name": "commission_rate"}, {"name": "expected_commission"}]
-    ]
-  },
-  {
-    "label": "Worksheet — complete these",
-    "name": "worksheet",
-    "rows": [
-      [{"name": "renewal_reviewed"}, {"name": "account_confirmed"}],
-      [{"name": "renewal_email_sent"}, {"name": "ams_updated"}]
-    ]
-  },
-  {
-    "label": "Outreach",
-    "name": "outreach",
-    "rows": [
-      [{"name": "last_contact_method"}, {"name": "last_contact_date"}],
-      [{"name": "renewal_effective_date"}, false]
-    ]
-  },
-  {
-    "label": "Lost Details",
-    "name": "lostDetails",
-    "rows": [
-      [{"name": "lost_reason"}, false]
-    ]
-  },
-  {
-    "label": "Won Details",
-    "name": "wonDetails",
-    "rows": [
-      [{"name": "newPolicy"}, false]
-    ]
-  },
-  {
-    "label": "Notes",
-    "rows": [
-      [{"name": "renewal_notes", "fullWidth": true}]
-    ]
-  }
+    {
+        "label": "Pipeline",
+        "name": "pipeline",
+        "rows": [
+            [
+                {
+                    "name": "pipeline_stage",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "disposition"
+                },
+                {
+                    "name": "urgency"
+                }
+            ],
+            [
+                {
+                    "name": "expiration_date"
+                },
+                {
+                    "name": "renewal_effective_date"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Overview",
+        "name": "overview",
+        "rows": [
+            [
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "policy"
+                },
+                {
+                    "name": "line_of_business"
+                }
+            ],
+            [
+                {
+                    "name": "carrier"
+                },
+                {
+                    "name": "carrierAccount"
+                }
+            ],
+            [
+                {
+                    "name": "assignedUser"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Premium",
+        "name": "premium",
+        "rows": [
+            [
+                {
+                    "name": "current_premium"
+                },
+                {
+                    "name": "renewal_proposed_premium"
+                }
+            ],
+            [
+                {
+                    "name": "renewal_premium"
+                },
+                {
+                    "name": "premium_change"
+                }
+            ],
+            [
+                {
+                    "name": "carrier_premium_change"
+                },
+                {
+                    "name": "commission_rate"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Worksheet",
+        "name": "worksheet",
+        "rows": [
+            [
+                {
+                    "name": "worksheet"
+                }
+            ],
+            [
+                {
+                    "name": "renewal_notes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    },
+    {
+        "label": "NowCerts Mirror",
+        "name": "nowcertsMirror",
+        "rows": [
+            [
+                {
+                    "name": "renewal_proposal_url",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "carrier_renewal_effective_date"
+                },
+                {
+                    "name": "renewal_underwriter_name"
+                }
+            ],
+            [
+                {
+                    "name": "renewal_underwriter_notes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Loop Integration",
+        "name": "loopIntegration",
+        "rows": [
+            [
+                {
+                    "name": "ams_policy_guid"
+                },
+                {
+                    "name": "ams_insured_guid"
+                }
+            ],
+            [
+                {
+                    "name": "ams_writeback_state"
+                },
+                {
+                    "name": "ams_writeback_at"
+                }
+            ],
+            [
+                {
+                    "name": "supabase_event_uuid"
+                }
+            ]
+        ]
+    }
 ]

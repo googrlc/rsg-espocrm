@@ -1,0 +1,307 @@
+[
+    {
+        "label": "Overview",
+        "name": "overview",
+        "rows": [
+            [
+                {
+                    "name": "lob_variant",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "state"
+                },
+                {
+                    "name": "completion_type"
+                }
+            ],
+            [
+                {
+                    "name": "renewal"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "assignedUser"
+                },
+                {
+                    "name": "teams"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Client Contact",
+        "name": "clientContact",
+        "rows": [
+            [
+                {
+                    "name": "client_contacted"
+                },
+                {
+                    "name": "client_contact_date"
+                }
+            ],
+            [
+                {
+                    "name": "client_contact_method"
+                },
+                {
+                    "name": "no_contact_reason"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Personal Auto",
+        "name": "variant_personal_auto",
+        "rows": [
+            [
+                {
+                    "name": "pa_driver_list_confirmed"
+                },
+                {
+                    "name": "pa_vehicle_list_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "pa_garaging_address_confirmed"
+                },
+                {
+                    "name": "pa_coverage_limits_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "pa_umbrella_offered"
+                },
+                {
+                    "name": "pa_payment_plan_confirmed"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "personal_auto"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Homeowners",
+        "name": "variant_homeowners",
+        "rows": [
+            [
+                {
+                    "name": "ho_dwelling_amount_reviewed"
+                },
+                {
+                    "name": "ho_replacement_cost_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "ho_roof_age_verified"
+                },
+                {
+                    "name": "ho_roof_age_years"
+                }
+            ],
+            [
+                {
+                    "name": "ho_scheduled_items_reviewed"
+                },
+                {
+                    "name": "ho_umbrella_offered"
+                }
+            ],
+            [
+                {
+                    "name": "ho_flood_reviewed"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "homeowners"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Commercial Auto",
+        "name": "variant_commercial_auto",
+        "rows": [
+            [
+                {
+                    "name": "ca_driver_list_confirmed"
+                },
+                {
+                    "name": "ca_vehicle_list_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "ca_radius_of_use_confirmed"
+                },
+                {
+                    "name": "ca_hired_non_owned_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "ca_coverage_limits_reviewed"
+                },
+                {
+                    "name": "ca_mvr_reviewed"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "commercial_auto"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "General Liability",
+        "name": "variant_general_liability",
+        "rows": [
+            [
+                {
+                    "name": "gl_operations_description_confirmed"
+                },
+                {
+                    "name": "gl_exposure_basis_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "gl_exposure_value_reviewed"
+                },
+                {
+                    "name": "gl_subcontractor_use_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "gl_additional_insureds_reviewed"
+                },
+                {
+                    "name": "gl_waiver_of_subrogation_needed"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "general_liability"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Workers Comp",
+        "name": "variant_workers_comp",
+        "rows": [
+            [
+                {
+                    "name": "wc_class_codes_confirmed"
+                },
+                {
+                    "name": "wc_payroll_by_class_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "wc_officers_treatment_reviewed"
+                },
+                {
+                    "name": "wc_experience_mod_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "wc_experience_mod_value"
+                },
+                {
+                    "name": "wc_certificates_of_insurance_current"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "workers_comp"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Default",
+        "name": "variant_default",
+        "rows": [
+            [
+                {
+                    "name": "def_coverage_reviewed"
+                },
+                {
+                    "name": "def_account_details_confirmed"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "default"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Overall Notes",
+        "name": "notes",
+        "rows": [
+            [
+                {
+                    "name": "overall_notes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
+]
