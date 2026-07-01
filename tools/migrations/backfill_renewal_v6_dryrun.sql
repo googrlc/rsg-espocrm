@@ -5,22 +5,24 @@
 -- !!! DEPLOY SEQUENCE (read before running) !!!
 -- MySQL DDL (ALTER/CREATE/DROP) is NOT transactional — it CANNOT be rolled back.
 -- So this dry-run is DML-ONLY and ASSUMES Phase 1 already ran:
---   Phase 1 (add-only): apply the v6 entityDefs with new fields ADDED but old fields
---     NOT yet removed, then `Rebuild` in EspoCRM. This creates the new columns
---     (`pipeline_stage`, `disposition`, `ams_*`, `supabase_event_uuid`, the
---     `renewal_worksheet` table) WITHOUT dropping the legacy columns yet.
+--   Phase 1 (add-only): apply the v6 entityDefs with new fields ADDED but legacy
+--     fields/links NOT yet removed, then `Rebuild` in EspoCRM. Creates the new
+--     columns (`pipeline_stage`, `disposition`, `ams_*`, `supabase_event_uuid`,
+--     the `renewal_worksheet` table) WITHOUT dropping legacy columns yet.
 --   Phase 2 (this back-fill): run backfill_renewal_v6_commit.sql to copy
 --     stage -> pipeline_stage, synthesize disposition, and seed RenewalWorksheet rows.
---   Phase 3 (drop-old): remove the legacy fields from entityDefs, Rebuild — EspoCRM
---     drops `stage`, `lost_reason`, `expected_commission`, `last_contact_*`, the
---     four checkboxes (data already migrated in Phase 2).
--- This dry-run previews Phase 2 DML only. Run it AFTER Phase 1 (new columns exist).
+--   Phase 3 (drop-old): remove legacy fields/links from entityDefs, Rebuild (drops
+--     stage, lost_reason, expected_commission, last_contact_*, the 4 checkboxes, and
+--     the newPolicy/contact/teams/tasks relationships), THEN run
+--     backfill_renewal_v6_phase3_drop_orphans.sql to drop the 17 orphan columns.
+--
+-- v6 §9.2: the 4 legacy checkboxes are NOT mirrored to the worksheet (zero non-null
+-- in production). They are dropped, not migrated.
 -- =====================================================================================
 
 START TRANSACTION;
 
--- Guard: fail fast if Phase 1 hasn't added the new columns yet.
--- (information_schema check — aborts the dry run with a clear error.)
+-- Guard: fail fast if Phase 1 hasn't added the new columns/table yet.
 SET @has_ps := (SELECT COUNT(*) FROM information_schema.COLUMNS
                 WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'renewal'
                   AND COLUMN_NAME = 'pipeline_stage');
@@ -37,7 +39,7 @@ SET pipeline_stage = CASE stage
     WHEN 'Lost' THEN 'Closed'
     ELSE stage
 END
-WHERE stage IS NOT NULL AND stage <> '' AND pipeline_stage IS NULL;
+WHERE stage IS NOT NULL AND stage <> '' AND (pipeline_stage IS NULL OR pipeline_stage = '');
 
 -- 2) disposition <- stage + lost_reason  (matches Hermes LEGACY_LOST_REASON_TO_DISPOSITION)
 UPDATE renewal
@@ -52,14 +54,11 @@ SET disposition = CASE
 END
 WHERE stage IN ('Renewed - Won','Lost') AND (disposition IS NULL OR disposition = '');
 
--- 3) Seed one RenewalWorksheet per Renewal (1:1), copying the four checkboxes.
---    lob_variant derived from line_of_business. Column names follow the
---    RenewalWorksheet entityDefs dbName (camelCase). VERIFY against the actual
---    renewal_worksheet columns after Phase 1 rebuild before the commit run.
+-- 3) Seed one RenewalWorksheet per Renewal (1:1). lob_variant from line_of_business.
+--    No checkbox mirroring (v6 §9.2). Column names follow RenewalWorksheet entityDefs
+--    dbName (camelCase) — VERIFY against actual renewal_worksheet columns after Phase 1.
 INSERT INTO renewal_worksheet
-    (id, name, lob_variant, state, completion_type, renewal_id, account_id,
-     renewal_reviewed, account_confirmed, renewal_email_sent, ams_updated,
-     notes, created_at, modified_at)
+    (id, name, lob_variant, state, completion_type, renewal_id, account_id, created_at, modified_at)
 SELECT
     REPLACE(UUID(),'-',''), CONCAT(name, ' — Worksheet'),
     CASE line_of_business
@@ -70,10 +69,7 @@ SELECT
         WHEN 'Workers Comp'       THEN 'workers_comp'
         ELSE 'default'
     END,
-    'not_started', '',
-    id, account_id,
-    renewal_reviewed, account_confirmed, renewal_email_sent, ams_updated,
-    renewal_notes, NOW(), NOW()
+    'not_started', '', id, account_id, NOW(), NOW()
 FROM renewal
 WHERE deleted = 0;
 
@@ -84,12 +80,6 @@ SELECT 'disposition mapping' AS check_name;
 SELECT stage, lost_reason, disposition, COUNT(*) n FROM renewal GROUP BY stage, lost_reason, disposition ORDER BY stage;
 SELECT 'worksheet seed count' AS check_name;
 SELECT lob_variant, COUNT(*) n FROM renewal_worksheet GROUP BY lob_variant ORDER BY lob_variant;
-SELECT 'checkbox carry-over sample' AS check_name;
-SELECT r.id, r.renewal_reviewed, r.account_confirmed, r.renewal_email_sent, r.ams_updated,
-       w.renewal_reviewed AS ws_reviewed, w.account_confirmed AS ws_confirmed
-FROM renewal r JOIN renewal_worksheet w ON w.renewal_id = r.id
-WHERE r.renewal_reviewed = 1 OR r.account_confirmed = 1 OR r.renewal_email_sent = 1 OR r.ams_updated = 1
-LIMIT 20;
 
 ROLLBACK;
 -- Nothing persisted. Inspect the SELECT outputs above. When correct, run backfill_renewal_v6_commit.sql.

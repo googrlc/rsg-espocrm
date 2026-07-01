@@ -11,16 +11,9 @@
             "required": true,
             "tooltipText": "The expiring policy being renewed"
         },
-        "newPolicy": {
-            "type": "link",
-            "tooltipText": "The renewed policy record once bound. Click the linked policy to view the new carrier, premium, and effective date."
-        },
         "account": {
             "type": "link",
             "required": true
-        },
-        "contact": {
-            "type": "link"
         },
         "expiration_date": {
             "type": "date",
@@ -133,9 +126,6 @@
         "assignedUser": {
             "type": "link"
         },
-        "teams": {
-            "type": "linkMultiple"
-        },
         "createdAt": {
             "type": "datetime",
             "readOnly": true
@@ -151,12 +141,6 @@
         "modifiedBy": {
             "type": "link",
             "readOnly": true
-        },
-        "tasks": {
-            "type": "linkMultiple",
-            "isCustom": true,
-            "layoutDetailDisabled": true,
-            "noLoad": true
         },
         "commissions": {
             "type": "linkMultiple",
@@ -323,32 +307,15 @@
             "foreign": "renewals",
             "isCustom": true
         },
-        "newPolicy": {
-            "type": "belongsTo",
-            "entity": "Policy",
-            "foreign": "renewedFrom",
-            "isCustom": true
-        },
         "account": {
             "type": "belongsTo",
             "entity": "Account",
             "foreign": "renewals",
             "isCustom": true
         },
-        "contact": {
-            "type": "belongsTo",
-            "entity": "Contact",
-            "isCustom": true
-        },
         "assignedUser": {
             "type": "belongsTo",
             "entity": "User"
-        },
-        "teams": {
-            "type": "hasMany",
-            "entity": "Team",
-            "relationName": "entityTeam",
-            "layoutRelationshipsDisabled": true
         },
         "createdBy": {
             "type": "belongsTo",
@@ -357,12 +324,6 @@
         "modifiedBy": {
             "type": "belongsTo",
             "entity": "User"
-        },
-        "tasks": {
-            "type": "hasChildren",
-            "entity": "Task",
-            "foreign": "parent",
-            "isCustom": true
         },
         "commissions": {
             "type": "hasMany",

@@ -1,8 +1,8 @@
 -- =====================================================================================
 -- Renewal Loop v6 — INVERSE migration (rollback). Run BEFORE reverting the entityDefs
--- to the pre-v6 schema. Restores legacy `stage`/`lost_reason` + checkbox values from
--- the v6 fields / worksheet rows, then removes the seeded worksheet rows.
--- Assumes Phase 3 (drop-old) has NOT yet run — i.e. legacy columns still exist.
+-- to the pre-v6 schema. Restores legacy `stage`/`lost_reason` from the v6 fields, then
+-- removes the seeded RenewalWorksheet rows. Assumes Phase 3 (drop-old) has NOT yet run.
+-- v6 §9.2: checkboxes were never mirrored, so there is nothing to restore for them.
 -- =====================================================================================
 
 START TRANSACTION;
@@ -29,16 +29,8 @@ SET lost_reason = CASE disposition
 END
 WHERE stage = 'Lost' AND (lost_reason IS NULL OR lost_reason = '');
 
--- Restore checkboxes <- worksheet rows (only where worksheet carried a true value)
-UPDATE renewal r
-JOIN renewal_worksheet w ON w.renewal_id = r.id
-SET r.renewal_reviewed  = IF(w.renewal_reviewed  = 1, 1, r.renewal_reviewed),
-    r.account_confirmed = IF(w.account_confirmed = 1, 1, r.account_confirmed),
-    r.renewal_email_sent = IF(w.renewal_email_sent = 1, 1, r.renewal_email_sent),
-    r.ams_updated       = IF(w.ams_updated       = 1, 1, r.ams_updated);
-
--- Remove seeded worksheet rows (preserves any manually-created worksheets
--- created after the back-fill: keyed on state='not_started' AND completion_type='')
+-- Remove seeded worksheet rows (preserves manually-created worksheets made after
+-- the back-fill: keyed on state='not_started' AND completion_type='')
 DELETE w FROM renewal_worksheet w
 WHERE w.state = 'not_started' AND (w.completion_type IS NULL OR w.completion_type = '');
 

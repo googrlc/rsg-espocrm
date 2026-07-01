@@ -36,23 +36,23 @@
         ]
     },
     {
-        "label": "Completion Checklist",
-        "name": "checklist",
+        "label": "Client Contact",
+        "name": "clientContact",
         "rows": [
             [
                 {
-                    "name": "renewal_reviewed"
+                    "name": "client_contacted"
                 },
                 {
-                    "name": "account_confirmed"
+                    "name": "client_contact_date"
                 }
             ],
             [
                 {
-                    "name": "renewal_email_sent"
+                    "name": "client_contact_method"
                 },
                 {
-                    "name": "ams_updated"
+                    "name": "no_contact_reason"
                 }
             ]
         ]
@@ -63,18 +63,26 @@
         "rows": [
             [
                 {
-                    "name": "vehicle_count"
+                    "name": "pa_driver_list_confirmed"
                 },
                 {
-                    "name": "garaging_zip"
+                    "name": "pa_vehicle_list_confirmed"
                 }
             ],
             [
                 {
-                    "name": "driver_count"
+                    "name": "pa_garaging_address_confirmed"
                 },
                 {
-                    "name": null
+                    "name": "pa_coverage_limits_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "pa_umbrella_offered"
+                },
+                {
+                    "name": "pa_payment_plan_confirmed"
                 }
             ]
         ],
@@ -96,18 +104,31 @@
         "rows": [
             [
                 {
-                    "name": "dwelling_amount"
+                    "name": "ho_dwelling_amount_reviewed"
                 },
                 {
-                    "name": "roof_age_years"
+                    "name": "ho_replacement_cost_confirmed"
                 }
             ],
             [
                 {
-                    "name": "claim_count_3yr"
+                    "name": "ho_roof_age_verified"
                 },
                 {
-                    "name": null
+                    "name": "ho_roof_age_years"
+                }
+            ],
+            [
+                {
+                    "name": "ho_scheduled_items_reviewed"
+                },
+                {
+                    "name": "ho_umbrella_offered"
+                }
+            ],
+            [
+                {
+                    "name": "ho_flood_reviewed"
                 }
             ]
         ],
@@ -129,18 +150,26 @@
         "rows": [
             [
                 {
-                    "name": "vehicle_count"
+                    "name": "ca_driver_list_confirmed"
                 },
                 {
-                    "name": "garaging_zip"
+                    "name": "ca_vehicle_list_confirmed"
                 }
             ],
             [
                 {
-                    "name": "driver_count"
+                    "name": "ca_radius_of_use_confirmed"
                 },
                 {
-                    "name": null
+                    "name": "ca_hired_non_owned_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "ca_coverage_limits_reviewed"
+                },
+                {
+                    "name": "ca_mvr_reviewed"
                 }
             ]
         ],
@@ -162,10 +191,26 @@
         "rows": [
             [
                 {
-                    "name": "payroll_estimate"
+                    "name": "gl_operations_description_confirmed"
                 },
                 {
-                    "name": "employee_count"
+                    "name": "gl_exposure_basis_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "gl_exposure_value_reviewed"
+                },
+                {
+                    "name": "gl_subcontractor_use_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "gl_additional_insureds_reviewed"
+                },
+                {
+                    "name": "gl_waiver_of_subrogation_needed"
                 }
             ]
         ],
@@ -187,18 +232,26 @@
         "rows": [
             [
                 {
-                    "name": "payroll_estimate"
+                    "name": "wc_class_codes_confirmed"
                 },
                 {
-                    "name": "employee_count"
+                    "name": "wc_payroll_by_class_confirmed"
                 }
             ],
             [
                 {
-                    "name": "class_codes"
+                    "name": "wc_officers_treatment_reviewed"
                 },
                 {
-                    "name": null
+                    "name": "wc_experience_mod_reviewed"
+                }
+            ],
+            [
+                {
+                    "name": "wc_experience_mod_value"
+                },
+                {
+                    "name": "wc_certificates_of_insurance_current"
                 }
             ]
         ],
@@ -215,12 +268,37 @@
         }
     },
     {
-        "label": "Notes",
+        "label": "Default",
+        "name": "variant_default",
+        "rows": [
+            [
+                {
+                    "name": "def_coverage_reviewed"
+                },
+                {
+                    "name": "def_account_details_confirmed"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "default"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Overall Notes",
         "name": "notes",
         "rows": [
             [
                 {
-                    "name": "notes",
+                    "name": "overall_notes",
                     "fullWidth": true
                 }
             ]

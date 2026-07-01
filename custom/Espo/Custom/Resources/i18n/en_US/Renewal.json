@@ -22,9 +22,7 @@
     "fields": {
         "name": "Renewal Name",
         "policy": "Expiring Policy",
-        "newPolicy": "Renewed Policy",
         "account": "Account",
-        "contact": "Contact",
         "expiration_date": "Expiration Date",
         "renewal_effective_date": "Renewal Effective Date",
         "current_premium": "Current Premium",
@@ -35,7 +33,6 @@
         "line_of_business": "Line of Business",
         "carrier": "Carrier",
         "renewal_notes": "Renewal Notes",
-        "tasks": "Tasks",
         "commissions": "Commissions",
         "carrierAccount": "Carrier Account",
         "pipeline_stage": "Pipeline Stage",
@@ -55,10 +52,7 @@
     },
     "links": {
         "policy": "Expiring Policy",
-        "newPolicy": "Renewed Policy",
         "account": "Account",
-        "contact": "Contact",
-        "tasks": "Tasks",
         "commissions": "Commissions",
         "worksheet": "Worksheet"
     },

@@ -34,9 +34,6 @@
             [
                 {
                     "name": "account"
-                },
-                {
-                    "name": "contact"
                 }
             ],
             [
@@ -58,9 +55,6 @@
             [
                 {
                     "name": "assignedUser"
-                },
-                {
-                    "name": "teams"
                 }
             ]
         ]
@@ -102,8 +96,7 @@
             [
                 {
                     "name": "worksheet"
-                },
-                false
+                }
             ],
             [
                 {
@@ -140,18 +133,6 @@
         ]
     },
     {
-        "label": "Outcome",
-        "name": "outcome",
-        "rows": [
-            [
-                {
-                    "name": "newPolicy"
-                },
-                false
-            ]
-        ]
-    },
-    {
         "label": "Loop Integration",
         "name": "loopIntegration",
         "rows": [
@@ -174,8 +155,7 @@
             [
                 {
                     "name": "supabase_event_uuid"
-                },
-                false
+                }
             ]
         ]
     }

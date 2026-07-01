@@ -37,13 +37,11 @@
             "readOnly": true,
             "options": [
                 "",
-                "not_started",
-                "in_progress",
                 "full_review",
                 "contact_only"
             ],
             "default": "",
-            "tooltipText": "Hidden system field — derived by SubmitWorksheet from populated fields. Two-tier gate: won/rewritten needs full_review; lost/DNR accepts contact_only.",
+            "tooltipText": "Hidden system field — derived by SubmitWorksheet. Two-tier gate: won/rewritten needs full_review; lost/DNR accepts contact_only.",
             "dbName": "completionType"
         },
         "state": {
@@ -76,95 +74,6 @@
             "readOnly": true,
             "tooltipText": "Auto from linked Renewal — used for ACL scope."
         },
-        "renewal_reviewed": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Renewal declaration pulled & reviewed",
-            "dbName": "renewalReviewed"
-        },
-        "account_confirmed": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Account details confirmed (units / drivers)",
-            "dbName": "accountConfirmed"
-        },
-        "renewal_email_sent": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Renewal email sent to client",
-            "dbName": "renewalEmailSent"
-        },
-        "ams_updated": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "AMS (NowCerts) updated",
-            "dbName": "amsUpdated"
-        },
-        "notes": {
-            "type": "text",
-            "isCustom": true,
-            "tooltipText": "Worksheet notes",
-            "dbName": "notes"
-        },
-        "vehicle_count": {
-            "type": "int",
-            "isCustom": true,
-            "tooltipText": "Units/vehicles",
-            "dbName": "vehicleCount"
-        },
-        "garaging_zip": {
-            "type": "varchar",
-            "isCustom": true,
-            "maxLength": 10,
-            "tooltipText": "Garaging ZIP",
-            "dbName": "garagingZip"
-        },
-        "driver_count": {
-            "type": "int",
-            "isCustom": true,
-            "tooltipText": "Driver count",
-            "dbName": "driverCount"
-        },
-        "dwelling_amount": {
-            "type": "currency",
-            "isCustom": true,
-            "tooltipText": "Dwelling amount",
-            "dbName": "dwellingAmount"
-        },
-        "roof_age_years": {
-            "type": "int",
-            "isCustom": true,
-            "tooltipText": "Roof age (years)",
-            "dbName": "roofAgeYears"
-        },
-        "claim_count_3yr": {
-            "type": "int",
-            "isCustom": true,
-            "tooltipText": "Claims (last 3 yr)",
-            "dbName": "claimCount3yr"
-        },
-        "payroll_estimate": {
-            "type": "currency",
-            "isCustom": true,
-            "tooltipText": "Estimated payroll",
-            "dbName": "payrollEstimate"
-        },
-        "employee_count": {
-            "type": "int",
-            "isCustom": true,
-            "tooltipText": "Employee count",
-            "dbName": "employeeCount"
-        },
-        "class_codes": {
-            "type": "text",
-            "isCustom": true,
-            "tooltipText": "WC class codes",
-            "dbName": "classCodes"
-        },
         "assignedUser": {
             "type": "link"
         },
@@ -186,6 +95,316 @@
         "modifiedBy": {
             "type": "link",
             "readOnly": true
+        },
+        "overall_notes": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Replaces legacy Renewal.renewal_notes",
+            "dbName": "overallNotes"
+        },
+        "client_contacted": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Required for any disposition (won or lost)",
+            "dbName": "clientContacted"
+        },
+        "client_contact_date": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Replaces legacy Renewal.last_contact_date",
+            "dbName": "clientContactDate"
+        },
+        "client_contact_method": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "",
+                "email",
+                "call",
+                "text",
+                "in_person"
+            ],
+            "default": "",
+            "displayAsLabel": true,
+            "tooltipText": "How the client was contacted",
+            "dbName": "clientContactMethod"
+        },
+        "no_contact_reason": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "",
+                "client_unresponsive",
+                "no_valid_contact_info",
+                "carrier_nonrenew_before_outreach",
+                "other"
+            ],
+            "default": "",
+            "displayAsLabel": true,
+            "tooltipText": "Required when client_contacted=false",
+            "dbName": "noContactReason"
+        },
+        "pa_driver_list_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: update_drivers (v1.1)",
+            "dbName": "paDriverListConfirmed"
+        },
+        "pa_vehicle_list_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: manage_vehicles (v1.1)",
+            "dbName": "paVehicleListConfirmed"
+        },
+        "pa_garaging_address_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: manage_policy_lifecycle_data (v1.1)",
+            "dbName": "paGaragingAddressConfirmed"
+        },
+        "pa_coverage_limits_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "paCoverageLimitsReviewed"
+        },
+        "pa_umbrella_offered": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "paUmbrellaOffered"
+        },
+        "pa_payment_plan_confirmed": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "",
+                "monthly",
+                "quarterly",
+                "semi_annual",
+                "full_pay",
+                "na"
+            ],
+            "default": "",
+            "displayAsLabel": true,
+            "tooltipText": "",
+            "dbName": "paPaymentPlanConfirmed"
+        },
+        "ho_dwelling_amount_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "hoDwellingAmountReviewed"
+        },
+        "ho_replacement_cost_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "hoReplacementCostConfirmed"
+        },
+        "ho_roof_age_verified": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "hoRoofAgeVerified"
+        },
+        "ho_roof_age_years": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "",
+            "dbName": "hoRoofAgeYears"
+        },
+        "ho_scheduled_items_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "hoScheduledItemsReviewed"
+        },
+        "ho_umbrella_offered": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "hoUmbrellaOffered"
+        },
+        "ho_flood_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "hoFloodReviewed"
+        },
+        "ca_driver_list_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: update_drivers (v1.1)",
+            "dbName": "caDriverListConfirmed"
+        },
+        "ca_vehicle_list_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: manage_vehicles (v1.1)",
+            "dbName": "caVehicleListConfirmed"
+        },
+        "ca_radius_of_use_confirmed": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "",
+                "local",
+                "intermediate",
+                "long_haul"
+            ],
+            "default": "",
+            "displayAsLabel": true,
+            "tooltipText": "",
+            "dbName": "caRadiusOfUseConfirmed"
+        },
+        "ca_hired_non_owned_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "caHiredNonOwnedReviewed"
+        },
+        "ca_coverage_limits_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "caCoverageLimitsReviewed"
+        },
+        "ca_mvr_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "caMvrReviewed"
+        },
+        "gl_operations_description_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "glOperationsDescriptionConfirmed"
+        },
+        "gl_exposure_basis_confirmed": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "",
+                "payroll",
+                "receipts",
+                "sales",
+                "area",
+                "na"
+            ],
+            "default": "",
+            "displayAsLabel": true,
+            "tooltipText": "",
+            "dbName": "glExposureBasisConfirmed"
+        },
+        "gl_exposure_value_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "glExposureValueReviewed"
+        },
+        "gl_subcontractor_use_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "glSubcontractorUseReviewed"
+        },
+        "gl_additional_insureds_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: manage_policy_lifecycle_data (v1.1)",
+            "dbName": "glAdditionalInsuredsReviewed"
+        },
+        "gl_waiver_of_subrogation_needed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "glWaiverOfSubrogationNeeded"
+        },
+        "wc_class_codes_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: manage_policy_lifecycle_data (v1.1)",
+            "dbName": "wcClassCodesConfirmed"
+        },
+        "wc_payroll_by_class_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS action: manage_policy_lifecycle_data (v1.1)",
+            "dbName": "wcPayrollByClassConfirmed"
+        },
+        "wc_officers_treatment_reviewed": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "",
+                "included",
+                "excluded",
+                "mixed"
+            ],
+            "default": "",
+            "displayAsLabel": true,
+            "tooltipText": "",
+            "dbName": "wcOfficersTreatmentReviewed"
+        },
+        "wc_experience_mod_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "wcExperienceModReviewed"
+        },
+        "wc_experience_mod_value": {
+            "type": "float",
+            "isCustom": true,
+            "tooltipText": "",
+            "dbName": "wcExperienceModValue"
+        },
+        "wc_certificates_of_insurance_current": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "wcCertificatesOfInsuranceCurrent"
+        },
+        "def_coverage_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "defCoverageReviewed"
+        },
+        "def_account_details_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "",
+            "dbName": "defAccountDetailsConfirmed"
         }
     },
     "links": {

@@ -1,7 +1,8 @@
 -- =====================================================================================
 -- Renewal Loop v6 — DATA back-fill (COMMIT). Run AFTER Phase 1 (add-only rebuild).
 -- Persists the migration. Idempotent guards: only updates rows still unmigrated.
--- See backfill_renewal_v6_dryrun.sql for the deploy sequence + the preview queries.
+-- v6 §9.2: 4 legacy checkboxes are NOT mirrored (dropped, not migrated).
+-- See backfill_renewal_v6_dryrun.sql for the deploy sequence + preview queries.
 -- =====================================================================================
 
 START TRANSACTION;
@@ -30,9 +31,7 @@ WHERE stage IN ('Renewed - Won','Lost') AND (disposition IS NULL OR disposition 
 
 -- 3) Seed RenewalWorksheet rows (only for renewals not yet seeded — idempotent)
 INSERT INTO renewal_worksheet
-    (id, name, lob_variant, state, completion_type, renewal_id, account_id,
-     renewal_reviewed, account_confirmed, renewal_email_sent, ams_updated,
-     notes, created_at, modified_at)
+    (id, name, lob_variant, state, completion_type, renewal_id, account_id, created_at, modified_at)
 SELECT
     REPLACE(UUID(),'-',''), CONCAT(r.name, ' — Worksheet'),
     CASE r.line_of_business
@@ -43,9 +42,7 @@ SELECT
         WHEN 'Workers Comp'       THEN 'workers_comp'
         ELSE 'default'
     END,
-    'not_started', '', r.id, r.account_id,
-    r.renewal_reviewed, r.account_confirmed, r.renewal_email_sent, r.ams_updated,
-    r.renewal_notes, NOW(), NOW()
+    'not_started', '', r.id, r.account_id, NOW(), NOW()
 FROM renewal r
 LEFT JOIN renewal_worksheet w ON w.renewal_id = r.id
 WHERE r.deleted = 0 AND w.id IS NULL;
