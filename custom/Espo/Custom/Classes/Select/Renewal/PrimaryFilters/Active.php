@@ -9,13 +9,14 @@ class Active implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where([
-            'stage' => [
+            'pipeline_stage' => [
                 'Identified',
                 'Outreach Sent',
                 'Quote Requested',
                 'Proposal Sent',
                 'Negotiating',
             ],
+            'disposition' => null,
         ]);
     }
 }

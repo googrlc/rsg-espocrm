@@ -18,9 +18,11 @@ class AccountHealthManager
      */
     public const SKIP_HEALTH_SNAPSHOT_OPTION = 'skipHealthSnapshot';
 
-    private const FINAL_RENEWAL_STAGES = [
-        'Renewed - Won',
-        'Lost',
+    private const FINAL_RENEWAL_DISPOSITIONS = [
+        'renewed',
+        'rewritten',
+        'lost',
+        'dnr',
     ];
 
     private const GAP_FIELDS = [
@@ -252,8 +254,12 @@ class AccountHealthManager
         }
 
         foreach ($renewalList as $renewal) {
-            $stage = trim((string) ($renewal->get('stage') ?? ''));
-            if ($stage !== '' && !in_array($stage, self::FINAL_RENEWAL_STAGES, true)) {
+            $stage = trim((string) ($renewal->get('pipeline_stage') ?? ''));
+            $disposition = trim((string) ($renewal->get('disposition') ?? ''));
+            if (
+                ($stage !== '' || $disposition !== '') &&
+                !in_array($disposition, self::FINAL_RENEWAL_DISPOSITIONS, true)
+            ) {
                 $hasRenewingMotion = true;
             }
 

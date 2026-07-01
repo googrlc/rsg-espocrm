@@ -1,0 +1,58 @@
+[
+  {
+    "label": "Status",
+    "name": "status",
+    "rows": [
+      [{"name": "state", "fullWidth": true}],
+      [{"name": "lob_variant"}, {"name": "completion_type"}],
+      [{"name": "submitted_at"}, false]
+    ]
+  },
+  {
+    "label": "Renewal",
+    "name": "renewal",
+    "rows": [
+      [{"name": "renewal"}, {"name": "account"}],
+      [{"name": "contact"}, {"name": "assignedUser"}],
+      [{"name": "line_of_business"}, {"name": "carrier"}],
+      [{"name": "expiration_date"}, {"name": "current_premium"}]
+    ]
+  },
+  {
+    "label": "Checklist — All LOBs",
+    "name": "checklist_common",
+    "rows": [
+      [{"name": "declaration_reviewed"}, {"name": "account_details_confirmed"}],
+      [{"name": "renewal_email_sent"}, {"name": "ams_updated"}],
+      [{"name": "coverages_reviewed"}, {"name": "contact_confirmed"}]
+    ]
+  },
+  {
+    "label": "Checklist — Auto",
+    "name": "checklist_auto",
+    "rows": [
+      [{"name": "vehicles_reviewed"}, {"name": "drivers_reviewed"}]
+    ]
+  },
+  {
+    "label": "Checklist — Workers Comp",
+    "name": "checklist_wc",
+    "rows": [
+      [{"name": "payroll_updated"}, {"name": "loss_runs_obtained"}]
+    ]
+  },
+  {
+    "label": "Checklist — Property",
+    "name": "checklist_property",
+    "rows": [
+      [{"name": "property_schedule_reviewed"}, {"name": "loss_runs_obtained"}]
+    ]
+  },
+  {
+    "label": "Notes",
+    "name": "notes",
+    "rows": [
+      [{"name": "notes", "fullWidth": true}]
+    ]
+  }
+]

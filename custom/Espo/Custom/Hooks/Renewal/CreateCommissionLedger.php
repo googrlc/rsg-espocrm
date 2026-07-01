@@ -9,13 +9,21 @@ use Espo\ORM\Repository\Option\SaveOptions;
 
 class CreateCommissionLedger implements AfterSave
 {
+    private const COMMISSION_DISPOSITIONS = ['renewed', 'rewritten'];
+
     public function __construct(
         private CommissionLedgerManager $commissionLedgerManager
     ) {}
 
     public function afterSave(Entity $entity, SaveOptions $options): void
     {
-        if ((string) ($entity->get('stage') ?? '') !== 'Renewed - Won') {
+        $disposition = (string) ($entity->get('disposition') ?? '');
+        if (!in_array($disposition, self::COMMISSION_DISPOSITIONS, true)) {
+            return;
+        }
+
+        $previousDisposition = (string) ($entity->getFetched('disposition') ?? '');
+        if ($previousDisposition === $disposition) {
             return;
         }
 

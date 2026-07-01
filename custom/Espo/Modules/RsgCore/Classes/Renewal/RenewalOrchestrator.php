@@ -18,9 +18,11 @@ class RenewalOrchestrator
         'Renewing',
     ];
 
-    private const FINAL_RENEWAL_STAGES = [
-        'Renewed - Won',
-        'Lost',
+    private const FINAL_RENEWAL_DISPOSITIONS = [
+        'renewed',
+        'rewritten',
+        'lost',
+        'dnr',
     ];
 
     /**
@@ -87,7 +89,6 @@ class RenewalOrchestrator
             $hasChanges = $this->setIfChanged($renewal, 'current_premium', $policy->get('premium_amount')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'line_of_business', $normalizedLineOfBusiness) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'carrier', $policy->get('carrier')) || $hasChanges;
-            $hasChanges = $this->setIfChanged($renewal, 'commission_rate', $this->normalizeRate($policy->get('commission_rate'))) || $hasChanges;
 
             if ($this->shouldSyncRenewalEffectiveDate($renewal, $originalExpirationDate, $expirationDate)) {
                 $hasChanges = $this->setIfChanged($renewal, 'renewal_effective_date', $expirationDate) || $hasChanges;
@@ -98,13 +99,17 @@ class RenewalOrchestrator
                 $hasChanges = $this->setIfChanged($renewal, 'urgency', $computedUrgency) || $hasChanges;
             }
 
-            if ((string) ($renewal->get('stage') ?? '') === '') {
-                $renewal->set('stage', 'Identified');
+            if ((string) ($renewal->get('pipeline_stage') ?? '') === '') {
+                $renewal->set('pipeline_stage', 'Identified');
                 $hasChanges = true;
             }
 
             if ($renewalIsNew || $hasChanges) {
                 $this->entityManager->saveEntity($renewal, [SaveOption::SILENT => true]);
+            }
+
+            if ($renewalIsNew && $renewal->hasId()) {
+                $this->createPairedWorksheet($renewal, $normalizedLineOfBusiness);
             }
 
             if ($this->shouldCreateInitialTask($policy, $renewal)) {
@@ -155,11 +160,12 @@ class RenewalOrchestrator
             $renewal->set('premium_change', null);
         }
 
-        if ($renewalPremium !== null && $renewalPremium !== '') {
-            $expectedCommission = (float) $renewalPremium * $this->normalizeRate($renewal->get('commission_rate'));
-            $renewal->set('expected_commission', round($expectedCommission, 2));
+        $proposedPremium = $renewal->get('renewal_proposed_premium');
+        if ($proposedPremium !== null && $proposedPremium !== '' && $currentPremium > 0) {
+            $carrierChange = (((float) $proposedPremium - $currentPremium) / $currentPremium) * 100;
+            $renewal->set('carrier_premium_change', round($carrierChange, 2));
         } else {
-            $renewal->set('expected_commission', null);
+            $renewal->set('carrier_premium_change', null);
         }
 
         $currentUrgency = (string) ($renewal->get('urgency') ?? '');
@@ -200,9 +206,10 @@ class RenewalOrchestrator
                 return;
             }
 
-            $targetStatus = $this->mapRenewalStageToPolicyStatus(
+            $targetStatus = $this->mapRenewalToPolicyStatus(
                 $policy,
-                (string) ($renewal->get('stage') ?? '')
+                (string) ($renewal->get('pipeline_stage') ?? ''),
+                (string) ($renewal->get('disposition') ?? '')
             );
 
             if ($targetStatus === null || $targetStatus === (string) ($policy->get('status') ?? '')) {
@@ -252,7 +259,7 @@ class RenewalOrchestrator
             return false;
         }
 
-        if (in_array((string) ($renewal->get('stage') ?? ''), self::FINAL_RENEWAL_STAGES, true)) {
+        if (in_array((string) ($renewal->get('disposition') ?? ''), self::FINAL_RENEWAL_DISPOSITIONS, true)) {
             return false;
         }
 
@@ -357,21 +364,79 @@ class RenewalOrchestrator
         };
     }
 
-    private function mapRenewalStageToPolicyStatus(Entity $policy, string $stage): ?string
+    private function mapRenewalToPolicyStatus(Entity $policy, string $pipelineStage, string $disposition): ?string
     {
+        if ($disposition !== '') {
+            return match ($disposition) {
+                'renewed', 'rewritten' => 'Renewed',
+                'lost', 'dnr'          => 'Non-Renewed',
+                default                 => null,
+            };
+        }
+
         $expirationDate = (string) ($policy->get('expiration_date') ?? '');
         $currentPolicyStatus = (string) ($policy->get('status') ?? '');
         $daysRemaining = $this->calculateDaysRemaining($expirationDate);
         $window = RenewalLeadWindows::leadDaysForPolicy($policy);
 
-        return match ($stage) {
+        return match ($pipelineStage) {
             'Identified' => $daysRemaining !== null && $daysRemaining <= $window
                 ? 'Up for Renewal'
                 : ($currentPolicyStatus === 'Renewing' ? 'Up for Renewal' : null),
             'Outreach Sent', 'Quote Requested', 'Proposal Sent', 'Negotiating' => 'Renewing',
-            'Renewed - Won' => 'Renewed',
-            'Lost' => 'Non-Renewed',
             default => null,
+        };
+    }
+
+    private function createPairedWorksheet(Entity $renewal, string $lineOfBusiness): void
+    {
+        $existingWorksheet = $this->entityManager
+            ->getRDBRepository('RenewalWorksheet')
+            ->where(['renewalId' => $renewal->getId()])
+            ->findOne();
+
+        if ($existingWorksheet) {
+            return;
+        }
+
+        $worksheet = $this->entityManager->getNewEntity('RenewalWorksheet');
+        $accountName = trim((string) ($renewal->get('accountName') ?? '')) ?: 'Account';
+
+        $worksheet->set([
+            'name'             => $accountName . ' - ' . $lineOfBusiness . ' Worksheet',
+            'state'            => 'not_started',
+            'lob_variant'      => $this->lobToVariant($lineOfBusiness),
+            'renewalId'        => $renewal->getId(),
+            'renewalName'      => $renewal->get('name'),
+            'accountId'        => $renewal->get('accountId'),
+            'accountName'      => $renewal->get('accountName'),
+            'contactId'        => $renewal->get('contactId'),
+            'contactName'      => $renewal->get('contactName'),
+            'assignedUserId'   => $renewal->get('assignedUserId'),
+            'assignedUserName' => $renewal->get('assignedUserName'),
+            'expiration_date'  => $renewal->get('expiration_date'),
+            'line_of_business' => $lineOfBusiness,
+            'carrier'          => $renewal->get('carrier'),
+            'current_premium'  => $renewal->get('current_premium'),
+        ]);
+
+        $this->entityManager->saveEntity($worksheet, [SaveOption::SILENT => true]);
+    }
+
+    private function lobToVariant(string $lob): string
+    {
+        return match ($lob) {
+            'Commercial Auto'      => 'commercial_auto',
+            'General Liability'    => 'general_liability',
+            'Workers Comp'         => 'workers_comp',
+            'Commercial Property'  => 'commercial_property',
+            'BOP'                  => 'bop',
+            'Professional Liability' => 'professional_liability',
+            'Umbrella'             => 'umbrella',
+            'Personal Auto'        => 'personal_auto',
+            'Homeowners'           => 'homeowners',
+            'Life', 'Health', 'Medicare', 'Group Benefits' => 'life_health',
+            default                => 'other',
         };
     }
 
@@ -420,17 +485,6 @@ class RenewalOrchestrator
             'Home' => 'Homeowners',
             default => $line === '' ? 'Other' : $line,
         };
-    }
-
-    private function normalizeRate(mixed $rate): float
-    {
-        if ($rate === null || $rate === '') {
-            return 0.10; // house default commission rate when none is set (unified across managers)
-        }
-
-        $numericRate = (float) $rate;
-
-        return $numericRate > 1 ? $numericRate / 100 : $numericRate;
     }
 
     private function calculateDaysRemaining(string $expirationDate): ?int

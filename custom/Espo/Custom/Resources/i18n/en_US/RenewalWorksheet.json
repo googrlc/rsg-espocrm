@@ -1,0 +1,63 @@
+{
+    "labels": {
+        "Create RenewalWorksheet": "Create Worksheet",
+        "Submit": "Submit Worksheet"
+    },
+    "fields": {
+        "name": "Worksheet Name",
+        "state": "State",
+        "lob_variant": "LOB Variant",
+        "completion_type": "Completion Type",
+        "renewal": "Renewal",
+        "account": "Account",
+        "contact": "Contact",
+        "expiration_date": "Expiration Date",
+        "line_of_business": "Line of Business",
+        "carrier": "Carrier",
+        "current_premium": "Current Premium",
+        "declaration_reviewed": "Declaration reviewed",
+        "account_details_confirmed": "Account details confirmed",
+        "renewal_email_sent": "Renewal email sent to client",
+        "ams_updated": "AMS (NowCerts) updated",
+        "vehicles_reviewed": "Vehicle schedule reviewed",
+        "drivers_reviewed": "Driver schedule reviewed",
+        "coverages_reviewed": "Coverage limits reviewed",
+        "payroll_updated": "Payroll / exposure updated",
+        "loss_runs_obtained": "Loss runs obtained",
+        "property_schedule_reviewed": "Property schedule reviewed",
+        "contact_confirmed": "Primary contact confirmed",
+        "notes": "Notes",
+        "submitted_at": "Submitted At"
+    },
+    "links": {
+        "renewal": "Renewal",
+        "account": "Account",
+        "contact": "Contact"
+    },
+    "options": {
+        "state": {
+            "not_started": "Not Started",
+            "in_progress": "In Progress",
+            "completed": "Completed"
+        },
+        "lob_variant": {
+            "": "",
+            "commercial_auto": "Commercial Auto",
+            "general_liability": "General Liability",
+            "workers_comp": "Workers Comp",
+            "commercial_property": "Commercial Property",
+            "bop": "BOP",
+            "professional_liability": "Professional Liability",
+            "umbrella": "Umbrella",
+            "personal_auto": "Personal Auto",
+            "homeowners": "Homeowners",
+            "life_health": "Life / Health",
+            "other": "Other"
+        },
+        "completion_type": {
+            "": "",
+            "contact_only": "Contact Only",
+            "full_review": "Full Review"
+        }
+    }
+}
