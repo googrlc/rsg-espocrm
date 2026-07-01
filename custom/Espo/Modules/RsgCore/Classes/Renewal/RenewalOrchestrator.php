@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Espo\Core\ORM\Repository\Option\SaveOption;
 use Espo\Custom\Classes\Account\AccountNameResolution;
 use Espo\Custom\Classes\Renewal\RenewalLeadWindows;
+use Espo\Modules\RsgCore\Config\RenewalWorksheetRequirements;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
 
@@ -16,11 +17,6 @@ class RenewalOrchestrator
         'Active',
         'Up for Renewal',
         'Renewing',
-    ];
-
-    private const FINAL_RENEWAL_STAGES = [
-        'Renewed - Won',
-        'Lost',
     ];
 
     /**
@@ -78,15 +74,14 @@ class RenewalOrchestrator
             $hasChanges = $this->setIfChanged($renewal, 'policyName', $policy->get('name')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'accountId', $policy->get('accountId')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'accountName', $renewalAccountName) || $hasChanges;
-            $hasChanges = $this->setIfChanged($renewal, 'contactId', $policy->get('contactId')) || $hasChanges;
-            $hasChanges = $this->setIfChanged($renewal, 'contactName', $policy->get('contactName')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'assignedUserId', $policy->get('assignedUserId')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'assignedUserName', $policy->get('assignedUserName')) || $hasChanges;
-            $hasChanges = $this->setIfChanged($renewal, 'teamsIds', $policy->get('teamsIds') ?? []) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'expiration_date', $expirationDate) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'current_premium', $policy->get('premium_amount')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'line_of_business', $normalizedLineOfBusiness) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'carrier', $policy->get('carrier')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'carrierAccountId', $policy->get('carrierAccountId')) || $hasChanges;
+            $hasChanges = $this->setIfChanged($renewal, 'carrierAccountName', $policy->get('carrierAccountName')) || $hasChanges;
             $hasChanges = $this->setIfChanged($renewal, 'commission_rate', $this->normalizeRate($policy->get('commission_rate'))) || $hasChanges;
 
             if ($this->shouldSyncRenewalEffectiveDate($renewal, $originalExpirationDate, $expirationDate)) {
@@ -98,13 +93,17 @@ class RenewalOrchestrator
                 $hasChanges = $this->setIfChanged($renewal, 'urgency', $computedUrgency) || $hasChanges;
             }
 
-            if ((string) ($renewal->get('stage') ?? '') === '') {
-                $renewal->set('stage', 'Identified');
+            if ((string) ($renewal->get('pipeline_stage') ?? '') === '') {
+                $renewal->set('pipeline_stage', 'Identified');
                 $hasChanges = true;
             }
 
             if ($renewalIsNew || $hasChanges) {
                 $this->entityManager->saveEntity($renewal, [SaveOption::SILENT => true]);
+            }
+
+            if ($renewalIsNew) {
+                $this->createWorksheetForRenewal($renewal, $normalizedLineOfBusiness);
             }
 
             if ($this->shouldCreateInitialTask($policy, $renewal)) {
@@ -155,11 +154,14 @@ class RenewalOrchestrator
             $renewal->set('premium_change', null);
         }
 
-        if ($renewalPremium !== null && $renewalPremium !== '') {
-            $expectedCommission = (float) $renewalPremium * $this->normalizeRate($renewal->get('commission_rate'));
-            $renewal->set('expected_commission', round($expectedCommission, 2));
+        // v6: carrier_premium_change is info-only (does NOT drive retention bands),
+        // derived from renewal_proposed_premium (AMS proposal / agent entry).
+        $proposedPremium = $renewal->get('renewal_proposed_premium');
+        if ($proposedPremium !== null && $proposedPremium !== '' && $currentPremium > 0) {
+            $carrierChange = (((float) $proposedPremium - $currentPremium) / $currentPremium) * 100;
+            $renewal->set('carrier_premium_change', round($carrierChange, 2));
         } else {
-            $renewal->set('expected_commission', null);
+            $renewal->set('carrier_premium_change', null);
         }
 
         $currentUrgency = (string) ($renewal->get('urgency') ?? '');
@@ -200,9 +202,10 @@ class RenewalOrchestrator
                 return;
             }
 
-            $targetStatus = $this->mapRenewalStageToPolicyStatus(
+            $targetStatus = $this->mapRenewalToPolicyStatus(
                 $policy,
-                (string) ($renewal->get('stage') ?? '')
+                (string) ($renewal->get('pipeline_stage') ?? ''),
+                (string) ($renewal->get('disposition') ?? '')
             );
 
             if ($targetStatus === null || $targetStatus === (string) ($policy->get('status') ?? '')) {
@@ -252,7 +255,7 @@ class RenewalOrchestrator
             return false;
         }
 
-        if (in_array((string) ($renewal->get('stage') ?? ''), self::FINAL_RENEWAL_STAGES, true)) {
+        if ((string) ($renewal->get('pipeline_stage') ?? '') === 'Closed') {
             return false;
         }
 
@@ -357,20 +360,22 @@ class RenewalOrchestrator
         };
     }
 
-    private function mapRenewalStageToPolicyStatus(Entity $policy, string $stage): ?string
+    private function mapRenewalToPolicyStatus(Entity $policy, string $pipelineStage, string $disposition): ?string
     {
         $expirationDate = (string) ($policy->get('expiration_date') ?? '');
         $currentPolicyStatus = (string) ($policy->get('status') ?? '');
         $daysRemaining = $this->calculateDaysRemaining($expirationDate);
         $window = RenewalLeadWindows::leadDaysForPolicy($policy);
 
-        return match ($stage) {
+        if ($pipelineStage === 'Closed') {
+            return in_array($disposition, ['renewed', 'rewritten'], true) ? 'Renewed' : 'Non-Renewed';
+        }
+
+        return match ($pipelineStage) {
             'Identified' => $daysRemaining !== null && $daysRemaining <= $window
                 ? 'Up for Renewal'
                 : ($currentPolicyStatus === 'Renewing' ? 'Up for Renewal' : null),
             'Outreach Sent', 'Quote Requested', 'Proposal Sent', 'Negotiating' => 'Renewing',
-            'Renewed - Won' => 'Renewed',
-            'Lost' => 'Non-Renewed',
             default => null,
         };
     }
@@ -400,6 +405,22 @@ class RenewalOrchestrator
             ->getRDBRepository('Renewal')
             ->where(['policyId' => $policyId])
             ->findOne();
+    }
+
+    private function createWorksheetForRenewal(Entity $renewal, string $lineOfBusiness): void
+    {
+        // v6 §2: pair every new Renewal with a 1:1 RenewalWorksheet (LOB-typed).
+        $worksheet = $this->entityManager->getNewEntity('RenewalWorksheet');
+        $worksheet->set('name', ((string) ($renewal->get('name') ?? '')) . ' — Worksheet');
+        $worksheet->set('lob_variant', RenewalWorksheetRequirements::lobVariantFromLineOfBusiness($lineOfBusiness));
+        $worksheet->set('state', 'not_started');
+        $worksheet->set('completion_type', '');
+        $worksheet->set('renewalId', $renewal->getId());
+        $worksheet->set('accountId', $renewal->get('accountId'));
+        $this->entityManager->saveEntity($worksheet, [SaveOption::SILENT => true]);
+
+        $renewal->set('worksheetId', $worksheet->getId());
+        $this->entityManager->saveEntity($renewal, [SaveOption::SILENT => true]);
     }
 
     private function buildRenewalName(string $accountName, string $lineOfBusiness): string

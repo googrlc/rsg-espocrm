@@ -15,7 +15,10 @@ class CreateCommissionLedger implements AfterSave
 
     public function afterSave(Entity $entity, SaveOptions $options): void
     {
-        if ((string) ($entity->get('stage') ?? '') !== 'Renewed - Won') {
+        // v6: commission ledger triggers on a WIN disposition (renewed/rewritten)
+        // instead of the legacy stage = 'Renewed - Won'.
+        $disposition = (string) ($entity->get('disposition') ?? '');
+        if (!in_array($disposition, ['renewed', 'rewritten'], true)) {
             return;
         }
 
