@@ -1,0 +1,244 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "maxLength": 255,
+            "required": false,
+            "tooltipText": "Auto: {Account} {LOB} worksheet"
+        },
+        "lob_variant": {
+            "type": "enum",
+            "isCustom": true,
+            "audited": true,
+            "displayAsLabel": true,
+            "options": [
+                "personal_auto",
+                "homeowners",
+                "commercial_auto",
+                "general_liability",
+                "workers_comp",
+                "default"
+            ],
+            "default": "default",
+            "style": {
+                "personal_auto": "info",
+                "homeowners": "info",
+                "commercial_auto": "info",
+                "general_liability": "info",
+                "workers_comp": "info",
+                "default": "default"
+            },
+            "tooltipText": "LOB discriminator — drives which variant fields are shown. Locked once completion state != not_started.",
+            "dbName": "lobVariant"
+        },
+        "completion_type": {
+            "type": "enum",
+            "isCustom": true,
+            "readOnly": true,
+            "options": [
+                "",
+                "not_started",
+                "in_progress",
+                "full_review",
+                "contact_only"
+            ],
+            "default": "",
+            "tooltipText": "Hidden system field — derived by SubmitWorksheet from populated fields. Two-tier gate: won/rewritten needs full_review; lost/DNR accepts contact_only.",
+            "dbName": "completionType"
+        },
+        "state": {
+            "type": "enum",
+            "isCustom": true,
+            "audited": true,
+            "displayAsLabel": true,
+            "labelType": "state",
+            "options": [
+                "not_started",
+                "in_progress",
+                "completed"
+            ],
+            "default": "not_started",
+            "style": {
+                "not_started": "default",
+                "in_progress": "warning",
+                "completed": "success"
+            },
+            "tooltipText": "Auto-progressed: not_started -> in_progress on first edit; locked once past not_started.",
+            "dbName": "state"
+        },
+        "renewal": {
+            "type": "link",
+            "required": true,
+            "tooltipText": "The Renewal this worksheet completes (1:1)."
+        },
+        "account": {
+            "type": "link",
+            "readOnly": true,
+            "tooltipText": "Auto from linked Renewal — used for ACL scope."
+        },
+        "renewal_reviewed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Renewal declaration pulled & reviewed",
+            "dbName": "renewalReviewed"
+        },
+        "account_confirmed": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Account details confirmed (units / drivers)",
+            "dbName": "accountConfirmed"
+        },
+        "renewal_email_sent": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "Renewal email sent to client",
+            "dbName": "renewalEmailSent"
+        },
+        "ams_updated": {
+            "type": "bool",
+            "isCustom": true,
+            "default": false,
+            "tooltipText": "AMS (NowCerts) updated",
+            "dbName": "amsUpdated"
+        },
+        "notes": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Worksheet notes",
+            "dbName": "notes"
+        },
+        "vehicle_count": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "Units/vehicles",
+            "dbName": "vehicleCount"
+        },
+        "garaging_zip": {
+            "type": "varchar",
+            "isCustom": true,
+            "maxLength": 10,
+            "tooltipText": "Garaging ZIP",
+            "dbName": "garagingZip"
+        },
+        "driver_count": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "Driver count",
+            "dbName": "driverCount"
+        },
+        "dwelling_amount": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Dwelling amount",
+            "dbName": "dwellingAmount"
+        },
+        "roof_age_years": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "Roof age (years)",
+            "dbName": "roofAgeYears"
+        },
+        "claim_count_3yr": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "Claims (last 3 yr)",
+            "dbName": "claimCount3yr"
+        },
+        "payroll_estimate": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Estimated payroll",
+            "dbName": "payrollEstimate"
+        },
+        "employee_count": {
+            "type": "int",
+            "isCustom": true,
+            "tooltipText": "Employee count",
+            "dbName": "employeeCount"
+        },
+        "class_codes": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "WC class codes",
+            "dbName": "classCodes"
+        },
+        "assignedUser": {
+            "type": "link"
+        },
+        "teams": {
+            "type": "linkMultiple"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true
+        }
+    },
+    "links": {
+        "renewal": {
+            "type": "belongsTo",
+            "entity": "Renewal",
+            "foreign": "worksheet",
+            "isCustom": true
+        },
+        "account": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "name"
+        ],
+        "sortByList": [
+            "name",
+            "createdAt",
+            "modifiedAt",
+            "state",
+            "lob_variant"
+        ]
+    },
+    "indexes": {
+        "renewal": {
+            "columns": [
+                "renewalId"
+            ]
+        }
+    },
+    "statusField": "state"
+}

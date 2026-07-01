@@ -1,0 +1,229 @@
+[
+    {
+        "label": "Overview",
+        "name": "overview",
+        "rows": [
+            [
+                {
+                    "name": "lob_variant",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "state"
+                },
+                {
+                    "name": "completion_type"
+                }
+            ],
+            [
+                {
+                    "name": "renewal"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "assignedUser"
+                },
+                {
+                    "name": "teams"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Completion Checklist",
+        "name": "checklist",
+        "rows": [
+            [
+                {
+                    "name": "renewal_reviewed"
+                },
+                {
+                    "name": "account_confirmed"
+                }
+            ],
+            [
+                {
+                    "name": "renewal_email_sent"
+                },
+                {
+                    "name": "ams_updated"
+                }
+            ]
+        ]
+    },
+    {
+        "label": "Personal Auto",
+        "name": "variant_personal_auto",
+        "rows": [
+            [
+                {
+                    "name": "vehicle_count"
+                },
+                {
+                    "name": "garaging_zip"
+                }
+            ],
+            [
+                {
+                    "name": "driver_count"
+                },
+                {
+                    "name": null
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "personal_auto"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Homeowners",
+        "name": "variant_homeowners",
+        "rows": [
+            [
+                {
+                    "name": "dwelling_amount"
+                },
+                {
+                    "name": "roof_age_years"
+                }
+            ],
+            [
+                {
+                    "name": "claim_count_3yr"
+                },
+                {
+                    "name": null
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "homeowners"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Commercial Auto",
+        "name": "variant_commercial_auto",
+        "rows": [
+            [
+                {
+                    "name": "vehicle_count"
+                },
+                {
+                    "name": "garaging_zip"
+                }
+            ],
+            [
+                {
+                    "name": "driver_count"
+                },
+                {
+                    "name": null
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "commercial_auto"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "General Liability",
+        "name": "variant_general_liability",
+        "rows": [
+            [
+                {
+                    "name": "payroll_estimate"
+                },
+                {
+                    "name": "employee_count"
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "general_liability"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Workers Comp",
+        "name": "variant_workers_comp",
+        "rows": [
+            [
+                {
+                    "name": "payroll_estimate"
+                },
+                {
+                    "name": "employee_count"
+                }
+            ],
+            [
+                {
+                    "name": "class_codes"
+                },
+                {
+                    "name": null
+                }
+            ]
+        ],
+        "dynamicLogic": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "lob_variant",
+                        "value": "workers_comp"
+                    }
+                ]
+            }
+        }
+    },
+    {
+        "label": "Notes",
+        "name": "notes",
+        "rows": [
+            [
+                {
+                    "name": "notes",
+                    "fullWidth": true
+                }
+            ]
+        ]
+    }
+]

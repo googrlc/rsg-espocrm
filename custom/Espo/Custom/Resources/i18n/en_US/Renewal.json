@@ -1,6 +1,7 @@
 {
     "labels": {
-        "Create Renewal": "Create Renewal"
+        "Create Renewal": "Create Renewal",
+        "fields": {}
     },
     "presetFilters": {
         "active": "Active Renewals",
@@ -20,7 +21,6 @@
     },
     "fields": {
         "name": "Renewal Name",
-        "stage": "Stage",
         "policy": "Expiring Policy",
         "newPolicy": "Renewed Policy",
         "account": "Account",
@@ -31,20 +31,27 @@
         "renewal_premium": "Renewal Premium",
         "premium_change": "Premium Change (Percent)",
         "commission_rate": "Commission Rate (Percent)",
-        "expected_commission": "Expected Commission",
         "urgency": "Urgency",
-        "last_contact_date": "Last Contact Date",
-        "last_contact_method": "Last Contact Method",
         "line_of_business": "Line of Business",
         "carrier": "Carrier",
-        "lost_reason": "Lost Reason",
         "renewal_notes": "Renewal Notes",
         "tasks": "Tasks",
         "commissions": "Commissions",
-        "renewal_reviewed": "Renewal declaration pulled & reviewed",
-        "account_confirmed": "Account details confirmed (units / drivers)",
-        "renewal_email_sent": "Renewal email sent to client",
-        "ams_updated": "AMS (NowCerts) updated"
+        "carrierAccount": "Carrier Account",
+        "pipeline_stage": "Pipeline Stage",
+        "disposition": "Disposition",
+        "renewal_proposed_premium": "Renewal Proposed Premium",
+        "carrier_premium_change": "Carrier Premium Change",
+        "renewal_proposal_url": "Renewal Proposal URL",
+        "carrier_renewal_effective_date": "Carrier Renewal Effective Date",
+        "renewal_underwriter_name": "Renewal Underwriter Name",
+        "renewal_underwriter_notes": "Renewal Underwriter Notes",
+        "ams_policy_guid": "AMS Policy GUID",
+        "ams_insured_guid": "AMS Insured GUID",
+        "ams_writeback_state": "AMS Writeback State",
+        "ams_writeback_at": "AMS Writeback At",
+        "supabase_event_uuid": "Supabase Event UUID",
+        "worksheet": "Worksheet"
     },
     "links": {
         "policy": "Expiring Policy",
@@ -52,19 +59,10 @@
         "account": "Account",
         "contact": "Contact",
         "tasks": "Tasks",
-        "commissions": "Commissions"
+        "commissions": "Commissions",
+        "worksheet": "Worksheet"
     },
     "options": {
-        "stage": {
-            "": "",
-            "Identified": "Identified",
-            "Outreach Sent": "Outreach Sent",
-            "Quote Requested": "Quote Requested",
-            "Proposal Sent": "Proposal Sent",
-            "Negotiating": "Negotiating",
-            "Renewed - Won": "Renewed - Won",
-            "Lost": "Lost"
-        },
         "urgency": {
             "": "",
             "Critical": "Critical",
@@ -113,6 +111,30 @@
             "Garagekeepers": "Garagekeepers",
             "Commercial Package": "Commercial Package",
             "Other": "Other"
+        },
+        "pipeline_stage": {
+            "": "—",
+            "Identified": "Identified",
+            "Outreach Sent": "Outreach Sent",
+            "Quote Requested": "Quote Requested",
+            "Proposal Sent": "Proposal Sent",
+            "Negotiating": "Negotiating",
+            "Closed": "Closed"
+        },
+        "disposition": {
+            "": "—",
+            "renewed": "Renewed",
+            "rewritten": "Rewritten",
+            "lost_price": "Lost — Price",
+            "lost_coverage": "Lost — Coverage",
+            "lost_no_response": "Lost — No Response",
+            "do_not_renew": "Do Not Renew"
+        },
+        "ams_writeback_state": {
+            "pending": "Pending",
+            "queued": "Queued",
+            "succeeded": "Succeeded",
+            "failed": "Failed"
         }
     }
 }

@@ -1,0 +1,26 @@
+[
+    [
+        {
+            "name": "name"
+        },
+        {
+            "name": "lob_variant"
+        },
+        {
+            "name": "state"
+        }
+    ],
+    [
+        {
+            "name": "renewal"
+        },
+        {
+            "name": "assignedUser"
+        }
+    ],
+    [
+        {
+            "name": "createdAt"
+        }
+    ]
+]

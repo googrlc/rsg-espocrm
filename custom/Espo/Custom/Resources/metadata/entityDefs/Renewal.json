@@ -6,34 +6,6 @@
             "required": false,
             "tooltipText": "Auto-generated: {Account} - {LOB} Renewal"
         },
-        "stage": {
-            "type": "enum",
-            "options": [
-                "",
-                "Identified",
-                "Outreach Sent",
-                "Quote Requested",
-                "Proposal Sent",
-                "Negotiating",
-                "Renewed - Won",
-                "Lost"
-            ],
-            "default": "Identified",
-            "audited": true,
-            "displayAsLabel": true,
-            "labelType": "state",
-            "isCustom": true,
-            "style": {
-                "Identified": "default",
-                "Outreach Sent": "primary",
-                "Quote Requested": "primary",
-                "Proposal Sent": "warning",
-                "Negotiating": "warning",
-                "Renewed - Won": "success",
-                "Lost": "danger"
-            },
-            "customizationOptionsReferenceDisabled": true
-        },
         "policy": {
             "type": "link",
             "required": true,
@@ -41,7 +13,7 @@
         },
         "newPolicy": {
             "type": "link",
-            "tooltipText": "The renewed policy record once bound"
+            "tooltipText": "The renewed policy record once bound. Click the linked policy to view the new carrier, premium, and effective date."
         },
         "account": {
             "type": "link",
@@ -72,14 +44,14 @@
         "renewal_premium": {
             "type": "currency",
             "isCustom": true,
-            "tooltipText": "Manually entered when quote is received \u2014 blank until then",
+            "tooltipText": "Manually entered when quote is received — blank until then",
             "dbName": "renewalPremium"
         },
         "premium_change": {
             "type": "float",
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 \u2014 premium delta %",
+            "tooltipText": "Auto-calculated: ((renewal - current) / current) * 100 — premium delta %",
             "dbName": "premiumChange"
         },
         "line_of_business": {
@@ -87,6 +59,7 @@
             "options": [
                 "",
                 "Commercial Auto",
+                "Transportation / Trucking",
                 "General Liability",
                 "Workers Comp",
                 "Commercial Property",
@@ -109,12 +82,16 @@
                 "Group Benefits",
                 "Garagekeepers",
                 "Commercial Package",
-                "Other"
+                "Other",
+                "Commercial Umbrella",
+                "Personal Umbrella",
+                "Cyber Liability"
             ],
             "isCustom": true,
             "readOnly": true,
-            "tooltipText": "Auto-populated from linked Policy \u2014 not editable",
-            "dbName": "lineOfBusiness"
+            "tooltipText": "Auto-populated from linked Policy — not editable",
+            "dbName": "lineOfBusiness",
+            "isSorted": true
         },
         "carrier": {
             "type": "varchar",
@@ -141,84 +118,17 @@
                 "Low": "default"
             }
         },
-        "last_contact_method": {
-            "type": "enum",
-            "options": [
-                "",
-                "Email",
-                "Call",
-                "Text",
-                "In person"
-            ],
-            "isCustom": true,
-            "tooltipText": "Updated when activity is logged",
-            "dbName": "lastContactMethod"
-        },
-        "last_contact_date": {
-            "type": "date",
-            "isCustom": true,
-            "tooltipText": "Updated when activity is logged",
-            "dbName": "lastContactDate"
-        },
-        "lost_reason": {
-            "type": "enum",
-            "options": [
-                "",
-                "Price",
-                "Coverage",
-                "Unresponsive",
-                "Moved carrier",
-                "Other"
-            ],
-            "isCustom": true,
-            "tooltipText": "Required when stage = Lost",
-            "dbName": "lostReason"
-        },
         "renewal_notes": {
             "type": "text",
             "isCustom": true,
             "tooltipText": "Free text notes for this renewal cycle",
             "dbName": "renewalNotes"
         },
-        "renewal_reviewed": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Renewal declaration pulled & reviewed",
-            "dbName": "renewalReviewed"
-        },
-        "account_confirmed": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Account details confirmed (units / drivers)",
-            "dbName": "accountConfirmed"
-        },
-        "renewal_email_sent": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "Renewal email sent to client",
-            "dbName": "renewalEmailSent"
-        },
-        "ams_updated": {
-            "type": "bool",
-            "isCustom": true,
-            "default": false,
-            "tooltipText": "AMS (NowCerts) updated",
-            "dbName": "amsUpdated"
-        },
         "commission_rate": {
             "type": "float",
             "isCustom": true,
             "tooltipText": "Renewal commission rate %",
             "dbName": "commissionRate"
-        },
-        "expected_commission": {
-            "type": "currency",
-            "isCustom": true,
-            "tooltipText": "renewalPremium * commissionRate",
-            "dbName": "expectedCommission"
         },
         "assignedUser": {
             "type": "link"
@@ -253,6 +163,157 @@
             "isCustom": true,
             "layoutDetailDisabled": true,
             "noLoad": true
+        },
+        "carrierAccount": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "Carrier Account (relationship link). Auto-populated from linked Policy."
+        },
+        "pipeline_stage": {
+            "type": "enum",
+            "options": [
+                "",
+                "Identified",
+                "Outreach Sent",
+                "Quote Requested",
+                "Proposal Sent",
+                "Negotiating",
+                "Closed"
+            ],
+            "default": "Identified",
+            "audited": true,
+            "displayAsLabel": true,
+            "labelType": "state",
+            "isCustom": true,
+            "style": {
+                "Identified": "default",
+                "Outreach Sent": "primary",
+                "Quote Requested": "primary",
+                "Proposal Sent": "warning",
+                "Negotiating": "warning",
+                "Closed": "success"
+            },
+            "customizationOptionsReferenceDisabled": true
+        },
+        "disposition": {
+            "type": "enum",
+            "options": [
+                "",
+                "renewed",
+                "rewritten",
+                "lost_price",
+                "lost_coverage",
+                "lost_no_response",
+                "do_not_renew"
+            ],
+            "default": "",
+            "audited": true,
+            "displayAsLabel": true,
+            "isCustom": true,
+            "style": {
+                "renewed": "success",
+                "rewritten": "success",
+                "lost_price": "danger",
+                "lost_coverage": "danger",
+                "lost_no_response": "danger",
+                "do_not_renew": "danger"
+            },
+            "tooltipText": "v6 outcome detail. Renewed/Rewritten = won; lost_* / do_not_renew = lost.",
+            "dbName": "disposition"
+        },
+        "renewal_proposed_premium": {
+            "type": "currency",
+            "isCustom": true,
+            "tooltipText": "Carrier's proposed renewal premium (AMS-download or agent entry). Source for carrier_premium_change.",
+            "dbName": "renewalProposedPremium"
+        },
+        "carrier_premium_change": {
+            "type": "float",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Info-only: ((renewal_proposed_premium - current_premium) / current_premium) * 100. Does NOT drive retention bands.",
+            "dbName": "carrierPremiumChange"
+        },
+        "renewal_proposal_url": {
+            "type": "url",
+            "isCustom": true,
+            "maxLength": 255,
+            "tooltipText": "Carrier renewal offer PDF (NowCerts Renewal Center)",
+            "dbName": "renewalProposalUrl"
+        },
+        "carrier_renewal_effective_date": {
+            "type": "date",
+            "isCustom": true,
+            "tooltipText": "Carrier's stated renewal effective date if different from expiration_date",
+            "dbName": "carrierRenewalEffectiveDate"
+        },
+        "renewal_underwriter_name": {
+            "type": "varchar",
+            "isCustom": true,
+            "maxLength": 255,
+            "tooltipText": "Underwriter contact name (NowCerts Renewal Center)",
+            "dbName": "renewalUnderwriterName"
+        },
+        "renewal_underwriter_notes": {
+            "type": "text",
+            "isCustom": true,
+            "tooltipText": "Underwriter notes (NowCerts Renewal Center)",
+            "dbName": "renewalUnderwriterNotes"
+        },
+        "ams_policy_guid": {
+            "type": "varchar",
+            "isCustom": true,
+            "maxLength": 36,
+            "tooltipText": "Canonical NowCerts policy GUID — join key across AMS/Espo/Supabase",
+            "dbName": "amsPolicyGuid"
+        },
+        "ams_insured_guid": {
+            "type": "varchar",
+            "isCustom": true,
+            "maxLength": 36,
+            "tooltipText": "NowCerts insured GUID — MCP manage_notes writeback target (populated by syncFromPolicy)",
+            "dbName": "amsInsuredGuid"
+        },
+        "ams_writeback_state": {
+            "type": "enum",
+            "isCustom": true,
+            "options": [
+                "pending",
+                "queued",
+                "succeeded",
+                "failed"
+            ],
+            "default": "pending",
+            "displayAsLabel": true,
+            "readOnly": true,
+            "style": {
+                "pending": "warning",
+                "queued": "info",
+                "succeeded": "success",
+                "failed": "danger"
+            },
+            "tooltipText": "Momentum MCP notes-writeback state (set by Hermes loop)",
+            "dbName": "amsWritebackState"
+        },
+        "ams_writeback_at": {
+            "type": "datetime",
+            "isCustom": true,
+            "readOnly": true,
+            "tooltipText": "Last successful MCP writeback timestamp",
+            "dbName": "amsWritebackAt"
+        },
+        "supabase_event_uuid": {
+            "type": "varchar",
+            "isCustom": true,
+            "maxLength": 36,
+            "readOnly": true,
+            "tooltipText": "Idempotency key -> renewal_events in Supabase",
+            "dbName": "supabaseEventUuid"
+        },
+        "worksheet": {
+            "type": "link",
+            "isCustom": true,
+            "tooltipText": "1:1 RenewalWorksheet (LOB-typed completion record)"
         }
     },
     "links": {
@@ -308,6 +369,17 @@
             "entity": "Commission",
             "foreign": "renewal",
             "isCustom": true
+        },
+        "carrierAccount": {
+            "type": "belongsTo",
+            "entity": "Account",
+            "isCustom": true
+        },
+        "worksheet": {
+            "type": "belongsTo",
+            "entity": "RenewalWorksheet",
+            "foreign": "renewal",
+            "isCustom": true
         }
     },
     "collection": {
@@ -322,16 +394,17 @@
             "expiration_date",
             "createdAt",
             "modifiedAt",
-            "stage",
+            "pipeline_stage",
             "urgency",
             "current_premium",
-            "carrier"
+            "carrier",
+            "disposition"
         ]
     },
     "indexes": {
-        "stageUrgency": {
+        "pipelineStageUrgency": {
             "columns": [
-                "stage",
+                "pipeline_stage",
                 "urgency"
             ]
         },
@@ -339,7 +412,12 @@
             "columns": [
                 "expiration_date"
             ]
+        },
+        "amsPolicyGuid": {
+            "columns": [
+                "ams_policy_guid"
+            ]
         }
     },
-    "statusField": "stage"
+    "statusField": "pipeline_stage"
 }

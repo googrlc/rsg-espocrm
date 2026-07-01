@@ -1,0 +1,73 @@
+{
+    "labels": {
+        "RenewalWorksheet": "Renewal Worksheet",
+        "Overview": "Overview",
+        "Completion Checklist": "Completion Checklist",
+        "Notes": "Notes",
+        "Personal Auto": "Personal Auto",
+        "Homeowners": "Homeowners",
+        "Commercial Auto": "Commercial Auto",
+        "General Liability": "General Liability",
+        "Workers Comp": "Workers Comp"
+    },
+    "fields": {
+        "name": "Name",
+        "lob_variant": "LOB Variant",
+        "completion_type": "Completion Type",
+        "state": "State",
+        "renewal": "Renewal",
+        "account": "Account",
+        "renewal_reviewed": "Renewal Reviewed",
+        "account_confirmed": "Account Confirmed",
+        "renewal_email_sent": "Renewal Email Sent",
+        "ams_updated": "AMS Updated",
+        "notes": "Notes",
+        "vehicle_count": "Vehicle Count",
+        "garaging_zip": "Garaging ZIP",
+        "driver_count": "Driver Count",
+        "dwelling_amount": "Dwelling Amount",
+        "roof_age_years": "Roof Age (Years)",
+        "claim_count_3yr": "Claims (3yr)",
+        "payroll_estimate": "Payroll Estimate",
+        "employee_count": "Employee Count",
+        "class_codes": "Class Codes",
+        "assignedUser": "Assigned User",
+        "teams": "Teams",
+        "createdAt": "Created At",
+        "modifiedAt": "Modified At",
+        "createdBy": "Created By",
+        "modifiedBy": "Modified By"
+    },
+    "links": {
+        "renewal": "Renewal",
+        "account": "Account",
+        "assignedUser": "Assigned User",
+        "teams": "Teams",
+        "createdBy": "Created By",
+        "modifiedBy": "Modified By"
+    },
+    "options": {
+        "lob_variant": {
+            "personal_auto": "Personal Auto",
+            "homeowners": "Homeowners",
+            "commercial_auto": "Commercial Auto",
+            "general_liability": "General Liability",
+            "workers_comp": "Workers Comp",
+            "default": "Default"
+        },
+        "completion_type": {
+            "": "—",
+            "not_started": "Not Started",
+            "in_progress": "In Progress",
+            "full_review": "Full Review",
+            "contact_only": "Contact Only"
+        },
+        "state": {
+            "not_started": "Not Started",
+            "in_progress": "In Progress",
+            "completed": "Completed"
+        }
+    },
+    "presetFilters": {},
+    "boolFilters": {}
+}
